@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getCurrentUrl } from './utils/get-current-url';
 
 export const middleware = async (req: NextRequest) => {
   if (!req.nextUrl.pathname.startsWith('/api')) return;
 
-  const url = getCurrentUrl();
+  const url =
+    process.env.NODE_ENV === 'production'
+      ? 'https://main.dhlbrqe2v28e4.amplifyapp.com/'
+      : 'http://localhost:3000';
   return NextResponse.rewrite(`${url}/api/bypass/get`);
 };
 
 export const config = {
-  matcher: ['/api/book/:path*'],
+  matcher: ['/api/:path*'],
 };
