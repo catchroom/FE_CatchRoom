@@ -28,4 +28,8 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'prettier',
   ],
+
+  rules: {
+    '@typescript-eslint/no-var-requires': 'off',
+  },
 };
