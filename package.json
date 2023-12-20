@@ -11,9 +11,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.14.2",
+    "@tanstack/react-query-devtools": "^5.14.2",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
@@ -34,6 +37,7 @@
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jsdoc": "^4.0.2",
     "postcss": "^8",
     "prettier": "^3.1.1",
     "tailwindcss": "^3.3.0",
