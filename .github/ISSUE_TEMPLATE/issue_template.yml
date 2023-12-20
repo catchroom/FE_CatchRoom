@@ -13,7 +13,6 @@ body:
     attributes:
       label: ✨ 작업 내용
       description: 해야할 작업에 대해서 간단하게 적어주세요
-      placeholder: ex. email@example.com
     validations:
       required: true
 
@@ -23,9 +22,11 @@ body:
       label: ⚙ 상새한 작업 내용
       description: 상새한 작업 내용을 적어주세요
       value: '
-        - [] :
-        - [] :
-        - [] :
+        - [ ] :
+
+        - [ ] :
+
+        - [ ] :
         '
     validations:
       required: true
