@@ -1,6 +1,6 @@
 name: ISSUE TEMPLATE
 description: File a ISSUE TEMPLATE
-title: '[ISSUE]: '
+title: 'Feat: '
 
 body:
   - type: markdown
