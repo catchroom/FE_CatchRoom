@@ -2,6 +2,7 @@ import { fetchText } from '@/api/fetch-text';
 import React from 'react';
 
 const page = async () => {
+  const envTest = process.env.QUERY_PATH;
   const data = await fetchText();
 
   return (
@@ -10,6 +11,7 @@ const page = async () => {
         <h1 className="text-xl">HELLO</h1>
         <p>THIS IS A TEST</p>
         <p>{data.message}</p>
+        <p>{envTest}</p>
       </div>
     </div>
   );
