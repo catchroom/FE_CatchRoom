@@ -21,8 +21,7 @@ body:
     attributes:
       label: ⚙ 상새한 작업 내용
       description: 상새한 작업 내용을 적어주세요
-      value: '
-        - [ ] :
+      value: '- [ ] :
 
         - [ ] :
 
