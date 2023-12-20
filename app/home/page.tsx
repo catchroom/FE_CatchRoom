@@ -1,12 +1,15 @@
+import { fetchText } from '@/api/fetch-text';
 import React from 'react';
 
-const page = () => {
+const page = async () => {
+  const data = await fetchText();
+
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center">
       <div className="flex flex-col items-center">
         <h1 className="text-xl">HELLO</h1>
         <p>THIS IS A TEST</p>
-        <a href="/dashboard">안녕</a>
+        <p>{data.message}</p>
       </div>
     </div>
   );
