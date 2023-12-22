@@ -10,6 +10,15 @@ const nextConfig = {
       },
     ];
   },
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.BACKEND_PATH}/test/:path*`, // Proxy to Backend
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -14,6 +14,7 @@
     "@aws-amplify/adapter-nextjs": "^1.0.8",
     "@tanstack/react-query": "^5.14.2",
     "@tanstack/react-query-devtools": "^5.14.2",
+    "axios": "^1.6.2",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
