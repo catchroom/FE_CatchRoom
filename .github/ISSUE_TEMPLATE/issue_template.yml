@@ -1,12 +1,12 @@
 name: ISSUE TEMPLATE
 description: File a ISSUE TEMPLATE
-title: 'Feat: '
+title: 'feat: '
 
 body:
   - type: markdown
     attributes:
       value: |
-        REBADGEME ISSUE TEMPLATE입니다!
+        CATCHROOM ISSUE TEMPLATE입니다!
 
   - type: textarea
     id: title
@@ -19,8 +19,8 @@ body:
   - type: textarea
     id: content
     attributes:
-      label: ⚙ 상새한 작업 내용
-      description: 상새한 작업 내용을 적어주세요
+      label: ⚙ 상세한 작업 내용
+      description: 상세한 작업 내용을 적어주세요
       value: '- [ ] :
 
         - [ ] :
