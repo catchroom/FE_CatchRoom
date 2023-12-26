@@ -6,7 +6,7 @@ frontend:
         - npm ci
     build:
       commands:
-        - env | grep -e QUERY_PATH >> .env.production
+        - env | grep -e QUERY_PATH -e BACKEND_PATH >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
