@@ -7,9 +7,10 @@ const page = async () => {
 
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center bg-primary">
-      <div className="flex flex-col items-center bg-secondary p-3 md:bg-quinary md:flex-row lg:bg-senary hover:bg-tertiary hover:animate-pulse">
+      <div className="flex flex-col items-center bg-secondary p-3 md:bg-quinary lg:bg-senary hover:bg-tertiary hover:animate-pulse">
         <h1 className="text-5xl font-bold">HELLO</h1>
         <p>THIS IS A TEST</p>
+        <p>{dataTest}</p>
       </div>
     </div>
   );

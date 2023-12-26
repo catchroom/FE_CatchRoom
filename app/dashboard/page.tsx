@@ -10,8 +10,6 @@ const Page = () => {
     queryFn: fetchApiTest,
   });
 
-  console.log(data);
-
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center bg-primary">
       <p className=" text-secondary text-xl font-bold">{data && data.data}</p>
