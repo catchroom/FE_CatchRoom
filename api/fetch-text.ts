@@ -1,5 +1,7 @@
 import { getCurrentUrl } from '@/utils/get-current-url';
 
+// 셈플
+
 export const fetchText = async () => {
   const url = getCurrentUrl();
   const response = await fetch(`${url}/api/do`, {
