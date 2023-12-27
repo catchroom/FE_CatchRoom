@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { isLikedState } from '@/atoms/heartButton';

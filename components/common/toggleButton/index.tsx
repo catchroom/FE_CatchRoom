@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { isActiveState } from '@/atoms/toggleButton';
 import { useRecoilState } from 'recoil';
