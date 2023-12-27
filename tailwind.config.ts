@@ -13,6 +13,8 @@ const config: Config = {
       lg: '1024px',
     },
     colors: {
+      black: '#000000',
+      white: '#ffffff',
       primary: '#0F4C81',
       secondary: '#FFAA00',
       tertiary: '#173F5F',
