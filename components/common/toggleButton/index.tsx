@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { isActiveState } from '@/atoms/toggleButton';
+import { useRecoilState } from 'recoil';
 
 /**
  * slide 형식으로 boolean값을 줄 수 있는 Toggle Button 컴포넌트 입니다.
@@ -7,7 +9,7 @@ import React, { useState } from 'react';
  */
 
 function ToggleButton() {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useRecoilState(isActiveState);
 
   const handleToggle = () => {
     setIsActive((prevState) => !prevState);
