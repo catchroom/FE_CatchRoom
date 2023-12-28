@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil';
  * @returns {JSX.Element} ToggleButton 컴포넌트 반환
  */
 
-function ToggleButton() {
+const ToggleButton = () => {
   const [isActive, setIsActive] = useRecoilState(isActiveState);
 
   const handleToggle = () => {
@@ -41,6 +41,6 @@ function ToggleButton() {
       </label>
     </div>
   );
-}
+};
 
 export default ToggleButton;
