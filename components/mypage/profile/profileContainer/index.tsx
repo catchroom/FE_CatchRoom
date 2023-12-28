@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-const AccountContainer = ({
+const ProfileContainer = ({
   name,
   email,
   children,
@@ -20,4 +20,4 @@ const AccountContainer = ({
   );
 };
 
-export default AccountContainer;
+export default ProfileContainer;

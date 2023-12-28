@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-const AccountButton = () => {
+const ProfileButton = () => {
   const router = useRouter();
   const onClick = () => {
     router.push('/mypage/myprofile');
@@ -20,4 +20,4 @@ const AccountButton = () => {
   );
 };
 
-export default AccountButton;
+export default ProfileButton;

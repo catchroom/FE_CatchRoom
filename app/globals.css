@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Pretendard Variable';
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url('../assets/fonts/PretendardVariable.woff2')
+    format('woff2-variations');
+}
+
 /* 세로 스크롤바 스타일 */
 ::-webkit-scrollbar {
   height: 0px;

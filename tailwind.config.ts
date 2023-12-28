@@ -20,6 +20,10 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
 
+      fontFamily: {
+        pretend: ['Pretendard Variable', 'sans-serif'],
+      },
+
       colors: {
         black: '#000000',
         white: '#ffffff',
