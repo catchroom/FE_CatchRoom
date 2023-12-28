@@ -1,4 +1,15 @@
 export const MypageConstants = {
+  accountButton: [
+    {
+      title: '출금하기',
+      location: '/mypage/withdraw',
+    },
+    {
+      title: '내역보기',
+      location: '/mypage/withdraw/history',
+    },
+  ],
+
   topBanner: {
     title: '나의 활동',
     banners: [
