@@ -8,7 +8,7 @@ import ProfileButton from '@/components/mypage/profile/profileButton';
 
 const page = () => {
   return (
-    <div className="p-3 font-pretend">
+    <div className="p-3">
       <div className="w-full flex flex-col gap-6">
         <ProfileContainer name="김민수" email="abcde@google.com">
           <ProfileButton />

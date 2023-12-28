@@ -13,7 +13,7 @@ const ProfileButton = () => {
     <button
       type="button"
       onClick={onClick}
-      className="p-3 bg-ui text-gray-500 rounded-lg"
+      className="p-3 bg-gray-300 text-gray-600 rounded-lg"
     >
       프로필 수정
     </button>
