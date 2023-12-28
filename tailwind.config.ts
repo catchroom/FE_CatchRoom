@@ -12,21 +12,23 @@ const config: Config = {
       md: '768px',
       lg: '1024px',
     },
-    colors: {
-      black: '#000000',
-      white: '#ffffff',
-      primary: '#0F4C81',
-      secondary: '#FFAA00',
-      tertiary: '#173F5F',
-      quaternary: '#20639B',
-      quinary: '#ED553B',
-      senary: '#3CAEA3',
-    },
+
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+
+      colors: {
+        black: '#000000',
+        white: '#ffffff',
+        primary: '#0F4C81',
+        secondary: '#FFAA00',
+        tertiary: '#173F5F',
+        quaternary: '#20639B',
+        quinary: '#ED553B',
+        senary: '#3CAEA3',
       },
     },
   },
