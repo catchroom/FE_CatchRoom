@@ -1,58 +1,58 @@
-export const MypageConstants = {
-  accountButton: [
+export const MYPAGE_CONSTANTS = {
+  ACCOUNT_BUTTON: [
     {
-      title: '출금하기',
-      location: '/mypage/withdraw',
+      TITLE: '출금하기',
+      LOCATION: '/mypage/withdraw',
     },
     {
-      title: '내역보기',
-      location: '/mypage/withdraw/history',
+      TITLE: '내역보기',
+      LOCATION: '/mypage/withdraw/history',
     },
   ],
 
-  topBanner: {
-    title: '나의 활동',
-    banners: [
+  TOP_BANNER: {
+    TITLE: '나의 활동',
+    BANNERS: [
       {
-        title: '판매 내역',
-        location: '/mypage/sales',
+        TITLE: '판매 내역',
+        LOCATION: '/mypage/sales',
       },
       {
-        title: '구매 내역',
-        location: '/mypage/purchases',
+        TITLE: '구매 내역',
+        LOCATION: '/mypage/purchases',
       },
       {
-        title: '찜목록',
-        location: '/mypage/likes',
+        TITLE: '찜목록',
+        LOCATION: '/mypage/likes',
       },
       {
-        title: '작성한 후기',
-        location: '/mypage/reviews',
+        TITLE: '작성한 후기',
+        LOCATION: '/mypage/reviews',
       },
     ],
   },
-  bottomBanner: {
-    title: '기타',
-    banners: [
+  BOTTOM_BANNER: {
+    TITLE: '기타',
+    BANNERS: [
       {
-        title: '공지사항',
-        location: '/mypage/notices',
+        TITLE: '공지사항',
+        LOCATION: '/mypage/notices',
       },
       {
-        title: '서비스 약관',
-        location: '/mypage/terms',
+        TITLE: '서비스 약관',
+        LOCATION: '/mypage/terms',
       },
       {
-        title: '개인정보 처리방침',
-        location: '/mypage/privacy',
+        TITLE: '개인정보 처리방침',
+        LOCATION: '/mypage/privacy',
       },
       {
-        title: '버전 정보',
-        location: '/mypage/edit',
+        TITLE: '버전 정보',
+        LOCATION: '/mypage/edit',
       },
       {
-        title: '1:1 문의하기',
-        location: '/mypage/ask',
+        TITLE: '1:1 문의하기',
+        LOCATION: '/mypage/ask',
       },
     ],
   },
