@@ -4,7 +4,7 @@ import React from 'react';
 import { SlArrowRight } from 'react-icons/sl';
 
 const BannerIcon = () => {
-  return <SlArrowRight />;
+  return <SlArrowRight className="opacity-60" />;
 };
 
 export default BannerIcon;
