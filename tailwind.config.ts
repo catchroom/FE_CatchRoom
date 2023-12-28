@@ -26,6 +26,7 @@ const config: Config = {
         primary: '#0F4C81',
         secondary: '#FFAA00',
         tertiary: '#173F5F',
+        ui: '#E9E9E9',
         quaternary: '#20639B',
         quinary: '#ED553B',
         senary: '#3CAEA3',
