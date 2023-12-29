@@ -9,14 +9,18 @@ import SelectedOfferMessage from '@/components/chatRoom/selectedOfferMessage';
 
 const page = async () => {
   return (
-    <div className="max-w-screen-sm h-screen flex flex-col items-center justify-center bg-semanticBg">
+    <div className="">
       <ProductInfo />
-      <p className="text-xs text-grey m-2">2023년 1월 1일</p>
-      <OfferMessage />
-      <SendMessage />
-      <ApproveMessage />
-      <ReceiveMessage />
-      <SelectedOfferMessage />
+      <div className="bg-blue-gray-50 overflow-auto flex flex-col">
+        <p className="text-xs text-blue-gray-600 m-2 text-center">
+          2023년 1월 1일
+        </p>
+        <OfferMessage />
+        <SendMessage />
+        <ApproveMessage />
+        <ReceiveMessage />
+        <SelectedOfferMessage />
+      </div>
       <Send />
     </div>
   );

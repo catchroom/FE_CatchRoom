@@ -3,7 +3,7 @@ import DotsVertical from '../../../public/dotsVertical.svg';
 
 const chatItem = async () => {
   return (
-    <div className="bg-white w-full h-18 flex items-center px-4 py-3 border-solid border border-grey">
+    <div className="bg-white w-full h-18 flex items-center px-4 py-3 border-solid border border-gray-300">
       <img src="/productImage.png" className="pr-3"></img>
       <div className="flex flex-col">
         <div className="flex items-center">
@@ -12,7 +12,9 @@ const chatItem = async () => {
         </div>
         <div className="flex">
           <div>네 가능합니다.</div>
-          <div className="bg-grey px-2 rounded-full text-white ml-2  ">1</div>
+          <div className="bg-blue-gray-300 px-2 rounded-full text-white ml-2  ">
+            1
+          </div>
         </div>
       </div>
       <div className="ml-auto">

@@ -2,7 +2,7 @@ import React from 'react';
 
 const productInfo = async () => {
   return (
-    <div className="bg-white w-full h-18 flex items-center px-4 py-3 border-solid border border-borderSub">
+    <div className="bg-white w-full h-18 flex items-center px-4 py-3 border-solid border border-borderSub mt-0 sticky top-0">
       <img src="/productImage.png" className="pr-3"></img>
       <div className="flex flex-col">
         <div className="pr-2 pb-2 text-sm">제주신라호텔</div>

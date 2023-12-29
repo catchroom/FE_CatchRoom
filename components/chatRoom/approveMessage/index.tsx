@@ -16,7 +16,7 @@ const appoveMessage = async () => {
           </button>
         </div>
       </div>
-      <p className="ml-2 text-grey text-sm ">오후 7:36</p>
+      <p className="ml-2 text-gray-500 text-sm ">오후 7:36</p>
     </div>
   );
 };

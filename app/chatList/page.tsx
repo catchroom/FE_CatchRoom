@@ -1,10 +1,10 @@
 import React from 'react';
-import ChatItem from '@/components/chatList/chatItem/.';
+import ChatList from '../../components/chatList/index';
 
 const page = async () => {
   return (
-    <div className="max-w-screen-sm h-screen flex flex-col items-center justify-center bg-semanticBg">
-      <ChatItem />
+    <div>
+      <ChatList />
     </div>
   );
 };
