@@ -8,7 +8,7 @@ import ProfileButton from '@/components/mypage/profile/profileButton';
 import AccountContainer from '@/components/mypage/account/accountContainer';
 import AccountButton from '@/components/mypage/account/accountButton';
 
-const page = () => {
+const page = async () => {
   return (
     <div className="px-3 py-12">
       <div className="w-full flex flex-col gap-6">
