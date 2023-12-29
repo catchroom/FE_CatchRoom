@@ -24,7 +24,7 @@ const CatchSpecialComponent = ({
   oldPrice,
   discount,
 }: catchItems) => {
-  const newPrice = Math.round(oldPrice * (discount / 100));
+  const newPrice = Math.round(oldPrice - oldPrice * (discount / 100));
 
   return (
     <div className="w-full h-36 flex flex-wrap pointer-events-auto">
