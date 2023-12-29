@@ -25,7 +25,6 @@ const Modal = () => {
           >
             <ListItemPrefix placeholder="go" className="mr-3">
               <Checkbox
-                crossOrigin="go"
                 id="vertical-list-react"
                 ripple={false}
                 className="hover:before:opacity-0 rounded-full"
@@ -39,8 +38,9 @@ const Modal = () => {
               color="blue-gray"
               className="font-medium"
             >
-              <div>제주 신라 호텔</div>
-              <p>12/25~12/26(1박)</p>
+              제주 신라 호텔
+              {/* <div>제주 신라 호텔</div>
+              <p>12/25~12/26(1박)</p> */}
             </Typography>
           </label>
         </ListItem>
@@ -51,7 +51,6 @@ const Modal = () => {
           >
             <ListItemPrefix placeholder="go" className="mr-3">
               <Checkbox
-                crossOrigin="go"
                 id="vertical-list-vue"
                 ripple={false}
                 className="hover:before:opacity-0"
@@ -65,8 +64,9 @@ const Modal = () => {
               color="blue-gray"
               className="font-medium"
             >
-              <div>제주 신라 호텔</div>
-              <p>12/25~12/26(1박)</p>
+              제주 신라 호텔
+              {/* <div>제주 신라 호텔</div>
+              <p>12/25~12/26(1박)</p> */}
             </Typography>
           </label>
         </ListItem>
@@ -77,7 +77,6 @@ const Modal = () => {
           >
             <ListItemPrefix placeholder="go" className="mr-3">
               <Checkbox
-                crossOrigin="go"
                 id="vertical-list-svelte"
                 ripple={false}
                 className="hover:before:opacity-0"
@@ -91,8 +90,9 @@ const Modal = () => {
               color="blue-gray"
               className="font-medium"
             >
-              <div>제주 신라 호텔</div>
-              <p>12/25~12/26(1박)</p>
+              제주 신라 호텔
+              {/* <div>제주 신라 호텔</div>
+              <p>12/25~12/26(1박)</p> */}
             </Typography>
           </label>
         </ListItem>
