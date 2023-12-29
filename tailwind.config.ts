@@ -19,6 +19,14 @@ const config: Config = {
       quaternary: '#20639B',
       quinary: '#ED553B',
       senary: '#3CAEA3',
+      white: '#fff',
+      black: '#000',
+      grey: '#717680',
+      borderSub: '#DBDEE3',
+      surfaceGrey: '#EFF1F4',
+      textSub: '#717680',
+      semanticBg: '#F8F9FB',
+      disabledGrey: '#9F9F9F',
     },
     extend: {
       backgroundImage: {
