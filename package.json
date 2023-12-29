@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.0.8",
+    "@react-oauth/google": "^0.12.1",
     "@tanstack/react-query": "^5.14.2",
     "@tanstack/react-query-devtools": "^5.14.2",
     "axios": "^1.6.2",
