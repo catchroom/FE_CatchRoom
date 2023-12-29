@@ -5,14 +5,7 @@ import BackIcon from '../../../public/svg/chevron-left.svg';
 import CloseIcon from '../../../public/svg/ph_x.svg';
 import MoreIcon from '../../../public/svg/dots-vertical.svg';
 import Image from 'next/image';
-
-type HeaderProps = {
-  title: string;
-  showBackButton?: boolean;
-  showCloseButton?: boolean;
-  showMoreButton?: boolean;
-  showBorder?: boolean;
-};
+import { HeaderProps } from '@/types/common/types';
 
 const Header = ({
   title,
