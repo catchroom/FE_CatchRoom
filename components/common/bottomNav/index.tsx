@@ -8,35 +8,47 @@ const BottomNav = () => {
   const currentPath = usePathname();
 
   return (
-    <nav className="fixed bottom-1 bg-white border-t-2 h-16 w-full max-w-[480px]">
+    <nav className="fixed bottom-0 bg-white border-t-2 border-gray-300 h-16 w-full max-w-[480px]">
       <ul className="flex justify-between items-center h-full">
-        <li className="flex-1">
+        <li
+          className={`flex-1 h-full ${
+            currentPath === '/home' ? 'bg-gray-700' : 'bg-gray-300'
+          }`}
+        >
           <Link href="/home">
             <div
-              className={`text-center h-full ${
-                currentPath === '/home' ? ' text-gray-1000' : 'text-gray-500'
+              className={`flex justify-center items-center text-center w-full h-full ${
+                currentPath === '/home' ? 'text-gray-100' : 'text-gray-800'
               }`}
             >
               홈
             </div>
           </Link>
         </li>
-        <li className="flex-1">
+        <li
+          className={`flex-1 h-full ${
+            currentPath === '/chat' ? 'bg-gray-700' : 'bg-gray-300'
+          }`}
+        >
           <Link href="/chat">
             <div
-              className={`text-center ${
-                currentPath === '/chat' ? ' text-gray-1000' : 'text-gray-500'
+              className={`flex justify-center items-center text-center w-full h-full ${
+                currentPath === '/chat' ? 'text-gray-100' : 'text-gray-800'
               }`}
             >
               채팅
             </div>
           </Link>
         </li>
-        <li className="flex-1">
+        <li
+          className={`flex-1 h-full ${
+            currentPath === '/mypage' ? 'bg-gray-700' : 'bg-gray-300'
+          }`}
+        >
           <Link href="/mypage">
             <div
-              className={`text-center ${
-                currentPath === '/mypage' ? ' text-gray-1000' : 'text-gray-500'
+              className={`flex justify-center items-center text-center w-full h-full ${
+                currentPath === '/mypage' ? 'text-gray-100' : 'text-gray-800'
               }`}
             >
               마이페이지
