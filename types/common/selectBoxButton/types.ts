@@ -1,4 +1,4 @@
-export type SelectBoxIconType = {
-  icon: 'pin' | 'calendar' | 'person' | 'house';
+export type selectBoxIconType = {
+  icon: string | ('pin' | 'calendar' | 'person' | 'house');
   placeholder: string;
 };
