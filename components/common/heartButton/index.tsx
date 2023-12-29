@@ -11,7 +11,7 @@ import { useRecoilState } from 'recoil';
  * @returns {JSX.Element} HeartButton 컴포넌트 반환
  */
 
-function HeartButton() {
+const HeartButton = () => {
   const [isLiked, setIsLiked] = useRecoilState(isLikedState);
 
   const handleLike = () => {
@@ -33,6 +33,6 @@ function HeartButton() {
       </button>
     </div>
   );
-}
+};
 
 export default HeartButton;

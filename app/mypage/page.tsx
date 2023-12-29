@@ -2,7 +2,7 @@ import BannerContainer from '@/components/mypage/banner/bannerContainer';
 import BannerItem from '@/components/mypage/banner/bannerItem';
 import React from 'react';
 
-import { MypageConstants } from '@/constants/mypage';
+import { MYPAGE_CONSTANTS } from '@/constants/mypage';
 import ProfileContainer from '@/components/mypage/profile/profileContainer';
 import ProfileButton from '@/components/mypage/profile/profileButton';
 import AccountContainer from '@/components/mypage/account/accountContainer';
@@ -18,35 +18,35 @@ const page = async () => {
         </ProfileContainer>
         {/* 가지고 있는 포인트 계좌 내역 */}
         <AccountContainer balance={9500}>
-          {MypageConstants.accountButton.map((button) => {
+          {MYPAGE_CONSTANTS.ACCOUNT_BUTTON.map((button) => {
             return (
               <AccountButton
-                key={button.title}
-                text={button.title}
-                location={button.location}
+                key={button.TITLE}
+                text={button.TITLE}
+                location={button.LOCATION}
               />
             );
           })}
         </AccountContainer>
         {/* 나의활동 및 기타사항 클릭 배너 */}
-        <BannerContainer text={MypageConstants.topBanner.title}>
-          {MypageConstants.topBanner.banners.map((banner) => {
+        <BannerContainer text={MYPAGE_CONSTANTS.TOP_BANNER.TITLE}>
+          {MYPAGE_CONSTANTS.TOP_BANNER.BANNERS.map((banner) => {
             return (
               <BannerItem
-                key={banner.title}
-                text={banner.title}
-                location={banner.location}
+                key={banner.TITLE}
+                text={banner.TITLE}
+                location={banner.LOCATION}
               />
             );
           })}
         </BannerContainer>
-        <BannerContainer text={MypageConstants.bottomBanner.title}>
-          {MypageConstants.bottomBanner.banners.map((banner) => {
+        <BannerContainer text={MYPAGE_CONSTANTS.BOTTOM_BANNER.TITLE}>
+          {MYPAGE_CONSTANTS.BOTTOM_BANNER.BANNERS.map((banner) => {
             return (
               <BannerItem
-                key={banner.title}
-                text={banner.title}
-                location={banner.location}
+                key={banner.TITLE}
+                text={banner.TITLE}
+                location={banner.LOCATION}
               />
             );
           })}

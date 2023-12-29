@@ -1,10 +1,14 @@
 import type { Config } from 'tailwindcss';
 
-const config: Config = {
+const withMT = require('@material-tailwind/react/utils/withMT');
+
+const config: Config = withMT({
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     screens: {
@@ -22,6 +26,7 @@ const config: Config = {
       black: '#000000',
       'gray-100': '#F8F9FB',
       'gray-200': '#EFF1F4',
+      'gray-250': '#E8E8E8',
       'gray-300': '#DBDEE3',
       'gray-400': '#BCC0C6',
       'gray-500': '#9FA3AB',
@@ -65,5 +70,5 @@ const config: Config = {
     },
   },
   plugins: [],
-};
+});
 export default config;
