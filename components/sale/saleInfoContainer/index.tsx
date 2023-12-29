@@ -2,7 +2,7 @@ import React from 'react';
 
 const SaleInfoContainer = () => {
   return (
-    <div className="w-[355px] p-3 bg-gray-400 flex flex-col gap-[22px] ">
+    <div className="w-[355px] p-3 bg-gray-200 flex flex-col gap-[22px] ">
       <div className="flex flex-col items-start">
         <h1 className="text-h2">제주신라호텔</h1>
         <p className="text-t2">스탠다드 더블</p>

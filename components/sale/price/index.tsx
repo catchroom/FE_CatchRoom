@@ -11,7 +11,7 @@ const Price = () => {
         <p>- 거래 수수료율 5%</p>
         <span>0원</span>
       </div>
-      <hr />
+      <hr className="border-black" />
       <div className="flex justify-between">
         <p>최종 정산금액</p>
         <span className="text-h2 font-bold">0원</span>
