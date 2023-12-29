@@ -1,4 +1,13 @@
-export const SEARCH_DEFAULT = {
+type SelectBoxType = {
+  icon: 'pin' | 'calendar' | 'person' | 'house';
+  placeholder: string;
+};
+
+type SearchDefaultType = {
+  props: SelectBoxType[];
+};
+
+export const SEARCH_DEFAULT: SearchDefaultType = {
   props: [
     {
       icon: 'pin',
