@@ -2,9 +2,9 @@
 import { Button } from '@material-tailwind/react';
 import React from 'react';
 
-interface Props {
+type Props = {
   percent: number;
-}
+};
 
 const SellingPriceBtn = ({ percent }: Props) => {
   return (
