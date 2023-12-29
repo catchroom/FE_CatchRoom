@@ -4,7 +4,7 @@ import { PiMapPinFill } from 'react-icons/pi';
 import { CiCalendar } from 'react-icons/ci';
 import { CiUser } from 'react-icons/ci';
 import { CiHome } from 'react-icons/ci';
-import { SelectBoxIconType } from '@/types/common/selectBoxButton/types';
+import { selectBoxIconType } from '@/types/common/selectBoxButton/types';
 
 /**
  * 클릭 시 바텀시트(select모달창)를 불러오는 버튼입니다.
@@ -17,7 +17,7 @@ import { SelectBoxIconType } from '@/types/common/selectBoxButton/types';
  * @returns {JSX.Element} SelectBoxButton 컴포넌트 반환
  */
 
-const SelectBoxButton = ({ icon, placeholder }: SelectBoxIconType) => {
+const SelectBoxButton = ({ icon, placeholder }: selectBoxIconType) => {
   let IconComponent!: IconType;
   let iconColor: string = '';
 
@@ -39,7 +39,7 @@ const SelectBoxButton = ({ icon, placeholder }: SelectBoxIconType) => {
   }
 
   return (
-    <button className="w-full  h-14 flex flex-wrap items-center my-2  border border-black text-base">
+    <button className="w-full  h-14 flex flex-wrap items-center my-1  border border-black text-base">
       <IconComponent className={`mx-2 text-h1 ${iconColor}`} />
       {placeholder}
     </button>
