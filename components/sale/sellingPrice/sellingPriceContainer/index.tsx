@@ -4,7 +4,7 @@ import SellingPriceBtn from '../sellingPriceBtn';
 const SellingPriceContainer = () => {
   return (
     <div className="flex flex-col w-[355px] mt-5">
-      <h2 className="text-t1 font-bold">판매가 설정</h2>
+      <h2 className="text-p1 font-bold">판매가 설정</h2>
       <div className="grid grid-cols-5 gap-4 mt-1">
         <SellingPriceBtn percent={30} />
         <SellingPriceBtn percent={40} />
