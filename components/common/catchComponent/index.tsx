@@ -50,7 +50,7 @@ const CatchSpecialComponent = ({
             <p className="text-p3 font-semibold">{roomType}</p>
           </div>
           <div className=" flex justify-start">
-            <p className="px-2 py-1 rounded-full bg-gray-250 text-t3 font-semibold">
+            <p className="px-2 py-1 rounded-full bg-gray-250 text-p3 font-semibold">
               {resDate}
             </p>
           </div>
