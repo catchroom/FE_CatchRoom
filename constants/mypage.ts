@@ -2,11 +2,11 @@ export const MYPAGE_CONSTANTS = {
   ACCOUNT_BUTTON: [
     {
       TITLE: '출금하기',
-      LOCATION: '/mypage/withdraw',
+      LOCATION: '/mypage/dashboard/withdraw',
     },
     {
       TITLE: '내역보기',
-      LOCATION: '/mypage/withdraw/history',
+      LOCATION: '/mypage/dashboard/withdraw/history',
     },
   ],
 
@@ -15,19 +15,19 @@ export const MYPAGE_CONSTANTS = {
     BANNERS: [
       {
         TITLE: '판매 내역',
-        LOCATION: '/mypage/sales',
+        LOCATION: '/mypage/dashboard/sales',
       },
       {
         TITLE: '구매 내역',
-        LOCATION: '/mypage/purchases',
+        LOCATION: '/mypage/dashboard/purchases',
       },
       {
         TITLE: '찜목록',
-        LOCATION: '/mypage/likes',
+        LOCATION: '/mypage/dashboard/likes',
       },
       {
         TITLE: '작성한 후기',
-        LOCATION: '/mypage/reviews',
+        LOCATION: '/mypage/dashboard/reviews',
       },
     ],
   },
@@ -36,23 +36,23 @@ export const MYPAGE_CONSTANTS = {
     BANNERS: [
       {
         TITLE: '공지사항',
-        LOCATION: '/mypage/notices',
+        LOCATION: '/mypage/dashboard/notices',
       },
       {
         TITLE: '서비스 약관',
-        LOCATION: '/mypage/terms',
+        LOCATION: '/mypage/dashboard/terms',
       },
       {
         TITLE: '개인정보 처리방침',
-        LOCATION: '/mypage/privacy',
+        LOCATION: '/mypage/dashboard/privacy',
       },
       {
         TITLE: '버전 정보',
-        LOCATION: '/mypage/edit',
+        LOCATION: '/mypage/dashboard/edit',
       },
       {
         TITLE: '1:1 문의하기',
-        LOCATION: '/mypage/ask',
+        LOCATION: '/mypage/dashboard/ask',
       },
     ],
   },
