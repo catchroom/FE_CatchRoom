@@ -1,6 +1,7 @@
 import Header from '@/components/common/header';
 import BookingHolderInfo from '@/components/order/bookingHolderInfo';
 import CheckInOut from '@/components/order/checkInOut';
+import GuestInfo from '@/components/order/guestInfo';
 import ProductDetails from '@/components/order/productDetails';
 import React from 'react';
 
@@ -27,6 +28,7 @@ const page = () => {
         />
         <CheckInOut checkIn={checkInData} checkOut={checkOutData} />
         <BookingHolderInfo name="이름" phoneNumber="010-1234-5678" />
+        <GuestInfo name="이름" phoneNumber="010-1234-5678" />
       </div>
     </>
   );
