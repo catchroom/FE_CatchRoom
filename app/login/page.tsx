@@ -4,7 +4,8 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
 import Image from 'next/image';
-import MyCustomButton from './_components/MyCustomButton';
+// import MyCustomButton from './_components/MyCustomButton';
+import KakaoLoginButton from './_components/KakaoLoginButton';
 
 const Page = () => {
   // const login = useGoogleLogin({
@@ -13,10 +14,22 @@ const Page = () => {
   // });
 
   const login2 = useGoogleLogin({
-    onSuccess: (res) => console.log(res),
-    flow: 'auth-code', // 서버 사이드, Authorization Code를 반환
-    //백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
+    onSuccess: (res) => {
+      console.log(res);
+      // axios.post('백엔드 api ', {
+      //   authCode: res.code
+      // })
+      // .then(response => {
+      //   console.log(response.data);
+      // })
+      // .catch((error) => {
+      //   console.error('보내기 실패', error);
+      // });
+    },
+    flow: 'auth-code',
   });
+  // 서버 사이드, Authorization Code를 반환
+  //백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen">
@@ -30,7 +43,9 @@ const Page = () => {
       />
 
       {/* 카카오*/}
-      <div className="justify-center mt-4">카카오 로그인</div>
+      <div className="justify-center mt-4">
+        <KakaoLoginButton />
+      </div>
 
       {/* 구글 credential*/}
       {/* <div className="justify-center mt-4">
@@ -45,9 +60,9 @@ const Page = () => {
       </div> */}
 
       {/* 커스텀 적용*/}
-      <div className="justify-center mt-4">
+      {/* <div className="justify-center mt-4">
         <MyCustomButton onClick={() => login2()}></MyCustomButton>
-      </div>
+      </div> */}
 
       {/* 구글 인가코드*/}
       <div className="justify-center mt-4">
