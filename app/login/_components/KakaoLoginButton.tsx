@@ -19,31 +19,3 @@ const KakaoLoginButton = () => {
 };
 
 export default KakaoLoginButton;
-
-// import React from 'react';
-// import KakaoLogin from 'react-kakao-login';
-
-// const KakaoLoginButton = () => {
-//   const kakaoClientId = process.env.NEXT_PUBLIC_KAKAO_KEY || '';
-//   // console.log(kakaoClientId);
-
-//   const kakaoOnSuccess = async (data: any) => {
-//     console.log(data);
-//     // const idToken = data.response.access_token;
-//   };
-//   const kakaoOnFailure = (error: any) => {
-//     console.log(error);
-//   };
-
-//   return (
-//     <>
-//       <KakaoLogin
-//         token={kakaoClientId}
-//         onSuccess={kakaoOnSuccess}
-//         onFail={kakaoOnFailure}
-//       />
-//     </>
-//   );
-// };
-
-// export default KakaoLoginButton;
