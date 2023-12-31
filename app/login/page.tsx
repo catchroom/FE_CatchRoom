@@ -4,7 +4,7 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
 import Image from 'next/image';
-// import MyCustomButton from './_components/MyCustomButton';
+//import MyCustomButton from './_components/MyCustomButton';
 import KakaoLoginButton from './_components/KakaoLoginButton';
 
 const Page = () => {
@@ -16,6 +16,7 @@ const Page = () => {
   const login2 = useGoogleLogin({
     onSuccess: (res) => {
       console.log(res);
+      console.log('백으로 보내줄 구글 로그인 코드', res.code);
       // axios.post('백엔드 api ', {
       //   authCode: res.code
       // })
@@ -41,13 +42,12 @@ const Page = () => {
         width={150}
         height={150}
       />
-
       {/* 카카오*/}
       <div className="justify-center mt-4">
         <KakaoLoginButton />
       </div>
 
-      {/* 구글 credential*/}
+      {/* 구글 credential -> Cross-Origin-Opener-Policy안뜸*/}
       {/* <div className="justify-center mt-4">
         <GoogleLogin
           onSuccess={(credentialResponse) => {
@@ -59,9 +59,9 @@ const Page = () => {
         />
       </div> */}
 
-      {/* 커스텀 적용*/}
-      {/* <div className="justify-center mt-4">
-        <MyCustomButton onClick={() => login2()}></MyCustomButton>
+      {/* 커스텀 적용
+      <div className="justify-center mt-4">
+        <MyCustomButton onClick={() => login()} />
       </div> */}
 
       {/* 구글 인가코드*/}
