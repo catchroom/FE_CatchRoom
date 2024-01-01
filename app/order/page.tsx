@@ -2,6 +2,7 @@ import Header from '@/components/common/header';
 import BookingHolderInfo from '@/components/order/bookingHolderInfo';
 import CheckInOut from '@/components/order/checkInOut';
 import GuestInfo from '@/components/order/guestInfo';
+import PaymentButton from '@/components/order/paymentButton';
 import PaymentInfo from '@/components/order/paymentInfo';
 import PaymentMethods from '@/components/order/paymentMethods';
 import ProductDetails from '@/components/order/productDetails';
@@ -37,6 +38,7 @@ const page = () => {
         <PaymentInfo totalPrice={totalPrice} />
         <PaymentMethods />
         <TermsAndConditions label="약관 동의" />
+        <PaymentButton amount={totalPrice} />
       </div>
     </>
   );
