@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ThemeProvider } from '@material-tailwind/react';
 
 const ClientProvider = ({ children }: { children: ReactNode }) => {
   const [queryClient] = useState(
@@ -23,10 +24,12 @@ const ClientProvider = ({ children }: { children: ReactNode }) => {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </RecoilRoot>
+        <ThemeProvider>
+          <RecoilRoot>
+            {children}
+            <ReactQueryDevtools initialIsOpen={false} />
+          </RecoilRoot>
+        </ThemeProvider>
       </QueryClientProvider>
     </GoogleOAuthProvider>
   );
