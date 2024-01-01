@@ -6,6 +6,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import Image from 'next/image';
 //import MyCustomButton from './_components/MyCustomButton';
 import KakaoLoginButton from './_components/KakaoLoginButton';
+import axios from 'axios';
 
 const Page = () => {
   // const login = useGoogleLogin({
@@ -15,26 +16,31 @@ const Page = () => {
 
   const login2 = useGoogleLogin({
     onSuccess: (res) => {
-      console.log(res);
-      console.log('백으로 보내줄 구글 로그인 코드', res.code);
-      // axios.post('백엔드 api ', {
-      //   authCode: res.code
-      // })
-      // .then(response => {
-      //   console.log(response.data);
-      // })
-      // .catch((error) => {
-      //   console.error('보내기 실패', error);
-      // });
+      console.log('서버에 보낼 값', res.code.toString());
+
+      axios
+        .post(
+          'https://www.catchroom.xyz/oauth2/callback',
+          res.code.toString(),
+          { headers: { 'Content-Type': 'text/plain' } },
+        )
+        .then((response) => {
+          console.log('성공', response.data);
+        })
+        .catch((error) => {
+          console.error('보내기 실패', error);
+        });
     },
     flow: 'auth-code',
   });
+
   // 서버 사이드, Authorization Code를 반환
   //백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen">
       {/* 로고 */}
+
       <Image
         className="justify-center mt-2"
         src="/Logo.png"
@@ -64,7 +70,7 @@ const Page = () => {
         <MyCustomButton onClick={() => login()} />
       </div> */}
 
-      {/* 구글 인가코드*/}
+      {/* 구글 인가코드 */}
       <div className="justify-center mt-4">
         <GoogleLogin
           onSuccess={login2}
