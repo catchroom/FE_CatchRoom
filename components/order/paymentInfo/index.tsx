@@ -5,10 +5,10 @@ type PaymentInfoProps = {
 };
 // 추가 후 위치 이동 예정
 
-const PaymentInfo: React.FC<PaymentInfoProps> = ({ totalPrice }) => {
+const PaymentInfo = ({ totalPrice }: PaymentInfoProps) => {
   return (
-    <div className=" flex flex-col justify-between">
-      <h3 className="text-p2 font-bold text-gray-900 mb-2">
+    <div className=" flex flex-col justify-between mb-14">
+      <h3 className="text-p2 font-bold text-gray-1000 mb-2">
         할인 및 결제 정보 + 수수료
       </h3>
       <div className="mb-2">

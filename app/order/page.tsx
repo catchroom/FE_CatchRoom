@@ -3,7 +3,9 @@ import BookingHolderInfo from '@/components/order/bookingHolderInfo';
 import CheckInOut from '@/components/order/checkInOut';
 import GuestInfo from '@/components/order/guestInfo';
 import PaymentInfo from '@/components/order/paymentInfo';
+import PaymentMethods from '@/components/order/paymentMethods';
 import ProductDetails from '@/components/order/productDetails';
+import TermsAndConditions from '@/components/order/termsAndConditions';
 import React from 'react';
 
 const page = () => {
@@ -19,8 +21,8 @@ const page = () => {
     time: '11:00',
   };
 
-  const points = 35129; // 예제 포인트
-  const totalPrice = 135000; // 예제 결제 금액
+  const totalPrice = 135000;
+
   return (
     <>
       <Header title="구매" showBackButton showBorder />
@@ -32,7 +34,9 @@ const page = () => {
         <CheckInOut checkIn={checkInData} checkOut={checkOutData} />
         <BookingHolderInfo name="이름" phoneNumber="010-1234-5678" />
         <GuestInfo name="이름" phoneNumber="010-1234-5678" />
-        <PaymentInfo points={points} totalPrice={totalPrice} />
+        <PaymentInfo totalPrice={totalPrice} />
+        <PaymentMethods />
+        <TermsAndConditions label="약관 동의" />
       </div>
     </>
   );
