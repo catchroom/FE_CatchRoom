@@ -9,7 +9,7 @@ const loginUri = `https://kauth.kakao.com/oauth/authorize?client_id=${process.en
 const KakaoLoginButton = () => {
   return (
     <Link href={loginUri} rel="noopener noreferrer">
-      <Image src={loginImage} alt="카카오 이미지" width={210} />
+      <Image src={loginImage} alt="카카오 이미지" width={215} />
     </Link>
   );
 };

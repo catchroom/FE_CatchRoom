@@ -4,11 +4,13 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
 import Image from 'next/image';
-//import MyCustomButton from './_components/MyCustomButton';
+import MyCustomButton from './_components/MyCustomButton';
 import { getSocialAuth } from '@/api/socialAuth';
 import KakaoLoginButton from './_components/KakaoLoginButton';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
+  const router = useRouter();
   const login2 = useGoogleLogin({
     onSuccess: (res) => {
       console.log('서버에 보낼 값', res.code.toString());
@@ -27,25 +29,24 @@ const Page = () => {
   // 백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen">
+    <div className="flex flex-col items-center w-screen h-screen">
       {/* 로고 */}
-
       <Image
-        className="justify-center mt-2"
+        className="mt-20"
         src="/Logo.png"
         alt="Logo"
         width={150}
-        height={150}
+        height={80}
       />
       {/* 카카오*/}
-      <div className="justify-center mt-4">
+      <div className="justify-center mt-7">
         <KakaoLoginButton />
       </div>
 
-      {/* 커스텀 적용
+      {/* 커스텀 적용 */}
       <div className="justify-center mt-4">
-        <MyCustomButton onClick={() => login()} />
-      </div> */}
+        <MyCustomButton onClick={login2} />
+      </div>
 
       {/* 구글 인가코드 */}
       <div className="justify-center mt-4">
@@ -56,10 +57,16 @@ const Page = () => {
           }}
         />
       </div>
-
       {/* 이메일*/}
-      <div className="w-3/4 mt-5">
-        <button className="w-full py-2">이메일로 시작하기</button>
+      <div className="w-3/4 mt-4">
+        <button
+          className="w-full py-2 text-sm"
+          onClick={() => {
+            router.push('/login/email');
+          }}
+        >
+          이메일로 시작하기
+        </button>
       </div>
     </div>
   );
