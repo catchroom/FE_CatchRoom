@@ -21,8 +21,10 @@ const Page = () => {
       axios
         .post(
           'https://www.catchroom.xyz/oauth2/callback',
-          res.code.toString(),
-          { headers: { 'Content-Type': 'text/plain' } },
+          { authCode: res.code.toString() },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
         )
         .then((response) => {
           console.log('성공', response.data);
@@ -35,7 +37,7 @@ const Page = () => {
   });
 
   // 서버 사이드, Authorization Code를 반환
-  //백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
+  // 백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen">
