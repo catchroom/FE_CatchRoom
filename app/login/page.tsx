@@ -5,38 +5,25 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
 import Image from 'next/image';
 //import MyCustomButton from './_components/MyCustomButton';
+import { getSocialAuth } from '@/api/socialAuth';
 import KakaoLoginButton from './_components/KakaoLoginButton';
-import axios from 'axios';
 
 const Page = () => {
-  // const login = useGoogleLogin({
-  //   onSuccess: (res) => console.log(res),
-  //   flow: 'implicit', //  클라이언트 사이드, AccessToken을 반환
-  // });
-
   const login2 = useGoogleLogin({
     onSuccess: (res) => {
       console.log('서버에 보낼 값', res.code.toString());
 
-      axios
-        .post(
-          'https://www.catchroom.xyz/oauth2/callback',
-          { authCode: res.code.toString() },
-          {
-            headers: { 'Content-Type': 'application/json' },
-          },
-        )
+      getSocialAuth(res.code.toString())
         .then((response) => {
-          console.log('성공', response.data);
+          console.log('구글 인증 성공', response.data);
         })
         .catch((error) => {
-          console.error('보내기 실패', error);
+          console.error('구글 인증 실패', error);
         });
     },
     flow: 'auth-code',
   });
 
-  // 서버 사이드, Authorization Code를 반환
   // 백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
 
   return (
@@ -54,18 +41,6 @@ const Page = () => {
       <div className="justify-center mt-4">
         <KakaoLoginButton />
       </div>
-
-      {/* 구글 credential -> Cross-Origin-Opener-Policy안뜸*/}
-      {/* <div className="justify-center mt-4">
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log('구글 로그인 실패');
-          }}
-        />
-      </div> */}
 
       {/* 커스텀 적용
       <div className="justify-center mt-4">
