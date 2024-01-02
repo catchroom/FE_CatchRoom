@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { nameSchema, FormName } from '@/constants/zodSchema';
+import { useDebounceText } from '@/hooks/useDebounceText';
 
 const ValidationForm = ({ name }: { name: string }) => {
   const [checkNickname, setCheckNickname] = useState(false);
@@ -21,25 +22,26 @@ const ValidationForm = ({ name }: { name: string }) => {
   });
 
   const inputText = watch('nickname');
+  const debounceText = useDebounceText(inputText);
 
   useEffect(() => {
-    const checkNickname = () => {
-      const notSameNickname = inputText !== name;
-
+    const validName = () => {
+      const notSameNickname = debounceText !== name;
       const availableNickname = nameSchema.safeParse({
-        nickname: inputText,
+        nickname: debounceText,
       }).success;
 
-      return notSameNickname && availableNickname;
+      if (notSameNickname && availableNickname) {
+        console.log('available');
+        setCheckNickname(true);
+      } else {
+        console.log('not available');
+        setCheckNickname(false);
+      }
     };
 
-    if (checkNickname()) {
-      console.log('available');
-      setCheckNickname(true);
-    } else {
-      console.log('not available');
-    }
-  }, [inputText, name]);
+    validName();
+  }, [debounceText, name]);
 
   const onSubmit: SubmitHandler<FormName> = (data) => {
     if (nameSchema.safeParse(data).success) {
