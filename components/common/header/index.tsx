@@ -28,7 +28,7 @@ const Header = ({
         </button>
       ) : (
         <div />
-      )}{' '}
+      )}
       <h1 className="justify-self-center text-h2 font-semibold">{title}</h1>
       {showCloseButton || showMoreButton ? (
         <div className="justify-self-end">
@@ -45,7 +45,7 @@ const Header = ({
         </div>
       ) : (
         <div />
-      )}{' '}
+      )}
     </header>
   );
 };
