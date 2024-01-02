@@ -2,10 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import loginImage from '../../../public/google_login_2xn.png';
-
-interface MyCustomButtonProps {
-  onClick: () => void;
-}
+import { MyCustomButtonProps } from '@/types/login/types';
 
 const MyCustomButton = ({ onClick }: MyCustomButtonProps) => {
   return (
