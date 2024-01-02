@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { nameSchema, FormName } from '@/constants/zodSchema';
 import { useDebounceText } from '@/hooks/useDebounceText';
 import MyPageCancelSVG from '@/public/svg/mypage-cancel';
+import { ErrorMessage } from '@hookform/error-message';
 
 const ValidationForm = ({ name }: { name: string }) => {
   const [checkNickname, setCheckNickname] = useState(false);
@@ -17,6 +18,8 @@ const ValidationForm = ({ name }: { name: string }) => {
     formState: { errors },
   } = useForm<FormName>({
     resolver: zodResolver(nameSchema),
+    mode: 'onChange',
+    delayError: 300,
     defaultValues: {
       nickname: name,
     },
@@ -79,13 +82,17 @@ const ValidationForm = ({ name }: { name: string }) => {
             <MyPageCancelSVG />
             {''}
           </button>
-          {errors.nickname && (
-            <p className="text-red-500">{errors.nickname.message}</p>
-          )}
+          <ErrorMessage
+            errors={errors}
+            name="nickname"
+            render={({ message }) => (
+              <p className="text-p4 text-pink-700">{message}</p>
+            )}
+          />
           <div className="w-full flex gap-3">
             <button
               type="submit"
-              disabled={!checkNickname}
+              // disabled={!checkNickname}
               className={`${
                 checkNickname
                   ? 'border-opacity-100  text-opacity-100'
