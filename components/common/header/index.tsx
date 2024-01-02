@@ -24,11 +24,11 @@ const Header = ({
     <header className={headerClass}>
       {showBackButton ? (
         <button onClick={() => router.back()} className="justify-self-start">
-          <Image src={BackIcon} alt="뒤로가기 아이콘" />
+          <BackIcon />
         </button>
       ) : (
         <div />
-      )}{' '}
+      )}
       <h1 className="justify-self-center text-h2 font-semibold">{title}</h1>
       {showCloseButton || showMoreButton ? (
         <div className="justify-self-end">
@@ -39,13 +39,13 @@ const Header = ({
           )}
           {showMoreButton && (
             <button>
-              <Image src={MoreIcon} alt="더보기 아이콘" />
+              <MoreIcon />
             </button>
           )}
         </div>
       ) : (
         <div />
-      )}{' '}
+      )}
     </header>
   );
 };
