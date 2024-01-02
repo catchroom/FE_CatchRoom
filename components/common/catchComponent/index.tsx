@@ -12,9 +12,12 @@ import React from 'react';
  *
  * 또한, 할인된 가격은 oldPrice와 discount를 반영하여 자동으로 값이 도출되게 됩니다.
  *
- * @props {string} icon - 아이콘 종류는 ('pin', 'calendar', 'person', 'house')가 있습니다.
- * @props {string} placeholder - 버튼 안에 들어갈 placeholder입니다.
- * @returns {JSX.Element} SelectBoxButton 컴포넌트 반환
+ * @props {string} roomName - 숙소의 명칭입니다.
+ * @props {string} roomType - 숙소의 타입입니다. (ex. 호텔, 팬션, 풀빌라 등)
+ * @props {string} resDate - 숙소가 예약된 날짜입니다.
+ * @props {number} oldPrice - 숙소의 이전 구매 가격입니다.
+ * @props {30|40|50|60|70|80|90} discount - 캐치 특가 할인률로, 30부터 10씩 증가하여 90까지 설정이 가능합니다.
+ * @returns {JSX.Element} CatchSpecialComponent 컴포넌트 반환
  */
 
 const CatchSpecialComponent = ({
