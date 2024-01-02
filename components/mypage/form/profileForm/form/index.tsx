@@ -66,6 +66,7 @@ const ProfileForm = ({ name }: { name: string }) => {
             className={`bg-white border-b-[1px] w-full outline-none border-black transition-colors duration-300 ease-in focus:border-main`}
           />
           <button
+            data-testid="cancel-button"
             type="button"
             onClick={() =>
               reset({
@@ -96,6 +97,7 @@ const ProfileForm = ({ name }: { name: string }) => {
               확인
             </button>
             <button
+              data-testid="reset-button"
               type="button"
               onClick={() =>
                 reset({
