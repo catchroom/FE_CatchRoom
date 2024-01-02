@@ -1,3 +1,5 @@
+import { maskEmail, maskPassword, maskPhoneNumber } from '@/utils/mypage-utils';
+
 export const MYPAGE_CONSTANTS = {
   ACCOUNT_BUTTON: [
     {
@@ -57,3 +59,26 @@ export const MYPAGE_CONSTANTS = {
     ],
   },
 };
+
+export const MYPAGE_PRIVACY = [
+  {
+    title: '아이디',
+    function: maskEmail,
+    key: 'id',
+  },
+  {
+    title: '이메일',
+    function: maskEmail,
+    key: 'email',
+  },
+  {
+    title: '비밀번호',
+    function: maskPassword,
+    key: 'password',
+  },
+  {
+    title: '휴대폰 번호',
+    function: maskPhoneNumber,
+    key: 'phoneNumber',
+  },
+];

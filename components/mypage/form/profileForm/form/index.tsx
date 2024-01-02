@@ -8,7 +8,7 @@ import { useDebounceText } from '@/hooks/useDebounceText';
 import MyPageCancelSVG from '@/public/svg/mypage-cancel';
 import { ErrorMessage } from '@hookform/error-message';
 
-const ValidationForm = ({ name }: { name: string }) => {
+const ProfileForm = ({ name }: { name: string }) => {
   const [checkNickname, setCheckNickname] = useState(false);
   const {
     register,
@@ -55,13 +55,8 @@ const ValidationForm = ({ name }: { name: string }) => {
     validName();
   }, [debounceText, name]);
 
-  console.log(errors.nickname);
-
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full px-12 flex flex-col"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
       <div className="w-full flex flex-row items-start  gap-3">
         <p className="mr-2 whitespace-nowrap">닉네임</p>
         <div className="flex flex-col gap-1 w-full relative">
@@ -80,7 +75,6 @@ const ValidationForm = ({ name }: { name: string }) => {
             className="absolute right-0 bg-white"
           >
             <MyPageCancelSVG />
-            {''}
           </button>
           <ErrorMessage
             errors={errors}
@@ -92,7 +86,7 @@ const ValidationForm = ({ name }: { name: string }) => {
           <div className="w-full flex gap-3">
             <button
               type="submit"
-              // disabled={!checkNickname}
+              disabled={!checkNickname}
               className={`${
                 checkNickname
                   ? 'border-opacity-100  text-opacity-100'
@@ -103,12 +97,12 @@ const ValidationForm = ({ name }: { name: string }) => {
             </button>
             <button
               type="button"
-              onClick={() => reset()}
-              className={`${
-                !!inputText && inputText !== name
-                  ? 'border-opacity-100  text-opacity-100'
-                  : 'border-opacity-30  text-opacity-30'
-              } border-2 border-black text-black px-2`}
+              onClick={() =>
+                reset({
+                  nickname: name,
+                })
+              }
+              className="border-opacity-30 text-opacity-30 border-2 border-black text-black px-2 hover:border-opacity-70  hover:text-opacity-70"
             >
               취소
             </button>
@@ -119,4 +113,4 @@ const ValidationForm = ({ name }: { name: string }) => {
   );
 };
 
-export default ValidationForm;
+export default ProfileForm;

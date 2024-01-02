@@ -9,7 +9,14 @@ import AccountContainer from '@/components/mypage/account/accountContainer';
 import AccountButton from '@/components/mypage/account/accountButton';
 import BottomNav from '@/components/common/bottomNav';
 
+const fetchTest = async () => {
+  const res = await fetch('https://catchroom.xyz/v1/test/do');
+  const data = await res.text();
+  console.log(data);
+};
+
 const page = async () => {
+  await fetchTest();
   return (
     <>
       <div className="px-3 py-12">
