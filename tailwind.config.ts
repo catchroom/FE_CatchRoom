@@ -26,6 +26,7 @@ const config: Config = withMT({
       black: '#000000',
       'gray-100': '#F8F9FB',
       'gray-200': '#EFF1F4',
+      'gray-250': '#E8E8E8',
       'gray-300': '#DBDEE3',
       'gray-400': '#BCC0C6',
       'gray-500': '#9FA3AB',
