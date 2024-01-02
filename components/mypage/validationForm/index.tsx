@@ -1,15 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { nameSchema, FormName } from '@/constants/zodSchema';
 
 const ValidationForm = ({ name }: { name: string }) => {
+  const [checkNickname, setCheckNickname] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<FormName>({
     resolver: zodResolver(nameSchema),
@@ -18,7 +20,26 @@ const ValidationForm = ({ name }: { name: string }) => {
     },
   });
 
-  console.log(nameSchema.safeParse(watch('nickname')).success);
+  const inputText = watch('nickname');
+
+  useEffect(() => {
+    const checkNickname = () => {
+      const notSameNickname = inputText !== name;
+
+      const availableNickname = nameSchema.safeParse({
+        nickname: inputText,
+      }).success;
+
+      return notSameNickname && availableNickname;
+    };
+
+    if (checkNickname()) {
+      console.log('available');
+      setCheckNickname(true);
+    } else {
+      console.log('not available');
+    }
+  }, [inputText, name]);
 
   const onSubmit: SubmitHandler<FormName> = (data) => {
     if (nameSchema.safeParse(data).success) {
@@ -50,13 +71,19 @@ const ValidationForm = ({ name }: { name: string }) => {
           <div className="w-full flex gap-3">
             <button
               type="submit"
-              disabled={nameSchema.safeParse(watch('nickname')).success}
-              className={`border-2 border-black border-opacity-30 text-black text-opacity-30 px-2`}
+              disabled={!checkNickname}
+              // disabled={!checkNickname(inputText)}
+              // className={`${
+              //   checkNickname(inputText)
+              //     ? 'border-opacity-100  text-opacity-100'
+              //     : 'border-opacity-30  text-opacity-30'
+              // } border-2 border-black text-black px-2`}
             >
               확인
             </button>
             <button
               type="button"
+              onClick={() => reset()}
               className={`border-2 border-black border-opacity-30 text-black text-opacity-30 px-2`}
             >
               취소
