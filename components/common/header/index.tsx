@@ -24,7 +24,7 @@ const Header = ({
     <header className={headerClass}>
       {showBackButton ? (
         <button onClick={() => router.back()} className="justify-self-start">
-          <Image src={BackIcon} alt="뒤로가기 아이콘" />
+          <BackIcon />
         </button>
       ) : (
         <div />
@@ -39,7 +39,7 @@ const Header = ({
           )}
           {showMoreButton && (
             <button>
-              <Image src={MoreIcon} alt="더보기 아이콘" />
+              <MoreIcon />
             </button>
           )}
         </div>
