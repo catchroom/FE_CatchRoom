@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { nameSchema, FormName } from '@/constants/zodSchema';
 import { useDebounceText } from '@/hooks/useDebounceText';
+import MyPageCancelSVG from '@/public/svg/mypage-cancel';
 
 const ValidationForm = ({ name }: { name: string }) => {
   const [checkNickname, setCheckNickname] = useState(false);
@@ -22,7 +23,17 @@ const ValidationForm = ({ name }: { name: string }) => {
   });
 
   const inputText = watch('nickname');
-  const debounceText = useDebounceText(inputText);
+  const debounceText = useDebounceText(inputText, 300);
+
+  const onSubmit: SubmitHandler<FormName> = (data) => {
+    if (nameSchema.safeParse(data).success) {
+      // api 요청
+      console.log(data);
+    } else {
+      // error alert 처리
+      console.log('error');
+    }
+  };
 
   useEffect(() => {
     const validName = () => {
@@ -32,10 +43,8 @@ const ValidationForm = ({ name }: { name: string }) => {
       }).success;
 
       if (notSameNickname && availableNickname) {
-        console.log('available');
         setCheckNickname(true);
       } else {
-        console.log('not available');
         setCheckNickname(false);
       }
     };
@@ -43,13 +52,7 @@ const ValidationForm = ({ name }: { name: string }) => {
     validName();
   }, [debounceText, name]);
 
-  const onSubmit: SubmitHandler<FormName> = (data) => {
-    if (nameSchema.safeParse(data).success) {
-      console.log(data);
-    } else {
-      console.log('error');
-    }
-  };
+  console.log(errors.nickname);
 
   return (
     <form
@@ -58,35 +61,47 @@ const ValidationForm = ({ name }: { name: string }) => {
     >
       <div className="w-full flex flex-row items-start  gap-3">
         <p className="mr-2 whitespace-nowrap">닉네임</p>
-        <div className="flex flex-col gap-1 w-full">
+        <div className="flex flex-col gap-1 w-full relative">
           <input
             {...register('nickname')}
             type="text"
             className={`bg-white border-b-[1px] w-full outline-none border-black transition-colors duration-300 ease-in focus:border-main`}
           />
+          <button
+            type="button"
+            onClick={() =>
+              reset({
+                nickname: '',
+              })
+            }
+            className="absolute right-0 bg-white"
+          >
+            <MyPageCancelSVG />
+            {''}
+          </button>
           {errors.nickname && (
-            <p className="text-p4  text-pink-700">
-              {'닉네임은 2~8자 한글/영문/숫자만 가능합니다.'}
-            </p>
+            <p className="text-red-500">{errors.nickname.message}</p>
           )}
-
           <div className="w-full flex gap-3">
             <button
               type="submit"
               disabled={!checkNickname}
-              // disabled={!checkNickname(inputText)}
-              // className={`${
-              //   checkNickname(inputText)
-              //     ? 'border-opacity-100  text-opacity-100'
-              //     : 'border-opacity-30  text-opacity-30'
-              // } border-2 border-black text-black px-2`}
+              className={`${
+                checkNickname
+                  ? 'border-opacity-100  text-opacity-100'
+                  : 'border-opacity-30  text-opacity-30'
+              } border-2 border-black text-black px-2`}
             >
               확인
             </button>
             <button
               type="button"
               onClick={() => reset()}
-              className={`border-2 border-black border-opacity-30 text-black text-opacity-30 px-2`}
+              className={`${
+                !!inputText && inputText !== name
+                  ? 'border-opacity-100  text-opacity-100'
+                  : 'border-opacity-30  text-opacity-30'
+              } border-2 border-black text-black px-2`}
             >
               취소
             </button>
