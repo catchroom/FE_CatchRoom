@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckInComponentProps } from '@/types/common/checkInComponent/type';
+import { CheckInComponentProps } from '@/types/common/checkInComponent/types';
 
 /**
  * 개별 상품의 체크인-체크아웃 날짜를 확인할 수 있는 컴포넌트입니다.
