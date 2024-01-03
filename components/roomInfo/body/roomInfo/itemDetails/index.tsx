@@ -6,20 +6,22 @@ const ItemDetailComponent = () => {
     <>
       <div className="flex flex-wrap items-center justify-start">
         <div className="flex flex-wrap items-center">
-          <p className="text-h2 font-bold mr-2">제주신라호텔</p>
-          <p className="text-p3 font-semibold bg-gray-300 p-1">스탠다드 더블</p>
+          <p className="text-h5 font-bold mr-2">제주신라호텔</p>
+          <p className="text-p3 font-bold bg-gray-300 p-1 px-2">
+            스탠다드 더블
+          </p>
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-start mt-2">
         <div className="flex flex-wrap text-p2 text-gray-600">
           <span>구매가&nbsp;</span>
-          <p className="line-through">180,000원</p>
+          <p className="line-through">300,000원</p>
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-start">
         <div className="flex flex-wrap items-center">
-          <p className=" text-main font-bold">30%</p>
-          <p className="ml-2 text-h1 font-semibold">180,000원</p>
+          <p className=" text-main font-normal">30%</p>
+          <p className="ml-2 text-h4 font-semibold">180,000원</p>
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-start">

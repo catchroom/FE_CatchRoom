@@ -10,7 +10,7 @@ const RoomImageComponent = () => {
         objectFit="cover"
         alt="숙소사진"
       />
-      <div className="absolute bottom-0 right-0 rounded-full bg-white flex items-center justify-center w-24 h-10 font-extrabold mr-4 mb-6">
+      <div className="absolute bottom-0 right-0 rounded-full bg-white flex items-center justify-center w-24 h-10 font-normal mr-4 mb-6">
         1/20
       </div>
     </div>
