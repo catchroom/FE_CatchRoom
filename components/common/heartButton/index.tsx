@@ -1,9 +1,8 @@
-'use client';
-
 import React from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import { isLikedState } from '@/atoms/heartButton';
+import { isLikedState } from '@/atoms/commons/heartButton';
 import { useRecoilState } from 'recoil';
+import EmptyHeartIcon from '@/public/svgComponent/emptyHeart';
+import FullHeartIcon from '@/public/svgComponent/fullHeart';
 
 /**
  * 찜하기 기능으로 사용할 수 있는 Heart Button 컴포넌트 입니다.
@@ -19,15 +18,15 @@ const HeartButton = () => {
   };
 
   return (
-    <div className="p-2">
+    <div className="flex items-center justify-center p-2">
       <button onClick={handleLike}>
         {!isLiked ? (
-          <div className="p-2 text-2xl">
-            <FaRegHeart color="black" />
+          <div className="p-2">
+            <EmptyHeartIcon />
           </div>
         ) : (
-          <div className="p-2 text-2xl ">
-            <FaHeart color="red" />
+          <div className="p-2">
+            <FullHeartIcon />
           </div>
         )}
       </button>
