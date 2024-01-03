@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import loginImage from '../../../public/kakao_login_medium_wide.png';
 
-const loginUri = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_KEY}\
-&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`;
+const loginUri = `https://kauth.kakao.com/oauth/authorize?client_id=e1ee4483cc660fd4d17c4e4872779cf6\
+&redirect_uri=https://localhost:3000/login/loading&response_type=code`;
 
 const KakaoLoginButton = () => {
   return (

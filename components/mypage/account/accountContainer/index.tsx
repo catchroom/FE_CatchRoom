@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { ReactNode } from 'react';
 
 const AccountContainer = ({
@@ -19,7 +20,9 @@ const AccountContainer = ({
               account ? '' : 'underline decoration-solid'
             }`}
           >
-            {account ? account : '!출금 계좌를 등록하세요'}
+            <Link href="/mypage/dashboard/account">
+              {account ? account : '!출금 계좌를 등록하세요'}
+            </Link>
           </p>
         </div>
         <p>{balance}원</p>

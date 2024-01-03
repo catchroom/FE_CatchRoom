@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 const ProfileButton = () => {
   const router = useRouter();
   const onClick = () => {
-    router.push('/mypage/myprofile');
+    router.push('/mypage/dashboard/profile');
   };
 
   return (
