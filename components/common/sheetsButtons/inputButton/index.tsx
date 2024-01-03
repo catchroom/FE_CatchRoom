@@ -1,17 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
-const InputButton = ({ name, fn }: { name: string; fn: () => void }) => {
-  const onClick = () => {
-    fn();
-  };
-
+const InputButton = ({
+  name,
+  fn,
+}: {
+  name: string;
+  fn: MouseEventHandler<HTMLButtonElement>;
+}) => {
   return (
     <button
-      onClick={onClick}
+      onClick={fn}
       type="button"
-      className="flex flex-start border-2 border-border-secondary text-t2 font-medium bg-transparent text-text p-4"
+      className="flex flex-start border-[1px] border-border-secondary text-t2 font-medium bg-transparent text-text p-4"
     >
       {name}
     </button>

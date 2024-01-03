@@ -1,19 +1,23 @@
 'use client';
 
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { Button } from '@material-tailwind/react';
 
-const SimpleButton = ({ name, fn }: { name: string; fn: () => void }) => {
-  const onClick = () => {
-    fn();
-  };
-
+const SimpleButton = ({
+  name,
+  fn,
+  type = 'button',
+}: {
+  name: string;
+  type?: 'button' | 'submit' | 'reset' | undefined;
+  fn?: MouseEventHandler<HTMLButtonElement>;
+}) => {
   return (
     <Button
       placeholder="Button"
-      onClick={onClick}
-      type="button"
-      className=" bg-focus font-pretend text-t2 font-medium text-text-on p-4"
+      onClick={fn}
+      type={type}
+      className="bg-focus w-full font-pretend text-t2 font-medium text-text-on p-4"
     >
       {name}
     </Button>

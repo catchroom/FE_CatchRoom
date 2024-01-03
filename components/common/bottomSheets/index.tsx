@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, useEffect } from 'react';
+import React, { MouseEventHandler, ReactNode, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SheetCloseSVG from '@/public/svg/sheet-close';
 import InputButton from '../sheetsButtons/inputButton';
@@ -23,9 +23,22 @@ const BottomSheets = ({
     setViewPortHeight(window.innerHeight);
   }, [viewPortHeight]);
 
+  const modalOpen: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    setOpen(true);
+  };
+
+  const modalClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> = (
+    e,
+  ) => {
+    e.stopPropagation();
+    if (e.target !== e.currentTarget) return;
+    setOpen(false);
+  };
+
   return (
     <>
-      <ButtonComponent name={title} fn={() => setOpen(true)} />
+      <ButtonComponent name={title} fn={modalOpen} />
       <AnimatePresence>
         {open && (
           <motion.div
@@ -36,9 +49,9 @@ const BottomSheets = ({
               duration: 0.3,
               ease: 'easeInOut',
             }}
-            className="fixed left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
+            className="fixed z-40 left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
           >
-            <div className="relative w-full h-full">
+            <div onClick={modalClose} className="relative w-full h-full">
               <motion.div
                 initial={{ y: viewPortHeight }}
                 animate={{ y: 0 }}
@@ -48,11 +61,12 @@ const BottomSheets = ({
                   delay: 0.1,
                   ease: 'easeInOut',
                 }}
-                className="absolute w-full min-h-[50%] bg-bg bottom-0 rounded-t-xl p-5"
+                className="absolute z-50 w-full min-h-[50%] bg-bg bottom-0 rounded-t-xl p-5"
               >
                 <div className="relative flex justify-center">
                   <h1 className="text-t1 font-bold">{title}</h1>
                   <button
+                    type="button"
                     className="absolute left-0"
                     onClick={() => setOpen(false)}
                   >

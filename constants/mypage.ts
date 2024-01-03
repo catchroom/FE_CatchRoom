@@ -82,3 +82,14 @@ export const MYPAGE_PRIVACY = [
     key: 'phoneNumber',
   },
 ];
+
+export const INPUT_LIST = [
+  {
+    name: 'account',
+    placeholder: '계좌번호 입력',
+  },
+  {
+    name: 'name',
+    placeholder: '예금주명',
+  },
+];
