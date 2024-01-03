@@ -29,7 +29,7 @@ const page = () => {
   };
   return (
     <>
-      <div className="flex flex-col container mx-auto w-full px-5 py-6">
+      <div className="flex flex-col container mx-auto w-full px-5 pt-14 bg-bg">
         <CompleteMessage />
         <ProductDetails
           accommodationName={accommodationName}
