@@ -4,6 +4,7 @@ import BottomSheets from '@/components/common/bottomSheets';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import { BANK_LIST, INPUT_LIST } from '@/constants/mypage';
 import { FormAccount, accountSchema } from '@/constants/zodSchema';
+import { getBankName } from '@/utils/get-bank-name';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Radio } from '@material-tailwind/react';
 import React from 'react';
@@ -28,7 +29,7 @@ const BankForm = () => {
     }
   };
 
-  const watchBank = watch('bank');
+  const bankName = getBankName(watch('bank'));
 
   return (
     <form
@@ -39,7 +40,7 @@ const BankForm = () => {
         buttonSelect="input"
         title="은행명 선택"
         closeButton
-        watchBank={watchBank}
+        watchBank={bankName}
       >
         <div className="w-full flex flex-col items-center gap-12">
           <div className="grid grid-cols-3 gap-5 max-h-96 overflow-y-scroll">
