@@ -7,7 +7,7 @@ import { ButtonType } from '@/types/roomInfo/types';
 const NavbarButtonComponent = () => {
   const [activeButton, setActiveButton] = useRecoilState(activeButtonState);
 
-  const handleButtonClick = (button: ButtonType) => {
+  const handleButtonClick = (button: ButtonType): undefined => {
     setActiveButton(button);
   };
   return (
