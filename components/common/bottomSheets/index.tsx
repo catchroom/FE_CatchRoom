@@ -10,9 +10,11 @@ const BottomSheets = ({
   children,
   title,
   buttonSelect = 'simple',
+  closeButton = false,
 }: {
   children: ReactNode;
   title: string;
+  closeButton?: boolean;
   buttonSelect?: 'input' | 'simple';
 }) => {
   const [open, setOpen] = React.useState(false);
@@ -73,7 +75,16 @@ const BottomSheets = ({
                     <SheetCloseSVG />
                   </button>
                 </div>
-                <div className="w-full h-full mt-3">{children}</div>
+                <div className="w-full h-full mt-3 flex flex-col items-center gap-12">
+                  {children}
+                  {closeButton && (
+                    <SimpleButton
+                      fn={modalClose}
+                      name="선택완료"
+                      type="button"
+                    />
+                  )}
+                </div>
               </motion.div>
             </div>
           </motion.div>

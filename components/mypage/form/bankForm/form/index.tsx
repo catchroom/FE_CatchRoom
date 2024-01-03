@@ -2,7 +2,7 @@
 
 import BottomSheets from '@/components/common/bottomSheets';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
-import { INPUT_LIST } from '@/constants/mypage';
+import { BANK_LIST, INPUT_LIST } from '@/constants/mypage';
 import { FormAccount, accountSchema } from '@/constants/zodSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
@@ -31,8 +31,27 @@ const BankForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col h-full gap-6"
     >
-      <BottomSheets buttonSelect="input" title="은행명 선택">
-        {''}
+      <BottomSheets buttonSelect="input" title="은행명 선택" closeButton>
+        <div className="w-full flex flex-col items-center gap-12">
+          <div className="grid grid-cols-3 gap-5 max-h-96 overflow-y-scroll">
+            {BANK_LIST.map((bank) => {
+              return (
+                <label
+                  key={bank.value}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <p>{bank.name}</p>
+                  <input
+                    type="radio"
+                    key={bank.value}
+                    value={bank.value}
+                    {...register('bank')}
+                  />
+                </label>
+              );
+            })}
+          </div>
+        </div>
       </BottomSheets>
       {INPUT_LIST.map((input) => (
         <div key={input.name} className="w-full flex flex-col relative">
