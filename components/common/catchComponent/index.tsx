@@ -1,6 +1,8 @@
+'use client';
 import { catchItems } from '@/types/common/catchItems/types';
 import Image from 'next/image';
 import React from 'react';
+import XSymbolComponent from '@/public/svgComponent/xSymbol';
 
 /**
  * 상품들을 조회할 수 있는 컴포넌트입니다.
@@ -17,6 +19,8 @@ import React from 'react';
  * @props {string} resDate - 숙소가 예약된 날짜입니다.
  * @props {number} oldPrice - 숙소의 이전 구매 가격입니다.
  * @props {30|40|50|60|70|80|90} discount - 캐치 특가 할인률로, 30부터 10씩 증가하여 90까지 설정이 가능합니다.
+ * @props {boolean} isDelete - 삭제 버튼을 활성화 할 수 있습니다. Default값은 false입니다.
+ * @props {()=>void} buttonFunc - 삭제 버튼을 눌렀을 때 실행되는 함수를 넣을 수 있는 props입니다.
  * @returns {JSX.Element} CatchSpecialComponent 컴포넌트 반환
  */
 
@@ -26,11 +30,26 @@ const CatchSpecialComponent = ({
   resDate,
   oldPrice,
   discount,
+  isDelete = false,
+  buttonFunc = () => {
+    console.log('삭제버튼이 클릭 됐습니다.');
+  },
 }: catchItems) => {
   const newPrice = Math.round(oldPrice - oldPrice * (discount / 100));
 
   return (
-    <div className="w-full h-36 flex flex-wrap pointer-events-auto">
+    <div className="relative w-full h-36 flex flex-wrap pointer-events-auto">
+      {isDelete ? (
+        <button
+          onClick={() => buttonFunc()}
+          className="absolute top-0 right-0 text-h2"
+        >
+          <XSymbolComponent />
+        </button>
+      ) : (
+        ''
+      )}
+
       <div className="relative w-1/3 overflow-auto">
         {discount >= 50 ? (
           <div className="absolute flex items-center z-10 px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
