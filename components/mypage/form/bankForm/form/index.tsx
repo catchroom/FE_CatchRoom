@@ -13,6 +13,7 @@ const BankForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormAccount>({
     resolver: zodResolver(accountSchema),
@@ -27,12 +28,19 @@ const BankForm = () => {
     }
   };
 
+  const watchBank = watch('bank');
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col h-full gap-6"
     >
-      <BottomSheets buttonSelect="input" title="은행명 선택" closeButton>
+      <BottomSheets
+        buttonSelect="input"
+        title="은행명 선택"
+        closeButton
+        watchBank={watchBank}
+      >
         <div className="w-full flex flex-col items-center gap-12">
           <div className="grid grid-cols-3 gap-5 max-h-96 overflow-y-scroll">
             {BANK_LIST.map((bank) => {
@@ -62,7 +70,7 @@ const BankForm = () => {
             {...register(input.name as keyof FormAccount)}
             type="text"
             placeholder={input.placeholder}
-            className="flex flex-start border-[1px] border-border-secondary text-t2 font-medium bg-transparent text-text p-4"
+            className="flex flex-start border-[1px] focus:outline-border-primary border-border-secondary text-t2 font-medium bg-transparent text-text p-4"
           />
           <p className="absolute py-1 bottom-0 translate-y-full text-p4 text-text-primary">
             {errors[input.name as keyof FormAccount]?.message}

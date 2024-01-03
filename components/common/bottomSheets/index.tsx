@@ -10,16 +10,17 @@ const BottomSheets = ({
   children,
   title,
   buttonSelect = 'simple',
+  watchBank,
   closeButton = false,
 }: {
   children: ReactNode;
   title: string;
+  watchBank?: string;
   closeButton?: boolean;
   buttonSelect?: 'input' | 'simple';
 }) => {
   const [open, setOpen] = React.useState(false);
   const [viewPortHeight, setViewPortHeight] = React.useState(0);
-  const ButtonComponent = buttonSelect === 'input' ? InputButton : SimpleButton;
 
   useEffect(() => {
     setViewPortHeight(window.innerHeight);
@@ -38,9 +39,16 @@ const BottomSheets = ({
     setOpen(false);
   };
 
+  const ButtonComponent =
+    buttonSelect === 'input' ? (
+      <InputButton name={title} fn={modalOpen} watchBank={watchBank} />
+    ) : (
+      <SimpleButton name={title} fn={modalOpen} />
+    );
+
   return (
     <>
-      <ButtonComponent name={title} fn={modalOpen} />
+      {ButtonComponent}
       <AnimatePresence>
         {open && (
           <motion.div
