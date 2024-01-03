@@ -61,7 +61,11 @@ const BottomSheets = ({
             }}
             className="fixed z-40 left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
           >
-            <div onClick={modalClose} className="relative w-full h-full">
+            <div
+              data-testid="modalBg"
+              onClick={modalClose}
+              className="relative w-full h-full"
+            >
               <motion.div
                 initial={{ y: viewPortHeight }}
                 animate={{ y: 0 }}
@@ -77,6 +81,7 @@ const BottomSheets = ({
                   <h1 className="text-t1 font-bold">{title}</h1>
                   <button
                     type="button"
+                    data-testid="modalClose"
                     className="absolute left-0"
                     onClick={() => setOpen(false)}
                   >
