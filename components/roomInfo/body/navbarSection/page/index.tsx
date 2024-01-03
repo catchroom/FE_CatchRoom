@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { activeButtonState } from '@/atoms/roomInfo/navbarButton';

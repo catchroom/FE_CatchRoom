@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { isLikedState } from '@/atoms/commons/heartButton';
 import { useRecoilState } from 'recoil';
