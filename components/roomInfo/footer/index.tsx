@@ -3,7 +3,7 @@ import React from 'react';
 
 const FooterComponent = () => {
   return (
-    <div className="fixed flex justify-center bottom-0 w-full max-w-[476px] h-[84px] bg-white border border-t-black z-10">
+    <div className="fixed flex justify-center bottom-0 w-full max-w-[480px] h-[84px] bg-white border-t border-black z-10">
       <div className="flex items-center justify-between w-full">
         <div className="mx-3">
           <HeartButton />
