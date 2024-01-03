@@ -5,6 +5,7 @@ import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import { BANK_LIST, INPUT_LIST } from '@/constants/mypage';
 import { FormAccount, accountSchema } from '@/constants/zodSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Radio } from '@material-tailwind/react';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -41,8 +42,10 @@ const BankForm = () => {
                   className="flex flex-col items-center justify-center"
                 >
                   <p>{bank.name}</p>
-                  <input
+                  <Radio
+                    crossOrigin="anonymous"
                     type="radio"
+                    color="pink"
                     key={bank.value}
                     value={bank.value}
                     {...register('bank')}
