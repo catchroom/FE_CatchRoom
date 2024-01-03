@@ -18,7 +18,7 @@ const page = () => {
   return (
     <>
       <Header title="구매" showBackButton showBorder />
-      <div className="flex flex-col container mx-auto px-3 py-6">
+      <div className="flex flex-col container mx-auto w-full px-5 py-6">
         <ProductDetails
           accommodationName={accommodationName}
           roomName={roomName}
