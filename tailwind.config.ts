@@ -20,6 +20,7 @@ const config: Config = withMT({
     colors: {
       main: '#FF3478',
       mint: '#00DBA3',
+      rate: '#47B1AA',
       raspberry: '#FE5868',
       mango: '#FFA811',
       white: '#ffffff',
