@@ -1,0 +1,10 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="heart-action" clip-path="url(#clip0_336_6816)">
+<path id="Icon" fill-rule="evenodd" clip-rule="evenodd" d="M10.16 3.08697C8.14643 0.732908 4.78863 0.099673 2.26574 2.25529C-0.257148 4.4109 -0.612336 8.01498 1.3689 10.5644C3.01617 12.6841 8.00138 17.1547 9.63526 18.6017C9.81805 18.7636 9.90945 18.8445 10.0161 18.8763C10.1091 18.9041 10.2109 18.9041 10.304 18.8763C10.4106 18.8445 10.502 18.7636 10.6848 18.6017C12.3187 17.1547 17.3039 12.6841 18.9511 10.5644C20.9324 8.01498 20.6205 4.38822 18.0543 2.25529C15.488 0.122348 12.1736 0.732908 10.16 3.08697Z" fill="#FF3478" stroke="#FF3478" stroke-width="1.20855" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_336_6816">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
