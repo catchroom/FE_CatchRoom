@@ -34,37 +34,42 @@ const BankForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col h-full gap-6"
+      className="flex flex-col w-full h-full gap-6"
     >
-      <BottomSheets
-        buttonSelect="input"
-        title="은행명 선택"
-        closeButton
-        watchBank={bankName}
-      >
-        <div className="w-full flex flex-col items-center gap-12">
-          <div className="grid grid-cols-3 gap-5 max-h-96 overflow-y-scroll">
-            {BANK_LIST.map((bank) => {
-              return (
-                <label
-                  key={bank.value}
-                  className="flex flex-col items-center justify-center"
-                >
-                  <p>{bank.name}</p>
-                  <Radio
-                    crossOrigin="anonymous"
-                    type="radio"
-                    color="pink"
+      <div className="w-full relative">
+        <BottomSheets
+          buttonSelect="input"
+          title="은행명 선택"
+          closeButton
+          watchBank={bankName}
+        >
+          <div className="w-full flex flex-col items-center gap-12">
+            <div className="grid grid-cols-3 gap-5 max-h-96 overflow-y-scroll">
+              {BANK_LIST.map((bank) => {
+                return (
+                  <label
                     key={bank.value}
-                    value={bank.value}
-                    {...register('bank')}
-                  />
-                </label>
-              );
-            })}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <p>{bank.name}</p>
+                    <Radio
+                      crossOrigin="anonymous"
+                      type="radio"
+                      color="pink"
+                      key={bank.value}
+                      value={bank.value}
+                      {...register('bank')}
+                    />
+                  </label>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </BottomSheets>
+        </BottomSheets>
+        <p className="absolute py-1  translate-y-full bottom-0 text-p4 text-text-primary">
+          {errors.bank?.message}
+        </p>
+      </div>
       {INPUT_LIST.map((input) => (
         <div key={input.name} className="w-full flex flex-col relative">
           <input
