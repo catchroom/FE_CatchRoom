@@ -1,4 +1,3 @@
-'use client';
 import { catchItems } from '@/types/common/catchItems/types';
 import Image from 'next/image';
 import React from 'react';
