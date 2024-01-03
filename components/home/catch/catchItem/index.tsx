@@ -51,12 +51,12 @@ const CatchItem = () => {
             />
             <p className="text-p2 ml-1">12.25 (월) ~ 12.26 (화)</p>
           </div>
-          <p className="line-through text-p2">구매가 200,000</p>
+          <p className="line-through text-p2 text-text-sub">구매가 200,000</p>
         </div>
         <div className="flex justify-between font-bold">
-          <div>제주신라호텔</div>
-          <div>
-            <span className="text-main">50%</span> 100,000원
+          <div className="text-h5">제주신라호텔</div>
+          <div className="text-t1">
+            <span className="text-main text-p1">50%</span> 100,000원
           </div>
         </div>
       </div>

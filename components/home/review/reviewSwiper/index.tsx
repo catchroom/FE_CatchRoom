@@ -1,7 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import ReviewItem from '../reviewItem';
 import 'swiper/css';
+import ReviewItem from '../reviewItem';
 
 const ReviewSwiper = () => {
   return (
