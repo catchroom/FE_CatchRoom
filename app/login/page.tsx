@@ -1,10 +1,7 @@
 'use client';
 
 import React from 'react';
-// import { GoogleLogin } from '@react-oauth/google';
-// import { useGoogleLogin } from '@react-oauth/google';
 import Image from 'next/image';
-// import MyCustomButton from './_components/MyCustomButton';
 // import { getSocialAuth } from '@/api/socialAuth';
 import KakaoLoginButton from './_components/KakaoLoginButton';
 import { useRouter } from 'next/navigation';
@@ -12,25 +9,8 @@ import { useRouter } from 'next/navigation';
 const Page = () => {
   const router = useRouter();
 
-  // const login = useGoogleLogin({
-  //   onSuccess: (res) => {
-  //     console.log('서버에 보낼 값', res.code.toString());
-
-  //     getSocialAuth(res.code.toString())
-  //       .then((response) => {
-  //         console.log('구글 인증 성공', response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error('구글 인증 실패', error);
-  //       });
-  //   },
-  //   flow: 'auth-code',
-  // });
-
-  // 백엔드에서 Authorization Code를 받아 토큰을 얻는 작업 처리 필요
-
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen">
+    <div className="flex flex-col items-center justify-center  x-3 py-12 bg-bg">
       {/* 로고 */}
 
       <Image
@@ -44,21 +24,6 @@ const Page = () => {
       <div className="justify-center mt-7">
         <KakaoLoginButton />
       </div>
-
-      {/* 커스텀 적용 */}
-      {/* <div className="justify-center mt-4">
-        <MyCustomButton onClick={() => login()} />
-      </div> */}
-
-      {/* 구글 인가코드 */}
-      {/* <div className="justify-center mt-4">
-        <GoogleLogin
-          onSuccess={login}
-          onError={() => {
-            console.log('구글 로그인 실패');
-          }}
-        />
-      </div> */}
 
       {/* 이메일*/}
       <div className="w-3/4 mt-5">
