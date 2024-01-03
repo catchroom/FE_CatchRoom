@@ -14,7 +14,7 @@ export const nameSchema = z.object({
 export const accountSchema = z.object({
   account: z
     .string()
-    .min(1, '계좌번호를 입력해주세요')
+    .min(1, '계좌번호를 입력해주세요.')
     .regex(/^[0-9]*$/, '계좌번호는 숫자만 입력 가능합니다.'),
   name: z
     .string()
