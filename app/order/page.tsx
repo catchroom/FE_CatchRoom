@@ -1,6 +1,6 @@
+import CheckInDateComponent from '@/components/common/checkInDateComponent';
 import Header from '@/components/common/header';
 import BookingHolderInfo from '@/components/order/bookingHolderInfo';
-import CheckInOut from '@/components/order/checkInOut';
 import GuestInfo from '@/components/order/guestInfo';
 import PaymentButton from '@/components/order/paymentButton';
 import PaymentInfo from '@/components/order/paymentInfo';
@@ -13,15 +13,6 @@ const page = () => {
   const accommodationName = '제주신라호텔';
   const roomName = '스탠다드 더블';
 
-  const checkInData = {
-    date: '2023-12-08 (목)',
-    time: '15:00',
-  };
-  const checkOutData = {
-    date: '2023-12-09 (금)',
-    time: '11:00',
-  };
-
   const totalPrice = 135000;
 
   return (
@@ -32,7 +23,12 @@ const page = () => {
           accommodationName={accommodationName}
           roomName={roomName}
         />
-        <CheckInOut checkIn={checkInData} checkOut={checkOutData} />
+        <CheckInDateComponent
+          checkInDate="2024-01-01 (월)"
+          CheckInTime="15:00"
+          CheckOutDate="2024-01-02 (화)"
+          CheckOutTime="11:00"
+        />
         <BookingHolderInfo name="이름" phoneNumber="010-1234-5678" />
         <GuestInfo name="이름" phoneNumber="010-1234-5678" />
         <PaymentInfo totalPrice={totalPrice} />
