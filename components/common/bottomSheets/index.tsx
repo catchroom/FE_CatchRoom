@@ -6,6 +6,18 @@ import SheetCloseSVG from '@/public/svg/sheet-close';
 import InputButton from '../sheetsButtons/inputButton';
 import SimpleButton from '../sheetsButtons/simpleButton';
 
+/**
+ * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
+ * @param children - 모달 내부에 들어갈 컴포넌트입니다. (필수)
+ * @param title - 모달의 제목입니다. (필수)
+ * @param buttonSelect - 모달을 열기 위한 버튼의 종류를 선택합니다. (선택)
+ * @summary - buttonSelect의 종류는 'input'과 'simple'이 있습니다. 'input'은 InputButton 컴포넌트를 사용하고, 'simple'은 SimpleButton 컴포넌트를 사용합니다. (default: 'simple')
+ * @summary - 버튼을 추가하고 싶다면 components/common/sheetsButtons 폴더에 컴포넌트를 추가하고, buttonSelect에 해당 컴포넌트를 넣어주세요.
+ * @param watchBank - 개인적으로 사용할 props여서 필요하면 사용하시면 됩니다. (선택)
+ * @param closeButton - 모달 내부에 선택완료 버튼을 추가하고 싶다면 true로 설정해주세요. (선택)
+ * @returns
+ */
+
 const BottomSheets = ({
   children,
   title,
