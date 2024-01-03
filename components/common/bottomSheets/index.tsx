@@ -3,16 +3,21 @@
 import React, { ReactNode, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SheetCloseSVG from '@/public/svg/sheet-close';
+import InputButton from '../sheetsButtons/inputButton';
+import SimpleButton from '../sheetsButtons/simpleButton';
 
 const BottomSheets = ({
   children,
   title,
+  buttonSelect = 'simple',
 }: {
   children: ReactNode;
   title: string;
+  buttonSelect?: 'input' | 'simple';
 }) => {
   const [open, setOpen] = React.useState(false);
   const [viewPortHeight, setViewPortHeight] = React.useState(0);
+  const ButtonComponent = buttonSelect === 'input' ? InputButton : SimpleButton;
 
   useEffect(() => {
     setViewPortHeight(window.innerHeight);
@@ -20,7 +25,7 @@ const BottomSheets = ({
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Open</button>
+      <ButtonComponent name={title} fn={() => setOpen(true)} />
       <AnimatePresence>
         {open && (
           <motion.div
@@ -31,7 +36,7 @@ const BottomSheets = ({
               duration: 0.3,
               ease: 'easeInOut',
             }}
-            className=" fixed bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
+            className="fixed left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
           >
             <div className="relative w-full h-full">
               <motion.div
