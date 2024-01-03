@@ -1,5 +1,6 @@
 import CatchContainer from '@/components/home/catch/catchContainer';
 import Header from '@/components/home/header';
+import ReviewContainer from '@/components/home/review/reviewContainer';
 import SearchBar from '@/components/home/searchBar';
 import React from 'react';
 
@@ -9,7 +10,7 @@ const page = async () => {
       <Header />
       <SearchBar />
       <CatchContainer />
-      {/* 준규님 컴포넌트 들어갈 자리 */}
+      <ReviewContainer />
     </div>
   );
 };
