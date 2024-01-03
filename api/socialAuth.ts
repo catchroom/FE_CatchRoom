@@ -1,30 +1,54 @@
-// 인증 코드 받아서 백엔드에 보내기
-// import axios from 'axios';
-'use client';
-
+// 인증 코드 받아서 백엔드에 보내기 -> 코드 요청 2번이상 시도 에러 ..
 export const setAuthCode = async (authCode: string) => {
-  const response = await fetch(`https://catchroom.xyz/oauth2/callback`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  console.log('fetch입니다2', authCode);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth2/callback`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        authCode: authCode,
+      }),
     },
-    body: JSON.stringify({
-      authCode: authCode,
-    }),
-  });
+  );
 
-  // Response를 JSON으로 변환
   const responseData = await response.json();
-  console.log('fetch입니다', authCode, responseData);
   return responseData;
 };
 
-// export const getSocialAuth2 = async (authCode: string) => {
-//   return await axios.post(
-//     `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth2/callback`,
-//     { authCode: authCode },
-//     {
-//       headers: { 'Content-Type': 'application/json' },
+// 400에러 테스트용 -> 클라에서 발급해보기
+// export const getAuthCode = async (authCode: string) => {
+//   const response = await fetch('https://kauth.kakao.com/oauth/token', {
+//     method: 'POST',
+//     headers: {
+//       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
 //     },
-//   );
+//     body: new URLSearchParams({
+//       grant_type: 'authorization_code',
+//       client_id: `${process.env.NEXT_PUBLIC_KAKAO_KEY}`,
+//       redirect_uri: `https://localhost:3000/login/loading`,
+//       code: authCode,
+//     }),
+//   });
+//   const responseData = await response.json();
+//   return responseData;
+// };
+
+// accessToken만 보내주기 테스트 -> 성공
+// export const setAccCode = async (accessToken: string) => {
+//   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/oauth2/test`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//       accessToken: accessToken,
+//     }),
+//   });
+
+//   const responseData = await response.json();
+//   console.log(responseData);
+//   return responseData;
 // };
