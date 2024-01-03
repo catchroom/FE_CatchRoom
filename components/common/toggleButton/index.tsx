@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import { isActiveState } from '@/atoms/toggleButton';
+import { isActiveState } from '@/atoms/commons/toggleButton';
 import { useRecoilState } from 'recoil';
 
 /**
