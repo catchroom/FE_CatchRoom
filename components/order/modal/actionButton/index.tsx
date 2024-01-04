@@ -5,7 +5,7 @@ const ActionButton = ({ action, label, colorClass }: ActionButtonProps) => {
   return (
     <button
       onClick={action}
-      className={`font-bold py-2 px-4 w-32 text-center ${colorClass}`}
+      className={`flex-grow min-w-[10rem] h-14 py-2.5 px-4 text-center ${colorClass}`}
     >
       {label}
     </button>

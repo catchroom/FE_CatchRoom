@@ -1,5 +1,5 @@
 export type ActionButtonProps = {
-  action: () => void;
+  action?: () => void;
   label: string;
   colorClass: string;
 };
