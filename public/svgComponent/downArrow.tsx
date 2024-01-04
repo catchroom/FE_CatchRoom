@@ -1,5 +1,5 @@
 import * as React from "react";
-const DownArrowComponent = () => (
+const DownArrowIcon = () => (
   <svg
     width={14}
     height={8}
@@ -16,4 +16,4 @@ const DownArrowComponent = () => (
     />
   </svg>
 );
-export default DownArrowComponent;
+export default DownArrowIcon;

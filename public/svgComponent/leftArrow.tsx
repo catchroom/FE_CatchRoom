@@ -1,5 +1,5 @@
 import * as React from "react";
-const LeftArrowComponent = () => (
+const LeftArrowIcon = () => (
   <svg
     width={28}
     height={28}
@@ -16,4 +16,4 @@ const LeftArrowComponent = () => (
     />
   </svg>
 );
-export default LeftArrowComponent;
+export default LeftArrowIcon;
