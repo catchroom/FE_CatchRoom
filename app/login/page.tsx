@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import loginImage from '../../public/kakao_login_medium_wide.png';
@@ -23,7 +21,6 @@ const Page = () => {
         />
 
         {/* 카카오*/}
-
         <div className="mt-3">
           <Link href={kakaoUrl}>
             <Image src={loginImage} alt="카카오 이미지" width={314} />

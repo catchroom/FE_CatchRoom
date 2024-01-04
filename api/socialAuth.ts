@@ -1,22 +1,22 @@
-// 인증 코드 받아서 백엔드에 보내기 -> 코드 요청 2번이상 시도 에러 ..
-export const setAuthCode = async (authCode: string) => {
-  console.log('fetch입니다2', authCode);
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth2/callback`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        authCode: authCode,
-      }),
-    },
-  );
+// 인증 코드 받아서 백엔드에 보내기
+// export const setAuthCode = async (authCode: string) => {
+//   console.log('fetch입니다2', authCode);
+//   const response = await fetch(
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth2/callback`,
+//     {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         authCode: authCode,
+//       }),
+//     },
+//   );
 
-  const responseData = await response.json();
-  return responseData;
-};
+//   const responseData = await response.json();
+//   return responseData;
+// };
 
 // 400에러 테스트용 -> 클라에서 발급해보기
 // export const getAuthCode = async (authCode: string) => {

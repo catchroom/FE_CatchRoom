@@ -50,7 +50,7 @@ const Page = () => {
 
             <input
               placeholder="비밀번호"
-              type="비밀번호"
+              type="password"
               {...register('password', {
                 required: '이메일과 비밀번호를 입력해주세요.',
               })}
