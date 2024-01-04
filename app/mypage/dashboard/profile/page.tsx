@@ -1,4 +1,4 @@
-import ProfileForm from '@/components/mypage/form/profileForm/form';
+import ProfileForm from '@/components/mypage/form/profileForm';
 import PrivacyContainer from '@/components/mypage/privacy/container';
 import React from 'react';
 import { MYPAGE_PRIVACY } from '@/constants/mypage';
