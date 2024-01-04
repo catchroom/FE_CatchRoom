@@ -8,7 +8,7 @@ import React, { ReactNode } from 'react';
 
 const MypageLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div>
+    <div className="w-full">
       <Header title="hello" showBackButton showBorder />
       {children}
     </div>

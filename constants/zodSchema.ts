@@ -11,4 +11,34 @@ export const nameSchema = z.object({
     ),
 });
 
+export const accountSchema = z.object({
+  account: z
+    .string()
+    .min(1, '계좌번호를 입력해주세요.')
+    .regex(/^[0-9]*$/, '계좌번호는 숫자만 입력 가능합니다.'),
+  name: z
+    .string()
+    .min(2, '이름을 입력해주세요.')
+    .regex(/^[a-zA-Z가-힣]*$/, '이름은 한글과 영어로만 입력 가능합니다.'),
+  bank: z.string({
+    required_error: '은행을 선택해주세요.',
+  }),
+});
+
+export const withdrawSchema = (originalBalance: number) =>
+  z.object({
+    balance: z
+      .string()
+      .min(1, '출금 가능 금액을 입력해주세요.')
+      .regex(/^[0-9]*$/, '출금액은 숫자만 입력 가능합니다.')
+      .refine((value) => Number(value) < originalBalance, {
+        message: '출금 가능 금액을 확인해주세요.',
+      }),
+  });
+
+export type FormWithdraw = {
+  balance: string;
+};
+
 export type FormName = z.infer<typeof nameSchema>;
+export type FormAccount = z.infer<typeof accountSchema>;
