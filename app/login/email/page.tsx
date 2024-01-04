@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { LoginData } from '@/types/login/types';
+import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
+import NextArrowIcon from '@/public/svgComponent/nextArrow';
 
 const Page = () => {
   const [state, setState] = useState<LoginData>({
@@ -32,7 +34,7 @@ const Page = () => {
               {...register('email', {
                 required: '이메일을 입력하세요.',
               })}
-              className={`w-full h-[3rem] border-2 ${
+              className={`w-full h-[3.5rem] border-[1.25px]  ${
                 errors.email ? 'border-red-500' : 'border-gray-400'
               }  mb-3 flex flex-col items-start pl-3 rounded-md`}
             />
@@ -47,7 +49,7 @@ const Page = () => {
               {...register('password', {
                 required: '비밀번호를 입력해주세요.',
               })}
-              className={`w-full h-[3rem] border-2 ${
+              className={`w-full h-[3.5rem] border-[1.5px] ${
                 errors.password ? 'border-red-500' : 'border-gray-400'
               } flex flex-col items-start pl-3 rounded-md`}
             />
@@ -56,24 +58,27 @@ const Page = () => {
               <p className="mt-3 text-red-500">{errors.password.message}</p>
             )}
 
-            <button
-              className="w-full h-[3rem]  bg-focus  font-pretend text-t2 font-medium text-text-on rounded-md mt-7"
-              type="submit"
-            >
-              로그인
-            </button>
+            <div className="mt-7">
+              <SimpleButton name=" 로그인" type="submit" />
+            </div>
 
             <div className="w-full h-[3rem] text-gray-600 flex justify-between px-5 mt-7 text-p2">
-              <span className="pl-11">
+              <span className="relative pl-11">
                 <Link href="https://www.yanolja.com/" className="underline">
                   비밀번호 재설정
                 </Link>
+                <span className="absolute">
+                  <NextArrowIcon />
+                </span>
               </span>
               |
-              <span className="pr-11">
+              <span className="relative pr-11">
                 <Link href="/signup" className="underline">
                   이메일로 회원가입
                 </Link>
+                <span className="absolute">
+                  <NextArrowIcon />
+                </span>
               </span>
             </div>
           </form>
