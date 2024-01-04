@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductInfo from '@/components/chatRoom/productInfo';
-import OfferBtn from '@/components/chatRoom/offerBtn/index';
+import ProductInfo from '@/components/chat/chatRoom/productInfo';
+import OfferBtn from '@/components/chat/chatRoom/offerBtn/index';
 
 const page = async () => {
   return (

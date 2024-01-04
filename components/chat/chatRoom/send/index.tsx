@@ -1,5 +1,5 @@
 import React from 'react';
-import Send from '../../../public/send.svg';
+import Send from '@/public/send.svg';
 
 const send = async () => {
   return (

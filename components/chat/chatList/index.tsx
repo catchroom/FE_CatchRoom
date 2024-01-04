@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatItem from './chatItem/index';
+import ChatItem from '../chatItem/index';
 
 const chatList = () => {
   return (
