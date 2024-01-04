@@ -1,4 +1,4 @@
-import BankForm from '@/components/mypage/form/bankForm/form';
+import BankForm from '@/components/mypage/form/bankForm';
 import React from 'react';
 
 const page = () => {
