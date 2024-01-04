@@ -1,4 +1,5 @@
 import React from 'react';
+import DefaultBtn from '../../common/defaultBtn';
 
 const selectedOfferMessage = async () => {
   return (
@@ -15,12 +16,8 @@ const selectedOfferMessage = async () => {
           </p>
         </div>
         <div className="flex w-full gap-1 px-4 pb-4">
-          <button className="w-full border-solid border border-main p-2 text-p2 font-bold rounded-sm text-main">
-            거절하기
-          </button>
-          <button className="w-full bg-main  p-2 text-p2 font-bold text-white rounded-sm">
-            승인하기
-          </button>
+          <DefaultBtn label="거절하기" theme="secondary" />
+          <DefaultBtn label="승인하기" theme="primary" />
         </div>
       </div>
       <p className="w-1/4 ml-2 text-gray-500 text-t3">오후 7:36</p>
