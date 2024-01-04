@@ -1,5 +1,5 @@
 import * as React from "react";
-const XSymbolComponent = () => (
+const XSymbolIcon = () => (
   <svg
     width={18}
     height={17}
@@ -11,4 +11,4 @@ const XSymbolComponent = () => (
     <path d="M17 16L1 1" stroke="black" />
   </svg>
 );
-export default XSymbolComponent;
+export default XSymbolIcon;
