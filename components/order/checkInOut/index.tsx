@@ -13,7 +13,7 @@ type CheckInOutProps = {
 
 const CheckInOut = ({ checkIn, checkOut }: CheckInOutProps) => {
   return (
-    <div className="flex justify-between items-center bg-gray-300 mb-4 px-10 py-2 ">
+    <div className="flex justify-between items-center bg-gray-300 mt-4 px-10 py-2 ">
       <div className="text-center">
         <div className="text-p1 font-medium text-gray-600">체크인</div>
         <div className="text-p1 font-bold text-gray-800">{checkIn.date}</div>
