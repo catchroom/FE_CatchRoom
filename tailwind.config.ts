@@ -11,6 +11,21 @@ const config: Config = withMT({
     './node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    radio: {
+      valid: {
+        colors: ['pink'],
+      },
+      styles: {
+        colors: {
+          pink: {
+            color: 'text-main',
+            border: 'checked:border-main',
+            before: 'checked:before:bg-main',
+          },
+        },
+      },
+    },
+
     screens: {
       sm: '640px',
       md: '768px',
