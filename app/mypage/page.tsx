@@ -18,8 +18,8 @@ const fetchTest = async () => {
 const page = async () => {
   await fetchTest();
   return (
-    <>
-      <div className="px-3 py-12 bg-bg">
+    <div className="w-full absolute top-0 h-[calc(100vh-66px)] overflow-y-scroll">
+      <div className="px-3 mt-12 bg-bg">
         <div className="w-full flex flex-col gap-6">
           {/* 유저 프로필 상단 배너 */}
           <ProfileContainer name="김민수" email="abcde@google.com">
@@ -63,7 +63,7 @@ const page = async () => {
         </div>
       </div>
       <BottomNav />
-    </>
+    </div>
   );
 };
 
