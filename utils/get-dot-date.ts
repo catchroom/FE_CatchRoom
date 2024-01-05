@@ -19,10 +19,15 @@ export const decodeState = (state: StateType) => {
     case 'offSale':
       return '판매불가';
     default:
-      return '판매불가';
+      return '상세보기';
   }
 };
 
 // decodeState return type
-export type StateType = 'onSale' | 'soldOut' | 'outDated' | 'offSale';
+export type StateType =
+  | 'onSale'
+  | 'soldOut'
+  | 'outDated'
+  | 'offSale'
+  | 'purchased';
 export type decodeStateReturnType = ReturnType<typeof decodeState>;

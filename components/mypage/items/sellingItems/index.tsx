@@ -2,8 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import { TradeItem } from '@/types/mypage/types';
 import { decodeState, getDotDate } from '@/utils/get-dot-date';
-import ReviewButtons from './reviewButtons';
-import TopButtons from './topButtons';
+import ReviewButtons from '../reviewButtons';
+import TopButtons from '../topButtons';
 
 const MItem = ({ item }: { item: TradeItem }) => {
   const soldOut = item.state === 'soldOut' ? true : false;

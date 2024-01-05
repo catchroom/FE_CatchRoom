@@ -4,7 +4,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { menuAtom } from '@/atoms/mypage/menuAtom';
 
-import MItem from '../items';
+import MItem from '../items/sellingItems';
 import { StateType } from '@/utils/get-dot-date';
 import { TradeItem } from '@/types/mypage/types';
 

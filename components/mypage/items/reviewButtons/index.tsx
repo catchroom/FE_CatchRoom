@@ -1,10 +1,10 @@
 import React from 'react';
 
 const ReviewButtons = ({
-  soldOut,
+  soldOut = true,
   isReview,
 }: {
-  soldOut: boolean;
+  soldOut?: boolean;
   isReview: boolean;
 }) => {
   return (
