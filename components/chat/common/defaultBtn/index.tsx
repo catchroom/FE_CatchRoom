@@ -1,4 +1,4 @@
-import { ButtonProps, Theme } from '@/types/chat/common/defaultBtn/types';
+import { ButtonProps, Theme } from '@/types/chat/defaultBtn/types';
 import React from 'react';
 
 const themes: Theme = {
@@ -35,6 +35,7 @@ const defaultBtn = (props: ButtonProps) => {
       ${theme.fontWeight ? theme.fontWeight : ''}
       ${theme.width} 
       `}
+      onClick={props.onClick}
     >
       {props.label}
     </button>
