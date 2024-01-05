@@ -6,12 +6,7 @@ const CatchItem = () => {
   return (
     <div className="flex flex-col relative w-[320px] mt-5 rounded-lg border border-gray-200">
       <div className="absolute flex top-[14px] left-4 bg-black gap-1 p-[10px] rounded-3xl">
-        <Image
-          src="/marker-pin-01-filled.svg"
-          width={16}
-          height={16}
-          alt="지도 아이콘"
-        />
+        <Image src="/maker-pin.svg" width={16} height={16} alt="지도 아이콘" />
         <span className="text-white">제주</span>
       </div>
       <div className="absolute flex top-[14px] right-4">
@@ -38,6 +33,7 @@ const CatchItem = () => {
           alt="숙소이미지"
           width={320}
           height={184}
+          className="rounded-t-xl"
         />
       </div>
       <div className="flex flex-col gap-1 p-5">
