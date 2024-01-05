@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { LoginData } from '@/types/login/types';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import NextArrowIcon from '@/public/svgComponent/nextArrow';
+import LoginSheet from '@/components/loginSheets';
 
 const Page = () => {
   const [state, setState] = useState<LoginData>({
@@ -23,6 +24,11 @@ const Page = () => {
     console.log(state);
   };
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
   return (
     <>
       <Header title="이메일로 로그인" showBackButton />
@@ -34,7 +40,7 @@ const Page = () => {
               {...register('email', {
                 required: '이메일을 입력하세요.',
               })}
-              className={`w-full h-[3.5rem] border-[1.25px]  ${
+              className={`w-full h-[3.5rem] border-[1.5px]  ${
                 errors.email ? 'border-red-500' : 'border-gray-400'
               }  mb-3 flex flex-col items-start pl-3 rounded-md`}
             />
@@ -73,12 +79,13 @@ const Page = () => {
               </span>
               |
               <span className="relative pr-11">
-                <Link href="/signup" className="underline">
+                <div className="underline" onClick={handleOpenModal}>
                   이메일로 회원가입
-                </Link>
-                <span className="absolute">
-                  <NextArrowIcon />
-                </span>
+                  <span className="absolute">
+                    <NextArrowIcon />
+                  </span>
+                  <LoginSheet open={open} setOpen={setOpen} />
+                </div>
               </span>
             </div>
           </form>

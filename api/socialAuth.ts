@@ -1,4 +1,4 @@
-// 인증 코드 받아서 백엔드에 보내기
+// 인증 코드 백엔드에 보내기
 // export const setAuthCode = async (authCode: string) => {
 //   console.log('fetch입니다2', authCode);
 //   const response = await fetch(
