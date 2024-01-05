@@ -3,6 +3,7 @@ import ReviewButtons from '../reviewButtons';
 import { decodeState, getDotDate } from '@/utils/get-dot-date';
 import { TradeItem } from '@/types/mypage/types';
 import Image from 'next/image';
+import RightArrowSVG from '@/public/svgComponent/rightArrow';
 
 const PurchasingItems = ({ item }: { item: TradeItem }) => {
   return (
@@ -13,8 +14,9 @@ const PurchasingItems = ({ item }: { item: TradeItem }) => {
       {/* 작성일, 판매일, 판매 상태 */}
       <div id="top" className="flex justify-between py-1">
         <p>{getDotDate(item.start_date)} (구매날짜)</p>
-        <div className="flex gap-1">
+        <div className="flex items-center gap-1">
           <p>{decodeState(item.state)}</p>
+          <RightArrowSVG />
         </div>
       </div>
 
