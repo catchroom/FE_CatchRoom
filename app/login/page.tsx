@@ -5,11 +5,9 @@ import Link from 'next/link';
 import Header from '@/components/common/header';
 import NextArrowIcon from '@/public/svgComponent/nextArrow';
 import Logo from '../../public/Logo.png';
+import { kakaoUrl } from '@/api/socialAuth';
 
 const Page = () => {
-  const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_KEY}\
-&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`;
-
   return (
     <div className="w-full px-1">
       <Header title="" showBackButton />

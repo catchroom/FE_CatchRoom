@@ -1,3 +1,7 @@
+// 인증코드 받기
+export const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_KEY}\
+&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`;
+
 // 인증 코드 백엔드에 보내기
 // export const setAuthCode = async (authCode: string) => {
 //   console.log('fetch입니다2', authCode);
