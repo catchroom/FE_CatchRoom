@@ -57,7 +57,11 @@ const MItem = ({ item }: { item: TradeItem }) => {
         </div>
 
         {/* 리뷰 버튼 */}
-        <ReviewButtons soldOut={soldOut} isReview={item.is_review} />
+        <ReviewButtons
+          id={item.order_history_id}
+          soldOut={soldOut}
+          isReview={item.is_review}
+        />
       </div>
     </div>
   );

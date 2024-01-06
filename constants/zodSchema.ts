@@ -36,9 +36,17 @@ export const withdrawSchema = (originalBalance: number) =>
       }),
   });
 
+export const reviewSchema = z.object({
+  content: z
+    .string()
+    .min(1, '리뷰를 입력해주세요.')
+    .max(100, '리뷰는 100자 이하로 입력해주세요.'),
+});
+
 export type FormWithdraw = {
   balance: string;
 };
 
+export type FormReview = z.infer<typeof reviewSchema>;
 export type FormName = z.infer<typeof nameSchema>;
 export type FormAccount = z.infer<typeof accountSchema>;

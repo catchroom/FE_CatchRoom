@@ -53,7 +53,7 @@ const PurchasingItems = ({ item }: { item: TradeItem }) => {
       </div>
 
       {/* 리뷰 버튼 */}
-      <ReviewButtons isReview={item.is_review} />
+      <ReviewButtons id={item.order_history_id} isReview={item.is_review} />
     </div>
   );
 };
