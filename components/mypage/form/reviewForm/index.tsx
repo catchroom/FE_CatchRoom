@@ -13,7 +13,11 @@ const ReviewForm = () => {
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<FormReview> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormReview> = (data) => {
+    if (reviewSchema.safeParse(data).success) {
+      console.log(data);
+    }
+  };
 
   console.log('렌ㄹ');
   const maxCharacterCount = 100;
