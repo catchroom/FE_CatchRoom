@@ -8,6 +8,9 @@ import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import NextArrowIcon from '@/public/svgComponent/nextArrow';
 import LoginSheet from '@/components/loginSheets';
 
+export const commonInputStyle =
+  'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
+
 const Page = () => {
   const [state, setState] = useState<LoginData>({
     email: '',
@@ -40,9 +43,9 @@ const Page = () => {
               {...register('email', {
                 required: '이메일을 입력하세요.',
               })}
-              className={`w-full h-[3.5rem] border-[1.5px]  ${
+              className={`${commonInputStyle}  ${
                 errors.email ? 'border-red-500' : 'border-gray-400'
-              }  mb-3 flex flex-col items-start pl-3 rounded-md`}
+              }  `}
             />
 
             {errors.email && (
@@ -55,17 +58,17 @@ const Page = () => {
               {...register('password', {
                 required: '비밀번호를 입력해주세요.',
               })}
-              className={`w-full h-[3.5rem] border-[1.5px] ${
+              className={`${commonInputStyle} ${
                 errors.password ? 'border-red-500' : 'border-gray-400'
-              } flex flex-col items-start pl-3 rounded-md`}
+              } `}
             />
 
             {errors.password && (
               <p className="mt-3 text-red-500">{errors.password.message}</p>
             )}
 
-            <div className="mt-7">
-              <SimpleButton name=" 로그인" type="submit" />
+            <div className="mt-7 cursor-pointer">
+              <SimpleButton name="로그인" type="submit" />
             </div>
 
             <div className="w-full h-[3rem] text-gray-600 flex justify-between px-5 mt-7 text-p2">

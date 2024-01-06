@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { UserInfo } from '@/types/signup/types';
+import { commonInputStyle } from '@/app/login/email/page';
 
 const Page = () => {
   const router = useRouter();
@@ -37,9 +38,9 @@ const Page = () => {
               {...register('name', {
                 required: '이름을 입력해주세요.',
               })}
-              className={`w-full h-[3.5rem] border-2 ${
+              className={`${commonInputStyle} ${
                 errors.name ? 'border-red-500' : 'border-gray-400'
-              }  mb-3 flex flex-col items-start pl-3 rounded-md`}
+              }  `}
             />
             {errors.name && (
               <p className="text-red-500 mb-3">{errors.name.message}</p>
@@ -50,9 +51,9 @@ const Page = () => {
               {...register('phone', {
                 required: '휴대폰번호를 입력해주세요.',
               })}
-              className={`w-full h-[3.5rem] border-2 ${
+              className={`${commonInputStyle} ${
                 errors.phone ? 'border-red-500' : 'border-gray-400'
-              }  mb-3 flex flex-col items-start pl-3 rounded-md`}
+              } `}
             />
             {errors.phone && (
               <p className="text-red-500 mb-3">{errors.phone.message}</p>
@@ -64,9 +65,9 @@ const Page = () => {
                 {...register('nickname', {
                   required: '한글/영문/숫자 혼합해서 2~12자로 설정해주세요.',
                 })}
-                className={`w-full h-[3.5rem] border-2 ${
+                className={`${commonInputStyle} ${
                   errors.nickname ? 'border-red-500' : 'border-gray-400'
-                }  mb-3 flex flex-col items-start pl-3 rounded-md`}
+                } `}
               />
               <div className="cursor-pointer absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p3 underline">
                 중복체크
@@ -81,9 +82,9 @@ const Page = () => {
               </div>
             )}
 
-            <div className="w-full mt-5">
+            <div className="w-full mt-7">
               <button
-                className={`w-full h-[3rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
+                className={`w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
                   isValid ? 'bg-focus' : 'bg-gray-300'
                 }`}
                 type="submit"

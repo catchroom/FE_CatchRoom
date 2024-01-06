@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { AuthData } from '@/types/signup/types';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
+import { commonInputStyle } from './../login/email/page';
 
 const Page = () => {
   const router = useRouter();
@@ -53,9 +54,9 @@ const Page = () => {
                   required:
                     '본인 소유의 연락가능한 이메일 주소를 사용해주세요.',
                 })}
-                className={`w-full h-[3.5rem] border-2 ${
+                className={`${commonInputStyle} ${
                   errors.email ? 'border-red-500' : 'border-gray-400'
-                }  mb-3 flex flex-col items-start pl-3 rounded-md`}
+                }  `}
               />
               {email && (
                 <div
@@ -79,9 +80,9 @@ const Page = () => {
                   required:
                     '영문 + 숫자 + 특수문자 8~20자의 조합으로 설정해주세요.',
                 })}
-                className={`w-full h-[3.5rem] border-2 ${
+                className={`${commonInputStyle} ${
                   errors.password ? 'border-red-500' : 'border-gray-400'
-                }  mb-3 flex flex-col items-start pl-3 rounded-md`}
+                }  `}
               />
 
               {password && (
@@ -109,9 +110,9 @@ const Page = () => {
                 {...register('passwordCheck', {
                   required: '동일한 비밀번호를 입력해주세요.',
                 })}
-                className={`w-full h-[3.5rem] border-2 ${
+                className={`${commonInputStyle} ${
                   errors.passwordCheck ? 'border-red-500' : 'border-gray-400'
-                }  mb-3 flex flex-col items-start pl-3 rounded-md`}
+                }  `}
               />
 
               {passwordCheck && (
