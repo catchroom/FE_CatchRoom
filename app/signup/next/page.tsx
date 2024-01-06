@@ -3,11 +3,11 @@ import Header from '@/components/common/header';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { SignupData2 } from '@/types/signup/types';
+import { UserInfo } from '@/types/signup/types';
 
 const Page = () => {
   const router = useRouter();
-  const [state, setState] = useState<SignupData2>({
+  const [state, setState] = useState<UserInfo>({
     name: '',
     phone: '',
     nickname: '',
@@ -17,11 +17,11 @@ const Page = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<SignupData2>({
+  } = useForm<UserInfo>({
     mode: 'onChange',
   });
 
-  const onSubmit = (data: SignupData2) => {
+  const onSubmit = (data: UserInfo) => {
     setState(data);
     console.log(state);
   };

@@ -3,12 +3,12 @@ import Header from '@/components/common/header';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { SignupData } from '@/types/signup/types';
+import { AuthData } from '@/types/signup/types';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 
 const Page = () => {
   const router = useRouter();
-  const [state, setState] = useState<SignupData>({
+  const [state, setState] = useState<AuthData>({
     email: '',
     password: '',
     passwordCheck: '',
@@ -20,7 +20,7 @@ const Page = () => {
     formState: { errors, isValid },
     watch,
     setValue,
-  } = useForm<SignupData>({
+  } = useForm<AuthData>({
     mode: 'onChange',
   });
 
@@ -32,7 +32,7 @@ const Page = () => {
     setValue(fieldName, '');
   };
 
-  const onSubmit = (data: SignupData) => {
+  const onSubmit = (data: AuthData) => {
     setState(data);
     console.log(state);
   };
