@@ -53,7 +53,7 @@ const Page = () => {
                   required:
                     '본인 소유의 연락가능한 이메일 주소를 사용해주세요.',
                 })}
-                className={`w-full h-[3rem] border-2 ${
+                className={`w-full h-[3.5rem] border-2 ${
                   errors.email ? 'border-red-500' : 'border-gray-400'
                 }  mb-3 flex flex-col items-start pl-3 rounded-md`}
               />
@@ -79,7 +79,7 @@ const Page = () => {
                   required:
                     '영문 + 숫자 + 특수문자 8~20자의 조합으로 설정해주세요.',
                 })}
-                className={`w-full h-[3rem] border-2 ${
+                className={`w-full h-[3.5rem] border-2 ${
                   errors.password ? 'border-red-500' : 'border-gray-400'
                 }  mb-3 flex flex-col items-start pl-3 rounded-md`}
               />
@@ -109,7 +109,7 @@ const Page = () => {
                 {...register('passwordCheck', {
                   required: '동일한 비밀번호를 입력해주세요.',
                 })}
-                className={`w-full h-[3rem] border-2 ${
+                className={`w-full h-[3.5rem] border-2 ${
                   errors.passwordCheck ? 'border-red-500' : 'border-gray-400'
                 }  mb-3 flex flex-col items-start pl-3 rounded-md`}
               />
@@ -130,7 +130,7 @@ const Page = () => {
 
             <div className="w-full mt-5">
               <button
-                className={`w-full h-[3rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
+                className={`w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
                   isValid ? 'bg-focus' : 'bg-gray-300'
                 }`}
                 type="submit"

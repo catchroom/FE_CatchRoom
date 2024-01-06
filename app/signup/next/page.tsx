@@ -37,7 +37,7 @@ const Page = () => {
               {...register('name', {
                 required: '이름을 입력해주세요.',
               })}
-              className={`w-full h-[3rem] border-2 ${
+              className={`w-full h-[3.5rem] border-2 ${
                 errors.name ? 'border-red-500' : 'border-gray-400'
               }  mb-3 flex flex-col items-start pl-3 rounded-md`}
             />
@@ -50,7 +50,7 @@ const Page = () => {
               {...register('phone', {
                 required: '휴대폰번호를 입력해주세요.',
               })}
-              className={`w-full h-[3rem] border-2 ${
+              className={`w-full h-[3.5rem] border-2 ${
                 errors.phone ? 'border-red-500' : 'border-gray-400'
               }  mb-3 flex flex-col items-start pl-3 rounded-md`}
             />
@@ -64,11 +64,11 @@ const Page = () => {
                 {...register('nickname', {
                   required: '한글/영문/숫자 혼합해서 2~12자로 설정해주세요.',
                 })}
-                className={`w-full h-[3rem] border-2 ${
+                className={`w-full h-[3.5rem] border-2 ${
                   errors.nickname ? 'border-red-500' : 'border-gray-400'
                 }  mb-3 flex flex-col items-start pl-3 rounded-md`}
               />
-              <div className="absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p4 underline">
+              <div className="cursor-pointer absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p3 underline">
                 중복체크
               </div>
             </div>
@@ -92,7 +92,7 @@ const Page = () => {
                 }}
                 disabled={!isValid}
               >
-                다음
+                완료
               </button>
             </div>
           </form>

@@ -79,7 +79,10 @@ const Page = () => {
               </span>
               |
               <span className="relative pr-11">
-                <div className="underline" onClick={handleOpenModal}>
+                <div
+                  className="underline cursor-pointer"
+                  onClick={handleOpenModal}
+                >
                   이메일로 회원가입
                   <span className="absolute">
                     <NextArrowIcon />
