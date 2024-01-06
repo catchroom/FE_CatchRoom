@@ -1,11 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { LoginData } from '@/types/login/types';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import NextArrowIcon from '@/public/svgComponent/nextArrow';
 import LoginSheet from '@/components/loginSheets';
+import DeleteIcon from '@/public/svgComponent/deleteIcon';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -19,12 +20,27 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginData>();
+    watch,
+    setValue,
+  } = useForm<LoginData>({
+    mode: 'onChange',
+  });
+
+  const email = watch('email');
+  const password = watch('password');
+
+  const clearField = (fieldName: 'email' | 'password') => {
+    setValue(fieldName, '');
+  };
 
   const onSubmit = (data: LoginData) => {
     setState(data);
-    console.log(state);
   };
+
+  useEffect(() => {
+    console.log(state);
+    //백엔드로 post하는 api 호출
+  }, [state]);
 
   const [open, setOpen] = React.useState(false);
   const handleOpenModal = () => {
@@ -34,30 +50,51 @@ const LoginForm = () => {
   return (
     <div>
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-        <input
-          placeholder="이메일"
-          {...register('email', {
-            required: '이메일을 입력하세요.',
-          })}
-          className={`${commonInputStyle}  ${
-            errors.email ? 'border-red-500' : 'border-gray-400'
-          }  `}
-        />
+        <div className="relative">
+          <input
+            placeholder="이메일"
+            {...register('email', {
+              required: '이메일을 입력하세요.',
+            })}
+            className={`${commonInputStyle}  ${
+              errors.email ? 'border-red-500' : 'border-gray-400'
+            }  `}
+          />
+          {email && (
+            <div
+              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              onClick={() => clearField('email')}
+            >
+              <DeleteIcon />
+            </div>
+          )}
+        </div>
 
         {errors.email && (
           <p className="mb-3 text-red-500">{errors.email.message}</p>
         )}
 
-        <input
-          placeholder="비밀번호"
-          type="password"
-          {...register('password', {
-            required: '비밀번호를 입력해주세요.',
-          })}
-          className={`${commonInputStyle} ${
-            errors.password ? 'border-red-500' : 'border-gray-400'
-          } `}
-        />
+        <div className="relative">
+          <input
+            placeholder="비밀번호"
+            type="password"
+            {...register('password', {
+              required: '비밀번호를 입력해주세요.',
+            })}
+            className={`${commonInputStyle} ${
+              errors.password ? 'border-red-500' : 'border-gray-400'
+            } `}
+          />
+
+          {password && (
+            <div
+              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              onClick={() => clearField('password')}
+            >
+              <DeleteIcon />
+            </div>
+          )}
+        </div>
 
         {errors.password && (
           <p className="mt-3 text-red-500">{errors.password.message}</p>

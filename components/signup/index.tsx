@@ -1,10 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { AuthData } from '@/types/signup/types';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { commonInputStyle } from '@/components/login';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { authDataSchema } from '@/constants/zodSchema';
 
 const SignUpAuth = () => {
   const router = useRouter();
@@ -22,6 +24,7 @@ const SignUpAuth = () => {
     setValue,
   } = useForm<AuthData>({
     mode: 'onChange',
+    resolver: zodResolver(authDataSchema),
   });
 
   const email = watch('email');
@@ -34,8 +37,12 @@ const SignUpAuth = () => {
 
   const onSubmit = (data: AuthData) => {
     setState(data);
-    console.log(state);
   };
+
+  useEffect(() => {
+    console.log(state);
+    //백엔드로 post하는 api 호출
+  }, [state]);
 
   return (
     <div>
@@ -46,9 +53,7 @@ const SignUpAuth = () => {
         <div className="relative">
           <input
             placeholder="이메일"
-            {...register('email', {
-              required: '본인 소유의 연락가능한 이메일 주소를 사용해주세요.',
-            })}
+            {...register('email')}
             className={`${commonInputStyle} ${
               errors.email ? 'border-red-500' : 'border-gray-400'
             }  `}
@@ -71,10 +76,7 @@ const SignUpAuth = () => {
           <input
             placeholder="비밀번호"
             type="password"
-            {...register('password', {
-              required:
-                '영문 + 숫자 + 특수문자 8~20자의 조합으로 설정해주세요.',
-            })}
+            {...register('password')}
             className={`${commonInputStyle} ${
               errors.password ? 'border-red-500' : 'border-gray-400'
             }  `}
@@ -102,9 +104,7 @@ const SignUpAuth = () => {
           <input
             placeholder="비밀번호 재입력"
             type="password"
-            {...register('passwordCheck', {
-              required: '동일한 비밀번호를 입력해주세요.',
-            })}
+            {...register('passwordCheck')}
             className={`${commonInputStyle} ${
               errors.passwordCheck ? 'border-red-500' : 'border-gray-400'
             }  `}
