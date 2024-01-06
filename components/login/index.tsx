@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { LoginData } from '@/types/login/types';
@@ -14,10 +14,6 @@ export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
 const LoginForm = () => {
-  const [state, setState] = useState<LoginData>({
-    email: '',
-    password: '',
-  });
   const {
     register,
     handleSubmit,
@@ -37,13 +33,9 @@ const LoginForm = () => {
   };
 
   const onSubmit = (data: LoginData) => {
-    setState(data);
+    //백엔드로 data를 post하기
+    console.log(data);
   };
-
-  useEffect(() => {
-    console.log(state);
-    //백엔드로 post하는 api 호출
-  }, [state]);
 
   const [open, setOpen] = React.useState(false);
   const handleOpenModal = () => {
