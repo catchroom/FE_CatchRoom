@@ -108,3 +108,14 @@ export const userInfoSchema = z.object({
       '닉네임은 한글, 영문, 숫자만 입력 가능합니다.',
     ),
 });
+
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .min(1, '이메일을 입력해주세요.')
+    .regex(
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      '이메일 형식을 확인해주세요.',
+    ),
+  password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
+});

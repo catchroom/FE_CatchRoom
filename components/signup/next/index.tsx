@@ -21,7 +21,7 @@ const SignUpInfo = () => {
     handleSubmit,
     formState: { errors, isValid },
     watch,
-    setValue,
+    reset,
   } = useForm<UserInfo>({
     mode: 'onChange',
     resolver: zodResolver(userInfoSchema),
@@ -35,7 +35,7 @@ const SignUpInfo = () => {
   };
 
   const clearField = (fieldName: 'name' | 'phone' | 'nickname') => {
-    setValue(fieldName, '');
+    reset({ [fieldName]: '' });
   };
 
   useEffect(() => {

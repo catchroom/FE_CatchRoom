@@ -21,7 +21,7 @@ const SignUpAuth = () => {
     handleSubmit,
     formState: { errors, isValid },
     watch,
-    setValue,
+    reset,
   } = useForm<AuthData>({
     mode: 'onChange',
     resolver: zodResolver(authDataSchema),
@@ -32,7 +32,7 @@ const SignUpAuth = () => {
   const passwordCheck = watch('passwordCheck');
 
   const clearField = (fieldName: 'email' | 'password' | 'passwordCheck') => {
-    setValue(fieldName, '');
+    reset({ [fieldName]: '' });
   };
 
   const onSubmit = (data: AuthData) => {

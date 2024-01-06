@@ -1,9 +1,10 @@
 'use client';
 
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SheetCloseSVG from '@/public/svg/sheet-close';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
 const commonCheckStyle =
   "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10";
@@ -35,11 +36,27 @@ const LoginSheet = ({
     router.push('/signup');
   };
 
-  const [allAgree, setAllAgree] = useState(false);
-  const [agree1, setAgree1] = useState(false);
-  const [agree2, setAgree2] = useState(false);
-  const [agree3, setAgree3] = useState(false);
-  const [agree4, setAgree4] = useState(false);
+  const { register, watch, getValues, setValue } = useForm({
+    defaultValues: {
+      allAgree: false,
+      agree1: false,
+      agree2: false,
+      agree3: false,
+      agree4: false,
+    },
+  });
+
+  const handleAllAgreeChange = () => {
+    const newValue = !getValues('allAgree');
+    setValue('allAgree', newValue);
+    setValue('agree1', newValue);
+    setValue('agree2', newValue);
+    setValue('agree3', newValue);
+    setValue('agree4', newValue);
+  };
+
+  const agree1 = watch('agree1');
+  const agree2 = watch('agree2');
 
   return (
     <>
@@ -82,19 +99,13 @@ const LoginSheet = ({
                     <SheetCloseSVG />
                   </button>
                 </div>
+
                 <div className="w-full h-full mt-3 flex flex-col text-black text-p1">
                   <div className="flex border border-gray-500 rounded-md p-3 mb-3 mt-2">
                     <input
                       type="checkbox"
-                      checked={allAgree}
-                      onChange={() => {
-                        const newValue = !allAgree;
-                        setAllAgree(newValue);
-                        setAgree1(newValue);
-                        setAgree2(newValue);
-                        setAgree3(newValue);
-                        setAgree4(newValue);
-                      }}
+                      {...register('allAgree')}
+                      onChange={handleAllAgreeChange}
                       className={commonCheckStyle}
                     />
                     <span className="pl-3">
@@ -106,8 +117,7 @@ const LoginSheet = ({
                   <div className="flex p-3 mb-3">
                     <input
                       type="checkbox"
-                      checked={agree1}
-                      onChange={() => setAgree1(!agree1)}
+                      {...register('agree1')}
                       className={commonCheckStyle}
                     />
                     <span className="pl-3">
@@ -119,8 +129,7 @@ const LoginSheet = ({
                   <div className="flex p-3 mb-3">
                     <input
                       type="checkbox"
-                      checked={agree2}
-                      onChange={() => setAgree2(!agree2)}
+                      {...register('agree2')}
                       className={commonCheckStyle}
                     />
                     <span className="pl-3">
@@ -131,8 +140,7 @@ const LoginSheet = ({
                   <div className="flex p-3 mb-3">
                     <input
                       type="checkbox"
-                      checked={agree3}
-                      onChange={() => setAgree3(!agree3)}
+                      {...register('agree3')}
                       className={commonCheckStyle}
                     />
                     <span className="pl-3">
@@ -143,8 +151,7 @@ const LoginSheet = ({
                   <div className="flex p-3 mb-3">
                     <input
                       type="checkbox"
-                      checked={agree4}
-                      onChange={() => setAgree4(!agree4)}
+                      {...register('agree4')}
                       className={commonCheckStyle}
                     />
                     <span className="pl-3">

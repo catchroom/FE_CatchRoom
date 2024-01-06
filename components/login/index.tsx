@@ -7,6 +7,8 @@ import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import NextArrowIcon from '@/public/svgComponent/nextArrow';
 import LoginSheet from '@/components/loginSheets';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema } from '@/constants/zodSchema';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -21,16 +23,17 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
     watch,
-    setValue,
+    reset,
   } = useForm<LoginData>({
     mode: 'onChange',
+    resolver: zodResolver(loginSchema),
   });
 
   const email = watch('email');
   const password = watch('password');
 
   const clearField = (fieldName: 'email' | 'password') => {
-    setValue(fieldName, '');
+    reset({ [fieldName]: '' });
   };
 
   const onSubmit = (data: LoginData) => {
@@ -53,9 +56,7 @@ const LoginForm = () => {
         <div className="relative">
           <input
             placeholder="이메일"
-            {...register('email', {
-              required: '이메일을 입력하세요.',
-            })}
+            {...register('email')}
             className={`${commonInputStyle}  ${
               errors.email ? 'border-red-500' : 'border-gray-400'
             }  `}
@@ -78,9 +79,7 @@ const LoginForm = () => {
           <input
             placeholder="비밀번호"
             type="password"
-            {...register('password', {
-              required: '비밀번호를 입력해주세요.',
-            })}
+            {...register('password')}
             className={`${commonInputStyle} ${
               errors.password ? 'border-red-500' : 'border-gray-400'
             } `}
