@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { UserInfo } from '@/types/signup/types';
@@ -10,11 +10,6 @@ import { userInfoSchema } from '@/constants/zodSchema';
 
 const SignUpInfo = () => {
   const router = useRouter();
-  const [state, setState] = useState<UserInfo>({
-    name: '',
-    phone: '',
-    nickname: '',
-  });
 
   const {
     register,
@@ -30,18 +25,13 @@ const SignUpInfo = () => {
   const name = watch('name');
   const phone = watch('phone');
 
-  const onSubmit = (data: UserInfo) => {
-    setState(data);
-  };
-
   const clearField = (fieldName: 'name' | 'phone' | 'nickname') => {
     reset({ [fieldName]: '' });
   };
-
-  useEffect(() => {
-    console.log(state);
-    //백엔드로 post하는 api 호출
-  }, [state]);
+  const onSubmit = (data: UserInfo) => {
+    //백엔드로 data를 post하기
+    console.log(data);
+  };
 
   return (
     <div>

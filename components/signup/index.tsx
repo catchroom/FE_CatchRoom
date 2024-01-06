@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { AuthData } from '@/types/signup/types';
@@ -10,11 +10,6 @@ import { authDataSchema } from '@/constants/zodSchema';
 
 const SignUpAuth = () => {
   const router = useRouter();
-  const [state, setState] = useState<AuthData>({
-    email: '',
-    password: '',
-    passwordCheck: '',
-  });
 
   const {
     register,
@@ -36,13 +31,9 @@ const SignUpAuth = () => {
   };
 
   const onSubmit = (data: AuthData) => {
-    setState(data);
+    //백엔드로 data를 post하기
+    console.log(data);
   };
-
-  useEffect(() => {
-    console.log(state);
-    //백엔드로 post하는 api 호출
-  }, [state]);
 
   return (
     <div>
