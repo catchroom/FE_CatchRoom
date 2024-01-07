@@ -4,4 +4,6 @@ export type CheckBoxPropsTypes = {
   isLabelTextBold?: boolean;
   isLabelTextUnderline?: boolean;
   setChkBoxDisabled?: boolean;
+  handleSelectState?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  isBoxChecked?: boolean;
 };

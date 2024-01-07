@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChkBoxDisabledIcon from '@/public/svgComponent/checkbox/disabled';
 import ChkBoxDefaultIcon from '@/public/svgComponent/checkbox/default';
 import ChkBoxSelectedIcon from '@/public/svgComponent/checkbox/selected';
-import { useRecoilState } from 'recoil';
-import { checkBox } from '@/atoms/commons/checkbox';
 import { CheckBoxPropsTypes } from '@/types/common/checkbox/types';
 
 /**
@@ -13,6 +11,8 @@ import { CheckBoxPropsTypes } from '@/types/common/checkbox/types';
  * @param labelText -체크박스 우측에 표시되는 라벨입니다. (필수)
  * @param isLabelTextBold - boolean 값으로 라벨의 텍스트 굵기 유무를 결정할 수 있습니다. `기본값: font-medium` (선택)
  * @param isLabelTextUnderline - boolean 값으로 라벨 텍스트에 밑줄 효과를 줄 수 있습니다. (선택)
+ * @param isBoxChecked - 별도로 체크박스의 체크 State를 커스텀하고 싶은 경우, boolean 값으로 전달할 수 있습니다. `기본값: false` (선택)
+ * @param handleSelectState - 전체선택 기능을 위해 핸들러 함수를 전달하는 용도로 사용할 수 있습니다. (선택)
  * @param setChkBoxDisabled - boolean 값으로 체크박스의 disabled를 활성화할 수 있습니다. (선택)
  * @returns
  */
@@ -22,9 +22,11 @@ const CheckBoxComponent = ({
   labelText,
   isLabelTextBold = false,
   isLabelTextUnderline = false,
+  isBoxChecked = false,
+  handleSelectState,
   setChkBoxDisabled,
 }: CheckBoxPropsTypes) => {
-  const [isChecked, setIsChecked] = useRecoilState(checkBox);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -41,13 +43,18 @@ const CheckBoxComponent = ({
         </>
       ) : (
         <>
-          {isChecked ? <ChkBoxSelectedIcon /> : <ChkBoxDefaultIcon />}
+          {isChecked || isBoxChecked ? (
+            <ChkBoxSelectedIcon />
+          ) : (
+            <ChkBoxDefaultIcon />
+          )}
           <input
             type="checkbox"
             id={id}
             name={id}
             className={inputStyle}
             onChange={handleCheckboxChange}
+            onClick={handleSelectState}
           />
         </>
       )}
