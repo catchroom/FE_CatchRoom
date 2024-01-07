@@ -32,7 +32,7 @@ const CheckBoxComponent = ({
     setIsChecked(!isChecked);
   };
 
-  const inputStyle = 'absolute w-[1.5rem] h-[1.5rem] opacity-0';
+  const inputStyle = 'absolute w-[1.5rem] h-[1.5rem] opacity-0 cursor-pointer';
 
   return (
     <div className="flex items-start w-full h-[1.5rem]">
@@ -61,7 +61,7 @@ const CheckBoxComponent = ({
       <label
         htmlFor={id}
         className={`${isLabelTextBold ? 'font-semibold' : 'font-medium'} 
-        ${isLabelTextUnderline ? 'underline' : ''} ml-2 text-t2`}
+        ${isLabelTextUnderline ? 'underline' : ''} pl-2 text-t2 cursor-pointer`}
       >
         {labelText}
       </label>
