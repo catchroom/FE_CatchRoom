@@ -1,7 +1,7 @@
 export type CheckBoxPropsTypes = {
   id: string;
   labelText: string;
-  useLabelTextBold?: boolean;
-  useLabelTextUnderline?: boolean;
+  isLabelTextBold?: boolean;
+  isLabelTextUnderline?: boolean;
   setChkBoxDisabled?: boolean;
 };
