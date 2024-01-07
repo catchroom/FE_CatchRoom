@@ -48,14 +48,6 @@ const CheckBoxComponent = ({
           ) : (
             <ChkBoxDefaultIcon />
           )}
-          <input
-            type="checkbox"
-            id={id}
-            name={id}
-            className={inputStyle}
-            onChange={handleCheckboxChange}
-            onClick={handleSelectState}
-          />
         </>
       )}
       <input
@@ -64,6 +56,7 @@ const CheckBoxComponent = ({
         name={id}
         className={inputStyle}
         onChange={handleCheckboxChange}
+        onClick={handleSelectState}
       />
       <label
         htmlFor={id}
