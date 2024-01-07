@@ -30,7 +30,7 @@ const Header = ({
       ) : (
         <div />
       )}
-      <h1 className="justify-self-center text-h2 font-semibold">{title}</h1>
+      <h1 className="justify-self-center text-h5 font-semibold">{title}</h1>
       {showCloseButton || showMoreButton ? (
         <div className="justify-self-end">
           {showCloseButton && (
