@@ -1,13 +1,13 @@
 import Header from '@/components/common/header';
 import React from 'react';
-import LoginForm from '@/components/login';
+import SignUpInfo from '@/components/signup/next';
 
 const Page = () => {
   return (
     <>
-      <Header title="이메일로 로그인" showBackButton />
+      <Header title="이메일로 회원가입(2/2)" showBackButton />
       <div className="flex flex-col container mx-auto px-3 py-6 bg-primary">
-        <LoginForm />
+        <SignUpInfo />
       </div>
     </>
   );
