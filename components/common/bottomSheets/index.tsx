@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import SheetCloseSVG from '@/public/svg/sheet-close';
 import InputButton from '../sheetsButtons/inputButton';
 import SimpleButton from '../sheetsButtons/simpleButton';
+import SaleButton from '../sheetsButtons/saleButton';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -29,7 +30,7 @@ const BottomSheets = ({
   title: string;
   watchBank?: string;
   closeButton?: boolean;
-  buttonSelect?: 'input' | 'simple';
+  buttonSelect?: 'input' | 'simple' | 'sale';
 }) => {
   const [open, setOpen] = React.useState(false);
   const [viewPortHeight, setViewPortHeight] = React.useState(0);
@@ -51,12 +52,24 @@ const BottomSheets = ({
     setOpen(false);
   };
 
-  const ButtonComponent =
-    buttonSelect === 'input' ? (
-      <InputButton name={title} fn={modalOpen} watchBank={watchBank} />
-    ) : (
-      <SimpleButton name={title} fn={modalOpen} />
-    );
+  // const ButtonComponent =
+  //   buttonSelect === 'input' ? (
+  //     <InputButton name={title} fn={modalOpen} watchBank={watchBank} />
+  //   ) : (
+  //     <SimpleButton name={title} fn={modalOpen} />
+  //   );
+  const ButtonComponent = (() => {
+    switch (buttonSelect) {
+      case 'input':
+        return (
+          <InputButton name={title} fn={modalOpen} watchBank={watchBank} />
+        );
+      case 'sale':
+        return <SaleButton name={title} fn={modalOpen} />;
+      default:
+        return <SimpleButton name={title} fn={modalOpen} />; // 기본값으로 사용될 컴포넌트
+    }
+  })();
 
   return (
     <>
