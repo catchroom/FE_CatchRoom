@@ -181,7 +181,7 @@ const SearchComponent = () => {
             buttonSelect="search"
             closeButton
           >
-            <div className="mt-3 w-full h-[16.5rem]">
+            <div className="mt-3 w-full">
               <div className="mb-6">
                 {prop.icon === 'pin' && (
                   <CheckBoxComponent
