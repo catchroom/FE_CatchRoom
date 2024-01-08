@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectBoxIconType } from '@/types/common/selectBoxButton/types';
+import { SearchBoxIconType } from '@/types/common/searchBoxButton/types';
 import HouseIcon from '@/public/svgComponent/house';
 import MapPinIcon from '@/public/svgComponent/mapPin';
 import CalendarIcon from '@/public/svgComponent/bigCalendar';
@@ -12,14 +12,14 @@ import DownArrowIcon from '@/public/svgComponent/downArrow';
  *
  * @props {string} icon - 아이콘 종류는 ('pin', 'calendar', 'person', 'house')가 있습니다.
  * @props {string} placeholder - 버튼 안에 들어갈 placeholder입니다.
- * @returns {JSX.Element} SelectBoxButton 컴포넌트 반환
+ * @returns {JSX.Element} SearchBoxButton 컴포넌트 반환
  */
 
 const SearchBoxButton = ({
   icon,
   placeholder,
   onClickFunc,
-}: SelectBoxIconType) => {
+}: SearchBoxIconType) => {
   return (
     <button
       className="w-full h-14 flex flex-wrap items-center justify-between my-1 p-3 px-4 bg-white border border-border-sub rounded text-t2 font-medium"
