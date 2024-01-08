@@ -30,7 +30,7 @@ const userProfile = {
 
 const page = () => {
   return (
-    <div className="w-full h-full mt-5 px-5 flex flex-col gap-5">
+    <div className="w-full h-full px-5 flex flex-col gap-5">
       {userProfile.history ? (
         userProfile.history.map((item) => {
           return <HistoryList key={item.id} item={item} />;
