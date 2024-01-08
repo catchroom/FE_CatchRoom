@@ -53,7 +53,7 @@ const CheckBoxComponent = ({
             id={id}
             name={id}
             className={inputStyle}
-            onChange={handleCheckboxChange}
+            onChange={!isBoxChecked ? handleCheckboxChange : undefined}
             onClick={handleSelectState}
           />
         </>
