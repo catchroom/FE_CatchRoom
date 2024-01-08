@@ -9,6 +9,7 @@ import AccountContainer from '@/components/mypage/account/accountContainer';
 import AccountButton from '@/components/mypage/account/accountButton';
 import BottomNav from '@/components/common/bottomNav';
 import { Banners } from '@/types/mypage/types';
+import BannerFooter from '@/components/mypage/banner/bannerFooter';
 
 const fetchTest = async () => {
   const res = await fetch('https://catchroom.xyz/v1/test/do');
@@ -72,11 +73,7 @@ const page = async () => {
             </p>
           </BannerContainer>
         </div>
-        <div className="w-full flex flex-col items-start gap-1 bg-border px-3 py-4 text-p3 text-text-sub">
-          <h1 className=" text-t3 font-bold">(주) 캐치룸</h1>
-          <p>고객센터 02-4989-4989</p>
-          <p>평일 09:00 - 18:00 (점심시간 12:00 - 13:00)</p>
-        </div>
+        <BannerFooter />
       </div>
       <BottomNav />
     </div>
