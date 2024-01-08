@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ChkBoxDisabledIcon from '@/public/svgComponent/checkbox/disabled';
 import ChkBoxDefaultIcon from '@/public/svgComponent/checkbox/default';
 import ChkBoxSelectedIcon from '@/public/svgComponent/checkbox/selected';
@@ -22,16 +22,10 @@ const CheckBoxComponent = ({
   labelText,
   isLabelTextBold = false,
   isLabelTextUnderline = false,
-  isBoxChecked = false,
+  isBoxChecked,
   handleSelectState,
   setChkBoxDisabled,
 }: CheckBoxPropsTypes) => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
   const inputStyle = 'absolute w-[1.5rem] h-[1.5rem] opacity-0 cursor-pointer';
 
   return (
@@ -43,17 +37,12 @@ const CheckBoxComponent = ({
         </>
       ) : (
         <>
-          {isChecked || isBoxChecked ? (
-            <ChkBoxSelectedIcon />
-          ) : (
-            <ChkBoxDefaultIcon />
-          )}
+          {isBoxChecked ? <ChkBoxSelectedIcon /> : <ChkBoxDefaultIcon />}
           <input
             type="checkbox"
             id={id}
             name={id}
             className={inputStyle}
-            onChange={!isBoxChecked ? handleCheckboxChange : undefined}
             onClick={handleSelectState}
           />
         </>
