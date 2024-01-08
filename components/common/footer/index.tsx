@@ -20,8 +20,8 @@ const Footer = () => {
         </p>
       </div>
       <div className="flex gap-[19px] text-text-secondary underline decoration-solid text-p2">
-        <p>개인정보 처리방침</p>
-        <p>서비스 이용약관</p>
+        <p className="cursor-pointer">개인정보 처리방침</p>
+        <p className="cursor-pointer">서비스 이용약관</p>
         <Image src={yanolja} alt="야놀자 로고" />
       </div>
       <div className="text-t4 text-text-sub">

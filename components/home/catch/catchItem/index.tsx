@@ -26,7 +26,7 @@ const CatchItem = ({
             height={32}
             alt="찜하기 버튼"
           />
-          <div className="absolute top-[7px] right-[6px]">
+          <div className="absolute top-[7px] right-[6px] cursor-pointer">
             <Image
               src="/heart-action.svg"
               width={20}
