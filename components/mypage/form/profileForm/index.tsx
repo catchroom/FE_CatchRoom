@@ -56,43 +56,50 @@ const ProfileForm = ({ name }: { name: string }) => {
   }, [debounceText, name]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
-      <div className="w-full flex flex-col items-start  gap-3">
-        <p className="whitespace-nowrap">닉네임</p>
-        <div className="flex flex-col gap-1 w-full relative">
-          <input
-            {...register('nickname')}
-            type="text"
-            className={`bg-white border-b-[1px] w-full outline-none border-black transition-colors duration-300 ease-in focus:border-main`}
-          />
-          <button
-            data-testid="cancel-button"
-            type="button"
-            onClick={() =>
-              reset({
-                nickname: '',
-              })
-            }
-            className="absolute right-0 bg-white"
-          >
-            <MyPageCancelSVG />
-          </button>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full flex flex-col gap-3"
+    >
+      <div className="w-full flex flex-col items-start">
+        <p className="whitespace-nowrap pb-1">닉네임</p>
+        <div className="w-full flex flex-col">
+          <div className="flex flex-col gap-1 w-full relative items-center">
+            <input
+              {...register('nickname')}
+              type="text"
+              className={`px-4 py-3 border border-border-sub rounded-md bg-surface w-full outline-none transition-colors duration-300 ease-in focus:border-border-critical`}
+            />
+            <button
+              data-testid="cancel-button"
+              type="button"
+              onClick={() =>
+                reset({
+                  nickname: '',
+                })
+              }
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white"
+            >
+              <MyPageCancelSVG />
+            </button>
+          </div>
           <ErrorMessage
             errors={errors}
             name="nickname"
             render={({ message }) => (
-              <p className="text-p4 text-pink-700">{message}</p>
+              <p className="pt-1 text-p2 text-text-critical">{message}</p>
             )}
           />
-          <div className="w-full flex gap-3">
+        </div>
+        <div>
+          <div className="w-full flex gap-1 pt-3 text-t3">
             <button
               type="submit"
               disabled={!checkNickname}
               className={`${
                 checkNickname
-                  ? 'border-opacity-100  text-opacity-100'
-                  : 'border-opacity-30  text-opacity-30'
-              } border-2 border-black text-black px-2`}
+                  ? 'bg-surface text-text-primary border-border-primary '
+                  : 'bg-action-secondary-disabled bg-opacity-15 text-text-disabled border-action-secondary-disabled border-opacity-15'
+              } px-4 py-2 rounded-md border box-border`}
             >
               확인
             </button>
@@ -104,7 +111,7 @@ const ProfileForm = ({ name }: { name: string }) => {
                   nickname: name,
                 })
               }
-              className="border-opacity-30 text-opacity-30 border-2 border-black text-black px-2 hover:border-opacity-70  hover:text-opacity-70"
+              className="text-opacity-30 border border-action-secondary-disabled border-opacity-15 text-black px-4 py-2 rounded-md hover:bg-surface hover:text-text-primary hover:border-border-primary"
             >
               취소
             </button>
