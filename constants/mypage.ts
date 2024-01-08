@@ -1,6 +1,7 @@
+import { Root } from '@/types/mypage/types';
 import { maskEmail, maskPassword, maskPhoneNumber } from '@/utils/mypage-utils';
 
-export const MYPAGE_CONSTANTS = {
+export const MYPAGE_CONSTANTS: Root = {
   ACCOUNT_BUTTON: [
     {
       TITLE: '출금하기',
@@ -18,14 +19,17 @@ export const MYPAGE_CONSTANTS = {
       {
         TITLE: '판매 내역',
         LOCATION: '/mypage/dashboard/sales',
+        TYPE: 'history',
       },
       {
         TITLE: '구매 내역',
         LOCATION: '/mypage/dashboard/purchase',
+        TYPE: 'shopping',
       },
       {
         TITLE: '찜목록',
         LOCATION: '/mypage/dashboard/likes',
+        TYPE: 'heart',
       },
     ],
   },
