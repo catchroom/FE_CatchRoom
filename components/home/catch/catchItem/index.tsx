@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { catchItems } from '@/types/common/catchItems/types';
+import White from '@/public/svgComponent/marker/white';
 
 const CatchItem = ({
   roomName,
@@ -13,8 +14,8 @@ const CatchItem = ({
   const newPrice = Math.round(oldPrice - oldPrice * (discount / 100));
   return (
     <div className="flex flex-col relative w-[320px] mt-5 rounded-lg border border-gray-200">
-      <div className="absolute flex top-[14px] left-4 bg-black gap-1 p-[10px] rounded-3xl">
-        <Image src="/maker-pin.svg" width={16} height={16} alt="지도 아이콘" />
+      <div className="absolute flex top-[14px] left-4 bg-black gap-1 p-[10px] rounded-3xl items-center">
+        <White />
         <span className="text-white">{location}</span>
       </div>
       <div className="absolute flex top-[14px] right-4">
@@ -53,7 +54,7 @@ const CatchItem = ({
               height={20}
               alt="달력아이콘"
             />
-            <p className="text-p2 ml-1">{resDate}</p>
+            <p className="text-p2 ml-1 text-black font-semibold">{resDate}</p>
           </div>
           <p className="line-through text-p2 text-text-sub">
             구매가 {oldPrice}
