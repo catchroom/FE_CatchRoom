@@ -27,19 +27,11 @@ export const MYPAGE_CONSTANTS = {
         TITLE: '찜목록',
         LOCATION: '/mypage/dashboard/likes',
       },
-      {
-        TITLE: '작성한 후기',
-        LOCATION: '/mypage/dashboard/reviews',
-      },
     ],
   },
   BOTTOM_BANNER: {
     TITLE: '기타',
     BANNERS: [
-      {
-        TITLE: '공지사항',
-        LOCATION: '/mypage/dashboard/notices',
-      },
       {
         TITLE: '서비스 약관',
         LOCATION: '/mypage/dashboard/terms',
@@ -47,14 +39,6 @@ export const MYPAGE_CONSTANTS = {
       {
         TITLE: '개인정보 처리방침',
         LOCATION: '/mypage/dashboard/privacy',
-      },
-      {
-        TITLE: '버전 정보',
-        LOCATION: '/mypage/dashboard/edit',
-      },
-      {
-        TITLE: '1:1 문의하기',
-        LOCATION: '/mypage/dashboard/ask',
       },
     ],
   },
