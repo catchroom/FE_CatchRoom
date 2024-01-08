@@ -1,12 +1,19 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const ReviewButtons = ({
-  soldOut,
+  id,
+  soldOut = true,
   isReview,
 }: {
-  soldOut: boolean;
+  id: number;
+  soldOut?: boolean;
   isReview: boolean;
 }) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/mypage/dashboard/review?id=${id}`);
+  };
   return (
     <>
       {soldOut && (
@@ -14,7 +21,7 @@ const ReviewButtons = ({
           {isReview ? (
             <button>작성한 리뷰 보기</button>
           ) : (
-            <button>리뷰 쓰기</button>
+            <button onClick={handleClick}>리뷰 쓰기</button>
           )}
         </div>
       )}

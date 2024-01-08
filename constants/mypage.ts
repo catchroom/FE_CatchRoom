@@ -21,7 +21,7 @@ export const MYPAGE_CONSTANTS = {
       },
       {
         TITLE: '구매 내역',
-        LOCATION: '/mypage/dashboard/purchases',
+        LOCATION: '/mypage/dashboard/purchase',
       },
       {
         TITLE: '찜목록',
