@@ -57,8 +57,8 @@ const ProfileForm = ({ name }: { name: string }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
-      <div className="w-full flex flex-row items-start  gap-3">
-        <p className="mr-2 whitespace-nowrap">닉네임</p>
+      <div className="w-full flex flex-col items-start  gap-3">
+        <p className="whitespace-nowrap">닉네임</p>
         <div className="flex flex-col gap-1 w-full relative">
           <input
             {...register('nickname')}

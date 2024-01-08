@@ -12,8 +12,8 @@ const MypageLayout = ({ children }: { children: ReactNode }) => {
       <div className="w-full max-w-[480px] fixed inset-0 left-1/2 -translate-x-1/2">
         <Header title="hello" showBackButton showBorder />
       </div>
-      <div className="w-full absolute h-[calc(100vh-61px)] overflow-hidden top-[61px]">
-        <div className="mt-5">{children}</div>
+      <div className="w-full absolute h-[calc(100vh-61px)] overflow-hidden top-[53px]">
+        {children}
       </div>
     </div>
   );

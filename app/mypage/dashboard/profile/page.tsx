@@ -15,8 +15,8 @@ const page = () => {
   console.log(sampleData['email']);
 
   return (
-    <div className="w-full h-full px-5">
-      <div className="w-full py-6 flex flex-col items-center justify-center">
+    <div className="w-full h-full px-5 pt-5">
+      <div className="w-full flex flex-col items-center justify-center">
         <div className="w-full flex flex-col gap-10">
           <ProfileForm name="홍길동" />
           <PrivacyContainer>
