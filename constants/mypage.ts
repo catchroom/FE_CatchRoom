@@ -21,7 +21,7 @@ export const MYPAGE_CONSTANTS = {
       },
       {
         TITLE: '구매 내역',
-        LOCATION: '/mypage/dashboard/purchases',
+        LOCATION: '/mypage/dashboard/purchase',
       },
       {
         TITLE: '찜목록',
@@ -125,4 +125,15 @@ export const BANK_LIST = [
   { name: 'HSBC', value: 'hsbc' },
   { name: 'JP모간', value: 'jpmorgan' },
   { name: 'SC제일은행', value: 'sc' },
+];
+
+export const MENU_BUTTON = [
+  {
+    name: '게시중',
+    value: 'onSale',
+  },
+  {
+    name: '게시만료',
+    value: 'offSale',
+  },
 ];
