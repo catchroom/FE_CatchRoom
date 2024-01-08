@@ -9,7 +9,7 @@ const userProfile = {
 
 const page = () => {
   return (
-    <div className="w-full h-full px-5 mt-5">
+    <div className="w-full h-full px-5">
       <div className="flex gap-3">
         <h1>{userProfile.bank}</h1>
         <p>{userProfile.account}</p>
