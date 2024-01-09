@@ -4,8 +4,7 @@ import CloseIcon from '@/public/svg/ph_x.svg';
 import { chatItemProps } from '@/types/chat/chatItem/types';
 import { useRouter } from 'next/navigation';
 
-// eslint-disable-next-line @next/next/no-async-client-component
-const ChatItem = async ({
+const ChatItem = ({
   id,
   image,
   sellerNickname,
