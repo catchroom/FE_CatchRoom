@@ -1,9 +1,15 @@
 import * as React from "react";
-const DownArrowIcon = () => (
+
+interface DownArrowIconProps extends React.SVGProps<SVGSVGElement> {
+  width?: number;
+  height?: number;
+}
+
+const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8}) => (
   <svg
-    width={14}
-    height={8}
-    viewBox="0 0 14 8"
+    width={width}
+    height={height}
+    viewBox={`0 0 14 8`}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >

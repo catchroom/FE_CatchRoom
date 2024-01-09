@@ -5,7 +5,7 @@ import MiddleHeader from './middleHeader';
 
 const HeaderComponent = () => {
   return (
-    <div className="w-full max-w-[475px] fixed z-20 top-0 bg-white box-border">
+    <div className="w-full max-w-[475px] fixed z-20 top-0 bg-bg box-border">
       {/* 날짜 (ex.2024년 1월) 및 뒤로가기 버튼의 상단 헤더 */}
       <TopHeader />
       {/* 요일, 일수 (ex.목, 24일) 를 포함하는 중단 헤더 */}
