@@ -2,19 +2,24 @@
 
 import BottomSheets from '@/components/common/bottomSheets';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
-import { BANK_LIST, INPUT_LIST } from '@/constants/mypage';
+import {
+  BANK_LIST,
+  INVESTMENT_BANK_LIST,
+  INPUT_LIST,
+} from '@/constants/mypage';
 import { FormAccount, accountSchema } from '@/constants/zodSchema';
 import { getBankName } from '@/utils/get-bank-name';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Radio } from '@material-tailwind/react';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 const BankForm = () => {
+  const [bankView] = React.useState(false);
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<FormAccount>({
     resolver: zodResolver(accountSchema),
@@ -29,7 +34,12 @@ const BankForm = () => {
     }
   };
 
-  const bankName = getBankName(watch('bank'));
+  const enrollBank = (value: string) => {
+    setValue('bank', value);
+  };
+
+  const BANK_VIEW = bankView ? BANK_LIST : INVESTMENT_BANK_LIST;
+  const bankName = getBankName(bankView, watch('bank'));
 
   return (
     <form
@@ -40,27 +50,24 @@ const BankForm = () => {
         <BottomSheets
           buttonSelect="input"
           title="은행명 선택"
+          innerTitle="은행 또는 증권사를 선택해주세요"
+          innerButtonTitle="선택"
           closeButton
           watchBank={bankName}
         >
-          <div className="w-full flex flex-col items-center gap-12">
-            <div className="grid grid-cols-3 gap-5 max-h-96 overflow-y-scroll">
-              {BANK_LIST.map((bank) => {
+          <div className="w-full">
+            <div className="flex flex-col items-start max-h-[calc(100vh-200px)] overflow-y-scroll">
+              {BANK_VIEW.map((bank) => {
                 return (
-                  <label
-                    key={bank.value}
-                    className="flex flex-col items-center justify-center"
+                  <button
+                    key={bank.name}
+                    type="button"
+                    onClick={() => enrollBank(bank.value)}
+                    value={bank.value}
+                    className="flex items-center w-full p-[10px]"
                   >
-                    <p>{bank.name}</p>
-                    <Radio
-                      crossOrigin="anonymous"
-                      type="radio"
-                      color="pink"
-                      key={bank.value}
-                      value={bank.value}
-                      {...register('bank')}
-                    />
-                  </label>
+                    {bank.name}
+                  </button>
                 );
               })}
             </div>
