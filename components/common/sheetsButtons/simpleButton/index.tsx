@@ -14,6 +14,7 @@ const SimpleButton = ({
 }) => {
   return (
     <Button
+      data-testId="sampleButton"
       placeholder="Button"
       onClick={fn}
       type={type}
