@@ -1,24 +1,38 @@
 'use client';
 
+import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import BottomSheets from '@/components/common/bottomSheets';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
-import { BANK_LIST, INPUT_LIST } from '@/constants/mypage';
+import {
+  BANK_LIST,
+  INVESTMENT_BANK_LIST,
+  INPUT_LIST,
+} from '@/constants/mypage';
 import { FormAccount, accountSchema } from '@/constants/zodSchema';
 import { getBankName } from '@/utils/get-bank-name';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Radio } from '@material-tailwind/react';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import DivideWrapper from '../../divideWrapper';
+import { divideAtom } from '@/atoms/mypage/divideAtom';
+import FormInput from '../formInput';
+import { ErrorMessage } from '@hookform/error-message';
+import FormError from '../formError';
 
 const BankForm = () => {
+  const bankView = useRecoilValue(divideAtom);
+  const setBankModal = useSetRecoilState(outerBottomSheetsControl);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
+    setValue,
     formState: { errors },
   } = useForm<FormAccount>({
     resolver: zodResolver(accountSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<FormAccount> = (data) => {
@@ -29,62 +43,80 @@ const BankForm = () => {
     }
   };
 
-  const bankName = getBankName(watch('bank'));
+  const disabledButton = () => {
+    if (errors.bank || errors.account || errors.name) {
+      return true;
+    }
+    return false;
+  };
+
+  const enrollBank = (value: string) => {
+    setBankModal(false);
+    setValue('bank', value);
+  };
+
+  const BANK_VIEW = bankView ? BANK_LIST : INVESTMENT_BANK_LIST;
+  const bankName = getBankName(bankView, watch('bank'));
+  const BottomSheetsTitle = bankName
+    ? bankName
+    : '은행 또는 증권사를 선택해주세요';
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-full h-full gap-6"
+      className="flex flex-col w-full h-full gap-6 py-5"
     >
       <div className="w-full relative">
         <BottomSheets
           buttonSelect="input"
-          title="은행명 선택"
-          closeButton
-          watchBank={bankName}
+          title={BottomSheetsTitle}
+          innerTitle="은행 또는 증권사를 선택해주세요"
+          innerButtonTitle="선택"
+          outerControl={true}
         >
-          <div className="w-full flex flex-col items-center gap-12">
-            <div className="grid grid-cols-3 gap-5 max-h-96 overflow-y-scroll">
-              {BANK_LIST.map((bank) => {
-                return (
-                  <label
-                    key={bank.value}
-                    className="flex flex-col items-center justify-center"
-                  >
-                    <p>{bank.name}</p>
-                    <Radio
-                      crossOrigin="anonymous"
-                      type="radio"
-                      color="pink"
-                      key={bank.value}
+          <div className="w-full">
+            <div className="flex flex-col items-start overflow-y-scroll">
+              <DivideWrapper divideCase="BANK">
+                {BANK_VIEW.map((bank) => {
+                  return (
+                    <button
+                      key={bank.name}
+                      type="button"
+                      onClick={() => enrollBank(bank.value)}
                       value={bank.value}
-                      {...register('bank')}
-                    />
-                  </label>
-                );
-              })}
+                      className="flex items-center w-full p-[10px] hover:text-text-primary"
+                    >
+                      {bank.name}
+                    </button>
+                  );
+                })}
+              </DivideWrapper>
             </div>
           </div>
         </BottomSheets>
-        <p className="absolute py-1  translate-y-full bottom-0 text-p4 text-text-primary">
-          {errors.bank?.message}
-        </p>
+        <ErrorMessage
+          errors={errors}
+          name="bank"
+          render={({ message }) => <FormError message={message} />}
+        />
       </div>
       {INPUT_LIST.map((input) => (
         <div key={input.name} className="w-full flex flex-col relative">
-          <input
-            {...register(input.name as keyof FormAccount)}
-            type="text"
+          <FormInput
+            value={input.name as keyof FormAccount}
+            register={register}
+            reset={reset}
             placeholder={input.placeholder}
-            className="flex flex-start border-[1px] focus:outline-border-primary border-border-secondary text-t2 font-medium bg-transparent text-text p-4"
           />
-          <p className="absolute py-1 bottom-0 translate-y-full text-p4 text-text-primary">
-            {errors[input.name as keyof FormAccount]?.message}
-          </p>
+          <ErrorMessage
+            errors={errors}
+            name={input.name as keyof FormAccount}
+            render={({ message }) => <FormError message={message} />}
+          />
         </div>
       ))}
       <div className="w-full max-w-[480px] absolute bottom-5 left-1/2 -translate-x-1/2 px-5">
-        <SimpleButton name="등록하기" type="submit" />
+        <SimpleButton disabled={disabledButton()} name="확인" type="submit" />
       </div>
     </form>
   );

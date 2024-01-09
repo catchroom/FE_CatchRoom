@@ -8,17 +8,24 @@ mockAnimationsApi();
 
 describe('bankForm test', () => {
   it('모든 input을 입력하지 않고 submit button을 눌렀을 때 경고 표시 활성화 되는 지 테스트', async () => {
+    // 1. 테스트 환경 구성
     const user = userEvent.setup();
     render(<BankForm />);
 
+    // 2. 테스트할 요소 찾기
     const submitButton = screen.getByText('등록하기');
+
+    // 3. action
     await user.click(submitButton);
 
+    // 4. result
     await waitFor(() => {
       const bankError = screen.getByText('은행을 선택해주세요.');
       const accountError = screen.getByText('계좌번호를 입력해주세요.');
       const accountNameError = screen.getByText('이름을 입력해주세요.');
 
+      // expect로 테스트를 진행
+      // 결과는 눈에 보이는 결과물로!!
       expect(bankError).toBeInTheDocument();
       expect(accountError).toBeInTheDocument();
       expect(accountNameError).toBeInTheDocument();

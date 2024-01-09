@@ -105,6 +105,30 @@ export const BANK_LIST = [
   { name: 'SC제일은행', value: 'sc' },
 ];
 
+export const INVESTMENT_BANK_LIST = [
+  { name: '미래에셋', value: 'miraeasset' },
+  { name: '한국투자', value: 'koreainvestment' },
+  { name: 'KB증권', value: 'kbsecurities' },
+  { name: '삼성증권', value: 'samsungsecurities' },
+  { name: '키움', value: 'kiwoom' },
+  { name: 'NH투자', value: 'nhinvestment' },
+  { name: '신한금융투자', value: 'shinhaninvestment' },
+  { name: '하나증권', value: 'hanasecurities' },
+  { name: '대신', value: 'daeshin' },
+  { name: 'SK증권', value: 'sksecurities' },
+  { name: '유진투자', value: 'yujininvestment' },
+  { name: 'DB금융투자', value: 'dbfinancialinvestment' },
+  { name: '한화투자', value: 'hanwainvestment' },
+  { name: '현대차증권', value: 'hyundaicarsecurities' },
+  { name: '하이투자', value: 'hifinanceinvestment' },
+  { name: '이베스트', value: 'ebest' },
+  { name: '다올투자증권', value: 'daolinvestmentsecurities' },
+  { name: '교보', value: 'kyobo' },
+  { name: '메리츠증권', value: 'meritzsecurities' },
+  { name: '토스증권', value: 'tossecurities' },
+  { name: '유안타증권', value: 'yuantasecurities' },
+];
+
 export const MENU_BUTTON = [
   {
     name: '게시중',
