@@ -1,11 +1,18 @@
 'use client';
 
-import React, { MouseEventHandler, ReactNode, useEffect } from 'react';
+import React, {
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SheetCloseSVG from '@/public/svg/sheet-close';
 import InputButton from '../sheetsButtons/inputButton';
 import SimpleButton from '../sheetsButtons/simpleButton';
 import SearchBoxButton from '../searchBoxButton';
+import { useRecoilState } from 'recoil';
+import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -33,11 +40,10 @@ const BottomSheets = ({
   placeholder,
   icon,
   watchBank,
-  defaultOpen = false,
   closeButton = false,
+  outerControl = false,
 }: {
   children: ReactNode;
-  defaultOpen?: boolean;
   title: string;
   innerTitle?: string;
   innerButtonTitle?: string;
@@ -46,17 +52,21 @@ const BottomSheets = ({
   icon?: 'pin' | 'calendar' | 'person' | 'house';
   watchBank?: string;
   closeButton?: boolean;
+  outerControl?: boolean;
 }) => {
-  const [open, setOpen] = React.useState(defaultOpen);
-  const [viewPortHeight, setViewPortHeight] = React.useState(0);
+  const [open, setOpen] = useState(false);
+  const [outerOpen, setOuterOpen] = useRecoilState(outerBottomSheetsControl);
+  const [viewPortHeight, setViewPortHeight] = useState(0);
 
   useEffect(() => {
     setViewPortHeight(window.innerHeight);
   }, [viewPortHeight]);
 
+  const isOpenModal = outerControl ? outerOpen : open;
+
   const modalOpen: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    setOpen(true);
+    outerControl ? setOuterOpen(true) : setOpen(true);
   };
 
   const modalClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> = (
@@ -64,7 +74,7 @@ const BottomSheets = ({
   ) => {
     e.stopPropagation();
     if (e.target !== e.currentTarget) return;
-    setOpen(false);
+    outerControl ? setOuterOpen(false) : setOpen(false);
   };
 
   // 버튼 추가되면 해당 객체에 추가해주세요.
@@ -84,7 +94,7 @@ const BottomSheets = ({
     <>
       {ButtonsComponentsObjects[buttonSelect]}
       <AnimatePresence>
-        {open && (
+        {isOpenModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -116,7 +126,7 @@ const BottomSheets = ({
                   <button
                     type="button"
                     data-testid="modalClose"
-                    onClick={() => setOpen(false)}
+                    onClick={modalClose}
                   >
                     <SheetCloseSVG />
                   </button>

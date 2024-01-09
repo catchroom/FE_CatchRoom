@@ -1,5 +1,6 @@
 'use client';
 
+import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import BottomSheets from '@/components/common/bottomSheets';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import {
@@ -10,11 +11,13 @@ import {
 import { FormAccount, accountSchema } from '@/constants/zodSchema';
 import { getBankName } from '@/utils/get-bank-name';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useSetRecoilState } from 'recoil';
 
 const BankForm = () => {
-  const [bankView] = React.useState(false);
+  const [bankView] = useState(false);
+  const setBankModal = useSetRecoilState(outerBottomSheetsControl);
   const {
     register,
     handleSubmit,
@@ -35,6 +38,7 @@ const BankForm = () => {
   };
 
   const enrollBank = (value: string) => {
+    setBankModal(false);
     setValue('bank', value);
   };
 
@@ -52,6 +56,7 @@ const BankForm = () => {
           title="은행명 선택"
           innerTitle="은행 또는 증권사를 선택해주세요"
           innerButtonTitle="선택"
+          outerControl={true}
           watchBank={bankName}
         >
           <div className="w-full">
