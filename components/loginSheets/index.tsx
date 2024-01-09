@@ -7,9 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import CheckBoxComponent from '../common/checkBox';
-
-const commonCheckStyle =
-  "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10";
+import { CheckboxId } from '@/types/login/types';
 
 const checkDivStyle = 'flex justify-between pl-3 p-2 mb-2';
 
@@ -40,7 +38,7 @@ const LoginSheet = ({
     router.push('/signup');
   };
 
-  const { register, watch, getValues, setValue } = useForm({
+  const { watch, getValues, setValue } = useForm({
     defaultValues: {
       allAgree: false,
       agree1: false,
@@ -52,17 +50,30 @@ const LoginSheet = ({
     },
   });
 
-  const handleAllAgreeChange = (event: React.MouseEvent) => {
-    event.stopPropagation();
+  const handleAgreeChange = (e: React.MouseEvent, id: CheckboxId) => {
+    e.stopPropagation();
 
-    const newValue = !getValues('allAgree');
-    setValue('allAgree', newValue);
-    setValue('agree1', newValue);
-    setValue('agree2', newValue);
-    setValue('agree3', newValue);
-    setValue('agree4', newValue);
-    setValue('agree5', newValue);
-    setValue('agree6', newValue);
+    const newValue = !getValues(id);
+    setValue(id, newValue);
+
+    if (id === 'allAgree') {
+      setValue('agree1', newValue);
+      setValue('agree2', newValue);
+      setValue('agree3', newValue);
+      setValue('agree4', newValue);
+      setValue('agree5', newValue);
+      setValue('agree6', newValue);
+    } else {
+      const allAgreed =
+        getValues('agree1') &&
+        getValues('agree2') &&
+        getValues('agree3') &&
+        getValues('agree4') &&
+        getValues('agree5') &&
+        getValues('agree6');
+
+      setValue('allAgree', allAgreed);
+    }
   };
 
   const allAgree = watch('allAgree');
@@ -70,8 +81,6 @@ const LoginSheet = ({
   const agree2 = watch('agree2');
   const agree3 = watch('agree3');
   const agree4 = watch('agree4');
-  // const agree5 = watch('agree5');
-  // const agree6 = watch('agree6');
 
   return (
     <>
@@ -122,31 +131,38 @@ const LoginSheet = ({
                         id="allAgree"
                         labelText="전체동의"
                         isBoxChecked={allAgree}
-                        handleSelectState={handleAllAgreeChange}
+                        handleSelectState={(event) =>
+                          handleAgreeChange(event, 'allAgree')
+                        }
+                        isLabelTextBold={true}
                       />
-                      <span className="pl-2 text-gray-400 flex-shrink-0">
+                      <span className="pl-1 text-gray-400 flex-shrink-0">
                         (선택 포함)
                       </span>
                     </div>
                   </div>
 
                   <div className="flex pl-3 p-2 mb-2">
-                    <input
-                      type="checkbox"
-                      {...register('agree1')}
-                      className={commonCheckStyle}
+                    <CheckBoxComponent
+                      id="Agree1"
+                      labelText="만 14세 이상입니다. (필수)"
+                      isBoxChecked={getValues('agree1')}
+                      handleSelectState={(event) =>
+                        handleAgreeChange(event, 'agree1')
+                      }
                     />
-                    <span className="pl-3">만 14세 이상입니다. (필수)</span>
                   </div>
 
                   <div className={checkDivStyle}>
                     <div className="flex">
-                      <input
-                        type="checkbox"
-                        {...register('agree2')}
-                        className={commonCheckStyle}
+                      <CheckBoxComponent
+                        id="Agree2"
+                        labelText="서비스 이용 약관 동의 (필수)"
+                        isBoxChecked={getValues('agree2')}
+                        handleSelectState={(event) =>
+                          handleAgreeChange(event, 'agree2')
+                        }
                       />
-                      <span className="pl-3">서비스 이용 약관 동의 (필수)</span>
                     </div>
                     <Link
                       href="/mypage/dashboard/terms"
@@ -158,44 +174,14 @@ const LoginSheet = ({
 
                   <div className={checkDivStyle}>
                     <div className="flex">
-                      <input
-                        type="checkbox"
-                        {...register('agree3')}
-                        className={commonCheckStyle}
+                      <CheckBoxComponent
+                        id="Agree3"
+                        labelText="개인정보 수집 및 이용 동의 (필수)"
+                        isBoxChecked={getValues('agree3')}
+                        handleSelectState={(event) =>
+                          handleAgreeChange(event, 'agree3')
+                        }
                       />
-                      <span className="pl-3">
-                        개인정보 수집 및 이용 동의 (필수)
-                      </span>
-                    </div>
-                    <Link
-                      href="/mypage/dashboard/terms"
-                      className="text-raspberry"
-                    >
-                      보기
-                    </Link>
-                  </div>
-
-                  <div className="flex p-2 pl-3 mb-2">
-                    <input
-                      type="checkbox"
-                      {...register('agree4')}
-                      className={commonCheckStyle}
-                    />
-                    <span className="pl-3">
-                      거래관련 필수 알림 수신 동의 (필수)
-                    </span>
-                  </div>
-
-                  <div className={checkDivStyle}>
-                    <div className="flex">
-                      <input
-                        type="checkbox"
-                        {...register('agree5')}
-                        className={commonCheckStyle}
-                      />
-                      <span className="pl-3">
-                        개인정보 수집 및 이용 동의 (선택)
-                      </span>
                     </div>
                     <Link
                       href="/mypage/dashboard/terms"
@@ -206,23 +192,55 @@ const LoginSheet = ({
                   </div>
 
                   <div className="flex p-2 pl-3 mb-2">
-                    <input
-                      type="checkbox"
-                      {...register('agree6')}
-                      className={commonCheckStyle}
+                    <CheckBoxComponent
+                      id="Agree4"
+                      labelText=" 거래관련 필수 알림 수신 동의 (필수)"
+                      isBoxChecked={getValues('agree4')}
+                      handleSelectState={(event) =>
+                        handleAgreeChange(event, 'agree4')
+                      }
                     />
-                    <span className="pl-3">마케팅 정보 수신 동의 (선택)</span>
+                  </div>
+
+                  <div className={checkDivStyle}>
+                    <div className="flex">
+                      <CheckBoxComponent
+                        id="Agree5"
+                        labelText="개인정보 수집 및 이용 동의 (선택)"
+                        isBoxChecked={getValues('agree5')}
+                        handleSelectState={(event) =>
+                          handleAgreeChange(event, 'agree5')
+                        }
+                      />
+                    </div>
+                    <Link
+                      href="/mypage/dashboard/terms"
+                      className="text-raspberry"
+                    >
+                      보기
+                    </Link>
+                  </div>
+
+                  <div className="flex p-2 pl-3 mb-2">
+                    <CheckBoxComponent
+                      id="Agree6"
+                      labelText="마케팅 정보 수신 동의 (선택)"
+                      isBoxChecked={getValues('agree6')}
+                      handleSelectState={(event) =>
+                        handleAgreeChange(event, 'agree6')
+                      }
+                    />
                   </div>
 
                   <button
-                    className={`w-full h-[3rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
+                    className={`mt-2 w-full h-[3rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
                       !agree1 || !agree2 || !agree3 || !agree4
                         ? 'bg-gray-400'
                         : 'bg-focus'
                     }`}
                     type="submit"
                     onClick={goToSignUp}
-                    disabled={!agree1 || !agree2}
+                    disabled={!agree1 || !agree2 || !agree3 || !agree4}
                   >
                     동의하고 계속하기
                   </button>
