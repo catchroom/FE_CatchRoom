@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import ReviewButtons from '../reviewButtons';
 import { decodeState, getDotDate } from '@/utils/get-dot-date';
