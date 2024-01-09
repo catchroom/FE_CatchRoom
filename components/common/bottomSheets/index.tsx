@@ -66,14 +66,16 @@ const BottomSheets = ({
     outerControl ? setOuterOpen(true) : setOpen(true);
   };
 
+  const closeControl = (outerControl: boolean) => {
+    return outerControl ? setOuterOpen(false) : setOpen(false);
+  };
+
   const modalClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> = (
     e,
   ) => {
-    if (e.currentTarget.id === 'modalClose') {
-      outerControl ? setOuterOpen(false) : setOpen(false);
-    }
-    if (e.target !== e.currentTarget) return;
-    outerControl ? setOuterOpen(false) : setOpen(false);
+    if (e.currentTarget.id === 'modalClose') return closeControl(outerControl);
+    else if (e.target !== e.currentTarget) return;
+    else return closeControl(outerControl);
   };
 
   // 버튼 추가되면 해당 객체에 추가해주세요.
