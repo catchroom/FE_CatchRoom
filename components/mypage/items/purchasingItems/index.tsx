@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import ReviewButtons from '../reviewButtons';
 import { decodeState, getDotDate } from '@/utils/get-dot-date';
@@ -53,7 +55,11 @@ const PurchasingItems = ({ item }: { item: TradeItem }) => {
       </div>
 
       {/* 리뷰 버튼 */}
-      <ReviewButtons id={item.order_history_id} isReview={item.is_review} />
+      <ReviewButtons
+        name={item.name}
+        id={item.order_history_id}
+        isReview={item.is_review}
+      />
     </div>
   );
 };

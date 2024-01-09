@@ -1,17 +1,24 @@
-import DownArrowComponent from '@/public/svgComponent/downArrow';
+import DownArrowIcon from '@/public/svgComponent/downArrow';
+import MapPinSmFillIcon from '@/public/svgComponent/mapPinSmFillIcon';
 import React from 'react';
 
 const BottomHeader = () => {
+  const buttonStyle =
+    'flex items-center gap-2 h-[2.25rem] bg-white rounded-full border border-border-sub px-3 py-2 text-t3 font-semibold ';
+
   return (
-    <div className="w-full h-14 flex px-7 gap-10 items-center justify-between text-xl text-p1 font-semibold">
-      <div className="text-p2 font-semibold">오늘 12건</div>
+    <div className="flex items-center justify-between w-full h-[4.75rem] p-5 border-border-sub border-t text-xl text-p1 font-semibold">
+      <p className="text-t2 font-bold">총 12건</p>
       <div className="flex">
-        <div className="mr-1 flex items-center rounded-full border border-black px-3 py-1 font-medium">
-          낮은 가격 순&nbsp; <DownArrowComponent />
-        </div>
-        <div className="flex items-center rounded-full border border-black px-3 py-1 font-medium">
-          서울&nbsp; <DownArrowComponent />
-        </div>
+        <button className={buttonStyle + 'mr-1'}>
+          <MapPinSmFillIcon />
+          <p>서울</p>
+          <DownArrowIcon width={12} height={7} />
+        </button>
+        <button className={buttonStyle}>
+          <p>낮은 가격 순</p>
+          <DownArrowIcon width={12} height={7} />
+        </button>
       </div>
     </div>
   );

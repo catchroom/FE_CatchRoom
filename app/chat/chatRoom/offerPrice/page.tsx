@@ -2,7 +2,7 @@ import React from 'react';
 import ProductInfo from '@/components/chat/chatRoom/productInfo';
 import OfferBtn from '@/components/chat/chatRoom/offerBtn/index';
 
-const page = async () => {
+const page = () => {
   return (
     <div className="h-screen w-full flex flex-col overflow-hidden">
       <ProductInfo />

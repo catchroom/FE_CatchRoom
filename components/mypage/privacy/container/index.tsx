@@ -1,10 +1,21 @@
 import React, { ReactNode } from 'react';
 
-const PrivacyContainer = ({ children }: { children: ReactNode }) => {
+const PrivacyContainer = ({
+  children,
+  title,
+  subTitle,
+}: {
+  children: ReactNode;
+  title: string;
+  subTitle?: string;
+}) => {
   return (
-    <div className="w-full flex flex-col gap-3">
-      <h1 className="border-b-2 py-3">개인 정보</h1>
-      <div className="w-full flex flex-col gap-3">{children}</div>
+    <div className="w-full flex flex-col">
+      <div className="flex gap-1 border-b border-divider-sub pb-5 font-semibold text-t2">
+        <h3>{title}</h3>
+        <p className="text-text-primary">{subTitle && subTitle}</p>
+      </div>
+      <div className="w-full flex flex-col pt-5 gap-5">{children}</div>
     </div>
   );
 };
