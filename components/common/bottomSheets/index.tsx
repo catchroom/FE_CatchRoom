@@ -26,7 +26,7 @@ import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsContr
  * @summary - buttonSelect의 종류는 'input'과 'simple'이 있습니다. 'input'은 InputButton 컴포넌트를 사용하고, 'simple'은 SimpleButton 컴포넌트를 사용합니다. (default: 'simple')
  * @summary - 버튼을 추가하고 싶다면 components/common/sheetsButtons 폴더에 컴포넌트를 추가하고, buttonSelect에 해당 컴포넌트를 넣어주세요.
  * @param closeButton - 모달 내부에 선택완료 버튼을 추가하고 싶다면 true로 설정해주세요. (선택)
- * @param defaultOpen - 모달을 열어놓고 싶다면 true로 설정해주세요. (선택)
+ * @param outerControl - 모달을 외부에서 컨트롤 하고 싶다면 true로 설정해주세요. (선택) outerBottomSheetsControl atom을 사용합니다.
  * @returns
  */
 

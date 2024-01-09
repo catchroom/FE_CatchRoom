@@ -54,6 +54,10 @@ const BankForm = () => {
       className="flex flex-col w-full h-full gap-6"
     >
       <div className="w-full relative">
+        <div>
+          <button>은행</button>
+          <button>증권사</button>
+        </div>
         <BottomSheets
           buttonSelect="input"
           title={BottomSheetsTitle}
