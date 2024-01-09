@@ -43,6 +43,8 @@ const LoginSheet = ({
       agree2: false,
       agree3: false,
       agree4: false,
+      agree5: false,
+      agree6: false,
     },
   });
 
@@ -53,10 +55,14 @@ const LoginSheet = ({
     setValue('agree2', newValue);
     setValue('agree3', newValue);
     setValue('agree4', newValue);
+    setValue('agree5', newValue);
+    setValue('agree6', newValue);
   };
 
   const agree1 = watch('agree1');
   const agree2 = watch('agree2');
+  const agree3 = watch('agree3');
+  const agree4 = watch('agree4');
 
   return (
     <>
@@ -114,44 +120,50 @@ const LoginSheet = ({
                     </span>
                   </div>
 
-                  <div className="flex p-3 mb-3">
+                  <div className="flex p-2 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree1')}
                       className={commonCheckStyle}
                     />
-                    <span className="pl-3">
-                      만 14세 이상 이용, 서비스 이용약관, 개인정보 수집 및 이용
-                      동의 (필수)
-                    </span>
+                    <span className="pl-3">만 14세 이상입니다. (필수)</span>
                   </div>
 
-                  <div className="flex p-3 mb-3">
+                  <div className="flex p-2 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree2')}
                       className={commonCheckStyle}
                     />
-                    <span className="pl-3">
-                      거래 관련 필수 알림 발송 동의 (필수)
-                    </span>
+                    <span className="pl-3">서비스 이용 약관 동의 (필수)</span>
                   </div>
 
-                  <div className="flex p-3 mb-3">
+                  <div className="flex p-2 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree3')}
                       className={commonCheckStyle}
                     />
                     <span className="pl-3">
-                      개인정보 수집 및 이용 동의 (선택)
+                      개인정보 수집 및 이용 동의 (필수)
                     </span>
                   </div>
 
-                  <div className="flex p-3 mb-3">
+                  <div className="flex p-2 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree4')}
+                      className={commonCheckStyle}
+                    />
+                    <span className="pl-3">
+                      거래관련 필수 알림 수신 동의 (필수)
+                    </span>
+                  </div>
+
+                  <div className="flex p-2 mb-2">
+                    <input
+                      type="checkbox"
+                      {...register('agree5')}
                       className={commonCheckStyle}
                     />
                     <span className="pl-3">
@@ -159,9 +171,20 @@ const LoginSheet = ({
                     </span>
                   </div>
 
+                  <div className="flex p-2 mb-2">
+                    <input
+                      type="checkbox"
+                      {...register('agree6')}
+                      className={commonCheckStyle}
+                    />
+                    <span className="pl-3">마케팅 정보 수신 동의 (선택)</span>
+                  </div>
+
                   <button
                     className={`w-full h-[3rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
-                      !agree1 || !agree2 ? 'bg-gray-400' : 'bg-focus'
+                      !agree1 || !agree2 || !agree3 || !agree4
+                        ? 'bg-gray-400'
+                        : 'bg-focus'
                     }`}
                     type="submit"
                     onClick={goToSignUp}
