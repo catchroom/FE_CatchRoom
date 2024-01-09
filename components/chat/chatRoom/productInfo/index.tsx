@@ -3,6 +3,7 @@ import React from 'react';
 import DefaultBtn from '../../common/defaultBtn';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { CHAT_ITEMS } from '@/constants/chat';
+import Image from 'next/image';
 
 const ProductInfo = () => {
   const router = useRouter();
@@ -15,7 +16,13 @@ const ProductInfo = () => {
 
   return (
     <div className="bg-white w-full h-18 flex content-center items-center px-5 py-3 border-solid border border-borderSub mt-0 sticky top-0">
-      <img src="/productImage.png" className="pr-3"></img>
+      <Image
+        src="/productImage.png"
+        className="w-full h-24 object-cover"
+        alt="숙소사진"
+        width={60}
+        height={60}
+      />
       <div className="flex flex-col w-full">
         <div className="pr-2 pb-2 text-sm">
           {CHAT_ITEMS[chatId].ITEM_INFO.NAME}

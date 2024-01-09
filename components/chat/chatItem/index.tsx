@@ -3,9 +3,10 @@ import React from 'react';
 import CloseIcon from '@/public/svg/ph_x.svg';
 import { chatItemProps } from '@/types/chat/chatItem/types';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const ChatItem = ({
-  id,
+  itemId,
   image,
   sellerNickname,
   lastMessageDate,
@@ -14,14 +15,20 @@ const ChatItem = ({
   const router = useRouter();
   return (
     <div
-      className="bg-white w-full h-18 flex items-center px-4 py-3 border-solid border border-gray-300"
-      onClick={() => router.push(`/chat/chatRoom?chatId=${id}`)}
+      className="bg-white w-full h-18 flex gap-x-3 items-center px-4 py-3 border-solid border border-gray-300"
+      onClick={() => router.push(`/chat/chatRoom?chatId=${itemId}`)}
     >
-      <img src={image} className="pr-3"></img>
+      <Image
+        src={image}
+        className="rounded-[4px]"
+        alt="숙소사진"
+        width={48}
+        height={48}
+      />
       <div className="flex flex-col">
         <div className="flex items-center">
-          <div className="font-semibold pr-2">{sellerNickname}</div>
-          <div className="text-xs text-grey">{lastMessageDate}</div>
+          <div className="text-t3 font-semibold pr-2">{sellerNickname}</div>
+          <div className="text-p2 text-grey">{lastMessageDate}</div>
         </div>
         <div className="flex">
           <div className="line-clamp-1">{lastMessageContent}</div>
