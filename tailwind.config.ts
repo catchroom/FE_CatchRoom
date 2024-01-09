@@ -77,7 +77,7 @@ const config: Config = withMT({
         sub: '#f8f9fb',
         gray: '#eff1f4',
         primary: '#ffebf1',
-        critical: '#ffe6e8',
+        critical: '#fff2f3',
         secondary: '#dbdee3',
       },
       action: {
@@ -105,7 +105,7 @@ const config: Config = withMT({
         'primary-disabled': 'rgba(255, 52, 120, 0.3)',
         secondary: '#9fa3ab',
         'secondary-disabled': '#bcc0c6',
-        critical: '#a51927',
+        critical: '#dd3344',
       },
       field: {
         primary: '#ffebf1',
