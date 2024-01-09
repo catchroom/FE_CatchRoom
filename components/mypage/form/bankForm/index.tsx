@@ -52,7 +52,6 @@ const BankForm = () => {
           title="은행명 선택"
           innerTitle="은행 또는 증권사를 선택해주세요"
           innerButtonTitle="선택"
-          closeButton
           watchBank={bankName}
         >
           <div className="w-full">
@@ -64,7 +63,7 @@ const BankForm = () => {
                     type="button"
                     onClick={() => enrollBank(bank.value)}
                     value={bank.value}
-                    className="flex items-center w-full p-[10px]"
+                    className="flex items-center w-full p-[10px] hover:text-text-primary"
                   >
                     {bank.name}
                   </button>

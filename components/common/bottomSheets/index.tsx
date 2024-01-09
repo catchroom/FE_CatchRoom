@@ -64,24 +64,22 @@ const BottomSheets = ({
     setOpen(false);
   };
 
-  const ButtonComponent =
-    buttonSelect === 'input' ? (
-      <InputButton name={title} fn={modalOpen} watchBank={watchBank} />
-    ) : buttonSelect === 'simple' ? (
-      <SimpleButton name={title} fn={modalOpen} />
-    ) : (
-      buttonSelect === 'search' && (
-        <SearchBoxButton
-          icon={icon}
-          onClickFunc={modalOpen}
-          placeholder={placeholder}
-        />
-      )
-    );
+  // 버튼 추가되면 해당 객체에 추가해주세요.
+  const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
+    input: <InputButton name={title} fn={modalOpen} watchBank={watchBank} />,
+    simple: <SimpleButton name={title} fn={modalOpen} />,
+    search: (
+      <SearchBoxButton
+        icon={icon}
+        onClickFunc={modalOpen}
+        placeholder={placeholder}
+      />
+    ),
+  };
 
   return (
     <>
-      {ButtonComponent}
+      {ButtonsComponentsObjects[buttonSelect]}
       <AnimatePresence>
         {open && (
           <motion.div
