@@ -17,7 +17,7 @@ const SimpleButton = ({
       placeholder="Button"
       onClick={fn}
       type={type}
-      className="bg-focus w-full font-pretend text-t2 font-medium text-text-on p-4"
+      className="bg-focus w-full font-pretend text-t2 font-medium text-text-on p-4 py-2.5"
     >
       {name}
     </Button>
