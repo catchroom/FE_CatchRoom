@@ -20,6 +20,7 @@ import SearchBoxButton from '../searchBoxButton';
  * @summary - 버튼을 추가하고 싶다면 components/common/sheetsButtons 폴더에 컴포넌트를 추가하고, buttonSelect에 해당 컴포넌트를 넣어주세요.
  * @param watchBank - 개인적으로 사용할 props여서 필요하면 사용하시면 됩니다. (선택)
  * @param closeButton - 모달 내부에 선택완료 버튼을 추가하고 싶다면 true로 설정해주세요. (선택)
+ * @param defaultOpen - 모달을 열어놓고 싶다면 true로 설정해주세요. (선택)
  * @returns
  */
 
@@ -32,9 +33,11 @@ const BottomSheets = ({
   placeholder,
   icon,
   watchBank,
+  defaultOpen = false,
   closeButton = false,
 }: {
   children: ReactNode;
+  defaultOpen?: boolean;
   title: string;
   innerTitle?: string;
   innerButtonTitle?: string;
@@ -44,7 +47,7 @@ const BottomSheets = ({
   watchBank?: string;
   closeButton?: boolean;
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(defaultOpen);
   const [viewPortHeight, setViewPortHeight] = React.useState(0);
 
   useEffect(() => {
