@@ -18,7 +18,7 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
     watch,
-    reset,
+    setValue,
   } = useForm<LoginData>({
     mode: 'onChange',
     resolver: zodResolver(loginSchema),
@@ -28,7 +28,7 @@ const LoginForm = () => {
   const password = watch('password');
 
   const clearField = (fieldName: 'email' | 'password') => {
-    reset({ [fieldName]: '' });
+    setValue(fieldName, '');
   };
 
   const onSubmit = (data: LoginData) => {

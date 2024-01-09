@@ -16,7 +16,7 @@ const SignUpInfo = () => {
     handleSubmit,
     formState: { errors, isValid },
     watch,
-    reset,
+    setValue,
   } = useForm<UserInfo>({
     mode: 'onChange',
     resolver: zodResolver(userInfoSchema),
@@ -26,7 +26,7 @@ const SignUpInfo = () => {
   const phone = watch('phone');
 
   const clearField = (fieldName: 'name' | 'phone' | 'nickname') => {
-    reset({ [fieldName]: '' });
+    setValue(fieldName, '');
   };
   const onSubmit = (data: UserInfo) => {
     //백엔드로 data를 post하기
