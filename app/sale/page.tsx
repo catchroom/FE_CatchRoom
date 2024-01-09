@@ -1,8 +1,9 @@
 'use client';
+import Header from '@/components/common/header';
 import Modal from '@/components/common/modal';
 import CatchContainer from '@/components/sale/catch/catchContainer';
 import CheckboxContainer from '@/components/sale/checkboxContainer';
-import Price from '@/components/sale/price';
+import Line from '@/components/sale/line';
 import SaleEndContainer from '@/components/sale/saleEndContainer';
 import SaleInfoContainer from '@/components/sale/saleInfoContainer';
 import SellingPriceContainer from '@/components/sale/sellingPrice/sellingPriceContainer';
@@ -23,13 +24,20 @@ const Sale = () => {
     router.push('/login');
   };
   return (
-    <div className="relative min-h-screen flex flex-col items-center mt-[73px] px-3">
-      <SaleInfoContainer />
-      <SaleEndContainer />
-      <SellingPriceContainer />
-      <Price />
-      <CatchContainer />
-      <CheckboxContainer />
+    <div>
+      <Header title="숙박권 판매" showBackButton={true} />
+      <div className="p-5">
+        <SaleInfoContainer />
+        <Line />
+        <SaleEndContainer />
+        <Line />
+        <SellingPriceContainer />
+        <Line />
+        <CatchContainer />
+        <Line />
+        <CheckboxContainer />
+      </div>
+
       {/* 다음 버튼 들어갈 자리 */}
       <button onClick={handleModalOpen}>다음</button>
       {/* 모달 사용 예시 */}
