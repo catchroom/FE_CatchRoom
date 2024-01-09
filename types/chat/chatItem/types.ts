@@ -1,5 +1,5 @@
 export type chatItemProps = {
-  id: number;
+  itemId: string;
   image: string;
   sellerNickname: string;
   lastMessageDate: string;
