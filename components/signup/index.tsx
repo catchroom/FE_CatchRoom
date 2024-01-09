@@ -50,18 +50,16 @@ const SignUpAuth = () => {
             }  `}
           />
 
-          <div className="cursor-pointer absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p3 underline">
-            중복확인
-          </div>
-
-          {email && (
-            <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
-              onClick={() => clearField('email')}
-            >
-              <DeleteIcon />
+          <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
+            {email && (
+              <div onClick={() => clearField('email')}>
+                <DeleteIcon />
+              </div>
+            )}
+            <div className="cursor-pointer font-bold text-p3 underline">
+              중복확인
             </div>
-          )}
+          </div>
         </div>
 
         {errors.email && (

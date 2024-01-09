@@ -24,6 +24,7 @@ const SignUpInfo = () => {
 
   const name = watch('name');
   const phone = watch('phone');
+  const nickname = watch('nickname');
 
   const clearField = (fieldName: 'name' | 'phone' | 'nickname') => {
     setValue(fieldName, '');
@@ -90,8 +91,15 @@ const SignUpInfo = () => {
             } `}
           />
 
-          <div className="cursor-pointer absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p3 underline">
-            중복체크
+          <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
+            {nickname && (
+              <div onClick={() => clearField('nickname')}>
+                <DeleteIcon />
+              </div>
+            )}
+            <div className="cursor-pointer font-bold text-p3 underline">
+              중복확인
+            </div>
           </div>
         </div>
 
