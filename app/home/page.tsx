@@ -1,3 +1,5 @@
+import BottomNav from '@/components/common/bottomNav';
+import Footer from '@/components/common/footer';
 import CatchContainer from '@/components/home/catch/catchContainer';
 import CheckInComponent from '@/components/home/checkIn';
 import Header from '@/components/home/header';
@@ -18,9 +20,11 @@ const page = async () => {
       <CheckInComponent />
       {/* 이용후기 컴포넌트 */}
       <ReviewContainer />
-      <div className="fixed bottom-8 right-5 z-30">
+      <Footer />
+      <div className="fixed bottom-20 right-5 z-30">
         <SaleButton />
       </div>
+      <BottomNav />
     </div>
   );
 };
