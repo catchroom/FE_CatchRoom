@@ -22,11 +22,11 @@ const SignUpAuth = () => {
     resolver: zodResolver(authDataSchema),
   });
 
-  // const email = watch('email');
+  const email = watch('email');
   const password = watch('password');
   const passwordCheck = watch('passwordCheck');
 
-  const clearField = (fieldName: 'password' | 'passwordCheck') => {
+  const clearField = (fieldName: 'email' | 'password' | 'passwordCheck') => {
     reset({ [fieldName]: '' });
   };
 
@@ -54,14 +54,14 @@ const SignUpAuth = () => {
             중복확인
           </div>
 
-          {/* {email && (
+          {email && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('email')}
             >
               <DeleteIcon />
             </div>
-          )} */}
+          )}
         </div>
 
         {errors.email && (
