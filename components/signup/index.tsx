@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { AuthData } from '@/types/signup/types';
@@ -7,9 +7,20 @@ import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { commonInputStyle } from '@/components/login';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authDataSchema } from '@/constants/zodSchema';
+import Modal from '../common/modal';
 
 const SignUpAuth = () => {
   const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const onConfirm = () => {
+    handleModalOpen();
+  };
 
   const {
     register,
@@ -56,9 +67,22 @@ const SignUpAuth = () => {
                 <DeleteIcon />
               </div>
             )}
-            <div className="cursor-pointer font-bold text-p3 underline">
+            <div
+              className="cursor-pointer font-bold text-p3 underline"
+              onClick={handleModalOpen}
+            >
               중복확인
             </div>
+            {/* 로그인 중복 여부에 따라 모달 다르게 보여주기 */}
+            {/* 에러 문구 : 사용중인 이메일 입니다. 추가하기 */}
+            {open && (
+              <Modal
+                title="사용 가능한 이메일입니다."
+                showConfirmButton={true}
+                onConfirm={onConfirm}
+                confirmString="확인"
+              />
+            )}
           </div>
         </div>
 
