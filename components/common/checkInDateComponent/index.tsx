@@ -3,19 +3,16 @@ import { CheckInComponentProps } from '@/types/common/checkInComponent/types';
 import { CHECKIN_TIME, CHECKOUT_TIME } from '@/constants/CheckInOut';
 /**
  * 개별 상품의 체크인-체크아웃 날짜를 확인할 수 있는 컴포넌트입니다.
- *
  * props로 checkInDate, CheckInTime, CheckOutDate, CheckOutTime 네가지를 입력받아야 합니다.
- *
- * 날짜는 `년-월-일 (요일)`순으로, 시간은 24시간제로 표기되어야 합니다.
- *
- * @props {string} checkInDate - 숙소의 체크인 날짜 입니다.`기본값 : 2099-00-00 (월)`
- * @props {string} CheckOutDate - 숙소의 체크아웃 날짜 입니다. `기본값 : 2099-00-00 (월)`
+ * 날짜는 `월.일 (요일)`순으로, 시간은 24시간제로 표기되어야 합니다.
+ * @props {string} checkInDate - 숙소의 체크인 날짜 입니다.`기본값 : 00.00 (월)`
+ * @props {string} CheckOutDate - 숙소의 체크아웃 날짜 입니다. `기본값 : 00.00 (월)`
  * @returns {JSX.Element} CheckInDateComponent 컴포넌트 반환
  */
 
 const CheckInDateComponent = ({
-  CheckInDate = '2099-00-00 (월)',
-  CheckOutDate = '2099-00-00 (월)',
+  CheckInDate = '00.00 (월)',
+  CheckOutDate = '00.00 (월)',
 }: CheckInComponentProps) => {
   return (
     <>
