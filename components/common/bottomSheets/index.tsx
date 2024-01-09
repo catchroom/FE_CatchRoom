@@ -25,7 +25,6 @@ import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsContr
  * @param icon - `buttonSelect가 search일 경우` 버튼에 표시 될 아이콘입니다. (선택)
  * @summary - buttonSelect의 종류는 'input'과 'simple'이 있습니다. 'input'은 InputButton 컴포넌트를 사용하고, 'simple'은 SimpleButton 컴포넌트를 사용합니다. (default: 'simple')
  * @summary - 버튼을 추가하고 싶다면 components/common/sheetsButtons 폴더에 컴포넌트를 추가하고, buttonSelect에 해당 컴포넌트를 넣어주세요.
- * @param watchBank - 개인적으로 사용할 props여서 필요하면 사용하시면 됩니다. (선택)
  * @param closeButton - 모달 내부에 선택완료 버튼을 추가하고 싶다면 true로 설정해주세요. (선택)
  * @param defaultOpen - 모달을 열어놓고 싶다면 true로 설정해주세요. (선택)
  * @returns
@@ -39,7 +38,6 @@ const BottomSheets = ({
   buttonSelect = 'simple',
   placeholder,
   icon,
-  watchBank,
   closeButton = false,
   outerControl = false,
 }: {
@@ -50,7 +48,6 @@ const BottomSheets = ({
   buttonSelect?: 'input' | 'simple' | 'search';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
-  watchBank?: string;
   closeButton?: boolean;
   outerControl?: boolean;
 }) => {
@@ -72,14 +69,16 @@ const BottomSheets = ({
   const modalClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> = (
     e,
   ) => {
-    e.stopPropagation();
+    if (e.currentTarget.id === 'modalClose') {
+      outerControl ? setOuterOpen(false) : setOpen(false);
+    }
     if (e.target !== e.currentTarget) return;
     outerControl ? setOuterOpen(false) : setOpen(false);
   };
 
   // 버튼 추가되면 해당 객체에 추가해주세요.
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
-    input: <InputButton name={title} fn={modalOpen} watchBank={watchBank} />,
+    input: <InputButton name={title} fn={modalOpen} />,
     simple: <SimpleButton name={title} fn={modalOpen} />,
     search: (
       <SearchBoxButton
@@ -127,6 +126,7 @@ const BottomSheets = ({
                     type="button"
                     data-testid="modalClose"
                     onClick={modalClose}
+                    id="modalClose"
                   >
                     <SheetCloseSVG />
                   </button>

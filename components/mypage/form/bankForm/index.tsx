@@ -44,6 +44,9 @@ const BankForm = () => {
 
   const BANK_VIEW = bankView ? BANK_LIST : INVESTMENT_BANK_LIST;
   const bankName = getBankName(bankView, watch('bank'));
+  const BottomSheetsTitle = bankName
+    ? bankName
+    : '은행 또는 증권사를 선택해주세요';
 
   return (
     <form
@@ -53,11 +56,10 @@ const BankForm = () => {
       <div className="w-full relative">
         <BottomSheets
           buttonSelect="input"
-          title="은행명 선택"
+          title={BottomSheetsTitle}
           innerTitle="은행 또는 증권사를 선택해주세요"
           innerButtonTitle="선택"
           outerControl={true}
-          watchBank={bankName}
         >
           <div className="w-full">
             <div className="flex flex-col items-start max-h-[calc(100vh-200px)] overflow-y-scroll">
