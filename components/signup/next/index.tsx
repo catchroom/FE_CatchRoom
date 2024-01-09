@@ -41,7 +41,7 @@ const SignUpInfo = () => {
             placeholder="이름"
             {...register('name')}
             className={`${commonInputStyle} ${
-              errors.name ? 'border-red-500' : 'border-gray-400'
+              errors.name ? 'border-border-critical' : 'border-gray-400'
             }  `}
           />
           {name && (
@@ -55,7 +55,7 @@ const SignUpInfo = () => {
         </div>
 
         {errors.name && (
-          <p className="text-red-500 mb-3">{errors.name.message}</p>
+          <p className="text-border-critical mb-3">{errors.name.message}</p>
         )}
 
         <div className="relative">
@@ -63,7 +63,7 @@ const SignUpInfo = () => {
             placeholder="휴대폰번호"
             {...register('phone')}
             className={`${commonInputStyle} ${
-              errors.phone ? 'border-red-500' : 'border-gray-400'
+              errors.phone ? 'border-border-critical' : 'border-gray-400'
             } `}
           />
 
@@ -78,7 +78,7 @@ const SignUpInfo = () => {
         </div>
 
         {errors.phone && (
-          <p className="text-red-500 mb-3">{errors.phone.message}</p>
+          <p className="text-border-critical mb-3">{errors.phone.message}</p>
         )}
 
         <div className="relative">
@@ -86,7 +86,7 @@ const SignUpInfo = () => {
             placeholder="닉네임"
             {...register('nickname')}
             className={`${commonInputStyle} ${
-              errors.nickname ? 'border-red-500' : 'border-gray-400'
+              errors.nickname ? 'border-border-critical' : 'border-gray-400'
             } `}
           />
 
@@ -96,7 +96,7 @@ const SignUpInfo = () => {
         </div>
 
         {errors.nickname ? (
-          <p className="text-red-500 mb-3">{errors.nickname.message}</p>
+          <p className="text-border-critical mb-3">{errors.nickname.message}</p>
         ) : (
           <div className="text-gray-600 text-p2">
             2~12자, 한글/영문/숫자 혼합

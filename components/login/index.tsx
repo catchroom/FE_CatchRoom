@@ -3,7 +3,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { LoginData } from '@/types/login/types';
-import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import NextArrowIcon from '@/public/svgComponent/nextArrow';
 import LoginSheet from '@/components/loginSheets';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
@@ -50,7 +49,7 @@ const LoginForm = () => {
             placeholder="이메일"
             {...register('email')}
             className={`${commonInputStyle}  ${
-              errors.email ? 'border-red-500' : 'border-gray-400'
+              errors.email ? 'border-border-critical' : 'border-gray-400'
             }  `}
           />
           {email && (
@@ -64,7 +63,7 @@ const LoginForm = () => {
         </div>
 
         {errors.email && (
-          <p className="mb-3 text-red-500">{errors.email.message}</p>
+          <p className="mb-3 text-border-critical">{errors.email.message}</p>
         )}
 
         <div className="relative">
@@ -73,13 +72,13 @@ const LoginForm = () => {
             type="password"
             {...register('password')}
             className={`${commonInputStyle} ${
-              errors.password ? 'border-red-500' : 'border-gray-400'
+              errors.password ? 'border-border-critical' : 'border-gray-400'
             } `}
           />
 
           {password && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              className="absolute right-3 top-[40%] transform -translate-y-1/2 text-border-critical"
               onClick={() => clearField('password')}
             >
               <DeleteIcon />
@@ -88,11 +87,16 @@ const LoginForm = () => {
         </div>
 
         {errors.password && (
-          <p className="mt-3 text-red-500">{errors.password.message}</p>
+          <p className="mt-3 text-raspberry">{errors.password.message}</p>
         )}
 
-        <div className="mt-7 cursor-pointer">
-          <SimpleButton name="로그인" type="submit" />
+        <div className="w-full mt-7">
+          <button
+            className="w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md  bg-focus"
+            type="submit"
+          >
+            완료
+          </button>
         </div>
 
         <div className="w-full h-[3rem] text-gray-600 flex justify-between px-5 mt-7 text-p2">

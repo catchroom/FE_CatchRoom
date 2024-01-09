@@ -6,6 +6,7 @@ import SheetCloseSVG from '@/public/svg/sheet-close';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import CheckBoxComponent from '../common/checkBox';
 
 const commonCheckStyle =
   "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10";
@@ -51,7 +52,9 @@ const LoginSheet = ({
     },
   });
 
-  const handleAllAgreeChange = () => {
+  const handleAllAgreeChange = (event: React.MouseEvent) => {
+    event.stopPropagation();
+
     const newValue = !getValues('allAgree');
     setValue('allAgree', newValue);
     setValue('agree1', newValue);
@@ -62,10 +65,13 @@ const LoginSheet = ({
     setValue('agree6', newValue);
   };
 
+  const allAgree = watch('allAgree');
   const agree1 = watch('agree1');
   const agree2 = watch('agree2');
   const agree3 = watch('agree3');
   const agree4 = watch('agree4');
+  // const agree5 = watch('agree5');
+  // const agree6 = watch('agree6');
 
   return (
     <>
@@ -111,19 +117,20 @@ const LoginSheet = ({
 
                 <div className="w-full h-full mt-3 flex flex-col text-black text-p1">
                   <div className="flex border border-gray-500 rounded-md p-3 mb-3 mt-2">
-                    <input
-                      type="checkbox"
-                      {...register('allAgree')}
-                      onChange={handleAllAgreeChange}
-                      className={commonCheckStyle}
-                    />
-                    <span className="pl-3">
-                      <span className="text-t1 font-bold">전체동의</span>
-                      <span className="text-gray-400"> (선택 포함)</span>
-                    </span>
+                    <div className="flex">
+                      <CheckBoxComponent
+                        id="allAgree"
+                        labelText="전체동의"
+                        isBoxChecked={allAgree}
+                        handleSelectState={handleAllAgreeChange}
+                      />
+                      <span className="pl-2 text-gray-400 flex-shrink-0">
+                        (선택 포함)
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="flex p-2 pl-3 mb-2">
+                  <div className="flex pl-3 p-2 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree1')}

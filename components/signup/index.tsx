@@ -46,12 +46,12 @@ const SignUpAuth = () => {
             placeholder="이메일"
             {...register('email')}
             className={`${commonInputStyle} ${
-              errors.email ? 'border-red-500' : 'border-gray-400'
+              errors.email ? 'border-border-critical' : 'border-gray-400'
             }  `}
           />
 
           <div className="cursor-pointer absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p3 underline">
-            중복체크
+            중복확인
           </div>
 
           {/* {email && (
@@ -65,7 +65,7 @@ const SignUpAuth = () => {
         </div>
 
         {errors.email && (
-          <p className="text-red-500 mb-3">{errors.email.message}</p>
+          <p className="text-border-critical mb-3">{errors.email.message}</p>
         )}
 
         <div className="relative">
@@ -74,7 +74,7 @@ const SignUpAuth = () => {
             type="password"
             {...register('password')}
             className={`${commonInputStyle} ${
-              errors.password ? 'border-red-500' : 'border-gray-400'
+              errors.password ? 'border-border-critical' : 'border-gray-400'
             }  `}
           />
 
@@ -89,7 +89,7 @@ const SignUpAuth = () => {
         </div>
 
         {errors.password ? (
-          <p className="text-red-500 mb-3">{errors.password.message}</p>
+          <p className="text-border-critical mb-3">{errors.password.message}</p>
         ) : (
           <div className="text-gray-600 text-p2 mt-3 mb-4">
             영문+숫자+특수문자 8~20자리
@@ -102,7 +102,9 @@ const SignUpAuth = () => {
             type="password"
             {...register('passwordCheck')}
             className={`${commonInputStyle} ${
-              errors.passwordCheck ? 'border-red-500' : 'border-gray-400'
+              errors.passwordCheck
+                ? 'border-border-critical'
+                : 'border-gray-400'
             }  `}
           />
 
@@ -117,7 +119,7 @@ const SignUpAuth = () => {
         </div>
 
         {errors.passwordCheck && (
-          <p className="text-red-500">{errors.passwordCheck.message}</p>
+          <p className="text-border-critical">{errors.passwordCheck.message}</p>
         )}
 
         <div className="w-full mt-5">
