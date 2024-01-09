@@ -171,6 +171,9 @@ const config: Config = withMT({
       fontFamily: {
         pretend: ['Pretendard Variable', 'sans-serif'],
       },
+      boxShadow: {
+        custom: '0px 8px 12px 0px rgba(0, 0, 0, 0.10)',
+      },
     },
   },
   plugins: [],
