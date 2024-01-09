@@ -22,11 +22,11 @@ const SignUpAuth = () => {
     resolver: zodResolver(authDataSchema),
   });
 
-  const email = watch('email');
+  // const email = watch('email');
   const password = watch('password');
   const passwordCheck = watch('passwordCheck');
 
-  const clearField = (fieldName: 'email' | 'password' | 'passwordCheck') => {
+  const clearField = (fieldName: 'password' | 'passwordCheck') => {
     reset({ [fieldName]: '' });
   };
 
@@ -49,14 +49,19 @@ const SignUpAuth = () => {
               errors.email ? 'border-red-500' : 'border-gray-400'
             }  `}
           />
-          {email && (
+
+          <div className="cursor-pointer absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p3 underline">
+            중복체크
+          </div>
+
+          {/* {email && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('email')}
             >
               <DeleteIcon />
             </div>
-          )}
+          )} */}
         </div>
 
         {errors.email && (
