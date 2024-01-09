@@ -11,7 +11,7 @@ const ReviewContainer = () => {
     router.push('/review');
   };
   return (
-    <div className="w-full mt-16 pb-14">
+    <div className="w-full mt-16">
       <div className="flex justify-between my-3">
         <h1 className="text-h4 font-bold">이용후기</h1>
         <span
