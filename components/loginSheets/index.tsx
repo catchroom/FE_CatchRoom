@@ -5,9 +5,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import SheetCloseSVG from '@/public/svg/sheet-close';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 const commonCheckStyle =
   "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10";
+
+const checkDivStyle = 'flex justify-between pl-3 p-2 mb-2';
 
 const LoginSheet = ({
   open,
@@ -120,7 +123,7 @@ const LoginSheet = ({
                     </span>
                   </div>
 
-                  <div className="flex p-2 mb-2">
+                  <div className="flex p-2 pl-3 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree1')}
@@ -129,27 +132,43 @@ const LoginSheet = ({
                     <span className="pl-3">만 14세 이상입니다. (필수)</span>
                   </div>
 
-                  <div className="flex p-2 mb-2">
-                    <input
-                      type="checkbox"
-                      {...register('agree2')}
-                      className={commonCheckStyle}
-                    />
-                    <span className="pl-3">서비스 이용 약관 동의 (필수)</span>
+                  <div className={checkDivStyle}>
+                    <div className="flex">
+                      <input
+                        type="checkbox"
+                        {...register('agree2')}
+                        className={commonCheckStyle}
+                      />
+                      <span className="pl-3">서비스 이용 약관 동의 (필수)</span>
+                    </div>
+                    <Link
+                      href="/mypage/dashboard/terms"
+                      className="text-raspberry"
+                    >
+                      보기
+                    </Link>
                   </div>
 
-                  <div className="flex p-2 mb-2">
-                    <input
-                      type="checkbox"
-                      {...register('agree3')}
-                      className={commonCheckStyle}
-                    />
-                    <span className="pl-3">
-                      개인정보 수집 및 이용 동의 (필수)
-                    </span>
+                  <div className={checkDivStyle}>
+                    <div className="flex">
+                      <input
+                        type="checkbox"
+                        {...register('agree3')}
+                        className={commonCheckStyle}
+                      />
+                      <span className="pl-3">
+                        개인정보 수집 및 이용 동의 (필수)
+                      </span>
+                    </div>
+                    <Link
+                      href="/mypage/dashboard/terms"
+                      className="text-raspberry"
+                    >
+                      보기
+                    </Link>
                   </div>
 
-                  <div className="flex p-2 mb-2">
+                  <div className="flex p-2 pl-3 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree4')}
@@ -160,18 +179,26 @@ const LoginSheet = ({
                     </span>
                   </div>
 
-                  <div className="flex p-2 mb-2">
-                    <input
-                      type="checkbox"
-                      {...register('agree5')}
-                      className={commonCheckStyle}
-                    />
-                    <span className="pl-3">
-                      개인정보 수집 및 이용 동의 (선택)
-                    </span>
+                  <div className={checkDivStyle}>
+                    <div className="flex">
+                      <input
+                        type="checkbox"
+                        {...register('agree5')}
+                        className={commonCheckStyle}
+                      />
+                      <span className="pl-3">
+                        개인정보 수집 및 이용 동의 (선택)
+                      </span>
+                    </div>
+                    <Link
+                      href="/mypage/dashboard/terms"
+                      className="text-raspberry"
+                    >
+                      보기
+                    </Link>
                   </div>
 
-                  <div className="flex p-2 mb-2">
+                  <div className="flex p-2 pl-3 mb-2">
                     <input
                       type="checkbox"
                       {...register('agree6')}
