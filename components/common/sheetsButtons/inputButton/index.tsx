@@ -14,7 +14,7 @@ const InputButton = ({
     <button
       onClick={fn}
       type="button"
-      className="w-full flex items-center justify-between border-[1px] border-border-secondary text-t2 font-medium bg-transparent text-text p-4"
+      className="flex items-center justify-between w-full px-4 py-3 border border-border-sub rounded-md bg-surface outline-none transition-colors duration-300 ease-in focus:border-border-critical"
     >
       {name}
       <DownArrowIcon />
