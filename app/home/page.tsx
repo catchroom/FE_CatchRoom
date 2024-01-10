@@ -27,16 +27,16 @@ const page = async () => {
         <BottomSheets
           buttonSelect="sale"
           title="숙박권 판매"
-          closeButton={true}
           innerTitle="판매할 숙박권을 선택해주세요."
-          innerButtonTitle="확인"
         >
           {isSuccess ? (
             <SaleItems />
           ) : (
-            <div className="flex flex-col items-center">
-              <p>판매 가능한 숙박권이 없습니다</p>
-              <p>
+            <div className="flex flex-col items-center gap-2 max-w-[271px]">
+              <p className="text-t2 font-semibold">
+                판매 가능한 숙박권이 없습니다
+              </p>
+              <p className="text-t3 text-text-sub text-center">
                 무료취소 가능 및 체크인 당일 자정 이후 숙박권은 판매할 수
                 없습니다.
               </p>

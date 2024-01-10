@@ -128,8 +128,6 @@ export const loginSchema = z.object({
   password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
 });
 
-//export type Checkbox = z.infer<typeof checkBoxSchema>;
-
 export const checkBoxSchema = (isCatch: boolean) =>
   z.object({
     check1: z.boolean().refine((val) => val === true, {
@@ -146,3 +144,7 @@ export const checkBoxSchema = (isCatch: boolean) =>
         }
       : {}),
   });
+
+export const radioSchema = z.object({
+  selectedProduct: z.string().min(1, '하나의 상품을 선택해야 합니다.'),
+});

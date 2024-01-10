@@ -105,7 +105,7 @@ const BottomSheets = ({
               duration: 0.3,
               ease: 'easeInOut',
             }}
-            className="fixed z-40 left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
+            className="fixed z-999 left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
           >
             <div
               data-testid="modalBg"
@@ -121,7 +121,7 @@ const BottomSheets = ({
                   delay: 0.1,
                   ease: 'easeInOut',
                 }}
-                className="absolute z-50 w-full min-h-[10%] bg-bg bottom-0 rounded-t-xl p-5"
+                className="absolute z-1000 w-full min-h-[10%] bg-bg bottom-0 rounded-t-xl p-5"
               >
                 <div className="relative flex justify-between">
                   <h1 className="text-t1 font-bold">{innerTitle}</h1>
