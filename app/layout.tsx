@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import ClientProvider from '@/components/common/provider/provider';
 import RootTemplate from '@/components/common/layoutTemplate/RootTemplate';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,6 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          strategy="beforeInteractive"
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services`}
+        />
+      </head>
       <body className={inter.className}>
         <ClientProvider>
           <RootTemplate>{children}</RootTemplate>
