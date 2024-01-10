@@ -31,7 +31,7 @@ const Searchlayout = ({ children }: { children: ReactNode }) => {
     <>
       <Header title="검색 결과" showBackButton showHomeButton />
       <FilterBar filters={filters} />
-      <main className="w-full absolute h-[calc(100vh-120px)] overflow-hidden ">
+      <main className="w-full absolute h-[calc(100vh-120px)]  ">
         {children}
       </main>
     </>
