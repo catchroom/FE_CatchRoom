@@ -1,9 +1,8 @@
 'use client';
-import CatchSpecialComponent from '@/components/common/catchComponent';
 import React, { useEffect, useState } from 'react';
-import { ITEMS_INFO } from '@/constants/catchItems';
 import { MapProps, MarkerProps } from '@/types/search/map/type';
 import ToggleViewButtonWrapper from './toggleViewButtonWrapper';
+import CatchSpecialComponentWrapper from './catchSpecialComponentWrapper';
 
 declare global {
   interface Window {
@@ -156,29 +155,10 @@ const Map = ({ markers }: MapProps) => {
     return overlayContent;
   };
 
-  //CatchSpecialComponent 랜더링
-  const renderCatchSpecialComponent = () => {
-    if (!selectedMarkerInfo) return null;
-
-    const firstRoomItem = ITEMS_INFO.roomItems[0];
-
-    return (
-      <div className="absolute bottom-[6.25rem] left-1/2 transform -translate-x-1/2 w-9/12 z-10 p-3 px-3 bg-white">
-        <CatchSpecialComponent
-          roomName={firstRoomItem.roomName}
-          roomType={firstRoomItem.roomType}
-          resDate={firstRoomItem.resDate}
-          oldPrice={firstRoomItem.oldPrice}
-          discount={firstRoomItem.discount}
-        />
-      </div>
-    );
-  };
-
   // eslint-disable-next-line react/react-in-jsx-scope
   return (
     <div id="map" className="w-full h-full ">
-      {renderCatchSpecialComponent()}
+      <CatchSpecialComponentWrapper selectedMarkerInfo={selectedMarkerInfo} />
       <ToggleViewButtonWrapper
         currentView={currentView}
         onViewChange={toggleView}

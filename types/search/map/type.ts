@@ -14,3 +14,7 @@ export type ToggleViewButtonWrapperProps = {
   currentView: 'map' | 'list';
   onViewChange: () => void;
 };
+
+export type CatchSpecialComponentWrapperProps = {
+  selectedMarkerInfo?: MarkerProps | null;
+};
