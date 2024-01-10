@@ -3,6 +3,7 @@ import CatchSpecialComponent from '@/components/common/catchComponent';
 import React, { useEffect, useState } from 'react';
 import { ITEMS_INFO } from '@/constants/catchItems';
 import ToggleViewButton from '../toggleViewButton';
+import { MapProps, MarkerProps } from '@/types/search/map/type';
 
 declare global {
   interface Window {
@@ -11,18 +12,6 @@ declare global {
   }
 }
 
-type MarkerProps = {
-  latitude: number;
-  longitude: number;
-  price: number;
-  discountRate: number;
-  catchType: boolean;
-};
-
-type MapProps = {
-  markers: MarkerProps[];
-};
-
 const Map = ({ markers }: MapProps) => {
   const [selectedOverlayIndex, setSelectedOverlayIndex] = useState<
     number | null
@@ -30,6 +19,8 @@ const Map = ({ markers }: MapProps) => {
   const [selectedMarkerInfo, setSelectedMarkerInfo] =
     useState<MarkerProps | null>(null);
   const [currentView, setCurrentView] = useState<'map' | 'list'>('map');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const overlays: any[] = [];
 
   useEffect(() => {
     const mapScript = document.createElement('script');
@@ -45,7 +36,7 @@ const Map = ({ markers }: MapProps) => {
               markers[0].latitude,
               markers[0].longitude,
             ),
-            level: 6,
+            level: 7,
           };
 
         const map = new window.kakao.maps.Map(mapContainer, mapOption);
@@ -61,6 +52,8 @@ const Map = ({ markers }: MapProps) => {
             index === selectedOverlayIndex,
             () => {
               setSelectedOverlayIndex(index);
+              setSelectedMarkerInfo(markerData);
+              updateOverlayZIndex();
             },
           );
 
@@ -70,12 +63,7 @@ const Map = ({ markers }: MapProps) => {
             xAnchor: 0.5,
             yAnchor: 1,
           });
-
-          overlayContent.onclick = () => {
-            setSelectedOverlayIndex(index);
-            setSelectedMarkerInfo(markerData);
-          };
-
+          overlays.push(customOverlay);
           customOverlay.setMap(map);
         });
       });
@@ -83,8 +71,17 @@ const Map = ({ markers }: MapProps) => {
 
     mapScript.addEventListener('load', onLoadKakaoMap);
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [markers, selectedOverlayIndex]);
 
+  //오버레이 ZIndex 조정
+  const updateOverlayZIndex = () => {
+    overlays.forEach((overlay, index) => {
+      overlay.setZIndex(index === selectedOverlayIndex ? 1000 : 1);
+    });
+  };
+
+  // 커스텀 오버레이 생성
   const createCustomOverlayContent = (
     markerData: MarkerProps,
     isSelected: boolean,
@@ -92,7 +89,10 @@ const Map = ({ markers }: MapProps) => {
   ) => {
     const overlayContent = document.createElement('div');
     overlayContent.className = 'custom-overlay';
-    overlayContent.onclick = onClick;
+    overlayContent.onclick = () => {
+      updateOverlayZIndex();
+      onClick();
+    };
 
     overlayContent.style.cssText = `
       display: flex;
@@ -136,9 +136,10 @@ const Map = ({ markers }: MapProps) => {
         top: -20px;
         left: 70%;
         transform: translateX(-50%);
+        padding: 2px 8px;
+
         background-color: #FF3478;
         color: white;
-        padding: 2px 8px;
         border-radius: 5.625rem;
         font-size: 14px;
         font-weight: 600;
@@ -150,6 +151,7 @@ const Map = ({ markers }: MapProps) => {
     return overlayContent;
   };
 
+  //CatchSpecialComponent 랜더링
   const renderCatchSpecialComponent = () => {
     if (!selectedMarkerInfo) return null;
 
@@ -168,6 +170,7 @@ const Map = ({ markers }: MapProps) => {
     );
   };
 
+  //ToggleButton 랜더링
   const renderToggleButton = () => {
     const onViewChange = () => {
       setCurrentView(currentView === 'map' ? 'list' : 'map');
