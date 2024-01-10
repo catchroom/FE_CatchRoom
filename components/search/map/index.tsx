@@ -2,8 +2,8 @@
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import React, { useEffect, useState } from 'react';
 import { ITEMS_INFO } from '@/constants/catchItems';
-import ToggleViewButton from '../toggleViewButton';
 import { MapProps, MarkerProps } from '@/types/search/map/type';
+import ToggleViewButtonWrapper from './toggleViewButtonWrapper';
 
 declare global {
   interface Window {
@@ -21,6 +21,11 @@ const Map = ({ markers }: MapProps) => {
   const [currentView, setCurrentView] = useState<'map' | 'list'>('map');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const overlays: any[] = [];
+
+  // 보기 상태를 토글(지도로보기, 리스트로보기 버튼)
+  const toggleView = () => {
+    setCurrentView(currentView === 'map' ? 'list' : 'map');
+  };
 
   useEffect(() => {
     const mapScript = document.createElement('script');
@@ -158,7 +163,7 @@ const Map = ({ markers }: MapProps) => {
     const firstRoomItem = ITEMS_INFO.roomItems[0];
 
     return (
-      <div className="absolute bottom-[14rem] left-1/2 transform -translate-x-1/2 w-9/12 z-10 p-3 px-3 bg-white">
+      <div className="absolute bottom-[6.25rem] left-1/2 transform -translate-x-1/2 w-9/12 z-10 p-3 px-3 bg-white">
         <CatchSpecialComponent
           roomName={firstRoomItem.roomName}
           roomType={firstRoomItem.roomType}
@@ -170,27 +175,14 @@ const Map = ({ markers }: MapProps) => {
     );
   };
 
-  //ToggleButton 랜더링
-  const renderToggleButton = () => {
-    const onViewChange = () => {
-      setCurrentView(currentView === 'map' ? 'list' : 'map');
-    };
-
-    return (
-      <div className="absolute  bottom-[10rem] left-1/2 transform -translate-x-1/2 z-20">
-        <ToggleViewButton
-          currentView={currentView}
-          onViewChange={onViewChange}
-        />
-      </div>
-    );
-  };
-
   // eslint-disable-next-line react/react-in-jsx-scope
   return (
-    <div id="map" className="w-full h-full rounded-lg">
+    <div id="map" className="w-full h-full ">
       {renderCatchSpecialComponent()}
-      {renderToggleButton()}
+      <ToggleViewButtonWrapper
+        currentView={currentView}
+        onViewChange={toggleView}
+      />
     </div>
   );
 };
