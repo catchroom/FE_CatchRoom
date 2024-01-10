@@ -1,26 +1,29 @@
-import Header from '@/components/common/header';
+'use client';
+
+import React from 'react';
 import Map from '@/components/search/map';
 
-import Script from 'next/dist/client/script';
-import React from 'react';
-
-// const latitude = 33.4853707;
-// const longitude = 126.4815713;
-
-const markers = [
-  { latitude: 33.4853707, longitude: 126.4815713 },
-  { latitude: 33.487804488150005, longitude: 126.48189425468445 },
+const markersData = [
+  {
+    latitude: 33.4853707,
+    longitude: 126.4815713,
+    price: 100000,
+    discountRate: 50,
+    catchType: true,
+  },
+  {
+    latitude: 33.4851906703734,
+    longitude: 126.48851314849429,
+    price: 1200000,
+    discountRate: 20,
+    catchType: true,
+  },
 ];
 
 const page = () => {
   return (
     <>
-      <Header title="검색 결과" showBackButton showBorder />
-      <Script
-        strategy="beforeInteractive"
-        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services`}
-      />
-      <Map markers={markers} />
+      <Map markers={markersData} />
     </>
   );
 };
