@@ -57,7 +57,7 @@ export const CHAT_ITEMS = [
   },
   {
     ITEM_ID: '1',
-    SELLER_NICKNAME: '초코맛우유',
+    SELLER_NICKNAME: '바나나조아',
     BUYER_NICKNAME: '초코조아',
     ITEM_INFO: {
       IMAGE: '/productImage.png',

@@ -21,7 +21,7 @@ const MessageItem = ({
   const sellerNickname = CHAT_ITEMS[chatId].SELLER_NICKNAME;
 
   // 테스트를 위해 임의적으로 닉네임 적용
-  const userNickname = '바나나맛우유';
+  const userNickname = '바나나조아';
 
   // MESSAGE_TYPE
   // 0: 일반 메시지
