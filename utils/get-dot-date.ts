@@ -1,8 +1,10 @@
-export const getDotDate = (inputDate: string) => {
+export const getDotDate = (inputDate: string, noDay = false) => {
+  const week = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
+  const dayOfWeek = week[new Date(inputDate).getDay()];
   const dateParts = inputDate.split('-');
   if (dateParts.length === 3) {
-    const [year, month, day] = dateParts;
-    return `${year}.${month}.${day}`;
+    const [month, day] = dateParts.slice(1);
+    return `${month}.${day} ${noDay ? '' : dayOfWeek}`;
   } else {
     return 'Invalid Date';
   }
@@ -10,7 +12,7 @@ export const getDotDate = (inputDate: string) => {
 
 export const decodeState = (state: StateType) => {
   switch (state) {
-    case 'onSale':
+    case 'ing':
       return '게시 만료예정';
     case 'soldOut':
       return '판매완료';
@@ -25,7 +27,7 @@ export const decodeState = (state: StateType) => {
 
 // decodeState return type
 export type StateType =
-  | 'onSale'
+  | 'ing'
   | 'soldOut'
   | 'outDated'
   | 'offSale'
