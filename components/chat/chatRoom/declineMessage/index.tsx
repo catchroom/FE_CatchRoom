@@ -18,14 +18,12 @@ const DeclineMessage = ({ offerPrice, date, isSeller }: MessageProps) => {
           {isSeller ? (
             <>
               <p className="text-t2 font-semibold">제안을 거절했어요</p>
-              <p className="py-3 text-p2 text-gray-500">
-                요청 금액: {offerPrice}원
-              </p>
+              <p className="text-p2 text-gray-500">요청 금액: {offerPrice}원</p>
             </>
           ) : (
             <>
               <p className="text-t2 font-semibold">제안이 거절됐어요</p>
-              <p className="py-3 text-p2 text-gray-500">
+              <p className="text-p2 text-gray-500">
                 제안한 가격은 유효하지 않습니다
               </p>
             </>

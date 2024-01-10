@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import CloseIcon from '@/public/svg/ph_x.svg';
+import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import { chatItemProps } from '@/types/chat/chatItem/types';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -15,7 +15,7 @@ const ChatItem = ({
   const router = useRouter();
   return (
     <div
-      className="bg-white w-full h-18 flex gap-x-3 items-center px-4 py-3 border-solid border border-gray-300"
+      className="bg-white w-full h-18 flex gap-x-3 items-center px-4 py-3 border-solid border border-divider mb-[-1px] cursor-pointer"
       onClick={() => router.push(`/chat/chatRoom?chatId=${itemId}`)}
     >
       <Image
@@ -27,17 +27,21 @@ const ChatItem = ({
       />
       <div className="flex flex-col">
         <div className="flex items-center">
-          <div className="text-t3 font-semibold pr-2">{sellerNickname}</div>
-          <div className="text-p2 text-grey">{lastMessageDate}</div>
+          <div className="text-t3 font-semibold  text-text pr-2">
+            {sellerNickname}
+          </div>
+          <div className="text-p2 text-text-sub">{lastMessageDate}</div>
         </div>
         <div className="flex">
-          <div className="line-clamp-1">{lastMessageContent}</div>
+          <div className="line-clamp-1 text-text">{lastMessageContent}</div>
+          <div className=" bg-main px-[9px] py-[4px] rounded-full text-white text-p3 ml-2  ">
+            1
+          </div>
         </div>
       </div>
-      <div className="ml-auto bg-gray-100 px-2 rounded-full text-black ml-2  ">
-        1
+      <div className="ml-auto">
+        <XSymbolIcon />
       </div>
-      <CloseIcon />
     </div>
   );
 };

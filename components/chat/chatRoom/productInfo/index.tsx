@@ -12,22 +12,18 @@ const ProductInfo = () => {
 
   const chatId = Number(searchParams?.get('chatId'));
 
-  // console.log(chatId);
-
   return (
-    <div className="bg-white w-full h-18 flex content-center items-center px-5 py-3 border-solid border border-borderSub mt-0 sticky top-0">
+    <div className="bg-white w-full h-[70px] flex gap-x-[12px] content-center items-center p-[16px] border border-border-sub mt-0 sticky top-0">
       <Image
         src="/productImage.png"
-        className="w-full h-24 object-cover"
+        className="rounded-[4px]"
         alt="숙소사진"
-        width={60}
-        height={60}
+        width={45}
+        height={45}
       />
-      <div className="flex flex-col w-full">
-        <div className="pr-2 pb-2 text-sm">
-          {CHAT_ITEMS[chatId].ITEM_INFO.NAME}
-        </div>
-        <div className="font-semibold text-xs">
+      <div className="flex flex-col">
+        <div className=" text-t2">{CHAT_ITEMS[chatId].ITEM_INFO.NAME}</div>
+        <div className="font-semibold text-t3 font-semibold">
           {CHAT_ITEMS[chatId].ITEM_INFO.PRICE}원
         </div>
       </div>
