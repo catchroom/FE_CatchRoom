@@ -21,7 +21,7 @@ const SlideButton = ({
             type="checkbox"
             className="hidden"
             checked={isButtonActive}
-            onClick={stateHandler}
+            onChange={stateHandler}
           />
           <div
             className={`w-10 h-6 rounded-full ${
