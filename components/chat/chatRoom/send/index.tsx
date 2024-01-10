@@ -15,7 +15,7 @@ const Send = () => {
   return (
     <div className="bg-white w-full h-full flex items-center px-4 py-3 pb-6 border border-border-sub sticky bottom-0">
       <textarea
-        className="bg-gray-200 w-full h-[40px] h-max-[120px] py-[8px] flex px-4 rounded-[20px]"
+        className="bg-gray-200 w-full h-[40px] max-h-[120px] py-[8px] flex px-4 rounded-[20px]"
         placeholder="메시지 보내기"
         rows={1}
         ref={textarea}
