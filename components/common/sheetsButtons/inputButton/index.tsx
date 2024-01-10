@@ -1,13 +1,12 @@
 'use client';
 
+import DownArrowIcon from '@/public/svgComponent/downArrow';
 import React, { MouseEventHandler } from 'react';
 
 const InputButton = ({
   name,
   fn,
-  watchBank,
 }: {
-  watchBank?: string;
   name: string;
   fn: MouseEventHandler<HTMLButtonElement>;
 }) => {
@@ -15,10 +14,10 @@ const InputButton = ({
     <button
       onClick={fn}
       type="button"
-      className="flex w-full justify-between border-[1px] border-border-secondary text-t2 font-medium bg-transparent text-text p-4"
+      className="flex items-center justify-between w-full px-4 py-3 border border-border-sub rounded-md bg-surface outline-none transition-colors duration-300 ease-in focus:border-border-critical"
     >
       {name}
-      {watchBank && <p className="text-text-primary">{watchBank}</p>}
+      <DownArrowIcon />
     </button>
   );
 };

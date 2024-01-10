@@ -1,4 +1,4 @@
 export type SlideButtonPropsType = {
   isButtonActive: boolean;
-  stateHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
+  stateHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
