@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import QuestionMark from '@/public/svgComponent/questionMark';
 import SlideButton from '@/components/common/slideButton';
 import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
+import { useRecoilState } from 'recoil';
+import { catchState } from '@/atoms/sale/catch';
 
 const CatchContainer = () => {
-  const [on, setOn] = useState(true);
   const [open, setOpen] = useState(false);
+  const [isCatch, setIsCatch] = useRecoilState(catchState);
   const handleToggleButton = () => {
-    setOn((prev) => !prev);
+    setIsCatch((prev) => !prev);
   };
   const handleQuestionButtonClick = () => {
     setOpen((prev) => !prev);
@@ -22,7 +24,10 @@ const CatchContainer = () => {
             <QuestionMark />
           </div>
         </div>
-        <SlideButton isButtonActive={on} stateHandler={handleToggleButton} />
+        <SlideButton
+          isButtonActive={isCatch}
+          stateHandler={handleToggleButton}
+        />
       </div>
       {open && (
         <div className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom">

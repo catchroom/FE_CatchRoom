@@ -1,12 +1,16 @@
 'use client';
+import { catchState } from '@/atoms/sale/catch';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { Checkbox, checkBoxSchema } from '@/constants/zodSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 
 const CheckboxContainer = () => {
+  const isCatch = useRecoilValue(catchState);
+
   const { watch, handleSubmit, getValues, setValue } = useForm({
     resolver: zodResolver(checkBoxSchema),
     mode: 'onSubmit',
@@ -85,7 +89,7 @@ const CheckboxContainer = () => {
       <div className="flex items-center cursor-pointer relative">
         <CheckBoxComponent
           id="check2"
-          labelText="[필수] 개인정보 제3자 정보"
+          labelText="[필수] 개인정보 제3자 제공"
           isBoxChecked={getValues('check2')}
           handleSelectState={(e) => handleAllCheck(e, 'check2')}
         />
@@ -96,20 +100,23 @@ const CheckboxContainer = () => {
           보기
         </Link>
       </div>
-      <div className="flex items-center cursor-pointer relative">
-        <CheckBoxComponent
-          id="check3"
-          labelText="[필수] 개인(신용)정보 처리"
-          isBoxChecked={getValues('check3')}
-          handleSelectState={(e) => handleAllCheck(e, 'check3')}
-        />
-        <Link
-          href="/mypage/dashboard/terms"
-          className="text-text-primary absolute right-0"
-        >
-          보기
-        </Link>
-      </div>
+      {isCatch && (
+        <div className="flex items-center cursor-pointer relative">
+          <CheckBoxComponent
+            id="check3"
+            labelText="[필수] 캐치특가 자동 설정 동의"
+            isBoxChecked={getValues('check3')}
+            handleSelectState={(e) => handleAllCheck(e, 'check3')}
+          />
+          <Link
+            href="/mypage/dashboard/terms"
+            className="text-text-primary absolute right-0"
+          >
+            보기
+          </Link>
+        </div>
+      )}
+
       <button
         type="submit"
         className="bg-action-primary text-white w-full px-4 rounded h-11 mt-5 cursor-pointer"
