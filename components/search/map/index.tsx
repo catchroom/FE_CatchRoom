@@ -1,5 +1,7 @@
 'use client';
-import { useEffect, useState } from 'react';
+import CatchSpecialComponent from '@/components/common/catchComponent';
+import React, { useEffect, useState } from 'react';
+import { ITEMS_INFO } from '@/constants/catchItems';
 
 declare global {
   interface Window {
@@ -24,7 +26,8 @@ const Map = ({ markers }: MapProps) => {
   const [selectedOverlayIndex, setSelectedOverlayIndex] = useState<
     number | null
   >(null);
-
+  const [selectedMarkerInfo, setSelectedMarkerInfo] =
+    useState<MarkerProps | null>(null);
   useEffect(() => {
     const mapScript = document.createElement('script');
     mapScript.async = true;
@@ -64,6 +67,11 @@ const Map = ({ markers }: MapProps) => {
             xAnchor: 0.5,
             yAnchor: 1,
           });
+
+          overlayContent.onclick = () => {
+            setSelectedOverlayIndex(index);
+            setSelectedMarkerInfo(markerData);
+          };
 
           customOverlay.setMap(map);
         });
@@ -139,8 +147,30 @@ const Map = ({ markers }: MapProps) => {
     return overlayContent;
   };
 
+  const renderCatchSpecialComponent = () => {
+    if (!selectedMarkerInfo) return null;
+
+    const firstRoomItem = ITEMS_INFO.roomItems[0];
+
+    return (
+      <div className="absolute bottom-[14rem] left-1/2 transform -translate-x-1/2 w-9/12 z-10 p-3 px-3 bg-white">
+        <CatchSpecialComponent
+          roomName={firstRoomItem.roomName}
+          roomType={firstRoomItem.roomType}
+          resDate={firstRoomItem.resDate}
+          oldPrice={firstRoomItem.oldPrice}
+          discount={firstRoomItem.discount}
+        />
+      </div>
+    );
+  };
+
   // eslint-disable-next-line react/react-in-jsx-scope
-  return <div id="map" className="w-full h-full rounded-lg"></div>;
+  return (
+    <div id="map" className="w-full h-full rounded-lg">
+      {renderCatchSpecialComponent()}
+    </div>
+  );
 };
 
 export default Map;
