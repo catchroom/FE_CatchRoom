@@ -1,19 +1,18 @@
 'use client';
 import { catchState } from '@/atoms/sale/catch';
 import CheckBoxComponent from '@/components/common/checkBox';
-import { Checkbox, checkBoxSchema } from '@/constants/zodSchema';
+import { checkBoxSchema } from '@/constants/zodSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 
 const CheckboxContainer = () => {
   const isCatch = useRecoilValue(catchState);
 
-  const { watch, handleSubmit, getValues, setValue } = useForm({
-    resolver: zodResolver(checkBoxSchema),
-    mode: 'onSubmit',
+  const { watch, getValues, setValue } = useForm({
+    resolver: zodResolver(checkBoxSchema(isCatch)),
     defaultValues: {
       allAgree: false,
       check1: false,
@@ -27,16 +26,6 @@ const CheckboxContainer = () => {
   const check2 = watch('check2');
   const check3 = watch('check3');
 
-  const onSubmit: SubmitHandler<Checkbox> = (data) => {
-    console.log(data);
-    if (checkBoxSchema.safeParse(data).success) {
-      // 모든 항목이 다 체크되어있는지 확인
-      console.log('success');
-    } else {
-      console.log('error');
-    }
-  };
-
   const handleAllCheck = (
     e: React.MouseEvent,
     id: 'allAgree' | 'check1' | 'check2' | 'check3',
@@ -49,20 +38,21 @@ const CheckboxContainer = () => {
     if (id === 'allAgree') {
       setValue('check1', checked);
       setValue('check2', checked);
-      setValue('check3', checked);
+      if (isCatch) setValue('check3', checked);
     } else {
-      const allAgreed =
-        getValues('check1') && getValues('check2') && getValues('check3');
-
-      setValue('allAgree', allAgreed);
+      if (isCatch) {
+        const allAgreed =
+          getValues('check1') && getValues('check2') && getValues('check3');
+        setValue('allAgree', allAgreed);
+      } else {
+        const allAgreed = getValues('check1') && getValues('check2');
+        setValue('allAgree', allAgreed);
+      }
     }
   };
 
   return (
-    <form
-      className="flex flex-col w-full gap-4 "
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <div className="flex flex-col w-full gap-4 ">
       <div className="flex items-center cursor-pointer relative">
         <CheckBoxComponent
           id="allAgree"
@@ -123,7 +113,7 @@ const CheckboxContainer = () => {
       >
         다음
       </button>
-    </form>
+    </div>
   );
 };
 
