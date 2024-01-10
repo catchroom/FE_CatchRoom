@@ -5,7 +5,7 @@ import React from 'react';
 const ItemsComponent = () => {
   return (
     <div className=" overflow-y-hidden">
-      <div className="w-full flex flex-col mt-56 gap-12 p-6 pt-1">
+      <div className="w-full flex flex-col mt-56 gap-12 p-6 pt-2">
         {ITEMS_INFO.roomItems.map((item) => {
           return (
             <CatchSpecialComponent
