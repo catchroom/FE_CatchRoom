@@ -23,7 +23,7 @@ const CheckInDateComponent = ({
             {CheckInDate} {CHECKIN_TIME}
           </div>
         </div>
-        <div className="absolute h-[2.3125rem] w-[0.0625rem] bg-gray-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute h-[37px] w-[1px] bg-gray-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
         <div className="text-center">
           <div className="text-p1 font-medium text-gray-600">체크아웃</div>
           <div className="text-p1 font-semibold text-gray-800">

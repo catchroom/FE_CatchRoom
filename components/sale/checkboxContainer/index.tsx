@@ -1,86 +1,118 @@
 'use client';
+import CheckBoxComponent from '@/components/common/checkBox';
+import { Checkbox, checkBoxSchema } from '@/constants/zodSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import React from 'react';
-import { useForm } from 'react-hook-form';
-
-const commonCheckStyle =
-  "before:content[''] peer relative h-5 w-5 mr-2 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10";
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 const CheckboxContainer = () => {
-  const { register, watch, handleSubmit, getValues, setValue } = useForm({
+  const { watch, handleSubmit, getValues, setValue } = useForm({
+    resolver: zodResolver(checkBoxSchema),
+    mode: 'onSubmit',
     defaultValues: {
       allAgree: false,
-      checkbox1: false,
-      checkbox2: false,
-      checkbox3: false,
+      check1: false,
+      check2: false,
+      check3: false,
     },
   });
 
-  const checkbox1 = watch('checkbox1');
-  const checkbox2 = watch('checkbox2');
-  const checkbox3 = watch('checkbox3');
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  const check1 = watch('check1');
+  const check2 = watch('check2');
+  const check3 = watch('check3');
 
-  const allChecked = checkbox1 && checkbox2 && checkbox3;
-
-  const onSubmit = () => {
-    console.log('clicked');
+  const onSubmit: SubmitHandler<Checkbox> = (data) => {
+    console.log(data);
+    if (checkBoxSchema.safeParse(data).success) {
+      // 모든 항목이 다 체크되어있는지 확인
+      console.log('success');
+    } else {
+      console.log('error');
+    }
   };
 
-  const handleAllCheck = () => {
-    const checked = !getValues('allAgree');
-    setValue('checkbox1', checked);
-    setValue('checkbox2', checked);
-    setValue('checkbox3', checked);
+  const handleAllCheck = (
+    e: React.MouseEvent,
+    id: 'allAgree' | 'check1' | 'check2' | 'check3',
+  ) => {
+    e.stopPropagation();
+
+    const checked = !getValues(id);
+    setValue(id, checked);
+
+    if (id === 'allAgree') {
+      setValue('check1', checked);
+      setValue('check2', checked);
+      setValue('check3', checked);
+    } else {
+      const allAgreed =
+        getValues('check1') && getValues('check2') && getValues('check3');
+
+      setValue('allAgree', allAgreed);
+    }
   };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col w-full gap-4 "
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <label className="flex items-center cursor-pointer relative">
-        <input
-          type="checkbox"
-          {...register('allAgree')}
-          onClick={handleAllCheck}
-          className={commonCheckStyle}
+      <div className="flex items-center cursor-pointer relative">
+        <CheckBoxComponent
+          id="allAgree"
+          labelText="전체동의"
+          isBoxChecked={getValues('allAgree')}
+          isLabelTextBold={true}
+          handleSelectState={(e) => handleAllCheck(e, 'allAgree')}
         />
-        <span className="font-semibold ">전체동의</span>
-      </label>
-      <label className="flex items-center cursor-pointer relative">
-        <input
-          type="checkbox"
-          {...register('checkbox1')}
-          className={commonCheckStyle}
+      </div>
+      <div className="flex items-center cursor-pointer relative">
+        <CheckBoxComponent
+          id="check1"
+          labelText="[필수] 개인정보 수집 및 이용"
+          isBoxChecked={getValues('check1')}
+          handleSelectState={(e) => handleAllCheck(e, 'check1')}
         />
-        [필수] 개인정보 수집 및 이용
-        <span className="text-text-primary absolute right-0">보기</span>
-      </label>
-      <label className="flex items-center cursor-pointer relative">
-        <input
-          type="checkbox"
-          {...register('checkbox2')}
-          className={commonCheckStyle}
+        <Link
+          href="/mypage/dashboard/terms"
+          className="text-text-primary absolute right-0"
+        >
+          보기
+        </Link>
+      </div>
+      <div className="flex items-center cursor-pointer relative">
+        <CheckBoxComponent
+          id="check2"
+          labelText="[필수] 개인정보 제3자 정보"
+          isBoxChecked={getValues('check2')}
+          handleSelectState={(e) => handleAllCheck(e, 'check2')}
         />
-        [필수] 개인정보 제3자 정보
-        <span className="text-text-primary absolute right-0">보기</span>
-      </label>
-      <label className="flex items-center cursor-pointer relative">
-        <input
-          type="checkbox"
-          {...register('checkbox3')}
-          className={commonCheckStyle}
+        <Link
+          href="/mypage/dashboard/terms"
+          className="text-text-primary absolute right-0"
+        >
+          보기
+        </Link>
+      </div>
+      <div className="flex items-center cursor-pointer relative">
+        <CheckBoxComponent
+          id="check3"
+          labelText="[필수] 개인(신용)정보 처리"
+          isBoxChecked={getValues('check3')}
+          handleSelectState={(e) => handleAllCheck(e, 'check3')}
         />
-        [필수] 개인(신용)정보 처리
-        <span className="text-text-primary absolute right-0">보기</span>
-      </label>
+        <Link
+          href="/mypage/dashboard/terms"
+          className="text-text-primary absolute right-0"
+        >
+          보기
+        </Link>
+      </div>
       <button
         type="submit"
-        disabled={!allChecked}
-        className={`w-full px-4 rounded h-11 mt-5 cursor-pointer ${
-          allChecked
-            ? 'bg-action-primary text-white'
-            : 'bg-action-secondary-disabled text-text-disabled'
-        }`}
+        className="bg-action-primary text-white w-full px-4 rounded h-11 mt-5 cursor-pointer"
       >
         다음
       </button>
