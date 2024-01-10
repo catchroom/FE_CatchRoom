@@ -16,7 +16,7 @@ const SignUpInfo = () => {
     handleSubmit,
     formState: { errors, isValid },
     watch,
-    reset,
+    setValue,
   } = useForm<UserInfo>({
     mode: 'onChange',
     resolver: zodResolver(userInfoSchema),
@@ -24,9 +24,10 @@ const SignUpInfo = () => {
 
   const name = watch('name');
   const phone = watch('phone');
+  const nickname = watch('nickname');
 
   const clearField = (fieldName: 'name' | 'phone' | 'nickname') => {
-    reset({ [fieldName]: '' });
+    setValue(fieldName, '');
   };
   const onSubmit = (data: UserInfo) => {
     //백엔드로 data를 post하기
@@ -41,7 +42,7 @@ const SignUpInfo = () => {
             placeholder="이름"
             {...register('name')}
             className={`${commonInputStyle} ${
-              errors.name ? 'border-red-500' : 'border-gray-400'
+              errors.name ? 'border-border-critical' : 'border-gray-400'
             }  `}
           />
           {name && (
@@ -55,7 +56,7 @@ const SignUpInfo = () => {
         </div>
 
         {errors.name && (
-          <p className="text-red-500 mb-3">{errors.name.message}</p>
+          <p className="text-border-critical mb-3">{errors.name.message}</p>
         )}
 
         <div className="relative">
@@ -63,7 +64,7 @@ const SignUpInfo = () => {
             placeholder="휴대폰번호"
             {...register('phone')}
             className={`${commonInputStyle} ${
-              errors.phone ? 'border-red-500' : 'border-gray-400'
+              errors.phone ? 'border-border-critical' : 'border-gray-400'
             } `}
           />
 
@@ -78,7 +79,7 @@ const SignUpInfo = () => {
         </div>
 
         {errors.phone && (
-          <p className="text-red-500 mb-3">{errors.phone.message}</p>
+          <p className="text-border-critical mb-3">{errors.phone.message}</p>
         )}
 
         <div className="relative">
@@ -86,17 +87,24 @@ const SignUpInfo = () => {
             placeholder="닉네임"
             {...register('nickname')}
             className={`${commonInputStyle} ${
-              errors.nickname ? 'border-red-500' : 'border-gray-400'
+              errors.nickname ? 'border-border-critical' : 'border-gray-400'
             } `}
           />
 
-          <div className="cursor-pointer absolute right-3 top-[40%] transform -translate-y-1/2 font-bold text-p3 underline">
-            중복체크
+          <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
+            {nickname && (
+              <div onClick={() => clearField('nickname')}>
+                <DeleteIcon />
+              </div>
+            )}
+            <div className="cursor-pointer font-bold text-p3 underline">
+              중복확인
+            </div>
           </div>
         </div>
 
         {errors.nickname ? (
-          <p className="text-red-500 mb-3">{errors.nickname.message}</p>
+          <p className="text-border-critical mb-3">{errors.nickname.message}</p>
         ) : (
           <div className="text-gray-600 text-p2">
             2~12자, 한글/영문/숫자 혼합
