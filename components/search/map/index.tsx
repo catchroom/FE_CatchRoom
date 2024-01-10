@@ -2,6 +2,7 @@
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import React, { useEffect, useState } from 'react';
 import { ITEMS_INFO } from '@/constants/catchItems';
+import ToggleViewButton from '../toggleViewButton';
 
 declare global {
   interface Window {
@@ -28,6 +29,8 @@ const Map = ({ markers }: MapProps) => {
   >(null);
   const [selectedMarkerInfo, setSelectedMarkerInfo] =
     useState<MarkerProps | null>(null);
+  const [currentView, setCurrentView] = useState<'map' | 'list'>('map');
+
   useEffect(() => {
     const mapScript = document.createElement('script');
     mapScript.async = true;
@@ -42,7 +45,7 @@ const Map = ({ markers }: MapProps) => {
               markers[0].latitude,
               markers[0].longitude,
             ),
-            level: 4,
+            level: 6,
           };
 
         const map = new window.kakao.maps.Map(mapContainer, mapOption);
@@ -105,12 +108,12 @@ const Map = ({ markers }: MapProps) => {
       padding: 0.5rem;
       font-family: 'Pretendard';
       font-weight: 600;
-      transform: translate(-50%, -100%);
+      transform: translate(-50%, -10%);
       position: absolute;
-      bottom: 35px;
+      bottom: 10px;
       left: 50%;
       width: 8.625rem;
-      cursor: pointer; // 커서 스타일 추가
+      cursor: pointer; 
     `;
 
     const priceSpan = document.createElement('span');
@@ -165,10 +168,26 @@ const Map = ({ markers }: MapProps) => {
     );
   };
 
+  const renderToggleButton = () => {
+    const onViewChange = () => {
+      setCurrentView(currentView === 'map' ? 'list' : 'map');
+    };
+
+    return (
+      <div className="absolute  bottom-[10rem] left-1/2 transform -translate-x-1/2 z-20">
+        <ToggleViewButton
+          currentView={currentView}
+          onViewChange={onViewChange}
+        />
+      </div>
+    );
+  };
+
   // eslint-disable-next-line react/react-in-jsx-scope
   return (
     <div id="map" className="w-full h-full rounded-lg">
       {renderCatchSpecialComponent()}
+      {renderToggleButton()}
     </div>
   );
 };
