@@ -4,6 +4,8 @@ import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import { chatItemProps } from '@/types/chat/chatItem/types';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { isModalState } from '@/atoms/chat/leaveButton';
+import { useSetRecoilState } from 'recoil';
 
 const ChatItem = ({
   itemId,
@@ -13,6 +15,13 @@ const ChatItem = ({
   lastMessageContent,
 }: chatItemProps) => {
   const router = useRouter();
+  const setIsOpen = useSetRecoilState(isModalState);
+
+  const handleModalOpen = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsOpen((prev) => !prev);
+    e.stopPropagation();
+  };
+
   return (
     <div
       className="bg-white w-full h-18 flex gap-x-3 items-center px-4 py-3 border-solid border border-divider mb-[-1px] cursor-pointer"
@@ -39,7 +48,7 @@ const ChatItem = ({
           </div>
         </div>
       </div>
-      <div className="ml-auto">
+      <div className="ml-auto" onClick={handleModalOpen}>
         <XSymbolIcon />
       </div>
     </div>

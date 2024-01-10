@@ -25,7 +25,7 @@ export const CHAT_ITEMS = [
       {
         MESSAGE_TYPE: 0,
         MESSAGE_ID: '2',
-        CONTENT: '제가 학생이라 돈이 없어서.. 9만원에 가능할까요?',
+        CONTENT: '제가 학생이라 돈이 없어서.. 3만원에 가능할까요?',
         SEND_USER_NICKNAME: '바나나조아',
         DATE: '202301120524',
       },
@@ -75,7 +75,7 @@ export const CHAT_ITEMS = [
       {
         MESSAGE_TYPE: 0,
         MESSAGE_ID: '2',
-        CONTENT: '아 진짜 오천원만 깎아주세요',
+        CONTENT: '오천원만 깎아주신다면 평생 감사드리며 살겠습니다.',
         SEND_USER_NICKNAME: '초코조아',
         DATE: '202301120524',
       },

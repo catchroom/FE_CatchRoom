@@ -11,7 +11,7 @@ const page = async () => {
       <Header title="닉네임" showBackButton />
       <div className="flex flex-col ">
         <ProductInfo />
-        <div className="bg-gray-100 overflow-auto flex flex-col px-5 h-full">
+        <div className="bg-gray-100 overflow-auto flex flex-col px-5 h-screen">
           <Date />
           <MessageList />
         </div>
