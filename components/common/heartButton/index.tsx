@@ -10,17 +10,23 @@ import { HeartButtonPropsType } from '@/types/common/heartButton/types';
  * @component
  * @param isButtonActive : 버튼의 상태를 전달하는 props입니다. `boolean` (필수)
  * @param stateHandler : 버튼을 클릭할 때 전달되는 핸들러 함수의 props 입니다.  `(e: React.MouseEvent<HTMLInputElement>) => void` (필수)
+ * @param stateHandler : 빈 하트의 테두리 색상을 흰색으로 지정할지 결정해주세요.  `boolean` (선택)
  * @returns {JSX.Element} HeartButton 컴포넌트 반환
  */
 
 const HeartButton = ({
   isButtonActive,
   stateHandler,
+  whiteStroke = false,
 }: HeartButtonPropsType) => {
   return (
     <div className="flex items-center justify-center">
       <button onClick={stateHandler}>
-        {!isButtonActive ? <EmptyHeartIcon /> : <FullHeartIcon />}
+        {!isButtonActive ? (
+          <EmptyHeartIcon whiteStroke={whiteStroke} />
+        ) : (
+          <FullHeartIcon />
+        )}
       </button>
     </div>
   );
