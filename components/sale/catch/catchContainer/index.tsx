@@ -4,10 +4,13 @@ import QuestionMark from '@/public/svgComponent/questionMark';
 import SlideButton from '@/components/common/slideButton';
 import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { catchState } from '@/atoms/sale/catchAtom';
+import {
+  catchPercentState,
+  catchPriceState,
+  catchState,
+} from '@/atoms/sale/catchAtom';
 import BottomSheets from '@/components/common/bottomSheets';
-import SalePrice from '../../bottomSheetsContent/salePrice';
-import { percentState, priceState } from '@/atoms/sale/priceAtom';
+import BottomSheetsContent from '../bottomSheetsContent';
 
 type PropsType = {
   price: number;
@@ -15,15 +18,15 @@ type PropsType = {
 const CatchContainer = ({ price }: PropsType) => {
   const [open, setOpen] = useState(false);
   const [isCatch, setIsCatch] = useRecoilState(catchState);
-  const selectPrice = useRecoilValue(priceState);
-  const selectPercent = useRecoilValue(percentState);
+  const selectCatchPrice = useRecoilValue(catchPriceState);
+  const selectCatchPercent = useRecoilValue(catchPercentState);
 
   const title =
-    selectPrice === 0
+    selectCatchPrice === 0
       ? '판매가를 선택해주세요'
-      : selectPrice.toLocaleString() + '원';
+      : selectCatchPrice.toLocaleString() + '원';
 
-  const buttonSelect = selectPrice === 0 ? 'input' : 'price';
+  const buttonSelect = selectCatchPrice === 0 ? 'input' : 'price';
   const handleToggleButton = () => {
     setIsCatch((prev) => !prev);
   };
@@ -64,10 +67,10 @@ const CatchContainer = ({ price }: PropsType) => {
               innerTitle="캐치특가 판매 금액을 선택해주세요"
               buttonSelect={buttonSelect}
               outerControl={true}
-              price={selectPrice}
-              percent={selectPercent}
+              price={selectCatchPrice}
+              percent={selectCatchPercent}
             >
-              <SalePrice price={price} isCatch={isCatch} />
+              <BottomSheetsContent price={price} />
             </BottomSheets>
           </div>
           <div>
