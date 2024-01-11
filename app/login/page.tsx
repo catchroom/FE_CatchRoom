@@ -1,15 +1,16 @@
-import Header from '@/components/common/header';
+import Image from 'next/image';
+import Logo from '../../public/Logo.png';
 import React from 'react';
 import LoginForm from '@/components/login';
 
 const Page = () => {
   return (
-    <>
-      <Header title="이메일로 로그인" showBackButton />
-      <div className="flex flex-col container mx-auto px-3 py-6 bg-primary">
+    <div className="flex flex-col items-center justify-center px-3 pt-20 bg-bg">
+      <Image className="justify-center" alt="Logo" src={Logo} />
+      <div className="flex flex-col container mx-auto py-6 bg-primary pt-10">
         <LoginForm />
       </div>
-    </>
+    </div>
   );
 };
 
