@@ -127,3 +127,22 @@ export const loginSchema = z.object({
     ),
   password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
 });
+
+//export type Checkbox = z.infer<typeof checkBoxSchema>;
+
+export const checkBoxSchema = (isCatch: boolean) =>
+  z.object({
+    check1: z.boolean().refine((val) => val === true, {
+      message: '필수 선택 요소입니다.',
+    }),
+    check2: z.boolean().refine((val) => val === true, {
+      message: '필수 선택 요소입니다.',
+    }),
+    ...(isCatch
+      ? {
+          check3: z.boolean().refine((val) => val === true, {
+            message: '필수 선택 요소입니다.',
+          }),
+        }
+      : {}),
+  });

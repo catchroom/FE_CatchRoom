@@ -5,8 +5,8 @@ const themes: Theme = {
   basic: {
     backgroundColor: 'bg-white',
     color: 'text-black',
-    borderColor: 'border border-gray-600',
-    width: 'w-2/6 ml-auto',
+    borderColor: 'border border-border-sub',
+    width: 'w-[110px] ml-auto',
   },
   primary: {
     backgroundColor: 'bg-main',
@@ -28,7 +28,7 @@ const defaultBtn = (props: ButtonProps) => {
 
   return (
     <button
-      className={`rounded-sm w-full text-p2 px-3 py-2 
+      className={`rounded-[4px] text-t3 px-3 py-2 cursor-pointer
       ${theme.backgroundColor} 
       ${theme.color} 
       ${theme.borderColor ? theme.borderColor : ''}

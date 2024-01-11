@@ -3,5 +3,6 @@ export type HeaderProps = {
   showBackButton?: boolean;
   showCloseButton?: boolean;
   showMoreButton?: boolean;
+  showHomeButton?: boolean;
   showBorder?: boolean;
 };

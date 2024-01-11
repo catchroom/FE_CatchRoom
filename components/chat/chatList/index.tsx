@@ -1,6 +1,7 @@
 import React from 'react';
 import { CHAT_ITEMS } from '@/constants/chat';
 import ChatItem from '../chatItem';
+import Login from './login';
 
 const ChatList = () => {
   return (
@@ -9,7 +10,7 @@ const ChatList = () => {
         return (
           <ChatItem
             key={item.ITEM_ID}
-            id={item.ITEM_ID}
+            itemId={item.ITEM_ID}
             image={item.ITEM_INFO.IMAGE}
             sellerNickname={item.SELLER_NICKNAME}
             lastMessageDate={item.MESSAGE_PREVIOUS.at(-1).DATE}
@@ -17,6 +18,8 @@ const ChatList = () => {
           />
         );
       })}
+      {/* 비로그인시 아래 컴포넌트 노출 */}
+      {/* <Login /> */}
     </>
   );
 };

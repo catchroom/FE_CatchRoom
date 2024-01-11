@@ -1,36 +1,56 @@
 'use client';
 import React from 'react';
-import CloseIcon from '@/public/svg/ph_x.svg';
+import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import { chatItemProps } from '@/types/chat/chatItem/types';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { isModalState } from '@/atoms/chat/leaveButton';
+import { useSetRecoilState } from 'recoil';
 
 const ChatItem = ({
-  id,
+  itemId,
   image,
   sellerNickname,
   lastMessageDate,
   lastMessageContent,
 }: chatItemProps) => {
   const router = useRouter();
+  const setIsOpen = useSetRecoilState(isModalState);
+
+  const handleModalOpen = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsOpen((prev) => !prev);
+    e.stopPropagation();
+  };
+
   return (
     <div
-      className="bg-white w-full h-18 flex items-center px-4 py-3 border-solid border border-gray-300"
-      onClick={() => router.push(`/chat/chatRoom?chatId=${id}`)}
+      className="bg-white w-full h-18 flex gap-x-3 items-center px-4 py-3 border-solid border border-divider mb-[-1px] cursor-pointer"
+      onClick={() => router.push(`/chat/chatRoom?chatId=${itemId}`)}
     >
-      <img src={image} className="pr-3"></img>
+      <Image
+        src={image}
+        className="rounded-[4px]"
+        alt="숙소사진"
+        width={48}
+        height={48}
+      />
       <div className="flex flex-col">
         <div className="flex items-center">
-          <div className="font-semibold pr-2">{sellerNickname}</div>
-          <div className="text-xs text-grey">{lastMessageDate}</div>
+          <div className="text-t3 font-semibold  text-text pr-2">
+            {sellerNickname}
+          </div>
+          <div className="text-p2 text-text-sub">{lastMessageDate}</div>
         </div>
         <div className="flex">
-          <div className="line-clamp-1">{lastMessageContent}</div>
+          <div className="line-clamp-1 text-text">{lastMessageContent}</div>
+          <div className=" bg-main px-[9px] py-[4px] rounded-full text-white text-p3 ml-2  ">
+            1
+          </div>
         </div>
       </div>
-      <div className="ml-auto bg-gray-100 px-2 rounded-full text-black ml-2  ">
-        1
+      <div className="ml-auto" onClick={handleModalOpen}>
+        <XSymbolIcon />
       </div>
-      <CloseIcon />
     </div>
   );
 };
