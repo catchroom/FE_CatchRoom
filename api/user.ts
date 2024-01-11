@@ -1,3 +1,7 @@
+import Cookies from 'js-cookie';
+
+const refreshToken: string = Cookies.get('refresh_token') || '';
+
 //회원가입
 export const signUp = async (
   email: string,
@@ -24,17 +28,6 @@ export const signUp = async (
     console.log(data.message);
   }
   //굳이 분기하지 말까 ..
-
-  // } else if (data.code === 1002) {
-  //   //비밀번호 형식 문제
-  //   console.log(data.message);
-  // } else if (data.code === 1003) {
-  //   //전화번호 형식 문제
-  //   console.log(data.message);
-  // } else if (data.code === 1004) {
-  //   //닉네임 형식 문제
-  //   console.log(data.message);
-  // }
 };
 
 // 로그인
@@ -104,7 +97,7 @@ export const emailCheck = async (email: string) => {
 };
 
 //리프레쉬 토큰으로 액세스 토큰 요청
-export const refreshAccessToken = async (refreshToken: string) => {
+export const refreshAccessToken = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
     {
