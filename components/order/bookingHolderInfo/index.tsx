@@ -1,13 +1,22 @@
 import { BookingHolderInfoProps } from '@/types/order/bookingHolderInfo/types';
 import React from 'react';
+import InfoBox from '../infoBox';
 
 const BookingHolderInfo = ({ name, phoneNumber }: BookingHolderInfoProps) => {
   return (
     <div className="flex flex-col mt-8 mb-6">
-      <span className="text-p2 font-bold text-gray-1000 mb-2">예약자 정보</span>
-      <div className="flex justify-start items-center space-x-2">
-        <span className="text-p2 text-gray-1000">{name}</span>
-        <span className="text-p2 text-gray-1000">{phoneNumber}</span>
+      <div className="mx-[-20px]">
+        <div className="w-full border-t-8 border-border-sub mb-6"></div>
+      </div>
+      <span className="text-h5 font-semibold text-gray-1000 mb-3">
+        예약자 정보
+      </span>
+      <div className="flex justify-start items-center mb-3 space-x-2">
+        <span className="text-p2 text-text-sub">{name}</span>
+        <span className="text-p2 text-text-sub">{phoneNumber}</span>
+      </div>
+      <div>
+        <InfoBox messageKey="bookingHolderInfo" />
       </div>
     </div>
   );
