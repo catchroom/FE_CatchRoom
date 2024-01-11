@@ -2,6 +2,7 @@ import { MessageProps } from '@/types/chat/chatRoom/types';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import DefaultBtn from '../../common/defaultBtn/index';
+import Image from 'next/image';
 
 const OfferMessage = ({ offerPrice, date, isSeller }: MessageProps) => {
   const router = useRouter();
@@ -10,10 +11,13 @@ const OfferMessage = ({ offerPrice, date, isSeller }: MessageProps) => {
       <>
         <p className="text-gray-500 text-t3">{date}</p>
         <div className="w-full bg-white w-56 h-30 flex flex-col items-center border-[1px] border-gray-300 rounded-sm">
-          <img
+          <Image
             src="/productImage.png"
-            className="w-full h-28  object-cover"
-          ></img>
+            className="w-full h-24 object-cover"
+            alt="숙소사진"
+            width={60}
+            height={60}
+          />
           <div className="float-right w-full p-4 ">
             <p className="text-t2 font-semibold pb-2">가격을 제안했어요</p>
             <p className="text-p2 text-gray-500">요청 금액: {offerPrice}원</p>
@@ -38,10 +42,13 @@ const OfferMessage = ({ offerPrice, date, isSeller }: MessageProps) => {
       <>
         <p className="text-gray-500 text-t3">{date}</p>
         <div className="w-full bg-white h-30 flex flex-col items-center border-solid border border-gray-300 rounded-sm">
-          <img
+          <Image
             src="/productImage.png"
-            className="w-full h-28 object-cover"
-          ></img>
+            className="w-full h-24 object-cover"
+            alt="숙소사진"
+            width={60}
+            height={60}
+          />
           <div className="float-right w-full p-5">
             <p className="text-t2 font-semibold pb-2">가격을 제안했어요</p>
             <p className="text-p2 text-gray-500">승인 금액: {offerPrice}원</p>

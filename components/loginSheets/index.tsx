@@ -51,6 +51,7 @@ const LoginSheet = ({
   });
 
   const handleAgreeChange = (e: React.MouseEvent, id: CheckboxId) => {
+    e.preventDefault();
     e.stopPropagation();
 
     const newValue = !getValues(id);

@@ -95,12 +95,12 @@ const LoginForm = () => {
             className="w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md  bg-focus"
             type="submit"
           >
-            완료
+            로그인
           </button>
         </div>
 
         <div className="w-full h-[3rem] text-gray-600 flex justify-between px-5 mt-7 text-p2">
-          <span className="relative pl-11">
+          <span className="relative pl-14">
             <Link href="https://www.yanolja.com/" className="underline">
               비밀번호 재설정
             </Link>
@@ -109,9 +109,9 @@ const LoginForm = () => {
             </span>
           </span>
           |
-          <span className="relative pr-11">
+          <span className="relative pr-20">
             <div className="underline cursor-pointer" onClick={handleOpenModal}>
-              이메일로 회원가입
+              회원가입
               <span className="absolute">
                 <NextArrowIcon />
               </span>

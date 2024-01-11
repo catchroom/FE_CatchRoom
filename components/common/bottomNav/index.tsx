@@ -34,19 +34,19 @@ const BottomNav = () => {
         </li>
         <li
           className={`flex-1 h-full py-1 rounded-lg ${
-            currentPath === '/chatList' ? 'bg-gray-200' : 'bg-white'
+            currentPath === '/chat' ? 'bg-gray-200' : 'bg-white'
           }`}
         >
-          <Link href="/chatList">
+          <Link href="/chat">
             <div
               className={`flex flex-col gap-1 justify-center items-center text-center text-p4 w-full h-full ${
-                currentPath === '/chatList'
+                currentPath === '/chat'
                   ? 'text-gray-1000'
                   : 'text-text-secondary'
               }`}
             >
               <ChattingIcon
-                stroke={currentPath === '/chatList' ? 'black' : 'currentColor'}
+                stroke={currentPath === '/chat' ? 'black' : 'currentColor'}
               />
               <span className="text-p4 font-semibold">채팅</span>
             </div>
