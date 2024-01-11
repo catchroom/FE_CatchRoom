@@ -19,22 +19,23 @@ export const signUp = async (
   if (data.code === 1000) {
     //성공
     return data;
-  } else if (data.code === 1001) {
+  } else if (data.code === 1001 || 1002 || 1003 || 1004) {
     //이메일 형식 문제
     console.log(data.message);
-  } else if (data.code === 1002) {
-    //비밀번호 형식 문제
-    console.log(data.message);
-  } else if (data.code === 1003) {
-    //전화번호 형식 문제
-    console.log(data.message);
-  } else if (data.code === 1004) {
-    //닉네임 형식 문제
-    console.log(data.message);
   }
-};
+  //굳이 분기하지 말까 ..
 
-signUp('TEST@test.com', 'password', '닉네임', '010', '김'); //테스트시 사용하기(eslint 에러때문에 ㅋㅋ)
+  // } else if (data.code === 1002) {
+  //   //비밀번호 형식 문제
+  //   console.log(data.message);
+  // } else if (data.code === 1003) {
+  //   //전화번호 형식 문제
+  //   console.log(data.message);
+  // } else if (data.code === 1004) {
+  //   //닉네임 형식 문제
+  //   console.log(data.message);
+  // }
+};
 
 // 로그인
 export const login = async (email: string, password: string) => {
@@ -47,8 +48,11 @@ export const login = async (email: string, password: string) => {
   const data = await res.json();
   if (data.code === 1006) {
     //성공
-    document.cookie = `access_token=${data.data.access_token}; path=/`;
-    document.cookie = `refresh_token=${data.data.refresh_token}; path=/`;
+
+    // 서버 컴포넌트에서 x -> 클라이언트 컴포넌트에서 사용하기
+    // document.cookie = `access_token=${data.data.access_token}; path=/`;
+    // document.cookie = `refresh_token=${data.data.refresh_token}; path=/`;
+
     return data;
   } else if (data.code === 1007) {
     //아이디 x
@@ -59,15 +63,13 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-login('TEST@test.com', 'password'); //테스트시 사용하기(eslint 에러때문에 ㅋㅋ)
-
 //닉네임 중복체크
 export const nicknameCheck = async (nickname: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/nicknamecheck?nickname=${nickname}`,
     {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { Accept: 'application/json' },
     },
   );
 
@@ -87,7 +89,7 @@ export const emailCheck = async (email: string) => {
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/emailcheck?email=${email}`,
     {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { Accept: 'application/json' },
     },
   );
 
@@ -104,16 +106,25 @@ export const emailCheck = async (email: string) => {
 //리프레쉬 토큰으로 액세스 토큰 요청
 export const refreshAccessToken = async (refreshToken: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/auth/refresh`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${refreshToken}`,
+      },
       body: JSON.stringify({ refreshToken }),
     },
   );
 
   const data = await res.json();
-  return data;
+  if (data.code === 1013) {
+    //성공
+    return data;
+  } else if (data.code === 5000) {
+    //에러
+    console.log(data.message);
+  }
 };
 
 // 카카오 인증코드 받기-> .env.local다시 설정하기
