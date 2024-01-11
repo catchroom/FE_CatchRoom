@@ -1,7 +1,7 @@
 import React from 'react';
 import ListIcon from '../../../public/svg/list.svg';
 import MapIcon from '../../../public/svg/map.svg';
-import { ToggleViewButtonProps } from '@/types/search/toggleViewButton/types';
+import { ToggleViewButtonProps } from '@/types/search-result/toggleViewButton/types';
 
 const ToggleViewButton = ({
   currentView,

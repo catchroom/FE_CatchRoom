@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Map from '@/components/search/map';
+import Map from '@/components/search-result/map';
 
 const markersData = [
   {
