@@ -40,22 +40,26 @@ const CatchContainer = () => {
           </ul>
         </div>
       )}
-      <div>
-        <p className="text-t2">캐치특가 적용 가격</p>
-        <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
-          <BigCalendarIcon />
-          {/* 바텀시트 모달로 변경예정 */}
-          <button className="w-full flex items-start">12월 9일 (월)</button>
-        </div>
-      </div>
-      <div>
-        <p className="text-t2">캐치특가 적용 시점</p>
-        <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
-          <BigCalendarIcon />
-          {/* 바텀시트 모달로 변경예정 */}
-          <button className="w-full flex items-start">12월 9일 (월)</button>
-        </div>
-      </div>
+      {isCatch && (
+        <>
+          <div>
+            <p className="text-t2">캐치특가 적용 가격</p>
+            <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
+              <BigCalendarIcon />
+              {/* 바텀시트 모달로 변경예정 */}
+              <button className="w-full flex items-start">12월 9일 (월)</button>
+            </div>
+          </div>
+          <div>
+            <p className="text-t2">캐치특가 적용 시점</p>
+            <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
+              <BigCalendarIcon />
+              {/* 바텀시트 모달로 변경예정 */}
+              <button className="w-full flex items-start">12월 9일 (월)</button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
