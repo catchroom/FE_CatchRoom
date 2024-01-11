@@ -1,7 +1,7 @@
 'use client';
 import CatchItemContainer from '@/components/catchSale/catchItemContainer';
-import ProductListControls from '@/components/search/list/productListControls';
-import ToggleViewButton from '@/components/search/toggleViewButton';
+import ProductListControls from '@/components/search-result/list/productListControls';
+import ToggleViewButton from '@/components/search-result/toggleViewButton';
 import React, { useState } from 'react';
 
 const Page = () => {

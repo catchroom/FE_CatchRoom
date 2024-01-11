@@ -1,7 +1,7 @@
 import React from 'react';
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import { ITEMS_INFO } from '@/constants/catchItems';
-import { CatchSpecialComponentWrapperProps } from '@/types/search/map/type';
+import { CatchSpecialComponentWrapperProps } from '@/types/search-result/map/type';
 
 const CatchSpecialComponentWrapper = ({
   selectedMarkerInfo,

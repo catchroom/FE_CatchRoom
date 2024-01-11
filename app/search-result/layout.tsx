@@ -1,5 +1,5 @@
 import Header from '@/components/common/header';
-import FilterBar from '@/components/search/filterBar';
+import FilterBar from '@/components/search-result/filterBar';
 import React, { ReactNode } from 'react';
 
 const locations = ['서울', '제주'];

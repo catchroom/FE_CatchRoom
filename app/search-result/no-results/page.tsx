@@ -1,5 +1,5 @@
-import ProductListControls from '@/components/search/list/productListControls';
-import NoResults from '@/components/search/noResults';
+import ProductListControls from '@/components/search-result/list/productListControls';
+import NoResults from '@/components/search-result/noResults';
 import React from 'react';
 
 const page = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import FilterButton from '../filterButton';
-import { FilterBarProps } from '@/types/search/FilterBar/types';
+import { FilterBarProps } from '@/types/search-result/FilterBar/types';
 
 const FilterBar = ({ filters }: FilterBarProps) => {
   return (
