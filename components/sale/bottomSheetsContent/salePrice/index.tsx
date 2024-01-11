@@ -1,16 +1,30 @@
+'use client';
 import React from 'react';
 import Discount from '../../discount';
 import CatchBadge from '../../catchBadge';
+import { useSetRecoilState } from 'recoil';
+import { percentState, priceState } from '@/atoms/sale/priceAtom';
+import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 
 type PropsType = {
   price: number;
   isCatch?: boolean;
 };
 const SalePrice = ({ price, isCatch }: PropsType) => {
+  const setSelectPrice = useSetRecoilState(priceState);
+  const setSelectPercent = useSetRecoilState(percentState);
+  const setBankModal = useSetRecoilState(outerBottomSheetsControl);
+
   const discount: number[] = [10, 20, 30, 40, 50, 60, 70, 80, 90];
   const filteredDiscounts = isCatch
     ? discount.filter((d) => d >= 50)
     : discount;
+
+  const handlePriceClick = (discountedPrice: number, percent: number) => {
+    setSelectPrice(discountedPrice);
+    setSelectPercent(percent);
+    setBankModal(false);
+  };
   return (
     <div
       className={`flex flex-col gap-8 ${
@@ -24,6 +38,7 @@ const SalePrice = ({ price, isCatch }: PropsType) => {
             <div
               key={percent}
               className="flex w-full relative gap-2 py-3 cursor-pointer "
+              onClick={() => handlePriceClick(discountedPrice, percent)}
             >
               <Discount percent={percent} />
               <div className="text-t2">

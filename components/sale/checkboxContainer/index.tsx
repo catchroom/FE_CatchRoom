@@ -1,5 +1,5 @@
 'use client';
-import { catchState } from '@/atoms/sale/catch';
+import { catchState } from '@/atoms/sale/catchAtom';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { checkBoxSchema } from '@/constants/zodSchema';

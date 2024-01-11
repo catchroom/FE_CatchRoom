@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import QuestionMark from '@/public/svgComponent/questionMark';
 import SlideButton from '@/components/common/slideButton';
 import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
-import { useRecoilState } from 'recoil';
-import { catchState } from '@/atoms/sale/catch';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { catchState } from '@/atoms/sale/catchAtom';
 import BottomSheets from '@/components/common/bottomSheets';
 import SalePrice from '../../bottomSheetsContent/salePrice';
+import { percentState, priceState } from '@/atoms/sale/priceAtom';
 
 type PropsType = {
   price: number;
@@ -14,6 +15,15 @@ type PropsType = {
 const CatchContainer = ({ price }: PropsType) => {
   const [open, setOpen] = useState(false);
   const [isCatch, setIsCatch] = useRecoilState(catchState);
+  const selectPrice = useRecoilValue(priceState);
+  const selectPercent = useRecoilValue(percentState);
+
+  const title =
+    selectPrice === 0
+      ? '판매가를 선택해주세요'
+      : selectPrice.toLocaleString() + '원';
+
+  const buttonSelect = selectPrice === 0 ? 'input' : 'price';
   const handleToggleButton = () => {
     setIsCatch((prev) => !prev);
   };
@@ -50,9 +60,12 @@ const CatchContainer = ({ price }: PropsType) => {
           <div>
             <p className="text-t2">캐치특가 적용 가격</p>
             <BottomSheets
-              title="캐치특가 판매 금액을 선택해주세요"
+              title={title}
               innerTitle="캐치특가 판매 금액을 선택해주세요"
-              buttonSelect="input"
+              buttonSelect={buttonSelect}
+              outerControl={true}
+              price={selectPrice}
+              percent={selectPercent}
             >
               <SalePrice price={price} isCatch={isCatch} />
             </BottomSheets>

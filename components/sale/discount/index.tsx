@@ -1,7 +1,7 @@
 import React from 'react';
 
 type PropsType = {
-  percent: number;
+  percent?: number;
 };
 const Discount = ({ percent }: PropsType) => {
   return (

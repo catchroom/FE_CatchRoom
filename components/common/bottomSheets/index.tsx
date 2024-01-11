@@ -14,6 +14,7 @@ import SaleButton from '../sheetsButtons/saleButton';
 import SearchBoxButton from '../searchBoxButton';
 import { useRecoilState } from 'recoil';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import PriceButton from '../sheetsButtons/priceButton';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -41,16 +42,20 @@ const BottomSheets = ({
   icon,
   closeButton = false,
   outerControl = false,
+  price,
+  percent,
 }: {
   children: ReactNode;
   title: string;
   innerTitle?: string;
   innerButtonTitle?: string;
-  buttonSelect?: 'input' | 'simple' | 'search' | 'sale';
+  buttonSelect?: 'input' | 'simple' | 'search' | 'sale' | 'price';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
   closeButton?: boolean;
   outerControl?: boolean;
+  price?: number;
+  percent?: number;
 }) => {
   const [open, setOpen] = useState(false);
   const [outerOpen, setOuterOpen] = useRecoilState(outerBottomSheetsControl);
@@ -90,6 +95,7 @@ const BottomSheets = ({
       />
     ),
     sale: <SaleButton name={title} fn={modalOpen} />,
+    price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
   };
 
   return (
