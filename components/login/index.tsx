@@ -8,6 +8,8 @@ import LoginSheet from '@/components/loginSheets';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
+import Cookies from 'js-cookie';
+import { login } from '@/api/user';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -31,9 +33,14 @@ const LoginForm = () => {
     setValue(fieldName, '');
   };
 
-  const onSubmit = (data: LoginData) => {
-    //백엔드로 data를 post하기
-    console.log(data);
+  const onSubmit = async (data: LoginData) => {
+    // console.log(data);
+
+    //data post하고 쿠키 저장
+    const resdata = await login(data.email, data.password);
+
+    Cookies.set('access_token', resdata.access_token, { path: '/' });
+    Cookies.set('refresh_token', resdata.refresh_token, { path: '/' });
   };
 
   const [open, setOpen] = React.useState(false);
