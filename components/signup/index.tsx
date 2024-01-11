@@ -44,6 +44,7 @@ const SignUpAuth = () => {
   const onSubmit = (data: AuthData) => {
     //백엔드로 data를 post하기
     console.log(data);
+    router.push('/signup/next');
   };
 
   return (

@@ -21,7 +21,7 @@ const MessageItem = ({
   const sellerNickname = CHAT_ITEMS[chatId].SELLER_NICKNAME;
 
   // 테스트를 위해 임의적으로 닉네임 적용
-  const userNickname = '바나나맛우유';
+  const userNickname = '바나나조아';
 
   // MESSAGE_TYPE
   // 0: 일반 메시지
@@ -36,7 +36,7 @@ const MessageItem = ({
       case 1:
         if (userNickname === sellerNickname) {
           return (
-            <div className="w-5/6 flex  gap-x-3 items-end ml-auto mb-3">
+            <div className="w-11/12 flex  gap-x-3 items-end ml-auto mb-3">
               <OfferMessage
                 offerPrice={offerPrice}
                 date={date}
@@ -46,7 +46,7 @@ const MessageItem = ({
           );
         } else {
           return (
-            <div className="w-5/6 flex  gap-x-3 items-end ml-auto mb-3">
+            <div className="w-11/12 flex  gap-x-3 items-end ml-auto mb-3">
               <OfferMessage
                 offerPrice={offerPrice}
                 date={date}
@@ -58,7 +58,7 @@ const MessageItem = ({
       case 2:
         if (userNickname === sellerNickname) {
           return (
-            <div className="w-5/6 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
+            <div className="w-11/12 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
               <ApproveMessage
                 approvePrice={approvePrice}
                 date={date}
@@ -68,7 +68,7 @@ const MessageItem = ({
           );
         } else {
           return (
-            <div className="w-5/6 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
+            <div className="w-11/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <ApproveMessage
                 approvePrice={approvePrice}
                 date={date}
@@ -80,7 +80,7 @@ const MessageItem = ({
       case 3:
         if (userNickname === sellerNickname) {
           return (
-            <div className="w-5/6 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
+            <div className="w-11/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <DeclineMessage
                 offerPrice={offerPrice}
                 date={date}
@@ -90,7 +90,7 @@ const MessageItem = ({
           );
         } else {
           return (
-            <div className="w-5/6 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
+            <div className="w-11/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <DeclineMessage
                 offerPrice={offerPrice}
                 date={date}
@@ -107,7 +107,7 @@ const MessageItem = ({
       case 1:
         if (userNickname === sellerNickname) {
           return (
-            <div className="w-5/6 flex  flex-row-reverse gap-x-3 items-end mr-auto mb-3 ">
+            <div className="w-11/12  flex  flex-row-reverse gap-x-3 items-end mr-auto mb-3 ">
               <OfferMessage
                 offerPrice={offerPrice}
                 date={date}
@@ -117,7 +117,7 @@ const MessageItem = ({
           );
         } else {
           return (
-            <div className="w-5/6 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
+            <div className="w-11/12  flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <OfferMessage
                 offerPrice={offerPrice}
                 date={date}
@@ -129,7 +129,7 @@ const MessageItem = ({
       case 2:
         if (userNickname === sellerNickname) {
           return (
-            <div className="w-5/6 flex gap-x-3 items-end  ml-auto mb-3">
+            <div className="w-11/12 flex gap-x-3 items-end  ml-auto mb-3">
               <ApproveMessage
                 approvePrice={approvePrice}
                 date={date}
@@ -139,7 +139,7 @@ const MessageItem = ({
           );
         } else {
           return (
-            <div className="w-5/6 flex gap-x-3 items-end ml-auto mb-3">
+            <div className="w-11/12 flex gap-x-3 items-end ml-auto mb-3">
               <ApproveMessage
                 approvePrice={approvePrice}
                 date={date}
@@ -151,7 +151,7 @@ const MessageItem = ({
       case 3:
         if (userNickname === sellerNickname) {
           return (
-            <div className="w-5/6 flex gap-x-3 items-end ml-auto mb-3">
+            <div className="w-11/12 flex gap-x-3 items-end ml-auto mb-3">
               <DeclineMessage
                 offerPrice={offerPrice}
                 date={date}
@@ -161,7 +161,7 @@ const MessageItem = ({
           );
         } else {
           return (
-            <div className="w-5/6 flex gap-x-3 items-end ml-auto mb-3">
+            <div className="w-11/12 flex gap-x-3 items-end ml-auto mb-3">
               <DeclineMessage
                 offerPrice={offerPrice}
                 date={date}
