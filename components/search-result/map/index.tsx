@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { MapProps, MarkerProps } from '@/types/search/map/type';
+import { MapProps, MarkerProps } from '@/types/search-result/map/type';
 import ToggleViewButtonWrapper from './toggleViewButtonWrapper';
 import CatchSpecialComponentWrapper from './catchSpecialComponentWrapper';
 

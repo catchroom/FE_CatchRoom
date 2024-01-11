@@ -3,9 +3,9 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import HomeIcon from '../../../public/svg/home-line.svg';
-import ChattingIcon from '../../../public/svg/chatting.svg';
-import MyPageIcon from '../../../public/svg/face-smile.svg';
+import HomeIcon from '@/public/svg/home-line.svg';
+import ChattingIcon from '@/public/svg/chatting.svg';
+import MyPageIcon from '@/public/svg/face-smile.svg';
 
 const BottomNav = () => {
   const currentPath = usePathname();

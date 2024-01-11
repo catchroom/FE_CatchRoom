@@ -1,6 +1,6 @@
 import React from 'react';
 import DownArrowComponent from '@/public/svgComponent/downArrow';
-import { FilterButtonProps } from '@/types/search/FilterButton/types';
+import { FilterButtonProps } from '@/types/search-result/FilterButton/types';
 
 const FilterButton = ({ label }: FilterButtonProps) => {
   return (

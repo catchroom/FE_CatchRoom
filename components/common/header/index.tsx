@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import BackIcon from '../../../public/svg/chevron-left.svg';
-import CloseIcon from '../../../public/svg/ph_x.svg';
-import MoreIcon from '../../../public/svg/dots-vertical.svg';
-import HomeIcon from '../../../public/svg/home.svg';
+import BackIcon from '@/public/svg/chevron-left.svg';
+import CloseIcon from '@/public/svg/ph_x.svg';
+import MoreIcon from '@/public/svg/dots-vertical.svg';
+import HomeIcon from '@/public/svg/home.svg';
 import { HeaderProps } from '@/types/common/header/types';
 
 const Header = ({
