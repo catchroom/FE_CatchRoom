@@ -12,3 +12,17 @@ export type MypageSellingType = {
   productEndDate: string;
   isCatch: boolean;
 };
+
+export type AccommodationType = {
+  id: string;
+  thumbnail_url: string;
+  logitude: number;
+  grade: number;
+  address?: string;
+  introduction: string;
+  service: string[];
+  latitude: number;
+  region: number;
+  name: string;
+  type: number;
+};

@@ -10,6 +10,8 @@ import {
 } from 'firebase/firestore';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { state } = req.query;
+
   try {
     const returnData = {
       code: 2015,
@@ -19,10 +21,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     };
 
+    const stateQuery =
+      state === 'ing'
+        ? where('state', '==', 'ing')
+        : where('state', '!=', 'ing');
+
     const productQuerySnapshot = await getDocs(
       query(
         collection(db, 'product'),
         where('user_id', '==', 'obj0nAnnC2LSJ0EZYdes'),
+        stateQuery,
       ),
     );
 
