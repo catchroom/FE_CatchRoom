@@ -1,6 +1,6 @@
 import BottomSheets from '@/components/common/bottomSheets';
 import React from 'react';
-import BottomSheetsContent from '../../bottomSheetsContent';
+import SalePrice from '../../bottomSheetsContent/salePrice';
 
 type PropsType = {
   price: number;
@@ -18,7 +18,7 @@ const SellingPriceContainer = ({ price }: PropsType) => {
         innerTitle="판매 금액을 선택해주세요"
         buttonSelect="input"
       >
-        <BottomSheetsContent price={price} />
+        <SalePrice price={price} />
       </BottomSheets>
       {/* 캐치특가 바텀시트 들어갈 자리 */}
       <div className="mt-8 flex flex-col gap-3 text-p1">

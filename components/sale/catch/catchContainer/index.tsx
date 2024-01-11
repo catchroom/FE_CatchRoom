@@ -6,7 +6,7 @@ import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
 import { useRecoilState } from 'recoil';
 import { catchState } from '@/atoms/sale/catch';
 import BottomSheets from '@/components/common/bottomSheets';
-import BottomSheetsContent from '../../bottomSheetsContent';
+import SalePrice from '../../bottomSheetsContent/salePrice';
 
 type PropsType = {
   price: number;
@@ -54,7 +54,7 @@ const CatchContainer = ({ price }: PropsType) => {
               innerTitle="캐치특가 판매 금액을 선택해주세요"
               buttonSelect="input"
             >
-              <BottomSheetsContent price={price} isCatch={isCatch} />
+              <SalePrice price={price} isCatch={isCatch} />
             </BottomSheets>
           </div>
           <div>

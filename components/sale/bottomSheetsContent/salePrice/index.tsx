@@ -1,12 +1,12 @@
 import React from 'react';
-import Discount from '../discount';
-import CatchBadge from '../catchBadge';
+import Discount from '../../discount';
+import CatchBadge from '../../catchBadge';
 
 type PropsType = {
   price: number;
   isCatch?: boolean;
 };
-const BottomSheetsContent = ({ price, isCatch }: PropsType) => {
+const SalePrice = ({ price, isCatch }: PropsType) => {
   const discount: number[] = [10, 20, 30, 40, 50, 60, 70, 80, 90];
   const filteredDiscounts = isCatch
     ? discount.filter((d) => d >= 50)
@@ -49,4 +49,4 @@ const BottomSheetsContent = ({ price, isCatch }: PropsType) => {
   );
 };
 
-export default BottomSheetsContent;
+export default SalePrice;

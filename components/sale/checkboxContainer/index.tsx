@@ -1,5 +1,6 @@
 'use client';
 import { catchState } from '@/atoms/sale/catch';
+import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { checkBoxSchema } from '@/constants/zodSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,6 +8,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
+import FromSeller from '../bottomSheetsContent/fromSeller';
 
 const CheckboxContainer = () => {
   const isCatch = useRecoilValue(catchState);
@@ -106,13 +108,11 @@ const CheckboxContainer = () => {
           </Link>
         </div>
       )}
-
-      <button
-        type="submit"
-        className="bg-action-primary text-white w-full px-4 rounded h-11 mt-5 cursor-pointer"
-      >
-        다음
-      </button>
+      <div className="mt-5 cursor-pointer">
+        <BottomSheets title="다음" innerTitle="판매자 한마디">
+          <FromSeller />
+        </BottomSheets>
+      </div>
     </div>
   );
 };
