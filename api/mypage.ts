@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 const accessToken: string = Cookies.get('access_token') || '';
 
 //로그아웃
-export const logout = async () => {
+export const logout = async (accessToken: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
     {
