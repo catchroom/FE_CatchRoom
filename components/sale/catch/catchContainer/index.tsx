@@ -5,8 +5,13 @@ import SlideButton from '@/components/common/slideButton';
 import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
 import { useRecoilState } from 'recoil';
 import { catchState } from '@/atoms/sale/catch';
+import BottomSheets from '@/components/common/bottomSheets';
+import BottomSheetsContent from '../../bottomSheetsContent';
 
-const CatchContainer = () => {
+type PropsType = {
+  price: number;
+};
+const CatchContainer = ({ price }: PropsType) => {
   const [open, setOpen] = useState(false);
   const [isCatch, setIsCatch] = useRecoilState(catchState);
   const handleToggleButton = () => {
@@ -44,11 +49,13 @@ const CatchContainer = () => {
         <>
           <div>
             <p className="text-t2">캐치특가 적용 가격</p>
-            <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
-              <BigCalendarIcon />
-              {/* 바텀시트 모달로 변경예정 */}
-              <button className="w-full flex items-start">12월 9일 (월)</button>
-            </div>
+            <BottomSheets
+              title="캐치특가 판매 금액을 선택해주세요"
+              innerTitle="캐치특가 판매 금액을 선택해주세요"
+              buttonSelect="input"
+            >
+              <BottomSheetsContent price={price} isCatch={isCatch} />
+            </BottomSheets>
           </div>
           <div>
             <p className="text-t2">캐치특가 적용 시점</p>

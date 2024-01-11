@@ -4,13 +4,21 @@ import CatchBadge from '../catchBadge';
 
 type PropsType = {
   price: number;
+  isCatch?: boolean;
 };
-const BottomSheetsContent = ({ price }: PropsType) => {
+const BottomSheetsContent = ({ price, isCatch }: PropsType) => {
   const discount: number[] = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+  const filteredDiscounts = isCatch
+    ? discount.filter((d) => d >= 50)
+    : discount;
   return (
-    <div className="flex flex-col gap-8 h-[calc(100vh-200px)] overflow-y-scroll">
+    <div
+      className={`flex flex-col gap-8 ${
+        isCatch ? '' : 'h-[calc(100vh-200px)] overflow-y-scroll'
+      }`}
+    >
       <div>
-        {discount.map((percent) => {
+        {filteredDiscounts.map((percent) => {
           const discountedPrice = price * ((100 - percent) / 100);
           return (
             <div
