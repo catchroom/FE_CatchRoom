@@ -8,6 +8,8 @@ import { commonInputStyle } from '@/components/login';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authDataSchema } from '@/constants/zodSchema';
 import Modal from '../common/modal';
+import { emailState, passwordState } from '@/atoms/signup/signup';
+import { useSetRecoilState } from 'recoil';
 
 const SignUpAuth = () => {
   const router = useRouter();
@@ -41,9 +43,12 @@ const SignUpAuth = () => {
     setValue(fieldName, '');
   };
 
+  const setEmail = useSetRecoilState(emailState);
+  const setPassword = useSetRecoilState(passwordState);
+
   const onSubmit = (data: AuthData) => {
-    //백엔드로 data를 post하기
-    console.log(data);
+    setEmail(data.email);
+    setPassword(data.password);
     router.push('/signup/next');
   };
 
@@ -151,9 +156,6 @@ const SignUpAuth = () => {
               isValid ? 'bg-focus' : 'bg-gray-300'
             }`}
             type="submit"
-            onClick={() => {
-              router.push('/signup/next');
-            }}
             disabled={!isValid}
           >
             다음

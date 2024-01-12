@@ -8,6 +8,9 @@ import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userInfoSchema } from '@/constants/zodSchema';
 import Modal from '@/components/common/modal';
+import { useRecoilValue } from 'recoil';
+import { signUpTest } from '@/api/mypage/api';
+import { emailState, passwordState } from '@/atoms/signup/signup';
 
 const SignUpInfo = () => {
   const router = useRouter();
@@ -40,9 +43,19 @@ const SignUpInfo = () => {
   const clearField = (fieldName: 'name' | 'phone' | 'nickname') => {
     setValue(fieldName, '');
   };
+
+  const email = useRecoilValue(emailState);
+  const password = useRecoilValue(passwordState);
+
   const onSubmit = (data: UserInfo) => {
-    //백엔드로 data를 post하기
-    console.log(data);
+    signUpTest(email, password, data.nickname, data.phone, data.name)
+      .then((response) => {
+        console.log(response);
+        router.push('/login');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
