@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-const SearchComponent = () => {
+const SearchBtnComponent = () => {
   const [isRegionChecked, setIsRegionChecked] =
     useRecoilState(regionCheckedState);
   const [isRoomChecked, setIsRoomChecked] = useRecoilState(roomCheckedState);
@@ -148,7 +148,7 @@ const SearchComponent = () => {
   );
 
   return (
-    <div className=" w-full flex flex-col p-5 items-center text-xl">
+    <div className=" w-full flex flex-col items-center text-xl">
       {SEARCH_DEFAULT.props.map((prop, index) => {
         let placeholderValue = prop.placeholder;
 
@@ -186,7 +186,7 @@ const SearchComponent = () => {
                 {prop.icon === 'pin' && (
                   <CheckBoxComponent
                     id="pin"
-                    labelText="지역 전체선택"
+                    labelText="전체선택"
                     isLabelTextUnderline
                     handleSelectState={handleRegionSelectAll}
                     isBoxChecked={isRegionChecked}
@@ -204,7 +204,7 @@ const SearchComponent = () => {
                 {prop.icon === 'house' && (
                   <CheckBoxComponent
                     id="house"
-                    labelText="유형 전체선택"
+                    labelText="전체선택"
                     isLabelTextUnderline
                     handleSelectState={handleRoomSelectAll}
                     isBoxChecked={isRoomChecked}
@@ -242,4 +242,4 @@ const SearchComponent = () => {
   );
 };
 
-export default SearchComponent;
+export default SearchBtnComponent;

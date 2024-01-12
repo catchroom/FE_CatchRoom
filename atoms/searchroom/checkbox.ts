@@ -2,10 +2,10 @@ import { atom } from 'recoil';
 
 export const regionCheckedState = atom({
   key: 'isRegionChecked',
-  default: false,
+  default: true,
 });
 
 export const roomCheckedState = atom({
   key: 'isRoomChecked',
-  default: false,
+  default: true,
 });
