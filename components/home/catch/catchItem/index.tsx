@@ -13,7 +13,7 @@ const CatchItem = ({
 }: catchItems) => {
   const newPrice = Math.round(oldPrice - oldPrice * (discount / 100));
   return (
-    <div className="flex flex-col relative w-[320px] mt-5 rounded-lg border border-gray-200">
+    <div className="flex flex-col relative w-[20rem] mt-5 rounded-lg border border-gray-200">
       <div className="absolute flex top-[14px] left-4 bg-black gap-1 p-[10px] rounded-3xl items-center">
         <White />
         <span className="text-white">{location}</span>
