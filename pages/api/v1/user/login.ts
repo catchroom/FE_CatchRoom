@@ -9,6 +9,7 @@ import {
   doc,
 } from 'firebase/firestore';
 import { v4 } from 'uuid';
+// import { cookies } from 'next/headers';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body } = req;
@@ -33,6 +34,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const refreshToken = v4();
 
       const userRef = doc(db, 'redis', data[0].id);
+
+      res.setHeader('Set-Cookie', [
+        `refresh_token=${refreshToken}; Path=/; Max-Age=2592000;`,
+        `access_token=${accessToken}; Path=/; Max-Age=300;`,
+      ]);
 
       await setDoc(
         userRef,
