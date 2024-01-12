@@ -20,10 +20,6 @@ const SignUpAuth = () => {
     setOpen((prev) => !prev);
   };
 
-  const onConfirm = () => {
-    handleModalOpen();
-  };
-
   const {
     register,
     handleSubmit,
@@ -85,7 +81,7 @@ const SignUpAuth = () => {
               <Modal
                 title="사용 가능한 이메일입니다."
                 showConfirmButton={true}
-                onConfirm={onConfirm}
+                onConfirm={handleModalOpen}
                 confirmString="확인"
               />
             )}

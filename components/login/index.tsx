@@ -11,7 +11,7 @@ import { loginSchema } from '@/constants/zodSchema';
 import Cookies from 'js-cookie';
 // import { login } from '@/api/user';
 import { useRouter } from 'next/navigation';
-// import Modal from '../common/modal';
+import Modal from '../common/modal';
 import { loginTest, getNewTokenTest } from '@/api/mypage/api';
 
 export const commonInputStyle =
@@ -20,9 +20,16 @@ export const commonInputStyle =
 const LoginForm = () => {
   const router = useRouter();
 
+  //약관 모달
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => {
     setOpen(true);
+  };
+
+  // alert모달
+  const [openAlert, setOpenAlert] = useState(false);
+  const handleModalOpen = () => {
+    setOpenAlert((prev) => !prev);
   };
 
   const {
@@ -60,6 +67,9 @@ const LoginForm = () => {
           console.log('refresh_token 체크:', Cookies.get('refresh_token'));
 
           router.push('/home');
+        } else {
+          //이메일 또는 비밀번호를 다시 확인해주세요. 모달 띄워주기
+          setOpenAlert(true);
         }
       })
       .catch((error) => {
@@ -127,10 +137,18 @@ const LoginForm = () => {
             로그인
           </button>
           {/* 로그인 실패시 alert 모달 추가로 띄우기? -> 피그마에만 나와서 아직 반영 x */}
+          {openAlert && (
+            <Modal
+              title="이메일 또는 비밀번호를 다시 확인해주세요."
+              showConfirmButton={true}
+              onConfirm={handleModalOpen}
+              confirmString="확인"
+            />
+          )}
         </div>
 
-        <div className="w-full h-[3rem] text-gray-600 flex justify-between px-5 mt-7 text-p2">
-          <span className="relative pl-14">
+        <div className="w-full h-[3rem] text-gray-600 flex justify-center space-x-10 px-5 mt-7 text-p2">
+          <span className="relative">
             <Link href="https://www.yanolja.com/" className="underline">
               비밀번호 재설정
             </Link>
@@ -138,8 +156,10 @@ const LoginForm = () => {
               <NextArrowIcon />
             </span>
           </span>
-          |
-          <span className="relative pr-20">
+
+          <span className="relative">&nbsp;|</span>
+
+          <span className="relative">
             <div className="underline cursor-pointer" onClick={handleOpenModal}>
               야놀자 통합 회원가입
               <span className="absolute">
@@ -151,7 +171,6 @@ const LoginForm = () => {
         </div>
 
         {/* 테스트입니다 */}
-        {/* 지금 문제 -> refreshtoken이 undefined */}
         <button
           onClick={() => {
             getNewTokenTest()
