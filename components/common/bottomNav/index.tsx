@@ -3,14 +3,14 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import HomeIcon from '../../../public/svg/home-line.svg';
-import ChattingIcon from '../../../public/svg/chatting.svg';
-import MyPageIcon from '../../../public/svg/face-smile.svg';
+import HomeIcon from '@/public/svg/home-line.svg';
+import ChattingIcon from '@/public/svg/chatting.svg';
+import MyPageIcon from '@/public/svg/face-smile.svg';
 
 const BottomNav = () => {
   const currentPath = usePathname();
   return (
-    <nav className="fixed bottom-0 bg-white border-t-2 border-gray-200 px-4 py-2 h-17 w-full max-w-[480px] z-50">
+    <nav className="fixed bottom-0 bg-white border-t-2 border-gray-200 px-4 py-2 h-17 w-full max-w-[480px] z-20">
       <ul className="flex justify-between items-center h-full">
         <li
           className={`flex-1 h-full py-1 rounded-lg ${

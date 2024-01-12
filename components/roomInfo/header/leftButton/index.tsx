@@ -5,8 +5,16 @@ import LeftButtonIcon from './leftButtonIcon';
 
 const LeftButton = () => {
   const router = useRouter();
+
+  const backPageHandler = () => {
+    router.back();
+  };
+
   return (
-    <button onClick={() => router.back()}>
+    <button
+      className="flex items-center justify-center w-[1.75rem] h-[1.75rem] "
+      onClick={backPageHandler}
+    >
       <LeftButtonIcon />
     </button>
   );
