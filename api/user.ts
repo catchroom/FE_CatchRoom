@@ -24,7 +24,6 @@ export const signUp = async (
     //성공
     return data;
   } else if (data.code === 1001 || 1002 || 1003 || 1004) {
-  } else if (data.code === 1001 || 1002 || 1003 || 1004) {
     //이메일 형식 문제
     console.log(data.message);
   }
@@ -41,12 +40,6 @@ export const login = async (email: string, password: string) => {
 
   const data = await res.json();
   if (data.code === 1006) {
-    //성공
-
-    // 서버 컴포넌트에서 x -> 클라이언트 컴포넌트에서 사용하기
-    // document.cookie = `access_token=${data.data.access_token}; path=/`;
-    // document.cookie = `refresh_token=${data.data.refresh_token}; path=/`;
-
     // 서버 컴포넌트에서 x -> 클라이언트 컴포넌트에서 사용하기
     // document.cookie = `access_token=${data.data.access_token}; path=/`;
     // document.cookie = `refresh_token=${data.data.refresh_token}; path=/`;
@@ -68,7 +61,6 @@ export const nicknameCheck = async (nickname: string) => {
     {
       method: 'GET',
       headers: { Accept: 'application/json' },
-      headers: { Accept: 'application/json' },
     },
   );
 
@@ -89,7 +81,6 @@ export const emailCheck = async (email: string) => {
     {
       method: 'GET',
       headers: { Accept: 'application/json' },
-      headers: { Accept: 'application/json' },
     },
   );
 
@@ -107,29 +98,18 @@ export const emailCheck = async (email: string) => {
 export const refreshAccessToken = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${refreshToken}`,
       },
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${refreshToken}`,
-      },
+
       body: JSON.stringify({ refreshToken }),
     },
   );
 
   const data = await res.json();
-  if (data.code === 1013) {
-    //성공
-    return data;
-  } else if (data.code === 5000) {
-    //에러
-    console.log(data.message);
-  }
   if (data.code === 1013) {
     //성공
     return data;

@@ -10,15 +10,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
 import Cookies from 'js-cookie';
 import { login } from '@/api/user';
+import { useRouter } from 'next/navigation';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     watch,
     setValue,
   } = useForm<LoginData>({
@@ -99,11 +102,18 @@ const LoginForm = () => {
 
         <div className="w-full mt-7">
           <button
-            className="w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md  bg-focus"
+            className={`w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
+              isValid ? 'bg-focus' : 'bg-gray-300'
+            }`}
             type="submit"
+            onClick={() => {
+              router.push('/home');
+            }}
+            disabled={!isValid}
           >
             로그인
           </button>
+          {/* 로그인 실패시 alert 모달 추가로 띄우기? -> 피그마에만 나와서 아직 반영 x */}
         </div>
 
         <div className="w-full h-[3rem] text-gray-600 flex justify-between px-5 mt-7 text-p2">
@@ -118,7 +128,7 @@ const LoginForm = () => {
           |
           <span className="relative pr-20">
             <div className="underline cursor-pointer" onClick={handleOpenModal}>
-              회원가입
+              야놀자 통합 회원가입
               <span className="absolute">
                 <NextArrowIcon />
               </span>
