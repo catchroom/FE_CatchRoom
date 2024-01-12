@@ -15,6 +15,7 @@ import SearchBoxButton from '../searchBoxButton';
 import { useRecoilState } from 'recoil';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import PriceButton from '../sheetsButtons/priceButton';
+import DropdownButton from '../sheetsButtons/dropdownButton';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -35,8 +36,8 @@ import PriceButton from '../sheetsButtons/priceButton';
 const BottomSheets = ({
   children,
   title,
-  innerTitle = '모달제목',
-  innerButtonTitle = '버튼제목',
+  innerTitle,
+  innerButtonTitle,
   buttonSelect = 'simple',
   placeholder,
   icon,
@@ -49,7 +50,7 @@ const BottomSheets = ({
   title: string;
   innerTitle?: string;
   innerButtonTitle?: string;
-  buttonSelect?: 'input' | 'simple' | 'search' | 'sale' | 'price';
+  buttonSelect?: 'input' | 'simple' | 'search' | 'sale' | 'price' | 'dropdown';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
   closeButton?: boolean;
@@ -96,6 +97,7 @@ const BottomSheets = ({
     ),
     sale: <SaleButton name={title} fn={modalOpen} />,
     price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
+    dropdown: <DropdownButton name={title} fn={modalOpen} />,
   };
 
   return (
@@ -142,7 +144,7 @@ const BottomSheets = ({
                 </div>
                 <div className="w-full h-full mt-3 flex flex-col items-center gap-12">
                   {children}
-                  {closeButton && (
+                  {closeButton && innerButtonTitle && (
                     <SimpleButton
                       fn={modalClose}
                       name={innerButtonTitle}
