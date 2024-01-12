@@ -15,6 +15,7 @@ import SearchBoxButton from '../searchBoxButton';
 import { useRecoilState } from 'recoil';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import PriceButton from '../sheetsButtons/priceButton';
+import ValidationButton from '../sheetsButtons/validationButton';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -49,7 +50,13 @@ const BottomSheets = ({
   title: string;
   innerTitle?: string;
   innerButtonTitle?: string;
-  buttonSelect?: 'input' | 'simple' | 'search' | 'sale' | 'price';
+  buttonSelect?:
+    | 'input'
+    | 'simple'
+    | 'search'
+    | 'sale'
+    | 'price'
+    | 'validation';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
   closeButton?: boolean;
@@ -96,6 +103,7 @@ const BottomSheets = ({
     ),
     sale: <SaleButton name={title} fn={modalOpen} />,
     price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
+    validation: <ValidationButton name={title} fn={modalOpen} />,
   };
 
   return (
