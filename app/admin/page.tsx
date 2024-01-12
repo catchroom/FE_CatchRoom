@@ -72,7 +72,16 @@ const sellingSchema = z.object({
   end_date: z.string({
     required_error: '필수 입력 사항입니다.',
   }),
-  discount: z.number({
+  discount: z.string({
+    required_error: '필수 입력 사항입니다.',
+  }),
+  sell_price: z.string({
+    required_error: '필수 입력 사항입니다.',
+  }),
+  catch_price: z.string({
+    required_error: '필수 입력 사항입니다.',
+  }),
+  actual_profit: z.string({
     required_error: '필수 입력 사항입니다.',
   }),
 });
@@ -101,15 +110,15 @@ export const 판매에필요한데이터 = [
 
 export const 할인률 = [
   {
-    label: 'discount',
+    label: 'discount1',
     value: 30,
   },
   {
-    label: 'discount',
+    label: 'discount2',
     value: 50,
   },
   {
-    label: 'discount',
+    label: 'discount3',
     value: 70,
   },
 ];
@@ -305,6 +314,8 @@ const RegisterSellingAccomodation = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<sellingType>({
     resolver: zodResolver(sellingSchema),
@@ -315,22 +326,22 @@ const RegisterSellingAccomodation = () => {
     console.log(data);
   };
 
-  // const handleRadioClick = (price: number) => {
-  //   setValue('sell_price', price);
-  // };
+  const handleRadioClick = (price: number) => {
+    setValue('sell_price', String(price));
+  };
 
-  // const handleDiscountClick = (discount: number) => {
-  //   setValue('discount', discount);
+  const handleDiscountClick = (discount: string) => {
+    setValue('discount', discount);
 
-  //   const price = getValues('sell_price');
-  //   const discountPrice = price * (discount / 100);
-  //   const sellPrice = price - discountPrice;
-  //   setValue('catch_price', sellPrice);
-  //   const commission = sellPrice * 0.15;
+    const price = Number(getValues('sell_price'));
+    const discountPrice = price * (Number(discount) / 100);
+    const sellPrice = price - discountPrice;
+    setValue('catch_price', String(sellPrice));
+    const commission = sellPrice * 0.15;
 
-  //   const finalPrice = sellPrice - commission;
-  //   setValue('actual_profit', finalPrice);
-  // };
+    const finalPrice = sellPrice - commission;
+    setValue('actual_profit', String(finalPrice));
+  };
 
   return (
     <div className="w-full flex flex-col gap-5 p-3 border border-border-primary rounded-lg">
@@ -348,6 +359,7 @@ const RegisterSellingAccomodation = () => {
                   crossOrigin="anonymouse"
                   value={data.order_history_id}
                   {...register('order_history_id', { required: true })}
+                  onClick={() => handleRadioClick(data.price)}
                 />
                 <div className="flex flex-col gap-1">
                   <div className="flex gap-2 items-baseline">
@@ -382,15 +394,15 @@ const RegisterSellingAccomodation = () => {
           })}
         </div>
         <h3>할인률</h3>
-        <div className="w-full flex gap-3 pt-3 pb-10">
+        <div className="w-full flex justify-around gap-3 pt-3 pb-10">
           {할인률.map((item) => {
             return (
-              <div key={item.value}>
+              <div key={item.value} className="flex flex-col items-center">
                 <Radio
                   crossOrigin="anonymouse"
-                  key={item.value}
                   value={item.value}
                   {...register('discount', { required: true })}
+                  onClick={() => handleDiscountClick(String(item.value))}
                 />
                 <p>{item.value}% 할인</p>
               </div>
@@ -401,13 +413,14 @@ const RegisterSellingAccomodation = () => {
           )}
         </div>
 
-        <div className="w-full grid grid-cols-2  gap-3 pt-3 pb-10">
+        <div className="w-full grid grid-cols-2 gap-3 pt-3 pb-10 ">
           {판매상태.map((item) => {
             return (
-              <div key={item.value}>
+              <div key={item.value} className="flex items-center">
                 <Radio
+                  crossOrigin="anonymouse"
+                  value={item.value}
                   key={item.value}
-                  crossOrigin="anonymous"
                   {...register('state', { required: true })}
                 />
                 <p>{item.label}</p>
