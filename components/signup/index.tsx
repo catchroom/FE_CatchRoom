@@ -20,6 +20,13 @@ const SignUpAuth = () => {
     setOpen((prev) => !prev);
   };
 
+  const checkEmail = () => {
+    //api요청 보내는 함수 추가
+    //응답 코드마다 분기처리!! 1012일때는 모달 열고 1005일때는 에러문구 출력
+    handleModalOpen(); //사용 가능한 이메일일때 뜨는 모달(응답이 1012일때 )
+    //응답이 1005일때는 에러 문구 뜨게 해주기 -> 사용중인 이메일 입니다.
+  };
+
   const {
     register,
     handleSubmit,
@@ -71,11 +78,10 @@ const SignUpAuth = () => {
             )}
             <div
               className="cursor-pointer font-bold text-p3 underline"
-              onClick={handleModalOpen}
+              onClick={checkEmail}
             >
               중복확인
             </div>
-            {/* 로그인 중복 여부에 따라 모달 다르게 보여주기 */}
             {/* 에러 문구 : 사용중인 이메일 입니다. 추가하기 */}
             {open && (
               <Modal
