@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -25,12 +25,29 @@ const fetchData = async (body: any) => {
   return data;
 };
 
+const fetchFindData = async () => {
+  const data = await axios.get(
+    'http://13.124.240.142:8080/v1/chat/room/find?id=02d6b08d-60f8-4c21-b5b2-0ba7af752e29',
+  );
+
+  console.log(data);
+  return data.data;
+};
+
 const TestComponent = () => {
   const mutation = useMutation({
     mutationKey: ['tesdddt'],
     // eslint-disable-next-line
     mutationFn: (body: any) => fetchData(body),
   });
+
+  const { data } = useQuery({
+    queryKey: ['find'],
+    queryFn: () => fetchFindData(),
+  });
+
+  console.log(data);
+
   const { register, handleSubmit } = useForm<loginFormType>({
     resolver: zodResolver(loginFormSchema),
   });

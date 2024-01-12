@@ -26,3 +26,15 @@ export type AccommodationType = {
   name: string;
   type: number;
 };
+
+export type sellingHistoryType = {
+  order_history_id: string;
+  productName: string;
+  transportation: string;
+  room_id: string;
+  price: number;
+  accommodation_id: string;
+  check_out: string;
+  check_in: string;
+  user_id: string;
+};
