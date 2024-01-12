@@ -54,7 +54,7 @@ const CheckboxContainer = () => {
   };
 
   return (
-    <div className="flex flex-col w-full gap-4 ">
+    <div className="flex flex-col w-full gap-4 mb-24 ">
       <div className="flex items-center cursor-pointer relative">
         <CheckBoxComponent
           id="allAgree"
@@ -108,10 +108,12 @@ const CheckboxContainer = () => {
           </Link>
         </div>
       )}
-      <div className="mt-5 cursor-pointer">
-        <BottomSheets title="다음" innerTitle="판매자 한마디">
-          <FromSeller />
-        </BottomSheets>
+      <div className="cursor-pointer fixed bottom-0 w-full max-w-[480px] flex justify-center ">
+        <div className="border border-border-sub bg-bg w-full p-5 -ml-10">
+          <BottomSheets title="다음" innerTitle="판매자 한마디">
+            <FromSeller />
+          </BottomSheets>
+        </div>
       </div>
     </div>
   );

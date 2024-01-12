@@ -22,7 +22,7 @@ const Sale = () => {
   // };
   return (
     <div>
-      <Header title="숙박권 판매" showBackButton={true} />
+      <Header title="판매하기" showBackButton={true} />
       <div className="p-5">
         <SaleInfoContainer />
         <Line />
