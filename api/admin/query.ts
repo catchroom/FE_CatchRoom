@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   fetchAllProduct,
+  fetchEnrollSellingData,
   fetchMypageSelling,
   fetchOrderHistory,
   fetchSellingData,
@@ -58,4 +59,22 @@ export const useOrderQuery = () => {
   });
 
   return { data, isLoading };
+};
+
+export const useSellingMutation = (queryKey: string) => {
+  const mutation = useMutation({
+    mutationKey: [queryKey],
+    // eslint-disable-next-line
+    mutationFn: (body: any) => fetchEnrollSellingData(body),
+    onSuccess: () => {
+      // eslint-disable-next-line
+      alert('숙소 등록이 완료되었습니다.');
+    },
+    onError: () => {
+      // eslint-disable-next-line
+      alert('숙소 등록에 실패하였습니다.');
+    },
+  });
+
+  return mutation;
 };

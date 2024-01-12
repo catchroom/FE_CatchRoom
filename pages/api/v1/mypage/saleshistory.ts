@@ -21,18 +21,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     };
 
-    const stateQuery =
-      state === 'ing'
-        ? where('state', '==', 'ing')
-        : where('state', '!=', 'ing');
+    console.log(state);
 
-    const productQuerySnapshot = await getDocs(
-      query(
-        collection(db, 'product'),
-        where('user_id', '==', 'obj0nAnnC2LSJ0EZYdes'),
-        stateQuery,
-      ),
-    );
+    const productQuerySnapshot =
+      state === 'ing'
+        ? await getDocs(
+            query(
+              collection(db, 'product'),
+              where('user_id', '==', 'obj0nAnnC2LSJ0EZYdes'),
+              where('state', '==', 'ing'),
+            ),
+          )
+        : await getDocs(
+            query(
+              collection(db, 'product'),
+              where('state', 'in', ['done', 'notForSale', 'expirationDate']),
+            ),
+          );
 
     for (const productDoc of productQuerySnapshot.docs) {
       const productData = productDoc.data();

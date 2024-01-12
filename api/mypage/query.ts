@@ -7,7 +7,7 @@ const queryData = {
     queryFn: fetchMypageSelling,
     retry: 1,
   },
-  test: {
+  done: {
     queryKey: ['mypage_offSale'],
     queryFn: fetchMypageSellingTest,
     retry: 1,

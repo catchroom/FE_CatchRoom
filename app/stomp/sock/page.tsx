@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 
+// test 완료되면 지우도록 하겠습니다
+
 const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
 
 type Content = {

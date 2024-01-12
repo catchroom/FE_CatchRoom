@@ -5,6 +5,7 @@ import {
   useAdminMutation,
   useOrderMutation,
   useOrderQuery,
+  useSellingMutation,
 } from '@/api/admin/query';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import {
@@ -134,11 +135,11 @@ export const 판매상태 = [
   },
   {
     label: '기한만료',
-    value: 'expriationDate',
+    value: 'expirationDate',
   },
   {
     label: '판매불가',
-    value: 'NotForSale',
+    value: 'notForSale',
   },
 ];
 
@@ -310,6 +311,7 @@ const ViewAccommodationData = () => {
 };
 
 const RegisterSellingAccomodation = () => {
+  const mutation = useSellingMutation('selling');
   const { data, isLoading } = useOrderQuery();
   const {
     register,
@@ -323,7 +325,28 @@ const RegisterSellingAccomodation = () => {
   });
 
   const onSubmit: SubmitHandler<sellingType> = (data) => {
-    console.log(data);
+    if (!sellingSchema.safeParse(data))
+      return alert('입력값이 올바르지 않습니다.');
+
+    const sendData = {
+      actual_profit: Number(data.actual_profit),
+      catch_price: Number(data.catch_price),
+      discount: Number(data.discount),
+      end_date: data.end_date,
+      introduction: data.introduction,
+      order_history_id: data.order_history_id,
+      sell_price: Number(data.sell_price),
+      state: data.state,
+      write_date: data.write_date,
+      is_auth_catch: true,
+      is_catch: true,
+      is_nego: true,
+      user_id: 'obj0nAnnC2LSJ0EZYdes',
+      catch_price_start_date: data.end_date,
+    };
+
+    mutation.mutate(sendData);
+    mutation.isSuccess && alert('성공적으로 추가되었습니다.');
   };
 
   const handleRadioClick = (price: number) => {

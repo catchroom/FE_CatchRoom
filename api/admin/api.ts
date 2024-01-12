@@ -68,3 +68,17 @@ export const fetchSellingData = async () => {
   const data = await response.json();
   return data.data;
 };
+
+// eslint-disable-next-line
+export const fetchEnrollSellingData = async (body: any) => {
+  const response = await fetch('/api/v1/mypage/salesenroll', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  const data = await response.json();
+  return data.data;
+};

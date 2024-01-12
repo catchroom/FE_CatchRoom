@@ -1,6 +1,6 @@
 import DivideWrapper from '@/components/mypage/divideWrapper';
+import Divide from '@/components/mypage/divider';
 import React from 'react';
-import Divide from './divide';
 
 const page = () => {
   return (
