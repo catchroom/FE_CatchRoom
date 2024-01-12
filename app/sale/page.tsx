@@ -28,9 +28,9 @@ const Sale = () => {
         <Line />
         <SaleEndContainer />
         <Line />
-        <SellingPriceContainer />
+        <SellingPriceContainer price={132000} />
         <Line />
-        <CatchContainer />
+        <CatchContainer price={132000} />
         <Line />
         <CheckboxContainer />
       </div>
