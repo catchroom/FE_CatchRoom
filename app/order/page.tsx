@@ -13,7 +13,9 @@ const page = () => {
   const accommodationName = '제주신라호텔';
   const roomName = '스탠다드 더블';
 
+  const price = 100000;
   const totalPrice = 135000;
+  const commission = 9000;
 
   return (
     <>
@@ -29,9 +31,13 @@ const page = () => {
           CheckOutDate="2024-01-02 (화)"
           CheckOutTime="11:00"
         />
-        <BookingHolderInfo name="이름" phoneNumber="010-1234-5678" />
-        <GuestInfo name="이름" phoneNumber="010-1234-5678" />
-        <PaymentInfo totalPrice={totalPrice} />
+        <BookingHolderInfo name="홍길동" phoneNumber="010-1234-5678" />
+        <GuestInfo name="홍길동" phoneNumber="01012345678" />
+        <PaymentInfo
+          price={price}
+          totalPrice={totalPrice}
+          commission={commission}
+        />
         <PaymentMethods />
         <TermsAndConditions label="약관 동의" />
         <PaymentButton amount={totalPrice} />
