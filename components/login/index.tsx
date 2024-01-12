@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { LoginData } from '@/types/login/types';
@@ -11,12 +11,18 @@ import { loginSchema } from '@/constants/zodSchema';
 import Cookies from 'js-cookie';
 import { login } from '@/api/user';
 import { useRouter } from 'next/navigation';
+// import Modal from '../common/modal';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
 const LoginForm = () => {
   const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
 
   const {
     register,
@@ -44,11 +50,6 @@ const LoginForm = () => {
 
     Cookies.set('access_token', resdata.access_token, { path: '/' });
     Cookies.set('refresh_token', resdata.refresh_token, { path: '/' });
-  };
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpenModal = () => {
-    setOpen(true);
   };
 
   return (
