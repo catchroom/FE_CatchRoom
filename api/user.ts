@@ -95,7 +95,7 @@ export const emailCheck = async (email: string) => {
 };
 
 //리프레쉬 토큰으로 액세스 토큰 요청
-export const refreshAccessToken = async () => {
+export const getNewToken = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
     {
@@ -104,7 +104,6 @@ export const refreshAccessToken = async () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${refreshToken}`,
       },
-
       body: JSON.stringify({ refreshToken }),
     },
   );

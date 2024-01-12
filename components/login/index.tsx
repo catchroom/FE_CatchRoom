@@ -9,9 +9,10 @@ import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
 import Cookies from 'js-cookie';
-import { login } from '@/api/user';
+// import { login } from '@/api/user';
 import { useRouter } from 'next/navigation';
 // import Modal from '../common/modal';
+import { loginTest, getNewTokenTest } from '@/api/mypage/api';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -43,13 +44,27 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (data: LoginData) => {
-    // console.log(data);
+    loginTest(data.email, data.password)
+      .then((response) => {
+        console.log(response);
+        if (response.code === '1006') {
+          Cookies.set('access_token', response.data.access_token, {
+            path: '/',
+          });
+          // 오타 반영한 코드임!! 수정
+          Cookies.set('refresh_token', response.data.refresh_toekn, {
+            path: '/',
+          });
 
-    //data post하고 쿠키 저장
-    const resdata = await login(data.email, data.password);
+          console.log('access_token 체크', Cookies.get('access_token'));
+          console.log('refresh_token 체크:', Cookies.get('refresh_token'));
 
-    Cookies.set('access_token', resdata.access_token, { path: '/' });
-    Cookies.set('refresh_token', resdata.refresh_token, { path: '/' });
+          router.push('/home');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -107,9 +122,6 @@ const LoginForm = () => {
               isValid ? 'bg-focus' : 'bg-gray-300'
             }`}
             type="submit"
-            onClick={() => {
-              router.push('/home');
-            }}
             disabled={!isValid}
           >
             로그인
@@ -137,6 +149,27 @@ const LoginForm = () => {
             </div>
           </span>
         </div>
+
+        {/* 테스트입니다 */}
+        {/* 지금 문제 -> refreshtoken이 undefined */}
+        <button
+          onClick={() => {
+            getNewTokenTest()
+              .then((response) => {
+                console.log(response);
+                if (response.code === '1006') {
+                  console.log('access_token 체크', Cookies.get('access_token'));
+                  router.push('/signup');
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }}
+        >
+          테스트입니다
+        </button>
+        {/* 테스트입니다 */}
       </form>
     </div>
   );
