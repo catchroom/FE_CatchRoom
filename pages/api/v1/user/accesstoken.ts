@@ -32,6 +32,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const userRef = doc(db, 'redis', data[0].id);
 
+      res.setHeader('Set-Cookie', [
+        `access_token=${accessToken}; Path=/; Max-Age=300;`,
+      ]);
+
       await setDoc(
         userRef,
         {
