@@ -13,13 +13,13 @@ export const getDotDate = (inputDate: string, noDay = false) => {
 export const decodeState = (state: StateType) => {
   switch (state) {
     case 'ing':
-      return '게시 만료예정';
-    case 'soldOut':
-      return '판매완료';
-    case 'outDated':
-      return '기한만료';
-    case 'offSale':
-      return '판매불가';
+      return '게시 만료일 ~ ';
+    case 'done':
+      return '판매일 ';
+    case 'expirationDate':
+      return '게시기한 만료';
+    case 'notForSale':
+      return '체크인 만료';
     default:
       return '상세보기';
   }
@@ -28,8 +28,8 @@ export const decodeState = (state: StateType) => {
 // decodeState return type
 export type StateType =
   | 'ing'
-  | 'soldOut'
-  | 'outDated'
-  | 'offSale'
+  | 'done'
+  | 'expirationDate'
+  | 'notForSale'
   | 'purchased';
 export type decodeStateReturnType = ReturnType<typeof decodeState>;

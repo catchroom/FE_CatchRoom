@@ -9,6 +9,8 @@ import CalendarSVG from '@/public/svgComponent/mediumCalendar';
 const MItem = ({ item }: { item: MypageSellingType }) => {
   // const soldOut = item.state === 'soldOut' ? true : false;
 
+  const state = decodeState(item.state as StateType);
+
   return (
     <div id="container" className="w-full px-5 py-3">
       {/* 호텔 이미지, 이름, 가격 정보 */}
@@ -44,7 +46,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
             </div>
           </div>
           <p className="text-sub text-t3 font-medium">
-            게시기한 {getDotDate(item.productEndDate, true)}
+            {state} {getDotDate(item.productEndDate, true)}
           </p>
         </div>
       </div>
