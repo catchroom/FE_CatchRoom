@@ -12,8 +12,8 @@ const BookingHolderInfo = ({ name, phoneNumber }: BookingHolderInfoProps) => {
         예약자 정보
       </span>
       <div className="flex justify-start items-center mb-3 space-x-2">
-        <span className="text-p2 text-text-sub">{name}</span>
-        <span className="text-p2 text-text-sub">{phoneNumber}</span>
+        <span className="text-t2 text-text-sub">{name}</span>
+        <span className="text-t2 text-text-sub">{phoneNumber}</span>
       </div>
       <div>
         <InfoBox messageKey="bookingHolderInfo" />

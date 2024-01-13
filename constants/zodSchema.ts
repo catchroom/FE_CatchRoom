@@ -146,3 +146,17 @@ export const checkBoxSchema = (isCatch: boolean) =>
         }
       : {}),
   });
+
+export const guestInfoSchema = z.object({
+  name: z
+    .string()
+    // .min(2, '이름을 입력해주세요.')
+    .regex(/^[a-zA-Z가-힣]*$/, '이름은 한글과 영어로만 입력 가능합니다.'),
+  phone: z
+    .string()
+    // .min(2, '휴대폰번호를 입력해주세요.')
+    .regex(
+      /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/,
+      '휴대폰번호는 숫자만 입력 가능합니다.',
+    ),
+});

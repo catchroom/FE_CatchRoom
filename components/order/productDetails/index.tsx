@@ -10,7 +10,7 @@ const ProductDetails = ({
       <h2 className="text-h4  mb-2 leading-8 font-bold text-gray-1000">
         {accommodationName}
       </h2>
-      <p className="text-p1 leading-6 font-semibold text-text-sub">
+      <p className="text-t2 leading-6 font-semibold text-text-sub">
         {roomName}
       </p>
     </section>
