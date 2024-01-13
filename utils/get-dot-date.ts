@@ -10,12 +10,12 @@ export const getDotDate = (inputDate: string, noDay = false) => {
   }
 };
 
-export const decodeState = (state: StateType) => {
+export const decodeState = (state: StateType, date?: string) => {
   switch (state) {
     case 'ing':
-      return '게시 만료일 ~ ';
+      return `게시 만료일 ~ ${date}`;
     case 'done':
-      return '판매일 ';
+      return `판매일 ${date}`;
     case 'expirationDate':
       return '게시기한 만료';
     case 'notForSale':

@@ -8,7 +8,7 @@ const ReviewButtons = ({
   soldOut = true,
   isReview,
 }: {
-  id: number;
+  id: string;
   name?: string;
   soldOut?: boolean;
   isReview: boolean;
