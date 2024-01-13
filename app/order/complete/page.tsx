@@ -23,11 +23,12 @@ const page = () => {
       phoneNumber: '010-1234-5678',
     },
     totalPrice: 200000,
+    paymentMethod: '카드',
   };
   return (
     <>
       <Header title="구매하기" showCloseButton />
-      <div className="flex flex-col container mx-auto w-full px-5 pt-14 pb-11 bg-bg">
+      <div className="flex flex-col container mx-auto w-full px-5 pt-14 pb-5  bg-bg">
         <div>
           <CompleteMessage />
         </div>
@@ -39,11 +40,11 @@ const page = () => {
             maxCapacity={maxCapacity}
             imageUrl={imageUrl}
           />
-
           <ReservationInfo
             bookingHolder={bookingDetails.bookingHolder}
             guest={bookingDetails.guest}
             totalPrice={bookingDetails.totalPrice}
+            paymentMethod={bookingDetails.paymentMethod}
           />
         </div>
         <div className="flex flex-row justify-center items-stretch gap-6 mt-28">
