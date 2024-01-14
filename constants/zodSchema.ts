@@ -128,8 +128,6 @@ export const loginSchema = z.object({
   password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
 });
 
-//export type Checkbox = z.infer<typeof checkBoxSchema>;
-
 export const checkBoxSchema = (isCatch: boolean) =>
   z.object({
     check1: z.boolean().refine((val) => val === true, {
@@ -146,6 +144,19 @@ export const checkBoxSchema = (isCatch: boolean) =>
         }
       : {}),
   });
+
+export const radioSchema = z.object({
+  selectedProduct: z.string().min(1, '하나의 상품을 선택해야 합니다.'),
+});
+
+export type FromSeller = z.infer<typeof sellerSchema>;
+
+export const sellerSchema = z.object({
+  sellerContent: z
+    .string()
+    .min(10, '최소 10자 이상 입력해주세요')
+    .max(100, '리뷰는 100자 이하로 입력해주세요.'),
+});
 
 export const guestInfoSchema = z.object({
   name: z

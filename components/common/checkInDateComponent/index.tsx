@@ -15,23 +15,21 @@ const CheckInDateComponent = ({
   CheckOutDate = '00.00 (월)',
 }: CheckInComponentProps) => {
   return (
-    <>
-      <div className="relative flex flex-wrap w-full h-[5.625rem] mt-2 items-center justify-around gap-0 bg-surface-gray">
-        <div className="text-center">
-          <div className="text-p1 font-medium text-gray-600">체크인</div>
-          <div className="text-p1 font-semibold text-gray-800">
-            {CheckInDate} {CHECKIN_TIME}
-          </div>
-        </div>
-        <div className="absolute h-[37px] w-[1px] bg-gray-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-        <div className="text-center">
-          <div className="text-p1 font-medium text-gray-600">체크아웃</div>
-          <div className="text-p1 font-semibold text-gray-800">
-            {CheckOutDate} {CHECKOUT_TIME}
-          </div>
+    <div className="relative flex flex-wrap w-full h-[5.625rem] mt-2 items-center justify-around bg-surface-gray rounded-[4px]">
+      <div className="text-center">
+        <div className="text-p1 font-medium text-gray-600">체크인</div>
+        <div className="text-p1 font-semibold text-gray-800">
+          {CheckInDate} {CHECKIN_TIME}
         </div>
       </div>
-    </>
+      <div className="absolute h-[37px] w-[1px] bg-gray-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+      <div className="text-center">
+        <div className="text-p1 font-medium text-gray-600">체크아웃</div>
+        <div className="text-p1 font-semibold text-gray-800">
+          {CheckOutDate} {CHECKOUT_TIME}
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -2,13 +2,13 @@ import CheckInDateComponent from '@/components/common/checkInDateComponent';
 import React from 'react';
 
 const ItemCheckInComponent = () => {
+  // 받아와야 할 데이터
+  // (체크인 날짜(월,일,요일), 체크아웃 날짜(월,일,요일))
   return (
     <>
       <CheckInDateComponent
-        checkInDate="2024-01-01 (월)"
-        CheckInTime="15:00"
-        CheckOutDate="2024-01-02 (화)"
-        CheckOutTime="11:00"
+        CheckInDate="01.01 (월)"
+        CheckOutDate="01.03 (월)"
       />
     </>
   );

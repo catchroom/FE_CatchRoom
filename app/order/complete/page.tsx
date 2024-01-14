@@ -1,9 +1,8 @@
 import Header from '@/components/common/header';
 import CompleteMessage from '@/components/complete/completeMessage';
+// import NavButton from '@/components/complete/navButton';
 import ProductDetails from '@/components/complete/productDetails';
 import ReservationInfo from '@/components/complete/reservationInfo';
-import ActionButton from '@/components/order/modal/actionButton';
-import Link from 'next/link';
 import React from 'react';
 
 const page = () => {
@@ -47,21 +46,7 @@ const page = () => {
             paymentMethod={bookingDetails.paymentMethod}
           />
         </div>
-        <div className="flex flex-row justify-center items-stretch gap-6 mt-28">
-          <Link href="/home">
-            <ActionButton
-              label="홈으로 이동"
-              colorClass="bg-white text-black border border-black"
-            />
-          </Link>
-          <Link href="/details" passHref>
-            {/* 상세보기 url 확인 후 수정 필요 */}
-            <ActionButton
-              label="상세보기"
-              colorClass="bg-gray-1000 text-white"
-            />
-          </Link>
-        </div>
+        {/* <NavButton /> 추가예정 */}
       </div>
     </>
   );
