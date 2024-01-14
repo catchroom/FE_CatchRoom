@@ -67,26 +67,27 @@ const CatchSpecialComponent = ({
         />
       </div>
       <div className="flex-grow flex-col h-[140px]">
-        <div className="mb-5 ">
+        <div className="mb-3 ">
           <div className="flex items-center gap-1 text-p2 font-semibold">
             <CallendarIcon />
             {resDate}
           </div>
-          <div className="flex flex-col items-start mt-2">
+          <div className="flex flex-col items-start mt-3 gap-3">
             <div className="text-t1 font-bold leading-none">{roomName}</div>
-            <div className="text-t1 font-bold leading-none text-text-sub mt-1">
+            <div className="text-t1 font-bold leading-none text-text-sub">
               {roomType}
             </div>
           </div>
         </div>
         <div className="flex flex-col items-start">
           <div className="flex flex-wrap text-p2 text-gray-600">
-            <span>구매가&nbsp;</span>
-            <p className="line-through">{oldPrice.toLocaleString()}원</p>
+            <p className="line-through">
+              구매가&nbsp;{oldPrice.toLocaleString()}원
+            </p>
           </div>
-          <div className="flex flex-wrap items-center mt-1">
+          <div className="flex flex-wrap items-center">
             <p className="text-t1 text-main font-bold">{discount}%</p>
-            <p className=" text-t1 font-semibold ml-2">
+            <p className=" text-t1 font-bold ml-2">
               {newPrice.toLocaleString()}원
             </p>
           </div>
