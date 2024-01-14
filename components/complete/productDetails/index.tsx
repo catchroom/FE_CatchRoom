@@ -1,15 +1,49 @@
+import CheckInDateComponent from '@/components/common/checkInDateComponent';
 import { ProductDetailsProps } from '@/types/order/productDetails/types';
+import Image from 'next/image';
 import React from 'react';
 
 const ProductDetails = ({
   accommodationName,
   roomName,
+  normalCapacity,
+  maxCapacity,
+  imageUrl,
 }: ProductDetailsProps) => {
   return (
-    <section className="p-2 mt-20 text-center">
-      <h2 className="text-h2  text-gray-1000 mb-2">{accommodationName}</h2>
-      <p className="text-p2 text-gray-1000">{roomName}</p>
-    </section>
+    <div className="flex flex-col pb-5 border-b border-border-sub">
+      <div className="flex flex-col gap-6">
+        <h3 className="text-h5 font-bold text-text-DEFAULT ">
+          상품 및 이용정보
+        </h3>
+        <section className="flex gap-5 mb-5 ">
+          <div className="w-32 h-32 relative mr-4">
+            <Image
+              src={imageUrl}
+              alt={accommodationName}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          </div>
+          <div>
+            <h2 className="text-h5 font-bold text-text-DEFAULT mb-1">
+              {accommodationName}
+            </h2>
+            <p className="text-t1 font-semibold text-text-sub">{roomName}</p>
+            <p className="mt-4 text-t1 text-text-sub">
+              기준 {normalCapacity}명 / 최대 {maxCapacity}명
+            </p>
+          </div>
+        </section>
+      </div>
+      <CheckInDateComponent
+        checkInDate="2024-01-01 (월)"
+        CheckInTime="15:00"
+        CheckOutDate="2024-01-02 (화)"
+        CheckOutTime="11:00"
+      />
+    </div>
   );
 };
 

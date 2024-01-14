@@ -8,4 +8,5 @@ export type ReservationInfoProps = {
     phoneNumber: string;
   };
   totalPrice: number;
+  paymentMethod: string;
 };
