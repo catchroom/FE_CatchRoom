@@ -1,34 +1,20 @@
 'use client';
+import React from 'react';
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import WeekCalendar from '@/components/common/weekCalendar';
 import { ITEMS_INFO } from '@/constants/catchItems';
+import { useBtnLoading } from '@/hooks/useBtnLoading';
 import { Button } from '@material-tailwind/react';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
 
 const CheckInComponent = () => {
-  const router = useRouter();
-  const [isActive, setIsActive] = useState(false);
-
-  const btnHandler = () => {
-    router.push('/catch-items');
-    setIsActive(true);
-  };
-
-  useEffect(() => {
-    if (isActive) {
-      const loading = setTimeout(() => {
-        setIsActive(false);
-      }, 4000);
-      return () => clearTimeout(loading);
-    }
-  }, [isActive, setIsActive]);
+  const { isActive, btnHandler } = useBtnLoading('/catch-items');
 
   return (
     <div className="relative w-full h-[51.9375rem] mt-14 ">
-      <div className="text-h4 font-extrabold">체크인 마감임박!</div>
+      <div className="text-h4 font-extrabold">
+        <p>체크인 마감임박!</p>
+      </div>
       <div className="relative w-full h-[34.375rem] rounded-lg border-2 border-border-sub bg-white pt-5 px-5 mt-3 mx-auto">
-        <div className="absolute inset-x-0 bottom-0 h-[130px] rounded-lg bg-gradient-to-t from-[#ffffffbd] to-transparent z-20" />
         {/* 달력 컴포넌트 */}
         <div className="flex flex-wrap items-center justify-between h-[4rem] mb-[1.75rem] text-p1 font-semibold">
           <WeekCalendar />
@@ -63,6 +49,7 @@ const CheckInComponent = () => {
             {isActive ? '' : '전체보기'}
           </Button>
         </div>
+        <div className="absolute inset-x-0 bottom-0 h-[130px] rounded-lg bg-gradient-to-t from-[#ffffffbd] to-transparent" />
       </div>
     </div>
   );
