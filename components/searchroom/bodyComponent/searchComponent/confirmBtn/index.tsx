@@ -29,7 +29,7 @@ const ConfirmBtnComponent = () => {
       onClick={searchHandler}
       className="font-pretendard flex items-center justify-center rounded-[4px] h-11 bg-action-primary text-t2 text-white font-semibold shadow-none"
     >
-      {isActive ? '' : '검색하기'}
+      {isActive ? '검색중...' : '검색하기'}
     </Button>
   );
 };
