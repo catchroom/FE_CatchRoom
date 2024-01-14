@@ -7,7 +7,7 @@ import { useBtnLoading } from '@/hooks/useBtnLoading';
 import { Button } from '@material-tailwind/react';
 
 const CheckInComponent = () => {
-  const { isActive, btnHandler } = useBtnLoading('/catch-items');
+  const { isLoading, btnHandler } = useBtnLoading('/catch-items');
 
   return (
     <div className="relative w-full h-[51.9375rem] mt-14 ">
@@ -42,11 +42,11 @@ const CheckInComponent = () => {
         <div className="relative bottom-16 w-full z-20 bg-white rounded-[4px]">
           <Button
             placeholder="button"
-            loading={isActive ? true : false}
+            loading={isLoading ? true : false}
             className="absolute font-pretend z-20 flex items-center justify-center w-full h-[2.75rem] rounded-[4px] border border-border-primary text-t1 text-text-primary font-bold bg-white shadow-none"
             onClick={btnHandler}
           >
-            {isActive ? '' : '전체보기'}
+            {isLoading ? '' : '전체보기'}
           </Button>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-[130px] rounded-lg bg-gradient-to-t from-[#ffffffbd] to-transparent" />
