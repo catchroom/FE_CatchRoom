@@ -9,7 +9,7 @@ const Modal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
 
   return (
     <div className="fixed inset-0  bg-gray-1000 bg-opacity-50 flex justify-center items-center">
-      <div className="relative bg-white w-full max-w-md m-auto">
+      <div className="relative bg-white w-full max-w-sm m-auto">
         <div className="p-5">
           <BookingDetails
             accommodationName="제주신라호텔"
