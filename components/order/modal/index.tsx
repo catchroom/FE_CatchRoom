@@ -21,16 +21,16 @@ const Modal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
             imageUrl="room_image_url.jpg"
           />
           <Disclaimer />
-          <div className="flex justify-center space-x-4 mt-4">
+          <div className="flex justify-center space-x-4 mt-5">
             <ActionButton
               action={onClose}
               label="취소"
-              colorClass=" text-gray-700 border border-gray-1000"
+              colorClass=" text-text-primary border border-border-primary"
             />
             <ActionButton
               action={onConfirm}
               label="동의 후 결제"
-              colorClass="bg-gray-1000 hover:bg-gray-900 text-white"
+              colorClass="bg-border-primary text-white"
             />
           </div>
         </div>
