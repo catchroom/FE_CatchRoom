@@ -1,10 +1,13 @@
 'use client';
+import { weekCalendarDate } from '@/atoms/checkInImnt/weekCalendar';
 import LeftArrowComponent from '@/public/svgComponent/leftArrow';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useRecoilState } from 'recoil';
 
 const TopHeader = () => {
   const router = useRouter();
+  const [selectedDate] = useRecoilState<Date>(weekCalendarDate);
 
   const backPageHandler = () => {
     router.back();
@@ -15,7 +18,7 @@ const TopHeader = () => {
         <LeftArrowComponent />
       </button>
       <button className="flex items-center justify-center text-t1 font-bold">
-        2023년 12월
+        {selectedDate.getFullYear()}년 {selectedDate.getMonth() + 1}월
       </button>
     </div>
   );

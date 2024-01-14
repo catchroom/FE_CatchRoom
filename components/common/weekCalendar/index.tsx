@@ -5,8 +5,17 @@ import { useRecoilState } from 'recoil';
 
 const WeekCalendar = () => {
   const [selectedDate, setSelectedDate] =
-    useRecoilState<number>(weekCalendarDate);
+    useRecoilState<Date>(weekCalendarDate);
 
+  console.log(
+    selectedDate.getFullYear() +
+      '년 ' +
+      selectedDate.getMonth() +
+      1 +
+      '월 ' +
+      selectedDate.getDate() +
+      '일 선택됨',
+  );
   // 오늘 날짜 기준으로 6일 후의 날짜를 계산
   const getDateAfterSixDays = (baseDate: Date) => {
     const sixDaysLater = new Date(baseDate);
@@ -14,7 +23,7 @@ const WeekCalendar = () => {
     return sixDaysLater;
   };
 
-  const handleDateClick = (date: number) => {
+  const handleDateClick = (date: Date) => {
     setSelectedDate(date);
   };
 
@@ -25,7 +34,7 @@ const WeekCalendar = () => {
 
     const isToday = date.toDateString() === today.toDateString();
     const isSixDaysLater = date.toDateString() === sixDaysLater.toDateString();
-    const isSelected = date.getDate() === selectedDate;
+    const isSelected = date.getDate() === selectedDate.getDate();
 
     const buttonClasses = `
       relative flex flex-col items-center font-semibold
@@ -37,7 +46,7 @@ const WeekCalendar = () => {
       <button
         key={date.getDate()}
         className={buttonClasses}
-        onClick={() => handleDateClick(date.getDate())}
+        onClick={() => handleDateClick(date)}
       >
         {isToday && (
           <div className="absolute w-[6px] h-[6px] rounded bg-main z-10" />

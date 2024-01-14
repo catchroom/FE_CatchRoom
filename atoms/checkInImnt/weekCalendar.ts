@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const weekCalendarDate = atom<number>({
+export const weekCalendarDate = atom<Date>({
   key: 'weekCalendarDate',
-  default: new Date().getDate(),
+  default: new Date(),
 });
