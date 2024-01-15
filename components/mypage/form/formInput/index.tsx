@@ -22,7 +22,7 @@ const FormInput = ({
   placeholder,
   register,
   reset,
-  won = true,
+  won = false,
   inputOn = false,
 }: {
   value: keyof FormAccount | keyof FormName | string;

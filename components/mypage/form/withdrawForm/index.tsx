@@ -1,15 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormWithdraw, withdrawSchema } from '@/constants/zodSchema';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import { ErrorMessage } from '@hookform/error-message';
+import Modal from '@/components/common/modal';
 import FormInput from '../formInput';
 import FormError from '../formError';
+import { useRouter } from 'next/navigation';
 
 const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
+  const [modal, setModal] = useState(false);
+  const router = useRouter();
   const schema = withdrawSchema(originalBalance);
   const {
     register,
@@ -19,18 +23,34 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
     formState: { errors },
   } = useForm<FormWithdraw>({
     resolver: zodResolver(schema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+    router.push('/mypage');
+  };
 
   const onSubmit: SubmitHandler<FormWithdraw> = (data) => {
     if (schema.safeParse(data)) {
-      console.log(data);
+      openModal();
     } else {
       console.log('error');
     }
   };
 
   const balance = watch('balance');
+
+  const disabledButton = () => {
+    if (errors.balance || !balance) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
@@ -49,11 +69,29 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
             name="balance"
             render={({ message }) => <FormError message={message} />}
           />
+          {!errors.balance && (
+            <p className=" text-t3 text-text-sub">
+              출금 가능 금액 : {originalBalance.toLocaleString()}원
+            </p>
+          )}
         </div>
       </div>
       <div className="w-full max-w-[480px] absolute bottom-5 left-1/2 -translate-x-1/2 px-5">
-        <SimpleButton name="확인" type="submit" />
+        <SimpleButton
+          disabled={disabledButton()}
+          name="출금하기"
+          type="submit"
+        />
       </div>
+      {/* 모달 띄우기 */}
+      {modal && (
+        <Modal
+          title="출금이 정상적으로 처리되었어요"
+          confirmString="마이페이지로 이동"
+          showConfirmButton={true}
+          onConfirm={closeModal}
+        />
+      )}
     </form>
   );
 };
