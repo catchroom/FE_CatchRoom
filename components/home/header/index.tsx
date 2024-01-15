@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <div className="w-full mt-14">
+    <div className="w-full mt-14 mb-14">
       <h1 className="font-bold text-h1">초특가 숙박권</h1>
       <h1 className="text-text-primary font-bold text-h1">빠르게 캐치하자!</h1>
       <p className="mt-4 text-text-sub text-t2">
