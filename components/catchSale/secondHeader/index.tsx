@@ -2,11 +2,11 @@
 import React from 'react';
 import DownArrowComponent from '@/public/svgComponent/downArrow';
 import Black from '@/public/svgComponent/marker/black';
-import BottomSheets from '@/components/common/bottomSheets';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import { DROP_DOWN } from '@/constants/catchSale';
+import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
 
 const SecondHeader = () => {
   const [dropdownTitle, setDropdownTitle] = useRecoilState(dropdownState);
@@ -27,12 +27,12 @@ const SecondHeader = () => {
           전체
           <DownArrowComponent />
         </div>
-        <BottomSheets
+        <BottomSheetsWithoutCloseBtn
           title={dropdownTitle}
           outerControl={true}
           buttonSelect="dropdown"
         >
-          <div className="flex flex-col gap-7 items-center text-t1 font-bold pb-5">
+          <div className="flex flex-col py-3 gap-7 items-center text-t1 font-bold">
             {DROP_DOWN.map((item) => {
               return (
                 <p key={item.name} onClick={() => handleOptionClick(item.name)}>
@@ -41,7 +41,7 @@ const SecondHeader = () => {
               );
             })}
           </div>
-        </BottomSheets>
+        </BottomSheetsWithoutCloseBtn>
       </div>
     </div>
   );
