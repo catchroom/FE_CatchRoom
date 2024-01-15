@@ -1,8 +1,10 @@
 import Header from '@/components/common/header';
 import CompleteMessage from '@/components/complete/completeMessage';
+import NavButton from '@/components/complete/navButton';
 // import NavButton from '@/components/complete/navButton';
 import ProductDetails from '@/components/complete/productDetails';
 import ReservationInfo from '@/components/complete/reservationInfo';
+import Link from 'next/link';
 import React from 'react';
 
 const page = () => {
@@ -46,7 +48,24 @@ const page = () => {
             paymentMethod={bookingDetails.paymentMethod}
           />
         </div>
-        {/* <NavButton /> 추가예정 */}
+        <div className="fixed flex gap-2 ml-[-1.25rem]  bottom-0 bg-white border-t border-border-sub p-5  h-17 w-full max-w-[480px] z-50">
+          <div className="w-full h-full">
+            <Link href="/home">
+              <NavButton
+                label="홈으로 이동"
+                colorClass=" text-text-primary border border-border-primary"
+              />
+            </Link>
+          </div>
+          <div className="w-full h-full">
+            <Link href="/order/complete/detail">
+              <NavButton
+                label="상세보기"
+                colorClass="bg-border-primary text-white"
+              />
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );
