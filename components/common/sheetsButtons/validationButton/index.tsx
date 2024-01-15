@@ -34,11 +34,13 @@ const ValidationButton = ({
       //판매가 설정을 안했을 때
       setOpen(true);
       setModalTitle('판매가를 설정해주세요');
+      return;
     }
 
     if (!allCheck) {
       setOpen(true);
       setModalTitle('이용 약관에 동의해주세요');
+      return;
     }
 
     if (fn && allCheck && price !== 0) {
