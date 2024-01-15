@@ -10,3 +10,9 @@ export type ReservationInfoProps = {
   totalPrice: number;
   paymentMethod: string;
 };
+
+export type CompleteMessageProps = {
+  guest: {
+    name: string;
+  };
+};

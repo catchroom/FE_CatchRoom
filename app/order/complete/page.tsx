@@ -16,11 +16,11 @@ const page = () => {
 
   const bookingDetails = {
     bookingHolder: {
-      name: '이름',
+      name: '홍길동',
       phoneNumber: '010-1234-5678',
     },
     guest: {
-      name: '이름',
+      name: '홍길동',
       phoneNumber: '010-1234-5678',
     },
     totalPrice: 200000,
@@ -28,10 +28,10 @@ const page = () => {
   };
   return (
     <>
-      <Header title="구매하기" showCloseButton />
+      <Header showCloseButton />
       <div className="flex flex-col container mx-auto w-full px-5 pt-14 pb-5  bg-bg">
         <div>
-          <CompleteMessage />
+          <CompleteMessage guest={bookingDetails.guest} />
         </div>
         <div className="flex flex-col container p-5 bg-white">
           <ProductDetails
