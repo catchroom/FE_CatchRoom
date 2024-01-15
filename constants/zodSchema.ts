@@ -29,10 +29,9 @@ export const withdrawSchema = (originalBalance: number) =>
   z.object({
     balance: z
       .string()
-      .min(1, '출금 가능 금액을 입력해주세요.')
       .regex(/^[0-9]*$/, '출금액은 숫자만 입력 가능합니다.')
       .refine((value) => Number(value) < originalBalance, {
-        message: '출금 가능 금액을 확인해주세요.',
+        message: '출금 가능 금액 초과',
       }),
   });
 

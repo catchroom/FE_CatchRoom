@@ -5,8 +5,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormWithdraw, withdrawSchema } from '@/constants/zodSchema';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
-import MyPageCancelSVG from '@/public/svg/mypage-cancel';
 import { ErrorMessage } from '@hookform/error-message';
+import FormInput from '../formInput';
+import FormError from '../formError';
 
 const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
   const schema = withdrawSchema(originalBalance);
@@ -14,6 +15,7 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<FormWithdraw>({
     resolver: zodResolver(schema),
@@ -27,33 +29,25 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
       console.log('error');
     }
   };
+
+  const balance = watch('balance');
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
       <div className="w-full flex flex-row items-start  gap-3">
-        <div className="flex flex-col gap-1 w-full relative">
-          <input
-            {...register('balance')}
-            type="text"
-            className={`bg-bg border-b-[1px] text-text-primary text-h2 w-full outline-none border-black transition-colors duration-300 ease-in focus:border-main`}
+        <div className="flex flex-col gap-2 w-full relative">
+          <FormInput
+            value="balance"
+            register={register}
+            reset={reset}
+            won={true}
+            inputOn={!!balance}
+            placeholder="출금 금액을 입력해주세요."
           />
-          <button
-            data-testid="cancel-button"
-            type="button"
-            onClick={() =>
-              reset({
-                balance: '',
-              })
-            }
-            className="absolute right-0 bg-white"
-          >
-            <MyPageCancelSVG />
-          </button>
           <ErrorMessage
             errors={errors}
             name="balance"
-            render={({ message }) => (
-              <p className="text-p1 text-pink-700">{message}</p>
-            )}
+            render={({ message }) => <FormError message={message} />}
           />
         </div>
       </div>
