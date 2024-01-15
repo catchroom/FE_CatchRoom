@@ -5,8 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { nameSchema, FormName } from '@/constants/zodSchema';
 import { useDebounceText } from '@/hooks/useDebounceText';
-import MyPageCancelSVG from '@/public/svg/mypage-cancel';
 import { ErrorMessage } from '@hookform/error-message';
+import FormInput from '../formInput';
 
 const ProfileForm = ({ name }: { name: string }) => {
   const [checkNickname, setCheckNickname] = useState(false);
@@ -56,43 +56,37 @@ const ProfileForm = ({ name }: { name: string }) => {
   }, [debounceText, name]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
-      <div className="w-full flex flex-row items-start  gap-3">
-        <p className="mr-2 whitespace-nowrap">닉네임</p>
-        <div className="flex flex-col gap-1 w-full relative">
-          <input
-            {...register('nickname')}
-            type="text"
-            className={`bg-white border-b-[1px] w-full outline-none border-black transition-colors duration-300 ease-in focus:border-main`}
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full flex flex-col gap-3"
+    >
+      <div className="w-full flex flex-col items-start">
+        <p className="whitespace-nowrap pb-1">닉네임</p>
+        <div className="w-full flex flex-col">
+          <FormInput
+            register={register}
+            value="nickname"
+            placeholder="닉네임을 입력해주세요"
+            reset={reset}
           />
-          <button
-            data-testid="cancel-button"
-            type="button"
-            onClick={() =>
-              reset({
-                nickname: '',
-              })
-            }
-            className="absolute right-0 bg-white"
-          >
-            <MyPageCancelSVG />
-          </button>
           <ErrorMessage
             errors={errors}
             name="nickname"
             render={({ message }) => (
-              <p className="text-p4 text-pink-700">{message}</p>
+              <p className="pt-1 text-p2 text-text-critical">{message}</p>
             )}
           />
-          <div className="w-full flex gap-3">
+        </div>
+        <div>
+          <div className="w-full flex gap-1 pt-3 text-t3">
             <button
               type="submit"
               disabled={!checkNickname}
               className={`${
                 checkNickname
-                  ? 'border-opacity-100  text-opacity-100'
-                  : 'border-opacity-30  text-opacity-30'
-              } border-2 border-black text-black px-2`}
+                  ? 'bg-surface text-text-primary border-border-primary '
+                  : 'bg-action-secondary-disabled bg-opacity-15 text-text-disabled border-action-secondary-disabled border-opacity-15'
+              } px-4 py-2 rounded-md border box-border`}
             >
               확인
             </button>
@@ -104,7 +98,7 @@ const ProfileForm = ({ name }: { name: string }) => {
                   nickname: name,
                 })
               }
-              className="border-opacity-30 text-opacity-30 border-2 border-black text-black px-2 hover:border-opacity-70  hover:text-opacity-70"
+              className="text-opacity-30 border border-action-secondary-disabled border-opacity-15 text-black px-4 py-2 rounded-md hover:bg-surface hover:text-text-primary hover:border-border-primary"
             >
               취소
             </button>

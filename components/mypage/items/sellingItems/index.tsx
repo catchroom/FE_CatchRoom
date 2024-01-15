@@ -1,69 +1,69 @@
 import React from 'react';
 import Image from 'next/image';
-import { TradeItem } from '@/types/mypage/types';
-import { decodeState, getDotDate } from '@/utils/get-dot-date';
+// eslint-disable-next-line
+import { StateType, decodeState, getDotDate } from '@/utils/get-dot-date';
+// import ReviewButtons from '../reviewButtons';
+import { MypageSellingType } from '@/types/mypage/data-types';
+import CalendarSVG from '@/public/svgComponent/mediumCalendar';
 import ReviewButtons from '../reviewButtons';
-import TopButtons from '../topButtons';
+import XSymbolIcon from '@/public/svgComponent/xSymbol';
 
-const MItem = ({ item }: { item: TradeItem }) => {
-  const soldOut = item.state === 'soldOut' ? true : false;
+const MItem = ({ item }: { item: MypageSellingType }) => {
+  // const soldOut = item.state === 'soldOut' ? true : false;
+
+  const state = decodeState(
+    item.state as StateType,
+    getDotDate(item.productEndDate, true),
+  );
+
+  const isCatch = item.isCatch === true && item.state === 'ing' ? true : false;
+
+  const isNotIng = item.state !== 'ing' ? true : false;
+
+  const viewReview = isNotIng && item.state === 'done' ? true : false;
 
   return (
-    <div className="w-full">
-      <TopButtons state={item.state} />
-      <div
-        id="item"
-        className="w-full flex flex-col p-3 border-2 border-border-secondary divide-y-2 divide-border-secondary"
-      >
-        {/* 작성일, 판매일, 판매 상태 */}
-        <div id="top" className="flex justify-between py-1">
-          <p>작성일 {getDotDate(item.start_date)}</p>
-          <div className="flex gap-1">
-            <p>{getDotDate(item.end_date)}</p>
-            <p>{decodeState(item.state)}</p>
-          </div>
-        </div>
-
-        {/* 호텔 이미지, 이름, 가격 정보 */}
-        <div className="w-full flex py-1 gap-3">
+    <div id="container" className="w-full px-5 py-3">
+      {/* 호텔 이미지, 이름, 가격 정보 */}
+      <div className="w-full flex gap-4">
+        <div className="relative">
           {/* 호텔 이미지 */}
           <Image
-            src={item.url}
+            src={item.thumbnailUrl}
             alt="room3"
-            width={500}
-            height={500}
+            width={300}
+            height={300}
             priority
-            className="w-24 h-24 rounded-sm object-cover"
+            className="rounded-md object-cover w-[120px] h-[120px]"
           />
-          {/* 호텔 이름과 가격 정보 */}
-          <div className="w-full flex flex-col gap-3">
-            <div id="bottom">
-              <h1 className="text-t1 font-semibold">{item.name}</h1>
-              <div className="flex items-center gap-3 font-medium">
-                <p className="text-p1">{item.sell_price}원</p>
-                {/* 캐치특가 여부 판단 */}
-                {item.is_catch && (
-                  <p className="text-p4 bg-text-primary p-1 rounded-lg text-center text-white">
-                    캐치특가
-                  </p>
-                )}
-              </div>
-            </div>
-            {/* 호텔 체크인 체크아웃 날짜 */}
-            <p className="flex justify-end">
-              {getDotDate(item.check_in)} ~ {getDotDate(item.check_out)}
-            </p>
-          </div>
+          {/* 캐치특가 여부 판단 */}
+          {item.isCatch && (
+            <span className="text-text-on border border-pink-600 bg-focus flex text-p4 absolute top-1 left-1 z-10 items-center py-1 px-[6.5px] rounded-xl">
+              캐치특가
+            </span>
+          )}
         </div>
-
-        {/* 리뷰 버튼 */}
-        <ReviewButtons
-          name={item.name}
-          id={item.order_history_id}
-          soldOut={soldOut}
-          isReview={item.is_review}
-        />
+        {/* 호텔 이름과 가격 정보 */}
+        <div className="flex flex-col justify-between">
+          <div className="flex flex-col gap-2">
+            {/* 호텔 체크인 체크아웃 날짜 */}
+            <p className="flex items-center gap-1 text-text text-t3 font-medium">
+              <CalendarSVG />
+              {getDotDate(item.checkIn)} - {getDotDate(item.checkOut)}
+            </p>
+            <div className="text-text">
+              <h3 className="text-t1 font-bold">{item.productName}</h3>
+              <p className="text-t2 font-semibold">{item.sellPrice}원</p>
+            </div>
+          </div>
+          <p className="text-sub text-t3 font-medium">
+            게시기한 {getDotDate(item.productEndDate, true)}
+          </p>
+        </div>
       </div>
+      {viewReview && (
+        <ReviewButtons id={item.productNum} isReview={item.isReview} />
+      )}
     </div>
   );
 };

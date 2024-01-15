@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import BackIcon from '../../../public/svg/chevron-left.svg';
-import CloseIcon from '../../../public/svg/ph_x.svg';
-import MoreIcon from '../../../public/svg/dots-vertical.svg';
-import Image from 'next/image';
-import { HeaderProps } from '@/types/common/types';
+import BackIcon from '@/public/svg/chevron-left.svg';
+import CloseIcon from '@/public/svg/ph_x.svg';
+import MoreIcon from '@/public/svg/dots-vertical.svg';
+import HomeIcon from '@/public/svg/home.svg';
+import { HeaderProps } from '@/types/common/header/types';
 
 const Header = ({
   title,
@@ -14,6 +14,7 @@ const Header = ({
   showCloseButton = false,
   showMoreButton = false,
   showBorder = false,
+  showHomeButton = false,
 }: HeaderProps) => {
   const router = useRouter();
 
@@ -31,22 +32,23 @@ const Header = ({
         <div />
       )}
       <h1 className="justify-self-center text-t1 font-semibold">{title}</h1>
-      {showCloseButton || showMoreButton ? (
-        <div className="justify-self-end">
-          {showCloseButton && (
-            <button onClick={() => router.back()}>
-              <Image src={CloseIcon} alt="닫기 아이콘" />
-            </button>
-          )}
-          {showMoreButton && (
-            <button>
-              <MoreIcon />
-            </button>
-          )}
-        </div>
-      ) : (
-        <div />
-      )}
+      <div className="justify-self-end mt-1">
+        {showCloseButton && (
+          <button onClick={() => router.back()}>
+            <CloseIcon />
+          </button>
+        )}
+        {showHomeButton && (
+          <button onClick={() => router.push('/home')}>
+            <HomeIcon />
+          </button>
+        )}
+        {showMoreButton && (
+          <button>
+            <MoreIcon />
+          </button>
+        )}
+      </div>
     </header>
   );
 };

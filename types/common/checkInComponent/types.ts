@@ -1,6 +1,4 @@
 export type CheckInComponentProps = {
-  checkInDate: string;
-  CheckInTime: string;
+  CheckInDate: string;
   CheckOutDate: string;
-  CheckOutTime: string;
 };

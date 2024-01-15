@@ -127,3 +127,47 @@ export const loginSchema = z.object({
     ),
   password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
 });
+
+export const checkBoxSchema = (isCatch: boolean) =>
+  z.object({
+    check1: z.boolean().refine((val) => val === true, {
+      message: '필수 선택 요소입니다.',
+    }),
+    check2: z.boolean().refine((val) => val === true, {
+      message: '필수 선택 요소입니다.',
+    }),
+    ...(isCatch
+      ? {
+          check3: z.boolean().refine((val) => val === true, {
+            message: '필수 선택 요소입니다.',
+          }),
+        }
+      : {}),
+  });
+
+export const radioSchema = z.object({
+  selectedProduct: z.string().min(1, '하나의 상품을 선택해야 합니다.'),
+});
+
+export type FromSeller = z.infer<typeof sellerSchema>;
+
+export const sellerSchema = z.object({
+  sellerContent: z
+    .string()
+    .min(10, '최소 10자 이상 입력해주세요')
+    .max(100, '리뷰는 100자 이하로 입력해주세요.'),
+});
+
+export const guestInfoSchema = z.object({
+  name: z
+    .string()
+    // .min(2, '이름을 입력해주세요.')
+    .regex(/^[a-zA-Z가-힣]*$/, '이름은 한글과 영어로만 입력 가능합니다.'),
+  phone: z
+    .string()
+    // .min(2, '휴대폰번호를 입력해주세요.')
+    .regex(
+      /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/,
+      '휴대폰번호는 숫자만 입력 가능합니다.',
+    ),
+});

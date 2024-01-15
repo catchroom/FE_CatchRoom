@@ -1,18 +1,31 @@
-import React from 'react';
-import Send from '@/public/send.svg';
+'use client';
+import React, { useRef } from 'react';
+import SendIcon from '@/public/send.svg';
 
-const send = async () => {
+const Send = () => {
+  const textarea = useRef(null);
+
+  const resizeHeight = (textarea: React.RefObject<HTMLTextAreaElement>) => {
+    if (textarea.current) {
+      textarea.current.style.height = 'auto';
+      textarea.current.style.height = textarea.current.scrollHeight + 'px';
+    }
+  };
+
   return (
-    <div className="bg-white w-full h-20 flex items-center px-4 py-3 pb-6 border-solid border border-borderSub sticky bottom-0">
-      <input
-        className="bg-gray-200 w-full h-full flex px-4 rounded-full "
+    <div className="bg-white w-full h-full flex items-center px-4 py-3 pb-6 border border-border-sub sticky bottom-0">
+      <textarea
+        className="bg-gray-200 w-full h-[40px] max-h-[120px] py-[8px] flex px-4 rounded-[20px]"
         placeholder="메시지 보내기"
+        rows={1}
+        ref={textarea}
+        onChange={() => resizeHeight(textarea)}
       />
       <div className="pl-3">
-        <Send />
+        <SendIcon />
       </div>
     </div>
   );
 };
 
-export default send;
+export default Send;
