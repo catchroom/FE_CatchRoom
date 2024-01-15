@@ -93,7 +93,7 @@ const CatchContainer = ({ price }: PropsType) => {
               title={title}
               innerTitle="캐치특가 판매가를 선택해주세요"
               buttonSelect={buttonSelect}
-              outerControl={true}
+              outerControl={false}
               price={selectedCatchPrice}
               percent={selectedCatchPercent}
             >

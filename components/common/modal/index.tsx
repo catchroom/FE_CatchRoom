@@ -18,12 +18,14 @@ const Modal = ({
   onCancel,
   onConfirm,
   confirmString,
+  cancelString = '취소',
   showCancelButton = false,
   showConfirmButton = false,
 }: {
   title: string;
   content?: string;
   confirmString?: string;
+  cancelString?: string;
   onCancel?: MouseEventHandler<HTMLButtonElement>;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
   showCancelButton?: boolean;
@@ -48,7 +50,7 @@ const Modal = ({
               onClick={onCancel}
               className="w-full text-main py-2 px-4 rounded cursor-pointer"
             >
-              취소
+              {cancelString}
             </button>
           )}
           {showConfirmButton && (

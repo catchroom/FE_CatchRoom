@@ -62,7 +62,8 @@ const Header = ({
           showCancelButton={true}
           onConfirm={onConfirm}
           onCancel={onCancel}
-          confirmString="확인"
+          confirmString="등록 취소하기"
+          cancelString="뒤로가기"
         />
       )}
       <header className={headerClass}>
