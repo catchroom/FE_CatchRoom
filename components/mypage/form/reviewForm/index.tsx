@@ -38,13 +38,16 @@ const ReviewForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full relative h-64">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full relative h-64 border border-border-sub rounded-md overflow-hidden"
+    >
       <textarea
         autoFocus
         maxLength={100}
         {...register('content')}
         onChange={handleContentChange}
-        className="w-full h-64 break-all text-start resize-none p-3"
+        className="w-full h-64 break-all text-start resize-none p-3 focus:outline-none"
       />
       <p className="absolute bottom-3 right-3">{wordCount}/100</p>
       {wordCount >= 100 && (
@@ -58,7 +61,7 @@ const ReviewForm = () => {
         </p>
       )}
       <div className="w-full max-w-[480px] fixed bottom-5 left-1/2 -translate-x-1/2 px-5">
-        <SimpleButton name="등록하기" type="submit" />
+        <SimpleButton name="등록" type="submit" />
       </div>
     </form>
   );
