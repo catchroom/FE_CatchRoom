@@ -2,64 +2,73 @@
 
 import React from 'react';
 import ReviewButtons from '../reviewButtons';
-import { decodeState, getDotDate } from '@/utils/get-dot-date';
-import { TradeItem } from '@/types/mypage/types';
+import { StateType, decodeState, getDotDate } from '@/utils/get-dot-date';
 import Image from 'next/image';
-import RightArrowSVG from '@/public/svgComponent/rightArrow';
+import CalendarSVG from '@/public/svgComponent/mediumCalendar';
+import { MypageSellingType } from '@/types/mypage/data-types';
+import { useRouter } from 'next/navigation';
 
-const PurchasingItems = ({ item }: { item: TradeItem }) => {
+const PurchasingItems = ({ item }: { item: MypageSellingType }) => {
+  const router = useRouter();
+  const state = decodeState(
+    item.state as StateType,
+    getDotDate(item.productEndDate, true),
+  );
+
+  const handleClick = () => {
+    router.push(`/order`);
+  };
+
   return (
-    <div
-      id="item"
-      className="w-full flex flex-col p-3 border-2 border-border-secondary divide-y-2 divide-border-secondary"
-    >
-      {/* 작성일, 판매일, 판매 상태 */}
-      <div id="top" className="flex justify-between py-1">
-        <p>{getDotDate(item.start_date)} (구매날짜)</p>
-        <div className="flex items-center gap-1">
-          <p>{decodeState(item.state)}</p>
-          <RightArrowSVG />
-        </div>
-      </div>
-
-      {/* 호텔 이미지, 이름, 가격 정보 */}
-      <div className="w-full flex py-1 gap-3">
-        {/* 호텔 이미지 */}
-        <Image
-          src={item.url}
-          alt="room3"
-          width={500}
-          height={500}
-          priority
-          className="w-24 h-24 rounded-sm object-cover"
-        />
-        {/* 호텔 이름과 가격 정보 */}
-        <div className="w-full flex flex-col gap-3">
-          <div id="bottom">
-            <h1 className="text-t1 font-semibold">{item.name}</h1>
-            <div className="flex items-center gap-3 font-medium">
-              <p className="text-p1">{item.sell_price}원</p>
-              {/* 캐치특가 여부 판단 */}
-              {item.is_catch && (
-                <p className="text-p4 bg-text-primary p-1 rounded-lg text-center text-white">
-                  캐치특가
+    <div id="container" className="w-full px-5 py-3 flex flex-col gap-3">
+      <div className="w-full flex flex-col">
+        {/* 호텔 이미지, 이름, 가격 정보 */}
+        <div className="w-full flex gap-4">
+          <div className="relative w-[120px] h-[120px]">
+            {/* 호텔 이미지 */}
+            <Image
+              src={item.thumbnailUrl}
+              alt="room3"
+              fill={true}
+              sizes="(max-width: 480px) 500px, (max-width: 320px) 500px, 180px"
+              priority
+              className="rounded-md object-cover"
+            />
+            {/* 캐치특가 여부 판단 */}
+            {item.isCatch && (
+              <span className="text-text-on border border-pink-600 bg-focus flex text-p4 absolute top-1 left-1 z-10 items-center py-1 px-[6.5px] rounded-xl">
+                캐치특가
+              </span>
+            )}
+          </div>
+          {/* 호텔 이름과 가격 정보 */}
+          <div className="flex flex-col justify-between grow">
+            <div className="flex flex-col gap-2 w-full">
+              {/* 호텔 체크인 체크아웃 날짜 */}
+              <div className="w-full flex justify-between grow">
+                <p className="flex items-center gap-1 text-text text-t3 font-medium">
+                  <CalendarSVG />
+                  {getDotDate(item.checkIn)} - {getDotDate(item.checkOut)}
                 </p>
-              )}
+                <span
+                  onClick={handleClick}
+                  className="text-t3 text-text-sub underline cursor-pointer"
+                >
+                  상세
+                </span>
+              </div>
+              <div className="text-text">
+                <h3 className="text-t1 font-bold">{item.productName}</h3>
+                <p className="text-t2 font-semibold">{item.sellPrice}원</p>
+              </div>
+            </div>
+            <div className="flex gap-2 text-sub text-t3 font-medium">
+              <p>{state}</p>
             </div>
           </div>
-          {/* 호텔 체크인 체크아웃 날짜 */}
-          <p className="flex justify-end">
-            {getDotDate(item.check_in)} ~ {getDotDate(item.check_out)}
-          </p>
         </div>
       </div>
-
-      {/* 리뷰 버튼 */}
-      <ReviewButtons
-        name={item.name}
-        id={item.order_history_id}
-        isReview={item.is_review}
-      />
+      <ReviewButtons id={item.productNum} isReview={item.isReview} />
     </div>
   );
 };
