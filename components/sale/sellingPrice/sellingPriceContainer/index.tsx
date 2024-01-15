@@ -36,6 +36,7 @@ const SellingPriceContainer = ({ price }: PropsType) => {
         price={selectedPrice}
         percent={selectedPercent}
         outerControl={true}
+        outerControlAtom="sale"
       >
         <BottomSheetsContent price={price} />
       </BottomSheets>

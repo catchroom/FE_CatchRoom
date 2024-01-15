@@ -4,7 +4,7 @@ import Discount from '../../discount';
 import CatchBadge from '../../catchBadge';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { percentState, priceState } from '@/atoms/sale/priceAtom';
-import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import { outerSaleBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 
 type PropsType = {
   price: number;
@@ -12,7 +12,9 @@ type PropsType = {
 const BottomSheetsContent = ({ price }: PropsType) => {
   const setSelectPrice = useSetRecoilState(priceState);
   const setSelectPercent = useSetRecoilState(percentState);
-  const [modalopen, setModalOpen] = useRecoilState(outerBottomSheetsControl);
+  const [modalopen, setModalOpen] = useRecoilState(
+    outerSaleBottomSheetsControl,
+  );
 
   const discount: number[] = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 

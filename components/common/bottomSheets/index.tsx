@@ -13,7 +13,11 @@ import SimpleButton from '../sheetsButtons/simpleButton';
 import SaleButton from '../sheetsButtons/saleButton';
 import SearchBoxButton from '../searchBoxButton';
 import { useRecoilState } from 'recoil';
-import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import {
+  outerBottomSheetsControl,
+  outerCatchBottomSheetsControl,
+  outerSaleBottomSheetsControl,
+} from '@/atoms/commons/outerBottomSheetsControl';
 import PriceButton from '../sheetsButtons/priceButton';
 import ValidationButton from '../sheetsButtons/validationButton';
 
@@ -30,6 +34,7 @@ import ValidationButton from '../sheetsButtons/validationButton';
  * @summary - 버튼을 추가하고 싶다면 components/common/sheetsButtons 폴더에 컴포넌트를 추가하고, buttonSelect에 해당 컴포넌트를 넣어주세요.
  * @param closeButton - 모달 내부에 선택완료 버튼을 추가하고 싶다면 true로 설정해주세요. (선택)
  * @param outerControl - 모달을 외부에서 컨트롤 하고 싶다면 true로 설정해주세요. (선택) outerBottomSheetsControl atom을 사용합니다.
+ * @param outerControlAtom - outerBottomSheetsControl atom의 종류를 받습니다. (선택)
  * @returns
  */
 
@@ -45,6 +50,7 @@ const BottomSheets = ({
   outerControl = false,
   price,
   percent,
+  outerControlAtom = 'default',
 }: {
   children: ReactNode;
   title: string;
@@ -63,10 +69,21 @@ const BottomSheets = ({
   outerControl?: boolean;
   price?: number;
   percent?: number;
+  outerControlAtom?: 'default' | 'sale' | 'catch';
 }) => {
   const [open, setOpen] = useState(false);
-  const [outerOpen, setOuterOpen] = useRecoilState(outerBottomSheetsControl);
+
   const [viewPortHeight, setViewPortHeight] = useState(0);
+
+  const outerControlState = {
+    default: outerBottomSheetsControl,
+    sale: outerSaleBottomSheetsControl,
+    catch: outerCatchBottomSheetsControl,
+  };
+
+  const [outerOpen, setOuterOpen] = useRecoilState(
+    outerControlState[outerControlAtom],
+  );
 
   useEffect(() => {
     setViewPortHeight(window.innerHeight);
