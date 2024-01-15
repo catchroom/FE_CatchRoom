@@ -43,16 +43,16 @@ const StompPage = () => {
         }),
       });
 
-      ws.publish({
-        destination: `/pub/chat/message`,
-        body: JSON.stringify({
-          roomId: ROOMID,
-          sender: 'test',
-          type: 'TALK',
-          userId: 'user1',
-          message: '소켓 연결 성공! 메세지 보냅니다 :D',
-        }),
-      });
+      // ws.publish({
+      //   destination: `/pub/chat/message`,
+      //   body: JSON.stringify({
+      //     roomId: ROOMID,
+      //     sender: 'test',
+      //     type: 'TALK',
+      //     userId: 'user1',
+      //     message: '소켓 연결 성공! 메세지 보냅니다 :D',
+      //   }),
+      // });
     });
   };
 
