@@ -12,7 +12,7 @@ import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsContr
 import DropdownButton from '../sheetsButtons/dropdownButton';
 
 /**
- * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
+ * @function BottomSheetsWithoutCloseBtn - bottom sheets component입니다. 모달 대체용으로 사용합니다.
  * @param children - 모달 내부에 들어갈 컴포넌트입니다. (필수)
  * @param title - 모달의 제목입니다. (필수)
  * @param buttonSelect - 모달을 열기 위한 버튼의 종류를 선택합니다. (선택)
@@ -31,10 +31,7 @@ const BottomSheetsWithoutCloseBtn = ({
   children: ReactNode;
   title: string;
   buttonSelect?: 'dropdown';
-  placeholder?: string;
-  icon?: 'pin' | 'calendar' | 'person' | 'house';
   outerControl?: boolean;
-  theme?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
   const [outerOpen, setOuterOpen] = useRecoilState(outerBottomSheetsControl);
