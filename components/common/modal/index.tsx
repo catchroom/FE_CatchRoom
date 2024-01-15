@@ -30,8 +30,8 @@ const Modal = ({
   showConfirmButton?: boolean;
 }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-lg flex flex-col items-center ">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[999]">
+      <div className="bg-white rounded-lg shadow-lg flex flex-col items-center z-[1000]">
         <div className="flex flex-col p-6 gap-1 ">
           <div className="font-bold text-p1 w-[200px] flex justify-center text-center whitespace-pre-wrap">
             {title}

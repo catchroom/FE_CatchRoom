@@ -8,21 +8,9 @@ import SellingPriceContainer from '@/components/sale/sellingPrice/sellingPriceCo
 import React from 'react';
 
 const Sale = () => {
-  // const [open, setOpen] = useState(false);
-  // const router = useRouter();
-  // const handleModalOpen = () => {
-  //   setOpen((prev) => !prev);
-  // };
-  // const onCancle = () => {
-  //   handleModalOpen();
-  // };
-  // const onConfirm = () => {
-  //   handleModalOpen();
-  //   router.push('/login');
-  // };
   return (
     <div>
-      <Header title="판매하기" showBackButton={true} />
+      <Header title="판매하기" showBackButton={true} isSale={true} />
       <div className="p-5">
         <SaleInfoContainer />
         <Line />
@@ -34,18 +22,6 @@ const Sale = () => {
         <Line />
         <CheckboxContainer />
       </div>
-      {/* 모달 사용 예시 */}
-      {/* {open && (
-        <Modal
-          title="로그인 요청"
-          content="로그인이 필요한 서비스입니다."
-          showConfirmButton={true}
-          showCancelButton={true}
-          onCancel={onCancle}
-          onConfirm={onConfirm}
-          confirmString="로그인하기"
-        />
-      )} */}
     </div>
   );
 };
