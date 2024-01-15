@@ -11,7 +11,7 @@ const ProductDetails = ({
   imageUrl,
 }: ProductDetailsProps) => {
   return (
-    <div className="flex flex-col pb-5 border-b border-border-sub">
+    <div className="flex flex-col pb-5 border-b border-gray-200">
       <div className="flex flex-col gap-6">
         <h3 className="text-h5 font-bold text-text-DEFAULT ">
           상품 및 이용정보
