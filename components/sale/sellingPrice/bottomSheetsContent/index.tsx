@@ -2,7 +2,7 @@
 import React from 'react';
 import Discount from '../../discount';
 import CatchBadge from '../../catchBadge';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { percentState, priceState } from '@/atoms/sale/priceAtom';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 
@@ -12,14 +12,15 @@ type PropsType = {
 const BottomSheetsContent = ({ price }: PropsType) => {
   const setSelectPrice = useSetRecoilState(priceState);
   const setSelectPercent = useSetRecoilState(percentState);
-  const setBankModal = useSetRecoilState(outerBottomSheetsControl);
+  const [modalopen, setModalOpen] = useRecoilState(outerBottomSheetsControl);
 
   const discount: number[] = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
   const handlePriceClick = (discountedPrice: number, percent: number) => {
     setSelectPrice(discountedPrice);
     setSelectPercent(percent);
-    setBankModal(false);
+    setModalOpen(false);
+    console.log(modalopen);
   };
   return (
     <div className="flex flex-col gap-8 h-[calc(100vh-200px)] overflow-y-scroll">

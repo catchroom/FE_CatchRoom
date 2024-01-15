@@ -20,6 +20,9 @@ const SellingPriceContainer = ({ price }: PropsType) => {
 
   const buttonSelect = selectedPrice === 0 ? 'input' : 'price';
 
+  const charge = selectedPrice * 0.05;
+  const totalPrice = selectedPrice - charge;
+
   return (
     <div className="flex flex-col w-full">
       <h2 className="text-h5 font-semibold">판매가 설정</h2>
@@ -32,6 +35,7 @@ const SellingPriceContainer = ({ price }: PropsType) => {
         buttonSelect={buttonSelect}
         price={selectedPrice}
         percent={selectedPercent}
+        outerControl={true}
       >
         <BottomSheetsContent price={price} />
       </BottomSheets>
@@ -41,19 +45,21 @@ const SellingPriceContainer = ({ price }: PropsType) => {
           <p>판매가</p>
           <div className="flex gap-2 items-center">
             <p className="bg-surface-primary text-text-primary rounded px-2 py-1 font-bold text-p2">
-              30%
+              {selectedPercent}%
             </p>
-            <span>0원</span>
+            <span>{selectedPrice.toLocaleString()}원</span>
           </div>
         </div>
         <div className="flex justify-between">
           <p>거래 수수료율 5%</p>
-          <span className="opacity-50">- 0원</span>
+          <span className="opacity-50">- {charge.toLocaleString()}원</span>
         </div>
         <hr className="border-divider-sub" />
         <div className="flex justify-between">
           <p>정산 예정 금액</p>
-          <span className="text-t1 font-semibold">0원</span>
+          <span className="text-t1 font-semibold">
+            {totalPrice.toLocaleString()}원
+          </span>
         </div>
       </div>
     </div>
