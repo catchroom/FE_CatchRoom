@@ -68,7 +68,7 @@ const CatchSpecialComponent = ({
       </div>
       <div className="flex-grow flex-col h-[140px]">
         <div className="mb-3 ">
-          <div className="flex items-center gap-1 text-p2 font-semibold">
+          <div className="flex items-center gap-1 text-t3 font-semibold">
             <CallendarIcon />
             {resDate}
           </div>
