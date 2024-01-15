@@ -24,12 +24,14 @@ const PaymentButton = ({ amount }: PaymentButtonProps) => {
 
   return (
     <>
-      <button
-        onClick={handleOpenModal}
-        className="bg-gray-1000 text-white font-bold py-3 px-4 mt-6"
-      >
-        {formattedAmount} 결제하기
-      </button>
+      <div className="fixed bottom-0 bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-50">
+        <button
+          onClick={handleOpenModal}
+          className="w-full bg-action-primary text-white font-semibold py-3 rounded leading-7"
+        >
+          {formattedAmount} 결제하기
+        </button>
+      </div>
 
       <Modal
         isOpen={isModalOpen}

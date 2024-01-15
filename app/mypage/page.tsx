@@ -11,14 +11,7 @@ import BottomNav from '@/components/common/bottomNav';
 import { Banners } from '@/types/mypage/types';
 import BannerFooter from '@/components/mypage/banner/bannerFooter';
 
-const fetchTest = async () => {
-  const res = await fetch('https://catchroom.xyz/v1/test/do');
-  const data = await res.text();
-  console.log(data);
-};
-
 const page = async () => {
-  await fetchTest();
   return (
     <div className="w-full absolute top-0 h-[calc(100vh-66px)] overflow-y-scroll">
       <div className="px-3 pt-4 bg-bg">
