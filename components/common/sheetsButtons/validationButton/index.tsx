@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import Modal from '../../modal';
 import { useRecoilValue } from 'recoil';
 import { priceState } from '@/atoms/sale/priceAtom';
-import { catchPriceState, catchState } from '@/atoms/sale/catchAtom';
 import { allCheckState } from '@/atoms/sale/checkAtom';
 
 const ValidationButton = ({
@@ -24,8 +23,6 @@ const ValidationButton = ({
     : 'bg-action-primary text-text-on';
 
   const price = useRecoilValue(priceState);
-  const isCatch = useRecoilValue(catchState);
-  const catchPrice = useRecoilValue(catchPriceState);
   const allCheck = useRecoilValue(allCheckState);
 
   const [modalTitle, setModalTitle] = useState('');
@@ -39,24 +36,13 @@ const ValidationButton = ({
       setModalTitle('판매가를 설정해주세요');
     }
 
-    if (isCatch) {
-      //캐치특가 설정 On 하고
-      if (catchPrice == 0) {
-        //캐치특가 판매가 설정 안했을 때
-        setOpen(true);
-        setModalTitle('캐치특가 자동 설정\n 옵션을 선택해주세요');
-      }
-      //캐치특가 날짜 적용안했을 때 추가 예정
-    }
-
     if (!allCheck) {
       setOpen(true);
       setModalTitle('이용 약관에 동의해주세요');
     }
 
     if (fn && allCheck && price !== 0) {
-      if (isCatch && catchPrice !== 0) fn(e);
-      else if (!isCatch) fn(e);
+      fn(e);
     }
   };
 
