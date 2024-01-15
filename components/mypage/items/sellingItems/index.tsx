@@ -6,6 +6,7 @@ import { StateType, decodeState, getDotDate } from '@/utils/get-dot-date';
 import { MypageSellingType } from '@/types/mypage/data-types';
 import CalendarSVG from '@/public/svgComponent/mediumCalendar';
 import ReviewButtons from '../reviewButtons';
+import XSymbolIcon from '@/public/svgComponent/xSymbol';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
   // const soldOut = item.state === 'soldOut' ? true : false;
@@ -15,14 +16,11 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
     getDotDate(item.productEndDate, true),
   );
 
-  const reEnroll =
-    item.state === 'expirationDate' ? (
-      <span className=" text-text-primary underline">기한 수정</span>
-    ) : null;
-
   const isCatch = item.isCatch === true && item.state === 'ing' ? true : false;
 
   const isNotIng = item.state !== 'ing' ? true : false;
+
+  const viewReview = isNotIng && item.state === 'done' ? true : false;
 
   return (
     <div id="container" className="w-full px-5 py-3">
@@ -30,11 +28,6 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
       <div className="w-full flex gap-4">
         <div className="relative">
           {/* 호텔 이미지 */}
-          {isNotIng && (
-            <div className="absolute flex items-center justify-center inset-0 backdrop-saturate-50 backdrop-brightness-75">
-              <p className="text-text-on font-semibold text-t2">판매완료</p>
-            </div>
-          )}
           <Image
             src={item.thumbnailUrl}
             alt="room3"
@@ -44,7 +37,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
             className="rounded-md object-cover w-[120px] h-[120px]"
           />
           {/* 캐치특가 여부 판단 */}
-          {isCatch && (
+          {item.isCatch && (
             <span className="text-text-on border border-pink-600 bg-focus flex text-p4 absolute top-1 left-1 z-10 items-center py-1 px-[6.5px] rounded-xl">
               캐치특가
             </span>
@@ -63,13 +56,14 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
               <p className="text-t2 font-semibold">{item.sellPrice}원</p>
             </div>
           </div>
-          <div className="flex gap-2 text-sub text-t3 font-medium">
-            <p>{state}</p>
-            {reEnroll}
-          </div>
+          <p className="text-sub text-t3 font-medium">
+            게시기한 {getDotDate(item.productEndDate, true)}
+          </p>
         </div>
       </div>
-      <ReviewButtons id={item.productNum} isReview={true} />
+      {viewReview && (
+        <ReviewButtons id={item.productNum} isReview={item.isReview} />
+      )}
     </div>
   );
 };

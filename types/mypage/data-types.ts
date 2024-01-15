@@ -11,6 +11,7 @@ export type MypageSellingType = {
   writeDate: string;
   productEndDate: string;
   isCatch: boolean;
+  isReview: boolean;
 };
 
 export type AccommodationType = {
