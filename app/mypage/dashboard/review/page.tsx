@@ -6,7 +6,7 @@ import React from 'react';
 const DATA: TradeItem = {
   user_id: 1,
   order_history_id: 9,
-  state: 'outDated',
+  state: 'done',
   name: '제주 그린 리조트',
   sell_price: 110000,
   is_catch: true,
@@ -27,12 +27,14 @@ const page = ({
 }) => {
   // 해당 숙소 id로 fetch 요청
   const { id } = searchParams;
+  console.log(id);
 
   return (
-    <div className="w-full h-full px-5">
+    <div className="w-full h-full">
       <ReviewHeader DATA={DATA} />
-      <p>{id}</p>
-      <ReviewForm />
+      <div className="w-full h-full p-5">
+        <ReviewForm />
+      </div>
     </div>
   );
 };
