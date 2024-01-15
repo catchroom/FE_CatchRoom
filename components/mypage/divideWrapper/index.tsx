@@ -70,7 +70,7 @@ const DivideWrapper = ({
           );
         })}
       </div>
-      <div className="max-h-[calc(100vh-300px)] overflow-y-scroll">
+      <div className="max-h-[calc(100vh-120px)] overflow-y-scroll">
         {children}
       </div>
     </div>
