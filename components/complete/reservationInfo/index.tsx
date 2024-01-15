@@ -8,7 +8,7 @@ const ReservationInfo = ({
   paymentMethod,
 }: ReservationInfoProps) => {
   return (
-    <div className="">
+    <>
       <section className="flex flex-col gap-2 px-5 py-5 border-b border-gray-200">
         <h3 className="text-h5 font-bold text-text-DEFAULT ">예약자 정보</h3>
         <div className="flex justify-between items-center">
@@ -42,7 +42,7 @@ const ReservationInfo = ({
           <p className="text-t2 text-text-sub">{paymentMethod}</p>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
