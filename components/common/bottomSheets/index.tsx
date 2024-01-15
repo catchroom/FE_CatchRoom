@@ -10,9 +10,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import SheetCloseSVG from '@/public/svg/sheet-close';
 import InputButton from '../sheetsButtons/inputButton';
 import SimpleButton from '../sheetsButtons/simpleButton';
+import SaleButton from '../sheetsButtons/saleButton';
 import SearchBoxButton from '../searchBoxButton';
 import { useRecoilState } from 'recoil';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import PriceButton from '../sheetsButtons/priceButton';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -40,16 +42,20 @@ const BottomSheets = ({
   icon,
   closeButton = false,
   outerControl = false,
+  price,
+  percent,
 }: {
   children: ReactNode;
   title: string;
   innerTitle?: string;
   innerButtonTitle?: string;
-  buttonSelect?: 'input' | 'simple' | 'search';
+  buttonSelect?: 'input' | 'simple' | 'search' | 'sale' | 'price';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
   closeButton?: boolean;
   outerControl?: boolean;
+  price?: number;
+  percent?: number;
 }) => {
   const [open, setOpen] = useState(false);
   const [outerOpen, setOuterOpen] = useRecoilState(outerBottomSheetsControl);
@@ -78,7 +84,6 @@ const BottomSheets = ({
     else return closeControl(outerControl);
   };
 
-  // 버튼 추가되면 해당 객체에 추가해주세요.
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
     input: <InputButton name={title} fn={modalOpen} />,
     simple: <SimpleButton name={title} fn={modalOpen} />,
@@ -89,6 +94,8 @@ const BottomSheets = ({
         placeholder={placeholder}
       />
     ),
+    sale: <SaleButton name={title} fn={modalOpen} />,
+    price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
   };
 
   return (
@@ -104,7 +111,7 @@ const BottomSheets = ({
               duration: 0.3,
               ease: 'easeInOut',
             }}
-            className="fixed z-40 left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
+            className="fixed z-[999] left-1/2 -translate-x-1/2 bg-black backdrop-blur-sm bg-opacity-30 w-full max-w-[480px] h-full inset-y-0"
           >
             <div
               data-testid="modalBg"
@@ -120,7 +127,7 @@ const BottomSheets = ({
                   delay: 0.1,
                   ease: 'easeInOut',
                 }}
-                className="absolute z-50 w-full min-h-[10%] bg-bg bottom-0 rounded-t-xl p-5"
+                className="absolute z-[1000] w-full min-h-[10%] bg-surface bottom-0 rounded-t-xl p-5"
               >
                 <div className="relative flex justify-between">
                   <h1 className="text-t1 font-bold">{innerTitle}</h1>

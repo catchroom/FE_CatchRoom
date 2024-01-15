@@ -15,7 +15,7 @@ export const ITEMS_INFO: ItemsInfoType = {
   roomItems: [
     {
       roomName: '블루캐치호텔',
-      roomType: '호텔',
+      roomType: '스위트',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 180000,
       discount: 30,
@@ -23,7 +23,7 @@ export const ITEMS_INFO: ItemsInfoType = {
     },
     {
       roomName: '그린리조트',
-      roomType: '리조트',
+      roomType: '패밀리 스위트',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 250000,
       discount: 40,
@@ -31,7 +31,7 @@ export const ITEMS_INFO: ItemsInfoType = {
     },
     {
       roomName: '핑크모텔',
-      roomType: '모텔',
+      roomType: '오션 뷰',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 120000,
       discount: 50,
@@ -39,7 +39,7 @@ export const ITEMS_INFO: ItemsInfoType = {
     },
     {
       roomName: '옐로우게스트하우스',
-      roomType: '게스트하우스',
+      roomType: '에코 룸',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 300000,
       discount: 60,
@@ -47,7 +47,7 @@ export const ITEMS_INFO: ItemsInfoType = {
     },
     {
       roomName: '블랙호스텔',
-      roomType: '호스텔',
+      roomType: '스탠다드',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 400000,
       discount: 70,
@@ -55,7 +55,7 @@ export const ITEMS_INFO: ItemsInfoType = {
     },
     {
       roomName: '화이트인',
-      roomType: '모텔',
+      roomType: '스탠다드',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 150000,
       discount: 80,
@@ -63,7 +63,7 @@ export const ITEMS_INFO: ItemsInfoType = {
     },
     {
       roomName: '블루머신',
-      roomType: '팬션',
+      roomType: '프리미엄 더블',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 450000,
       discount: 90,
@@ -71,7 +71,7 @@ export const ITEMS_INFO: ItemsInfoType = {
     },
     {
       roomName: '레드스팟',
-      roomType: '풀빌라',
+      roomType: '스위트룸',
       resDate: '12.25(금) - 12.26(토)',
       oldPrice: 280000,
       discount: 30,
