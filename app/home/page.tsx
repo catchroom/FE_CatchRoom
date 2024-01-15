@@ -23,7 +23,8 @@ const page = async () => {
       {/* 이용후기 컴포넌트 */}
       <ReviewContainer />
       <Footer />
-      <div className="fixed bottom-20 right-5 z-30">
+
+      <div className="fixed bottom-24 left-2/3 z-30">
         <BottomSheets
           buttonSelect="sale"
           title="숙박권 판매"
@@ -44,6 +45,7 @@ const page = async () => {
           )}
         </BottomSheets>
       </div>
+
       <BottomNav />
     </div>
   );
