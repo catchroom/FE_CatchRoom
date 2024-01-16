@@ -26,6 +26,9 @@ const Map = ({ markers }: MapProps) => {
     setCurrentView(currentView === 'map' ? 'list' : 'map');
   };
 
+  // let map: { setCenter: (arg0: any) => void };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let map: { panTo: (arg0: any) => void };
   useEffect(() => {
     const mapScript = document.createElement('script');
     mapScript.async = true;
@@ -43,7 +46,8 @@ const Map = ({ markers }: MapProps) => {
             level: 7,
           };
 
-        const map = new window.kakao.maps.Map(mapContainer, mapOption);
+        // const map = new window.kakao.maps.Map(mapContainer, mapOption);
+        map = new window.kakao.maps.Map(mapContainer, mapOption);
 
         markers.forEach((markerData, index) => {
           const markerPosition = new window.kakao.maps.LatLng(
@@ -96,6 +100,13 @@ const Map = ({ markers }: MapProps) => {
     overlayContent.onclick = () => {
       updateOverlayZIndex();
       onClick();
+
+      // 지도 중심을 부드럽게 이동
+      const overlayPosition = new window.kakao.maps.LatLng(
+        markerData.latitude,
+        markerData.longitude,
+      );
+      map.panTo(overlayPosition);
     };
 
     overlayContent.style.cssText = `
@@ -133,12 +144,12 @@ const Map = ({ markers }: MapProps) => {
     overlayContent.appendChild(priceSpan);
     overlayContent.appendChild(discountSpan);
 
-    if (isSelected && markerData.catchType) {
+    if (markerData.catchType) {
       const badge = document.createElement('div');
       badge.style.cssText = `
         position: absolute;
         top: -20px;
-        left: 70%;
+        left: 34%;
         transform: translateX(-50%);
         padding: 2px 8px;
 
