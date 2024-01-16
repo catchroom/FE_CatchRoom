@@ -28,6 +28,11 @@ const SignUpAuth = () => {
         type: 'email',
         message: '이메일을 입력해주세요.',
       });
+    } else if (errors.email?.message) {
+      setError('email', {
+        type: 'email',
+        message: '이메일 형식을 확인해주세요.',
+      });
     } else {
       emailCheck(email).then((response) => {
         console.log(response);

@@ -100,6 +100,11 @@ const SignUpInfo = () => {
         type: 'nickname',
         message: '닉네임을 입력해주세요.',
       });
+    } else if (errors.nickname?.message) {
+      setError('nickname', {
+        type: 'nickname',
+        message: '닉네임은 한글/영문/숫자 혼합해서 2~8자로 설정해주세요.',
+      });
     } else {
       nicknameCheck(nickname).then((response) => {
         console.log(response);

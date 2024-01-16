@@ -1,9 +1,10 @@
 import nookies from 'nookies';
-import { apiClient } from '../apiClient';
+import { apiClient } from '../user/apiClient';
 
 const accessToken = nookies.get(null)['accessToken'];
 
 //6. 로그아웃
+//이 요청 성공시, 쿠키의 access/refresh token 모두 삭제하기
 export const logout = async () => {
   try {
     const res = await apiClient.post('/v1/mypage/logout');
