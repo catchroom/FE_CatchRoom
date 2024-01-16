@@ -18,6 +18,7 @@ const CatchSwiper = () => {
               oldPrice={item.oldPrice}
               discount={item.discount}
               location={item.location}
+              roomType="room"
             />
           </SwiperSlide>
         );

@@ -38,7 +38,8 @@ const GuestInfo = ({
   const watchedName = watch('name');
   const watchedPhone = watch('phone');
 
-  const onSubmit = (data) => {
+  // eslint-disable-next-line
+  const onSubmit = (data: any) => {
     console.log(data);
     const isFormEmpty = !data.name && !data.phone;
 
