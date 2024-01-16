@@ -5,3 +5,8 @@ export type ProductDetailsProps = {
   maxCapacity: number;
   imageUrl: string;
 };
+
+export type BasicProductDetailsProps = Pick<
+  ProductDetailsProps,
+  'accommodationName' | 'roomName'
+>;

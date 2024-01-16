@@ -1,10 +1,10 @@
-import { ProductDetailsProps } from '@/types/order/productDetails/types';
+import { BasicProductDetailsProps } from '@/types/order/productDetails/types';
 import React from 'react';
 
 const ProductDetails = ({
   accommodationName,
   roomName,
-}: ProductDetailsProps) => {
+}: BasicProductDetailsProps) => {
   return (
     <section className="p-2 mb-4">
       <h2 className="text-h4  mb-2 leading-8 font-bold text-gray-1000">

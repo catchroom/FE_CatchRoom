@@ -38,10 +38,8 @@ const ProductDetails = ({
         </section>
       </div>
       <CheckInDateComponent
-        checkInDate="2024-01-01 (월)"
-        CheckInTime="15:00"
-        CheckOutDate="2024-01-02 (화)"
-        CheckOutTime="11:00"
+        CheckInDate="01.01 (월)"
+        CheckOutDate="01.03 (월)"
       />
     </div>
   );
