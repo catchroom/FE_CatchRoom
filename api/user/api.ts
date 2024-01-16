@@ -1,6 +1,6 @@
 import nookies from 'nookies';
 
-//1. 이메일 중복체크  -> 1005랑 1012 바뀐거만 확인요청하면 ok
+//1. 이메일 중복체크
 export const emailCheck = async (email: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/email/check?email=${email}`,
@@ -14,7 +14,7 @@ export const emailCheck = async (email: string) => {
   return data;
 };
 
-//2. 닉네임 중복체크-> 1010이랑 1011 바뀐거만 확인요청하면 ok
+//2. 닉네임 중복체크
 export const nicknameCheck = async (nickname: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/nickname/check?nickname=${nickname}`,
@@ -46,11 +46,7 @@ export const signUp = async (
   );
 
   const data = await res.json();
-  if (data.code === 1000) {
-    return data;
-  } else if (data.code === 1001 || 1002 || 1003 || 1004) {
-    console.log(data.message);
-  }
+  return data;
 };
 
 // 4. 로그인
@@ -65,16 +61,12 @@ export const login = async (email: string, password: string) => {
   );
 
   const data = await res.json();
-  if (data.code === 1006) {
-    return data;
-  } else if (data.code === 1007 || 1008) {
-    console.log(data.message);
-  }
+  return data;
 };
 
-// 5. 리프레쉬 토큰으로 액세스 토큰 요청
+// 5. 액세스 토큰 재발급 -> apiClient있으면 필요 x, 일단 테스트용 ㅇ
 export const getNewToken = async () => {
-  const refreshToken = nookies.get(null)['refresh_token'];
+  const refreshToken = nookies.get(null)['refreshToken'];
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
@@ -84,18 +76,16 @@ export const getNewToken = async () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${refreshToken}`,
       },
-      body: JSON.stringify({ refreshToken }),
     },
   );
 
   const data = await res.json();
-  if (data.code === 1013) {
-    //성공
-    return data;
-  } else if (data.code === 5000) {
-    //에러
-    console.log(data.message);
+  if (data.accessToken) {
+    nookies.set(null, 'accessToken', data.accessToken, {
+      path: '/',
+    });
   }
+  return data;
 };
 
 // etc) 소셜로그인 : 카카오 인증코드 받기-> .env.local다시 설정하기

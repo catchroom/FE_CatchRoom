@@ -54,8 +54,7 @@ const SignUpInfo = () => {
       signUp(email, password, data.nickname, data.phone, data.name)
         .then((response) => {
           console.log(response);
-          router.push('/login'); //성공시에 로그인을 하고,
-          //로그인 성공시에는 마이페이지 이동 추가하기
+          //성공시(코드가 1000)에 로그인하고, 로그인 성공시에는 마이페이지로 이동 시키기 router.push('/mypage');
         })
         .catch((error) => {
           console.log(error);
@@ -73,7 +72,6 @@ const SignUpInfo = () => {
       nicknameCheck(nickname).then((response) => {
         console.log(response);
         if (response.code === 1010) {
-          //console.log(response);
           handleModalOpen();
           setConfirmedNickname(true);
         } else if (response.code === 1011) {
