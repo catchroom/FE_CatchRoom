@@ -25,7 +25,7 @@ const ToastAlertComponent = () => {
         }}
       >
         <motion.div
-          className="absolute top-0 left-0 h-[4px] bg-white rounded-[4px]"
+          className="absolute top-0 left-0 h-[4px] bg-gray-200 rounded-[4px]"
           style={{ width: isOpen ? '100%' : '0%' }}
           animate={{ width: isOpen ? '0%' : '100%' }}
           transition={{ duration: 3.5, ease: 'easeInOut' }}
