@@ -37,8 +37,8 @@ const page = async () => {
                 판매 가능한 숙박권이 없습니다
               </p>
               <p className="text-t3 text-text-sub text-center">
-                무료취소 가능 및 체크인 당일 자정 이후 숙박권은 판매할 수
-                없습니다.
+                오늘 체크인이 가능하고 무료 취소가 불가한 숙박권만 판매할 수
+                있어요.
               </p>
             </div>
           )}
