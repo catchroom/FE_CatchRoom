@@ -1,6 +1,6 @@
 'use client';
 import { AlertMessageState, AlertOpenState } from '@/atoms/toastAlert/alert';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 /**
  * @function useToastAlert - Alert 메세지를 지정하고, 알럿을 트리거할 버튼을 `alertOpenHandler`을 통해 지정할 수 있습니다.
@@ -10,8 +10,8 @@ import { useRecoilState } from 'recoil';
  */
 
 export const useToastAlert = (message: string) => {
-  const [, setIsOpen] = useRecoilState(AlertOpenState);
-  const [, setAlertMessage] = useRecoilState<string>(AlertMessageState);
+  const setIsOpen = useSetRecoilState(AlertOpenState);
+  const setAlertMessage = useSetRecoilState<string>(AlertMessageState);
 
   const alertOpenHandler = () => {
     setAlertMessage(message);
