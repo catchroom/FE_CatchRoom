@@ -64,7 +64,7 @@ export const login = async (email: string, password: string) => {
   return data;
 };
 
-// 5. 액세스 토큰 재발급 -> apiClient있으면 필요 x, 일단 테스트용 ㅇ
+// 5. 액세스 토큰 재발급 -> apiClient 사용할거면 필요 x, 일단 테스트용
 export const getNewToken = async () => {
   const refreshToken = nookies.get(null)['refreshToken'];
 
