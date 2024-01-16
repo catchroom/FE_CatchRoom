@@ -6,15 +6,15 @@ import { StateType, decodeState, getDotDate } from '@/utils/get-dot-date';
 import { MypageSellingType } from '@/types/mypage/data-types';
 import CalendarSVG from '@/public/svgComponent/mediumCalendar';
 import ReviewButtons from '../reviewButtons';
-//import XSymbolIcon from '@/public/svgComponent/xSymbol';
+import XSymbolIcon from '@/public/svgComponent/xSymbol';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
   // const soldOut = item.state === 'soldOut' ? true : false;
 
-   const state = decodeState(
-     item.state as StateType,
-     getDotDate(item.productEndDate, true),
-   );
+  const state = decodeState(
+    item.state as StateType,
+    getDotDate(item.productEndDate, true),
+  );
 
   const reEnroll =
     item.state === 'expirationDate' ? (
