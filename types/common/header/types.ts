@@ -1,5 +1,5 @@
 export type HeaderProps = {
-  title: string;
+  title?: string;
   showBackButton?: boolean;
   showCloseButton?: boolean;
   showMoreButton?: boolean;

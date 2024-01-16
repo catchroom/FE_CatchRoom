@@ -71,16 +71,15 @@ const Header = ({
           <button onClick={handleCloseBtn} className="justify-self-start">
             <BackIcon />
           </button>
+        ) : showCloseButton ? (
+          <button onClick={() => router.back()} className="justify-self-start">
+            <CloseIcon />
+          </button>
         ) : (
           <div />
         )}
         <h1 className="justify-self-center text-t1 font-semibold">{title}</h1>
         <div className="justify-self-end mt-1">
-          {showCloseButton && (
-            <button onClick={() => router.back()}>
-              <CloseIcon />
-            </button>
-          )}
           {showHomeButton && (
             <button onClick={() => router.push('/home')}>
               <HomeIcon />
