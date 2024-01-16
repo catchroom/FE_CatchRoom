@@ -14,8 +14,14 @@ import SaleButton from '../sheetsButtons/saleButton';
 import BorderButton from '../sheetsButtons/borderButton';
 import SearchBoxButton from '../searchBoxButton';
 import { useRecoilState } from 'recoil';
-import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import {
+  outerBottomSheetsControl,
+  outerCatchBottomSheetsControl,
+  outerSaleBottomSheetsControl,
+} from '@/atoms/commons/outerBottomSheetsControl';
 import PriceButton from '../sheetsButtons/priceButton';
+import DropdownButton from '../sheetsButtons/dropdownButton';
+import ValidationButton from '../sheetsButtons/validationButton';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -30,14 +36,15 @@ import PriceButton from '../sheetsButtons/priceButton';
  * @summary - 버튼을 추가하고 싶다면 components/common/sheetsButtons 폴더에 컴포넌트를 추가하고, buttonSelect에 해당 컴포넌트를 넣어주세요.
  * @param closeButton - 모달 내부에 선택완료 버튼을 추가하고 싶다면 true로 설정해주세요. (선택)
  * @param outerControl - 모달을 외부에서 컨트롤 하고 싶다면 true로 설정해주세요. (선택) outerBottomSheetsControl atom을 사용합니다.
+ * @param outerControlAtom - outerBottomSheetsControl atom의 종류를 받습니다. (선택)
  * @returns
  */
 
 const BottomSheets = ({
   children,
   title,
-  innerTitle = '모달제목',
-  innerButtonTitle = '버튼제목',
+  innerTitle,
+  innerButtonTitle,
   buttonSelect = 'simple',
   placeholder,
   icon,
@@ -46,12 +53,21 @@ const BottomSheets = ({
   theme = false,
   price,
   percent,
+  outerControlAtom = 'default',
 }: {
   children: ReactNode;
   title: string;
   innerTitle?: string;
   innerButtonTitle?: string;
-  buttonSelect?: 'input' | 'simple' | 'search' | 'sale' | 'price' | 'border';
+  buttonSelect?:
+    | 'input'
+    | 'simple'
+    | 'search'
+    | 'sale'
+    | 'price'
+    | 'border'
+    | 'dropdown';
+    | 'validation';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
   closeButton?: boolean;
@@ -59,10 +75,21 @@ const BottomSheets = ({
   price?: number;
   percent?: number;
   theme?: boolean;
+  outerControlAtom?: 'default' | 'sale' | 'catch';
 }) => {
   const [open, setOpen] = useState(false);
-  const [outerOpen, setOuterOpen] = useRecoilState(outerBottomSheetsControl);
+
   const [viewPortHeight, setViewPortHeight] = useState(0);
+
+  const outerControlState = {
+    default: outerBottomSheetsControl,
+    sale: outerSaleBottomSheetsControl,
+    catch: outerCatchBottomSheetsControl,
+  };
+
+  const [outerOpen, setOuterOpen] = useRecoilState(
+    outerControlState[outerControlAtom],
+  );
 
   useEffect(() => {
     setViewPortHeight(window.innerHeight);
@@ -100,6 +127,8 @@ const BottomSheets = ({
     sale: <SaleButton name={title} fn={modalOpen} />,
     price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
     border: <BorderButton name={title} fn={modalOpen} disabled={theme} />,
+    dropdown: <DropdownButton name={title} fn={modalOpen} />,
+    validation: <ValidationButton name={title} fn={modalOpen} />,
   };
 
   return (
@@ -146,7 +175,7 @@ const BottomSheets = ({
                 </div>
                 <div className="w-full h-full flex flex-col items-center gap-12">
                   {children}
-                  {closeButton && (
+                  {closeButton && innerButtonTitle && (
                     <SimpleButton
                       fn={modalClose}
                       name={innerButtonTitle}
