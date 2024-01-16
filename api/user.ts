@@ -1,6 +1,4 @@
-import Cookies from 'js-cookie';
-
-const refreshToken: string = Cookies.get('refresh_token') || '';
+import nookies from 'nookies';
 
 //회원가입
 export const signUp = async (
@@ -92,6 +90,8 @@ export const emailCheck = async (email: string) => {
 
 //리프레쉬 토큰으로 액세스 토큰 요청
 export const getNewToken = async () => {
+  const refreshToken = nookies.get(null)['refresh_token'];
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
     {

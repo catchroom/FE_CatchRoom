@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import nookies from 'nookies';
 
 // 판매중일 때 판매중인 상품들을 가져오는 api
 export const fetchMypageSelling = async () => {
@@ -44,25 +44,9 @@ export const loginTest = async (email: string, password: string) => {
   return data;
 };
 
-// export const loginTest = async (email: string, password: string) => {
-//   try {
-//     const res = await axios.post(`/api/v1/user/login`, { email, password });
-//     const data = await res.data();
-//     if (data.code === 1006) {
-//       // 서버 컴포넌트에서 x -> 클라이언트 컴포넌트에서 사용하기
-//       // document.cookie = `access_token=${data.data.access_token}; path=/`;
-//       // document.cookie = `refresh_token=${data.data.refresh_token}; path=/`;
-//     }
-//     return data;
-//   } catch (error) {
-//     console.error(error);
-//     return null;
-//   }
-// };
-
 //리프레쉬 토큰으로 액세스 토큰 요청 테스트
 export const getNewTokenTest = async () => {
-  const refreshToken = Cookies.get('refresh_token');
+  const refreshToken = nookies.get(null)['refresh_token'];
 
   const res = await fetch(`/api/v1/user/accesstoken`, {
     method: 'POST',

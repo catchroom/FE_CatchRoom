@@ -8,11 +8,10 @@ import LoginSheet from '@/components/loginSheets';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
-import Cookies from 'js-cookie';
-// import { login } from '@/api/user';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
 import { loginTest } from '@/api/mypage/testApi';
+import nookies from 'nookies';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -55,20 +54,23 @@ const LoginForm = () => {
       .then((response) => {
         console.log(response);
         if (response.code === '1006') {
-          Cookies.set('access_token', response.data.access_token, {
+          //nookies로 변경 테스트
+          nookies.set(null, 'access_token', response.data.access_token, {
             path: '/',
           });
-          // 오타 반영한 코드임!! 수정
-          Cookies.set('refresh_token', response.data.refresh_toekn, {
+          //오타 반영된 코드 -> 수정 필요
+          nookies.set(null, 'refresh_token', response.data.refresh_toekn, {
             path: '/',
           });
 
-          console.log('access_token 체크', Cookies.get('access_token'));
-          console.log('refresh_token 체크:', Cookies.get('refresh_token'));
+          console.log('access_token 체크', nookies.get(null)['access_token']);
+          console.log(
+            'refresh_token 체크:',
+            nookies.get(null)['refresh_token'],
+          );
 
-          router.push('/mypage');
-        } else {
-          //이메일 또는 비밀번호를 다시 확인해주세요. 모달 띄워주기
+          router.push('/home');
+        } else if (response.code === '1007' || '1008') {
           setOpenAlert(true);
         }
       })
