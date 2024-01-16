@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { LoginData } from '@/types/login/types';
@@ -8,15 +8,33 @@ import LoginSheet from '@/components/loginSheets';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
+import { useRouter } from 'next/navigation';
+import Modal from '../common/modal';
+import { loginTest } from '@/api/mypage/testApi';
+import nookies from 'nookies';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
 const LoginForm = () => {
+  const router = useRouter();
+
+  //약관 모달
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
+  // alert모달
+  const [openAlert, setOpenAlert] = useState(false);
+  const handleModalOpen = () => {
+    setOpenAlert((prev) => !prev);
+  };
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     watch,
     setValue,
   } = useForm<LoginData>({
@@ -31,14 +49,34 @@ const LoginForm = () => {
     setValue(fieldName, '');
   };
 
-  const onSubmit = (data: LoginData) => {
-    //백엔드로 data를 post하기
-    console.log(data);
-  };
+  const onSubmit = async (data: LoginData) => {
+    loginTest(data.email, data.password) //테스트
+      .then((response) => {
+        console.log(response);
+        if (response.code === '1006') {
+          //nookies로 변경 테스트
+          nookies.set(null, 'access_token', response.data.access_token, {
+            path: '/',
+          });
+          //오타 반영된 코드 -> 수정 필요
+          nookies.set(null, 'refresh_token', response.data.refresh_toekn, {
+            path: '/',
+          });
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpenModal = () => {
-    setOpen(true);
+          console.log('access_token 체크', nookies.get(null)['access_token']);
+          console.log(
+            'refresh_token 체크:',
+            nookies.get(null)['refresh_token'],
+          );
+
+          router.push('/home');
+        } else if (response.code === '1007' || '1008') {
+          setOpenAlert(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -92,15 +130,27 @@ const LoginForm = () => {
 
         <div className="w-full mt-7">
           <button
-            className="w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md  bg-focus"
+            className={`w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
+              isValid ? 'bg-focus' : 'bg-gray-300'
+            }`}
             type="submit"
+            disabled={!isValid}
           >
             로그인
           </button>
+          {/* 로그인 실패시 alert 모달 추가로 띄우기? -> 피그마에만 나와서 아직 반영 x */}
+          {openAlert && (
+            <Modal
+              title="이메일 또는 비밀번호를 다시 확인해주세요."
+              showConfirmButton={true}
+              onConfirm={handleModalOpen}
+              confirmString="확인"
+            />
+          )}
         </div>
 
-        <div className="w-full h-[3rem] text-gray-600 flex justify-between px-5 mt-7 text-p2">
-          <span className="relative pl-14">
+        <div className="w-full h-[3rem] text-gray-600 flex justify-center space-x-10 px-5 mt-7 text-p2">
+          <span className="relative">
             <Link href="https://www.yanolja.com/" className="underline">
               비밀번호 재설정
             </Link>
@@ -108,10 +158,12 @@ const LoginForm = () => {
               <NextArrowIcon />
             </span>
           </span>
-          |
-          <span className="relative pr-20">
+
+          <span className="relative">&nbsp;|</span>
+
+          <span className="relative">
             <div className="underline cursor-pointer" onClick={handleOpenModal}>
-              회원가입
+              야놀자 통합 회원가입
               <span className="absolute">
                 <NextArrowIcon />
               </span>
