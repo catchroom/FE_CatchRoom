@@ -9,13 +9,17 @@ const userProfile = {
 
 const page = () => {
   return (
-    <div className="w-full h-full px-5">
-      <div className="flex gap-3">
-        <h1>{userProfile.bank}</h1>
-        <p>{userProfile.account}</p>
+    <div className="w-full h-full flex flex-col p-5 gap-5">
+      <div className="flex flex-col">
+        <div className="text-t1">
+          <strong className="font-semibold">내 계좌</strong>로
+        </div>
+        <div className="w-full flex gap-1 text-text-sub text-t3">
+          <h1>{userProfile.bank}</h1>
+          <p>{userProfile.account}</p>
+        </div>
       </div>
       <WithdrawForm originalBalance={userProfile.balance} />
-      <p>출금가능 금액 : {userProfile.balance}원</p>
     </div>
   );
 };

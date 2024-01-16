@@ -1,10 +1,14 @@
 export type catchItems = {
   roomName: string;
-  roomType?: string;
+  roomType: string;
   resDate: string;
   oldPrice: number;
-  discount: 30 | 40 | 50 | 60 | 70 | 80 | 90;
+  discount: number;
   isDelete?: boolean;
-  buttonFunc?: () => void;
+  isHeart?: boolean;
+  heartState?: boolean;
+  pageHandler?: () => void;
+  heartBtnHandler?: () => void;
+  deleteBtnHandler?: () => void;
   location?: string;
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { CHAT_ITEMS } from '@/constants/chat';
 import ChatItem from '../chatItem';
-import Login from './login';
 
 const ChatList = () => {
   return (
@@ -13,8 +12,8 @@ const ChatList = () => {
             itemId={item.ITEM_ID}
             image={item.ITEM_INFO.IMAGE}
             sellerNickname={item.SELLER_NICKNAME}
-            lastMessageDate={item.MESSAGE_PREVIOUS.at(-1).DATE}
-            lastMessageContent={item.MESSAGE_PREVIOUS.at(-1)?.CONTENT}
+            lastMessageDate={'2021-10-10'} //item.MESSAGE_PREVIOUS.at(-1)?.CREATED
+            lastMessageContent={'안녕하세요'} //item.MESSAGE_PREVIOUS.at(-1)?.CONTENT
           />
         );
       })}

@@ -1,14 +1,14 @@
 import { Root } from '@/types/mypage/types';
-import { maskEmail } from '@/utils/mypage-utils';
+import { maskEmail, maskPhoneNumber, noMask } from '@/utils/mypage-utils';
 
 export const MYPAGE_CONSTANTS: Root = {
   ACCOUNT_BUTTON: [
     {
-      TITLE: '출금하기',
+      TITLE: '예치금 출금',
       LOCATION: '/mypage/dashboard/withdraw',
     },
     {
-      TITLE: '내역보기',
+      TITLE: '예치금 내역',
       LOCATION: '/mypage/dashboard/withdraw/history',
     },
   ],
@@ -28,7 +28,7 @@ export const MYPAGE_CONSTANTS: Root = {
       },
       {
         TITLE: '찜목록',
-        LOCATION: '/mypage/dashboard/likes',
+        LOCATION: '/mypage/dashboard/wishlist',
         TYPE: 'heart',
       },
     ],
@@ -48,6 +48,20 @@ export const MYPAGE_CONSTANTS: Root = {
   },
 };
 
+export const MYPAGE_APP_ROUTE = [
+  ...MYPAGE_CONSTANTS.ACCOUNT_BUTTON,
+  ...MYPAGE_CONSTANTS.TOP_BANNER.BANNERS,
+  ...MYPAGE_CONSTANTS.BOTTOM_BANNER.BANNERS,
+  {
+    TITLE: '설정',
+    LOCATION: '/mypage/dashboard/profile',
+  },
+  {
+    TITLE: '내 계좌',
+    LOCATION: '/mypage/dashboard/account',
+  },
+];
+
 export const MYPAGE_PRIVACY = [
   {
     title: '아이디',
@@ -58,6 +72,16 @@ export const MYPAGE_PRIVACY = [
     title: '이메일',
     function: maskEmail,
     key: 'email',
+  },
+  {
+    title: '이름',
+    function: noMask,
+    key: 'name',
+  },
+  {
+    title: '휴대폰번호',
+    function: maskPhoneNumber,
+    key: 'phoneNumber',
   },
 ];
 

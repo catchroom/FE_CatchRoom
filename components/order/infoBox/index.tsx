@@ -9,10 +9,13 @@ type InfoBoxProps = {
 const InfoBox = ({ messageKey }: InfoBoxProps) => {
   const messages = INFO_MESSAGES[messageKey];
   return (
-    <div className=" flex gap-2 items-center justify-center  px-4 py-3 bg-gray-200 p-4 rounded">
-      <InfoIcon />
-      {messages.map((message) => (
-        <p key={messageKey} className=" text-gray-700 text-p2">
+    <div className="flex flex-col gap-2 px-4 py-3 bg-gray-200 rounded">
+      <div className="flex items-start gap-2">
+        <InfoIcon />
+        <p className="text-gray-700 text-p2">{messages[0]}</p>
+      </div>
+      {messages.slice(1).map((message, index) => (
+        <p key={index} className="text-gray-700 text-p2">
           {message}
         </p>
       ))}

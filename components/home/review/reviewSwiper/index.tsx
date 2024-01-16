@@ -5,7 +5,7 @@ import ReviewItem from '../reviewItem';
 
 const ReviewSwiper = () => {
   return (
-    <Swiper spaceBetween={40} slidesPerView={1.2} loop={true}>
+    <Swiper spaceBetween={18} slidesPerView={1.2} loop={true}>
       <SwiperSlide>
         <ReviewItem />
       </SwiperSlide>
