@@ -31,8 +31,8 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
   };
 
   const closeModal = () => {
-    setModal(false);
     router.push('/mypage');
+    setModal(false);
   };
 
   const onSubmit: SubmitHandler<FormWithdraw> = (data) => {

@@ -1,10 +1,16 @@
-export const getDotDate = (inputDate: string, noDay = false) => {
+export const getDotDate = (
+  inputDate: string,
+  noDay = false,
+  noYear = false,
+) => {
   const week = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
   const dayOfWeek = week[new Date(inputDate).getDay()];
   const dateParts = inputDate.split('-');
   if (dateParts.length === 3) {
-    const [month, day] = dateParts.slice(1);
-    return `${month}.${day} ${noDay ? '' : dayOfWeek}`;
+    const [year, month, day] = dateParts;
+    return noYear
+      ? `${year}.${month}.${day}`
+      : `${month}.${day} ${noDay ? '' : dayOfWeek}`;
   } else {
     return 'Invalid Date';
   }
