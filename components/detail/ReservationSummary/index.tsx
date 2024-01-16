@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { CHECKIN_TIME, CHECKOUT_TIME } from '@/constants/CheckInOut';
-import { ReservationSummaryProps } from '@/types/detail/types';
 
 const ReservationSummary = ({
   reservationNumber,
@@ -14,7 +13,8 @@ const ReservationSummary = ({
   checkIn,
   checkOut,
   sellPrice,
-}: ReservationSummaryProps) => {
+  // eslint-disable-next-line
+}: any) => {
   const transportationLabels: { [key: string]: string } = {
     WALK: '도보 방문',
   };

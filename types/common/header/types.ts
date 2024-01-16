@@ -5,4 +5,5 @@ export type HeaderProps = {
   showMoreButton?: boolean;
   showHomeButton?: boolean;
   showBorder?: boolean;
+  isSale?: boolean;
 };

@@ -25,6 +25,7 @@ const Modal = () => {
           >
             <ListItemPrefix placeholder="go" className="mr-3">
               <Checkbox
+                crossOrigin="anonymous"
                 id="vertical-list-react"
                 ripple={false}
                 className="hover:before:opacity-0 rounded-full"
@@ -51,6 +52,7 @@ const Modal = () => {
           >
             <ListItemPrefix placeholder="go" className="mr-3">
               <Checkbox
+                crossOrigin="anonymous"
                 id="vertical-list-vue"
                 ripple={false}
                 className="hover:before:opacity-0"
@@ -77,6 +79,7 @@ const Modal = () => {
           >
             <ListItemPrefix placeholder="go" className="mr-3">
               <Checkbox
+                crossOrigin="anonymous"
                 id="vertical-list-svelte"
                 ripple={false}
                 className="hover:before:opacity-0"

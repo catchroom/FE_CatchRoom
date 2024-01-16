@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
-import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import { outerCatchBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import Discount from '../../discount';
 import CatchBadge from '../../catchBadge';
 import { catchPercentState, catchPriceState } from '@/atoms/sale/catchAtom';
@@ -12,14 +12,14 @@ type PropsType = {
 const BottomSheetsContent = ({ price }: PropsType) => {
   const setSelectCatchPrice = useSetRecoilState(catchPriceState);
   const setSelectCatchPercent = useSetRecoilState(catchPercentState);
-  const setBankModal = useSetRecoilState(outerBottomSheetsControl);
+  const setModalOpen = useSetRecoilState(outerCatchBottomSheetsControl);
 
   const discount: number[] = [50, 60, 70, 80, 90];
 
   const handlePriceClick = (discountedPrice: number, percent: number) => {
     setSelectCatchPrice(discountedPrice);
     setSelectCatchPercent(percent);
-    setBankModal(false);
+    setModalOpen(false);
   };
   return (
     <div className=" flex flex-col gap-8 ">

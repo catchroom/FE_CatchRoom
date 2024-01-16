@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { UserInfo } from '@/types/signup/types';
@@ -7,9 +7,19 @@ import { commonInputStyle } from '@/components/login';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userInfoSchema } from '@/constants/zodSchema';
+import Modal from '@/components/common/modal';
+import { useRecoilValue } from 'recoil';
+import { signUpTest } from '@/api/mypage/testApi';
+import { emailState, passwordState } from '@/atoms/signup/signup';
 
 const SignUpInfo = () => {
   const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setOpen((prev) => !prev);
+  };
 
   const {
     register,
@@ -29,9 +39,26 @@ const SignUpInfo = () => {
   const clearField = (fieldName: 'name' | 'phone' | 'nickname') => {
     setValue(fieldName, '');
   };
+
+  const email = useRecoilValue(emailState);
+  const password = useRecoilValue(passwordState);
+
   const onSubmit = (data: UserInfo) => {
-    //백엔드로 data를 post하기
-    console.log(data);
+    signUpTest(email, password, data.nickname, data.phone, data.name)
+      .then((response) => {
+        console.log(response);
+        router.push('/login');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const checkNickname = () => {
+    //api요청 보내기
+    //응답 코드마다 분기처리!! 1010일때는 모달 열고 1011일때는 에러문구 출력
+    handleModalOpen(); //사용 가능한 이메일일때 뜨는 모달(응답이 1010일때 )
+    //응답이 1011일때는 에러 문구 뜨게 해주기 -> 사용중인 닉네임 입니다.
   };
 
   return (
@@ -97,11 +124,24 @@ const SignUpInfo = () => {
                 <DeleteIcon />
               </div>
             )}
-            <div className="cursor-pointer font-bold text-p3 underline">
+            <div
+              className="cursor-pointer font-bold text-p3 underline"
+              onClick={checkNickname}
+            >
               중복확인
             </div>
+            {/* 에러 문구 : 사용중인 닉네임 입니다. 추가하기 */}{' '}
           </div>
         </div>
+
+        {open && (
+          <Modal
+            title="사용 가능한 닉네임입니다."
+            showConfirmButton={true}
+            onConfirm={handleModalOpen}
+            confirmString="확인"
+          />
+        )}
 
         {errors.nickname ? (
           <p className="text-border-critical mb-3">{errors.nickname.message}</p>

@@ -5,6 +5,7 @@ import './globals.css';
 import ClientProvider from '@/components/common/provider/provider';
 import RootTemplate from '@/components/common/layoutTemplate/RootTemplate';
 import Script from 'next/script';
+import ToastAlertComponent from '@/components/common/toastAlert';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +29,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ClientProvider>
-          <RootTemplate>{children}</RootTemplate>
+          <RootTemplate>
+            {children}
+            <ToastAlertComponent />
+          </RootTemplate>
         </ClientProvider>
       </body>
     </html>
