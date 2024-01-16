@@ -47,6 +47,7 @@ const Map = ({ markers }: MapProps) => {
           };
 
         // const map = new window.kakao.maps.Map(mapContainer, mapOption);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         map = new window.kakao.maps.Map(mapContainer, mapOption);
 
         markers.forEach((markerData, index) => {
@@ -63,6 +64,7 @@ const Map = ({ markers }: MapProps) => {
               setSelectedMarkerInfo(markerData);
               updateOverlayZIndex();
             },
+            // index,
           );
 
           const customOverlay = new window.kakao.maps.CustomOverlay({
@@ -74,12 +76,14 @@ const Map = ({ markers }: MapProps) => {
           overlays.push(customOverlay);
           customOverlay.setMap(map);
         });
+        updateOverlayZIndex(); // 초기 오버레이 z-index 설정
       });
     };
 
     mapScript.addEventListener('load', onLoadKakaoMap);
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [markers, selectedOverlayIndex]);
   }, [markers, selectedOverlayIndex]);
 
   //오버레이 ZIndex 조정
@@ -94,19 +98,23 @@ const Map = ({ markers }: MapProps) => {
     markerData: MarkerProps,
     isSelected: boolean,
     onClick: () => void,
+    // index: number,
   ) => {
     const overlayContent = document.createElement('div');
     overlayContent.className = 'custom-overlay';
     overlayContent.onclick = () => {
-      updateOverlayZIndex();
-      onClick();
+      // 지도 중심 재설정
+      // const overlayPosition = new window.kakao.maps.LatLng(
+      //   markerData.latitude,
+      //   markerData.longitude,
+      // );
+      // map.panTo(overlayPosition);
 
-      // 지도 중심을 부드럽게 이동
-      const overlayPosition = new window.kakao.maps.LatLng(
-        markerData.latitude,
-        markerData.longitude,
-      );
-      map.panTo(overlayPosition);
+      // //선택된 오버레이 인덱스와 정보를 업데이트
+      // setSelectedOverlayIndex(index);
+      // setSelectedMarkerInfo(markerData);
+
+      onClick();
     };
 
     overlayContent.style.cssText = `
