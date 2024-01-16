@@ -12,7 +12,7 @@ import Cookies from 'js-cookie';
 // import { login } from '@/api/user';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
-import { loginTest, getNewTokenTest } from '@/api/mypage/api';
+import { loginTest } from '@/api/mypage/api';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -51,7 +51,7 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (data: LoginData) => {
-    loginTest(data.email, data.password)
+    loginTest(data.email, data.password) //테스트
       .then((response) => {
         console.log(response);
         if (response.code === '1006') {
@@ -169,26 +169,6 @@ const LoginForm = () => {
             </div>
           </span>
         </div>
-
-        {/* 테스트입니다 */}
-        <button
-          onClick={() => {
-            getNewTokenTest()
-              .then((response) => {
-                console.log(response);
-                if (response.code === '1006') {
-                  console.log('access_token 체크', Cookies.get('access_token'));
-                  router.push('/signup');
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }}
-        >
-          테스트입니다
-        </button>
-        {/* 테스트입니다 */}
       </form>
     </div>
   );
