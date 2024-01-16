@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert } from '@material-tailwind/react';
 import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
@@ -13,11 +13,22 @@ const ToastAlertComponent = () => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      const floating = setTimeout(() => {
+        setIsOpen(false);
+      }, 4000);
+      return () => {
+        clearTimeout(floating);
+      };
+    }
+  }, [isOpen, setIsOpen]);
+
   return (
     <div className="flex items-center fixed bottom-0  w-full  mb-28  z-[2000]">
       <Alert
         open={isOpen}
-        className="relative flex items-center max-w-[440px] w-full h-[56px] py-2  rounded-[4px] mx-5 bg-gray-900 text-p2 text-white font-pretend"
+        className="relative flex items-center max-w-[440px] w-full h-[56px] py-2  rounded-[4px] mx-5 bg-gray-900 text-p2 text-white font-pretend shadow-xl"
         onClose={alertCloseHandler}
         animate={{
           mount: { y: 0 },
