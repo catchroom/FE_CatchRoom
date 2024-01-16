@@ -28,7 +28,7 @@ export const MYPAGE_CONSTANTS: Root = {
       },
       {
         TITLE: '찜목록',
-        LOCATION: '/mypage/dashboard/likes',
+        LOCATION: '/mypage/dashboard/wishlist',
         TYPE: 'heart',
       },
     ],
