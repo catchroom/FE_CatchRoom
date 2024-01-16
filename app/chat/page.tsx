@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import ChatList from '../../components/chat/chatList/index';
 import Header from '@/components/common/header';
@@ -7,6 +8,46 @@ import { useRouter } from 'next/navigation';
 import Modal from '@/components/common/modal';
 import { useRecoilState } from 'recoil';
 import { isModalState } from '@/atoms/chat/leaveButton';
+import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
+import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
+
+const createRoom = async () => {
+  const data = await axios.post(
+    'http://13.124.240.142:8080/v1/chat/room/create',
+    {
+      buyerId: 'buyer1',
+      sellerId: 'seller1',
+      productId: 'product1',
+    },
+    {
+      headers: {
+        Authorization: `Bearer tokentoken`,
+      },
+    },
+  );
+  console.log(data);
+  console;
+  return data;
+};
+
+const MakeButton = () => {
+  const mutation = useMutation({
+    mutationFn: () => createRoom(),
+    onError: (error) => {
+      console.log(error);
+    },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
+
+  const onClick = () => {
+    mutation.mutate();
+  };
+
+  return <SimpleButton fn={onClick} name="방 만들기" />;
+};
 
 const Page = () => {
   const router = useRouter();
@@ -40,6 +81,7 @@ const Page = () => {
           confirmString="나가기"
         />
       )}
+      <MakeButton />
     </div>
   );
 };
