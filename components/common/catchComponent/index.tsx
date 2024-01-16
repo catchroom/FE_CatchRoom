@@ -24,6 +24,7 @@ import HeartButton from '../heartButton';
  * @param isDelete - (선택) 삭제버튼을 활성화 할 수 있습니다. Default값은 false입니다.
  * @param isHeart - (선택) 찜버튼을 활성화 할 수 있습니다. Default값은 false입니다.
  * @param pageHandler - (선택) 상품 컴포넌트를 눌렀을 때 실행되는 함수를 넣을 수 있는 props입니다.
+ * @param heartState - (선택) 찜버튼의 토글 상태 전달을 위한 props입니다.
  * @param heartStateHandler - (선택) 찜버튼을 눌렀을 때 실행되는 함수를 넣을 수 있는 props입니다.
  * @param deleteBtnHandler - (선택) 삭제버튼을 눌렀을 때 실행되는 함수를 넣을 수 있는 props입니다.
  * @returns {JSX.Element} CatchSpecialComponent 컴포넌트 반환
