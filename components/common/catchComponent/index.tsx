@@ -37,7 +37,7 @@ const CatchSpecialComponent = ({
   discount,
   isDelete = false,
   isHeart = false,
-  heartState = false,
+  heartState = true,
   pageHandler = () => {
     console.log('상품이 클릭됐습니다.');
   },
