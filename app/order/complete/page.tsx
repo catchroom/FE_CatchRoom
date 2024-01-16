@@ -1,7 +1,5 @@
-import Header from '@/components/common/header';
 import CompleteMessage from '@/components/complete/completeMessage';
 import NavButton from '@/components/complete/navButton';
-// import NavButton from '@/components/complete/navButton';
 import ProductDetails from '@/components/complete/productDetails';
 import ReservationInfo from '@/components/complete/reservationInfo';
 import Link from 'next/link';
@@ -28,8 +26,7 @@ const page = () => {
   };
   return (
     <>
-      <Header showCloseButton />
-      <div className="flex flex-col container mx-auto w-full px-5 pt-14 pb-5  bg-bg">
+      <div className="flex flex-col container mx-auto w-full px-5 pt-16 pb-5  bg-bg">
         <div>
           <CompleteMessage guest={bookingDetails.guest} />
         </div>
