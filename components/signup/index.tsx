@@ -82,17 +82,18 @@ const SignUpAuth = () => {
             >
               중복확인
             </div>
-            {/* 에러 문구 : 사용중인 이메일 입니다. 추가하기 */}
-            {open && (
-              <Modal
-                title="사용 가능한 이메일입니다."
-                showConfirmButton={true}
-                onConfirm={handleModalOpen}
-                confirmString="확인"
-              />
-            )}
           </div>
         </div>
+
+        {/* 에러 문구 : 사용중인 이메일 입니다. 추가하기 */}
+        {open && (
+          <Modal
+            title="사용 가능한 이메일입니다."
+            showConfirmButton={true}
+            onConfirm={handleModalOpen}
+            confirmString="확인"
+          />
+        )}
 
         {errors.email && (
           <p className="text-border-critical mb-3">{errors.email.message}</p>

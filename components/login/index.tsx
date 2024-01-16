@@ -12,7 +12,7 @@ import Cookies from 'js-cookie';
 // import { login } from '@/api/user';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
-import { loginTest } from '@/api/mypage/api';
+import { loginTest } from '@/api/mypage/testApi';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';

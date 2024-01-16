@@ -40,10 +40,6 @@ export const login = async (email: string, password: string) => {
 
   const data = await res.json();
   if (data.code === 1006) {
-    // 서버 컴포넌트에서 x -> 클라이언트 컴포넌트에서 사용하기
-    // document.cookie = `access_token=${data.data.access_token}; path=/`;
-    // document.cookie = `refresh_token=${data.data.refresh_token}; path=/`;
-
     return data;
   } else if (data.code === 1007) {
     //아이디 x

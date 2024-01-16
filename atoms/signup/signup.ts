@@ -10,8 +10,9 @@ export const passwordState = atom({
   default: '',
 });
 
-// export const nicknameState = atom({
-//   key: 'nicknameState',
+//소셜시 추가로 필요한 정보들
+// export const phonenumberState = atom({
+//   key: 'phonenumberState',
 //   default: '',
 // });
 

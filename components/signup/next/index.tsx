@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userInfoSchema } from '@/constants/zodSchema';
 import Modal from '@/components/common/modal';
 import { useRecoilValue } from 'recoil';
-import { signUpTest } from '@/api/mypage/api';
+import { signUpTest } from '@/api/mypage/testApi';
 import { emailState, passwordState } from '@/atoms/signup/signup';
 
 const SignUpInfo = () => {
@@ -130,17 +130,18 @@ const SignUpInfo = () => {
             >
               중복확인
             </div>
-            {/* 에러 문구 : 사용중인 닉네임 입니다. 추가하기 */}
-            {open && (
-              <Modal
-                title="사용 가능한 닉네임입니다."
-                showConfirmButton={true}
-                onConfirm={handleModalOpen}
-                confirmString="확인"
-              />
-            )}
+            {/* 에러 문구 : 사용중인 닉네임 입니다. 추가하기 */}{' '}
           </div>
         </div>
+
+        {open && (
+          <Modal
+            title="사용 가능한 닉네임입니다."
+            showConfirmButton={true}
+            onConfirm={handleModalOpen}
+            confirmString="확인"
+          />
+        )}
 
         {errors.nickname ? (
           <p className="text-border-critical mb-3">{errors.nickname.message}</p>
