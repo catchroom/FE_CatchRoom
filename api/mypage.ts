@@ -1,6 +1,5 @@
-import Cookies from 'js-cookie';
-
-const accessToken: string = Cookies.get('access_token') || '';
+import nookies from 'nookies';
+const accessToken = nookies.get(null)['accessToken'];
 
 //로그아웃
 export const logout = async (accessToken: string) => {
