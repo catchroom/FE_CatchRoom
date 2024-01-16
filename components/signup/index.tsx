@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { AuthData } from '@/types/signup/types';
@@ -65,13 +65,19 @@ const SignUpAuth = () => {
     setValue(fieldName, '');
   };
 
+  useEffect(() => {
+    setConfirmedEmail(false);
+  }, [email]);
+
   const setEmail = useSetRecoilState(emailState);
   const setPassword = useSetRecoilState(passwordState);
 
   const onSubmit = (data: AuthData) => {
-    setEmail(data.email);
-    setPassword(data.password);
-    router.push('/signup/next');
+    if (confirmedEmail === true) {
+      setEmail(data.email);
+      setPassword(data.password);
+      router.push('/signup/next');
+    }
   };
 
   return (
@@ -174,10 +180,10 @@ const SignUpAuth = () => {
         <div className="w-full mt-5">
           <button
             className={`w-full h-[3.5rem] font-pretend text-t2 font-medium text-text-on rounded-md ${
-              isValid ? 'bg-focus' : 'bg-gray-300'
+              isValid && confirmedEmail ? 'bg-focus' : 'bg-gray-300'
             }`}
             type="submit"
-            disabled={!isValid}
+            disabled={!(isValid && confirmedEmail)}
           >
             다음
           </button>
