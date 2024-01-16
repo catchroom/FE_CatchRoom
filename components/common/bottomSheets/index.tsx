@@ -20,6 +20,7 @@ import {
   outerSaleBottomSheetsControl,
 } from '@/atoms/commons/outerBottomSheetsControl';
 import PriceButton from '../sheetsButtons/priceButton';
+import DropdownButton from '../sheetsButtons/dropdownButton';
 import ValidationButton from '../sheetsButtons/validationButton';
 
 /**
@@ -42,8 +43,8 @@ import ValidationButton from '../sheetsButtons/validationButton';
 const BottomSheets = ({
   children,
   title,
-  innerTitle = '모달제목',
-  innerButtonTitle = '버튼제목',
+  innerTitle,
+  innerButtonTitle,
   buttonSelect = 'simple',
   placeholder,
   icon,
@@ -65,6 +66,7 @@ const BottomSheets = ({
     | 'sale'
     | 'price'
     | 'border'
+    | 'dropdown';
     | 'validation';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
@@ -125,6 +127,7 @@ const BottomSheets = ({
     sale: <SaleButton name={title} fn={modalOpen} />,
     price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
     border: <BorderButton name={title} fn={modalOpen} disabled={theme} />,
+    dropdown: <DropdownButton name={title} fn={modalOpen} />,
     validation: <ValidationButton name={title} fn={modalOpen} />,
   };
 
@@ -172,7 +175,7 @@ const BottomSheets = ({
                 </div>
                 <div className="w-full h-full flex flex-col items-center gap-12">
                   {children}
-                  {closeButton && (
+                  {closeButton && innerButtonTitle && (
                     <SimpleButton
                       fn={modalClose}
                       name={innerButtonTitle}
