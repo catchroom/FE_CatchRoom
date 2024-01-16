@@ -22,6 +22,7 @@ import {
 import PriceButton from '../sheetsButtons/priceButton';
 import DropdownButton from '../sheetsButtons/dropdownButton';
 import ValidationButton from '../sheetsButtons/validationButton';
+import CalendarButton from '../sheetsButtons/calendarButton';
 
 /**
  * @function BottomSheets - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -67,7 +68,8 @@ const BottomSheets = ({
     | 'price'
     | 'border'
     | 'dropdown'
-    | 'validation';
+    | 'validation'
+    | 'calendar';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
   closeButton?: boolean;
@@ -129,6 +131,7 @@ const BottomSheets = ({
     border: <BorderButton name={title} fn={modalOpen} disabled={theme} />,
     dropdown: <DropdownButton name={title} fn={modalOpen} />,
     validation: <ValidationButton name={title} fn={modalOpen} />,
+    calendar: <CalendarButton name={title} fn={modalOpen} />,
   };
 
   return (

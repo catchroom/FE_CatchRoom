@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
-import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
+import BottomSheets from '@/components/common/bottomSheets';
+import SetTime from '../setTime';
 
 const SaleEndContainer = () => {
   return (
@@ -9,11 +10,9 @@ const SaleEndContainer = () => {
       <p className="text-p1 opacity-50 mt-1">
         판매 종료일 이후 판매글은 미노출 됩니다
       </p>
-      <div className="flex w-full px-4 border border-border-sub gap-2 h-[3.8rem] rounded items-center">
-        <BigCalendarIcon />
-        {/* 바텀시트 모달로 변경예정 */}
-        <button className="w-full flex items-start">12월 9일 (월)</button>
-      </div>
+      <BottomSheets buttonSelect="calendar" title="12월 28일 (수) 오후 11:59">
+        <SetTime />
+      </BottomSheets>
     </div>
   );
 };
