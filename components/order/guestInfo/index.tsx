@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { guestInfoSchema } from '@/constants/zodSchema';
 import CheckBoxComponent from '@/components/common/checkBox';
 import Modal from '@/components/common/modal';
-import InfoBox from '../infoBox';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 
 // 미입력시 모달 로직,유효성 검사 수정 예정
@@ -39,7 +38,8 @@ const GuestInfo = ({
   const watchedName = watch('name');
   const watchedPhone = watch('phone');
 
-  const onSubmit = (data) => {
+  // eslint-disable-next-line
+  const onSubmit = (data: any) => {
     console.log(data);
     const isFormEmpty = !data.name && !data.phone;
 
@@ -153,9 +153,6 @@ const GuestInfo = ({
           showConfirmButton={true}
         />
       )}
-      <div className="mb-6">
-        <InfoBox messageKey="guestInfo" />
-      </div>
     </div>
   );
 };

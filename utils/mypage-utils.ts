@@ -27,3 +27,7 @@ export const maskPhoneNumber = (phoneNumber: string) => {
     phoneNumber.substring(0, 3) + '****' + phoneNumber.substring(7);
   return maskedPhoneNumber;
 };
+
+export const noMask = (value: string) => {
+  return value;
+};

@@ -7,7 +7,7 @@ import CatchItem from '../catchItem';
 
 const CatchSwiper = () => {
   return (
-    <Swiper spaceBetween={20} slidesPerView={1.2} loop={true}>
+    <Swiper spaceBetween={12} slidesPerView={1.1} loop={true}>
       {ITEMS_INFO.roomItems.map((item) => {
         return (
           <SwiperSlide key={item.roomName}>
@@ -18,6 +18,7 @@ const CatchSwiper = () => {
               oldPrice={item.oldPrice}
               discount={item.discount}
               location={item.location}
+              roomType="room"
             />
           </SwiperSlide>
         );

@@ -5,25 +5,29 @@ const HistoryList = ({
   item,
 }: {
   item: {
-    id: number;
     date: string;
-    amount: number;
-    status: string;
-    message: string;
+    totalNum: number;
+    type: string;
+    productName: string;
   };
 }) => {
+  const isWithdraw = item.type === '출금';
+  const returnWord = isWithdraw ? ' 출금' : ' 판매적립';
+
   return (
-    <div className="w-full gap-3 flex flex-col" key={item.id}>
-      <div className="w-full flex items-center gap-3">
-        <p className=" text-t1">{getDotDate(item.date)}</p>
-        <p>{item.status === 'withdraw' ? '(출금한 날짜)' : '(적립된 날짜)'}</p>
+    <div className="w-full flex flex-col gap-1">
+      <div className="w-full flex items-center">
+        <p className="text-t3">{getDotDate(item.date, true, true)}</p>
       </div>
-      <div className="flex items-center gap-3">
-        <div className="text-t1">
-          <span>{item.status === 'withdraw' ? '- ' : '+ '}</span>
-          {item.amount}원
+      <div className="flex justify-between items-center text-p2 font-semibold">
+        <p className={`text-text`}>
+          {item.productName}
+          {returnWord}
+        </p>
+        <div className={`${isWithdraw ? 'text-text-primary' : 'text-text'}`}>
+          <span>{isWithdraw ? '- ' : '+ '}</span>
+          {item.totalNum.toLocaleString()}원
         </div>
-        <p className=" text-text-sub text-p2">{item.message}</p>
       </div>
     </div>
   );

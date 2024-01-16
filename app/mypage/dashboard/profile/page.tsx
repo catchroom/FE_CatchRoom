@@ -8,13 +8,11 @@ import PrivacyToggle from '@/components/mypage/privacy/privacyToggle';
 const sampleData: Record<string, string> = {
   id: 'doremi123@gmail.com',
   email: 'doremi123@gmail.com',
-  password: '123456789!',
+  name: '홍길동',
   phoneNumber: '01012345678',
 };
 
 const page = () => {
-  console.log(sampleData['email']);
-
   return (
     <div className="w-full h-full flex flex-col gap-5">
       <div className="w-full flex flex-col items-center justify-center px-5 pt-5">
