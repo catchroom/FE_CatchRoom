@@ -1,7 +1,7 @@
 import nookies from 'nookies';
 const accessToken = nookies.get(null)['accessToken'];
 
-//로그아웃
+//6. 로그아웃
 export const logout = async (accessToken: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
