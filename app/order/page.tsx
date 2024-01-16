@@ -26,10 +26,8 @@ const page = () => {
           roomName={roomName}
         />
         <CheckInDateComponent
-          checkInDate="2024-01-01 (월)"
-          CheckInTime="15:00"
-          CheckOutDate="2024-01-02 (화)"
-          CheckOutTime="11:00"
+          CheckInDate="01.01 (월)"
+          CheckOutDate="01.03 (월)"
         />
         <BookingHolderInfo name="홍길동" phoneNumber="010-1234-5678" />
         <GuestInfo name="홍길동" phoneNumber="01012345678" />
@@ -39,7 +37,7 @@ const page = () => {
           commission={commission}
         />
         <PaymentMethods />
-        <TermsAndConditions label="약관 동의" />
+        <TermsAndConditions />
         <PaymentButton amount={totalPrice} />
       </div>
     </>
