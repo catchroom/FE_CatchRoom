@@ -5,7 +5,7 @@ import nookies from 'nookies';
 //1. 이메일 중복체크
 export const emailCheck = async (email: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_LOCAL_URL}/v1/user/emailcheck?email=${email}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/email/check?email=${email}`,
     {
       method: 'GET',
       headers: { Accept: 'application/json' },
@@ -16,14 +16,15 @@ export const emailCheck = async (email: string) => {
   if (data.code === 1012) {
     return data;
   } else if (data.code === 1005) {
-    console.log(data.message);
+    return data;
+    // console.log(data.message);
   }
 };
 
 //2. 닉네임 중복체크
 export const nicknameCheck = async (nickname: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_LOCAL_URL}/v1/user/nicknamecheck?nickname=${nickname}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/nickname/check?nickname=${nickname}`,
     {
       method: 'GET',
       headers: { Accept: 'application/json' },
@@ -32,10 +33,8 @@ export const nicknameCheck = async (nickname: string) => {
 
   const data = await res.json();
   if (data.code === 1010) {
-    //성공 -> alert띄워주기
     return data;
   } else if (data.code === 1011) {
-    //중복 -> 에러문구 띄워주기
     console.log(data.message);
   }
 };
@@ -49,7 +48,7 @@ export const signUp = async (
   name: string,
 ) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_LOCAL_URL}/user/register`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/register`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -67,11 +66,14 @@ export const signUp = async (
 
 // 4. 로그인
 export const login = async (email: string, password: string) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/user/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/login`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    },
+  );
 
   const data = await res.json();
   if (data.code === 1006) {
@@ -86,7 +88,7 @@ export const getNewToken = async () => {
   const refreshToken = nookies.get(null)['refresh_token'];
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_LOCAL_URL}/v1/user/accesstoken`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
     {
       method: 'POST',
       headers: {

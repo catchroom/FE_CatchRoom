@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userInfoSchema } from '@/constants/zodSchema';
 import Modal from '@/components/common/modal';
 import { useRecoilValue } from 'recoil';
-import { signUpTest } from '@/api/mypage/testApi';
+import { signUp } from '@/api/user/api';
 import { emailState, passwordState } from '@/atoms/signup/signup';
 
 const SignUpInfo = () => {
@@ -44,10 +44,10 @@ const SignUpInfo = () => {
   const password = useRecoilValue(passwordState);
 
   const onSubmit = (data: UserInfo) => {
-    signUpTest(email, password, data.nickname, data.phone, data.name)
+    signUp(email, password, data.nickname, data.phone, data.name)
       .then((response) => {
         console.log(response);
-        router.push('/login');
+        router.push('/login'); //성공시에만 보내는걸로 수정하기
       })
       .catch((error) => {
         console.log(error);

@@ -10,9 +10,11 @@ import { authDataSchema } from '@/constants/zodSchema';
 import Modal from '../common/modal';
 import { emailState, passwordState } from '@/atoms/signup/signup';
 import { useSetRecoilState } from 'recoil';
+import { emailCheck } from '@/api/user/api';
 
 const SignUpAuth = () => {
   const router = useRouter();
+  const [confirmedEmail, setConfirmedEmail] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -20,11 +22,27 @@ const SignUpAuth = () => {
     setOpen((prev) => !prev);
   };
 
-  const checkEmail = () => {
-    //api요청 보내는 함수 추가
-    //응답 코드마다 분기처리!! 1012일때는 모달 열고 1005일때는 에러문구 출력
-    handleModalOpen(); //사용 가능한 이메일일때 뜨는 모달(응답이 1012일때 )
-    //응답이 1005일때는 에러 문구 뜨게 해주기 -> 사용중인 이메일 입니다.
+  const checkEmail = async (email: string) => {
+    if (email === '') {
+      setError('email', {
+        type: 'email',
+        message: '이메일을 입력해주세요.',
+      });
+    } else {
+      emailCheck(email).then((response) => {
+        // console.log(response);
+        if (response.code === 1012) {
+          //console.log(response);
+          handleModalOpen();
+          setConfirmedEmail(true);
+        } else if (response.code === 1005) {
+          setError('email', {
+            type: 'email',
+            message: '사용중인 이메일입니다.',
+          });
+        }
+      });
+    }
   };
 
   const {
@@ -33,6 +51,7 @@ const SignUpAuth = () => {
     formState: { errors, isValid },
     watch,
     setValue,
+    setError,
   } = useForm<AuthData>({
     mode: 'onChange',
     resolver: zodResolver(authDataSchema),
@@ -71,21 +90,20 @@ const SignUpAuth = () => {
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {email && (
+            {email && !confirmedEmail && (
               <div onClick={() => clearField('email')}>
                 <DeleteIcon />
               </div>
             )}
             <div
               className="cursor-pointer font-bold text-p3 underline"
-              onClick={checkEmail}
+              onClick={() => checkEmail(email)}
             >
               중복확인
             </div>
           </div>
         </div>
 
-        {/* 에러 문구 : 사용중인 이메일 입니다. 추가하기 */}
         {open && (
           <Modal
             title="사용 가능한 이메일입니다."
@@ -95,7 +113,7 @@ const SignUpAuth = () => {
           />
         )}
 
-        {errors.email && (
+        {errors.email && errors.email.message && (
           <p className="text-border-critical mb-3">{errors.email.message}</p>
         )}
 
