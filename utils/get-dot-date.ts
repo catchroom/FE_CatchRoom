@@ -21,7 +21,7 @@ export const decodeState = (state: StateType, date?: string) => {
     case 'notForSale':
       return '체크인 만료';
     default:
-      return '상세보기';
+      return `구매일 ${date}`;
   }
 };
 

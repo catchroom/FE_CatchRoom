@@ -28,14 +28,14 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
   const viewReview = isNotIng && item.state === 'done' ? true : false;
 
   return (
-    <div id="container" className="w-full px-5 py-3 flex flex-col gap-3">
-      <div className="w-full flex flex-col">
+    <div className="w-full px-5 py-3 flex flex-col gap-3">
+      <div id="container" className="w-full flex flex-col">
         {/* 호텔 이미지, 이름, 가격 정보 */}
-        <div className="w-full flex gap-4">
+        <div className="flex w-full gap-4">
           <div className="relative w-[120px] h-[120px]">
             {/* 호텔 이미지 */}
             {isNotIng && (
-              <div className="absolute flex items-center justify-center inset-0 backdrop-saturate-50 backdrop-brightness-75">
+              <div className="absolute flex z-10 items-center justify-center inset-0 backdrop-saturate-50 backdrop-brightness-75">
                 <p className="text-text-on font-semibold text-t2">판매완료</p>
               </div>
             )}
@@ -58,7 +58,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
           <div className="flex flex-col justify-between grow">
             <div className="flex flex-col gap-2 w-full">
               {/* 호텔 체크인 체크아웃 날짜 */}
-              <div className="w-full flex justify-between grow">
+              <div className="flex items-center justify-between w-full">
                 <p className="flex items-center gap-1 text-text text-t3 font-medium">
                   <CalendarSVG />
                   {getDotDate(item.checkIn)} - {getDotDate(item.checkOut)}
