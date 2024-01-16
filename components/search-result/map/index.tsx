@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { MapProps, MarkerProps } from '@/types/search-result/map/type';
 import ToggleViewButtonWrapper from './toggleViewButtonWrapper';
 import CatchSpecialComponentWrapper from './catchSpecialComponentWrapper';
+import Link from 'next/link';
 
 declare global {
   interface Window {
@@ -178,10 +179,12 @@ const Map = ({ markers }: MapProps) => {
   return (
     <div id="map" className="w-full h-full ">
       <CatchSpecialComponentWrapper selectedMarkerInfo={selectedMarkerInfo} />
-      <ToggleViewButtonWrapper
-        currentView={currentView}
-        onViewChange={toggleView}
-      />
+      <Link href="/search-result/list" passHref>
+        <ToggleViewButtonWrapper
+          currentView={currentView}
+          onViewChange={toggleView}
+        />
+      </Link>
     </div>
   );
 };
