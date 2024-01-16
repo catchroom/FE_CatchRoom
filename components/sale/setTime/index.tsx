@@ -11,8 +11,8 @@ import { useRecoilState } from 'recoil';
 
 const SetTime = () => {
   const [time, setTime] = useRecoilState(timeState);
-  const [hour, setHour] = useRecoilState(hourState); // 초기 시간 설정
-  const [minute, setMinute] = useRecoilState(minuteState); // 초기 분 설정
+  const [hour, setHour] = useRecoilState(hourState);
+  const [minute, setMinute] = useRecoilState(minuteState);
 
   const toggleTime = () => {
     setTime((prev) => (prev === DAY_TIME[0] ? DAY_TIME[1] : DAY_TIME[0]));
