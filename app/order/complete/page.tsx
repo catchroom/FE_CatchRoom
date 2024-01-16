@@ -1,8 +1,10 @@
 import Header from '@/components/common/header';
 import CompleteMessage from '@/components/complete/completeMessage';
+import NavButton from '@/components/complete/navButton';
 // import NavButton from '@/components/complete/navButton';
 import ProductDetails from '@/components/complete/productDetails';
 import ReservationInfo from '@/components/complete/reservationInfo';
+import Link from 'next/link';
 import React from 'react';
 
 const page = () => {
@@ -14,11 +16,11 @@ const page = () => {
 
   const bookingDetails = {
     bookingHolder: {
-      name: '이름',
+      name: '홍길동',
       phoneNumber: '010-1234-5678',
     },
     guest: {
-      name: '이름',
+      name: '홍길동',
       phoneNumber: '010-1234-5678',
     },
     totalPrice: 200000,
@@ -26,10 +28,10 @@ const page = () => {
   };
   return (
     <>
-      <Header title="구매하기" showCloseButton />
+      <Header showCloseButton />
       <div className="flex flex-col container mx-auto w-full px-5 pt-14 pb-5  bg-bg">
         <div>
-          <CompleteMessage />
+          <CompleteMessage guest={bookingDetails.guest} />
         </div>
         <div className="flex flex-col container p-5 bg-white">
           <ProductDetails
@@ -46,7 +48,24 @@ const page = () => {
             paymentMethod={bookingDetails.paymentMethod}
           />
         </div>
-        {/* <NavButton /> 추가예정 */}
+        <div className="fixed flex gap-2 ml-[-1.25rem]  bottom-0 bg-white border-t border-border-sub p-5  h-17 w-full max-w-[480px] z-50">
+          <div className="w-full h-full">
+            <Link href="/home">
+              <NavButton
+                label="홈으로 이동"
+                colorClass=" text-text-primary border border-border-primary"
+              />
+            </Link>
+          </div>
+          <div className="w-full h-full">
+            <Link href="/order/complete/detail">
+              <NavButton
+                label="상세보기"
+                colorClass="bg-border-primary text-white"
+              />
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );

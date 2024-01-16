@@ -1,5 +1,5 @@
 import { Root } from '@/types/mypage/types';
-import { maskEmail } from '@/utils/mypage-utils';
+import { maskEmail, maskPhoneNumber, noMask } from '@/utils/mypage-utils';
 
 export const MYPAGE_CONSTANTS: Root = {
   ACCOUNT_BUTTON: [
@@ -58,6 +58,16 @@ export const MYPAGE_PRIVACY = [
     title: '이메일',
     function: maskEmail,
     key: 'email',
+  },
+  {
+    title: '이름',
+    function: noMask,
+    key: 'name',
+  },
+  {
+    title: '휴대폰번호',
+    function: maskPhoneNumber,
+    key: 'phoneNumber',
   },
 ];
 
