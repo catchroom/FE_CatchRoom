@@ -3,6 +3,7 @@
 import CheckBoxComponent from '@/components/common/checkBox';
 import { FromSeller, sellerSchema } from '@/constants/zodSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -13,6 +14,10 @@ const FromSeller = () => {
     resolver: zodResolver(sellerSchema),
     mode: 'onChange',
   });
+
+  const router = useRouter();
+
+  const [content, setContent] = useState('');
 
   const onSubmit: SubmitHandler<FromSeller> = (data) => {
     if (sellerSchema.safeParse(data).success) {
@@ -28,11 +33,19 @@ const FromSeller = () => {
       const slicedValue = currentValue.slice(0, 100);
       setValue('sellerContent', slicedValue);
       setWordCount(slicedValue.length);
+      setContent(slicedValue);
     }
   };
 
   const handleCheckbox = () => {
     setAgreedPriceOffer((prev) => !prev);
+  };
+
+  const handleButtonClick = () => {
+    if (wordCount > 10) {
+      router.push('/room-info');
+      console.log(content);
+    }
   };
   return (
     <div className="flex flex-col w-full">
@@ -65,6 +78,7 @@ const FromSeller = () => {
       />
 
       <button
+        onClick={handleButtonClick}
         type="submit"
         className="bg-action-primary h-11 px-4 mt-6 rounded text-text-on text-t2 font-semibold "
       >
