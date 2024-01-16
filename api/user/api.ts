@@ -1,8 +1,6 @@
 import nookies from 'nookies';
 
-//NEXT_PUBLIC_LOCAL_URL -> NEXT_PUBLIC_SERVER_URL로 바꾸기
-
-//1. 이메일 중복체크
+//1. 이메일 중복체크  -> 1005랑 1012 바뀐거만 확인요청하면 ok
 export const emailCheck = async (email: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/email/check?email=${email}`,
@@ -13,15 +11,10 @@ export const emailCheck = async (email: string) => {
   );
 
   const data = await res.json();
-  if (data.code === 1012) {
-    return data;
-  } else if (data.code === 1005) {
-    return data;
-    // console.log(data.message);
-  }
+  return data;
 };
 
-//2. 닉네임 중복체크
+//2. 닉네임 중복체크-> 1010이랑 1011 바뀐거만 확인요청하면 ok
 export const nicknameCheck = async (nickname: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/nickname/check?nickname=${nickname}`,
@@ -32,11 +25,7 @@ export const nicknameCheck = async (nickname: string) => {
   );
 
   const data = await res.json();
-  if (data.code === 1010) {
-    return data;
-  } else if (data.code === 1011) {
-    console.log(data.message);
-  }
+  return data;
 };
 
 //3. 회원가입
