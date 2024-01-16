@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchMypageSelling, fetchMypageSellingTest } from './api';
+import { fetchMypageSelling, fetchMypageSellingTest } from './testApi';
 
 const queryData = {
   ing: {

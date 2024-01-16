@@ -4,6 +4,7 @@ import { radioSchema } from '@/constants/zodSchema';
 import { getSlashDate } from '@/utils/get-slash-date';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Radio } from '@material-tailwind/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -29,12 +30,18 @@ const SaleItems = () => {
     },
   });
 
+  const router = useRouter();
+
   const onSubmit = () => {
     // 선택된 값 처리
     console.log('success');
   };
 
   const selectedProduct = watch('selectedProduct');
+
+  const handleButtonClick = () => {
+    if (selectedProduct) router.push('/sale');
+  };
 
   return (
     <form
@@ -67,6 +74,7 @@ const SaleItems = () => {
         );
       })}
       <button
+        onClick={handleButtonClick}
         type="submit"
         className={`w-full h-[44px] rounded mt-12 ${
           selectedProduct

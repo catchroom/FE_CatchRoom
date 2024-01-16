@@ -8,8 +8,12 @@ import React, {
 } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
-import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import {
+  outerBottomSheetsControl,
+  outerDatePickerBottomSheetsControl,
+} from '@/atoms/commons/outerBottomSheetsControl';
 import DropdownButton from '../sheetsButtons/dropdownButton';
+import CalendarButton from '../sheetsButtons/calendarButton';
 
 /**
  * @function BottomSheetsWithoutCloseBtn - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -27,14 +31,24 @@ const BottomSheetsWithoutCloseBtn = ({
   title,
   buttonSelect = 'dropdown',
   outerControl = true,
+  outerControlAtom = 'default',
 }: {
   children: ReactNode;
   title: string;
-  buttonSelect?: 'dropdown';
+  buttonSelect?: 'dropdown' | 'calendar';
   outerControl?: boolean;
+  outerControlAtom?: 'default' | 'datePicker';
 }) => {
   const [open, setOpen] = useState(false);
-  const [outerOpen, setOuterOpen] = useRecoilState(outerBottomSheetsControl);
+
+  const outerControlState = {
+    default: outerBottomSheetsControl,
+    datePicker: outerDatePickerBottomSheetsControl,
+  };
+
+  const [outerOpen, setOuterOpen] = useRecoilState(
+    outerControlState[outerControlAtom],
+  );
   const [viewPortHeight, setViewPortHeight] = useState(0);
 
   useEffect(() => {
@@ -62,6 +76,7 @@ const BottomSheetsWithoutCloseBtn = ({
 
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
     dropdown: <DropdownButton name={title} fn={modalOpen} />,
+    calendar: <CalendarButton name={title} fn={modalOpen} />,
   };
 
   return (
