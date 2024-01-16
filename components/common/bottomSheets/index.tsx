@@ -66,7 +66,7 @@ const BottomSheets = ({
     | 'sale'
     | 'price'
     | 'border'
-    | 'dropdown';
+    | 'dropdown'
     | 'validation';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
