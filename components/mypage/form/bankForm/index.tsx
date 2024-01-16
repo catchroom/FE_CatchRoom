@@ -76,7 +76,7 @@ const BankForm = () => {
         >
           <div className="w-full">
             <div className="flex flex-col items-start overflow-y-scroll">
-              <DivideWrapper divideCase="BANK">
+              <DivideWrapper maxHeightControl={false} divideCase="BANK">
                 {BANK_VIEW.map((bank) => {
                   return (
                     <button
