@@ -30,7 +30,7 @@ const ReservationSummary = ({
           상품 및 이용정보
         </h3>
         <section className="flex flex-col gap-1">
-          <div className=" text-t2 text-text-sub">
+          <div className=" text-t3 text-text-sub">
             숙소 예약번호 {reservationNumber}
           </div>
           <h2 className="text-h5 font-bold text-text-DEFAULT">

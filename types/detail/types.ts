@@ -1,4 +1,14 @@
-export type ReservationSummaryProps = {
+export type ReservationDetailProps = {
+  bookingHolder: {
+    name: string;
+    phoneNumber: string;
+  };
+  guest: {
+    name: string;
+    phoneNumber: string;
+  };
+  totalPrice: number;
+  paymentMethod: string;
   accommodationName: string;
   roomName: string;
   normalCapacity: number;
@@ -9,4 +19,6 @@ export type ReservationSummaryProps = {
   checkIn: string;
   checkOut: string;
   sellPrice: number;
+  commission: number;
+  nikName: string;
 };

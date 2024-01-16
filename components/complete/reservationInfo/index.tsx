@@ -13,7 +13,7 @@ const ReservationInfo = ({
         <h3 className="text-h5 font-bold text-text-DEFAULT ">예약자 정보</h3>
         <div className="flex justify-between items-center">
           <h3 className="text-t2 text-text-sub">이름</h3>
-          <p className="text-t2 text-gray-1000">{bookingHolder.name}</p>
+          <p className="text-t2 text-text-sub">{bookingHolder.name}</p>
         </div>
         <div className="flex justify-between items-center ">
           <h3 className="text-t2 text-text-sub">연락처</h3>
