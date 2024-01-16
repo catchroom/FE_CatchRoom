@@ -66,7 +66,7 @@ const LoginForm = () => {
           console.log('access_token 체크', Cookies.get('access_token'));
           console.log('refresh_token 체크:', Cookies.get('refresh_token'));
 
-          router.push('/home');
+          router.push('/mypage');
         } else {
           //이메일 또는 비밀번호를 다시 확인해주세요. 모달 띄워주기
           setOpenAlert(true);
