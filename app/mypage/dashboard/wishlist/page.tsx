@@ -15,6 +15,7 @@ const page = () => {
             resDate={item.resDate}
             oldPrice={item.oldPrice}
             discount={item.discount}
+            isHeart={true}
           />
         );
       })}
