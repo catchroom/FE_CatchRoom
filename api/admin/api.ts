@@ -1,9 +1,7 @@
 // 숙소 정보를 등록하는 API
 
-import { orderHistoryType, roomType } from '@/app/admin/page';
-
 // eslint-disable-next-line
-export const fetchMypageSelling = async (body: roomType) => {
+export const fetchMypageSelling = async (body: any) => {
   const response = await fetch(`/api/v1/admin/product`, {
     method: 'POST',
     headers: {
@@ -38,7 +36,8 @@ export const fetchAllProduct = async () => {
   return data.data;
 };
 
-export const fetchOrderHistory = async (body: orderHistoryType) => {
+// eslint-disable-next-line
+export const fetchOrderHistory = async (body: any) => {
   const response = await fetch(`/api/v1/admin/history`, {
     method: 'POST',
     headers: {
