@@ -39,7 +39,7 @@ const SaleItems = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-start w-full"
+      className="flex flex-col items-start w-full mt-12 gap-3"
     >
       {items.map((item) => {
         const dateString = getSlashDate(item.check_In, item.check_out);

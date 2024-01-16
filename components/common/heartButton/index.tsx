@@ -17,15 +17,21 @@ import { HeartButtonPropsType } from '@/types/common/heartButton/types';
 const HeartButton = ({
   isButtonActive,
   stateHandler,
+  width = 24,
+  height = 24,
   whiteStroke = false,
 }: HeartButtonPropsType) => {
   return (
     <div className="flex items-center justify-center">
       <button onClick={stateHandler}>
         {!isButtonActive ? (
-          <EmptyHeartIcon whiteStroke={whiteStroke} />
+          <EmptyHeartIcon
+            width={width}
+            height={height}
+            whiteStroke={whiteStroke}
+          />
         ) : (
-          <FullHeartIcon />
+          <FullHeartIcon width={width} height={height} />
         )}
       </button>
     </div>

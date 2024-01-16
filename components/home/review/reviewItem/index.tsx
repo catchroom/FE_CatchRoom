@@ -3,7 +3,7 @@ import React from 'react';
 
 const ReviewItem = () => {
   return (
-    <div className="flex rounded-md bg-white w-[326px] h-[140px]">
+    <div className="flex rounded-md bg-white w-[20rem] h-[140px]">
       <div className="relative w-full h-full max-w-[110px] min-h-[140px]">
         <Image
           src="/sample/Rectangle-70.png"
