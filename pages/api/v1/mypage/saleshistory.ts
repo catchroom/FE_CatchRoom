@@ -23,6 +23,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     console.log(state);
 
+    const getRandomBoolean = () => Math.random() < 0.5;
+
     const productQuerySnapshot =
       state === 'ing'
         ? await getDocs(
@@ -74,6 +76,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             thumbnailUrl: accommodationImage,
             writeDate: productData.write_date,
             productEndDate: productData.end_date,
+            isReview: getRandomBoolean(),
           });
         }
       }

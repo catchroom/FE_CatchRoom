@@ -11,7 +11,7 @@ const CatchContainer = () => {
   };
   return (
     <div className="w-full mt-12">
-      <div className="flex justify-between font-bold">
+      <div className="flex items-center justify-between font-bold">
         <h2 className="text-h4">
           캐치특가 숙소 <span className="text-main">50%~</span>
         </h2>
