@@ -7,11 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import FromSeller from '../bottomSheetsContent/fromSeller';
+import { allCheckState } from '@/atoms/sale/checkAtom';
 
 const CheckboxContainer = () => {
   const isCatch = useRecoilValue(catchState);
+  const setAllCheck = useSetRecoilState(allCheckState);
 
   const { watch, getValues, setValue } = useForm({
     resolver: zodResolver(checkBoxSchema(isCatch)),
@@ -41,6 +43,7 @@ const CheckboxContainer = () => {
       setValue('check1', checked);
       setValue('check2', checked);
       if (isCatch) setValue('check3', checked);
+      setAllCheck(checked);
     } else {
       if (isCatch) {
         const allAgreed =
@@ -54,7 +57,7 @@ const CheckboxContainer = () => {
   };
 
   return (
-    <div className="flex flex-col w-full gap-4 ">
+    <div className="flex flex-col w-full gap-4 mb-24 ">
       <div className="flex items-center cursor-pointer relative">
         <CheckBoxComponent
           id="allAgree"
@@ -108,10 +111,16 @@ const CheckboxContainer = () => {
           </Link>
         </div>
       )}
-      <div className="mt-5 cursor-pointer">
-        <BottomSheets title="다음" innerTitle="판매자 한마디">
-          <FromSeller />
-        </BottomSheets>
+      <div className="cursor-pointer fixed bottom-0 w-full max-w-[480px] flex justify-center ">
+        <div className="border border-border-sub bg-bg w-full p-5 -ml-10">
+          <BottomSheets
+            title="다음"
+            innerTitle="판매자 한마디"
+            buttonSelect="validation"
+          >
+            <FromSeller />
+          </BottomSheets>
+        </div>
       </div>
     </div>
   );
