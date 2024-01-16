@@ -18,22 +18,24 @@ const Modal = ({
   onCancel,
   onConfirm,
   confirmString,
+  cancelString = '취소',
   showCancelButton = false,
   showConfirmButton = false,
 }: {
   title: string;
   content?: string;
   confirmString?: string;
+  cancelString?: string;
   onCancel?: MouseEventHandler<HTMLButtonElement>;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
   showCancelButton?: boolean;
   showConfirmButton?: boolean;
 }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-lg flex flex-col items-center ">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[999]">
+      <div className="bg-white rounded-lg shadow-lg flex flex-col items-center z-[1000]">
         <div className="flex flex-col p-6 gap-1 ">
-          <div className="font-bold text-p1 w-[200px] flex justify-center ">
+          <div className="font-bold text-p1 w-[200px] flex justify-center text-center whitespace-pre-wrap">
             {title}
           </div>
           {content && (
@@ -48,7 +50,7 @@ const Modal = ({
               onClick={onCancel}
               className="w-full text-main py-2 px-4 rounded cursor-pointer"
             >
-              취소
+              {cancelString}
             </button>
           )}
           {showConfirmButton && (
