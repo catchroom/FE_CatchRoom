@@ -37,13 +37,15 @@ const SaleEndContainer = () => {
         outerControlAtom="datePicker"
       >
         <SetTime />
-        <button
-          onClick={handleButtonClick}
-          type="button"
-          className="w-full bg-action-primary text-text-on text-t2 font-medium p-4 py-2.5 rounded-md transition-colors duration-300 ease-in"
-        >
-          {title}로 설정하기
-        </button>
+        <div className="w-full border-t border-border-sub py-5">
+          <button
+            onClick={handleButtonClick}
+            type="button"
+            className="w-full bg-action-primary text-text-on text-t2 font-medium p-4 py-2.5 rounded-md transition-colors duration-300 ease-in"
+          >
+            {title}로 설정하기
+          </button>
+        </div>
       </BottomSheetsWithoutCloseBtn>
     </div>
   );
