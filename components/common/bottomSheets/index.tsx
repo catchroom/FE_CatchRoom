@@ -11,6 +11,7 @@ import SheetCloseSVG from '@/public/svg/sheet-close';
 import InputButton from '../sheetsButtons/inputButton';
 import SimpleButton from '../sheetsButtons/simpleButton';
 import SaleButton from '../sheetsButtons/saleButton';
+import BorderButton from '../sheetsButtons/borderButton';
 import SearchBoxButton from '../searchBoxButton';
 import { useRecoilState } from 'recoil';
 import {
@@ -48,6 +49,7 @@ const BottomSheets = ({
   icon,
   closeButton = false,
   outerControl = false,
+  theme = false,
   price,
   percent,
   outerControlAtom = 'default',
@@ -62,6 +64,7 @@ const BottomSheets = ({
     | 'search'
     | 'sale'
     | 'price'
+    | 'border'
     | 'validation';
   placeholder?: string;
   icon?: 'pin' | 'calendar' | 'person' | 'house';
@@ -69,6 +72,7 @@ const BottomSheets = ({
   outerControl?: boolean;
   price?: number;
   percent?: number;
+  theme?: boolean;
   outerControlAtom?: 'default' | 'sale' | 'catch';
 }) => {
   const [open, setOpen] = useState(false);
@@ -120,6 +124,7 @@ const BottomSheets = ({
     ),
     sale: <SaleButton name={title} fn={modalOpen} />,
     price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
+    border: <BorderButton name={title} fn={modalOpen} disabled={theme} />,
     validation: <ValidationButton name={title} fn={modalOpen} />,
   };
 
@@ -165,7 +170,7 @@ const BottomSheets = ({
                     <SheetCloseSVG />
                   </button>
                 </div>
-                <div className="w-full h-full mt-3 flex flex-col items-center gap-12">
+                <div className="w-full h-full flex flex-col items-center gap-12">
                   {children}
                   {closeButton && (
                     <SimpleButton

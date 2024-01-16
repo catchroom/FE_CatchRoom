@@ -1,3 +1,5 @@
+'use client';
+
 import { divideAtom } from '@/atoms/mypage/divideAtom';
 import { BANK_LIST, INVESTMENT_BANK_LIST } from '@/constants/mypage';
 import React, { MouseEventHandler, ReactNode } from 'react';
@@ -14,6 +16,16 @@ export const DIVIDE_LIST = {
       title: '증권사',
       view: false,
       list: INVESTMENT_BANK_LIST,
+    },
+  ],
+  SALE: [
+    {
+      title: '게시중',
+      view: true,
+    },
+    {
+      title: '게시만료',
+      view: false,
     },
   ],
 };
@@ -58,7 +70,7 @@ const DivideWrapper = ({
           );
         })}
       </div>
-      <div className="max-h-[calc(100vh-300px)] overflow-y-scroll">
+      <div className="max-h-[calc(100vh-120px)] overflow-y-scroll">
         {children}
       </div>
     </div>

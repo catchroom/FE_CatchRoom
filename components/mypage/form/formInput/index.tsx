@@ -13,9 +13,8 @@ const FormInput = ({
   register,
   reset,
 }: {
-  value: keyof FormAccount | keyof FormName;
+  value: keyof FormAccount | keyof FormName | string;
   placeholder?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: (key: keyof (FormAccount | FormName)) => UseFormRegisterReturn;
   reset: (values?: resetType) => void;
 }) => {
