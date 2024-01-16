@@ -3,9 +3,10 @@ import * as React from "react";
 interface DownArrowIconProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
   height?: number;
+  color? : string;
 }
 
-const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8}) => (
+const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8, color='black'}) => (
   <svg
     width={width}
     height={height}
@@ -15,7 +16,7 @@ const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8}) => (
   >
     <path
       d="M13 0.999999L7 7L1 1"
-      stroke="black"
+      stroke={color}
       strokeWidth={1.2}
       strokeLinecap="round"
       strokeLinejoin="round"

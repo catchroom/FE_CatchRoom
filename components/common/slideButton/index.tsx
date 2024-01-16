@@ -6,12 +6,14 @@ import React from 'react';
  * @component
  * @param isButtonActive : 버튼의 상태를 전달하는 props입니다. `boolean` (필수)
  * @param stateHandler : 버튼을 클릭할 때 전달되는 핸들러 함수의 props 입니다.  `(e: React.MouseEvent<HTMLInputElement>) => void` (필수)
+ *  @param isDisabled : 버튼의 비활성화 여부를 전달하는 props입니다. `boolean` (선택)
  * @returns {JSX.Element} SlideButton 컴포넌트 반환
  */
 
 const SlideButton = ({
   isButtonActive,
   stateHandler,
+  isDisabled = false,
 }: SlideButtonPropsType) => {
   return (
     <div className="p-2">
@@ -22,6 +24,7 @@ const SlideButton = ({
             className="hidden"
             checked={isButtonActive}
             onChange={stateHandler}
+            disabled={isDisabled}
           />
           <div
             className={`w-10 h-6 rounded-full ${
