@@ -1,21 +1,28 @@
 'use client';
 import React from 'react';
-import BottomSheets from '@/components/common/bottomSheets';
 import SetTime from '../setTime';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { hourState, minuteState, timeState } from '@/atoms/sale/timeAtom';
+import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
+import { outerDatePickerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 
 const SaleEndContainer = () => {
   const time = useRecoilValue(timeState);
   const hour = useRecoilValue(hourState);
   const minute = useRecoilValue(minuteState);
 
+  const setModalOpen = useSetRecoilState(outerDatePickerBottomSheetsControl);
+
+  const handleButtonClick = () => {
+    setModalOpen(false);
+  };
+
   const title =
     '12월 28일 (수) ' +
     time.toString() +
     ' ' +
     hour.toString() +
-    ' ' +
+    ':' +
     minute.toString();
   return (
     <div className="w-full flex flex-col mt-5 gap-3">
@@ -23,9 +30,21 @@ const SaleEndContainer = () => {
       <p className="text-p1 opacity-50 mt-1">
         판매 종료일 이후 판매글은 미노출 됩니다
       </p>
-      <BottomSheets buttonSelect="calendar" title={title}>
+      <BottomSheetsWithoutCloseBtn
+        buttonSelect="calendar"
+        title={title}
+        outerControl={true}
+        outerControlAtom="datePicker"
+      >
         <SetTime />
-      </BottomSheets>
+        <button
+          onClick={handleButtonClick}
+          type="button"
+          className="w-full bg-action-primary text-text-on text-t2 font-medium p-4 py-2.5 rounded-md transition-colors duration-300 ease-in"
+        >
+          {title}로 설정하기
+        </button>
+      </BottomSheetsWithoutCloseBtn>
     </div>
   );
 };

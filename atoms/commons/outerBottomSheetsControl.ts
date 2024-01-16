@@ -14,3 +14,8 @@ export const outerCatchBottomSheetsControl = atom<boolean>({
   key: 'outerCatchBottomSheetsControl',
   default: false,
 });
+
+export const outerDatePickerBottomSheetsControl = atom<boolean>({
+  key: 'outerDatePickerBottomSheetsControl',
+  default: false,
+});
