@@ -1,16 +1,21 @@
+import {
+  DAY_TIME,
+  hourState,
+  minuteState,
+  timeState,
+} from '@/atoms/sale/timeAtom';
 import DownArrowIcon from '@/public/svgComponent/downArrow';
 import UpArrow from '@/public/svgComponent/upArrow';
-import React, { useState } from 'react';
-
-const dayTime = ['오전', '오후'];
+import React from 'react';
+import { useRecoilState } from 'recoil';
 
 const SetTime = () => {
-  const [time, setTime] = useState(dayTime[1]);
-  const [hour, setHour] = useState(11); // 초기 시간 설정
-  const [minute, setMinute] = useState(59); // 초기 분 설정
+  const [time, setTime] = useRecoilState(timeState);
+  const [hour, setHour] = useRecoilState(hourState); // 초기 시간 설정
+  const [minute, setMinute] = useRecoilState(minuteState); // 초기 분 설정
 
   const toggleTime = () => {
-    setTime((prev) => (prev === dayTime[0] ? dayTime[1] : dayTime[0]));
+    setTime((prev) => (prev === DAY_TIME[0] ? DAY_TIME[1] : DAY_TIME[0]));
   };
 
   const increaseHour = () =>
@@ -56,6 +61,7 @@ const SetTime = () => {
             <DownArrowIcon color="#9FA3AB" />
           </div>
         </div>
+        <div className="flex items-center justify-center">:</div>
         <div className="flex flex-col gap-8 items-center">
           <div onClick={decreaseMinute}>
             <UpArrow />
