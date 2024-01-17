@@ -10,7 +10,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
-import nookies from 'nookies';
 import { login, getNewToken } from '@/api/user/api';
 
 export const commonInputStyle =
@@ -57,20 +56,7 @@ const LoginForm = () => {
       .then((response) => {
         console.log(response);
         if (response.code === 1006) {
-          nookies.set(null, 'accessToken', response.data.accessToken, {
-            path: '/',
-          });
-          nookies.set(null, 'refreshToken', response.data.refreshToken, {
-            path: '/',
-          });
-
-          // 액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
-          setTimeout(() => {
-            getNewToken().then((newToken) => {
-              console.log(newToken);
-            });
-          }, 1000);
-
+          getNewToken(); //401..
           router.push('/mypage');
         } else if (response.code === 1007 || response.code === 1008) {
           setOpenAlert(true);

@@ -8,10 +8,9 @@ import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userInfoSchema } from '@/constants/zodSchema';
 import Modal from '@/components/common/modal';
-import { useRecoilValue } from 'recoil';
-import { signUp, nicknameCheck, login, getNewToken } from '@/api/user/api';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { signUp, nicknameCheck, login } from '@/api/user/api';
 import { emailState, passwordState } from '@/atoms/signup/signup';
-import nookies from 'nookies';
 
 const SignUpInfo = () => {
   const router = useRouter();
@@ -54,36 +53,22 @@ const SignUpInfo = () => {
   const email = useRecoilValue(emailState);
   const password = useRecoilValue(passwordState);
 
+  const setEmail = useSetRecoilState(emailState);
+  const setPassword = useSetRecoilState(passwordState);
+
   const onSubmit = (data: UserInfo) => {
     if (confirmedNickname === true) {
       signUp(email, password, data.nickname, data.phone, data.name)
         .then((response) => {
           console.log(response);
-          //성공시(코드가 1000)에 로그인하고, 로그인 성공시에는 마이페이지로 이동 시키기 router.push('/mypage');
+
           if (response.code === 1000) {
             login(email, password)
               .then((response) => {
                 console.log(response);
                 if (response.code === 1006) {
-                  nookies.set(null, 'accessToken', response.data.accessToken, {
-                    path: '/',
-                  });
-                  nookies.set(
-                    null,
-                    'refreshToken',
-                    response.data.refreshToken,
-                    {
-                      path: '/',
-                    },
-                  );
-
-                  // 액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
-                  setTimeout(() => {
-                    getNewToken().then((newToken) => {
-                      console.log(newToken);
-                    });
-                  }, 1000);
-
+                  setEmail('');
+                  setPassword('');
                   router.push('/mypage');
                 }
               })

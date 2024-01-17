@@ -56,16 +56,15 @@ export const login = async (email: string, password: string) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   }).then((data) => {
-    //토큰을 쿠키에서 가져와서 출력
-    const cookies = nookies.get(null);
-    console.log(cookies);
     return data.json();
   });
 };
 
 // 5. 액세스 토큰 재발급 -> apiClient 사용할거면 필요 x, 일단 테스트용
 export const getNewToken = async () => {
-  const refreshToken = nookies.get(null)['refreshToken'];
+  // const cookies = nookies.get();
+  // const refreshToken = cookies.refreshToken;
+  // console.log(refreshToken);
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
@@ -73,7 +72,6 @@ export const getNewToken = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${refreshToken}`,
       },
     },
   );
