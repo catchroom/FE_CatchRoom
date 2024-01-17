@@ -4,22 +4,32 @@ import React, { useState } from 'react';
 import { catchItems } from '@/types/common/catchItems/types';
 import White from '@/public/svgComponent/marker/white';
 import HeartButton from '@/components/common/heartButton';
+import { useRouter } from 'next/navigation';
 
 const CatchItem = ({
+  id,
   roomName,
   resDate,
   oldPrice,
   discount,
   location,
 }: catchItems) => {
+  const router = useRouter();
   const newPrice = Math.round(oldPrice - oldPrice * (discount / 100));
 
   const [isHeart, setIsHeart] = useState(false);
   const handleHeartBtnClick = () => {
     setIsHeart((prev) => !prev);
   };
+
+  const handleItemClick = () => {
+    router.push(`/room-info?id=${id}`);
+  };
   return (
-    <div className="flex flex-col relative w-[20rem] mt-5 rounded-lg border border-gray-200">
+    <div
+      className="flex flex-col relative w-[20rem] mt-5 rounded-lg border border-gray-200"
+      onClick={handleItemClick}
+    >
       <div className="absolute flex top-[12px] left-4 bg-black gap-1 p-[10px] rounded-3xl items-center">
         <White />
         <span className="text-white">{location}</span>
