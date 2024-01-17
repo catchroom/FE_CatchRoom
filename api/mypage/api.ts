@@ -7,10 +7,9 @@ const accessToken = nookies.get(null)['accessToken'];
 //이 요청 성공시, 쿠키의 access/refresh token 모두 삭제하기
 // export const logout = async () => {
 //   try {
-//     const res = await apiClient.post(
-//       `/v1/mypage/logout`,
-//     );
+//     const res = await apiClient.post(`/v1/mypage/logout`);
 //     return res;
+//     console.log('로그아웃 눌렀음(api호출)');
 //   } catch (error) {
 //     console.error(error);
 //     throw error;
@@ -30,9 +29,11 @@ export const logout = async () => {
   );
 
   console.log('로그아웃 눌렀음(api호출)');
+
   const data = await res.json();
   return data;
 };
+//응답코드 2000일때 쿠키 다 지우기
 
 // 프로필 수정 put*
 export const editProfile = async () => {
