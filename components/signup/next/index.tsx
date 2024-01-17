@@ -17,6 +17,10 @@ const SignUpInfo = () => {
   const router = useRouter();
   const [confirmedNickname, setConfirmedNickname] = useState(false);
 
+  const [clickedNameInput, setClickedNameInput] = useState(false);
+  const [clickedPhoneInput, setClickedPhoneInput] = useState(false);
+  const [clickedNickInput, setClickedNickInput] = useState(false);
+
   const [open, setOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -130,8 +134,10 @@ const SignUpInfo = () => {
             className={`${commonInputStyle} ${
               errors.name ? 'border-border-critical' : 'border-gray-400'
             }  `}
+            onClick={() => setClickedNameInput(true)}
+            onBlur={() => setClickedNameInput(false)}
           />
-          {name && (
+          {name && clickedNameInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('name')}
@@ -152,9 +158,11 @@ const SignUpInfo = () => {
             className={`${commonInputStyle} ${
               errors.phone ? 'border-border-critical' : 'border-gray-400'
             } `}
+            onClick={() => setClickedPhoneInput(true)}
+            onBlur={() => setClickedPhoneInput(false)}
           />
 
-          {phone && (
+          {phone && clickedPhoneInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('phone')}
@@ -175,10 +183,12 @@ const SignUpInfo = () => {
             className={`${commonInputStyle} ${
               errors.nickname ? 'border-border-critical' : 'border-gray-400'
             } `}
+            onClick={() => setClickedNickInput(true)}
+            onBlur={() => setClickedNickInput(false)}
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {email && !confirmedNickname && (
+            {email && !confirmedNickname && clickedNickInput && (
               <div onClick={() => clearField('nickname')}>
                 <DeleteIcon />
               </div>

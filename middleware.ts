@@ -6,6 +6,7 @@ export function middleware(request: NextRequest) {
   console.log('토큰', accessToken);
 
   if (accessToken) {
+    //maxAge
     if (request.nextUrl.pathname.startsWith('/login')) {
       return NextResponse.redirect(new URL('/mypage', request.url));
     }

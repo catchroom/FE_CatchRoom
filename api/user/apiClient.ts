@@ -1,8 +1,6 @@
 import axios from 'axios';
 import nookies from 'nookies';
 
-//fetch로 추후에 바꿀지 결정
-
 export const apiClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
 });
@@ -23,9 +21,11 @@ apiClient.interceptors.response.use(
     return response;
   },
   async (error) => {
-    //토큰 만료시 재요청
-    //5000은 액세스 만료, 5001일때는 아마도 리프레쉬 만료..?, 5002는 서비스에러
-    if (error.response.status === 401 || error.response.status === 5000) {
+    if (
+      error.response.status === 401 ||
+      error.response.status === 5000 ||
+      error.response.status === 5001
+    ) {
       const refreshToken = nookies.get(null)['refreshToken'];
       const res = await apiClient.post(
         '/v1/user/accesstoken',

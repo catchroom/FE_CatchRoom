@@ -31,6 +31,9 @@ const LoginForm = () => {
     setOpenAlert((prev) => !prev);
   };
 
+  const [clickedEmailInput, setClickedEmailInput] = useState(false);
+  const [clickedPwInput, setClickedPwInput] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -88,8 +91,10 @@ const LoginForm = () => {
             className={`${commonInputStyle}  ${
               errors.email ? 'border-border-critical' : 'border-gray-400'
             }  `}
+            onClick={() => setClickedEmailInput(true)}
+            onBlur={() => setClickedEmailInput(false)}
           />
-          {email && (
+          {email && clickedEmailInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('email')}
@@ -111,9 +116,11 @@ const LoginForm = () => {
             className={`${commonInputStyle} ${
               errors.password ? 'border-border-critical' : 'border-gray-400'
             } `}
+            onClick={() => setClickedPwInput(true)}
+            onBlur={() => setClickedPwInput(false)}
           />
 
-          {password && (
+          {password && clickedPwInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2 text-border-critical"
               onClick={() => clearField('password')}

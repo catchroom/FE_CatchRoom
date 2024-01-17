@@ -51,17 +51,16 @@ export const signUp = async (
 
 // 4. 로그인
 export const login = async (email: string, password: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/login`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    },
-  );
-
-  const data = await res.json();
-  return data;
+  return fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  }).then((data) => {
+    //토큰을 쿠키에서 가져와서 출력
+    const cookies = nookies.get(null);
+    console.log(cookies);
+    return data.json();
+  });
 };
 
 // 5. 액세스 토큰 재발급 -> apiClient 사용할거면 필요 x, 일단 테스트용
