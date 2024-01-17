@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
-import { Stomp } from '@stomp/stompjs';
+import { CompatClient, Stomp } from '@stomp/stompjs';
 
 // test 완료되면 지우도록 하겠습니다
 
@@ -18,10 +18,13 @@ type Content = {
 
 const StompPage = () => {
   const [message, setMessage] = useState<Content[]>([]);
+  const [ws, setWs] = useState<CompatClient | null>(null);
 
   const connect = () => {
     const sockjs = new SockJS('http://13.124.240.142:8080/ws-stomp');
     const ws = Stomp.over(sockjs);
+
+    setWs(ws);
 
     // eslint-disable-next-line
     ws.connect({}, (frame: any) => {
@@ -36,23 +39,23 @@ const StompPage = () => {
         destination: `/pub/chat/message`,
         body: JSON.stringify({
           roomId: ROOMID,
-          sender: 'test',
+          sender: '승연',
           type: 'ENTER',
           userId: 'user1',
           message: '소켓 연결 성공!',
         }),
       });
 
-      ws.publish({
-        destination: `/pub/chat/message`,
-        body: JSON.stringify({
-          roomId: ROOMID,
-          sender: 'test',
-          type: 'TALK',
-          userId: 'user1',
-          message: '소켓 연결 성공! 메세지 보냅니다 :D',
-        }),
-      });
+      // ws.publish({
+      //   destination: `/pub/chat/message`,
+      //   body: JSON.stringify({
+      //     roomId: ROOMID,
+      //     sender: 'test',
+      //     type: 'TALK',
+      //     userId: 'user1',
+      //     message: '소켓 연결 성공! 메세지 보냅니다 :D',
+      //   }),
+      // });
     });
   };
 
@@ -63,6 +66,20 @@ const StompPage = () => {
     };
   }, []);
 
+  const sendMessage = () => {
+    if (!ws) return;
+    ws.publish({
+      destination: `/pub/chat/message`,
+      body: JSON.stringify({
+        roomId: ROOMID,
+        sender: '승연',
+        type: 'TALK',
+        userId: 'user1',
+        message: '안녕하세용',
+      }),
+    });
+  };
+
   return (
     <>
       {message.map((item, index) => (
@@ -70,6 +87,7 @@ const StompPage = () => {
           {item.sender} : {item.message}
         </div>
       ))}
+      <button onClick={sendMessage}>보내기</button>
     </>
   );
 };

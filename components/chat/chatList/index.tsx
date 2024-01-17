@@ -1,7 +1,6 @@
 import React from 'react';
 import { CHAT_ITEMS } from '@/constants/chat';
 import ChatItem from '../chatItem';
-import Login from './login';
 
 const ChatList = () => {
   return (
