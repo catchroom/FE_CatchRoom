@@ -99,8 +99,12 @@ const SignUpAuth = () => {
             placeholder="이메일"
             {...register('email')}
             className={`${commonInputStyle} ${
-              errors.email ? 'border-border-critical' : 'border-gray-400'
-            }  `}
+              errors.email
+                ? 'border-border-critical'
+                : clickedEmailInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
             onClick={() => setClickedEmailInput(true)}
             onBlur={() => setClickedEmailInput(false)}
           />
@@ -139,8 +143,12 @@ const SignUpAuth = () => {
             type="password"
             {...register('password')}
             className={`${commonInputStyle} ${
-              errors.password ? 'border-border-critical' : 'border-gray-400'
-            }  `}
+              errors.password
+                ? 'border-border-critical'
+                : clickedPwInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
             onClick={() => setClickedPwInput(true)}
             onBlur={() => setClickedPwInput(false)}
           />
@@ -171,8 +179,10 @@ const SignUpAuth = () => {
             className={`${commonInputStyle} ${
               errors.passwordCheck
                 ? 'border-border-critical'
-                : 'border-gray-400'
-            }  `}
+                : clickedPwCheckInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
             onClick={() => setClickedPwCheckInput(true)}
             onBlur={() => setClickedPwCheckInput(false)}
           />

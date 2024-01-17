@@ -137,8 +137,12 @@ const SignUpInfo = () => {
             placeholder="이름"
             {...register('name')}
             className={`${commonInputStyle} ${
-              errors.name ? 'border-border-critical' : 'border-gray-400'
-            }  `}
+              errors.name
+                ? 'border-border-critical'
+                : clickedNameInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
             onClick={() => setClickedNameInput(true)}
             onBlur={() => setClickedNameInput(false)}
           />
@@ -161,8 +165,12 @@ const SignUpInfo = () => {
             placeholder="휴대폰번호"
             {...register('phone')}
             className={`${commonInputStyle} ${
-              errors.phone ? 'border-border-critical' : 'border-gray-400'
-            } `}
+              errors.phone
+                ? 'border-border-critical'
+                : clickedPhoneInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
             onClick={() => setClickedPhoneInput(true)}
             onBlur={() => setClickedPhoneInput(false)}
           />
@@ -186,8 +194,12 @@ const SignUpInfo = () => {
             placeholder="닉네임"
             {...register('nickname')}
             className={`${commonInputStyle} ${
-              errors.nickname ? 'border-border-critical' : 'border-gray-400'
-            } `}
+              errors.nickname
+                ? 'border-border-critical'
+                : clickedNickInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
             onClick={() => setClickedNickInput(true)}
             onBlur={() => setClickedNickInput(false)}
           />

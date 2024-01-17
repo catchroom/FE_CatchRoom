@@ -27,9 +27,6 @@ export const logout = async () => {
       },
     },
   );
-
-  console.log('로그아웃 눌렀음(api호출)');
-
   const data = await res.json();
   return data;
 };
