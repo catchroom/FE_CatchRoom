@@ -7,7 +7,7 @@ const Logout = () => {
   return (
     <div className="w-full flex">
       <p
-        className="px-2 py-3 underline text-text-sub font-medium text-p2"
+        className="px-2 py-3 underline text-text-sub font-medium text-p2 cursor-pointer"
         onClick={() => {
           logout();
           // router.push(/login)

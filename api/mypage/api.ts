@@ -8,7 +8,7 @@ const accessToken = nookies.get(null)['accessToken'];
 // export const logout = async () => {
 //   try {
 //     const res = await apiClient.post(
-//       `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
+//       `/v1/mypage/logout`,
 //     );
 //     return res;
 //   } catch (error) {
@@ -29,6 +29,7 @@ export const logout = async () => {
     },
   );
 
+  console.log('로그아웃 눌렀음(api호출)');
   const data = await res.json();
   return data;
 };
