@@ -27,11 +27,9 @@ const StompPage = () => {
     setWs(ws);
 
     // eslint-disable-next-line
-    ws.connect({}, (frame: any) => {
-      console.log('connected');
+    ws.connect({}, () => {
       ws.subscribe(`/sub/chat/room/${ROOMID}`, (message) => {
         const recv = JSON.parse(message.body);
-        console.log(recv);
         setMessage((prev) => [...prev, recv]);
       });
 
@@ -45,25 +43,15 @@ const StompPage = () => {
           message: '소켓 연결 성공!',
         }),
       });
-
-      // ws.publish({
-      //   destination: `/pub/chat/message`,
-      //   body: JSON.stringify({
-      //     roomId: ROOMID,
-      //     sender: 'test',
-      //     type: 'TALK',
-      //     userId: 'user1',
-      //     message: '소켓 연결 성공! 메세지 보냅니다 :D',
-      //   }),
-      // });
     });
   };
 
   useEffect(() => {
     connect();
     return () => {
-      console.log('disconnect');
+      ws?.disconnect();
     };
+    // eslint-disable-next-line
   }, []);
 
   const sendMessage = () => {
@@ -87,7 +75,9 @@ const StompPage = () => {
           {item.sender} : {item.message}
         </div>
       ))}
-      <button onClick={sendMessage}>보내기</button>
+      <button className="bg-mint" onClick={sendMessage}>
+        채팅 보내기
+      </button>
     </>
   );
 };

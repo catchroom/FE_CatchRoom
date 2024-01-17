@@ -24,7 +24,7 @@ const PaymentButton = ({ amount }: PaymentButtonProps) => {
 
   return (
     <>
-      <div className="fixed bottom-0 bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-50">
+      <div className="fixed bottom-0 bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-1 ">
         <button
           onClick={handleOpenModal}
           className="w-full bg-action-primary text-white font-semibold py-3 rounded leading-7"
