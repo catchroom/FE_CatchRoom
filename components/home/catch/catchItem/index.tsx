@@ -5,6 +5,7 @@ import { catchItems } from '@/types/common/catchItems/types';
 import White from '@/public/svgComponent/marker/white';
 import HeartButton from '@/components/common/heartButton';
 import { useRouter } from 'next/navigation';
+import CalendarIcon from '@/public/svgComponent/calendar';
 
 const CatchItem = ({
   id,
@@ -63,12 +64,7 @@ const CatchItem = ({
       <div className="flex flex-col gap-1 p-5">
         <div className="flex justify-between">
           <div className="flex">
-            <Image
-              src="/calendar.svg"
-              width={20}
-              height={20}
-              alt="달력아이콘"
-            />
+            <CalendarIcon />
             <p className="text-p2 ml-1 text-black font-semibold">{resDate}</p>
           </div>
           <p className="line-through text-p2 text-text-sub">
