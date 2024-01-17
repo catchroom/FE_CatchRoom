@@ -10,8 +10,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
-import { loginTest } from '@/api/mypage/testApi';
 import nookies from 'nookies';
+import { login, getNewToken } from '@/api/user/api';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -50,27 +50,26 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (data: LoginData) => {
-    loginTest(data.email, data.password) //테스트
+    login(data.email, data.password)
       .then((response) => {
         console.log(response);
-        if (response.code === '1006') {
-          //nookies로 변경 테스트
-          nookies.set(null, 'access_token', response.data.access_token, {
+        if (response.code === 1006) {
+          nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
           });
-          //오타 반영된 코드 -> 수정 필요
-          nookies.set(null, 'refresh_token', response.data.refresh_toekn, {
+          nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',
           });
 
-          console.log('access_token 체크', nookies.get(null)['access_token']);
-          console.log(
-            'refresh_token 체크:',
-            nookies.get(null)['refresh_token'],
-          );
+          // 액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
+          setTimeout(() => {
+            getNewToken().then((newToken) => {
+              console.log(newToken);
+            });
+          }, 1000);
 
-          router.push('/home');
-        } else if (response.code === '1007' || '1008') {
+          router.push('/mypage');
+        } else if (response.code === 1007 || response.code === 1008) {
           setOpenAlert(true);
         }
       })

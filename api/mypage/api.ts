@@ -1,26 +1,17 @@
 import nookies from 'nookies';
+import { apiClient } from '../user/apiClient';
+
 const accessToken = nookies.get(null)['accessToken'];
 
 //6. 로그아웃
-export const logout = async (accessToken: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
-
-  const data = await res.json();
-  if (data.code === 1012) {
-    //성공 -> alert띄워주기
-    return data;
-  } else if (data.code === 1005) {
-    //중복 -> 에러문구 띄워주기
-    console.log(data.message);
+//이 요청 성공시, 쿠키의 access/refresh token 모두 삭제하기
+export const logout = async () => {
+  try {
+    const res = await apiClient.post('/v1/mypage/logout');
+    return res;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };
 
