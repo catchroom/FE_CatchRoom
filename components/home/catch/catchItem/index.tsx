@@ -24,15 +24,15 @@ const CatchItem = ({
         <White />
         <span className="text-white">{location}</span>
       </div>
-      <div className="absolute flex top-[12px] right-4">
-        <div className="relative">
+      <div className="absolute flex top-[12px] h-[40px] right-4 justify-center items-center">
+        <div className="relative ">
           <Image
             src="/Ellipse-22.svg"
             width={40}
             height={40}
             alt="찜하기 버튼"
           />
-          <div className="absolute bottom-1/4 right-1/2 translate-x-1/2 cursor-pointer">
+          <div className="absolute bottom-1/2 right-1/2 translate-y-1/2 translate-x-1/2 cursor-pointer">
             <HeartButton
               isButtonActive={isHeart}
               stateHandler={handleHeartBtnClick}
