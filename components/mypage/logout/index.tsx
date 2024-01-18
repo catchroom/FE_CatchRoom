@@ -11,8 +11,6 @@ const Logout = () => {
 
   const [openAlert, setOpenAlert] = useState(false);
   const handleModalOpen = () => {
-    setOpenAlert((prev) => !prev);
-
     logout()
       .then((response) => {
         console.log(response);
@@ -35,7 +33,6 @@ const Logout = () => {
           setOpenAlert(true);
         }}
       >
-        {/* 문구 수정 요청 */}
         로그아웃
       </p>
       {openAlert && (
@@ -44,7 +41,11 @@ const Logout = () => {
           showConfirmButton={true}
           showCancelButton={true}
           onConfirm={handleModalOpen}
+          onCancel={() => {
+            setOpenAlert(false);
+          }}
           confirmString="예"
+          cancelString="아니요"
         />
       )}
     </div>
