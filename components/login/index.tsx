@@ -8,7 +8,6 @@ import LoginSheet from '@/components/loginSheets';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
-import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
 import nookies from 'nookies';
 import { login } from '@/api/user/api';
@@ -16,7 +15,6 @@ export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
 const LoginForm = () => {
-  const router = useRouter();
   //약관 모달
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => {
@@ -61,8 +59,7 @@ const LoginForm = () => {
           nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',
           });
-
-          router.push('/mypage');
+          window.location.href = '/mypage';
         } else if (response.code === 1007 || response.code === 1008) {
           setOpenAlert(true);
         }
