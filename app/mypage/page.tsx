@@ -10,6 +10,7 @@ import AccountButton from '@/components/mypage/account/accountButton';
 import BottomNav from '@/components/common/bottomNav';
 import { Banners } from '@/types/mypage/types';
 import BannerFooter from '@/components/mypage/banner/bannerFooter';
+import Logout from '@/components/mypage/logout';
 
 const page = async () => {
   return (
@@ -61,9 +62,8 @@ const page = async () => {
                 />
               );
             })}
-            <p className="px-2 py-3 underline text-text-sub font-medium text-p2">
-              로그아웃
-            </p>
+            {/* 로그아웃 컴포넌트 */}
+            <Logout />
           </BannerContainer>
         </div>
         <BannerFooter />

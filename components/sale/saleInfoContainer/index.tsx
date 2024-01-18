@@ -26,9 +26,10 @@ const SaleInfoContainer = () => {
           <Image
             src={roomImg}
             alt="숙소 이미지"
-            layout="fill"
-            objectFit="cover"
+            fill={true}
             className="rounded-[0.6rem]"
+            sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 80px"
+            priority
           />
         </Link>
 
