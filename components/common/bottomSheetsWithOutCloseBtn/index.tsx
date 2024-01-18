@@ -81,7 +81,7 @@ const BottomSheetsWithoutCloseBtn = ({
     dropdown: <DropdownButton name={title as string} fn={modalOpen} />,
     calendar: <CalendarButton name={title as string} fn={modalOpen} />,
     more: <MoreButton fn={modalOpen} />,
-    sortOptions: <SortOptionsButton name={title} fn={modalOpen} />,
+    sortOptions: <SortOptionsButton name={title as string} fn={modalOpen} />,
   };
 
   return (
