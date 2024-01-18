@@ -3,11 +3,10 @@ import { apiClient } from '../user/apiClient';
 // 노션의 api 명세서 번호 기준으로 표시
 const accessToken = nookies.get(null)['accessToken'];
 
-// //6. 로그아웃
+//6. 로그아웃
 export const logout = async () => {
   const res = await apiClient.post('/v1/mypage/logout');
-  const data = res.data;
-  return data;
+  return res.data;
 };
 
 // export const logout = async () => {
@@ -32,8 +31,7 @@ export const editProfile = async (nickname: string) => {
     nickname,
   });
 
-  const data = res.data;
-  return data;
+  return res.data;
 };
 
 // export const editProfile = async (nickname: string) => {
@@ -55,21 +53,8 @@ export const editProfile = async (nickname: string) => {
 
 // 8. 닉네임 조회 get
 export const getNickname = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile/nickname`,
-    {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-    },
-  );
-
-  const data = await res.json();
-  if (data.code === 2004) {
-    return data;
-  } else if (data.code === 1011) {
-    //에러코드 수정하기!!
-    console.log(data.message);
-  }
+  const res = await apiClient.put(`/v1/mypage/nickname`);
+  return res.data;
 };
 
 // 9. 계좌번호,예치금 잔액 조회 get
