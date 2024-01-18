@@ -7,17 +7,20 @@ import { nameSchema, FormName } from '@/constants/zodSchema';
 import { useDebounceText } from '@/hooks/useDebounceText';
 import { ErrorMessage } from '@hookform/error-message';
 import FormInput from '../formInput';
-import { useCheckNickname } from '@/api/user/query';
+// import { useCheckNickname } from '@/api/user/query';
+import { editProfile } from '@/api/mypage/api';
+import { nicknameCheck } from '@/api/user/api';
+import Modal from '@/components/common/modal';
 
 const ProfileForm = ({ name }: { name: string }) => {
-  const mutation = useCheckNickname();
+  // const mutation = useCheckNickname();
   const [checkNickname, setCheckNickname] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
     reset,
-    setValue,
+    // setValue,
     formState: { errors },
   } = useForm<FormName>({
     resolver: zodResolver(nameSchema),
@@ -25,19 +28,36 @@ const ProfileForm = ({ name }: { name: string }) => {
     delayError: 300,
     defaultValues: {
       nickname: name,
+      //??이거 없애도 되는지 여쭤보기~,, 닉네임 겟해와서 이걸로 디폴트 해주는거아닌지
     },
   });
+
+  const [openErrorAlert, setOpenErrorAlert] = useState(false);
+  const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
 
   const inputText = watch('nickname');
   const debounceText = useDebounceText(inputText, 300);
 
   const onSubmit: SubmitHandler<FormName> = (data) => {
     if (nameSchema.safeParse(data).success) {
-      // api 요청
-      mutation.mutate(data.nickname);
-      mutation.isSuccess && setValue('nickname', data.nickname);
+      // mutation.mutate(data.nickname);
+      console.log(data);
+      nicknameCheck(data.nickname).then((res) => {
+        console.log(res);
+        if (res.code === 1010) {
+          editProfile(data.nickname).then((response) => {
+            console.log(response);
+            if (response.code === 2002) {
+              setOpenSuccessAlert(true);
+            } else if (res.code == 2003) {
+              console.log('프로필 수정 실패');
+            }
+          });
+        } else if (res.code == 1011) {
+          setOpenErrorAlert(true);
+        }
+      });
     } else {
-      // error alert 처리
       console.log('error');
     }
   };
@@ -109,6 +129,26 @@ const ProfileForm = ({ name }: { name: string }) => {
           </div>
         </div>
       </div>
+      {openErrorAlert && (
+        <Modal
+          title="중복된 닉네임입니다."
+          showConfirmButton={true}
+          onConfirm={() => {
+            setOpenErrorAlert(false);
+          }}
+          confirmString="확인"
+        />
+      )}
+      {openSuccessAlert && (
+        <Modal
+          title="정상적으로 변경됐어요"
+          showConfirmButton={true}
+          onConfirm={() => {
+            setOpenSuccessAlert(false);
+          }}
+          confirmString="확인"
+        />
+      )}
     </form>
   );
 };

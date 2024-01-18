@@ -26,23 +26,19 @@ export const logout = async () => {
 //   return data;
 // };
 
-// 7. 프로필 수정
+// 7. 프로필 수정(닉네임 변경)
 export const editProfile = async (nickname: string) => {
-  const res = await apiClient.put('/v1/mypage/profile', {
+  const res = await apiClient.put(`/v1/mypage/profile?nickName=${nickname}`, {
     nickname,
   });
 
   const data = res.data;
-  if (data.code === 2002) {
-    return data;
-  } else if (data.code === 2003) {
-    console.log(data.message);
-  }
+  return data;
 };
 
 // export const editProfile = async (nickname: string) => {
 //   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile`,
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile?nickName=${nickname}`,
 //     {
 //       method: 'PUT',
 //       headers: {
@@ -54,17 +50,13 @@ export const editProfile = async (nickname: string) => {
 //   );
 
 //   const data = await res.json();
-//   if (data.code === 2002) {
-//     return data;
-//   } else if (data.code === 2003) {
-//     console.log(data.message);
-//   }
+//   return data;
 // };
 
-// 닉네임 조회 get
-export const nickname찾기 = async (nickname: string) => {
+// 8. 닉네임 조회 get
+export const getNickname = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile/nickname?nickname=${nickname}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile/nickname`,
     {
       method: 'GET',
       headers: { Accept: 'application/json' },
@@ -80,7 +72,7 @@ export const nickname찾기 = async (nickname: string) => {
   }
 };
 
-// 계좌번호,예치금 잔액 조회 get
+// 9. 계좌번호,예치금 잔액 조회 get
 export const 잔액조회 = async (nickname: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile/nickname?nickname=${nickname}`,
