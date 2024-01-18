@@ -7,7 +7,12 @@ import SaleInfoContainer from '@/components/sale/saleInfoContainer';
 import SellingPriceContainer from '@/components/sale/sellingPrice/sellingPriceContainer';
 import React from 'react';
 
-const Sale = () => {
+const Page = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
+  console.log(searchParams.id);
   return (
     <div>
       <Header title="판매하기" showBackButton={true} isSale={true} />
@@ -26,4 +31,4 @@ const Sale = () => {
   );
 };
 
-export default Sale;
+export default Page;
