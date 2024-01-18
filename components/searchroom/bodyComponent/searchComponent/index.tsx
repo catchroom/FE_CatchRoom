@@ -10,7 +10,7 @@ import {
   REGION_NAMES,
   ROOM_CATEGORIES,
   SEARCH_DEFAULT,
-} from '@/constants/serchpage';
+} from '@/constants/search-detail';
 // import { Button } from '@material-tailwind/react';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
