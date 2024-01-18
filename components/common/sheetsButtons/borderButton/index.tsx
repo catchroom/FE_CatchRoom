@@ -27,6 +27,7 @@ const BorderButton = ({
       whileTap={{ scale: 0.97 }}
       data-testid="sampleButton"
       onClick={fn}
+      disabled={deeperGray}
       type={type}
       className={`${disabledStyle} w-full text-t3 p-1 h-9 rounded-md transition-colors duration-300 ease-in`}
     >
