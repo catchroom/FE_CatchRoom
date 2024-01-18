@@ -56,14 +56,13 @@ const Header = ({
     <>
       {modalOpen && (
         <Modal
-          title="등록 취소"
+          title="나가시겠습니까?"
           content="작성된 내용은 저장되지 않습니다."
           showConfirmButton={true}
           showCancelButton={true}
           onConfirm={onConfirm}
           onCancel={onCancel}
-          confirmString="등록 취소하기"
-          cancelString="뒤로가기"
+          confirmString="나가기"
         />
       )}
       <header className={headerClass}>
