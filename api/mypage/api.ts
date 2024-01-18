@@ -57,23 +57,12 @@ export const getNickname = async () => {
   return res.data;
 };
 
-// 9. 계좌번호,예치금 잔액 조회 get
-export const 잔액조회 = async (nickname: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile/nickname?nickname=${nickname}`,
-    {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-    },
-  );
+//+✨✨✨ 마이페이지에서 유저정보 get해오는 api 필요~!
 
-  const data = await res.json();
-  if (data.code === 2004) {
-    return data;
-  } else if (data.code === 1011) {
-    //에러코드 수정하기!!
-    console.log(data.message);
-  }
+// 9. 계좌번호,예치금 잔액 조회 get
+export const getBalance = async () => {
+  const res = await apiClient.get(`/v1/mypage/deposit/accountnum`);
+  return res.data;
 };
 
 // 예치금 계좌 등록하기 **post**
