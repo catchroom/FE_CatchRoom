@@ -43,8 +43,8 @@ const SetTime = () => {
 
   const IncreaseHourLongPress = useLongPress(increaseHour, 300);
   const decreaseHourLongPress = useLongPress(decreaseHour, 300);
-  const IncreaseMinuteLongPress = useLongPress(decreaseMinute, 300);
-  const decreaseMinuteLongPress = useLongPress(decreaseHour, 300);
+  const IncreaseMinuteLongPress = useLongPress(increaseMinute, 300);
+  const decreaseMinuteLongPress = useLongPress(decreaseMinute, 300);
 
   useEffect(() => {
     if (isTimeChange) toggleTime();
