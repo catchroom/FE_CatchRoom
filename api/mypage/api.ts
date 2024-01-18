@@ -1,19 +1,37 @@
 import nookies from 'nookies';
-import { apiClient } from '../user/apiClient';
+// import { apiClient } from '../user/apiClient';
 
 const accessToken = nookies.get(null)['accessToken'];
 
 //6. 로그아웃
 //이 요청 성공시, 쿠키의 access/refresh token 모두 삭제하기
+// export const logout = async () => {
+//   try {
+//     const res = await apiClient.post(`/v1/mypage/logout`);
+//     return res;
+//     console.log('로그아웃 눌렀음(api호출)');
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// };
+
 export const logout = async () => {
-  try {
-    const res = await apiClient.post('/v1/mypage/logout');
-    return res;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  console.log(accessToken);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
+  const data = await res.json();
+  return data;
 };
+//응답코드 2000일때 쿠키 다 지우기
 
 // 프로필 수정 put*
 export const editProfile = async () => {

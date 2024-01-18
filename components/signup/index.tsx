@@ -16,6 +16,10 @@ const SignUpAuth = () => {
   const router = useRouter();
   const [confirmedEmail, setConfirmedEmail] = useState(false);
 
+  const [clickedEmailInput, setClickedEmailInput] = useState(false);
+  const [clickedPwInput, setClickedPwInput] = useState(false);
+  const [clickedPwCheckInput, setClickedPwCheckInput] = useState(false);
+
   const [open, setOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -95,12 +99,18 @@ const SignUpAuth = () => {
             placeholder="이메일"
             {...register('email')}
             className={`${commonInputStyle} ${
-              errors.email ? 'border-border-critical' : 'border-gray-400'
-            }  `}
+              errors.email
+                ? 'border-border-critical'
+                : clickedEmailInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
+            onClick={() => setClickedEmailInput(true)}
+            onBlur={() => setClickedEmailInput(false)}
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {email && !confirmedEmail && (
+            {email && !confirmedEmail && clickedEmailInput && (
               <div onClick={() => clearField('email')}>
                 <DeleteIcon />
               </div>
@@ -133,11 +143,17 @@ const SignUpAuth = () => {
             type="password"
             {...register('password')}
             className={`${commonInputStyle} ${
-              errors.password ? 'border-border-critical' : 'border-gray-400'
-            }  `}
+              errors.password
+                ? 'border-border-critical'
+                : clickedPwInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
+            onClick={() => setClickedPwInput(true)}
+            onBlur={() => setClickedPwInput(false)}
           />
 
-          {password && (
+          {password && clickedPwInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('password')}
@@ -163,11 +179,15 @@ const SignUpAuth = () => {
             className={`${commonInputStyle} ${
               errors.passwordCheck
                 ? 'border-border-critical'
-                : 'border-gray-400'
-            }  `}
+                : clickedPwCheckInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
+            onClick={() => setClickedPwCheckInput(true)}
+            onBlur={() => setClickedPwCheckInput(false)}
           />
 
-          {passwordCheck && (
+          {passwordCheck && clickedPwCheckInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('passwordCheck')}

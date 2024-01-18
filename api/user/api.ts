@@ -51,17 +51,13 @@ export const signUp = async (
 
 // 4. 로그인
 export const login = async (email: string, password: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/login`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    },
-  );
-
-  const data = await res.json();
-  return data;
+  return fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  }).then((data) => {
+    return data.json();
+  });
 };
 
 // 5. 액세스 토큰 재발급 -> apiClient 사용할거면 필요 x, 일단 테스트용
@@ -87,7 +83,6 @@ export const getNewToken = async () => {
   }
   return data;
 };
-
 // etc) 소셜로그인 : 카카오 인증코드 받기-> .env.local다시 설정하기
 // export const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_KEY}\
 // &redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`;

@@ -12,13 +12,11 @@ import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
 import nookies from 'nookies';
 import { login, getNewToken } from '@/api/user/api';
-
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
 const LoginForm = () => {
   const router = useRouter();
-
   //약관 모달
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => {
@@ -30,6 +28,9 @@ const LoginForm = () => {
   const handleModalOpen = () => {
     setOpenAlert((prev) => !prev);
   };
+
+  const [clickedEmailInput, setClickedEmailInput] = useState(false);
+  const [clickedPwInput, setClickedPwInput] = useState(false);
 
   const {
     register,
@@ -61,12 +62,12 @@ const LoginForm = () => {
             path: '/',
           });
 
-          // 액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
+          //액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
           setTimeout(() => {
             getNewToken().then((newToken) => {
               console.log(newToken);
             });
-          }, 1000);
+          }, 5000);
 
           router.push('/mypage');
         } else if (response.code === 1007 || response.code === 1008) {
@@ -86,10 +87,16 @@ const LoginForm = () => {
             placeholder="이메일"
             {...register('email')}
             className={`${commonInputStyle}  ${
-              errors.email ? 'border-border-critical' : 'border-gray-400'
-            }  `}
+              errors.email
+                ? 'border-border-critical'
+                : clickedEmailInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
+            onClick={() => setClickedEmailInput(true)}
+            onBlur={() => setClickedEmailInput(false)}
           />
-          {email && (
+          {email && clickedEmailInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('email')}
@@ -109,11 +116,17 @@ const LoginForm = () => {
             type="password"
             {...register('password')}
             className={`${commonInputStyle} ${
-              errors.password ? 'border-border-critical' : 'border-gray-400'
-            } `}
+              errors.password
+                ? 'border-border-critical'
+                : clickedPwInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
+            onClick={() => setClickedPwInput(true)}
+            onBlur={() => setClickedPwInput(false)}
           />
 
-          {password && (
+          {password && clickedPwInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2 text-border-critical"
               onClick={() => clearField('password')}
@@ -137,7 +150,6 @@ const LoginForm = () => {
           >
             로그인
           </button>
-          {/* 로그인 실패시 alert 모달 추가로 띄우기? -> 피그마에만 나와서 아직 반영 x */}
           {openAlert && (
             <Modal
               title="이메일 또는 비밀번호를 다시 확인해주세요."
