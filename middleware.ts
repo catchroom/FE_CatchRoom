@@ -11,7 +11,11 @@ export function middleware(request: NextRequest) {
     }
   } else if (!accessToken) {
     if (request.nextUrl.pathname.startsWith('/mypage')) {
-      return NextResponse.redirect(new URL('/login', request.url));
+      if (request.nextUrl.pathname === '/mypage/dashboard/terms') {
+        return NextResponse.next();
+      } else {
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
     }
   }
   return NextResponse.next();

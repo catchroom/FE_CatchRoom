@@ -165,12 +165,14 @@ const LoginSheet = ({
                         }
                       />
                     </div>
-                    <Link
-                      href="/mypage/dashboard/terms"
+                    <div
                       className="text-raspberry"
+                      onClick={() => {
+                        router.push('/mypage/dashboard/terms');
+                      }}
                     >
                       보기
-                    </Link>
+                    </div>
                   </div>
 
                   <div className={checkDivStyle}>

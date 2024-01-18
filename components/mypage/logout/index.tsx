@@ -17,7 +17,7 @@ const Logout = () => {
         if (response.code === 2000) {
           nookies.destroy(null, 'accessToken');
           nookies.destroy(null, 'refreshToken');
-          router.push('/login');
+          router.push('/home');
         }
       })
       .catch((error) => {
