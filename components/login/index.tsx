@@ -10,15 +10,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/constants/zodSchema';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
-import { loginTest } from '@/api/mypage/testApi';
 import nookies from 'nookies';
-
+import { login, getNewToken } from '@/api/user/api';
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
 const LoginForm = () => {
   const router = useRouter();
-
   //약관 모달
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => {
@@ -30,6 +28,9 @@ const LoginForm = () => {
   const handleModalOpen = () => {
     setOpenAlert((prev) => !prev);
   };
+
+  const [clickedEmailInput, setClickedEmailInput] = useState(false);
+  const [clickedPwInput, setClickedPwInput] = useState(false);
 
   const {
     register,
@@ -50,27 +51,26 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (data: LoginData) => {
-    loginTest(data.email, data.password) //테스트
+    login(data.email, data.password)
       .then((response) => {
         console.log(response);
-        if (response.code === '1006') {
-          //nookies로 변경 테스트
-          nookies.set(null, 'access_token', response.data.access_token, {
+        if (response.code === 1006) {
+          nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
           });
-          //오타 반영된 코드 -> 수정 필요
-          nookies.set(null, 'refresh_token', response.data.refresh_toekn, {
+          nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',
           });
 
-          console.log('access_token 체크', nookies.get(null)['access_token']);
-          console.log(
-            'refresh_token 체크:',
-            nookies.get(null)['refresh_token'],
-          );
+          //액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
+          setTimeout(() => {
+            getNewToken().then((newToken) => {
+              console.log(newToken);
+            });
+          }, 5000);
 
-          router.push('/home');
-        } else if (response.code === '1007' || '1008') {
+          router.push('/mypage');
+        } else if (response.code === 1007 || response.code === 1008) {
           setOpenAlert(true);
         }
       })
@@ -87,10 +87,16 @@ const LoginForm = () => {
             placeholder="이메일"
             {...register('email')}
             className={`${commonInputStyle}  ${
-              errors.email ? 'border-border-critical' : 'border-gray-400'
-            }  `}
+              errors.email
+                ? 'border-border-critical'
+                : clickedEmailInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
+            onClick={() => setClickedEmailInput(true)}
+            onBlur={() => setClickedEmailInput(false)}
           />
-          {email && (
+          {email && clickedEmailInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2"
               onClick={() => clearField('email')}
@@ -110,11 +116,17 @@ const LoginForm = () => {
             type="password"
             {...register('password')}
             className={`${commonInputStyle} ${
-              errors.password ? 'border-border-critical' : 'border-gray-400'
-            } `}
+              errors.password
+                ? 'border-border-critical'
+                : clickedPwInput
+                  ? 'border-border-primary'
+                  : 'border-gray-400'
+            } outline-none`}
+            onClick={() => setClickedPwInput(true)}
+            onBlur={() => setClickedPwInput(false)}
           />
 
-          {password && (
+          {password && clickedPwInput && (
             <div
               className="absolute right-3 top-[40%] transform -translate-y-1/2 text-border-critical"
               onClick={() => clearField('password')}
@@ -138,7 +150,6 @@ const LoginForm = () => {
           >
             로그인
           </button>
-          {/* 로그인 실패시 alert 모달 추가로 띄우기? -> 피그마에만 나와서 아직 반영 x */}
           {openAlert && (
             <Modal
               title="이메일 또는 비밀번호를 다시 확인해주세요."
