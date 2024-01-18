@@ -3,32 +3,31 @@
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { nameSchema, FormName } from '@/constants/zodSchema';
+import { nicknameSchema, FormName } from '@/constants/zodSchema';
 import { useDebounceText } from '@/hooks/useDebounceText';
 import { ErrorMessage } from '@hookform/error-message';
 import FormInput from '../formInput';
 // import { useCheckNickname } from '@/api/user/query';
-import { editProfile } from '@/api/mypage/api';
+import { editProfile, getNickname } from '@/api/mypage/api';
 import { nicknameCheck } from '@/api/user/api';
 import Modal from '@/components/common/modal';
 
-const ProfileForm = ({ name }: { name: string }) => {
+const ProfileForm = () => {
   // const mutation = useCheckNickname();
   const [checkNickname, setCheckNickname] = useState(false);
+  const [nickname, setNickname] = useState('');
   const {
     register,
     handleSubmit,
     watch,
     reset,
-    // setValue,
     formState: { errors },
   } = useForm<FormName>({
-    resolver: zodResolver(nameSchema),
+    resolver: zodResolver(nicknameSchema),
     mode: 'onChange',
     delayError: 300,
     defaultValues: {
-      nickname: name,
-      //??이거 없애도 되는지 여쭤보기~,, 닉네임 겟해와서 이걸로 디폴트 해주는거아닌지
+      nickname: nickname,
     },
   });
 
@@ -39,7 +38,7 @@ const ProfileForm = ({ name }: { name: string }) => {
   const debounceText = useDebounceText(inputText, 300);
 
   const onSubmit: SubmitHandler<FormName> = (data) => {
-    if (nameSchema.safeParse(data).success) {
+    if (nicknameSchema.safeParse(data).success) {
       // mutation.mutate(data.nickname);
       console.log(data);
       nicknameCheck(data.nickname).then((res) => {
@@ -47,6 +46,7 @@ const ProfileForm = ({ name }: { name: string }) => {
         if (res.code === 1010) {
           editProfile(data.nickname).then((response) => {
             console.log(response);
+            setNickname(response.data);
             if (response.code === 2002) {
               setOpenSuccessAlert(true);
             } else if (res.code == 2003) {
@@ -64,8 +64,8 @@ const ProfileForm = ({ name }: { name: string }) => {
 
   useEffect(() => {
     const validName = () => {
-      const notSameNickname = debounceText !== name;
-      const availableNickname = nameSchema.safeParse({
+      const notSameNickname = debounceText !== nickname;
+      const availableNickname = nicknameSchema.safeParse({
         nickname: debounceText,
       }).success;
 
@@ -77,7 +77,17 @@ const ProfileForm = ({ name }: { name: string }) => {
     };
 
     validName();
-  }, [debounceText, name]);
+  }, [debounceText, nickname]);
+
+  useEffect(() => {
+    getNickname().then((res) => {
+      if (res.code === 2004) {
+        console.log(res.data); //닉네임 가져온거 찍기
+        reset({ nickname: res.data });
+        setNickname(res.data);
+      }
+    });
+  }, [nickname]);
 
   return (
     <form
@@ -119,10 +129,14 @@ const ProfileForm = ({ name }: { name: string }) => {
               type="button"
               onClick={() =>
                 reset({
-                  nickname: name,
+                  nickname: nickname,
                 })
               }
-              className="text-opacity-30 border border-action-secondary-disabled border-opacity-15 text-black px-4 py-2 rounded-md hover:bg-surface hover:text-text-primary hover:border-border-primary"
+              className={`border border-action-secondary-disabled  text-black px-4 py-2 rounded-md ${
+                debounceText !== nickname
+                  ? 'text-text-primary border-border-primary'
+                  : 'text-opacity-30 border-opacity-15'
+              }`}
             >
               취소
             </button>

@@ -53,7 +53,7 @@ export const editProfile = async (nickname: string) => {
 
 // 8. 닉네임 조회 get
 export const getNickname = async () => {
-  const res = await apiClient.put(`/v1/mypage/nickname`);
+  const res = await apiClient.get(`/v1/mypage/nickname`);
   return res.data;
 };
 
