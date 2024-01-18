@@ -11,7 +11,7 @@ import { loginSchema } from '@/constants/zodSchema';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
 import nookies from 'nookies';
-import { login } from '@/api/user/api';
+import { login, getNewToken } from '@/api/user/api';
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
@@ -62,12 +62,13 @@ const LoginForm = () => {
             path: '/',
           });
 
-          // 액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
-          // setTimeout(() => {
-          //   getNewToken().then((newToken) => {
-          //     console.log(newToken);
-          //   });
-          // }, 5000);
+          //액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
+          setTimeout(() => {
+            getNewToken().then((newToken) => {
+              console.log(newToken);
+            });
+          }, 5000);
+
           router.push('/mypage');
         } else if (response.code === 1007 || response.code === 1008) {
           setOpenAlert(true);
@@ -149,7 +150,6 @@ const LoginForm = () => {
           >
             로그인
           </button>
-          {/* 로그인 실패시 alert 모달 추가로 띄우기? -> 피그마에만 나와서 아직 반영 x */}
           {openAlert && (
             <Modal
               title="이메일 또는 비밀번호를 다시 확인해주세요."

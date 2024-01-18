@@ -17,6 +17,7 @@ const accessToken = nookies.get(null)['accessToken'];
 // };
 
 export const logout = async () => {
+  console.log(accessToken);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
     {
