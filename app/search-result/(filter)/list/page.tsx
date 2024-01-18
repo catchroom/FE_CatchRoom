@@ -1,6 +1,5 @@
 'use client';
 import CatchItemContainer from '@/components/catchSale/catchItemContainer';
-import ProductListControls from '@/components/search-result/list/productListControls';
 import ToggleViewButton from '@/components/search-result/toggleViewButton';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -14,9 +13,8 @@ const Page = () => {
 
   return (
     <div className="w-full flex flex-col">
-      <ProductListControls />
       <CatchItemContainer />
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-20">
+      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-10">
         <Link href="/search-result/map" passHref>
           <ToggleViewButton
             currentView={currentView}
