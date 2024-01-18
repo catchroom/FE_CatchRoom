@@ -187,7 +187,7 @@ const LoginSheet = ({
                       />
                     </div>
                     <Link
-                      href="/mypage/dashboard/terms"
+                      href="/mypage/dashboard/privacy"
                       className="text-raspberry"
                     >
                       보기
@@ -217,7 +217,7 @@ const LoginSheet = ({
                       />
                     </div>
                     <Link
-                      href="/mypage/dashboard/terms"
+                      href="/mypage/dashboard/privacy"
                       className="text-raspberry"
                     >
                       보기
