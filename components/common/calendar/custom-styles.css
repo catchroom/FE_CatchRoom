@@ -51,12 +51,15 @@ th {
 /* 3. 오늘 날짜 표시효과 추가 */
 .rdp-day_today::before {
   content: '';
+
   position: absolute;
   bottom: 0;
   left: 50%;
+
   transform: translate(-50%, -50%);
   width: 5px;
   height: 5px;
+
   background-color: #ff3478;
   border-radius: 50%;
 }
