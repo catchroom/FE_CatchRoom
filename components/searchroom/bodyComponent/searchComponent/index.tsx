@@ -32,8 +32,6 @@ const SearchBtnComponent = () => {
     Array(REGION_NAMES.length).fill(true),
   );
 
-  const selectedRegionNames = regionBtnIdx.map((index) => REGION_NAMES[index]);
-
   const handleRegionSelectAll = () => {
     setIsRegionChecked(!isRegionChecked);
     const allIndexes = Array.from(
@@ -58,6 +56,8 @@ const SearchBtnComponent = () => {
         updatedRegionSelected.length > 0,
     );
   };
+
+  const selectedRegionNames = regionBtnIdx.map((index) => REGION_NAMES[index]);
 
   const regionButtons = REGION_NAMES.map((buttonName: string, index) => (
     <button
@@ -91,8 +91,6 @@ const SearchBtnComponent = () => {
     Array(ROOM_CATEGORIES.length).fill(true),
   );
 
-  const selectedRoomNames = roomBtnIdx.map((index) => ROOM_CATEGORIES[index]);
-
   const handleRoomSelectAll = () => {
     setIsRoomChecked(!isRoomChecked);
     const allIndexes = Array.from(
@@ -117,6 +115,8 @@ const SearchBtnComponent = () => {
         updateRoomSelected.length > 0,
     );
   };
+
+  const selectedRoomNames = roomBtnIdx.map((index) => ROOM_CATEGORIES[index]);
 
   const roomCategoryButtons = ROOM_CATEGORIES.map(
     (buttonName: string, index) => (
