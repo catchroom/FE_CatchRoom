@@ -22,7 +22,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
 
   const isNotIng = item.state !== 'ing' ? true : false;
 
-  const viewReview = isNotIng && item.state === 'done' ? true : false;
+  console.log(isNotIng);
 
   return (
     <div className="w-full px-5 py-3 flex flex-col gap-3">
@@ -74,7 +74,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
           </div>
         </div>
       </div>
-      {viewReview && (
+      {isNotIng && (
         <ReviewButtons id={item.productNum} isReview={item.isReview} />
       )}
     </div>

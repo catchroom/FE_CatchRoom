@@ -6,17 +6,21 @@ import { motion } from 'framer-motion';
 const BorderButton = ({
   name,
   fn,
-  disabled = false,
+  gray = false,
+  deeperGray = false,
   type = 'button',
 }: {
   name: string;
-  disabled?: boolean;
+  gray?: boolean;
+  deeperGray?: boolean;
   type?: 'button' | 'submit' | 'reset' | undefined;
   fn?: MouseEventHandler<HTMLButtonElement>;
 }) => {
-  const disabledStyle = disabled
-    ? 'bg-surface-gray text-text-sub'
-    : 'border border-border-primary text-text-primary';
+  const disabledStyle = deeperGray
+    ? 'bg-action-secondary-disabled text-text-disabled'
+    : gray
+      ? 'bg-surface-gray text-text-sub'
+      : 'border border-border-primary text-text-primary';
 
   return (
     <motion.button
