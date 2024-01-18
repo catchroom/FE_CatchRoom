@@ -1,6 +1,7 @@
-// import { cookies } from 'next/headers';
 import React from 'react';
 import LoginButton from './LoginButton';
+import ChattingRoom from './chattingRoom';
+import MakeChattingButton from './makeChattingButton';
 
 export type ChatRoom = {
   chatRoomNumber: string;
@@ -10,40 +11,24 @@ export type ChatRoom = {
   loginUserIdentity: string;
 };
 
-// const fetchChatRoom = async () => {
-//   const accessToken = cookies().get('accessToken')?.value;
-//   const data = await fetch('https://catchroom.xyz/v1/chat/room/list', {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${accessToken}`,
-//     },
-//   });
-
-//   const result = await data.json();
-
-//   return result.data;
-// };
-
-const page = async () => {
-  // const result = await fetchChatRoom();
-
+const page = () => {
   return (
-    <div className="w-full h-full p-5">
-      <LoginButton />
-      <p>안녕 반가워</p>
-      {/* <div className="w-full h-full bg-white p-5">
-        {result &&
-          result.map((room: ChatRoom, index: number) => {
-            return (
-              <div key={index}>
-                <div>
-                  <p>{room.chatRoomNumber}</p>
-                </div>
-              </div>
-            );
-          })}
-      </div> */}
+    <div className="w-full h-full p-5 flex flex-col gap-5">
+      <strong className="text-h1"># 채팅방 테스트용 페이지</strong>
+      <section className="flex flex-col gap-12 py-20">
+        <div>
+          <strong className="text-h3 pb-3">## 로그인 로직관리</strong>
+          <LoginButton />
+        </div>
+        <div>
+          <strong className="text-h3 ">## 채팅방 리스트</strong>
+          <ChattingRoom />
+        </div>
+        <div>
+          <strong className="text-h3 pb-3">## 채팅방 만들기</strong>
+          <MakeChattingButton />
+        </div>
+      </section>
     </div>
   );
 };
