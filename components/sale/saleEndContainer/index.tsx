@@ -30,12 +30,12 @@ const SaleEndContainer = () => {
   };
 
   const title =
-    '12월 28일 (수) ' +
     time.toString() +
     ' ' +
-    hour.toString() +
-    ':' +
-    minute.toString();
+    (hour < 10
+      ? '0' + hour.toString() + ':' + minute.toString()
+      : hour.toString() + ':' + minute.toString());
+
   return (
     <div className="w-full flex flex-col mt-5">
       <h2 className="text-h5 font-semibold">판매 종료일 설정</h2>
@@ -65,7 +65,7 @@ const SaleEndContainer = () => {
       </LocalizationProvider> */}
 
       <BottomSheetsWithoutCloseBtn
-        buttonSelect="calendar"
+        buttonSelect="timePicker"
         title={title}
         outerControl={true}
         outerControlAtom="datePicker"

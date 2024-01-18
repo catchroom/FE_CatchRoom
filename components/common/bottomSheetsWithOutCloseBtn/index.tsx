@@ -13,7 +13,7 @@ import {
   outerDatePickerBottomSheetsControl,
 } from '@/atoms/commons/outerBottomSheetsControl';
 import DropdownButton from '../sheetsButtons/dropdownButton';
-import CalendarButton from '../sheetsButtons/calendarButton';
+import TimePickerButton from '../sheetsButtons/calendarButton';
 
 /**
  * @function BottomSheetsWithoutCloseBtn - bottom sheets component입니다. 모달 대체용으로 사용합니다.
@@ -35,7 +35,7 @@ const BottomSheetsWithoutCloseBtn = ({
 }: {
   children: ReactNode;
   title: string;
-  buttonSelect?: 'dropdown' | 'calendar';
+  buttonSelect?: 'dropdown' | 'timePicker';
   outerControl?: boolean;
   outerControlAtom?: 'default' | 'datePicker';
 }) => {
@@ -76,7 +76,7 @@ const BottomSheetsWithoutCloseBtn = ({
 
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
     dropdown: <DropdownButton name={title} fn={modalOpen} />,
-    calendar: <CalendarButton name={title} fn={modalOpen} />,
+    timePicker: <TimePickerButton name={title} fn={modalOpen} />,
   };
 
   return (
