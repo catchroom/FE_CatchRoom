@@ -1,23 +1,28 @@
 'use client';
 
-import Modal from '@/components/order/modal';
+import PaymentModal from '@/components/order/modal';
+import Modal from '@/components/common/modal';
 import { PaymentButtonProps } from '@/types/order/paymentButton/type';
 import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
 
 const PaymentButton = ({ amount }: PaymentButtonProps) => {
+  const selectedTerms = useRecoilValue(selectedTermsState);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('orderConfirmation');
 
   const handleOpenModal = () => {
+    if (selectedTerms.length === 3) {
+      setModalType('orderConfirmation');
+    } else {
+      setModalType('termsFailure');
+    }
     setModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
-  };
-
-  const handleConfirm = () => {
-    handleCloseModal();
-    // 결제 완료 페이지로 이동 추가
   };
 
   const formattedAmount = `${amount.toLocaleString('ko-KR')}원`;
@@ -33,11 +38,19 @@ const PaymentButton = ({ amount }: PaymentButtonProps) => {
         </button>
       </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onConfirm={handleConfirm}
-      />
+      {modalType === 'orderConfirmation' && (
+        <PaymentModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      )}
+
+      {isModalOpen && modalType === 'termsFailure' && (
+        <Modal
+          title="결제 실패"
+          content="필수 이용 약관 동의가 필요합니다."
+          onConfirm={handleCloseModal}
+          confirmString="확인"
+          showConfirmButton={true}
+        />
+      )}
     </>
   );
 };
