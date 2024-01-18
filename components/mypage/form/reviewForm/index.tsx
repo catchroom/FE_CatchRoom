@@ -21,7 +21,6 @@ const ReviewForm = () => {
     }
   };
 
-  console.log('렌ㄹ');
   const maxCharacterCount = 100;
 
   const handleContentChange = (
