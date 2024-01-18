@@ -5,7 +5,7 @@ import { StateType, decodeState, getDotDate } from '@/utils/get-dot-date';
 import { MypageSellingType } from '@/types/mypage/data-types';
 import CalendarSVG from '@/public/svgComponent/mediumCalendar';
 import ReviewButtons from '../reviewButtons';
-import XSymbolIcon from '@/public/svgComponent/xSymbol';
+import DeleteButtons from '../deleteButtons';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
   const state = decodeState(
@@ -60,7 +60,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
                   <CalendarSVG />
                   {getDotDate(item.checkIn)} - {getDotDate(item.checkOut)}
                 </p>
-                {isNotIng && <XSymbolIcon />}
+                {isNotIng && <DeleteButtons />}
               </div>
               <div className="text-text">
                 <h3 className="text-t1 font-bold">{item.productName}</h3>
