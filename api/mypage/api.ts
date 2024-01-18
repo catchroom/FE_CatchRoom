@@ -1,9 +1,9 @@
 import nookies from 'nookies';
 import { apiClient } from '../user/apiClient';
-
+// 노션의 api 명세서 번호 기준으로 표시
 const accessToken = nookies.get(null)['accessToken'];
 
-//6. 로그아웃
+// //6. 로그아웃
 export const logout = async () => {
   const res = await apiClient.post('/v1/mypage/logout');
   const data = res.data;
@@ -26,26 +26,40 @@ export const logout = async () => {
 //   return data;
 // };
 
-// 프로필 수정 put*
-export const editProfile = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
+// 7. 프로필 수정
+export const editProfile = async (nickname: string) => {
+  const res = await apiClient.put('/v1/mypage/profile', {
+    nickname,
+  });
 
-  const data = await res.json();
+  const data = res.data;
   if (data.code === 2002) {
     return data;
   } else if (data.code === 2003) {
     console.log(data.message);
   }
 };
+
+// export const editProfile = async (nickname: string) => {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile`,
+//     {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//       body: JSON.stringify({ nickname }),
+//     },
+//   );
+
+//   const data = await res.json();
+//   if (data.code === 2002) {
+//     return data;
+//   } else if (data.code === 2003) {
+//     console.log(data.message);
+//   }
+// };
 
 // 닉네임 조회 get
 export const nickname찾기 = async (nickname: string) => {

@@ -137,7 +137,7 @@ const SignUpInfo = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedNameInput(true)}
-            onBlur={() => setClickedNameInput(false)}
+            onBlur={() => setTimeout(() => setClickedNameInput(false), 200)}
           />
           {name && clickedNameInput && (
             <div
@@ -165,7 +165,7 @@ const SignUpInfo = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPhoneInput(true)}
-            onBlur={() => setClickedPhoneInput(false)}
+            onBlur={() => setTimeout(() => setClickedPhoneInput(false), 200)}
           />
 
           {phone && clickedPhoneInput && (
@@ -194,11 +194,11 @@ const SignUpInfo = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedNickInput(true)}
-            onBlur={() => setClickedNickInput(false)}
+            onBlur={() => setTimeout(() => setClickedNickInput(false), 200)}
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {email && !confirmedNickname && clickedNickInput && (
+            {nickname && !confirmedNickname && clickedNickInput && (
               <div onClick={() => clearField('nickname')}>
                 <DeleteIcon />
               </div>

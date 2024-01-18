@@ -62,13 +62,6 @@ const LoginForm = () => {
             path: '/',
           });
 
-          // //액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
-          // setTimeout(() => {
-          //   getNewToken().then((newToken) => {
-          //     console.log(newToken);
-          //   });
-          // }, 5000);
-
           router.push('/mypage');
         } else if (response.code === 1007 || response.code === 1008) {
           setOpenAlert(true);
@@ -94,7 +87,7 @@ const LoginForm = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedEmailInput(true)}
-            onBlur={() => setClickedEmailInput(false)}
+            onBlur={() => setTimeout(() => setClickedEmailInput(false), 200)}
           />
           {email && clickedEmailInput && (
             <div
@@ -123,7 +116,7 @@ const LoginForm = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPwInput(true)}
-            onBlur={() => setClickedPwInput(false)}
+            onBlur={() => setTimeout(() => setClickedPwInput(false), 200)}
           />
 
           {password && clickedPwInput && (
