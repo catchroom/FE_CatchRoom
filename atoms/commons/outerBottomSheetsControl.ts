@@ -19,3 +19,8 @@ export const outerDatePickerBottomSheetsControl = atom<boolean>({
   key: 'outerDatePickerBottomSheetsControl',
   default: false,
 });
+
+export const outerMoreBottomSheetsControl = atom<boolean>({
+  key: 'outerMoreBottomSheetsControl',
+  default: false,
+});
