@@ -48,7 +48,7 @@ const FromSeller = () => {
     }
   };
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full mt-8">
       <form className="w-full h-[120px]" onSubmit={handleSubmit(onSubmit)}>
         <textarea
           className={`w-full h-[120px] border border-border-sub px-3 py-2 ${

@@ -1,16 +1,15 @@
 'use client';
-import React, { useState } from 'react';
-// import SetTime from '../setTime';
-// import { useRecoilValue, useSetRecoilState } from 'recoil';
-// import { hourState, minuteState, timeState } from '@/atoms/sale/timeAtom';
-// import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
-// import { outerDatePickerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
-import { MobileTimePicker } from '@mui/x-date-pickers';
+import React from 'react';
+import SetTime from '../setTime';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { hourState, minuteState, timeState } from '@/atoms/sale/timeAtom';
+import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
+import { outerDatePickerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+// import { MobileTimePicker } from '@mui/x-date-pickers';
 //import { TextField } from '@mui/material';
 
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
-
+// import { LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 // const CustomToolbar = ({ time }: { time: string }) => (
 //   <>
 //     <div>판매 종료 시간</div>
@@ -19,31 +18,31 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 // );
 
 const SaleEndContainer = () => {
-  const [time, setTime] = useState<string | null>('');
-  // const time = useRecoilValue(timeState);
-  // const hour = useRecoilValue(hourState);
-  // const minute = useRecoilValue(minuteState);
+  //const [time, setTime] = useState<string | null>('');
+  const time = useRecoilValue(timeState);
+  const hour = useRecoilValue(hourState);
+  const minute = useRecoilValue(minuteState);
 
-  // const setModalOpen = useSetRecoilState(outerDatePickerBottomSheetsControl);
+  const setModalOpen = useSetRecoilState(outerDatePickerBottomSheetsControl);
 
-  // const handleButtonClick = () => {
-  //   setModalOpen(false);
-  // };
+  const handleButtonClick = () => {
+    setModalOpen(false);
+  };
 
-  // const title =
-  //   '12월 28일 (수) ' +
-  //   time.toString() +
-  //   ' ' +
-  //   hour.toString() +
-  //   ':' +
-  //   minute.toString();
+  const title =
+    '12월 28일 (수) ' +
+    time.toString() +
+    ' ' +
+    hour.toString() +
+    ':' +
+    minute.toString();
   return (
-    <div className="w-full flex flex-col mt-5 gap-3">
+    <div className="w-full flex flex-col mt-5">
       <h2 className="text-h5 font-semibold">판매 종료일 설정</h2>
-      <p className="text-p1 opacity-50 mt-1">
+      <p className="text-p1 opacity-50 mt-1 mb-3">
         판매 종료일 이후 판매글은 미노출 됩니다
       </p>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
         <MobileTimePicker
           value={time}
           onChange={(newValue) => {
@@ -63,9 +62,9 @@ const SaleEndContainer = () => {
             },
           }}
         />
-      </LocalizationProvider>
+      </LocalizationProvider> */}
 
-      {/* <BottomSheetsWithoutCloseBtn
+      <BottomSheetsWithoutCloseBtn
         buttonSelect="calendar"
         title={title}
         outerControl={true}
@@ -81,7 +80,7 @@ const SaleEndContainer = () => {
             {title}로 설정하기
           </button>
         </div>
-      </BottomSheetsWithoutCloseBtn> */}
+      </BottomSheetsWithoutCloseBtn>
     </div>
   );
 };

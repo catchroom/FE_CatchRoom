@@ -88,7 +88,7 @@ const CatchContainer = ({ price }: PropsType) => {
       {isCatch && (
         <>
           <div>
-            <p className="text-t2">캐치특가 적용 가격</p>
+            <p className="text-t2 mb-2">캐치특가 적용 가격</p>
             <BottomSheets
               title={title}
               innerTitle="캐치특가 판매가를 선택해주세요"
@@ -102,6 +102,7 @@ const CatchContainer = ({ price }: PropsType) => {
             </BottomSheets>
           </div>
           <div>
+            <p className="text-t2 mb-2">캐치특가 적용 날짜</p>
             <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
               <BigCalendarIcon />
               {/* 바텀시트 모달로 변경예정 */}
