@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userInfoSchema } from '@/constants/zodSchema';
 import Modal from '@/components/common/modal';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { signUp, nicknameCheck, login, getNewToken } from '@/api/user/api';
+import { signUp, nicknameCheck, login } from '@/api/user/api';
 import nookies from 'nookies';
 import { emailState, passwordState } from '@/atoms/signup/signup';
 
@@ -81,13 +81,6 @@ const SignUpInfo = () => {
                       path: '/',
                     },
                   );
-
-                  // 액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
-                  setTimeout(() => {
-                    getNewToken().then((newToken) => {
-                      console.log(newToken);
-                    });
-                  }, 1000);
 
                   router.push('/mypage');
                 }

@@ -11,7 +11,7 @@ import { loginSchema } from '@/constants/zodSchema';
 import { useRouter } from 'next/navigation';
 import Modal from '../common/modal';
 import nookies from 'nookies';
-import { login, getNewToken } from '@/api/user/api';
+import { login } from '@/api/user/api';
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
 
@@ -62,12 +62,12 @@ const LoginForm = () => {
             path: '/',
           });
 
-          //액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
-          setTimeout(() => {
-            getNewToken().then((newToken) => {
-              console.log(newToken);
-            });
-          }, 5000);
+          // //액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
+          // setTimeout(() => {
+          //   getNewToken().then((newToken) => {
+          //     console.log(newToken);
+          //   });
+          // }, 5000);
 
           router.push('/mypage');
         } else if (response.code === 1007 || response.code === 1008) {
