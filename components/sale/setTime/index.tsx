@@ -4,15 +4,17 @@ import {
   minuteState,
   timeState,
 } from '@/atoms/sale/timeAtom';
+import { useLongPress } from '@/hooks/useLongPress';
 import DownArrowIcon from '@/public/svgComponent/downArrow';
 import UpArrow from '@/public/svgComponent/upArrow';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 const SetTime = () => {
   const [time, setTime] = useRecoilState(timeState);
   const [hour, setHour] = useRecoilState(hourState);
   const [minute, setMinute] = useRecoilState(minuteState);
+  const [isTimeChange, setIsTimeChange] = useState(false);
 
   const toggleTime = () => {
     setTime((prev) => (prev === DAY_TIME[0] ? DAY_TIME[1] : DAY_TIME[0]));
@@ -21,7 +23,7 @@ const SetTime = () => {
   const increaseHour = () =>
     setHour((prevHour) => {
       if (prevHour === 11) {
-        toggleTime();
+        setIsTimeChange(true);
         return 0;
       } else return prevHour + 1;
     });
@@ -31,13 +33,23 @@ const SetTime = () => {
   const decreaseHour = () =>
     setHour((prevHour) => {
       if (prevHour === 1) {
-        toggleTime();
+        setIsTimeChange(true);
         return 0;
       } else if (prevHour === 0) return 11;
       else return prevHour - 1;
     });
   const decreaseMinute = () =>
     setMinute((prevMinute) => (prevMinute === 0 ? 59 : prevMinute - 1));
+
+  const IncreaseHourLongPress = useLongPress(increaseHour, 300);
+  const decreaseHourLongPress = useLongPress(decreaseHour, 300);
+  const IncreaseMinuteLongPress = useLongPress(decreaseMinute, 300);
+  const decreaseMinuteLongPress = useLongPress(decreaseHour, 300);
+
+  useEffect(() => {
+    if (isTimeChange) toggleTime();
+    setIsTimeChange(false);
+  }, [isTimeChange]); // Only re-run the effect if hour changes
   return (
     <div className="flex justify-between w-full items-center p-5 text-t1">
       <div className=" font-semibold">판매 종료 시간</div>
@@ -52,23 +64,23 @@ const SetTime = () => {
           </div>
         </div>
         <div className="flex flex-col gap-8 items-center">
-          <div onClick={decreaseHour}>
+          <div {...decreaseHourLongPress} onClick={decreaseHour}>
             <UpArrow />
           </div>
 
           <p>{hour < 10 ? '0' + hour.toString() : hour}</p>
-          <div onClick={increaseHour}>
+          <div {...IncreaseHourLongPress} onClick={increaseHour}>
             <DownArrowIcon color="#9FA3AB" />
           </div>
         </div>
         <div className="flex items-center justify-center">:</div>
         <div className="flex flex-col gap-8 items-center">
-          <div onClick={decreaseMinute}>
+          <div {...decreaseMinuteLongPress} onClick={decreaseMinute}>
             <UpArrow />
           </div>
 
           <p>{minute < 10 ? '0' + minute.toString() : minute}</p>
-          <div onClick={increaseMinute}>
+          <div {...IncreaseMinuteLongPress} onClick={increaseMinute}>
             <DownArrowIcon color="#9FA3AB" />
           </div>
         </div>
