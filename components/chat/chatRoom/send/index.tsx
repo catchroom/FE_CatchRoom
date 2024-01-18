@@ -1,18 +1,15 @@
 'use client';
 
-import React, { useRef } from 'react';
-import SockJS from 'sockjs-client';
-import { Stomp } from '@stomp/stompjs';
-import SendIcon from '@/public/send.svg';
+import React, { useRef, useState } from 'react';
+import SendIcon from '@/public/svgComponent/sendIcon';
 
-const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
+type sendProps = {
+  onSendMessage: (message: string) => void;
+};
 
-const Send = () => {
+const Send: React.FC<sendProps> = ({ onSendMessage }) => {
+  // textarea 높이 조절
   const textarea = useRef(null);
-
-  const sockjs = new SockJS('http://13.124.240.142:8080/ws-stomp');
-  const ws = Stomp.over(sockjs);
-
   const resizeHeight = (textarea: React.RefObject<HTMLTextAreaElement>) => {
     if (textarea.current) {
       textarea.current.style.height = 'auto';
@@ -20,30 +17,39 @@ const Send = () => {
     }
   };
 
-  const sendMessage = () => {
-    if (!ws) return;
-    ws.publish({
-      destination: `/pub/chat/message`,
-      body: JSON.stringify({
-        roomId: ROOMID,
-        sender: '승연',
-        type: 'TALK',
-        userId: 'user1',
-        message: '안녕하세용',
-      }),
-    });
+  const [message, setMessage] = useState<string>('');
+
+  //textarea 입력 내용 반영
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+    resizeHeight(textarea);
+  };
+
+  //메시지 보내기
+  const handleSendMessage = () => {
+    onSendMessage(message);
+    setMessage(''); // 메시지 보낸 후에 입력 필드 초기화
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSendMessage();
+    }
   };
 
   return (
-    <div className="bg-white w-full h-[50px] flex items-center px-4 py-3 pb-6 border border-border-sub sticky bottom-0">
+    <div className="bg-white w-full h-auto flex items-center px-4 py-3 border border-border-sub sticky bottom-0">
       <textarea
         className="bg-gray-200 w-full h-[40px] max-h-[120px] py-[8px] flex px-4 rounded-[20px]"
         placeholder="메시지 보내기"
         rows={1}
         ref={textarea}
-        onChange={() => resizeHeight(textarea)}
+        value={message}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
       />
-      <div className="pl-3 cursor-pointer" onClick={sendMessage}>
+      <div className="pl-3 cursor-pointer" onClick={handleSendMessage}>
         <SendIcon />
       </div>
     </div>
