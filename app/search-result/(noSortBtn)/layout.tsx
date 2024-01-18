@@ -36,9 +36,7 @@ const Searchlayout = ({
     <>
       <Header title="검색 결과" showBackButton showHomeButton />
       <FilterBar filters={filters} />
-      <main className="w-full absolute h-[calc(100vh-20px)] mt-20 ">
-        {children}
-      </main>
+      <main className="w-full absolute h-full mt-20 ">{children}</main>
     </>
   );
 };
