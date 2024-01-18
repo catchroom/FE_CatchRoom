@@ -1,6 +1,9 @@
 'use client';
 
-import { adultCountState, childCountState } from '@/atoms/searchroom/checkbox';
+import {
+  adultCountState,
+  childCountState,
+} from '@/atoms/search-detail/checkbox';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import {
