@@ -35,9 +35,11 @@ type DivideCase = keyof typeof DIVIDE_LIST;
 const DivideWrapper = ({
   children,
   divideCase,
+  maxHeightControl = true,
 }: {
   children: ReactNode;
   divideCase: DivideCase;
+  maxHeightControl?: boolean;
 }) => {
   const [value, setValue] = useRecoilState(divideAtom);
   const VIEW_DATA = DIVIDE_LIST[divideCase];
@@ -54,6 +56,9 @@ const DivideWrapper = ({
   };
 
   const defaultStyle = 'border-b p-4 w-1/2 transition-colors duration-300';
+  const maxHeightStyle = maxHeightControl
+    ? `max-h-[calc(100vh-120px)] overflow-y-scroll`
+    : `max-h-[calc(100vh-200px)] overflow-y-scroll`;
 
   return (
     <div className="w-full">
@@ -70,9 +75,7 @@ const DivideWrapper = ({
           );
         })}
       </div>
-      <div className="max-h-[calc(100vh-120px)] overflow-y-scroll">
-        {children}
-      </div>
+      <div className={maxHeightStyle}>{children}</div>
     </div>
   );
 };

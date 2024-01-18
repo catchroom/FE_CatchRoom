@@ -1,4 +1,5 @@
 export type catchItems = {
+  id?: number;
   roomName: string;
   roomType: string;
   resDate: string;

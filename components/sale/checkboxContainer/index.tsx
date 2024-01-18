@@ -5,7 +5,7 @@ import CheckBoxComponent from '@/components/common/checkBox';
 import { checkBoxSchema } from '@/constants/zodSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import FromSeller from '../bottomSheetsContent/fromSeller';
@@ -29,6 +29,13 @@ const CheckboxContainer = () => {
   const check1 = watch('check1');
   const check2 = watch('check2');
   const check3 = watch('check3');
+
+  useEffect(() => {
+    if (isCatch) {
+      const checked = getValues('allAgree');
+      setValue('check3', checked);
+    }
+  }, [isCatch, getValues, setAllCheck, setValue]);
 
   const handleAllCheck = (
     e: React.MouseEvent,
