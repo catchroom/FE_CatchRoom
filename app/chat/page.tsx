@@ -8,28 +8,32 @@ import { useRouter } from 'next/navigation';
 import Modal from '@/components/common/modal';
 import { useRecoilState } from 'recoil';
 import { isModalState } from '@/atoms/chat/leaveButton';
-import axios from 'axios';
+
 import { useMutation } from '@tanstack/react-query';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
+import { creatChatRoom, loadedChatList } from '@/api/chat/api';
 
+// 채팅방 생성하기
 const createRoom = async () => {
-  const data = await axios.post(
-    'http://13.124.240.142:8080/v1/chat/room/create',
-    {
-      buyerId: 'buyer1',
-      sellerId: 'seller1',
-      productId: 'product1',
-    },
-    {
-      headers: {
-        Authorization: `Bearer tokentoken`,
-      },
-    },
-  );
-  console.log(data);
-  console;
-  return data;
+  try {
+    const result = await creatChatRoom('buyer1', 'seller1', 'product1');
+    console.log(result);
+  } catch (error) {
+    console.error('failed:', error);
+  }
 };
+createRoom();
+
+//채팅방 리스트 불러오기
+const chatLists = async () => {
+  try {
+    const result = await loadedChatList();
+    console.log(result);
+  } catch (error) {
+    console.error('failed:', error);
+  }
+};
+chatLists();
 
 const MakeButton = () => {
   const mutation = useMutation({
@@ -62,7 +66,7 @@ const Page = () => {
   };
   const onConfirm = () => {
     handleModalOpen();
-    router.push('/login');
+    router.push('/chat');
   };
 
   return (
