@@ -1,10 +1,14 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ROOM_CATEGORIES, SEARCH_DEFAULT } from '@/constants/search-detail';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 
-const RoomBottomSheet = () => {
+const RoomBottomSheet = ({
+  buttonStyle,
+}: {
+  buttonStyle: 'search' | 'dropdown';
+}) => {
   const [isRoomChecked, setIsRoomChecked] = useState<boolean>(true);
   const [roomBtnIdx, setRoomBtnIdx] = useState<number[]>(
     Array(ROOM_CATEGORIES.length)
@@ -14,6 +18,17 @@ const RoomBottomSheet = () => {
   const [isRoomBtnSelected, setIsRoomBtnSelected] = useState<boolean[]>(
     Array(ROOM_CATEGORIES.length).fill(true),
   );
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      // fetch(roomBtnIdx) 등등 api에 사용 예정
+      console.log('디바운스된 숙소유형 :', roomBtnIdx);
+    }, 500);
+
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [roomBtnIdx]);
 
   const handleRoomSelectAll = () => {
     setIsRoomChecked(!isRoomChecked);
@@ -74,7 +89,7 @@ const RoomBottomSheet = () => {
             title={prop.BottomSheetTitle}
             innerTitle={prop.BottomSheetTitle}
             placeholder={placeholderValue}
-            buttonSelect="search"
+            buttonSelect={buttonStyle}
             closeButton
             innerButtonTitle={'확인'}
           >

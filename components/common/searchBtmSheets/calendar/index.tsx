@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { rangeDate } from '@/atoms/calendar/calendarAtoms';
 import { SEARCH_DEFAULT } from '@/constants/search-detail';
@@ -9,9 +9,33 @@ import CalendarComponent from '@/components/common/calendar';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-const CalendarBottomSheet = () => {
+const CalendarBottomSheet = ({
+  buttonStyle,
+}: {
+  buttonStyle: 'search' | 'dropdown';
+}) => {
   const [isCalendarChecked, setIsCalendarChecked] = useState<boolean>(true);
   const [range] = useRecoilState(rangeDate);
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      if (range && range.from && range.to)
+        // fetch(range.from) 등등 api에 사용 예정
+        console.log(
+          '디바운스된 날짜 :',
+          format(range.from, 'yyyy-MM-dd', {
+            locale: ko,
+          }),
+          format(range.to, 'yyyy-MM-dd', {
+            locale: ko,
+          }),
+        );
+    }, 500);
+
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [range]);
 
   const handleDateSelectAll = () => {
     setIsCalendarChecked(!isCalendarChecked);
@@ -45,7 +69,7 @@ const CalendarBottomSheet = () => {
             title={prop.BottomSheetTitle}
             innerTitle={prop.BottomSheetTitle}
             placeholder={placeholderValue}
-            buttonSelect="search"
+            buttonSelect={buttonStyle}
             closeButton
             innerButtonTitle={'확인'}
           >

@@ -1,10 +1,21 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { REGION_NAMES, SEARCH_DEFAULT } from '@/constants/search-detail';
 
-const RegionBottomSheet = () => {
+/** 지역 바텀시트를 사용할 수 있는 컴포넌트입니다.
+ * @param buttonStyle - (필수) 트리거 버튼의 스타일을 전달해주셔야 합니다. ('search':  | 'dropdown')
+ * @param usePinIcon - 마감임박 페이지에서 핀 아이콘을 사용할지에 대한 여부입니다. (default: false)
+ * @returns `<RegionBottomSheet />`
+ */
+const RegionBottomSheet = ({
+  buttonStyle,
+  usePinIcon = false,
+}: {
+  buttonStyle: 'search' | 'dropdown';
+  usePinIcon?: boolean;
+}) => {
   const [isRegionChecked, setIsRegionChecked] = useState<boolean>(true);
   const [regionBtnIdx, setRegionBtnIdx] = useState<number[]>(
     Array(REGION_NAMES.length)
@@ -14,6 +25,17 @@ const RegionBottomSheet = () => {
   const [regionBtnBlArr, setRegionBtnBlArr] = useState<boolean[]>(
     Array(REGION_NAMES.length).fill(true),
   );
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      // fetch(regionBtnIdx) 등등 api에 사용 예정
+      console.log('디바운스된 지역들 :', regionBtnIdx);
+    }, 500);
+
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [regionBtnIdx]);
 
   const handleRegionSelectAll = () => {
     setIsRegionChecked(!isRegionChecked);
@@ -40,6 +62,7 @@ const RegionBottomSheet = () => {
     );
   };
 
+  // placeholder용 텍스트
   const selectedRegions = regionBtnIdx.map((index) => REGION_NAMES[index]);
 
   const regionButtons = REGION_NAMES.map((buttonName: string, index) => (
@@ -59,16 +82,27 @@ const RegionBottomSheet = () => {
         let placeholderValue = prop.placeholder;
 
         if (index === 0 && selectedRegions.length > 0) {
-          placeholderValue = selectedRegions.join(', ');
-          if (placeholderValue.length > 20) {
-            const selectedValue = placeholderValue.slice(0, 20);
-            const reduceComma = selectedValue.lastIndexOf(',');
-            placeholderValue =
-              selectedValue.slice(0, reduceComma) +
-              ` 등 총 ${selectedRegions.length}개`;
-          }
+          if (buttonStyle === 'dropdown')
+            if (selectedRegions.length === 1)
+              placeholderValue = `${selectedRegions.at(0)}`;
+            else
+              placeholderValue = `${selectedRegions.at(0)} 외 ${
+                selectedRegions.length - 1
+              }곳`;
+          if (buttonStyle === 'search')
+            if (selectedRegions.length <= 4) {
+              const selectedValue = selectedRegions.slice(0, 4);
+              placeholderValue = selectedValue.join(', ');
+            } else {
+              const selectedValue = selectedRegions.slice(0, 4);
+              placeholderValue = `${selectedValue.join(', ')} 외 ${
+                selectedRegions.length - 4
+              }곳`;
+            }
+
           if (selectedRegions.length === REGION_NAMES.length) {
-            placeholderValue = '모든 지역';
+            if (buttonStyle === 'search') placeholderValue = '모든 지역';
+            else placeholderValue = '전체';
           }
         }
 
@@ -79,7 +113,8 @@ const RegionBottomSheet = () => {
             title={prop.BottomSheetTitle}
             innerTitle={prop.BottomSheetTitle}
             placeholder={placeholderValue}
-            buttonSelect="search"
+            buttonSelect={buttonStyle}
+            theme={usePinIcon}
             closeButton
             innerButtonTitle={'확인'}
           >
