@@ -69,7 +69,7 @@ const ValidationButton = ({
       )}
       <motion.button
         whileTap={{ scale: 0.97 }}
-        data-testid="sampleButton"
+        data-testid="validationButton"
         onClick={handleValidation}
         disabled={disabled}
         type={type}
