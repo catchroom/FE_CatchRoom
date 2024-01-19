@@ -5,13 +5,13 @@ import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useRecoilState } from 'recoil';
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
-
+// import { loadedChatMessage } from '@/api/chat/api';
 // test 완료되면 지우도록 하겠습니다
 
 const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
 
 export type ChatContentType = {
-  type: 'ENTER' | 'TALK' | 'LEAVE';
+  type: 'ENTER' | 'TALK' | 'QUIT';
   message: string;
   sender: string;
   roomId: string;
@@ -42,7 +42,7 @@ const StompPage = ({ children }: { children: ReactNode }) => {
         destination: `/pub/chat/message`,
         body: JSON.stringify({
           roomId: ROOMID,
-          sender: '민섭',
+          sender: '승연',
           type: 'ENTER',
           userId: 'user2',
           message: '소켓 연결 성공!',
