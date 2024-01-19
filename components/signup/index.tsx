@@ -146,7 +146,7 @@ const SignUpAuth = () => {
               errors.password
                 ? 'border-border-critical'
                 : clickedPwInput
-                  ? 'border-border-primary'
+                  ? 'border-gray-600'
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPwInput(true)}

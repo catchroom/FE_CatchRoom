@@ -1,15 +1,15 @@
 'use client';
 import React, { ReactNode, useState, useEffect } from 'react';
-import { getNickname } from '@/api/mypage/api';
+import { getUserProfile } from '@/api/mypage/api';
 
 const ProfileContainer = ({ children }: { children: ReactNode }) => {
   const [nickname, setNickname] = useState('');
 
   useEffect(() => {
-    getNickname().then((res) => {
+    getUserProfile().then((res) => {
       if (res.code === 2004) {
         // console.log(res.data);
-        setNickname(res.data);
+        setNickname(res.data.nickName);
       }
     });
   }, []);

@@ -5,6 +5,8 @@ export const apiClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
 });
 
+const refreshToken = nookies.get(null)['refreshToken'];
+
 apiClient.interceptors.request.use(
   (config) => {
     const accessToken = nookies.get(null)['accessToken'];
@@ -21,17 +23,18 @@ apiClient.interceptors.response.use(
     return response;
   },
   async (error) => {
+    console.log('리프레쉬 있닝', refreshToken);
     //로그아웃 할때는 재발급 요청 안되게 추가
     if (error.config.url === '/v1/mypage/logout') {
       return Promise.reject(error);
     }
     //재발급 요청
     if (
-      error.response.status === 401 ||
-      error.response.status === 5000 ||
-      error.response.status === 5001
+      error.response.code === 401 ||
+      error.response.code === 5000 ||
+      error.response.code === 5001
     ) {
-      const refreshToken = nookies.get(null)['refreshToken'];
+      console.log(refreshToken);
       const res = await apiClient.post(
         '/v1/user/accesstoken',
         {},
@@ -42,6 +45,8 @@ apiClient.interceptors.response.use(
           },
         },
       );
+
+      console.log(res.data);
 
       const accessToken = res.data.accessToken;
       if (accessToken) {

@@ -25,41 +25,25 @@ export const logout = async () => {
 //   return data;
 // };
 
-// 7. 프로필 수정(닉네임 변경) --> 수정 예정
+// 7. 닉네임 변경
 export const editProfile = async (nickname: string) => {
-  const res = await apiClient.put(`/v1/mypage/profile?nickName=${nickname}`, {
-    nickname,
-  });
+  const res = await apiClient.put(
+    `/v1/mypage/profile/nickname?nickName=${nickname}`,
+    {
+      nickname,
+    },
+  );
 
   return res.data;
 };
 
-// export const editProfile = async (nickname: string) => {
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile?nickName=${nickname}`,
-//     {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//       body: JSON.stringify({ nickname }),
-//     },
-//   );
-
-//   const data = await res.json();
-//   return data;
-// };
-
-// 8. 닉네임 조회 --> 프로필 조회로 수정 예정
-export const getNickname = async () => {
-  const res = await apiClient.get(`/v1/mypage/nickname`);
+// 8. 유저정보 조회
+export const getUserProfile = async () => {
+  const res = await apiClient.get(`/v1/mypage/profile`);
   return res.data;
 };
 
 /////////여기부터 연결 진행중//////////
-
-//+✨✨✨ 마이페이지에서 유저정보 get해오는 api 필요~!
 
 // 9. 계좌번호,예치금 잔액 조회 get
 export const getBalance = async () => {
