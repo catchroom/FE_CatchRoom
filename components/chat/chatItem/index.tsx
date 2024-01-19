@@ -1,8 +1,9 @@
 'use client';
+
 import React from 'react';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import { useRouter } from 'next/navigation';
-// import Image from 'next/image';
+import Image from 'next/image';
 import { isModalState } from '@/atoms/chat/leaveButton';
 import { useSetRecoilState } from 'recoil';
 import { ChatRoomType } from '@/types/chat/chatRoom/types';
@@ -12,6 +13,7 @@ const ChatItem = ({
   chatRoomNumber,
   sellerId,
   productId,
+  accommodationUrl,
   loginUserIdentity,
 }: ChatRoomType) => {
   const router = useRouter();
@@ -22,20 +24,27 @@ const ChatItem = ({
     setIsOpen((prev) => !prev);
   };
 
+  const handleClick = () => {
+    router.push(`/chat/chatRoom?chatId=${chatRoomNumber}`);
+  };
+
   console.log(buyerId, chatRoomNumber, sellerId, productId, loginUserIdentity);
 
   return (
     <div
-      className="bg-white w-full h-18 flex gap-x-3 items-center px-4 py-3 border-solid border border-divider mb-[-1px] cursor-pointer"
-      onClick={() => router.push(`/chat/chatRoom?chatId=${chatRoomNumber}`)}
+      className=" w-full flex gap-3 items-center p-4 border border-divider bg-white cursor-pointer"
+      onClick={handleClick}
     >
-      {/* <Image
-        src={image}
-        className="rounded-[4px]"
-        alt="숙소사진"
-        width={48}
-        height={48}
-      /> */}
+      {/* 채팅방 사진 보여주는 데이터 */}
+      <div className="w-12 h-12 relative">
+        <Image
+          src={accommodationUrl}
+          className="rounded-md"
+          alt="숙소사진"
+          fill={true}
+          sizes="(max-width: 640px) 50vw, 100vw"
+        />
+      </div>
       <div className="flex flex-col">
         <div className="flex items-center">
           <div className="text-t3 font-semibold  text-text pr-2">{buyerId}</div>

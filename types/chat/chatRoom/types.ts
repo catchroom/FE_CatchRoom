@@ -13,6 +13,7 @@ export type ChatRoomType = {
   sellerId: number;
   productId: number;
   loginUserIdentity: string;
+  accommodationUrl: string;
 };
 
 // export type MessageProps = {

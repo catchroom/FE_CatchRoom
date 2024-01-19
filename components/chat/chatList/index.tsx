@@ -23,6 +23,7 @@ const ChatList = () => {
               sellerId={item.sellerId}
               productId={item.productId}
               loginUserIdentity={item.loginUserIdentity}
+              accommodationUrl={item.accommodationUrl}
             />
           );
         })}
