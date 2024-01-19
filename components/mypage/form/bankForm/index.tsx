@@ -19,9 +19,13 @@ import { divideAtom } from '@/atoms/mypage/divideAtom';
 import FormInput from '../formInput';
 import { ErrorMessage } from '@hookform/error-message';
 import FormError from '../formError';
+import { useToastAlert } from '@/hooks/useToastAlert';
+import { useRouter } from 'next/navigation';
 
 const BankForm = () => {
+  const { alertOpenHandler } = useToastAlert('계좌를 등록했습니다.');
   const bankView = useRecoilValue(divideAtom);
+  const router = useRouter();
   const setBankModal = useSetRecoilState(outerBottomSheetsControl);
   const {
     register,
@@ -35,6 +39,14 @@ const BankForm = () => {
     mode: 'onChange',
   });
 
+  const checkInput = () => {
+    const { bank, account, name } = watch();
+    if (bank && account && name) {
+      return true;
+    }
+    return false;
+  };
+
   const onSubmit: SubmitHandler<FormAccount> = (data) => {
     if (accountSchema.safeParse(data)) {
       console.log(data);
@@ -44,7 +56,7 @@ const BankForm = () => {
   };
 
   const disabledButton = () => {
-    if (errors.bank || errors.account || errors.name) {
+    if (errors.bank || errors.account || errors.name || !checkInput()) {
       return true;
     }
     return false;
@@ -61,6 +73,11 @@ const BankForm = () => {
     ? bankName
     : '은행 또는 증권사를 선택해주세요';
 
+  const handleBankClick = () => {
+    alertOpenHandler();
+    router.push('/mypage');
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -76,7 +93,7 @@ const BankForm = () => {
         >
           <div className="w-full">
             <div className="flex flex-col items-start overflow-y-scroll">
-              <DivideWrapper divideCase="BANK">
+              <DivideWrapper maxHeightControl={false} divideCase="BANK">
                 {BANK_VIEW.map((bank) => {
                   return (
                     <button
@@ -116,7 +133,12 @@ const BankForm = () => {
         </div>
       ))}
       <div className="w-full max-w-[480px] absolute bottom-5 left-1/2 -translate-x-1/2 px-5">
-        <SimpleButton disabled={disabledButton()} name="확인" type="submit" />
+        <SimpleButton
+          fn={handleBankClick}
+          disabled={disabledButton()}
+          name="확인"
+          type="submit"
+        />
       </div>
     </form>
   );

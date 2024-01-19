@@ -40,7 +40,10 @@ const SaleItems = () => {
   const selectedProduct = watch('selectedProduct');
 
   const handleButtonClick = () => {
-    if (selectedProduct) router.push('/sale');
+    const selectedItem = items.find(
+      (item) => item.productName === selectedProduct,
+    );
+    if (selectedProduct) router.push(`/sale?id=${selectedItem?.id}`);
   };
 
   return (

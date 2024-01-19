@@ -11,10 +11,12 @@ import { useRecoilState } from 'recoil';
 import {
   outerBottomSheetsControl,
   outerDatePickerBottomSheetsControl,
+  outerMoreBottomSheetsControl,
 } from '@/atoms/commons/outerBottomSheetsControl';
 import DropdownButton from '../sheetsButtons/dropdownButton';
-import CalendarButton from '../sheetsButtons/calendarButton';
-
+import TimePickerButton from '../sheetsButtons/calendarButton';
+import MoreButton from '../sheetsButtons/moreButton';
+import SortOptionsButton from '@/components/search-result/list/sortOptionsButton';
 /**
  * @function BottomSheetsWithoutCloseBtn - bottom sheets component입니다. 모달 대체용으로 사용합니다.
  * @param children - 모달 내부에 들어갈 컴포넌트입니다. (필수)
@@ -34,16 +36,17 @@ const BottomSheetsWithoutCloseBtn = ({
   outerControlAtom = 'default',
 }: {
   children: ReactNode;
-  title: string;
-  buttonSelect?: 'dropdown' | 'calendar';
+  title?: string;
+  buttonSelect?: 'dropdown' | 'timePicker' | 'more' | 'sortOptions';
   outerControl?: boolean;
-  outerControlAtom?: 'default' | 'datePicker';
+  outerControlAtom?: 'default' | 'datePicker' | 'more';
 }) => {
   const [open, setOpen] = useState(false);
 
   const outerControlState = {
     default: outerBottomSheetsControl,
     datePicker: outerDatePickerBottomSheetsControl,
+    more: outerMoreBottomSheetsControl,
   };
 
   const [outerOpen, setOuterOpen] = useRecoilState(
@@ -75,8 +78,10 @@ const BottomSheetsWithoutCloseBtn = ({
   };
 
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
-    dropdown: <DropdownButton name={title} fn={modalOpen} />,
-    calendar: <CalendarButton name={title} fn={modalOpen} />,
+    dropdown: <DropdownButton name={title as string} fn={modalOpen} />,
+    timePicker: <TimePickerButton name={title as string} fn={modalOpen} />,
+    more: <MoreButton fn={modalOpen} />,
+    sortOptions: <SortOptionsButton name={title} fn={modalOpen} />,
   };
 
   return (

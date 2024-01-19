@@ -7,9 +7,10 @@ const ReviewItem = () => {
       <div className="relative w-full h-full max-w-[110px] min-h-[140px]">
         <Image
           src="/sample/Rectangle-70.png"
-          layout="fill"
-          objectFit="cover"
+          fill
+          priority
           alt="숙소 이미지"
+          sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 80px"
           style={{
             borderTopLeftRadius: '6px',
             borderBottomLeftRadius: '6px',
