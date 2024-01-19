@@ -1,5 +1,7 @@
 // 숙소 정보를 등록하는 API
 
+import { getCurrentUrl } from '@/utils/get-current-url';
+
 // eslint-disable-next-line
 export const fetchMypageSelling = async (body: any) => {
   const response = await fetch(`/api/v1/admin/product`, {
@@ -80,4 +82,11 @@ export const fetchEnrollSellingData = async (body: any) => {
 
   const data = await response.json();
   return data.data;
+};
+
+export const fetchEnrollSellingData2 = async () => {
+  const url = getCurrentUrl();
+  const data = await fetch(`${url}/api/v1/hello/name`);
+  const result = await data.json();
+  return result;
 };

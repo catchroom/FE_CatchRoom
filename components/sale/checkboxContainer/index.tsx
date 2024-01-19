@@ -123,7 +123,7 @@ const CheckboxContainer = () => {
         </div>
       )}
       <div className="cursor-pointer fixed bottom-0 w-full max-w-[480px] flex justify-center ">
-        <div className="border border-border-sub bg-bg w-full p-5 -ml-10">
+        <div className="border-t border-border-sub bg-bg w-full p-5 -ml-10">
           <BottomSheets
             title="다음"
             innerTitle="판매자 한마디"

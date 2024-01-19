@@ -11,6 +11,19 @@ export const nameSchema = z.object({
     ),
 });
 
+export const nicknameSchema = z.object({
+  nickname: z
+    .string()
+    .min(2, {
+      message: '닉네임은 한글/영문/숫자 혼합해서 2~8자로 설정해주세요.',
+    })
+    .max(8, '닉네임은 한글/영문/숫자 혼합해서 2~8자로 설정해주세요.')
+    .regex(
+      /^[a-zA-Z0-9가-힣]*$/,
+      '닉네임은 한글, 영문, 숫자만 입력 가능합니다.',
+    ),
+});
+
 export const accountSchema = z.object({
   account: z
     .string()

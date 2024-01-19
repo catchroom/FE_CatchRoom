@@ -21,6 +21,11 @@ apiClient.interceptors.response.use(
     return response;
   },
   async (error) => {
+    //로그아웃 할때는 재발급 요청 안되게 추가
+    if (error.config.url === '/v1/mypage/logout') {
+      return Promise.reject(error);
+    }
+    //재발급 요청
     if (
       error.response.status === 401 ||
       error.response.status === 5000 ||

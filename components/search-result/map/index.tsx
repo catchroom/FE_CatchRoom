@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { MapProps, MarkerProps } from '@/types/search-result/map/type';
 import ToggleViewButtonWrapper from './toggleViewButtonWrapper';
 import CatchSpecialComponentWrapper from './catchSpecialComponentWrapper';
+import Link from 'next/link';
 
 declare global {
   interface Window {
@@ -26,6 +27,9 @@ const Map = ({ markers }: MapProps) => {
     setCurrentView(currentView === 'map' ? 'list' : 'map');
   };
 
+  // let map: { setCenter: (arg0: any) => void };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let map: { panTo: (arg0: any) => void };
   useEffect(() => {
     const mapScript = document.createElement('script');
     mapScript.async = true;
@@ -43,7 +47,9 @@ const Map = ({ markers }: MapProps) => {
             level: 7,
           };
 
-        const map = new window.kakao.maps.Map(mapContainer, mapOption);
+        // const map = new window.kakao.maps.Map(mapContainer, mapOption);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        map = new window.kakao.maps.Map(mapContainer, mapOption);
 
         markers.forEach((markerData, index) => {
           const markerPosition = new window.kakao.maps.LatLng(
@@ -59,6 +65,7 @@ const Map = ({ markers }: MapProps) => {
               setSelectedMarkerInfo(markerData);
               updateOverlayZIndex();
             },
+            // index,
           );
 
           const customOverlay = new window.kakao.maps.CustomOverlay({
@@ -70,12 +77,14 @@ const Map = ({ markers }: MapProps) => {
           overlays.push(customOverlay);
           customOverlay.setMap(map);
         });
+        updateOverlayZIndex(); // 초기 오버레이 z-index 설정
       });
     };
 
     mapScript.addEventListener('load', onLoadKakaoMap);
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [markers, selectedOverlayIndex]);
   }, [markers, selectedOverlayIndex]);
 
   //오버레이 ZIndex 조정
@@ -90,11 +99,22 @@ const Map = ({ markers }: MapProps) => {
     markerData: MarkerProps,
     isSelected: boolean,
     onClick: () => void,
+    // index: number,
   ) => {
     const overlayContent = document.createElement('div');
     overlayContent.className = 'custom-overlay';
     overlayContent.onclick = () => {
-      updateOverlayZIndex();
+      // 지도 중심 재설정
+      // const overlayPosition = new window.kakao.maps.LatLng(
+      //   markerData.latitude,
+      //   markerData.longitude,
+      // );
+      // map.panTo(overlayPosition);
+
+      // //선택된 오버레이 인덱스와 정보를 업데이트
+      // setSelectedOverlayIndex(index);
+      // setSelectedMarkerInfo(markerData);
+
       onClick();
     };
 
@@ -133,12 +153,12 @@ const Map = ({ markers }: MapProps) => {
     overlayContent.appendChild(priceSpan);
     overlayContent.appendChild(discountSpan);
 
-    if (isSelected && markerData.catchType) {
+    if (markerData.catchType) {
       const badge = document.createElement('div');
       badge.style.cssText = `
         position: absolute;
         top: -20px;
-        left: 70%;
+        left: 34%;
         transform: translateX(-50%);
         padding: 2px 8px;
 
@@ -159,10 +179,12 @@ const Map = ({ markers }: MapProps) => {
   return (
     <div id="map" className="w-full h-full ">
       <CatchSpecialComponentWrapper selectedMarkerInfo={selectedMarkerInfo} />
-      <ToggleViewButtonWrapper
-        currentView={currentView}
-        onViewChange={toggleView}
-      />
+      <Link href="/search-result/list" passHref>
+        <ToggleViewButtonWrapper
+          currentView={currentView}
+          onViewChange={toggleView}
+        />
+      </Link>
     </div>
   );
 };

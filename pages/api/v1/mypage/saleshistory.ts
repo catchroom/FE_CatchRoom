@@ -23,7 +23,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     console.log(state);
 
-    const getRandomBoolean = () => Math.random() < 0.5;
+    const getRandomReviewStatus = () => {
+      const randomValue = Math.random();
+
+      if (randomValue < 0.25) {
+        return 'onReview';
+      } else if (randomValue < 0.5) {
+        return 'deleteReview';
+      } else if (randomValue < 0.75) {
+        return 'noReview';
+      } else {
+        return 'outDatedReview';
+      }
+    };
 
     const productQuerySnapshot =
       state === 'ing'
@@ -76,7 +88,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             thumbnailUrl: accommodationImage,
             writeDate: productData.write_date,
             productEndDate: productData.end_date,
-            isReview: getRandomBoolean(),
+            isReview: getRandomReviewStatus(),
           });
         }
       }

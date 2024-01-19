@@ -12,9 +12,11 @@ import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 
+const ACCESSTOKEN = '6231025e-0347-4ae3-9fdd-dd4e6cbb5abe';
+
 const createRoom = async () => {
   const data = await axios.post(
-    'http://13.124.240.142:8080/v1/chat/room/create',
+    'http://localhost:3000/v1/chat/room/create',
     {
       buyerId: 'buyer1',
       sellerId: 'seller1',
@@ -22,7 +24,7 @@ const createRoom = async () => {
     },
     {
       headers: {
-        Authorization: `Bearer tokentoken`,
+        Authorization: `Bearer ${ACCESSTOKEN}`,
       },
     },
   );

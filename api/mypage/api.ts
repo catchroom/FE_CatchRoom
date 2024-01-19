@@ -1,95 +1,68 @@
 import nookies from 'nookies';
-// import { apiClient } from '../user/apiClient';
-
+import { apiClient } from '../user/apiClient';
+// 노션의 api 명세서 번호 기준으로 표시
 const accessToken = nookies.get(null)['accessToken'];
 
 //6. 로그아웃
-//이 요청 성공시, 쿠키의 access/refresh token 모두 삭제하기
+export const logout = async () => {
+  const res = await apiClient.post('/v1/mypage/logout');
+  return res.data;
+};
+
 // export const logout = async () => {
-//   try {
-//     const res = await apiClient.post(`/v1/mypage/logout`);
-//     return res;
-//     console.log('로그아웃 눌렀음(api호출)');
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
+//   console.log(accessToken);
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
+//     {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     },
+//   );
+//   const data = await res.json();
+//   return data;
 // };
 
-export const logout = async () => {
-  console.log(accessToken);
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
-  const data = await res.json();
-  return data;
-};
-//응답코드 2000일때 쿠키 다 지우기
+// 7. 프로필 수정(닉네임 변경)
+export const editProfile = async (nickname: string) => {
+  const res = await apiClient.put(`/v1/mypage/profile?nickName=${nickname}`, {
+    nickname,
+  });
 
-// 프로필 수정 put*
-export const editProfile = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
-
-  const data = await res.json();
-  if (data.code === 2002) {
-    return data;
-  } else if (data.code === 2003) {
-    console.log(data.message);
-  }
+  return res.data;
 };
 
-// 닉네임 조회 get
-export const nickname찾기 = async (nickname: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile/nickname?nickname=${nickname}`,
-    {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-    },
-  );
+// export const editProfile = async (nickname: string) => {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile?nickName=${nickname}`,
+//     {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//       body: JSON.stringify({ nickname }),
+//     },
+//   );
 
-  const data = await res.json();
-  if (data.code === 2004) {
-    return data;
-  } else if (data.code === 1011) {
-    //에러코드 수정하기!!
-    console.log(data.message);
-  }
+//   const data = await res.json();
+//   return data;
+// };
+
+// 8. 닉네임 조회 get
+export const getNickname = async () => {
+  const res = await apiClient.get(`/v1/mypage/nickname`);
+  return res.data;
 };
 
-// 계좌번호,예치금 잔액 조회 get
-export const 잔액조회 = async (nickname: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/profile/nickname?nickname=${nickname}`,
-    {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-    },
-  );
+//+✨✨✨ 마이페이지에서 유저정보 get해오는 api 필요~!
 
-  const data = await res.json();
-  if (data.code === 2004) {
-    return data;
-  } else if (data.code === 1011) {
-    //에러코드 수정하기!!
-    console.log(data.message);
-  }
+// 9. 계좌번호,예치금 잔액 조회 get
+export const getBalance = async () => {
+  const res = await apiClient.get(`/v1/mypage/deposit/accountnum`);
+  return res.data;
 };
 
 // 예치금 계좌 등록하기 **post**

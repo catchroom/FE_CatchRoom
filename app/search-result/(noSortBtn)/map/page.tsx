@@ -18,6 +18,13 @@ const markersData = [
     discountRate: 20,
     catchType: true,
   },
+  {
+    latitude: 33.51876726662839,
+    longitude: 126.51808833334624,
+    price: 220000,
+    discountRate: 30,
+    catchType: false,
+  },
 ];
 
 const page = () => {

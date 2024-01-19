@@ -1,11 +1,6 @@
 import MyPageHeader from '@/components/mypage/header';
 import React, { ReactNode } from 'react';
 
-// showBackButton = false,
-// showCloseButton = false,
-// showMoreButton = false,
-// showBorder = false,
-
 const MypageLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="w-full">
