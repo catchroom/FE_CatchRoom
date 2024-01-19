@@ -41,6 +41,7 @@ const CatchContainer = ({ price }: PropsType) => {
       }
     }
     setSelectedCatchPrice(price * ((100 - percent) / 100));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);
 
   const title =

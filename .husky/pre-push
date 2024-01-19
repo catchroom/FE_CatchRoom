@@ -3,4 +3,4 @@
 
 echo "허스키가 돌아갑니다. 🐶"
 
-npx lint-staged
+npm run lint

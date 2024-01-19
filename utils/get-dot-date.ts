@@ -31,6 +31,25 @@ export const decodeState = (state: StateType, date?: string) => {
   }
 };
 
+export const decodeReviewState = (ismodify: ReviewType) => {
+  switch (ismodify) {
+    case 'onReview':
+      return '작성한 리뷰보기';
+    case 'noReview':
+      return '리뷰쓰기';
+    case 'deleteReview':
+      return '리뷰 삭제완료';
+    default:
+      return '리뷰 작성기한 만료';
+  }
+};
+
+export type ReviewType =
+  | 'onReview'
+  | 'noReview'
+  | 'deleteReview'
+  | 'outDatedReview';
+
 // decodeState return type
 export type StateType =
   | 'ing'
