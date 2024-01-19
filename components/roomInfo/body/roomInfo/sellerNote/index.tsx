@@ -3,6 +3,7 @@ import React from 'react';
 const SellerNoteComponent = () => {
   // 받아와야 할 데이터
   // (판매자 한마디)
+  // 데이터의 유무를 통해 컴포넌트가 나오도록 삼항연산자 추가해야 함.
   return (
     <div className="flex flex-col w-full items-start justify-center my-6">
       <p className="text-p2 font-semibold">판매자 한마디</p>
