@@ -64,7 +64,11 @@ const CatchContainer = ({ price }: PropsType) => {
       <div className="flex justify-between">
         <div className="flex gap-1 items-center">
           <h2 className="text-h5 font-bold">캐치특가 자동 설정</h2>
-          <div onClick={handleQuestionButtonClick} className="cursor-pointer">
+          <div
+            onClick={handleQuestionButtonClick}
+            className="cursor-pointer"
+            data-testid="question-mark"
+          >
             <QuestionMark />
           </div>
         </div>
@@ -75,7 +79,10 @@ const CatchContainer = ({ price }: PropsType) => {
         />
       </div>
       {open && (
-        <div className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom">
+        <div
+          className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom"
+          data-testid="catch-describe"
+        >
           <p className="text-p1 font-bold">
             자동으로 메인 상단에 노출되어 빠른 구매전환을 유도해요!
           </p>

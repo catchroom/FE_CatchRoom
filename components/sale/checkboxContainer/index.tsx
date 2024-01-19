@@ -72,6 +72,7 @@ const CheckboxContainer = () => {
           isBoxChecked={getValues('allAgree')}
           isLabelTextBold={true}
           handleSelectState={(e) => handleAllCheck(e, 'allAgree')}
+          data-testid="allCheck"
         />
       </div>
       <div className="flex items-center cursor-pointer relative">
@@ -80,6 +81,7 @@ const CheckboxContainer = () => {
           labelText="[필수] 개인정보 수집 및 이용"
           isBoxChecked={getValues('check1')}
           handleSelectState={(e) => handleAllCheck(e, 'check1')}
+          data-testid="check1"
         />
         <Link
           href="/mypage/dashboard/terms"
@@ -94,6 +96,7 @@ const CheckboxContainer = () => {
           labelText="[필수] 개인정보 제3자 제공"
           isBoxChecked={getValues('check2')}
           handleSelectState={(e) => handleAllCheck(e, 'check2')}
+          data-testid="check1"
         />
         <Link
           href="/mypage/dashboard/terms"
@@ -109,6 +112,7 @@ const CheckboxContainer = () => {
             labelText="[필수] 캐치특가 자동 설정 동의"
             isBoxChecked={getValues('check3')}
             handleSelectState={(e) => handleAllCheck(e, 'check3')}
+            data-testid="check3"
           />
           <Link
             href="/mypage/dashboard/terms"
@@ -124,6 +128,7 @@ const CheckboxContainer = () => {
             title="다음"
             innerTitle="판매자 한마디"
             buttonSelect="validation"
+            data-testid="validation-button"
           >
             <FromSeller />
           </BottomSheets>
