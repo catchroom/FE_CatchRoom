@@ -106,7 +106,7 @@ const SignUpAuth = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedEmailInput(true)}
-            onBlur={() => setClickedEmailInput(false)}
+            onBlur={() => setTimeout(() => setClickedEmailInput(false), 200)}
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
@@ -150,7 +150,7 @@ const SignUpAuth = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPwInput(true)}
-            onBlur={() => setClickedPwInput(false)}
+            onBlur={() => setTimeout(() => setClickedPwInput(false), 200)}
           />
 
           {password && clickedPwInput && (
@@ -184,7 +184,7 @@ const SignUpAuth = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPwCheckInput(true)}
-            onBlur={() => setClickedPwCheckInput(false)}
+            onBlur={() => setTimeout(() => setClickedPwCheckInput(false), 200)}
           />
 
           {passwordCheck && clickedPwCheckInput && (
