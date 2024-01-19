@@ -10,8 +10,10 @@ import Modal from '@/components/common/modal';
 import FormInput from '../formInput';
 import FormError from '../formError';
 import { useRouter } from 'next/navigation';
+import { useToastAlert } from '@/hooks/useToastAlert';
 
 const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
+  const { alertOpenHandler } = useToastAlert('출금이 완료되었습니다.');
   const [modal, setModal] = useState(false);
   const router = useRouter();
   const schema = withdrawSchema(originalBalance);
@@ -52,6 +54,10 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
     return false;
   };
 
+  const handleClick = () => {
+    alertOpenHandler();
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
       <div className="w-full flex flex-row items-start  gap-3">
@@ -78,6 +84,7 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
       </div>
       <div className="w-full max-w-[480px] absolute bottom-5 left-1/2 -translate-x-1/2 px-5">
         <SimpleButton
+          fn={handleClick}
           disabled={disabledButton()}
           name="출금하기"
           type="submit"

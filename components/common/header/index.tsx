@@ -27,7 +27,7 @@ const Header = ({
   const setPrice = useSetRecoilState(priceState);
   const setAllCheck = useSetRecoilState(allCheckState);
 
-  const headerClass = `grid grid-cols-3 items-center px-6 py-3 bg-white ${
+  const headerClass = `w-full max-w-[480px] fixed z-20 grid grid-cols-3 items-center px-6 py-3 bg-bg ${
     showBorder ? 'border-b border-gray-300' : ''
   }`;
 
@@ -77,7 +77,9 @@ const Header = ({
         ) : (
           <div />
         )}
-        <h1 className="justify-self-center text-t1 font-semibold">{title}</h1>
+        <h1 className="justify-self-center text-t1 whitespace-nowrap font-semibold">
+          {title}
+        </h1>
         <div className="justify-self-end mt-1">
           {showHomeButton && (
             <button onClick={() => router.push('/home')}>
