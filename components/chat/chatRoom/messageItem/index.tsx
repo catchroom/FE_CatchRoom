@@ -5,9 +5,9 @@ import ReceiveMessage from '../receiveMessage';
 import { MessageProps } from '@/types/chat/chatRoom/types';
 import ApproveMessage from '@/components/chat/chatRoom/approveMessage';
 import OfferMessage from '../offerMessage';
-import { CHAT_ITEMS } from '@/constants/chat';
+// import { CHAT_ITEMS } from '@/constants/chat';
 import DeclineMessage from '../declineMessage';
-import { loadedChatInfo } from '@/api/chat/api';
+// import { loadedChatInfo } from '@/api/chat/api';
 
 const MessageItem = ({
   type,
@@ -18,6 +18,7 @@ const MessageItem = ({
 }: MessageProps) => {
   const searchParams = useSearchParams();
   const roomId = searchParams?.get('roomId');
+  console.log(roomId);
   console.log(roomId);
 
   // // 채팅방 내부 정보 불러오기
