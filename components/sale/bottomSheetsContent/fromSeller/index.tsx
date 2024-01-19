@@ -48,25 +48,17 @@ const FromSeller = () => {
     }
   };
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full mt-8">
       <form className="w-full h-[120px]" onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          className={`w-full h-[120px] border border-border-sub px-3 py-2 ${
-            wordCount < 10 ? 'outline-[#dd3344]' : 'outline-[#dbdee3]'
-          }`}
+          className="w-full h-[120px] border border-border-sub px-3 py-2 focus:outline-border-sub"
           {...register('sellerContent')}
           onChange={handleContentChange}
           placeholder={`판매사유 등 추가설명 작성\nex) 네고 가능하니 연락주세요!`}
         />
       </form>
       <div className="flex justify-between mt-2 text-p2 mb-5">
-        <p
-          className={`${
-            wordCount < 10 ? 'text-text-critical' : 'text-text-sub'
-          }`}
-        >
-          최소 10자 이상 입력해주세요
-        </p>
+        <p className="text-text-sub">최소 10자 이상 입력해주세요</p>
         <p>{wordCount}/100</p>
       </div>
       <CheckBoxComponent
