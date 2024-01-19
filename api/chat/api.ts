@@ -4,8 +4,8 @@ const accessToken = nookies.get(null)['accessToken'];
 const ACCESSTOKEN = '6231025e-0347-4ae3-9fdd-dd4e6cbb5abe';
 
 // 1. 참여중인 채팅방 리스트 보기
-export const loadedChatList = async (userId: string) => {
-  const res = await fetch(`/v1/chat/room/${userId}`, {
+export const loadedChatList = async () => {
+  const res = await fetch('https://catchroom.xyz/v1/chat/room/list', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export const creatChatRoom = async (
   sellerId: string,
   productId: string,
 ) => {
-  const res = await fetch(`/v1/chat/room/create`, {
+  const res = await fetch(`https://catchroom.xyz/v1/chat/room/create`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const creatChatRoom = async (
 
 // 3. 채팅 내용 불러오기
 export const loadedChatMessage = async (roomId: string) => {
-  const res = await fetch(`/v1/chat/find?id=${roomId}`, {
+  const res = await fetch(`http://catchroom.xyz/v1/chat/find?id=${roomId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -52,13 +52,16 @@ export const loadedChatMessage = async (roomId: string) => {
 
 // 4. 채팅방 내부 정보 불러오기
 export const loadedChatInfo = async (roomId: string) => {
-  const res = await fetch(`/v1/chat/room?roomId=${roomId}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+  const res = await fetch(
+    `https://catchroom.xyz/v1/chat/room?roomId=${roomId}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
     },
-  });
+  );
 
   const data = await res.json();
   console.log(data);

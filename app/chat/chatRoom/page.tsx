@@ -7,7 +7,7 @@ import Header from '@/components/common/header';
 import MessageList from '@/components/chat/chatRoom/messageList';
 import WebSocketConnection from '@/components/chat/chatRoom/WebSocketConnection/WebSocketConnection';
 import { MessageProps } from '@/types/chat/chatRoom/types';
-import { loadedChatMessage, loadedChatInfo } from '@/api/chat/api';
+import { loadedChatMessage } from '@/api/chat/api';
 
 const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
 
@@ -25,16 +25,16 @@ const Page = () => {
   // };
   // ChatInfo();
 
-  // //채팅 내용 불러오기
-  // const chatMessage = async () => {
-  //   try {
-  //     const result = await loadedChatMessage(ROOMID);
-  //     console.log(result);
-  //   } catch (error) {
-  //     console.error('failed:', error);
-  //   }
-  // };
-  // chatMessage();
+  //채팅 내용 불러오기
+  const chatMessage = async () => {
+    try {
+      const result = await loadedChatMessage(ROOMID);
+      console.log(result);
+    } catch (error) {
+      console.error('failed:', error);
+    }
+  };
+  chatMessage();
 
   const onMessageReceived = (newMessage: MessageProps) => {
     setMessage((prev) => [...prev, newMessage]);
