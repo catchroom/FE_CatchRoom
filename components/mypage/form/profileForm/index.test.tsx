@@ -6,7 +6,7 @@ import ProfileForm from '.';
 describe('ProfileForm test', () => {
   it('form value에 특수문자가 들어간 경우 버튼을 클릭할 수 없음', async () => {
     const user = userEvent.setup();
-    render(<ProfileForm name="홍길동" />);
+    render(<ProfileForm />);
 
     const submitButton = screen.getByText('확인');
     const input = screen.getByRole('textbox');
@@ -19,7 +19,7 @@ describe('ProfileForm test', () => {
 
   it('form value에 8자 이상 문자가 들어가면 에러 문구가 발생해야함', async () => {
     const user = userEvent.setup();
-    render(<ProfileForm name="홍길동" />);
+    render(<ProfileForm />);
 
     const input = screen.getByRole('textbox');
 
@@ -34,7 +34,7 @@ describe('ProfileForm test', () => {
 
   it('cancel-button을 누르면 input value가 빈 값이 되어야 함', async () => {
     const user = userEvent.setup();
-    render(<ProfileForm name="홍길동" />);
+    render(<ProfileForm />);
 
     const input = screen.getByRole('textbox');
     const cancelButton = screen.getByTestId('cancel-button');
@@ -48,7 +48,7 @@ describe('ProfileForm test', () => {
 
   it('reset-button을 누르면 input value가 name 값이 되어야 함', async () => {
     const user = userEvent.setup();
-    render(<ProfileForm name="홍길동" />);
+    render(<ProfileForm />);
 
     const input = screen.getByRole('textbox');
     const resetButton = screen.getByTestId('reset-button');
