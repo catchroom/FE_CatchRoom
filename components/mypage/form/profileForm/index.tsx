@@ -7,14 +7,17 @@ import { nameSchema, FormName } from '@/constants/zodSchema';
 import { useDebounceText } from '@/hooks/useDebounceText';
 import { ErrorMessage } from '@hookform/error-message';
 import FormInput from '../formInput';
+import { useCheckNickname } from '@/api/user/query';
 
 const ProfileForm = ({ name }: { name: string }) => {
+  const mutation = useCheckNickname();
   const [checkNickname, setCheckNickname] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormName>({
     resolver: zodResolver(nameSchema),
@@ -31,7 +34,8 @@ const ProfileForm = ({ name }: { name: string }) => {
   const onSubmit: SubmitHandler<FormName> = (data) => {
     if (nameSchema.safeParse(data).success) {
       // api 요청
-      console.log(data);
+      mutation.mutate(data.nickname);
+      mutation.isSuccess && setValue('nickname', data.nickname);
     } else {
       // error alert 처리
       console.log('error');

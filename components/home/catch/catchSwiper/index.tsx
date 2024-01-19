@@ -10,9 +10,10 @@ const CatchSwiper = () => {
     <Swiper spaceBetween={12} slidesPerView={1.1} loop={true}>
       {ITEMS_INFO.roomItems.map((item) => {
         return (
-          <SwiperSlide key={item.roomName}>
+          <SwiperSlide key={item.id}>
             <CatchItem
-              key={item.roomName}
+              key={item.id}
+              id={item.id}
               roomName={item.roomName}
               resDate={item.resDate}
               oldPrice={item.oldPrice}

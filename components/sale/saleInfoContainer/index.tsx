@@ -17,7 +17,7 @@ const item: ProductItem = {
 
 const SaleInfoContainer = () => {
   return (
-    <div className="flex flex-col w-full p-4 gap-5 border border-border-sub rounded">
+    <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
         <Link
           href={item.accommodation_url}
@@ -26,9 +26,10 @@ const SaleInfoContainer = () => {
           <Image
             src={roomImg}
             alt="숙소 이미지"
-            layout="fill"
-            objectFit="cover"
+            fill={true}
             className="rounded-[0.6rem]"
+            sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 80px"
+            priority
           />
         </Link>
 

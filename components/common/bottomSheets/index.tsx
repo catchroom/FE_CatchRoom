@@ -126,7 +126,7 @@ const BottomSheets = ({
     ),
     sale: <SaleButton name={title} fn={modalOpen} />,
     price: <PriceButton fn={modalOpen} price={price} percent={percent} />,
-    border: <BorderButton name={title} fn={modalOpen} disabled={theme} />,
+    border: <BorderButton name={title} fn={modalOpen} gray={theme} />,
     dropdown: <DropdownButton name={title} fn={modalOpen} />,
     validation: <ValidationButton name={title} fn={modalOpen} />,
   };

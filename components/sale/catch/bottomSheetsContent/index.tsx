@@ -22,7 +22,7 @@ const BottomSheetsContent = ({ price }: PropsType) => {
     setModalOpen(false);
   };
   return (
-    <div className=" flex flex-col gap-8 ">
+    <div className=" flex flex-col gap-8 mt-8 ">
       <div>
         {discount.map((percent) => {
           const discountedPrice = price * ((100 - percent) / 100);
