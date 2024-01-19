@@ -10,7 +10,7 @@ const ProductInfo = () => {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
-  const chatId = Number(searchParams?.get('chatId'));
+  const roomId = Number(searchParams?.get('roomId'));
 
   return (
     <div className="bg-white w-full h-[70px] flex gap-x-[12px] content-center items-center p-[16px] border border-border-sub mt-0 sticky top-0">
@@ -22,9 +22,9 @@ const ProductInfo = () => {
         height={45}
       />
       <div className="flex flex-col">
-        <div className=" text-t2">{CHAT_ITEMS[chatId].ITEM_INFO.NAME}</div>
+        <div className=" text-t2">{CHAT_ITEMS[roomId].ITEM_INFO.NAME}</div>
         <div className="font-semibold text-t3 font-semibold">
-          {CHAT_ITEMS[chatId].ITEM_INFO.PRICE}원
+          {CHAT_ITEMS[roomId].ITEM_INFO.PRICE}원
         </div>
       </div>
       {/* 가격 제안 페이지에서는 제안버튼 미노출 */}
