@@ -8,13 +8,13 @@ const SearchBtnComponent = () => {
   return (
     <div className="w-full flex flex-col items-center text-xl">
       {/* 지역 선택버튼 & 바텀시트 */}
-      <RegionBottomSheet />
+      <RegionBottomSheet buttonStyle="search" />
       {/* 날짜 선택버튼 & 바텀시트 */}
-      <CalendarBottomSheet />
+      <CalendarBottomSheet buttonStyle="search" />
       {/* 숙소유형 선택버튼 & 바텀시트 */}
-      <RoomBottomSheet />
+      <RoomBottomSheet buttonStyle="search" />
       {/* 인원 수 선택버튼 & 바텀시트 */}
-      <CustomerBottomSheet />
+      <CustomerBottomSheet buttonStyle="search" />
     </div>
   );
 };
