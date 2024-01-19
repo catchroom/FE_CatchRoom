@@ -2,7 +2,7 @@ import React from 'react';
 
 const page = () => {
   return (
-    <div className="w-full px-5 flex flex-col gap-5 h-[calc(100vh-100px)] overflow-x-scroll">
+    <div className="w-full p-5 flex flex-col gap-5 h-[calc(100vh-100px)] overflow-x-scroll">
       <div id="top" className="flex flex-col gap-3">
         <h1 className="text-h1">이용약관</h1>
         <h3 className="text-h3">제 1조 (목적)</h3>

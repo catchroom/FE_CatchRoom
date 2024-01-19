@@ -78,7 +78,9 @@ const Header = ({
         ) : (
           <div />
         )}
-        <h1 className="justify-self-center text-t1 font-semibold">{title}</h1>
+        <h1 className="justify-self-center text-t1 font-semibold whitespace-nowrap">
+          {title}
+        </h1>
         <div className="justify-self-end mt-1">
           {showHomeButton && (
             <button onClick={() => router.push('/home')}>
