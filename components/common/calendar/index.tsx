@@ -47,7 +47,7 @@ const CalendarComponent = ({
   };
 
   const leftFooterStyle = 'text-h3 font-semibold mr-3 break-keep';
-  const rightFooterStyle = 'text-h3 font-semibold ml-3 break-keep	';
+  const rightFooterStyle = 'text-h3 font-semibold ml-3 break-keep';
 
   let footer = (
     <>

@@ -17,7 +17,7 @@ const page = () => {
     <div className="w-full h-full flex flex-col gap-5">
       <div className="w-full flex flex-col items-center justify-center px-5 pt-5">
         <div className="w-full flex flex-col gap-10">
-          <ProfileForm name="홍길동" />
+          <ProfileForm />
         </div>
       </div>
       <div className="bg-black bg-opacity-5 h-2" />

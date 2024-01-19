@@ -1,24 +1,49 @@
+'use client';
+import React from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import DownArrowIcon from '@/public/svgComponent/downArrow';
 import MapPinSmFillIcon from '@/public/svgComponent/mapPinSmFillIcon';
-import React from 'react';
+import { searchDropdownState } from '@/atoms/catchSale/dropdownAtom';
+import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
+import { DROP_DOWN_TWO } from '@/constants/catchSale';
 
 const BottomHeader = () => {
+  const [dropdownTitle, setDropdownTitle] = useRecoilState(searchDropdownState);
+  const setModal = useSetRecoilState(outerBottomSheetsControl);
+
+  const handleOptionClick = (title: string) => {
+    setDropdownTitle(title);
+    setModal(false);
+  };
+
   const buttonStyle =
-    'flex items-center gap-2 h-[2.25rem] bg-white rounded-full border border-border-sub px-3 py-2 text-t3 font-semibold ';
+    'flex items-center gap-2 h-[2.25rem] bg-white rounded-full border border-border-sub px-3 py-2 text-t3 font-semibold';
 
   return (
     <div className="flex items-center justify-between w-full h-[4.75rem] p-5 border-border-sub border-t text-xl text-p1 font-semibold">
       <p className="text-t2 font-bold">총 12건</p>
-      <div className="flex">
+      <div className="flex gap-1">
         <button className={buttonStyle + 'mr-1'}>
           <MapPinSmFillIcon />
           <p>서울</p>
           <DownArrowIcon width={12} height={7} />
         </button>
-        <button className={buttonStyle}>
-          <p>낮은 가격 순</p>
-          <DownArrowIcon width={12} height={7} />
-        </button>
+        <BottomSheetsWithoutCloseBtn
+          title={dropdownTitle}
+          outerControl={true}
+          buttonSelect="dropdown"
+        >
+          <div className="flex flex-col py-3 gap-7 items-center text-t1 font-bold">
+            {DROP_DOWN_TWO.map((item) => {
+              return (
+                <p key={item.name} onClick={() => handleOptionClick(item.name)}>
+                  {item.name}
+                </p>
+              );
+            })}
+          </div>
+        </BottomSheetsWithoutCloseBtn>
       </div>
     </div>
   );

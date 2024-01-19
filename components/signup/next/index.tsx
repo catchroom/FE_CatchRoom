@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userInfoSchema } from '@/constants/zodSchema';
 import Modal from '@/components/common/modal';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { signUp, nicknameCheck, login, getNewToken } from '@/api/user/api';
+import { signUp, nicknameCheck, login } from '@/api/user/api';
 import nookies from 'nookies';
 import { emailState, passwordState } from '@/atoms/signup/signup';
 
@@ -82,13 +82,6 @@ const SignUpInfo = () => {
                     },
                   );
 
-                  // 액세스 토큰 요청 테스트용, apiClient 사용 예정이라 삭제하기
-                  setTimeout(() => {
-                    getNewToken().then((newToken) => {
-                      console.log(newToken);
-                    });
-                  }, 1000);
-
                   router.push('/mypage');
                 }
               })
@@ -144,7 +137,7 @@ const SignUpInfo = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedNameInput(true)}
-            onBlur={() => setClickedNameInput(false)}
+            onBlur={() => setTimeout(() => setClickedNameInput(false), 200)}
           />
           {name && clickedNameInput && (
             <div
@@ -172,7 +165,7 @@ const SignUpInfo = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPhoneInput(true)}
-            onBlur={() => setClickedPhoneInput(false)}
+            onBlur={() => setTimeout(() => setClickedPhoneInput(false), 200)}
           />
 
           {phone && clickedPhoneInput && (
@@ -201,11 +194,11 @@ const SignUpInfo = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedNickInput(true)}
-            onBlur={() => setClickedNickInput(false)}
+            onBlur={() => setTimeout(() => setClickedNickInput(false), 200)}
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {email && !confirmedNickname && clickedNickInput && (
+            {nickname && !confirmedNickname && clickedNickInput && (
               <div onClick={() => clearField('nickname')}>
                 <DeleteIcon />
               </div>
