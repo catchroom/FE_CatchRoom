@@ -55,6 +55,7 @@ const LoginForm = () => {
         if (response.code === 1006) {
           nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
+            // maxAge: 30, //30초
           });
           nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',

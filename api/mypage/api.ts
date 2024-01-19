@@ -26,6 +26,7 @@ export const logout = async () => {
 // };
 
 // 7. 닉네임 변경
+
 export const editProfile = async (nickname: string) => {
   const res = await apiClient.put(
     `/v1/mypage/profile/nickname?nickName=${nickname}`,
@@ -43,15 +44,13 @@ export const getUserProfile = async () => {
   return res.data;
 };
 
-/////////여기부터 연결 진행중//////////
-
-// 9. 계좌번호,예치금 잔액 조회 get
-export const getBalance = async () => {
+// 9. 계좌번호,예치금 잔액 조회
+export const getAccount = async () => {
   const res = await apiClient.get(`/v1/mypage/deposit/accountnum`);
   return res.data;
 };
 
-// 10. 예치금 계좌 등록하기 **post**
+// 10. 예치금 계좌 등록하기
 export const registerAccount = async (
   bankName: string,
   accountNumber: string,
@@ -66,74 +65,35 @@ export const registerAccount = async (
   return res.data;
 };
 
+/////////여기부터 연결 진행중//////////
+
+// 11. 예치금 계좌 수정하기 --------> 테스트는 더미데이터 받아야함
+export const editAccount = async (
+  bankName: string,
+  accountNumber: string,
+  accountOwner: string,
+) => {
+  const res = await apiClient.put(`/v1/mypage/accountnum`, {
+    bankName,
+    accountNumber,
+    accountOwner,
+  });
+
+  return res.data;
+};
+
+// 12. 예치금 계좌 삭제하기
+export const deleteAccount = async () => {
+  const res = await apiClient.delete(`/v1/mypage/accountnum`);
+  return res.data;
+};
+
 ///////// 여기까지 현재 진행중/////////////
 
-// 예치금 계좌 수정하기 put*
-export const editAccount = async (
-  bankname: string,
-  accountnum: string,
-  accountowner: string,
-) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/accountnum`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ bankname, accountnum, accountowner }),
-    },
-  );
-
-  const data = await res.json();
-  if (data.code === 2010) {
-    return data;
-  } else if (data.code === 2007) {
-    console.log(data.message);
-  }
-};
-
-// 예치금 계좌 삭제하기 *****delete
-export const delete계좌 = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/accountnum`,
-    {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
-
-  const data = await res.json();
-  if (data.code === 2011) {
-    return data;
-  }
-};
-
-// 예치금 출금하기 **post**
+// 13. 예치금 출금하기
 export const 출금Account = async (deposit: number) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/deposit/withdraw`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ deposit }),
-    },
-  );
-
-  const data = await res.json();
-  if (data.code === 2012) {
-    return data;
-  } else if (data.code === 2013) {
-    //예치금 잔액보다 출금 금액이 더 큽니다.
-    console.log(data.message);
-  }
+  const res = await apiClient.post(`/v1/mypage/deposit/withdraw`, { deposit });
+  return res.data;
 };
 
 // 예치금 내역 보기 (상세 조회) get  ---> id

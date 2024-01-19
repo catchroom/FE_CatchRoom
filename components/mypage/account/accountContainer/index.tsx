@@ -4,18 +4,14 @@ import MoneySVG from '@/public/svgComponent/money';
 import WarningSVG from '@/public/svgComponent/warning';
 import Link from 'next/link';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { getBalance } from '@/api/mypage/api';
-
-{
-  /* 내 계좌 정보 받아와야함 */
-}
+import { getAccount } from '@/api/mypage/api';
 
 const AccountContainer = ({ children }: { children: ReactNode }) => {
   const [balance, setBalance] = useState<number>();
   const [accountNumber, setAccountNumber] = useState('');
 
   useEffect(() => {
-    getBalance().then((res) => {
+    getAccount().then((res) => {
       if (res.code === 2005) {
         console.log(res.data);
         setBalance(res.data.balance);

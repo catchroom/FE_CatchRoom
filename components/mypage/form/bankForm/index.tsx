@@ -21,6 +21,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import FormError from '../formError';
 import { useToastAlert } from '@/hooks/useToastAlert';
 import { useRouter } from 'next/navigation';
+import { registerAccount } from '@/api/mypage/api';
 
 const BankForm = () => {
   const { alertOpenHandler } = useToastAlert('계좌를 등록했습니다.');
@@ -50,6 +51,11 @@ const BankForm = () => {
   const onSubmit: SubmitHandler<FormAccount> = (data) => {
     if (accountSchema.safeParse(data)) {
       console.log(data);
+      registerAccount(data.bank, data.account, data.name).then((res) => {
+        if (res.code === 2006) {
+          console.log(res.data);
+        }
+      });
     } else {
       console.log('error');
     }
@@ -87,7 +93,7 @@ const BankForm = () => {
         <BottomSheets
           buttonSelect="input"
           title={BottomSheetsTitle}
-          innerTitle="은행 또는 증권사를 선택해주세요"
+          innerTitle="은행/증권사 선택"
           innerButtonTitle="선택"
           outerControl={true}
         >

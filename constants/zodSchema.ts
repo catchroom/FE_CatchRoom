@@ -14,10 +14,8 @@ export const nameSchema = z.object({
 export const nicknameSchema = z.object({
   nickname: z
     .string()
-    .min(2, {
-      message: '닉네임은 한글/영문/숫자 혼합해서 2~8자로 설정해주세요.',
-    })
-    .max(8, '닉네임은 한글/영문/숫자 혼합해서 2~8자로 설정해주세요.')
+    .min(2, { message: '닉네임이 너무 짧아요' })
+    .max(8, '닉네임은 2자 이상 8자 이하로 입력해주세요.')
     .regex(
       /^[a-zA-Z0-9가-힣]*$/,
       '닉네임은 한글, 영문, 숫자만 입력 가능합니다.',
