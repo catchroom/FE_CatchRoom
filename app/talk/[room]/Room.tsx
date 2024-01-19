@@ -3,14 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useRecoilState } from 'recoil';
-import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 
 // test 완료되면 지우도록 하겠습니다
 
 const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
 
-export type ChatContentType = {
+type Content = {
   type: 'ENTER' | 'TALK' | 'LEAVE';
   message: string;
   sender: string;
@@ -19,8 +17,7 @@ export type ChatContentType = {
 };
 
 const StompPage = () => {
-  const [message, setMessage] =
-    useRecoilState<ChatContentType[]>(chatContentAtom);
+  const [message, setMessage] = useState<Content[]>([]);
   const [ws, setWs] = useState<CompatClient | null>(null);
 
   const connect = () => {
