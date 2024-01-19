@@ -29,4 +29,14 @@ describe('SellingPriceContainer test', () => {
 
     expect(screen.getByTestId('priceButton')).toBeInTheDocument();
   });
+
+  it('값이 선택되야 퍼센트 뱃지가 보임', () => {
+    render(
+      <RecoilRoot initializeState={(snap) => snap.set(priceState, 110000)}>
+        <SellingPriceContainer price={123000} />
+      </RecoilRoot>,
+    );
+
+    expect(screen.getByTestId('percent-badge')).toBeInTheDocument();
+  });
 });

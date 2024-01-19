@@ -46,7 +46,10 @@ const SellingPriceContainer = ({ price }: PropsType) => {
           <p>판매가</p>
           <div className="flex gap-2 items-center">
             {selectedPrice !== 0 ? (
-              <p className="bg-surface-primary text-text-primary rounded px-2 py-1 font-bold text-p2">
+              <p
+                data-testid="percent-badge"
+                className="bg-surface-primary text-text-primary rounded px-2 py-1 font-bold text-p2"
+              >
                 {selectedPercent}%
               </p>
             ) : null}
