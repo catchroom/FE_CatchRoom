@@ -7,6 +7,14 @@ export type MessageProps = {
   time?: string;
 };
 
+export type ChatRoomType = {
+  chatRoomNumber: string;
+  buyerId: number;
+  sellerId: number;
+  productId: number;
+  loginUserIdentity: string;
+};
+
 // export type MessageProps = {
 //   messageType?: number;
 //   sellerNickname?: string;
