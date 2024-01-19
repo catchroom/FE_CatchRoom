@@ -5,7 +5,7 @@ import CatchSpecialComponent from '@/components/common/catchComponent';
 const CatchItemContainer = () => {
   return (
     <div className=" overflow-y-hidden">
-      <div className="w-full flex flex-col gap-12 p-6 pt-1">
+      <div className="w-full flex flex-col gap-12 px-6">
         {ITEMS_INFO.roomItems.map((item) => {
           return (
             <CatchSpecialComponent

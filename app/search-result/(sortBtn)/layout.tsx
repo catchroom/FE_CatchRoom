@@ -1,5 +1,6 @@
 import Header from '@/components/common/header';
 import FilterBar from '@/components/search-result/filterBar';
+import ProductListControls from '@/components/search-result/list/productListControls';
 import React, { ReactNode } from 'react';
 
 const locations = ['서울', '제주'];
@@ -26,12 +27,18 @@ const filters = [
   { id: 'guests', label: guestsLabel },
 ];
 
-const Searchlayout = ({ children }: { children: ReactNode }) => {
+const Searchlayout = ({
+  children,
+}: {
+  children: ReactNode;
+  showProductListControls?: boolean;
+}) => {
   return (
     <>
       <Header title="검색 결과" showBackButton showHomeButton />
       <FilterBar filters={filters} />
-      <main className="w-full absolute h-[calc(100vh-120px)]  ">
+      <ProductListControls />
+      <main className="w-full absolute h-[calc(100vh-200px)] top-[200px] overflow-y-auto ">
         {children}
       </main>
     </>

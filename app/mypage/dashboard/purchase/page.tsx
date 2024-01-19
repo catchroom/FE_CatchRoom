@@ -17,7 +17,7 @@ const examplesWithDummyData: MypageSellingType[] = [
     writeDate: '2021-09-01',
     productEndDate: '2024-01-01',
     isCatch: true,
-    isReview: true,
+    isReview: 'onReview',
   },
   {
     accommodationId: 'string',
@@ -33,7 +33,23 @@ const examplesWithDummyData: MypageSellingType[] = [
     writeDate: '2024-09-01',
     productEndDate: '2024-10-01',
     isCatch: false,
-    isReview: false,
+    isReview: 'outDatedReview',
+  },
+  {
+    accommodationId: 'string',
+    historyId: '1234',
+    productNum: 'string',
+    checkIn: '2024-12-15',
+    checkOut: '2024-12-17',
+    productName: '도래미파 하우스',
+    thumbnailUrl:
+      'https://res.cloudinary.com/dtf6uf7vi/image/upload/v1699924550/Home/minseob12.png',
+    sellPrice: 70000,
+    state: 'purchased',
+    writeDate: '2024-09-01',
+    productEndDate: '2024-10-01',
+    isCatch: false,
+    isReview: 'noReview',
   },
 ];
 

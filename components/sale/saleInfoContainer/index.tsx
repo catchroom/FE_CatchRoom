@@ -17,7 +17,7 @@ const item: ProductItem = {
 
 const SaleInfoContainer = () => {
   return (
-    <div className="flex flex-col w-full p-4 gap-5 border border-border-sub rounded">
+    <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
         <Link
           href={item.accommodation_url}

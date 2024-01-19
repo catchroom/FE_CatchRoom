@@ -3,7 +3,7 @@
 import DownArrowIcon from '@/public/svgComponent/downArrow';
 import React, { MouseEventHandler } from 'react';
 
-const InputButton = ({
+const SortOptionsButton = ({
   name,
   fn,
 }: {
@@ -14,12 +14,12 @@ const InputButton = ({
     <button
       onClick={fn}
       type="button"
-      className="flex items-center justify-between w-full h-[54px] px-4 py-3 text-text-sub border border-border-sub rounded-md bg-surface outline-none transition-colors duration-300 ease-in focus:border-border-critical"
+      className="flex  items-center justify-between gap-1 text-t3 font-semibold"
     >
       {name}
-      <DownArrowIcon />
+      <DownArrowIcon width={12} height={7} />
     </button>
   );
 };
 
-export default InputButton;
+export default SortOptionsButton;

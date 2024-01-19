@@ -1,3 +1,5 @@
+import { ReviewType } from '@/utils/get-dot-date';
+
 export type MypageSellingType = {
   accommodationId: string;
   historyId: string;
@@ -11,7 +13,7 @@ export type MypageSellingType = {
   writeDate: string;
   productEndDate: string;
   isCatch: boolean;
-  isReview: boolean;
+  isReview: ReviewType;
 };
 
 export type AccommodationType = {
