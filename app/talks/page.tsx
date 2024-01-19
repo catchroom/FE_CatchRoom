@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useCookies } from 'react-cookie';
@@ -17,11 +17,11 @@ type Content = {
   userId: number;
 };
 
-const StompPage = ({ children }: { children: ReactNode }) => {
-  const [ws, setWs] = useState<CompatClient | null>(null); // 가장 중요한 부분
+const StompPage = () => {
   const [cookies] = useCookies();
   const accessToken = cookies.accessToken;
   const [message, setMessage] = useState<Content[]>([]);
+  const [ws, setWs] = useState<CompatClient | null>(null);
 
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp');
@@ -39,10 +39,10 @@ const StompPage = ({ children }: { children: ReactNode }) => {
         },
       },
       () => {
-        ws.subscribe(`/sub/chat/room/${ROOMID}`, (message) => {
+        ws.subscribe(`/sub/chat/roomlist/4`, (message) => {
           const recv = JSON.parse(message.body);
-          console.log(recv);
           setMessage((prev) => [...prev, recv]);
+          console.log(recv);
         });
 
         ws.publish({
@@ -112,7 +112,6 @@ const StompPage = ({ children }: { children: ReactNode }) => {
           {item.sender} : {item.message}
         </div>
       ))}
-      <div>{children}</div>
       <div className="w-full flex justify-between">
         <button className="bg-mint" onClick={sendMessage}>
           채팅 보내기
