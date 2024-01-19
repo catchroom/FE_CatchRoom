@@ -6,7 +6,9 @@ const page = ({ params }: { params: { room: string } }) => {
   return (
     <div>
       page {room}
-      <StompPage />
+      <StompPage>
+        <div>test</div>
+      </StompPage>
     </div>
   );
 };
