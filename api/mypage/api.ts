@@ -25,7 +25,7 @@ export const logout = async () => {
 //   return data;
 // };
 
-// 7. 프로필 수정(닉네임 변경)
+// 7. 프로필 수정(닉네임 변경) --> 수정 예정
 export const editProfile = async (nickname: string) => {
   const res = await apiClient.put(`/v1/mypage/profile?nickName=${nickname}`, {
     nickname,
@@ -51,11 +51,13 @@ export const editProfile = async (nickname: string) => {
 //   return data;
 // };
 
-// 8. 닉네임 조회 get
+// 8. 닉네임 조회 --> 프로필 조회로 수정 예정
 export const getNickname = async () => {
   const res = await apiClient.get(`/v1/mypage/nickname`);
   return res.data;
 };
+
+/////////여기부터 연결 진행중//////////
 
 //+✨✨✨ 마이페이지에서 유저정보 get해오는 api 필요~!
 
@@ -65,32 +67,22 @@ export const getBalance = async () => {
   return res.data;
 };
 
-// 예치금 계좌 등록하기 **post**
+// 10. 예치금 계좌 등록하기 **post**
 export const registerAccount = async (
-  bankname: string,
-  accountnum: string,
-  accountowner: string,
+  bankName: string,
+  accountNumber: string,
+  accountOwner: string,
 ) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/accountnum`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ bankname, accountnum, accountowner }),
-    },
-  );
+  const res = await apiClient.post(`/v1/mypage/accountnum`, {
+    bankName,
+    accountNumber,
+    accountOwner,
+  });
 
-  const data = await res.json();
-  if (data.code === 2006) {
-    return data;
-  } else if (data.code === 2007) {
-    //은행 존재x
-    console.log(data.message);
-  }
+  return res.data;
 };
+
+///////// 여기까지 현재 진행중/////////////
 
 // 예치금 계좌 수정하기 put*
 export const editAccount = async (

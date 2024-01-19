@@ -55,9 +55,11 @@ const LoginForm = () => {
         if (response.code === 1006) {
           nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
+            maxAge: 60 * 30, //30분
           });
           nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',
+            maxAge: 60 * 60 * 24 * 2, //2일
           });
           window.location.href = '/mypage';
         } else if (response.code === 1007 || response.code === 1008) {
