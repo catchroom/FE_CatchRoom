@@ -11,7 +11,7 @@ const CatchSpecialComponentWrapper = ({
   const firstRoomItem = ITEMS_INFO.roomItems[0];
 
   return (
-    <div className="absolute bottom-[6.25rem] left-1/2 transform -translate-x-1/2 w-9/12 z-10 p-3 px-3 bg-white">
+    <div className="absolute bottom-[11.5rem] left-1/2 transform -translate-x-1/2 w-9/12 z-10 p-3 px-3 bg-white">
       <CatchSpecialComponent
         roomName={firstRoomItem.roomName}
         roomType={firstRoomItem.roomType}
