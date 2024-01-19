@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { getUserProfile } from '@/api/mypage/api';
 
 const PrivacyItems = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<{ label: string; value: string }[]>([]);
 
   useEffect(() => {
     getUserProfile().then((res) => {
       if (res.code === 2004) {
-        console.log(res.data);
+        //console.log(res.data);
         const { email, name, phoneNumber } = res.data;
 
         const updatedData = [
