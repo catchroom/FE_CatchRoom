@@ -19,11 +19,13 @@ const ChatItem = ({
   const router = useRouter();
   const setIsOpen = useSetRecoilState(isModalState);
 
+  // 모달 열고 닫기
   const handleModalOpen = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsOpen((prev) => !prev);
   };
 
+  // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
     router.push(`/chat/chatRoom?chatId=${chatRoomNumber}`);
   };
@@ -45,16 +47,16 @@ const ChatItem = ({
           sizes="(max-width: 640px) 50vw, 100vw"
         />
       </div>
-      <div className="flex flex-col">
-        <div className="flex items-center">
-          <div className="text-t3 font-semibold  text-text pr-2">{buyerId}</div>
-          <div className="text-p2 text-text-sub">{chatRoomNumber}</div>
+      <div className="grow">
+        <div data-testId="banner-top" className="flex items-center">
+          <p className="text-t3 font-semibold  text-text pr-2">
+            닉네임 : {buyerId}
+          </p>
         </div>
         <div className="flex">
-          <div className="line-clamp-1 text-text">{loginUserIdentity}</div>
-          <div className=" bg-main px-[9px] py-[4px] rounded-full text-white text-p3 ml-2  ">
-            1
-          </div>
+          <p className="line-clamp-1 text-text">
+            lastMessage : {loginUserIdentity}
+          </p>
         </div>
       </div>
       <div className="ml-auto" onClick={handleModalOpen}>

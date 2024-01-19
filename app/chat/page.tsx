@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatList from '../../components/chat/chatList/index';
+import ChatList from '../../components/chat/chatList/control/index';
 import BottomNav from '@/components/common/bottomNav';
 import ChatWrapper from '@/components/chat/chatList/wrapper';
 

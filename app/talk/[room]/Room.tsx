@@ -3,47 +3,63 @@
 import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
+import { useCookies } from 'react-cookie';
 
 // test 완료되면 지우도록 하겠습니다
 
-const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
+const ROOMID = '4983cb81-2bbc-4ce6-9e93-322c98c8fe4d';
 
 type Content = {
   type: 'ENTER' | 'TALK' | 'LEAVE';
   message: string;
   sender: string;
   roomId: string;
-  userId: string;
+  userId: number;
 };
 
 const StompPage = () => {
+  const [cookies] = useCookies();
+  const accessToken = cookies.accessToken;
   const [message, setMessage] = useState<Content[]>([]);
   const [ws, setWs] = useState<CompatClient | null>(null);
 
   const connect = () => {
-    const sockjs = new SockJS('http://13.124.240.142:8080/ws-stomp');
+    const sockjs = new SockJS('https://catchroom.store/ws-stomp');
     const ws = Stomp.over(sockjs);
 
     setWs(ws);
 
-    // eslint-disable-next-line
-    ws.connect({}, () => {
-      ws.subscribe(`/sub/chat/room/${ROOMID}`, (message) => {
-        const recv = JSON.parse(message.body);
-        setMessage((prev) => [...prev, recv]);
-      });
+    console.log('connect');
 
-      ws.publish({
-        destination: `/pub/chat/message`,
-        body: JSON.stringify({
-          roomId: ROOMID,
-          sender: '지운',
-          type: 'ENTER',
-          userId: 'user2',
-          message: '소켓 연결 성공!',
-        }),
-      });
-    });
+    // eslint-disable-next-line
+    ws.connect(
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      () => {
+        ws.subscribe(`/sub/chat/room/${ROOMID}`, (message) => {
+          const recv = JSON.parse(message.body);
+          console.log(recv);
+          setMessage((prev) => [...prev, recv]);
+        });
+
+        ws.publish({
+          destination: `/pub/chat/message`,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            roomId: ROOMID,
+            sender: '지운',
+            type: 'ENTER',
+            userId: 4,
+            message: '소켓 연결 성공!',
+          }),
+        });
+      },
+    );
   };
 
   useEffect(() => {
@@ -57,12 +73,15 @@ const StompPage = () => {
   const sendMessage = () => {
     if (!ws) return;
     ws.publish({
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
       destination: `/pub/chat/message`,
       body: JSON.stringify({
         roomId: ROOMID,
         sender: '지운',
         type: 'TALK',
-        userId: 'user2',
+        userId: 4,
         message: '안녕하세용',
       }),
     });
@@ -71,13 +90,17 @@ const StompPage = () => {
   const sendMessage2 = () => {
     if (!ws) return;
     ws.publish({
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
       destination: `/pub/chat/message`,
       body: JSON.stringify({
+        type: 'NEGO_REQ',
         roomId: ROOMID,
-        sender: '민섭',
-        type: 'TALK',
-        userId: 'user1',
-        message: '안녕하세용',
+        message: '네고해요',
+        sender: '네고',
+        userId: 4,
+        negoPrice: 10000,
       }),
     });
   };

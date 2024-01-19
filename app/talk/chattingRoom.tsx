@@ -8,24 +8,24 @@ import { ChatRoom } from './page';
 import FindRoomInfo from './FindRoomInfo';
 
 const fetchChatRoom = async (token: string) => {
-  const data = await axios('https://catchroom.xyz/v1/chat/room/list', {
+  const data = await axios.get('https://catchroom.store/v1/chat/room/list', {
     headers: {
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });
 
   const result = await data.data;
-  return result.data;
+  return result;
 };
 
 const ChattingRoom = () => {
   const [cookies] = useCookies();
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['chatRoom'],
     queryFn: () => fetchChatRoom(cookies.accessToken),
   });
 
+  console.log(error);
   const LoadingComponent = isLoading && <div>로딩중...</div>;
   const ErrorComponent = isError && <div>에러가 발생했습니다.</div>;
 
