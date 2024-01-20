@@ -3,18 +3,20 @@ import React, { useEffect, useState } from 'react';
 import { ROOM_CATEGORIES, SEARCH_DEFAULT } from '@/constants/search-detail';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
+import { useRecoilState } from 'recoil';
+import {
+  isRoomCheckedState,
+  roomIndex,
+} from '@/atoms/search-detail/searchStates';
 
 const RoomBottomSheet = ({
   buttonStyle,
 }: {
   buttonStyle: 'search' | 'dropdown';
 }) => {
-  const [isRoomChecked, setIsRoomChecked] = useState<boolean>(true);
-  const [roomBtnIdx, setRoomBtnIdx] = useState<number[]>(
-    Array(ROOM_CATEGORIES.length)
-      .fill(0)
-      .map((_, index) => index),
-  );
+  const [isRoomChecked, setIsRoomChecked] =
+    useRecoilState<boolean>(isRoomCheckedState);
+  const [roomBtnIdx, setRoomBtnIdx] = useRecoilState<number[]>(roomIndex);
   const [isRoomBtnSelected, setIsRoomBtnSelected] = useState<boolean[]>(
     Array(ROOM_CATEGORIES.length).fill(true),
   );
@@ -78,7 +80,8 @@ const RoomBottomSheet = ({
         if (index === 2 && selectedRoomNames.length > 0) {
           placeholderValue = selectedRoomNames.join(', ');
           if (selectedRoomNames.length === ROOM_CATEGORIES.length) {
-            placeholderValue = '모든 숙소 유형';
+            if (buttonStyle === 'search') placeholderValue = '모든 숙소 유형';
+            else placeholderValue = '모든 타입';
           }
         }
 

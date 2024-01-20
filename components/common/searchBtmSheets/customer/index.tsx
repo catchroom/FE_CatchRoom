@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import {
   adultCountState,
   childCountState,
-} from '@/atoms/search-detail/checkbox';
+} from '@/atoms/search-detail/searchStates';
 import { useRecoilState } from 'recoil';
 import { SEARCH_DEFAULT } from '@/constants/search-detail';
 import BottomSheets from '@/components/common/bottomSheets';

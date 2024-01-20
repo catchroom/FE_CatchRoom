@@ -7,8 +7,9 @@ import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 import './custom-styles.css';
 import MidLineIcon from '@/public/svgComponent/calendar/midline';
-import { rangeDate, singleDate } from '@/atoms/calendar/calendarAtoms';
+
 import { CalendarContainerProps } from '@/types/common/calendar/type';
+import { rangeDate, singleDate } from '@/atoms/search-detail/searchStates';
 
 const CalendarComponent = ({
   useSingleDate,

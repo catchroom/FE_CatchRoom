@@ -3,6 +3,11 @@ import React, { useEffect, useState } from 'react';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { REGION_NAMES, SEARCH_DEFAULT } from '@/constants/search-detail';
+import { useRecoilState } from 'recoil';
+import {
+  isRegionCheckedState,
+  regionIndex,
+} from '@/atoms/search-detail/searchStates';
 
 /** 지역 바텀시트를 사용할 수 있는 컴포넌트입니다.
  * @param buttonStyle - (필수) 트리거 버튼의 스타일을 전달해주셔야 합니다. ('search':  | 'dropdown')
@@ -16,12 +21,9 @@ const RegionBottomSheet = ({
   buttonStyle: 'search' | 'dropdown';
   usePinIcon?: boolean;
 }) => {
-  const [isRegionChecked, setIsRegionChecked] = useState<boolean>(true);
-  const [regionBtnIdx, setRegionBtnIdx] = useState<number[]>(
-    Array(REGION_NAMES.length)
-      .fill(0)
-      .map((_, index) => index),
-  );
+  const [isRegionChecked, setIsRegionChecked] =
+    useRecoilState<boolean>(isRegionCheckedState);
+  const [regionBtnIdx, setRegionBtnIdx] = useRecoilState<number[]>(regionIndex);
   const [regionBtnBlArr, setRegionBtnBlArr] = useState<boolean[]>(
     Array(REGION_NAMES.length).fill(true),
   );
