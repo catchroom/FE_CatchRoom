@@ -10,7 +10,6 @@ import {
   regionIndex,
   roomBooleanIndex,
   roomIndex,
-  singleDate,
 } from '@/atoms/search-detail/searchStates';
 import { useResetRecoilState } from 'recoil';
 
@@ -20,7 +19,6 @@ export const useResetSearchAtoms = () => {
   const resetRegionBooleanIndex = useResetRecoilState(regionBooleanIndex);
 
   const resetIsAllDayChecked = useResetRecoilState(isAllDayCheckedState);
-  const resetSingleDate = useResetRecoilState(singleDate);
   const resetRangeDate = useResetRecoilState(rangeDate);
 
   const resetIsRoomChecked = useResetRecoilState(isRoomCheckedState);
@@ -36,7 +34,6 @@ export const useResetSearchAtoms = () => {
     resetRegionBooleanIndex();
 
     resetIsAllDayChecked();
-    resetSingleDate();
     resetRangeDate();
 
     resetIsRoomChecked();
