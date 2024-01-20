@@ -41,6 +41,7 @@ const CatchContainer = ({ price }: PropsType) => {
       }
     }
     setSelectedCatchPrice(price * ((100 - percent) / 100));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);
 
   const title =
@@ -64,7 +65,11 @@ const CatchContainer = ({ price }: PropsType) => {
       <div className="flex justify-between">
         <div className="flex gap-1 items-center">
           <h2 className="text-h5 font-bold">캐치특가 자동 설정</h2>
-          <div onClick={handleQuestionButtonClick} className="cursor-pointer">
+          <div
+            onClick={handleQuestionButtonClick}
+            className="cursor-pointer"
+            data-testid="question-mark"
+          >
             <QuestionMark />
           </div>
         </div>
@@ -75,7 +80,10 @@ const CatchContainer = ({ price }: PropsType) => {
         />
       </div>
       {open && (
-        <div className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom">
+        <div
+          className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom"
+          data-testid="catch-describe"
+        >
           <p className="text-p1 font-bold">
             자동으로 메인 상단에 노출되어 빠른 구매전환을 유도해요!
           </p>
@@ -88,7 +96,7 @@ const CatchContainer = ({ price }: PropsType) => {
       {isCatch && (
         <>
           <div>
-            <p className="text-t2">캐치특가 적용 가격</p>
+            <p className="text-t2 mb-2">캐치특가 적용 가격</p>
             <BottomSheets
               title={title}
               innerTitle="캐치특가 판매가를 선택해주세요"
@@ -102,6 +110,7 @@ const CatchContainer = ({ price }: PropsType) => {
             </BottomSheets>
           </div>
           <div>
+            <p className="text-t2 mb-2">캐치특가 적용 날짜</p>
             <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
               <BigCalendarIcon />
               {/* 바텀시트 모달로 변경예정 */}

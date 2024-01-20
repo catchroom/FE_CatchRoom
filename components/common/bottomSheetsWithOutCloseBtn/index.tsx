@@ -14,7 +14,7 @@ import {
   outerMoreBottomSheetsControl,
 } from '@/atoms/commons/outerBottomSheetsControl';
 import DropdownButton from '../sheetsButtons/dropdownButton';
-import CalendarButton from '../sheetsButtons/calendarButton';
+import TimePickerButton from '../sheetsButtons/calendarButton';
 import MoreButton from '../sheetsButtons/moreButton';
 import SortOptionsButton from '@/components/search-result/list/sortOptionsButton';
 /**
@@ -37,7 +37,7 @@ const BottomSheetsWithoutCloseBtn = ({
 }: {
   children: ReactNode;
   title?: string;
-  buttonSelect?: 'dropdown' | 'calendar' | 'more' | 'sortOptions';
+  buttonSelect?: 'dropdown' | 'timePicker' | 'more' | 'sortOptions';
   outerControl?: boolean;
   outerControlAtom?: 'default' | 'datePicker' | 'more';
 }) => {
@@ -79,7 +79,7 @@ const BottomSheetsWithoutCloseBtn = ({
 
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
     dropdown: <DropdownButton name={title as string} fn={modalOpen} />,
-    calendar: <CalendarButton name={title as string} fn={modalOpen} />,
+    timePicker: <TimePickerButton name={title as string} fn={modalOpen} />,
     more: <MoreButton fn={modalOpen} />,
     sortOptions: <SortOptionsButton name={title as string} fn={modalOpen} />,
   };

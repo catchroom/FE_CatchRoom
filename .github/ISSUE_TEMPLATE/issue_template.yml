@@ -6,7 +6,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        CATCHROOM ISSUE TEMPLATE입니다!
+        CATCHROOM ISSUE TEMPLATE입니다! 
+        ✨ feat : 기능 추가
+        🐛 fix : 버그 수정
+        🧪 test :  테스트 코드 작성
+        📚 docs : 문서 추가 및 수정
+        ♻️ refactor : 코드 리팩토링
+        📦 chore :  기타 변경사항 (빌드 스크립트 수정 등)
+        🎨 style : 스타일 변경
 
   - type: textarea
     id: title

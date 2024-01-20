@@ -25,6 +25,7 @@ const SlideButton = ({
             checked={isButtonActive}
             onChange={stateHandler}
             disabled={isDisabled}
+            data-testid="slideButton"
           />
           <div
             className={`w-10 h-6 rounded-full ${

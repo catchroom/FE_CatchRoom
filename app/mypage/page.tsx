@@ -18,7 +18,7 @@ const page = async () => {
       <div className="px-3 pt-4 bg-bg">
         <div className="w-full flex flex-col gap-6">
           {/* 유저 프로필 상단 배너 */}
-          <ProfileContainer name="강남구청기념품12">
+          <ProfileContainer>
             <ProfileButton />
           </ProfileContainer>
           {/* 가지고 있는 포인트 계좌 내역 */}
