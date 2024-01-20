@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useQuery } from '@tanstack/react-query';
 import BottomSheets from '@/components/common/bottomSheets';
 import Image from 'next/image';
+import axios from 'axios';
 
 const fetchRoomInfo = async (token: string, roomNumber: string) => {
   const data = await axios.get(
