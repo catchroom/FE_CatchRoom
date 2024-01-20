@@ -5,16 +5,13 @@ import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 // import ChatItem from '../../chatItem';
 import { useCookies } from 'react-cookie';
-// import { useGetChatRoom } from '@/api/chat/query';
-// import { ChatRoomType } from '@/types/chat/chatRoom/types';
-const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
+import { ChatRoomType } from '@/types/chat/chatRoom/types';
+import ChatItem from '../../chatItem';
 
 const ChatList = () => {
   const [ws, setWs] = useState<CompatClient | null>(null);
+  const [room, setRoom] = useState<ChatRoomType[]>([]);
   const [cookies] = useCookies();
-  // eslint-disable-next-line
-  const [message, setMessage] = useState<any>([]);
-  // const { data } = useGetChatRoom(cookies.accessToken);
 
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
@@ -33,11 +30,9 @@ const ChatList = () => {
         },
       },
       () => {
-        ws.subscribe(`/sub/chat/room/${ROOMID}`, (message) => {
+        ws.subscribe(`/sub/chat/roomlist/4`, (message) => {
           const recv = JSON.parse(message.body);
-          console.log(recv);
-          // eslint-disable-next-line
-          setMessage((prev: any) => [...prev, recv]);
+          setRoom(recv);
         });
 
         ws.publish({
@@ -49,7 +44,7 @@ const ChatList = () => {
             roomId: '4',
             sender: '민섭',
             type: 'ENTER',
-            userId: 'user2',
+            userId: '4',
             message: '소켓 연결 성공!',
           }),
         });
@@ -65,106 +60,16 @@ const ChatList = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(message);
+  console.log(room);
 
   return (
     <div className="w-full h-full">
-      {/* {data &&
-        data.map((item: ChatRoomType, index: number) => {
-          return (
-            <ChatItem
-              key={index}
-              buyerId={item.buyerId}
-              chatRoomNumber={item.chatRoomNumber}
-              sellerId={item.sellerId}
-              productId={item.productId}
-              loginUserIdentity={item.loginUserIdentity}
-              accommodationUrl={item.accommodationUrl}
-            />
-          );
-        })} */}
+      {room &&
+        room.map((item: ChatRoomType, index: number) => {
+          return <ChatItem key={index} item={item} />;
+        })}
     </div>
   );
 };
 
 export default ChatList;
-
-export type ChatContentType = {
-  type: 'ENTER' | 'TALK' | 'QUIT';
-  message: string;
-  sender: string;
-  roomId: string;
-  userId: string;
-};
-
-// export const StompPage = ({ children }: { children: ReactNode }) => {
-//   const [message, setMessage] =
-//     useRecoilState<ChatContentType[]>(chatContentAtom);
-//
-
-//   const connect = () => {
-//     const sockjs = new SockJS('http://13.124.240.142:8080/ws-stomp');
-//     console.log(sockjs);
-//     const ws = Stomp.over(sockjs);
-//     console.log(ws);
-
-//     setWs(ws);
-
-//     // eslint-disable-next-line
-//     ws.connect({}, () => {
-//       ws.subscribe(`/sub/chat/room/${ROOMID}`, (message) => {
-//         const recv = JSON.parse(message.body);
-//         setMessage((prev) => [...prev, recv]);
-//       });
-
-//       ws.publish({
-//         destination: `/pub/chat/message`,
-//         body: JSON.stringify({
-//           roomId: ROOMID,
-//           sender: '승연',
-//           type: 'ENTER',
-//           userId: 'user2',
-//           message: '소켓 연결 성공!',
-//         }),
-//       });
-//     });
-//   };
-
-//   useEffect(() => {
-//     connect();
-//     return () => {
-//       ws?.disconnect();
-//     };
-//     // eslint-disable-next-line
-//   }, []);
-
-//   const negoMessage = () => {
-//     if (!ws) return;
-//     ws.publish({
-//       destination: `/pub/chat/message`,
-//       body: JSON.stringify({
-//         roomId: ROOMID,
-//         sender: '민섭',
-//         type: 'NEGO_REQ',
-//         negoPrice: 10000,
-//         message: '네고해주세요',
-//       }),
-//     });
-//   };
-
-//   return (
-//     <>
-//       {message.map((item, index) => (
-//         <div key={index}>
-//           {item.sender} : {item.message}
-//         </div>
-//       ))}
-//       {children}
-//       <div className="w-full flex justify-between">
-//         <button className="bg-mint" onClick={negoMessage}>
-//           민섭 채팅 보내기
-//         </button>
-//       </div>
-//     </>
-//   );
-// };

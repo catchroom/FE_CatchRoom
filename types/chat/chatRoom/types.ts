@@ -14,6 +14,19 @@ export type ChatRoomType = {
   productId: number;
   loginUserIdentity: string;
   accommodationUrl: string;
+  partnerNickName: string;
+  chatMessageDto: ChatMessageDto;
+};
+
+export type ChatMessageDto = {
+  type: string;
+  roomId: string;
+  sender: string;
+  userId: number;
+  message: string;
+  time: string;
+  userCount: number;
+  negoPrice: number;
 };
 
 // export type MessageProps = {

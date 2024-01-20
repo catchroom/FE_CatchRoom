@@ -8,14 +8,7 @@ import { isModalState } from '@/atoms/chat/leaveButton';
 import { useSetRecoilState } from 'recoil';
 import { ChatRoomType } from '@/types/chat/chatRoom/types';
 
-const ChatItem = ({
-  buyerId,
-  chatRoomNumber,
-  sellerId,
-  productId,
-  accommodationUrl,
-  loginUserIdentity,
-}: ChatRoomType) => {
+const ChatItem = ({ item }: { item: ChatRoomType }) => {
   const router = useRouter();
   const setIsOpen = useSetRecoilState(isModalState);
 
@@ -27,10 +20,8 @@ const ChatItem = ({
 
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
-    router.push(`/chat/chatRoom?chatId=${chatRoomNumber}`);
+    router.push(`/chat/chatRoom?chatId=${item.chatRoomNumber}`);
   };
-
-  console.log(buyerId, chatRoomNumber, sellerId, productId, loginUserIdentity);
 
   return (
     <div
@@ -40,7 +31,7 @@ const ChatItem = ({
       {/* 채팅방 사진 보여주는 데이터 */}
       <div className="w-12 h-12 relative">
         <Image
-          src={accommodationUrl}
+          src={item.accommodationUrl}
           className="rounded-md"
           alt="숙소사진"
           fill={true}
@@ -48,14 +39,14 @@ const ChatItem = ({
         />
       </div>
       <div className="grow">
-        <div data-testId="banner-top" className="flex items-center">
-          <p className="text-t3 font-semibold  text-text pr-2">
-            닉네임 : {buyerId}
+        <div data-testid="banner-top" className="flex items-center">
+          <p className="text-t3 font-semibold text-text">
+            {item.partnerNickName}
           </p>
         </div>
         <div className="flex">
           <p className="line-clamp-1 text-text">
-            lastMessage : {loginUserIdentity}
+            lastMessage : {item.loginUserIdentity}
           </p>
         </div>
       </div>
