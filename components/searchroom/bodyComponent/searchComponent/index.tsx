@@ -1,10 +1,18 @@
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import RegionBottomSheet from '@/components/common/searchBtmSheets/region';
 import CalendarBottomSheet from '@/components/common/searchBtmSheets/calendar';
 import RoomBottomSheet from '@/components/common/searchBtmSheets/room';
 import CustomerBottomSheet from '@/components/common/searchBtmSheets/customer';
+import { useResetSearchAtoms } from '@/hooks/useResetSearchAtoms';
 
 const SearchBtnComponent = () => {
+  const resetAllSearchAtoms = useResetSearchAtoms();
+
+  useEffect(() => {
+    resetAllSearchAtoms(); // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="w-full flex flex-col items-center text-xl">
       {/* 지역 선택버튼 & 바텀시트 */}
