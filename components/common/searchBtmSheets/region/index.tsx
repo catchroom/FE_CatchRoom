@@ -1,11 +1,12 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { REGION_NAMES, SEARCH_DEFAULT } from '@/constants/search-detail';
 import { useRecoilState } from 'recoil';
 import {
   isRegionCheckedState,
+  regionBooleanIndex,
   regionIndex,
 } from '@/atoms/search-detail/searchStates';
 
@@ -24,9 +25,8 @@ const RegionBottomSheet = ({
   const [isRegionChecked, setIsRegionChecked] =
     useRecoilState<boolean>(isRegionCheckedState);
   const [regionBtnIdx, setRegionBtnIdx] = useRecoilState<number[]>(regionIndex);
-  const [regionBtnBlArr, setRegionBtnBlArr] = useState<boolean[]>(
-    Array(REGION_NAMES.length).fill(true),
-  );
+  const [regionBtnBlArr, setRegionBtnBlArr] =
+    useRecoilState<boolean[]>(regionBooleanIndex);
 
   useEffect(() => {
     const debounce = setTimeout(() => {

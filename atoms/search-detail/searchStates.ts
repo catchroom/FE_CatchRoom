@@ -13,6 +13,10 @@ export const regionIndex = atom<number[]>({
     .fill(0)
     .map((_, index) => index),
 });
+export const regionBooleanIndex = atom<boolean[]>({
+  key: 'regionBooleanIndex',
+  default: Array(REGION_NAMES.length).fill(true),
+});
 
 // 2. 날짜
 export const isAllDayCheckedState = atom<boolean>({
@@ -41,6 +45,10 @@ export const roomIndex = atom<number[]>({
   default: Array(ROOM_CATEGORIES.length)
     .fill(0)
     .map((_, index) => index),
+});
+export const roomBooleanIndex = atom<boolean[]>({
+  key: 'roomBooleanIndex',
+  default: Array(ROOM_CATEGORIES.length).fill(true),
 });
 
 // 4. 인원수 카운터

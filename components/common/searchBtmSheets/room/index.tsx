@@ -1,11 +1,12 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ROOM_CATEGORIES, SEARCH_DEFAULT } from '@/constants/search-detail';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { useRecoilState } from 'recoil';
 import {
   isRoomCheckedState,
+  roomBooleanIndex,
   roomIndex,
 } from '@/atoms/search-detail/searchStates';
 
@@ -17,9 +18,8 @@ const RoomBottomSheet = ({
   const [isRoomChecked, setIsRoomChecked] =
     useRecoilState<boolean>(isRoomCheckedState);
   const [roomBtnIdx, setRoomBtnIdx] = useRecoilState<number[]>(roomIndex);
-  const [isRoomBtnSelected, setIsRoomBtnSelected] = useState<boolean[]>(
-    Array(ROOM_CATEGORIES.length).fill(true),
-  );
+  const [isRoomBtnSelected, setIsRoomBtnSelected] =
+    useRecoilState<boolean[]>(roomBooleanIndex);
 
   useEffect(() => {
     const debounce = setTimeout(() => {
