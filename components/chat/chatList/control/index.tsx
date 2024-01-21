@@ -1,22 +1,24 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
-// import ChatItem from '../../chatItem';
 import { useCookies } from 'react-cookie';
-import { ChatRoomType } from '@/types/chat/chatRoom/types';
-import ChatItem from '../../chatItem';
+import { useSetRecoilState } from 'recoil';
+import { chatAllRoomAtom } from '@/atoms/chat/chatContentAtom';
 
-const ChatList = () => {
+const ChatConrol = ({ children }: { children: ReactNode }) => {
   const [ws, setWs] = useState<CompatClient | null>(null);
-  const [room, setRoom] = useState<ChatRoomType[]>([]);
+  const setChatList = useSetRecoilState(chatAllRoomAtom);
   const [cookies] = useCookies();
+
+  const accessToken = cookies.accessToken;
+  const userId = cookies.id;
 
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
       headers: {
-        Authorization: `Bearer ${cookies.accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     const ws = Stomp.over(sockjs);
@@ -26,26 +28,25 @@ const ChatList = () => {
     ws.connect(
       {
         headers: {
-          Authorization: `Bearer ${cookies.accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
       () => {
-        ws.subscribe(`/sub/chat/roomlist/4`, (message) => {
+        ws.subscribe(`/sub/chat/roomlist/${userId}`, (message) => {
           const recv = JSON.parse(message.body);
-          setRoom(recv);
+          setChatList(recv);
         });
 
         ws.publish({
           destination: `/pub/chat/message`,
           headers: {
-            Authorization: `Bearer ${cookies.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
-            roomId: '4',
-            sender: '민섭',
+            roomId: '-1',
+            sender: 'systemSender',
             type: 'ENTER',
             userId: '4',
-            message: '소켓 연결 성공!',
           }),
         });
       },
@@ -60,16 +61,7 @@ const ChatList = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(room);
-
-  return (
-    <div className="w-full h-full">
-      {room &&
-        room.map((item: ChatRoomType, index: number) => {
-          return <ChatItem key={index} item={item} />;
-        })}
-    </div>
-  );
+  return <div className="w-full h-full">{children}</div>;
 };
 
-export default ChatList;
+export default ChatConrol;

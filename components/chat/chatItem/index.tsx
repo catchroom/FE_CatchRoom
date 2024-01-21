@@ -6,11 +6,27 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { isModalState } from '@/atoms/chat/leaveButton';
 import { useSetRecoilState } from 'recoil';
-import { ChatRoomType } from '@/types/chat/chatRoom/types';
+import { ChatMessageDto, ChatRoomType } from '@/types/chat/chatRoom/types';
+import moment from 'moment';
+import 'moment/locale/ko';
+import { chatRoomAtom } from '@/atoms/chat/chatContentAtom';
 
 const ChatItem = ({ item }: { item: ChatRoomType }) => {
   const router = useRouter();
+  const setRoomInfo = useSetRecoilState(chatRoomAtom);
   const setIsOpen = useSetRecoilState(isModalState);
+
+  // 최근 메세지 시간 보여주는 데이터
+  const getRecentTime = (chatMessageDto: ChatMessageDto) => {
+    if (!chatMessageDto) return '';
+    else return moment(chatMessageDto.time).startOf('hour').fromNow();
+  };
+
+  // 최근 메세지 보여주는 데이터
+  const viewRecentMessage = (chatMessageDto: ChatMessageDto) => {
+    if (!chatMessageDto) return '최근 메세지가 없습니다.';
+    else return chatMessageDto.message;
+  };
 
   // 모달 열고 닫기
   const handleModalOpen = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -20,7 +36,8 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
 
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
-    router.push(`/chat/chatRoom?chatId=${item.chatRoomNumber}`);
+    setRoomInfo(item);
+    router.push(`/chat/${item.chatRoomNumber}`);
   };
 
   return (
@@ -39,16 +56,15 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
         />
       </div>
       <div className="grow">
-        <div data-testid="banner-top" className="flex items-center">
+        <div data-testid="banner-top" className="flex items-center gap-2">
           <p className="text-t3 font-semibold text-text">
             {item.partnerNickName}
           </p>
+          <p className="text-text-sub">{getRecentTime(item.chatMessageDto)}</p>
         </div>
-        <div className="flex">
-          <p className="line-clamp-1 text-text">
-            lastMessage : {item.loginUserIdentity}
-          </p>
-        </div>
+        <p className="text-text text-t2">
+          {viewRecentMessage(item.chatMessageDto)}
+        </p>
       </div>
       <div className="ml-auto" onClick={handleModalOpen}>
         <XSymbolIcon />
