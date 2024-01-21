@@ -12,6 +12,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { signUp, nicknameCheck, login } from '@/api/user/api';
 import nookies from 'nookies';
 import { emailState, passwordState } from '@/atoms/signup/signup';
+import VerifiedIcon from '@/public/svgComponent/verifiedIcon';
 
 const SignUpInfo = () => {
   const router = useRouter();
@@ -198,17 +199,20 @@ const SignUpInfo = () => {
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {nickname && !confirmedNickname && clickedNickInput && (
+            {nickname && clickedNickInput && (
               <div onClick={() => clearField('nickname')}>
                 <DeleteIcon />
               </div>
             )}
-            <div
-              className="cursor-pointer font-bold text-p3 underline"
-              onClick={() => checkNickname(nickname)}
-            >
-              중복확인
-            </div>
+            {!confirmedNickname && (
+              <div
+                className="cursor-pointer font-bold text-p3 underline"
+                onClick={() => checkNickname(nickname)}
+              >
+                중복확인
+              </div>
+            )}
+            {confirmedNickname && <VerifiedIcon />}
           </div>
         </div>
 

@@ -35,6 +35,7 @@ const LoginSheet = ({
 
   const goToSignUp = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    event.preventDefault();
     router.push('/signup');
   };
 
