@@ -5,10 +5,11 @@ const HistoryList = ({
   item,
 }: {
   item: {
+    id: number;
     date: string;
-    totalNum: number;
+    money: number;
     type: string;
-    productName: string;
+    info: string;
   };
 }) => {
   const isWithdraw = item.type === '출금';
@@ -17,16 +18,16 @@ const HistoryList = ({
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="w-full flex items-center">
-        <p className="text-t3">{getDotDate(item.date, true, true)}</p>
+        <p className="text-t3">{getDotDate(item.date, true, false)}</p>
       </div>
       <div className="flex justify-between items-center text-p2 font-semibold">
         <p className={`text-text`}>
-          {item.productName}
+          {item.info}
           {returnWord}
         </p>
         <div className={`${isWithdraw ? 'text-text-primary' : 'text-text'}`}>
           <span>{isWithdraw ? '- ' : '+ '}</span>
-          {item.totalNum.toLocaleString()}원
+          {item.money.toLocaleString()}원
         </div>
       </div>
     </div>

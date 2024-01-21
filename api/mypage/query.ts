@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchMypageSelling, fetchMypageSellingTest } from './testApi';
-import { getAccount } from './api';
+import { getAccount, depositDetail } from './api';
 
 const queryData = {
   ing: {
@@ -23,11 +23,25 @@ export const useMyPageQuery = (queryCase: keyof QueryData) => {
   return { data, isLoading, error };
 };
 
-// 9.
+// 9
 export const useQueryGetAccount = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['getAccount'],
     queryFn: getAccount,
+    select: ({ data }) => data,
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};
+
+// 14
+export const useQueryGetDetail = () => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['depositDetail'],
+    queryFn: depositDetail,
     select: ({ data }) => data,
   });
   return {
