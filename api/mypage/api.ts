@@ -91,7 +91,7 @@ export const deleteAccount = async () => {
 ///////// 여기까지 현재 진행중/////////////
 
 // 13. 예치금 출금하기
-export const withdrawAccount = async (deposit: number) => {
+export const withdrawAccount = async (deposit: string) => {
   const res = await apiClient.post(
     `/v1/mypage/deposit/withdraw?deposit=${deposit}`,
   );
