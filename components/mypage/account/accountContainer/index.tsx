@@ -5,6 +5,8 @@ import WarningSVG from '@/public/svgComponent/warning';
 import Link from 'next/link';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getAccount } from '@/api/mypage/api';
+import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
+import { deleteAccount } from './../../../../api/mypage/api';
 
 const AccountContainer = ({ children }: { children: ReactNode }) => {
   const [balance, setBalance] = useState<number>();
@@ -54,9 +56,30 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
 
               <p>{accountNumber}</p>
             </div>
-            <Link href="/mypage/dashboard/account">
-              <button className="underline font-medium text-text">수정</button>
-            </Link>
+
+            {/* 눌리면 바텀시트 열리게 */}
+
+            <BottomSheetsWithoutCloseBtn
+              buttonSelect="more"
+              outerControlAtom="more"
+              outerControl={false}
+            >
+              <div className="flex flex-col gap-7 w-full py-3 text-t1 font-bold">
+                {/* 누르면 계좌 선택 페이지로 이동? */}
+                <Link href="/mypage/dashboard/account">수정하기</Link>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => {
+                    deleteAccount().then((res) => {
+                      console.log(res.data);
+                      window.location.href = '/mypage';
+                    });
+                  }}
+                >
+                  삭제하기
+                </div>
+              </div>
+            </BottomSheetsWithoutCloseBtn>
           </>
         )}
       </div>
