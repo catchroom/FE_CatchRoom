@@ -1,21 +1,22 @@
-import nookies from 'nookies';
 import axios from 'axios';
-const accessToken = nookies.get(null)['accessToken'];
+import { cookies } from 'next/headers';
+const accessToken = cookies().get('accessToken')?.value;
 
 const ACCESSTOKEN = '6231025e-0347-4ae3-9fdd-dd4e6cbb5abe';
 
 // 1. 참여중인 채팅방 리스트 보기
 export const loadedChatList = async () => {
-  const res = await fetch('https://catchroom.xyz/v1/chat/room/list', {
+  const res = await fetch('https://catchroom.store/v1/chat/room/list', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     },
+    cache: 'no-cache',
   });
 
   const data = await res.json();
-  console.log(data);
+  return data;
 };
 
 // 2. 채팅방 생성하기

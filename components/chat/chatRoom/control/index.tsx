@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie';
 import { useSetRecoilState } from 'recoil';
 import { chatAllRoomAtom } from '@/atoms/chat/chatContentAtom';
 
-const ChatConrol = ({ children }: { children: ReactNode }) => {
+const ChatRoomControl = ({ children }: { children: ReactNode }) => {
   const [ws, setWs] = useState<CompatClient | null>(null);
   const setChatList = useSetRecoilState(chatAllRoomAtom);
   const [cookies] = useCookies();
@@ -57,4 +57,4 @@ const ChatConrol = ({ children }: { children: ReactNode }) => {
   return <div className="w-full h-full">{children}</div>;
 };
 
-export default ChatConrol;
+export default ChatRoomControl;
