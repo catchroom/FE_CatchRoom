@@ -31,6 +31,7 @@ const GuestInfo = ({
 
   const clearInput = (fieldName: string) => {
     setValue(fieldName, '');
+    setValue('sameAsReservation', false);
   };
 
   const isChecked = watch('sameAsReservation', false);
