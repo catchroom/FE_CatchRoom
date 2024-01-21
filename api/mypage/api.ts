@@ -4,26 +4,26 @@ import { apiClient } from '../user/apiClient';
 const accessToken = nookies.get(null)['accessToken'];
 
 //6. 로그아웃
-export const logout = async () => {
-  const res = await apiClient.post('/v1/mypage/logout');
-  return res.data;
-};
-
 // export const logout = async () => {
-//   console.log(accessToken);
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
-//     {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     },
-//   );
-//   const data = await res.json();
-//   return data;
+//   const res = await apiClient.post('/v1/mypage/logout');
+//   return res.data;
 // };
+
+export const logout = async () => {
+  console.log(accessToken);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
+  const data = await res.json();
+  return data;
+};
 
 // 7. 닉네임 변경
 
@@ -67,7 +67,7 @@ export const registerAccount = async (
 
 /////////여기부터 연결 진행중//////////
 
-// 11. 예치금 계좌 수정하기 --------> 테스트는 더미데이터 받아야함
+// 11. 예치금 계좌 수정하기
 export const editAccount = async (
   bankName: string,
   accountNumber: string,
@@ -91,32 +91,20 @@ export const deleteAccount = async () => {
 ///////// 여기까지 현재 진행중/////////////
 
 // 13. 예치금 출금하기
-export const 출금Account = async (deposit: number) => {
-  const res = await apiClient.post(`/v1/mypage/deposit/withdraw`, { deposit });
+export const withdrawAccount = async (deposit: number) => {
+  const res = await apiClient.post(
+    `/v1/mypage/deposit/withdraw?deposit=${deposit}`,
+  );
   return res.data;
 };
 
-// 예치금 내역 보기 (상세 조회) get  ---> id
-export const 예치금내역보기 = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/deposit/detail`,
-    {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
-
-  const data = await res.json();
-  if (data.code === 2014) {
-    return data;
-  } else if (data.code === 1011) {
-    //에러코드 수정하기!!
-    console.log(data.message);
-  }
+// 14. 예치금 내역 보기 (상세 조회)
+export const depositDetail = async () => {
+  const res = await apiClient.get(`/v1/mypage/deposit/detail`);
+  return res.data;
 };
+
+/////////////////////////연결///////////////////////
 
 // 나의 판매 내역 - 게시중 get
 export const 판매내역게시중 = async () => {

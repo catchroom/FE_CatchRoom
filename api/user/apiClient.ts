@@ -1,10 +1,12 @@
 import axios from 'axios';
 import nookies from 'nookies';
+import { getNewToken } from './api';
 
 export const apiClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
 });
 
+const accessToken = nookies.get(null)['accessToken'];
 const refreshToken = nookies.get(null)['refreshToken'];
 
 apiClient.interceptors.request.use(
@@ -15,7 +17,9 @@ apiClient.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error),
+  (error) => {
+    return Promise.reject(error);
+  },
 );
 
 apiClient.interceptors.response.use(
@@ -23,40 +27,29 @@ apiClient.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log('리프레쉬 있닝', refreshToken);
-    //로그아웃 할때는 재발급 요청 안되게 추가
-    if (error.config.url === '/v1/mypage/logout') {
-      return Promise.reject(error);
-    }
-    //재발급 요청
-    if (
-      error.response.code === 401 ||
-      error.response.code === 5000 ||
-      error.response.code === 5001
-    ) {
-      console.log(refreshToken);
-      const res = await apiClient.post(
-        '/v1/user/accesstoken',
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${refreshToken}`,
-          },
-        },
-      );
+    console.log('기존 액세스', accessToken);
+    const originalRequest = error.config;
+    console.log(error);
 
-      console.log(res.data);
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
 
-      const accessToken = res.data.accessToken;
+      console.log('refresh', refreshToken);
+
+      const res = await getNewToken();
+      console.log('발급요청 성공 토큰', res.data);
+
+      const accessToken = res.data;
+
       if (accessToken) {
         nookies.set(null, 'accessToken', accessToken, {
           path: '/',
         });
+        console.log('집어넣는 토큰', accessToken);
 
         // 재시도
-        error.config.headers['Authorization'] = `Bearer ${accessToken}`;
-        return apiClient.request(error.config);
+        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+        return apiClient.request(originalRequest);
       }
     }
 
