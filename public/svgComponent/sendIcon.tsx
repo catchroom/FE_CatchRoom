@@ -1,5 +1,5 @@
 import * as React from "react";
-const SVGComponent = () => (
+const SendIconSVG = () => (
   <svg
     width={28}
     height={28}
@@ -22,4 +22,4 @@ const SVGComponent = () => (
     </defs>
   </svg>
 );
-export default SVGComponent;
+export default SendIconSVG;
