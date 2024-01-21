@@ -3,24 +3,13 @@
 import MoneySVG from '@/public/svgComponent/money';
 import WarningSVG from '@/public/svgComponent/warning';
 import Link from 'next/link';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { getAccount } from '@/api/mypage/api';
+import React, { ReactNode } from 'react';
+import { useQueryGetAccount } from '@/api/mypage/query';
 import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
 import { deleteAccount } from './../../../../api/mypage/api';
 
 const AccountContainer = ({ children }: { children: ReactNode }) => {
-  const [balance, setBalance] = useState<number>();
-  const [accountNumber, setAccountNumber] = useState('');
-
-  useEffect(() => {
-    getAccount().then((res) => {
-      if (res.code === 2005) {
-        console.log(res.data);
-        setBalance(res.data.balance);
-        setAccountNumber(res.data.accountNumber);
-      }
-    });
-  }, []);
+  const { data } = useQueryGetAccount();
 
   return (
     <section className="w-full flex flex-col gap-4 px-4 pt-4 bg-white ">
@@ -29,15 +18,15 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
           <MoneySVG />
           <p>예치금</p>
         </div>
-        <p>{balance ? balance.toLocaleString('us-EN') : '0'}원</p>
+        <p>{data?.balance ? data.balance.toLocaleString('us-EN') : '0'}원</p>
       </div>
       {/* 계좌 번호가 있거나 없을때 판단 */}
       <div
         className={`flex justify-between items-center p-3 ${
-          !accountNumber ? 'bg-surface-critical' : 'bg-surface-gray'
+          !data?.accountNumber ? 'bg-surface-critical' : 'bg-surface-gray'
         }`}
       >
-        {!accountNumber ? (
+        {!data?.accountNumber ? (
           <>
             <div className="flex items-center gap-2 text-p2">
               <WarningSVG />
@@ -54,7 +43,7 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
             <div className="flex items-center gap-2 text-p2">
               <p className=" text-text-sub">내 계좌</p>
 
-              <p>{accountNumber}</p>
+              <p>{data?.accountNumber}</p>
             </div>
 
             {/* 눌리면 바텀시트 열리게 */}
