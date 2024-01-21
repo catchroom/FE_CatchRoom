@@ -39,6 +39,7 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
 
   const onSubmit: SubmitHandler<FormWithdraw> = (data) => {
     if (schema.safeParse(data)) {
+      //api연결
       openModal();
     } else {
       console.log('error');

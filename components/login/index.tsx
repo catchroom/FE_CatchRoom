@@ -63,11 +63,11 @@ const LoginForm = () => {
 
           nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
-            // maxAge: 30, //30초
+            maxAge: 60 * 30, //30분
           });
           nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',
-            // maxAge: 60 * 60 * 24 * 2, //2일
+            maxAge: 60 * 60 * 24 * 2, //2일
           });
 
           window.location.href = '/mypage';

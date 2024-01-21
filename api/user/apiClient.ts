@@ -53,6 +53,9 @@ apiClient.interceptors.response.use(
       }
     }
 
+    //재발급 수정 필요
+    console.log(Promise.reject(error));
+
     return Promise.reject(error);
   },
 );
