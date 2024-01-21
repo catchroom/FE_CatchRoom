@@ -4,25 +4,33 @@ import PaymentModal from '@/components/order/modal';
 import Modal from '@/components/common/modal';
 import { PaymentButtonProps } from '@/types/order/paymentButton/type';
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
-import { selectedPaymentMethodState } from '@/atoms/order/paymentMethodAtom';
+// import { useRecoilValue } from 'recoil';
+// import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
+// import { selectedPaymentMethodState } from '@/atoms/order/paymentMethodAtom';
 
-const PaymentButton = ({ amount }: PaymentButtonProps) => {
-  const selectedPaymentMethod = useRecoilValue(selectedPaymentMethodState);
-  const selectedTerms = useRecoilValue(selectedTermsState);
+const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
+  // const selectedPaymentMethod = useRecoilValue(sel0e00ctedPaymentMethodState);
+  // const selectedTerms = useRecoilValue(selectedTermsState);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [modalType, setModalType] = useState('orderConfirmation');
+  // const [modalType, setModalType] = useState('orderConfirmation');
 
-  const handleOpenModal = () => {
-    if (!selectedPaymentMethod) {
-      setModalType('paymentMethodFailure');
-    } else if (selectedTerms.length !== 3) {
-      setModalType('termsFailure');
+  // const handleOpenModal = () => {
+  //   if (!selectedPaymentMethod) {
+  //     setModalType('paymentMethodFailure');
+  //   } else if (selectedTerms.length !== 3) {
+  //     setModalType('termsFailure');
+  //   } else {
+  //     setModalType('orderConfirmation');
+  //   }
+  //   setModalOpen(true);
+  // };
+
+  const handleSubmit = () => {
+    if (formRef.current) {
+      formRef.current.submitForm();
     } else {
-      setModalType('orderConfirmation');
+      console.error('Form ref is not available');
     }
-    setModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -35,7 +43,8 @@ const PaymentButton = ({ amount }: PaymentButtonProps) => {
     <>
       <div className="fixed bottom-0 bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-1 ">
         <button
-          onClick={handleOpenModal}
+          // onClick={handleOpenModal}
+          onClick={handleSubmit}
           className="w-full bg-action-primary text-white font-semibold py-3 rounded leading-7"
         >
           {formattedAmount} 결제하기
