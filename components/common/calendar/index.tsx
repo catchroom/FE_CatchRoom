@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { useRecoilState } from 'recoil';
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
@@ -9,7 +9,7 @@ import './custom-styles.css';
 import MidLineIcon from '@/public/svgComponent/calendar/midline';
 
 import { CalendarContainerProps } from '@/types/common/calendar/type';
-import { rangeDate } from '@/atoms/search-detail/searchStates';
+import { rangeDate, singleDate } from '@/atoms/search-detail/searchStates';
 
 const CalendarComponent = ({
   useSingleDate,
@@ -18,7 +18,7 @@ const CalendarComponent = ({
   checkInMonth,
   checkInDay,
 }: CalendarContainerProps) => {
-  const [selected, setSelected] = useState<Date | undefined>(undefined);
+  const [selected, setSelected] = useRecoilState(singleDate);
   const [range, setRange] = useRecoilState(rangeDate);
 
   const today = new Date();

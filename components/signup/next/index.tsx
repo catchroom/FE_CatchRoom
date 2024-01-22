@@ -12,6 +12,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { signUp, nicknameCheck, login } from '@/api/user/api';
 import nookies from 'nookies';
 import { emailState, passwordState } from '@/atoms/signup/signup';
+import VerifiedIcon from '@/public/svgComponent/verifiedIcon';
 
 const SignUpInfo = () => {
   const router = useRouter();
@@ -72,6 +73,7 @@ const SignUpInfo = () => {
                   setPassword('');
                   nookies.set(null, 'accessToken', response.data.accessToken, {
                     path: '/',
+                    maxAge: 60 * 29, //29분
                   });
                   nookies.set(
                     null,
@@ -79,6 +81,7 @@ const SignUpInfo = () => {
                     response.data.refreshToken,
                     {
                       path: '/',
+                      maxAge: 60 * 60 * 24 * 2, //2일
                     },
                   );
 
@@ -196,19 +199,21 @@ const SignUpInfo = () => {
             onClick={() => setClickedNickInput(true)}
             onBlur={() => setTimeout(() => setClickedNickInput(false), 200)}
           />
-
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {nickname && !confirmedNickname && clickedNickInput && (
+            {nickname && clickedNickInput && (
               <div onClick={() => clearField('nickname')}>
                 <DeleteIcon />
               </div>
             )}
-            <div
-              className="cursor-pointer font-bold text-p3 underline"
-              onClick={() => checkNickname(nickname)}
-            >
-              중복확인
-            </div>
+            {!confirmedNickname && (
+              <div
+                className="cursor-pointer font-bold text-p3 underline"
+                onClick={() => checkNickname(nickname)}
+              >
+                중복확인
+              </div>
+            )}
+            {confirmedNickname && <VerifiedIcon />}
           </div>
         </div>
 
