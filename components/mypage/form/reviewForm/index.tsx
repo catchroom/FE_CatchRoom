@@ -21,7 +21,6 @@ const ReviewForm = () => {
     }
   };
 
-  console.log('렌ㄹ');
   const maxCharacterCount = 100;
 
   const handleContentChange = (
@@ -46,7 +45,7 @@ const ReviewForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full relative h-64 border border-border-sub rounded-md overflow-hidden"
+      className="w-full relative h-64 border border-border-sub rounded-sm box-content"
     >
       <textarea
         autoFocus
@@ -58,14 +57,12 @@ const ReviewForm = () => {
       />
       <p className="absolute bottom-3 right-3">{wordCount}/100</p>
       {wordCount >= 100 && (
-        <p className="abolute bottom-0 text-text-primary">
+        <p className="text-text-primary">
           리뷰는 최대 100자까지 입력 가능합니다.
         </p>
       )}
       {wordCount < 1 && (
-        <p className="abolute bottom-0 text-text-primary">
-          리뷰는 최소 1자 이상 입력해주세요.
-        </p>
+        <p className="text-text-primary">리뷰는 최소 1자 이상 입력해주세요.</p>
       )}
       <div className="w-full max-w-[480px] fixed bottom-5 left-1/2 -translate-x-1/2 px-5">
         <SimpleButton fn={handleClick} name="등록" type="submit" />

@@ -1,4 +1,5 @@
 import nookies from 'nookies';
+import axios from 'axios';
 const accessToken = nookies.get(null)['accessToken'];
 
 const ACCESSTOKEN = '6231025e-0347-4ae3-9fdd-dd4e6cbb5abe';
@@ -65,4 +66,16 @@ export const loadedChatInfo = async (roomId: string) => {
 
   const data = await res.json();
   console.log(data);
+};
+
+export const fetchChatRoom = async (token: string) => {
+  const data = await axios.get('https://catchroom.xyz/v1/chat/room/list', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await data.data;
+  return result.data;
 };
