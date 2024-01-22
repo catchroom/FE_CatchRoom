@@ -3,11 +3,7 @@
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import BottomSheets from '@/components/common/bottomSheets';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
-import {
-  BANK_LIST,
-  INVESTMENT_BANK_LIST,
-  INPUT_LIST,
-} from '@/constants/mypage';
+import { BANK_LIST, INVESTMENT_BANK_LIST } from '@/constants/mypage';
 import { FormAccount, accountSchema } from '@/constants/zodSchema';
 import { getBankName } from '@/utils/get-bank-name';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,6 +18,8 @@ import FormError from '../formError';
 import { useToastAlert } from '@/hooks/useToastAlert';
 import { useRouter } from 'next/navigation';
 import { registerAccount } from '@/api/mypage/api';
+import { useQueryGetAccount } from '@/api/mypage/query';
+import { editAccount } from './../../../../api/mypage/api';
 
 const BankForm = () => {
   const { alertOpenHandler } = useToastAlert('계좌를 등록했습니다.');
@@ -39,6 +37,8 @@ const BankForm = () => {
     resolver: zodResolver(accountSchema),
     mode: 'onChange',
   });
+  const { data } = useQueryGetAccount();
+  //console.log(data);
 
   const checkInput = () => {
     const { bank, account, name } = watch();
@@ -48,14 +48,26 @@ const BankForm = () => {
     return false;
   };
 
-  const onSubmit: SubmitHandler<FormAccount> = (data) => {
-    if (accountSchema.safeParse(data)) {
-      console.log(data);
-      registerAccount(data.bank, data.account, data.name).then((res) => {
-        if (res.code === 2006) {
-          console.log(res.data);
-        }
-      });
+  const onSubmit: SubmitHandler<FormAccount> = (dataField) => {
+    if (accountSchema.safeParse(dataField)) {
+      console.log(dataField);
+      if (!data) {
+        registerAccount(dataField.bank, dataField.account, dataField.name).then(
+          (res) => {
+            if (res.code === 2006) {
+              console.log(res.data);
+            }
+          },
+        );
+      } else if (data) {
+        editAccount(dataField.bank, dataField.account, dataField.name).then(
+          (res) => {
+            if (res.code === 2010) {
+              console.log(res.data);
+            }
+          },
+        );
+      }
     } else {
       console.log('error');
     }
@@ -75,9 +87,12 @@ const BankForm = () => {
 
   const BANK_VIEW = bankView ? BANK_LIST : INVESTMENT_BANK_LIST;
   const bankName = getBankName(bankView, watch('bank'));
-  const BottomSheetsTitle = bankName
-    ? bankName
-    : '은행 또는 증권사를 선택해주세요';
+  const BottomSheetsTitle = !data
+    ? '은행 또는 증권사를 선택해주세요'
+    : bankName
+      ? bankName
+      : data.bankName;
+  //이 부분 추가 수정
 
   const handleBankClick = () => {
     alertOpenHandler();
@@ -123,21 +138,33 @@ const BankForm = () => {
           render={({ message }) => <FormError message={message} />}
         />
       </div>
-      {INPUT_LIST.map((input) => (
-        <div key={input.name} className="w-full flex flex-col relative">
-          <FormInput
-            value={input.name as keyof FormAccount}
-            register={register}
-            reset={reset}
-            placeholder={input.placeholder}
-          />
-          <ErrorMessage
-            errors={errors}
-            name={input.name as keyof FormAccount}
-            render={({ message }) => <FormError message={message} />}
-          />
-        </div>
-      ))}
+      <div className="w-full flex flex-col relative">
+        <FormInput
+          value="account"
+          register={register}
+          reset={reset}
+          placeholder={data ? data.accountNumber : '계좌번호 입력'}
+        />
+        <ErrorMessage
+          errors={errors}
+          name="account"
+          render={({ message }) => <FormError message={message} />}
+        />
+      </div>
+      <div className="w-full flex flex-col relative">
+        <FormInput
+          value="name"
+          register={register}
+          reset={reset}
+          placeholder={data ? `${data.accountOwner}` : '예금주명'}
+        />
+        <ErrorMessage
+          errors={errors}
+          name="name"
+          render={({ message }) => <FormError message={message} />}
+        />
+      </div>
+
       <div className="w-full max-w-[480px] absolute bottom-5 left-1/2 -translate-x-1/2 px-5">
         <SimpleButton
           fn={handleBankClick}

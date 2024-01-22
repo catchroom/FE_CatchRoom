@@ -85,17 +85,6 @@ export const MYPAGE_PRIVACY = [
   },
 ];
 
-export const INPUT_LIST = [
-  {
-    name: 'account',
-    placeholder: '계좌번호 입력',
-  },
-  {
-    name: 'name',
-    placeholder: '예금주명',
-  },
-];
-
 export const BANK_LIST = [
   { name: '카카오뱅크', value: '카카오뱅크' },
   { name: '농협', value: '농협' },
