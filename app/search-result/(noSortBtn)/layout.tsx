@@ -26,12 +26,7 @@ const filters = [
   { id: 'guests', label: guestsLabel },
 ];
 
-const Searchlayout = ({
-  children,
-}: {
-  children: ReactNode;
-  showProductListControls?: boolean;
-}) => {
+const Searchlayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header title="검색 결과" showBackButton showHomeButton />

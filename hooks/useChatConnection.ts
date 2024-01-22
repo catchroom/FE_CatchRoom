@@ -1,3 +1,6 @@
+'use client';
+
+import { useGetPreviousChat } from '@/api/chat/query';
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useRef } from 'react';
@@ -6,12 +9,15 @@ import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
 export const useChatConnection = (roomId: string) => {
-  const ws = useRef<CompatClient | null>(null);
-  const setChatList = useSetRecoilState(chatContentAtom);
   const [cookies] = useCookies();
-
-  const userId = cookies.id;
   const accessToken = cookies.accessToken;
+  const userId = cookies.id;
+
+  const ws = useRef<CompatClient | null>(null);
+  const { data } = useGetPreviousChat(roomId, accessToken);
+  const setChatList = useSetRecoilState(chatContentAtom);
+
+  console.log('data', data);
 
   console.log('userId', userId);
   console.log('roomId', roomId);
