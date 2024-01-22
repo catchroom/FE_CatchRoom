@@ -31,7 +31,7 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config;
     console.log(error);
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error.response.status === 401 || !originalRequest._retry) {
       originalRequest._retry = true;
 
       console.log('refresh', refreshToken);
@@ -53,8 +53,8 @@ apiClient.interceptors.response.use(
       }
     }
 
-    //재발급 수정 필요
-    console.log(Promise.reject(error));
+    //재발급 수정 필요 --> 콘솔 확인하기
+    console.log('재시도 테스트, 리턴값:', Promise.reject(error));
 
     return Promise.reject(error);
   },

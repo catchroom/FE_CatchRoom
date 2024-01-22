@@ -40,7 +40,7 @@ const ProfileForm = () => {
   const onSubmit: SubmitHandler<FormName> = (data) => {
     if (nicknameSchema.safeParse(data).success) {
       // mutation.mutate(data.nickname);
-      console.log(data);
+      //console.log(data);
       nicknameCheck(data.nickname).then((res) => {
         console.log(res);
         if (res.code === 1010) {
