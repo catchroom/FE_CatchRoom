@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -29,6 +29,7 @@
     "next": "14.0.4",
     "nookies": "^2.5.2",
     "react": "^18",
+    "react-cookie": "^7.0.1",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
+    "@playwright/test": "^1.41.0",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",

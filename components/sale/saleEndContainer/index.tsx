@@ -5,14 +5,14 @@ import { useRecoilValue } from 'recoil';
 import { hourState, minuteState, timeState } from '@/atoms/sale/timeAtom';
 import BottomSheets from '@/components/common/bottomSheets';
 import CalendarComponent from '@/components/common/calendar';
-import { singleDate } from '@/atoms/calendar/calendarAtoms';
 import { getDateWithDay } from '@/utils/get-date-with-day';
+import { saleSingleDate } from '@/atoms/search-detail/searchStates';
 const SaleEndContainer = () => {
   const time = useRecoilValue(timeState);
   const hour = useRecoilValue(hourState);
   const minute = useRecoilValue(minuteState);
 
-  const selected = useRecoilValue(singleDate);
+  const selected = useRecoilValue(saleSingleDate);
   const selectedDateString = getDateWithDay(selected);
 
   const title =
@@ -41,7 +41,7 @@ const SaleEndContainer = () => {
       >
         <div className="w-full flex flex-col">
           <div className="w-full h-[480px]">
-            <CalendarComponent useSingleDate={true} />
+            <CalendarComponent useSingleDate={true} outerControlAtom="sale" />
           </div>
           <SetTime />
         </div>

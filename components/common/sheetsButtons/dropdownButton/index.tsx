@@ -7,21 +7,21 @@ import React, { MouseEventHandler } from 'react';
 const DropdownButton = ({
   name,
   fn,
-  icon,
+  useLocationIcon,
 }: {
   name: string;
   fn: MouseEventHandler<HTMLButtonElement>;
-  icon?: boolean;
+  useLocationIcon?: boolean;
 }) => {
   return (
     <button
       onClick={fn}
       type="button"
-      className="flex items-center py-2 px-3 gap-1 border border-border-sub rounded-[1.2rem]"
+      className="flex items-center gap-2 h-[2.25rem] bg-white rounded-full border border-border-sub px-3 py-2 text-t3 font-semibold"
     >
-      {icon ? <MapPinSmFillIcon /> : null}
+      {useLocationIcon && <MapPinSmFillIcon />}
       {name}
-      <DownArrowIcon />
+      <DownArrowIcon width={12} height={7} />
     </button>
   );
 };

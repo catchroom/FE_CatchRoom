@@ -7,8 +7,13 @@ import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 import './custom-styles.css';
 import MidLineIcon from '@/public/svgComponent/calendar/midline';
-import { rangeDate, singleDate } from '@/atoms/calendar/calendarAtoms';
+
 import { CalendarContainerProps } from '@/types/common/calendar/type';
+import {
+  catchSingleDate,
+  rangeDate,
+  saleSingleDate,
+} from '@/atoms/search-detail/searchStates';
 
 const CalendarComponent = ({
   useSingleDate,
@@ -16,8 +21,16 @@ const CalendarComponent = ({
   checkInYear,
   checkInMonth,
   checkInDay,
+  outerControlAtom = 'sale',
 }: CalendarContainerProps) => {
-  const [selected, setSelected] = useRecoilState(singleDate);
+  const outerControlState = {
+    sale: saleSingleDate,
+    catch: catchSingleDate,
+  };
+
+  const [selected, setSelected] = useRecoilState(
+    outerControlState[outerControlAtom],
+  );
   const [range, setRange] = useRecoilState(rangeDate);
 
   const today = new Date();
@@ -47,13 +60,13 @@ const CalendarComponent = ({
   };
 
   const leftFooterStyle = 'text-h3 font-semibold mr-3 break-keep';
-  const rightFooterStyle = 'text-h3 font-semibold ml-3 break-keep	';
+  const rightFooterStyle = 'text-h3 font-semibold ml-3 break-keep';
 
   let footer = (
     <>
-      <p className={leftFooterStyle}>체크인 날짜</p>
+      <p className={leftFooterStyle}>시작 날짜</p>
       <MidLineIcon />
-      <p className={`${rightFooterStyle} text-text-disabled`}>체크아웃 날짜</p>
+      <p className={`${rightFooterStyle} text-text-disabled`}>끝 날짜</p>
     </>
   );
 
@@ -65,7 +78,7 @@ const CalendarComponent = ({
             {format(range.from, 'MM월 dd일')}
           </p>
           <MidLineIcon />
-          <p className={rightFooterStyle}>체크아웃 날짜</p>
+          <p className={rightFooterStyle}>끝 날짜</p>
         </>
       );
     } else if (range.to) {
@@ -117,10 +130,10 @@ const CalendarComponent = ({
                 <div className="flex flex-col mt-5">
                   <span className="mb-3 text-text-disabled">선택한 날짜</span>
                   <div className="flex items-center text-text-disabled">
-                    <p className={leftFooterStyle}>체크인 날짜</p>
+                    <p className={leftFooterStyle}>시작 날짜</p>
                     <MidLineIcon />
                     <p className={`${rightFooterStyle} text-text-disabled`}>
-                      체크아웃 날짜
+                      끝 날짜
                     </p>
                   </div>
                 </div>

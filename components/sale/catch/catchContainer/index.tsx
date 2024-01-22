@@ -11,9 +11,9 @@ import {
 import BottomSheets from '@/components/common/bottomSheets';
 import BottomSheetsContent from '../bottomSheetsContent';
 import { percentState, priceState } from '@/atoms/sale/priceAtom';
-import { singleDate } from '@/atoms/calendar/calendarAtoms';
 import CalendarComponent from '@/components/common/calendar';
 import { getDateWithDay } from '@/utils/get-date-with-day';
+import { catchSingleDate } from '@/atoms/search-detail/searchStates';
 
 type PropsType = {
   price: number;
@@ -26,7 +26,7 @@ const CatchContainer = ({ price }: PropsType) => {
   const selectedPrice = useRecoilValue(priceState);
   const selectedPercent = useRecoilValue(percentState);
 
-  const selected = useRecoilValue(singleDate);
+  const selected = useRecoilValue(catchSingleDate);
   const selectedDateString = getDateWithDay(selected);
 
   const [selectedCatchPrice, setSelectedCatchPrice] =
@@ -69,7 +69,11 @@ const CatchContainer = ({ price }: PropsType) => {
       <div className="flex justify-between">
         <div className="flex gap-1 items-center">
           <h2 className="text-h5 font-bold">캐치특가 자동 설정</h2>
-          <div onClick={handleQuestionButtonClick} className="cursor-pointer">
+          <div
+            onClick={handleQuestionButtonClick}
+            className="cursor-pointer"
+            data-testid="question-mark"
+          >
             <QuestionMark />
           </div>
         </div>
@@ -80,7 +84,10 @@ const CatchContainer = ({ price }: PropsType) => {
         />
       </div>
       {open && (
-        <div className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom">
+        <div
+          className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom"
+          data-testid="catch-describe"
+        >
           <p className="text-p1 font-bold">
             자동으로 메인 상단에 노출되어 빠른 구매전환을 유도해요!
           </p>
@@ -118,7 +125,10 @@ const CatchContainer = ({ price }: PropsType) => {
               innerButtonTitle={selectedDateString}
             >
               <div className="w-full h-[480px]">
-                <CalendarComponent useSingleDate={true} />
+                <CalendarComponent
+                  useSingleDate={true}
+                  outerControlAtom="catch"
+                />
               </div>
             </BottomSheets>
           </div>

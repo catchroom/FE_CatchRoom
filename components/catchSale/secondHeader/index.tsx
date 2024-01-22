@@ -31,7 +31,6 @@ const SecondHeader = () => {
           title={dropdownTitle}
           outerControl={true}
           buttonSelect="dropdown"
-          icon={true}
         >
           <div className="flex flex-col py-3 gap-7 items-center text-t1 font-bold">
             {DROP_DOWN.map((item) => {
