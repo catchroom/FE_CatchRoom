@@ -12,7 +12,7 @@ const OfferMessage = ({ negoPrice, time, isSeller }: MessageProps) => {
     return (
       <>
         <p className="text-gray-500 text-t3">{formatTime(time)}</p>
-        <div className="w-full bg-white w-56 h-30 flex flex-col items-center border-[1px] border-gray-300 rounded-sm">
+        <div className="w-full bg-white h-30 flex flex-col items-center border-[1px] border-gray-300 rounded-sm">
           <Image
             src="/productImage.png"
             className="w-full h-24 object-cover"

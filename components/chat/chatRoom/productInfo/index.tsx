@@ -23,7 +23,7 @@ const ProductInfo = () => {
       />
       <div className="flex flex-col">
         <div className=" text-t2">{CHAT_ITEMS[chatId].ITEM_INFO.NAME}</div>
-        <div className="font-semibold text-t3 font-semibold">
+        <div className="text-t3 font-semibold">
           {CHAT_ITEMS[chatId].ITEM_INFO.PRICE}원
         </div>
       </div>
