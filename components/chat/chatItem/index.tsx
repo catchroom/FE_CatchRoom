@@ -2,7 +2,6 @@
 
 import React from 'react';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { isModalState } from '@/atoms/chat/leaveButton';
 import { useSetRecoilState } from 'recoil';
@@ -12,7 +11,6 @@ import 'moment/locale/ko';
 import { chatRoomAtom } from '@/atoms/chat/chatContentAtom';
 
 const ChatItem = ({ item }: { item: ChatRoomType }) => {
-  const router = useRouter();
   const setRoomInfo = useSetRecoilState(chatRoomAtom);
   const setIsOpen = useSetRecoilState(isModalState);
 
@@ -37,7 +35,7 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
     setRoomInfo(item);
-    router.push(`/chat/${item.chatRoomNumber}`);
+    window.location.href = `/chat/${item.chatRoomNumber}`;
   };
 
   return (
@@ -60,10 +58,12 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
           <p className="text-t3 font-semibold text-text">
             {item.partnerNickName}
           </p>
-          <p className="text-text-sub">{getRecentTime(item.chatMessageDto)}</p>
+          <p className="text-text-sub">
+            {getRecentTime(item.lastChatmessageDto)}
+          </p>
         </div>
         <p className="text-text text-t2">
-          {viewRecentMessage(item.chatMessageDto)}
+          {viewRecentMessage(item.lastChatmessageDto)}
         </p>
       </div>
       <div className="ml-auto" onClick={handleModalOpen}>

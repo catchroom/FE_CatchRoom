@@ -12,16 +12,19 @@ const ChatConrol = ({ children }: { children: ReactNode }) => {
   const setChatList = useSetRecoilState(chatAllRoomAtom);
   const [cookies] = useCookies();
 
+  console.log(ws);
   const accessToken = cookies.accessToken;
   const userId = cookies.id;
 
   const connect = () => {
+    setWs(null);
+    setChatList([]);
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    const ws = Stomp.over(sockjs);
+    const ws = Stomp.over(() => sockjs);
 
     setWs(ws);
 
@@ -34,7 +37,6 @@ const ChatConrol = ({ children }: { children: ReactNode }) => {
       () => {
         ws.subscribe(`/sub/chat/roomlist/${userId}`, (message) => {
           const recv = JSON.parse(message.body);
-          console.log('새로운 메세지 도착');
           setChatList(recv);
         });
       },
@@ -43,7 +45,12 @@ const ChatConrol = ({ children }: { children: ReactNode }) => {
 
   const disconnect = () => {
     if (!ws) return;
-    ws?.disconnect();
+    ws.unsubscribe(`/sub/chat/roomlist/${userId}`);
+    ws.disconnect(() => {
+      console.log('웹소켓 연결이 종료되었습니다.');
+    });
+    console.log('웹소켓 연결이 종료되었습니다.');
+    console.log(ws);
   };
 
   useEffect(() => {

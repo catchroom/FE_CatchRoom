@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useChatConnection } from '@/hooks/useChatConnection';
 import ChatMessageSender from '../sender';
 
@@ -11,20 +11,20 @@ const ChatRoomControl = ({
   children: ReactNode;
   roomId: string;
 }) => {
-  const { connect, disconnect } = useChatConnection(roomId);
+  const { connect, disconnect, sendMessage } = useChatConnection(roomId);
 
   useEffect(() => {
     connect();
     return () => {
       disconnect();
     };
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="w-full h-full">
       {children}
-      <ChatMessageSender />
+      <ChatMessageSender publish={sendMessage} />
     </div>
   );
 };

@@ -2,6 +2,11 @@ import { ChatContentType } from '@/app/stomp/sock/page';
 import { ChatMessageDto, ChatRoomType } from '@/types/chat/chatRoom/types';
 import { atom } from 'recoil';
 
+export const connectedCheckAtom = atom<boolean>({
+  key: 'connectedCheckAtom',
+  default: false,
+});
+
 export const chatContentAtom = atom<ChatContentType[]>({
   key: 'chatContentAtom',
   default: [],
@@ -22,6 +27,6 @@ export const chatRoomAtom = atom<ChatRoomType>({
     loginUserIdentity: '',
     accommodationUrl: '',
     partnerNickName: '',
-    chatMessageDto: {} as ChatMessageDto,
+    lastChatmessageDto: {} as ChatMessageDto,
   },
 });

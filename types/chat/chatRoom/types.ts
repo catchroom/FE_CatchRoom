@@ -15,7 +15,7 @@ export type ChatRoomType = {
   loginUserIdentity: string;
   accommodationUrl: string;
   partnerNickName: string;
-  chatMessageDto: ChatMessageDto;
+  lastChatmessageDto: ChatMessageDto;
 };
 
 export type ChatMessageDto = {

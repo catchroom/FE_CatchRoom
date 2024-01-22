@@ -10,14 +10,18 @@ const ChatMessageSchema = z.object({
 
 type ChatMessage = z.infer<typeof ChatMessageSchema>;
 
-const ChatMessageSender = () => {
+const ChatMessageSender = ({
+  publish,
+}: {
+  publish: (message: string) => void;
+}) => {
   const [rows, setRows] = React.useState(1);
   const { register, handleSubmit } = useForm<ChatMessage>({
     resolver: zodResolver(ChatMessageSchema),
   });
 
   const handleRows = rows > 1 ? 'rounded-md' : 'rounded-full';
-  const onSubmit: SubmitHandler<ChatMessage> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<ChatMessage> = (data) => publish(data.message);
   return (
     <div className="w-full max-w-[480px] fixed bottom-0 left-1/2 -translate-x-1/2">
       <form

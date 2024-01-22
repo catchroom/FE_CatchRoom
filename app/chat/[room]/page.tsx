@@ -8,7 +8,6 @@ const page = ({ params }: { params: { room: string } }) => {
 
   return (
     <ChatRoomWrapper>
-      {room}
       <ChatRoomControl roomId={room}>
         <ChatMessageViewer />
       </ChatRoomControl>

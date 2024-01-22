@@ -1,6 +1,6 @@
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
@@ -10,7 +10,7 @@ export const useChatConnection = (roomId: string) => {
   const setChatList = useSetRecoilState(chatContentAtom);
   const [cookies] = useCookies();
 
-  const userId = cookies.userId;
+  const userId = cookies.id;
   const accessToken = cookies.accessToken;
 
   const connect = () => {
@@ -18,36 +18,23 @@ export const useChatConnection = (roomId: string) => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      reportErrors: true,
+      debug: true,
     });
-    const ws = Stomp.over(sockjs);
+    const wsClient = Stomp.over(() => sockjs);
 
-    setWs(ws);
-
-    ws.connect(
+    setWs(wsClient);
+    wsClient.connect(
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       },
       () => {
-        ws.subscribe(`/sub/chat/room/${roomId}`, (message) => {
+        wsClient.subscribe(`/sub/chat/room/${roomId}`, (message) => {
           const recv = JSON.parse(message.body);
-          console.log('새로운 메세지 도착');
+          console.log('Message recv:', message);
           setChatList((prev) => [...prev, recv]);
-        });
-
-        ws.publish({
-          destination: `/pub/chat/message`,
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            roomId: roomId,
-            sender: '민섭',
-            type: 'ENTER',
-            userId: userId,
-            message: '안녕하세요',
-          }),
         });
       },
     );
@@ -55,8 +42,20 @@ export const useChatConnection = (roomId: string) => {
 
   const disconnect = () => {
     if (!ws) return;
-    ws?.disconnect();
+    ws.unsubscribe(`/sub/chat/room/${roomId}`);
+    setWs(null);
+    setChatList([]);
+    ws.disconnect();
+    ws.deactivate();
   };
+
+  useEffect(() => {
+    connect();
+    return () => {
+      disconnect();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sendMessage = (message: string) => {
     if (!ws) return;
@@ -76,5 +75,5 @@ export const useChatConnection = (roomId: string) => {
     });
   };
 
-  return { connect, disconnect, ws, sendMessage };
+  return { connect, disconnect, sendMessage };
 };
