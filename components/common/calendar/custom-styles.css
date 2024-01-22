@@ -1,0 +1,98 @@
+/*------------------- 기본 스타일 초기화 -------------------*/
+
+/* 1. 전체 margin값 제거 및 강조효과 제거 */
+.rdp {
+  margin: 0;
+  --rdp-outline: 2px solid #fff;
+}
+
+/* 2. 크기 조정 */
+.rdp-table {
+  max-width: 440px;
+  width: 100%;
+  margin-top: 30px;
+}
+.rdp-caption_start {
+  width: 100%;
+}
+.rdp-tbody {
+  margin-bottom: 40px;
+}
+.rdp-months {
+  padding: 30px 0 30px 0;
+}
+
+/*------------------- 커스텀 스타일 적용 -------------------*/
+
+/* 1. 달력 table 정렬 및 크기수정 */
+tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+.rpd-row > :last-child {
+  margin-bottom: 10px;
+}
+
+th {
+  width: 40px;
+}
+
+/* 2. 요일 색상 및 폰트 수정  */
+.rdp-head_cell {
+  font-size: 16px;
+  font-weight: 400;
+
+  color: #717680;
+}
+
+/* 3. 오늘 날짜 표시효과 추가 */
+.rdp-day_today::before {
+  content: '';
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+
+  background-color: #ff3478;
+  border-radius: 50%;
+}
+.rdp-day_today:not(.rdp-day_outside) {
+  font-weight: 400;
+}
+
+/* 4-1. 선택된 날짜 (single-picker)*/
+.rdp-day_selected,
+.rdp-day_selected:hover {
+  background-color: #ff3478;
+}
+
+/* 4-2. 선택된 날짜 (range-picker) */
+/* 첫 날짜 */
+.rdp:not([dir='rtl']) .rdp-day_range_start:not(.rdp-day_range_end) {
+  border-radius: 20px;
+}
+
+/* 중간 날짜들 */
+.rdp-button_reset.rdp-button.rdp-day.rdp-day_selected.rdp-day_range_middle {
+  border-radius: 20px;
+  background-color: #ffebf1;
+
+  color: black;
+}
+
+/* 마지막 날짜 */
+.rdp:not([dir='rtl']) .rdp-day_range_end:not(.rdp-day_range_start) {
+  border-radius: 20px;
+}
+
+/* 5. 버튼 취소 후 남아있는 selected 배경 white로 제거 */
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: white;
+}

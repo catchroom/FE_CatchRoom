@@ -66,6 +66,7 @@ const SaleItems = () => {
                   type="radio"
                   key={item.id}
                   value={item.productName}
+                  data-testid="radioButton"
                 />
               )}
             />

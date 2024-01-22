@@ -131,6 +131,7 @@ const LoginSheet = ({
                     <div className="flex">
                       <CheckBoxComponent
                         id="allAgree"
+                        data-testid="allAgree"
                         labelText="전체동의"
                         isBoxChecked={allAgree}
                         handleSelectState={(event) =>
@@ -210,6 +211,7 @@ const LoginSheet = ({
                     <div className="flex">
                       <CheckBoxComponent
                         id="Agree5"
+                        data-testid="Agree5"
                         labelText="개인정보 수집 및 이용 동의 (선택)"
                         isBoxChecked={getValues('agree5')}
                         handleSelectState={(event) =>
