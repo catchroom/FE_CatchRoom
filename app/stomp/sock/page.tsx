@@ -15,7 +15,7 @@ export type ChatContentType = {
   message: string;
   sender: string;
   roomId: string;
-  userId: string;
+  userId: number;
 };
 
 const StompPage = ({ children }: { children: ReactNode }) => {
@@ -58,20 +58,6 @@ const StompPage = ({ children }: { children: ReactNode }) => {
     };
     // eslint-disable-next-line
   }, []);
-
-  // const sendMessage = () => {
-  //   if (!ws) return;
-  //   ws.publish({
-  //     destination: `/pub/chat/message`,
-  //     body: JSON.stringify({
-  //       roomId: ROOMID,
-  //       sender: '민섭',
-  //       type: 'TALK',
-  //       userId: 'user1',
-  //       message: '안녕하세용',
-  //     }),
-  //   });
-  // };
 
   const negoMessage = () => {
     if (!ws) return;

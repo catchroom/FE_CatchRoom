@@ -1,6 +1,6 @@
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
@@ -13,6 +13,9 @@ export const useChatConnection = (roomId: string) => {
   const userId = cookies.id;
   const accessToken = cookies.accessToken;
 
+  console.log('userId', userId);
+  console.log('roomId', roomId);
+
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
       headers: {
@@ -24,6 +27,7 @@ export const useChatConnection = (roomId: string) => {
     const wsClient = Stomp.over(() => sockjs);
 
     setWs(wsClient);
+    console.log('wsClient', wsClient);
     wsClient.connect(
       {
         headers: {
@@ -32,8 +36,8 @@ export const useChatConnection = (roomId: string) => {
       },
       () => {
         wsClient.subscribe(`/sub/chat/room/${roomId}`, (message) => {
+          console.log('message', message);
           const recv = JSON.parse(message.body);
-          console.log('Message recv:', message);
           setChatList((prev) => [...prev, recv]);
         });
       },
@@ -43,19 +47,9 @@ export const useChatConnection = (roomId: string) => {
   const disconnect = () => {
     if (!ws) return;
     ws.unsubscribe(`/sub/chat/room/${roomId}`);
-    setWs(null);
-    setChatList([]);
     ws.disconnect();
     ws.deactivate();
   };
-
-  useEffect(() => {
-    connect();
-    return () => {
-      disconnect();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const sendMessage = (message: string) => {
     if (!ws) return;

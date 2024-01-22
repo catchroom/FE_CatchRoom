@@ -9,7 +9,15 @@ export const connectedCheckAtom = atom<boolean>({
 
 export const chatContentAtom = atom<ChatContentType[]>({
   key: 'chatContentAtom',
-  default: [],
+  default: [
+    {
+      type: 'TALK',
+      message: '안녕하세요',
+      sender: '네고왕김네고',
+      userId: 4,
+      roomId: '4983cb81-2bbc-4ce6-9e93-322c98c8fe4d',
+    },
+  ],
 });
 
 export const chatAllRoomAtom = atom<ChatRoomType[]>({
