@@ -52,9 +52,9 @@ const CalendarComponent = ({
 
   let footer = (
     <>
-      <p className={leftFooterStyle}>체크인 날짜</p>
+      <p className={leftFooterStyle}>시작 날짜</p>
       <MidLineIcon />
-      <p className={`${rightFooterStyle} text-text-disabled`}>체크아웃 날짜</p>
+      <p className={`${rightFooterStyle} text-text-disabled`}>끝 날짜</p>
     </>
   );
 
@@ -66,7 +66,7 @@ const CalendarComponent = ({
             {format(range.from, 'MM월 dd일')}
           </p>
           <MidLineIcon />
-          <p className={rightFooterStyle}>체크아웃 날짜</p>
+          <p className={rightFooterStyle}>끝 날짜</p>
         </>
       );
     } else if (range.to) {
@@ -118,10 +118,10 @@ const CalendarComponent = ({
                 <div className="flex flex-col mt-5">
                   <span className="mb-3 text-text-disabled">선택한 날짜</span>
                   <div className="flex items-center text-text-disabled">
-                    <p className={leftFooterStyle}>체크인 날짜</p>
+                    <p className={leftFooterStyle}>시작 날짜</p>
                     <MidLineIcon />
                     <p className={`${rightFooterStyle} text-text-disabled`}>
-                      체크아웃 날짜
+                      끝 날짜
                     </p>
                   </div>
                 </div>
