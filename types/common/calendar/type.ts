@@ -4,4 +4,5 @@ export type CalendarContainerProps = {
   checkInYear?: number;
   checkInMonth?: number;
   checkInDay?: number;
+  outerControlAtom?: 'sale' | 'catch';
 };
