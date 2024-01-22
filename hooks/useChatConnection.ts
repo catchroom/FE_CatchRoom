@@ -26,6 +26,7 @@ export const useChatConnection = (roomId: string) => {
     setChatList(data);
   }, [data, setChatList]);
 
+  // 연결
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
       headers: {
@@ -51,6 +52,7 @@ export const useChatConnection = (roomId: string) => {
     );
   };
 
+  // 연결 해제
   const disconnect = () => {
     if (!ws.current) return;
     ws.current.unsubscribe(`/sub/chat/room/${roomId}`);
@@ -58,6 +60,7 @@ export const useChatConnection = (roomId: string) => {
     ws.current.deactivate();
   };
 
+  // 메시지 전송
   const sendMessage = (message: string) => {
     if (!ws.current) return;
     ws.current.publish({
