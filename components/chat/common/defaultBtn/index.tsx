@@ -21,6 +21,12 @@ const themes: Theme = {
     fontWeight: 'font-bold',
     width: 'w-full',
   },
+  disabled: {
+    backgroundColor: ' bg-action-secondary-disabled',
+    color: ' text-text-disabled font-semibold',
+    borderColor: 'border border-border-sub',
+    width: 'w-full',
+  },
 };
 
 const defaultBtn = (props: ButtonProps) => {
