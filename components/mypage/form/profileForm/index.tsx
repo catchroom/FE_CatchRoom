@@ -7,13 +7,11 @@ import { nicknameSchema, FormName } from '@/constants/zodSchema';
 import { useDebounceText } from '@/hooks/useDebounceText';
 import { ErrorMessage } from '@hookform/error-message';
 import FormInput from '../formInput';
-// import { useCheckNickname } from '@/api/user/query';
-import { editProfile, getNickname } from '@/api/mypage/api';
+import { editProfile, getUserProfile } from '@/api/mypage/api';
 import { nicknameCheck } from '@/api/user/api';
 import Modal from '@/components/common/modal';
 
 const ProfileForm = () => {
-  // const mutation = useCheckNickname();
   const [checkNickname, setCheckNickname] = useState(false);
   const [nickname, setNickname] = useState('');
   const {
@@ -39,8 +37,6 @@ const ProfileForm = () => {
 
   const onSubmit: SubmitHandler<FormName> = (data) => {
     if (nicknameSchema.safeParse(data).success) {
-      // mutation.mutate(data.nickname);
-      console.log(data);
       nicknameCheck(data.nickname).then((res) => {
         console.log(res);
         if (res.code === 1010) {
@@ -80,14 +76,14 @@ const ProfileForm = () => {
   }, [debounceText, nickname]);
 
   useEffect(() => {
-    getNickname().then((res) => {
+    getUserProfile().then((res) => {
       if (res.code === 2004) {
         console.log(res.data); //닉네임 가져온거 찍기
-        reset({ nickname: res.data });
-        setNickname(res.data);
+        reset({ nickname: res.data.nickName });
+        setNickname(res.data.nickName);
       }
     });
-  }, [nickname]);
+  }, []);
 
   return (
     <form

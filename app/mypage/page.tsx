@@ -22,7 +22,7 @@ const page = async () => {
             <ProfileButton />
           </ProfileContainer>
           {/* 가지고 있는 포인트 계좌 내역 */}
-          <AccountContainer balance={9500} account="1234-56-789-01">
+          <AccountContainer>
             {MYPAGE_CONSTANTS.ACCOUNT_BUTTON.map((button) => {
               return (
                 <AccountButton
