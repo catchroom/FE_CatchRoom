@@ -199,9 +199,7 @@ const SignUpInfo = () => {
             onClick={() => setClickedNickInput(true)}
             onBlur={() => setTimeout(() => setClickedNickInput(false), 200)}
           />
-
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-
             {nickname && clickedNickInput && (
               <div onClick={() => clearField('nickname')}>
                 <DeleteIcon />

@@ -17,6 +17,7 @@ const Divide = () => {
   const { data: mypageData, isLoading } = useMyPageQuery(viewCase);
   const Loading = isLoading && <div>loading...</div>;
   console.log(mypageData);
+
   return (
     <div>
       {Loading}

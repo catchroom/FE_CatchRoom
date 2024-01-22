@@ -7,7 +7,7 @@ export const apiClient = axios.create({
 });
 
 const accessToken = nookies.get(null)['accessToken'];
-const refreshToken = nookies.get(null)['refreshToken'];
+// const refreshToken = nookies.get(null)['refreshToken'];
 
 apiClient.interceptors.request.use(
   (config) => {
@@ -34,8 +34,8 @@ apiClient.interceptors.response.use(
     if (error.isAxiosError && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      console.log('originalRequest', originalRequest);
-      console.log('refresh', refreshToken);
+      // console.log('originalRequest', originalRequest);
+      // console.log('refresh', refreshToken);
 
       return getNewToken().then((res) => {
         console.log('발급요청 성공 토큰', res.data);
