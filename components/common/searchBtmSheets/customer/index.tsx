@@ -1,17 +1,33 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   adultCountState,
   childCountState,
-} from '@/atoms/search-detail/checkbox';
+} from '@/atoms/search-detail/searchStates';
 import { useRecoilState } from 'recoil';
 import { SEARCH_DEFAULT } from '@/constants/search-detail';
 import BottomSheets from '@/components/common/bottomSheets';
 import UserCounterComponent from '@/components/searchroom/bodyComponent/searchComponent/userCounter';
 
-const CustomerBottomSheet = () => {
+const CustomerBottomSheet = ({
+  buttonStyle,
+}: {
+  buttonStyle: 'search' | 'dropdown';
+}) => {
   const [adultCount] = useRecoilState(adultCountState);
   const [childCount] = useRecoilState(childCountState);
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      // fetch(adultCount,childCount) 등등 api에 사용 예정
+      console.log('디바운스된 성인, 아동 수 :', adultCount, ', ', childCount);
+    }, 500);
+
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [adultCount, childCount]);
+
   return (
     <>
       {SEARCH_DEFAULT.props.map((prop, index) => {
@@ -34,7 +50,7 @@ const CustomerBottomSheet = () => {
             title={prop.BottomSheetTitle}
             innerTitle={prop.BottomSheetTitle}
             placeholder={placeholderValue}
-            buttonSelect="search"
+            buttonSelect={buttonStyle}
             closeButton
             innerButtonTitle={'확인'}
           >

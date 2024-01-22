@@ -6,7 +6,7 @@ interface DownArrowIconProps extends React.SVGProps<SVGSVGElement> {
   color? : string;
 }
 
-const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8, color='black'}) => (
+const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8, color='#9FA3AB'}) => (
   <svg
     width={width}
     height={height}

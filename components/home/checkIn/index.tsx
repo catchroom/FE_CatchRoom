@@ -8,7 +8,7 @@ import { Button } from '@material-tailwind/react';
 import { useProductInfoPage } from '@/hooks/useProductInfoPage';
 
 const CheckInComponent = () => {
-  const { isLoading, btnHandler } = useBtnLoading('/catch-items');
+  const { isLoading, btnHandler } = useBtnLoading('/deadline-items');
 
   const { pageHandler } = useProductInfoPage();
 
