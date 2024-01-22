@@ -47,7 +47,7 @@ apiClient.interceptors.response.use(
         });
         console.log('집어넣는 토큰', accessToken);
 
-        // 재시도 --> 둘다 안찍힘
+        // 재시도
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
