@@ -1,4 +1,7 @@
-import { adultCountState, childCountState } from '@/atoms/searchroom/checkbox';
+import {
+  adultCountState,
+  childCountState,
+} from '@/atoms/search-detail/searchStates';
 import MinusBtnIcon from '@/public/svgComponent/counter/minusBtn';
 import PlusBtnIcon from '@/public/svgComponent/counter/plusBtn';
 import React, { useEffect, useState } from 'react';
