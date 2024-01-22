@@ -1,12 +1,12 @@
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useState } from 'react';
+import { useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
 export const useChatConnection = (roomId: string) => {
-  const [ws, setWs] = useState<CompatClient | null>(null);
+  const ws = useRef<CompatClient | null>(null);
   const setChatList = useSetRecoilState(chatContentAtom);
   const [cookies] = useCookies();
 
@@ -25,10 +25,8 @@ export const useChatConnection = (roomId: string) => {
       debug: true,
     });
     const wsClient = Stomp.over(() => sockjs);
-
-    setWs(wsClient);
-    console.log('wsClient', wsClient);
-    wsClient.connect(
+    ws.current = wsClient;
+    ws.current.connect(
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -45,15 +43,15 @@ export const useChatConnection = (roomId: string) => {
   };
 
   const disconnect = () => {
-    if (!ws) return;
-    ws.unsubscribe(`/sub/chat/room/${roomId}`);
-    ws.disconnect();
-    ws.deactivate();
+    if (!ws.current) return;
+    ws.current.unsubscribe(`/sub/chat/room/${roomId}`);
+    ws.current.disconnect();
+    ws.current.deactivate();
   };
 
   const sendMessage = (message: string) => {
-    if (!ws) return;
-    ws.publish({
+    if (!ws.current) return;
+    ws.current.publish({
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
