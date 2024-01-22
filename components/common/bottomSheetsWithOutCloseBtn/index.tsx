@@ -34,12 +34,14 @@ const BottomSheetsWithoutCloseBtn = ({
   buttonSelect = 'dropdown',
   outerControl = true,
   outerControlAtom = 'default',
+  icon = false,
 }: {
   children: ReactNode;
   title?: string;
   buttonSelect?: 'dropdown' | 'timePicker' | 'more' | 'sortOptions';
   outerControl?: boolean;
   outerControlAtom?: 'default' | 'datePicker' | 'more';
+  icon?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -78,10 +80,12 @@ const BottomSheetsWithoutCloseBtn = ({
   };
 
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
-    dropdown: <DropdownButton name={title as string} fn={modalOpen} />,
+    dropdown: (
+      <DropdownButton icon={icon} name={title as string} fn={modalOpen} />
+    ),
     timePicker: <TimePickerButton name={title as string} fn={modalOpen} />,
     more: <MoreButton fn={modalOpen} />,
-    sortOptions: <SortOptionsButton name={title} fn={modalOpen} />,
+    sortOptions: <SortOptionsButton name={title as string} fn={modalOpen} />,
   };
 
   return (

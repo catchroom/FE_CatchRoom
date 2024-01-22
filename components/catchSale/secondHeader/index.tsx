@@ -18,7 +18,7 @@ const SecondHeader = () => {
   };
 
   return (
-    <div className="flex justify-between w-full p-5 items-center">
+    <div className="flex  fixed z-20 justify-between w-full p-5 items-center mt-[52px] bg-bg">
       <div className="font-bold text-t2">총 12건</div>
       <div className="flex gap-1 text-p2">
         {/* 드롭다운 UI 나오면 변경 예정 */}
@@ -31,6 +31,7 @@ const SecondHeader = () => {
           title={dropdownTitle}
           outerControl={true}
           buttonSelect="dropdown"
+          icon={true}
         >
           <div className="flex flex-col py-3 gap-7 items-center text-t1 font-bold">
             {DROP_DOWN.map((item) => {
