@@ -25,6 +25,5 @@ export const fetchPreviousChat = async (roomId: string, token: string) => {
   );
 
   const result = await data.data;
-  console.log('result', result);
   return result.data;
 };

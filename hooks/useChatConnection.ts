@@ -3,21 +3,28 @@
 import { useGetPreviousChat } from '@/api/chat/query';
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
 export const useChatConnection = (roomId: string) => {
+  const setChatList = useSetRecoilState(chatContentAtom);
   const [cookies] = useCookies();
+
   const accessToken = cookies.accessToken;
   const userId = cookies.id;
 
-  const ws = useRef<CompatClient | null>(null);
   const { data } = useGetPreviousChat(roomId, accessToken);
-  const setChatList = useSetRecoilState(chatContentAtom);
+  console.log(data);
+  const ws = useRef<CompatClient | null>(null);
 
-  console.log('data', data);
+  // 초기 데이터 로딩
+  useEffect(() => {
+    if (!data) return;
+    console.log(data);
+    setChatList(data);
+  }, [data, setChatList]);
 
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
@@ -37,7 +44,6 @@ export const useChatConnection = (roomId: string) => {
       },
       () => {
         wsClient.subscribe(`/sub/chat/room/${roomId}`, (message) => {
-          console.log('message', message);
           const recv = JSON.parse(message.body);
           setChatList((prev) => [...prev, recv]);
         });
@@ -63,7 +69,6 @@ export const useChatConnection = (roomId: string) => {
         type: 'TALK',
         roomId: roomId,
         message: message,
-        sender: '네고왕김네고',
         userId: userId,
         negoPrice: -1,
       }),
