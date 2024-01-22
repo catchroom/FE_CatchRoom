@@ -43,7 +43,9 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
             <div className="flex items-center gap-2 text-p2">
               <p className=" text-text-sub">내 계좌</p>
 
-              <p>{data?.accountNumber}</p>
+              <p>
+                {data?.accountNumber} ({data?.bankName})
+              </p>
             </div>
 
             {/* 눌리면 바텀시트 열리게 */}
