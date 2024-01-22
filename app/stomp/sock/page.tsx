@@ -11,11 +11,12 @@ import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
 
 export type ChatContentType = {
-  type: 'ENTER' | 'TALK' | 'QUIT';
+  type: 'ENTER' | 'TALK' | 'QUIT' | 'NEGO_REQ' | 'NEGO_ALLOW' | 'NEGO_DENIED ';
   message: string;
   sender: string;
   roomId: string;
   userId: number;
+  time: string;
 };
 
 const StompPage = ({ children }: { children: ReactNode }) => {
