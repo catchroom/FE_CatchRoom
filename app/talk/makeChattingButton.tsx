@@ -28,9 +28,13 @@ const fetchNewChatRoom = async (token: string) => {
 
 const MakeChattingButton = () => {
   const [cookies] = useCookies();
+
   const mutation = useMutation({
     mutationKey: ['newChatRoom'],
-    mutationFn: () => fetchNewChatRoom(cookies.accessToken),
+    mutationFn: (token: string) => fetchNewChatRoom(token),
+    onMutate: () => {
+      console.log('방만들기 시작');
+    },
     onSuccess: (data) => {
       console.log(data, '성공데스');
     },
@@ -40,7 +44,7 @@ const MakeChattingButton = () => {
   });
 
   const handleClick = () => {
-    mutation.mutate();
+    mutation.mutate(cookies.access_token);
   };
 
   return <SimpleButton name="채팅방 만들기" fn={handleClick} />;
