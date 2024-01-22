@@ -17,7 +17,7 @@ const Page = ({
     <div>
       <Header title="판매하기" showBackButton={true} isSale={true} />
       <div className="p-5 mt-[52px]">
-        <SaleInfoContainer />
+        <SaleInfoContainer id={searchParams.id} />
         <Line />
         <SaleEndContainer />
         <Line />

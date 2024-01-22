@@ -6,7 +6,6 @@ export const useQueryGetSalesHistory = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['getSalesHistory'],
     queryFn: getSalesHistory,
-    // select: ({ data }) => data,
   });
   return {
     isLoading,
