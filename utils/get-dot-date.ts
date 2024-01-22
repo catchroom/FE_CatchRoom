@@ -1,19 +1,27 @@
-export const getDotDate = (
-  inputDate: string,
-  noDay = false,
-  noYear = false,
-) => {
+export const getDotDate = (inputDate: string, noDay = true, noYear = false) => {
   const week = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
-  const dayOfWeek = week[new Date(inputDate).getDay()];
-  const dateParts = inputDate.split('-');
-  if (dateParts.length === 3) {
-    const [year, month, day] = dateParts;
-    return noYear
-      ? `${year}.${month}.${day}`
-      : `${month}.${day} ${noDay ? '' : dayOfWeek}`;
-  } else {
-    return 'Invalid Date';
+  const date = new Date(inputDate);
+  const dayOfWeek = week[date.getDay()];
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  let formattedDate = `${
+    date.getMonth() + 1
+  }.${date.getDate()}.${hours}:${minutes} ${dayOfWeek}`;
+
+  if (!noDay) {
+    formattedDate = `${date.getFullYear()}.${
+      date.getMonth() + 1
+    }.${date.getDate()}.${hours}:${minutes} ${dayOfWeek}`;
   }
+
+  if (!noYear) {
+    formattedDate = `${date.getFullYear()}.${
+      date.getMonth() + 1
+    }.${date.getDate()}.${hours}:${minutes}`;
+  }
+
+  return formattedDate;
 };
 
 export const decodeState = (state: StateType, date?: string) => {
@@ -30,6 +38,25 @@ export const decodeState = (state: StateType, date?: string) => {
       return `구매일 ${date}`;
   }
 };
+
+export const decodeReviewState = (ismodify: ReviewType) => {
+  switch (ismodify) {
+    case 'onReview':
+      return '작성한 리뷰보기';
+    case 'noReview':
+      return '리뷰쓰기';
+    case 'deleteReview':
+      return '리뷰 삭제완료';
+    default:
+      return '리뷰 작성기한 만료';
+  }
+};
+
+export type ReviewType =
+  | 'onReview'
+  | 'noReview'
+  | 'deleteReview'
+  | 'outDatedReview';
 
 // decodeState return type
 export type StateType =

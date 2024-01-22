@@ -10,8 +10,11 @@ import Modal from '@/components/common/modal';
 import FormInput from '../formInput';
 import FormError from '../formError';
 import { useRouter } from 'next/navigation';
+import { useToastAlert } from '@/hooks/useToastAlert';
+import { withdrawAccount } from '@/api/mypage/api';
 
 const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
+  const { alertOpenHandler } = useToastAlert('출금이 완료되었습니다.');
   const [modal, setModal] = useState(false);
   const router = useRouter();
   const schema = withdrawSchema(originalBalance);
@@ -37,9 +40,10 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
 
   const onSubmit: SubmitHandler<FormWithdraw> = (data) => {
     if (schema.safeParse(data)) {
+      withdrawAccount(data.balance);
       openModal();
     } else {
-      console.log('error');
+      console.log('출금 실패');
     }
   };
 
@@ -50,6 +54,10 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
       return true;
     }
     return false;
+  };
+
+  const handleClick = () => {
+    alertOpenHandler();
   };
 
   return (
@@ -71,13 +79,14 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
           />
           {!errors.balance && (
             <p className=" text-t3 text-text-sub">
-              출금 가능 금액 : {originalBalance.toLocaleString()}원
+              출금 가능 금액 : {originalBalance.toLocaleString('us-EN')}원
             </p>
           )}
         </div>
       </div>
       <div className="w-full max-w-[480px] absolute bottom-5 left-1/2 -translate-x-1/2 px-5">
         <SimpleButton
+          fn={handleClick}
           disabled={disabledButton()}
           name="출금하기"
           type="submit"

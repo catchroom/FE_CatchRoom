@@ -15,7 +15,7 @@ const page = () => {
         />
         <p className="px-5 py-2 text-p2 text-text-sub leading-[20px]">
           건전한 네고를 위해 무리한 제안은 지양해 주세요. <br />
-          최종결제금액은 구매수수료의 5%가 추가 합산됩니다.
+          최종결제금액은 구매수수료 5%가 추가 합산됩니다.
         </p>
         <OfferBtn />
       </div>

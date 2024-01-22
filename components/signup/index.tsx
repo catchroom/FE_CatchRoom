@@ -11,6 +11,7 @@ import Modal from '../common/modal';
 import { emailState, passwordState } from '@/atoms/signup/signup';
 import { useSetRecoilState } from 'recoil';
 import { emailCheck } from '@/api/user/api';
+import VerifiedIcon from '@/public/svgComponent/verifiedIcon';
 
 const SignUpAuth = () => {
   const router = useRouter();
@@ -106,21 +107,24 @@ const SignUpAuth = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedEmailInput(true)}
-            onBlur={() => setClickedEmailInput(false)}
+            onBlur={() => setTimeout(() => setClickedEmailInput(false), 200)}
           />
 
           <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
-            {email && !confirmedEmail && clickedEmailInput && (
+            {email && clickedEmailInput && (
               <div onClick={() => clearField('email')}>
                 <DeleteIcon />
               </div>
             )}
-            <div
-              className="cursor-pointer font-bold text-p3 underline"
-              onClick={() => checkEmail(email)}
-            >
-              중복확인
-            </div>
+            {!confirmedEmail && (
+              <div
+                className="cursor-pointer font-bold text-p3 underline"
+                onClick={() => checkEmail(email)}
+              >
+                중복확인
+              </div>
+            )}
+            {confirmedEmail && <VerifiedIcon />}
           </div>
         </div>
 
@@ -150,7 +154,7 @@ const SignUpAuth = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPwInput(true)}
-            onBlur={() => setClickedPwInput(false)}
+            onBlur={() => setTimeout(() => setClickedPwInput(false), 200)}
           />
 
           {password && clickedPwInput && (
@@ -184,7 +188,7 @@ const SignUpAuth = () => {
                   : 'border-gray-400'
             } outline-none`}
             onClick={() => setClickedPwCheckInput(true)}
-            onBlur={() => setClickedPwCheckInput(false)}
+            onBlur={() => setTimeout(() => setClickedPwCheckInput(false), 200)}
           />
 
           {passwordCheck && clickedPwCheckInput && (

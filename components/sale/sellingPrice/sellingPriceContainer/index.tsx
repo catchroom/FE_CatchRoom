@@ -45,9 +45,15 @@ const SellingPriceContainer = ({ price }: PropsType) => {
         <div className="flex justify-between">
           <p>판매가</p>
           <div className="flex gap-2 items-center">
-            <p className="bg-surface-primary text-text-primary rounded px-2 py-1 font-bold text-p2">
-              {selectedPercent}%
-            </p>
+            {selectedPrice !== 0 ? (
+              <p
+                data-testid="percent-badge"
+                className="bg-surface-primary text-text-primary rounded px-2 py-1 font-bold text-p2"
+              >
+                {selectedPercent}%
+              </p>
+            ) : null}
+
             <span>{selectedPrice.toLocaleString()}원</span>
           </div>
         </div>

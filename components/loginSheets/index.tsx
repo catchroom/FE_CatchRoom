@@ -35,6 +35,7 @@ const LoginSheet = ({
 
   const goToSignUp = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    event.preventDefault();
     router.push('/signup');
   };
 
@@ -130,6 +131,7 @@ const LoginSheet = ({
                     <div className="flex">
                       <CheckBoxComponent
                         id="allAgree"
+                        data-testid="allAgree"
                         labelText="전체동의"
                         isBoxChecked={allAgree}
                         handleSelectState={(event) =>
@@ -165,12 +167,14 @@ const LoginSheet = ({
                         }
                       />
                     </div>
-                    <Link
-                      href="/mypage/dashboard/terms"
+                    <div
                       className="text-raspberry"
+                      onClick={() => {
+                        router.push('/mypage/dashboard/terms');
+                      }}
                     >
                       보기
-                    </Link>
+                    </div>
                   </div>
 
                   <div className={checkDivStyle}>
@@ -185,7 +189,7 @@ const LoginSheet = ({
                       />
                     </div>
                     <Link
-                      href="/mypage/dashboard/terms"
+                      href="/mypage/dashboard/privacy"
                       className="text-raspberry"
                     >
                       보기
@@ -207,6 +211,7 @@ const LoginSheet = ({
                     <div className="flex">
                       <CheckBoxComponent
                         id="Agree5"
+                        data-testid="Agree5"
                         labelText="개인정보 수집 및 이용 동의 (선택)"
                         isBoxChecked={getValues('agree5')}
                         handleSelectState={(event) =>
@@ -215,7 +220,7 @@ const LoginSheet = ({
                       />
                     </div>
                     <Link
-                      href="/mypage/dashboard/terms"
+                      href="/mypage/dashboard/privacy"
                       className="text-raspberry"
                     >
                       보기
