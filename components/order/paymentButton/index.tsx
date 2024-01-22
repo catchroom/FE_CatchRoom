@@ -4,30 +4,32 @@ import PaymentModal from '@/components/order/modal';
 import Modal from '@/components/common/modal';
 import { PaymentButtonProps } from '@/types/order/paymentButton/type';
 import React, { useState } from 'react';
-// import { useRecoilValue } from 'recoil';
-// import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
-// import { selectedPaymentMethodState } from '@/atoms/order/paymentMethodAtom';
+import { useRecoilValue } from 'recoil';
+import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
 
 const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
-  // const selectedPaymentMethod = useRecoilValue(sel0e00ctedPaymentMethodState);
-  // const selectedTerms = useRecoilValue(selectedTermsState);
+  const selectedTerms = useRecoilValue(selectedTermsState);
   const [isModalOpen, setModalOpen] = useState(false);
-  // const [modalType, setModalType] = useState('orderConfirmation');
-
-  // const handleOpenModal = () => {
-  //   if (!selectedPaymentMethod) {
-  //     setModalType('paymentMethodFailure');
-  //   } else if (selectedTerms.length !== 3) {
-  //     setModalType('termsFailure');
-  //   } else {
-  //     setModalType('orderConfirmation');
-  //   }
-  //   setModalOpen(true);
-  // };
+  const [modalType, setModalType] = useState('orderConfirmation');
 
   const handleSubmit = () => {
     if (formRef.current) {
+      const formValues = formRef.current.getValues();
       formRef.current.submitForm();
+      if (!formValues.name || !formValues.phone) {
+        setModalType('formValidationFailure');
+        setModalOpen(true);
+        return;
+      }
+
+      if (selectedTerms.length !== 3) {
+        setModalType('termsFailure');
+        setModalOpen(true);
+        return;
+      }
+
+      setModalType('orderConfirmation');
+      setModalOpen(true);
     } else {
       console.error('Form ref is not available');
     }
@@ -36,14 +38,12 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-
   const formattedAmount = `${amount.toLocaleString('ko-KR')}원`;
 
   return (
     <>
       <div className="fixed bottom-0 bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-1 ">
         <button
-          // onClick={handleOpenModal}
           onClick={handleSubmit}
           className="w-full bg-action-primary text-white font-semibold py-3 rounded leading-7"
         >
@@ -55,10 +55,10 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
         <PaymentModal isOpen={isModalOpen} onClose={handleCloseModal} />
       )}
 
-      {isModalOpen && modalType === 'paymentMethodFailure' && (
+      {isModalOpen && modalType === 'formValidationFailure' && (
         <Modal
           title="결제 실패"
-          content="주문내역과 결제수단을 확인해 주세요"
+          content="이용자 정보를 모두 입력해주세요"
           onConfirm={handleCloseModal}
           confirmString="확인"
           showConfirmButton={true}

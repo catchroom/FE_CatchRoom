@@ -1,23 +1,14 @@
 'use client';
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useEffect,
-  useState,
-} from 'react';
+import React, { forwardRef, useImperativeHandle, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { guestInfoSchema } from '@/constants/zodSchema';
 import CheckBoxComponent from '@/components/common/checkBox';
-import Modal from '@/components/common/modal';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
-
-// 미입력시 모달 로직,유효성 검사 수정 예정
-
-type GuestInfoProps = {
-  name: string;
-  phoneNumber: string;
-};
+import {
+  GuestInfoFormData,
+  GuestInfoProps,
+} from '@/types/order/guestInfo/types';
 
 const GuestInfo = forwardRef(
   (
@@ -26,20 +17,24 @@ const GuestInfo = forwardRef(
   ) => {
     useImperativeHandle(ref, () => ({
       submitForm: () => handleSubmit(onSubmit)(),
+      getValues,
     }));
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const {
       register,
       handleSubmit,
       setValue,
       watch,
+      clearErrors,
+      getValues,
+
       formState: { errors },
-    } = useForm({
+    } = useForm<GuestInfoFormData>({
       resolver: zodResolver(guestInfoSchema),
+      mode: 'onBlur',
     });
 
-    const clearInput = (fieldName: string) => {
+    const clearInput = (fieldName: 'name' | 'phone') => {
       setValue(fieldName, '');
       setValue('sameAsReservation', false);
     };
@@ -49,41 +44,24 @@ const GuestInfo = forwardRef(
     const watchedName = watch('name');
     const watchedPhone = watch('phone');
 
-    // eslint-disable-next-line
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: GuestInfoFormData) => {
       console.log(data);
-      const isFormEmpty = !data.name && !data.phone;
-
-      if (Object.keys(errors).length > 0 || isFormEmpty) {
-        setIsModalOpen(true);
-      } else {
-        console.log('폼 제출 성공');
-      }
     };
 
     useEffect(() => {
       if (isChecked) {
         setValue('name', defaultName);
         setValue('phone', defaultPhoneNumber);
+        clearErrors(['name', 'phone']);
       } else {
         setValue('name', '');
         setValue('phone', '');
       }
-    }, [isChecked, setValue, defaultName, defaultPhoneNumber]);
+    }, [isChecked, setValue, defaultName, defaultPhoneNumber, clearErrors]);
 
     const handleSelectState = () => {
       setValue('sameAsReservation', !isChecked);
     };
-
-    let modalContent = '이용자 정보를 입력해주세요.';
-    if (errors.name && errors.phone) {
-      modalContent = '이용자 정보를 모두 입력해주세요.';
-    } else if (errors.name) {
-      modalContent = '이름을 입력해주세요.';
-    } else if (errors.phone) {
-      modalContent = '휴대폰번호를 입력해주세요.';
-    }
-
     const baseInputStyle = `w-full rounded-md border border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2`;
     const inputWrapperStyle =
       'relative flex items-center border border-border-sub rounded-md';
@@ -125,7 +103,9 @@ const GuestInfo = forwardRef(
               </div>
               {errors.name && watchedName && (
                 <p className="border-border-critical text-text-sub text-p3">
-                  {/* {errors.name.message} */}
+                  {typeof errors.name.message === 'string'
+                    ? errors.name.message
+                    : ''}
                 </p>
               )}
               <div className={inputWrapperStyle}>
@@ -150,22 +130,14 @@ const GuestInfo = forwardRef(
               </div>
               {errors.phone && watchedPhone && (
                 <p className="border-border-critical text-text-sub text-p3">
-                  {/* {errors.phone.message} */}
+                  {typeof errors.phone.message === 'string'
+                    ? errors.phone.message
+                    : ''}
                 </p>
               )}
             </div>
           </div>
-          {/* <input type="submit" className="mt-4" /> */}
         </form>
-        {isModalOpen && (
-          <Modal
-            title="입력 오류"
-            content={modalContent}
-            onConfirm={() => setIsModalOpen(false)}
-            confirmString="확인"
-            showConfirmButton={true}
-          />
-        )}
       </div>
     );
   },
