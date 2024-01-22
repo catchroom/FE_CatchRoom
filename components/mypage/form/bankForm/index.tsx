@@ -87,12 +87,11 @@ const BankForm = () => {
 
   const BANK_VIEW = bankView ? BANK_LIST : INVESTMENT_BANK_LIST;
   const bankName = getBankName(bankView, watch('bank'));
-  const BottomSheetsTitle = !data
-    ? '은행 또는 증권사를 선택해주세요'
+  const BottomSheetsTitle = data?.bankName
+    ? data?.bankName
     : bankName
       ? bankName
-      : data.bankName;
-  //이 부분 추가 수정
+      : '은행 또는 증권사를 선택해주세요';
 
   const handleBankClick = () => {
     alertOpenHandler();
@@ -143,7 +142,9 @@ const BankForm = () => {
           value="account"
           register={register}
           reset={reset}
-          placeholder={data ? data.accountNumber : '계좌번호 입력'}
+          placeholder={
+            data?.accountNumber ? data.accountNumber : '계좌번호 입력'
+          }
         />
         <ErrorMessage
           errors={errors}
@@ -156,7 +157,7 @@ const BankForm = () => {
           value="name"
           register={register}
           reset={reset}
-          placeholder={data ? `${data.accountOwner}` : '예금주명'}
+          placeholder={data?.accountOwner ? data.accountOwner : '예금주명'}
         />
         <ErrorMessage
           errors={errors}
