@@ -1,27 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchMypageSelling, fetchMypageSellingTest } from './testApi';
-import { getAccount, depositDetail, getUserProfile } from './api';
-
-const queryData = {
-  ing: {
-    queryKey: ['mypage_onSale'],
-    queryFn: fetchMypageSelling,
-    retry: 1,
-  },
-  done: {
-    queryKey: ['mypage_offSale'],
-    queryFn: fetchMypageSellingTest,
-    retry: 1,
-  },
-};
-
-export type QueryData = typeof queryData;
-
-export const useMyPageQuery = (queryCase: keyof QueryData) => {
-  const { data, isLoading, error } = useQuery(queryData[queryCase]);
-
-  return { data, isLoading, error };
-};
+import {
+  getAccount,
+  depositDetail,
+  getUserProfile,
+  salesHistoryListed,
+  salesHistoryExpired,
+  purchaseHistory,
+} from './api';
 
 // 8
 export const useQueryGetProfile = () => {
@@ -56,6 +41,40 @@ export const useQueryGetDetail = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['depositDetail'],
     queryFn: depositDetail,
+    select: ({ data }) => data,
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};
+
+// 15, 16
+const queryData = {
+  ing: {
+    queryKey: ['salesHistoryListed'],
+    queryFn: salesHistoryListed,
+  },
+  done: {
+    queryKey: ['salesHistoryExpired'],
+    queryFn: salesHistoryExpired,
+  },
+};
+
+export type QueryData = typeof queryData;
+
+export const useMyPageQuery = (queryCase: keyof QueryData) => {
+  const { data, isLoading, error } = useQuery(queryData[queryCase]);
+
+  return { data, isLoading, error };
+};
+
+// 18
+export const useQueryGetPurchaseHistory = () => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['purchaseHistory'],
+    queryFn: purchaseHistory,
     select: ({ data }) => data,
   });
   return {

@@ -101,22 +101,19 @@ export const depositDetail = async () => {
 
 // 15. 나의 판매 내역 - 게시중 get
 export const salesHistoryListed = async () => {
-  const res = await apiClient.get(`/v1/mypage/saleshistory?state=ing`);
+  const res = await apiClient.get(`/v1/mypage/saleshistory/now`);
   return res.data;
 };
 
 // 16. 나의 판매 내역 - 게시만료 get
 export const salesHistoryExpired = async () => {
-  //수정
-  const res = await apiClient.get(
-    `/v1/mypage/saleshistory?state=done,expriationDate,NotForSale`,
-  );
+  const res = await apiClient.get(`/v1/mypage/saleshistory/done`);
   return res.data;
 };
 
-// 17. 나의 판매 내역 삭제하기 *****delete
+// 17. 나의 판매 내역 삭제하기 *****delete  ->34와 동일
 export const deleteSalesList = async (id: number) => {
-  const res = await apiClient.delete(`/v1/mypage/saleshistory?id=${id}`);
+  const res = await apiClient.delete(`/v1/sales/product?id=${id}`);
   return res.data;
 };
 
