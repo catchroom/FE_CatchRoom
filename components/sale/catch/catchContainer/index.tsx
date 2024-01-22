@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import QuestionMark from '@/public/svgComponent/questionMark';
 import SlideButton from '@/components/common/slideButton';
-import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   catchPercentState,
@@ -12,6 +11,9 @@ import {
 import BottomSheets from '@/components/common/bottomSheets';
 import BottomSheetsContent from '../bottomSheetsContent';
 import { percentState, priceState } from '@/atoms/sale/priceAtom';
+import { singleDate } from '@/atoms/calendar/calendarAtoms';
+import CalendarComponent from '@/components/common/calendar';
+import { getDateWithDay } from '@/utils/get-date-with-day';
 
 type PropsType = {
   price: number;
@@ -23,6 +25,9 @@ const CatchContainer = ({ price }: PropsType) => {
 
   const selectedPrice = useRecoilValue(priceState);
   const selectedPercent = useRecoilValue(percentState);
+
+  const selected = useRecoilValue(singleDate);
+  const selectedDateString = getDateWithDay(selected);
 
   const [selectedCatchPrice, setSelectedCatchPrice] =
     useRecoilState(catchPriceState);
@@ -41,7 +46,6 @@ const CatchContainer = ({ price }: PropsType) => {
       }
     }
     setSelectedCatchPrice(price * ((100 - percent) / 100));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);
 
   const title =
@@ -104,13 +108,19 @@ const CatchContainer = ({ price }: PropsType) => {
           </div>
           <div>
             <p className="text-t2 mb-2">캐치특가 적용 날짜</p>
-            <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
-              <BigCalendarIcon />
-              {/* 바텀시트 모달로 변경예정 */}
-              <button className="w-full flex items-start">
-                캐치특가 적용날짜를 선택해주세요
-              </button>
-            </div>
+            <BottomSheets
+              title={selectedDateString}
+              innerTitle="캐치특가 적용날짜를 설정해주세요"
+              placeholder={selectedDateString}
+              buttonSelect="search"
+              icon="calendar"
+              closeButton={true}
+              innerButtonTitle={selectedDateString}
+            >
+              <div className="w-full h-[480px]">
+                <CalendarComponent useSingleDate={true} />
+              </div>
+            </BottomSheets>
           </div>
         </>
       )}
