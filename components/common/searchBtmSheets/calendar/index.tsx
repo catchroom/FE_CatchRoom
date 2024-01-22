@@ -92,7 +92,7 @@ const CalendarBottomSheet = ({
                     handleSelectState={handleDateSelectAll}
                     isBoxChecked={isCalendarChecked}
                   />
-                  <div className="w-full h-[580px]">
+                  <div className="w-full h-[530px]">
                     <CalendarComponent
                       useSingleDate={false}
                       searchAll={isCalendarChecked}
