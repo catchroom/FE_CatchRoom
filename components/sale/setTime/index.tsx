@@ -7,7 +7,7 @@ import {
 import { useLongPress } from '@/hooks/useLongPress';
 import DownArrowIcon from '@/public/svgComponent/downArrow';
 import UpArrow from '@/public/svgComponent/upArrow';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 const SetTime = () => {
@@ -16,9 +16,9 @@ const SetTime = () => {
   const [minute, setMinute] = useRecoilState(minuteState);
   const [isTimeChange, setIsTimeChange] = useState(false);
 
-  const toggleTime = () => {
+  const toggleTime = useCallback(() => {
     setTime((prev) => (prev === DAY_TIME[0] ? DAY_TIME[1] : DAY_TIME[0]));
-  };
+  }, [setTime]);
 
   const increaseHour = () =>
     setHour((prevHour) => {
@@ -49,7 +49,7 @@ const SetTime = () => {
   useEffect(() => {
     if (isTimeChange) toggleTime();
     setIsTimeChange(false);
-  }, [isTimeChange]); // Only re-run the effect if hour changes
+  }, [isTimeChange, toggleTime]); // Only re-run the effect if hour changes
   return (
     <div className="flex justify-between w-full items-center p-5 text-t1">
       <div className=" font-semibold">판매 종료 시간</div>
