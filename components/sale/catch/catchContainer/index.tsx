@@ -44,7 +44,7 @@ const CatchContainer = ({ price }: PropsType) => {
         setIsCatch(false);
         setDisable(true);
       }
-    }
+    } else setDisable(true);
     setSelectedCatchPrice(price * ((100 - percent) / 100));
   }, [selectedPercent]);
 
