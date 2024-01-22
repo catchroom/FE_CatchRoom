@@ -72,19 +72,9 @@ const CalendarComponent = ({
     } else if (range.to) {
       footer = (
         <>
-          {format(range.from, 'P') === format(range.to, 'P') ? (
-            <p className={leftFooterStyle}>{format(range.from, 'MM월 dd일')}</p>
-          ) : (
-            <>
-              <p className={leftFooterStyle}>
-                {format(range.from, 'MM월 dd일')}
-              </p>
-              <MidLineIcon />
-              <p className={rightFooterStyle}>
-                {format(range.to, 'MM월 dd일')}
-              </p>
-            </>
-          )}
+          <p className={leftFooterStyle}>{format(range.from, 'MM월 dd일')}</p>
+          <MidLineIcon />
+          <p className={rightFooterStyle}>{format(range.to, 'MM월 dd일')}</p>
         </>
       );
     }
