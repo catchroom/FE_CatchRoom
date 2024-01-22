@@ -32,6 +32,11 @@ const GuestInfo = forwardRef(
     } = useForm<GuestInfoFormData>({
       resolver: zodResolver(guestInfoSchema),
       mode: 'onBlur',
+      defaultValues: {
+        sameAsReservation: true,
+        name: defaultName,
+        phone: defaultPhoneNumber,
+      },
     });
 
     const clearInput = (fieldName: 'name' | 'phone') => {
