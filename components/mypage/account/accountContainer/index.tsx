@@ -47,7 +47,6 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
             </div>
 
             {/* 눌리면 바텀시트 열리게 */}
-
             <BottomSheetsWithoutCloseBtn
               buttonSelect="more"
               outerControlAtom="more"

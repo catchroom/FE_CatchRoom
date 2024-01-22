@@ -31,26 +31,39 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config;
     console.log(error);
 
-    if (error.response.status === 401 || !originalRequest._retry) {
+    if (error.isAxiosError && !originalRequest._retry) {
       originalRequest._retry = true;
 
+      console.log('originalRequest', originalRequest);
       console.log('refresh', refreshToken);
 
-      const res = await getNewToken();
-      console.log('발급요청 성공 토큰', res.data);
+      return getNewToken().then((res) => {
+        console.log('발급요청 성공 토큰', res.data);
 
-      const accessToken = res.data;
+        const accessToken = res.data;
 
-      if (accessToken) {
         nookies.set(null, 'accessToken', accessToken, {
           path: '/',
         });
         console.log('집어넣는 토큰', accessToken);
 
-        // 재시도
-        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-        return apiClient.request(originalRequest);
-      }
+        // 재시도 --> 둘다 안찍힘
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+            apiClient.request(originalRequest).then(
+              (response) => {
+                console.log('재시도 요청 성공:', response.data);
+                resolve(response);
+              },
+              (error) => {
+                console.log('재시도 요청 실패:', error);
+                reject(error);
+              },
+            );
+          }, 3000); // 3초 대기
+        });
+      });
     }
 
     //재발급 수정 필요 --> 콘솔 확인하기

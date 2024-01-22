@@ -101,7 +101,7 @@ export const depositDetail = async () => {
 
 /////////////////////////연결 시작하기///////////////////////
 
-// 나의 판매 내역 - 게시중 get
+// 15. 나의 판매 내역 - 게시중 get
 export const 판매내역게시중 = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/saleshistory?state=ing`,
