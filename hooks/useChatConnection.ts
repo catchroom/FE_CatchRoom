@@ -19,9 +19,6 @@ export const useChatConnection = (roomId: string) => {
 
   console.log('data', data);
 
-  console.log('userId', userId);
-  console.log('roomId', roomId);
-
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
       headers: {

@@ -1,6 +1,12 @@
-import { ChatContentType } from '@/app/stomp/sock/page';
 import { ChatMessageDto, ChatRoomType } from '@/types/chat/chatRoom/types';
 import { atom } from 'recoil';
+
+export type ChatContentType = {
+  type: 'TALK' | 'ENTER';
+  message: string;
+  userId: number;
+  roomId: string;
+};
 
 export const connectedCheckAtom = atom<boolean>({
   key: 'connectedCheckAtom',
@@ -13,7 +19,6 @@ export const chatContentAtom = atom<ChatContentType[]>({
     {
       type: 'TALK',
       message: '안녕하세요',
-      sender: '네고왕김네고',
       userId: 4,
       roomId: '4983cb81-2bbc-4ce6-9e93-322c98c8fe4d',
     },
