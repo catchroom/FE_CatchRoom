@@ -31,11 +31,14 @@ import HeartButton from '../heartButton';
  */
 
 const CatchSpecialComponent = ({
+  image = '/sample/room3.png',
+  accommodationName,
   roomName,
-  roomType,
   resDate,
-  oldPrice,
-  discount,
+  catchType,
+  originalPrice,
+  discountRate,
+  sellPrice,
   isDelete = false,
   isHeart = false,
   heartState = true,
@@ -49,8 +52,6 @@ const CatchSpecialComponent = ({
     console.log('삭제버튼이 클릭됐습니다.');
   },
 }: catchItems) => {
-  const newPrice = Math.round(oldPrice - oldPrice * (discount / 100));
-
   const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     deleteBtnHandler();
@@ -58,48 +59,45 @@ const CatchSpecialComponent = ({
 
   return (
     <div className="relative w-full h-36">
-      <div className="flex flex-wrap cursor-pointer" onClick={pageHandler}>
+      <div className="flex cursor-pointer" onClick={pageHandler}>
         {/* 숙소 이미지 및 캐치특가 */}
-        <div className="relative w-[120px] max-w-[120px] h-[140px] max-h-[140px] overflow-auto rounded-md mr-4">
-          {discount >= 50 ? (
+        <div className="relative w-[120px] max-w-[120px] overflow-auto rounded-md mr-4">
+          {catchType ? (
             <div className="absolute flex items-center z-10 px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
               캐치 특가
             </div>
           ) : (
             ''
           )}
-          <Image
-            src="/sample/room3.png"
-            layout="fill"
-            objectFit="cover"
-            alt="숙소사진"
-          />
+          <Image src={image} layout="fill" objectFit="cover" alt="숙소사진" />
         </div>
 
         {/* 숙소정보 */}
-        <div className="flex-grow flex-col h-[140px]">
+        <div className="flex-grow flex-col ">
           <div className="mb-3 ">
             <div className="flex items-center gap-1 text-t3 font-semibold">
               <CalendarIcon />
               {resDate}
             </div>
             <div className="flex flex-col items-start mt-3 gap-3">
-              <div className="text-t1 font-bold leading-none">{roomName}</div>
+              <div className="text-t1 font-bold leading-none">
+                {accommodationName}
+              </div>
               <div className="text-t1 font-bold leading-none text-text-sub">
-                {roomType}
+                {roomName}
               </div>
             </div>
           </div>
           <div className="flex flex-col items-start">
             <div className="flex flex-wrap text-p2 text-gray-600">
               <p className="line-through">
-                구매가&nbsp;{oldPrice.toLocaleString()}원
+                구매가&nbsp;{originalPrice.toLocaleString()}원
               </p>
             </div>
             <div className="flex flex-wrap items-center">
-              <p className="text-t1 text-main font-bold">{discount}%</p>
+              <p className="text-t1 text-main font-bold">{discountRate}%</p>
               <p className=" text-t1 font-bold ml-2">
-                {newPrice.toLocaleString()}원
+                {sellPrice.toLocaleString()}원
               </p>
             </div>
           </div>
