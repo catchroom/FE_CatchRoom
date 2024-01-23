@@ -5,7 +5,7 @@ import BookingDetails from './bookingDetails';
 import Disclaimer from './disclaimer';
 import Link from 'next/link';
 
-const Modal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
+const PaymentModal = ({ isOpen, onClose }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -30,7 +30,6 @@ const Modal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
             />
             <Link href="/order/complete" passHref>
               <ActionButton
-                action={onConfirm}
                 label="동의 후 결제"
                 colorClass="bg-border-primary text-white"
               />
@@ -41,4 +40,4 @@ const Modal = ({ isOpen, onClose, onConfirm }: ModalProps) => {
     </div>
   );
 };
-export default Modal;
+export default PaymentModal;
