@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import QuestionMark from '@/public/svgComponent/questionMark';
 import SlideButton from '@/components/common/slideButton';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -10,15 +10,21 @@ import {
 } from '@/atoms/sale/catchAtom';
 import BottomSheets from '@/components/common/bottomSheets';
 import BottomSheetsContent from '../bottomSheetsContent';
-import { percentState, priceState } from '@/atoms/sale/priceAtom';
+import {
+  percentState,
+  priceState,
+  productPriceState,
+} from '@/atoms/sale/priceAtom';
 import CalendarComponent from '@/components/common/calendar';
 import { getDateWithDay } from '@/utils/get-date-with-day';
-import { catchSingleDate } from '@/atoms/search-detail/searchStates';
+import {
+  catchSingleDate,
+  saleSingleDate,
+} from '@/atoms/search-detail/searchStates';
 
-type PropsType = {
-  price: number;
-};
-const CatchContainer = ({ price }: PropsType) => {
+const CatchContainer = () => {
+  const price = useRecoilValue(productPriceState); //product price
+
   const [open, setOpen] = useState(false);
   const [isCatch, setIsCatch] = useRecoilState(catchState);
   const [disable, setDisable] = useState(false);
@@ -26,8 +32,32 @@ const CatchContainer = ({ price }: PropsType) => {
   const selectedPrice = useRecoilValue(priceState);
   const selectedPercent = useRecoilValue(percentState);
 
-  const selected = useRecoilValue(catchSingleDate);
+  const percent = selectedPercent <= 40 ? 50 : selectedPercent + 10;
+
+  const selectedSaleEndDate = useRecoilValue(saleSingleDate);
+
+  const [selected, setSelected] = useRecoilState(catchSingleDate); // 캐치특가 선택 날짜
+
+  useEffect(() => {
+    if (selectedSaleEndDate instanceof Date) {
+      const endDate = new Date(selectedSaleEndDate);
+      endDate.setDate(endDate.getDate() - 1);
+      setSelected(endDate);
+      const today = new Date();
+      if (selectedSaleEndDate.toDateString() === today.toDateString()) {
+        setDisable(true);
+        setIsCatch(false);
+      } else setDisable(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSaleEndDate]);
+
   const selectedDateString = getDateWithDay(selected);
+
+  const date = useMemo(() => new Date(selected!), [selected]);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
 
   const [selectedCatchPrice, setSelectedCatchPrice] =
     useRecoilState(catchPriceState);
@@ -46,6 +76,7 @@ const CatchContainer = ({ price }: PropsType) => {
       }
     } else setDisable(true);
     setSelectedCatchPrice(price * ((100 - percent) / 100));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);
 
   const title =
@@ -54,8 +85,6 @@ const CatchContainer = ({ price }: PropsType) => {
       : selectedCatchPrice === 0
         ? selectedPrice.toLocaleString() + '원'
         : selectedCatchPrice.toLocaleString() + '원';
-
-  const percent = selectedPercent <= 40 ? 50 : selectedPercent + 10;
 
   const buttonSelect = selectedCatchPrice === 0 ? 'input' : 'price';
   const handleToggleButton = () => {
@@ -128,6 +157,9 @@ const CatchContainer = ({ price }: PropsType) => {
                 <CalendarComponent
                   useSingleDate={true}
                   outerControlAtom="catch"
+                  checkInYear={year}
+                  checkInMonth={month}
+                  checkInDay={day}
                 />
               </div>
             </BottomSheets>

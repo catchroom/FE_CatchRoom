@@ -1,9 +1,13 @@
 'use client';
 import CheckInDateComponent from '@/components/common/checkInDateComponent';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useQueryGetSaleProduct } from '@/api/sale/query';
+import { formatDateWithDay } from '@/utils/get-dot-date';
+import { useSetRecoilState } from 'recoil';
+import { checkInDateState } from '@/atoms/sale/timeAtom';
+import { productPriceState } from '@/atoms/sale/priceAtom';
 
 type Props = {
   id: string | string[] | undefined;
@@ -11,7 +15,21 @@ type Props = {
 
 const SaleInfoContainer = ({ id }: Props) => {
   const { data } = useQueryGetSaleProduct(+id! as number);
-  console.log(data);
+
+  const checkInString = formatDateWithDay(data?.checkIn);
+  const checkOutString = formatDateWithDay(data?.checkOut);
+
+  const setCheckInDate = useSetRecoilState(checkInDateState);
+  const setProductPrice = useSetRecoilState(productPriceState);
+
+  useEffect(() => {
+    setCheckInDate(data?.checkIn);
+  }, [data, setCheckInDate]);
+
+  useEffect(() => {
+    setProductPrice(data?.price);
+  }, [data, setProductPrice]);
+
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
@@ -36,8 +54,8 @@ const SaleInfoContainer = ({ id }: Props) => {
         </div>
       </div>
       <CheckInDateComponent
-        CheckInDate="01.12 (월)"
-        CheckOutDate="01.13 (화)"
+        CheckInDate={checkInString}
+        CheckOutDate={checkOutString}
       />
     </div>
   );

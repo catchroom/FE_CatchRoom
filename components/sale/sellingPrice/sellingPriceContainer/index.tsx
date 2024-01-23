@@ -1,17 +1,20 @@
 'use client';
 import BottomSheets from '@/components/common/bottomSheets';
-import React from 'react';
+import React, { useEffect } from 'react';
 import BottomSheetsContent from '../bottomSheetsContent';
-import { useRecoilValue } from 'recoil';
-import { percentState, priceState } from '@/atoms/sale/priceAtom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  percentState,
+  priceState,
+  productPriceState,
+} from '@/atoms/sale/priceAtom';
+import { isCatchPriceState } from '@/atoms/sale/catchAtom';
 
-type PropsType = {
-  price: number;
-};
-
-const SellingPriceContainer = ({ price }: PropsType) => {
+const SellingPriceContainer = () => {
+  const price = useRecoilValue(productPriceState);
   const selectedPrice = useRecoilValue(priceState);
   const selectedPercent = useRecoilValue(percentState);
+  const setIsCatchPrice = useSetRecoilState(isCatchPriceState);
 
   const title =
     selectedPrice === 0
@@ -22,6 +25,10 @@ const SellingPriceContainer = ({ price }: PropsType) => {
 
   const charge = selectedPrice * 0.05;
   const totalPrice = selectedPrice - charge;
+
+  useEffect(() => {
+    if (selectedPercent >= 50) setIsCatchPrice(true);
+  }, [selectedPercent, setIsCatchPrice]);
 
   return (
     <div className="flex flex-col w-full">

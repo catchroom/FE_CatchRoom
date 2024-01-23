@@ -1,8 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import SetTime from '../setTime';
-import { useRecoilValue } from 'recoil';
-import { hourState, minuteState, timeState } from '@/atoms/sale/timeAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  checkInDateState,
+  hourState,
+  minuteState,
+  timeState,
+} from '@/atoms/sale/timeAtom';
 import BottomSheets from '@/components/common/bottomSheets';
 import CalendarComponent from '@/components/common/calendar';
 import { getDateWithDay } from '@/utils/get-date-with-day';
@@ -11,9 +16,21 @@ const SaleEndContainer = () => {
   const time = useRecoilValue(timeState);
   const hour = useRecoilValue(hourState);
   const minute = useRecoilValue(minuteState);
+  const checkInDate = useRecoilValue(checkInDateState);
 
-  const selected = useRecoilValue(saleSingleDate);
+  const date = useMemo(() => new Date(checkInDate!), [checkInDate]);
+  const [selected, setSelected] = useRecoilState(saleSingleDate);
+
+  useEffect(() => {
+    setSelected(date);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
+
   const selectedDateString = getDateWithDay(selected);
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
 
   const title =
     selectedDateString +
@@ -41,7 +58,13 @@ const SaleEndContainer = () => {
       >
         <div className="w-full flex flex-col">
           <div className="w-full h-[480px]">
-            <CalendarComponent useSingleDate={true} outerControlAtom="sale" />
+            <CalendarComponent
+              useSingleDate={true}
+              outerControlAtom="sale"
+              checkInYear={year}
+              checkInMonth={month}
+              checkInDay={day}
+            />
           </div>
           <SetTime />
         </div>

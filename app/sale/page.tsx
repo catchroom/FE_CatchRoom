@@ -21,9 +21,9 @@ const Page = ({
         <Line />
         <SaleEndContainer />
         <Line />
-        <SellingPriceContainer price={132000} />
+        <SellingPriceContainer />
         <Line />
-        <CatchContainer price={132000} />
+        <CatchContainer />
         <Line />
         <CheckboxContainer />
       </div>
