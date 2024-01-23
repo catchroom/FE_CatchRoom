@@ -14,9 +14,9 @@ import {
 import { format } from 'date-fns';
 import { formatDate } from '@/utils/formatDate';
 import { useAccommodationList } from '@/api/search-result/query';
-import { useRouter } from 'next/navigation';
+import NoResults from '@/components/search-result/noResults';
+
 const Page = () => {
-  const router = useRouter();
   const [currentView, setCurrentView] = useState<'list' | 'map'>('list');
   const today = new Date();
   const tomorrow = new Date(today);
@@ -38,7 +38,7 @@ const Page = () => {
     error,
   } = useAccommodationList(searchParams);
 
-  const selectedRegionIndices = useRecoilValue(regionIndex);
+  const selectedRegion = useRecoilValue(regionIndex);
   const dateRange = useRecoilValue(rangeDate);
   const selectedRoomIndices = useRecoilValue(roomIndex);
   const adultCount = useRecoilValue(adultCountState);
@@ -47,9 +47,9 @@ const Page = () => {
   useEffect(() => {
     setSearchParams((prev) => ({
       ...prev,
-      region: selectedRegionIndices.join(','),
+      region: selectedRegion.join(','),
     }));
-  }, [selectedRegionIndices]);
+  }, [selectedRegion]);
 
   useEffect(() => {
     const startDate = dateRange?.from ?? new Date();
@@ -76,12 +76,6 @@ const Page = () => {
     }));
   }, [adultCount, childCount]);
 
-  useEffect(() => {
-    if (accommodations && accommodations.length === 0) {
-      router.push('/search-result/no-results');
-    }
-  }, [accommodations, router]);
-
   if (isLoading) {
     return <div>Loading</div>;
   }
@@ -96,7 +90,11 @@ const Page = () => {
 
   return (
     <div className="w-full flex flex-col">
-      <AccommodationList accommodations={accommodations} />
+      {accommodations && accommodations.length > 0 ? (
+        <AccommodationList accommodations={accommodations} />
+      ) : (
+        <NoResults />
+      )}
       <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[3]">
         <Link href="/search-result/map" passHref>
           <ToggleViewButton
