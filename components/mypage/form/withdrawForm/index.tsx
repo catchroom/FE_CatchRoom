@@ -79,7 +79,7 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
           />
           {!errors.balance && (
             <p className=" text-t3 text-text-sub">
-              출금 가능 금액 : {originalBalance.toLocaleString('us-EN')}원
+              출금 가능 금액 : {originalBalance?.toLocaleString('us-EN')}원
             </p>
           )}
         </div>

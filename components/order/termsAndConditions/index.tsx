@@ -2,6 +2,8 @@
 import CheckBoxComponent from '@/components/common/checkBox';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
 
 type TermOption = {
   id: string;
@@ -28,7 +30,7 @@ const termsOptions: TermOption[] = [
 ]; //페이지 생성 후 링크 수정 예정
 
 const TermsAndConditions = () => {
-  const [selectedTerms, setSelectedTerms] = useState<string[]>([]);
+  const [selectedTerms, setSelectedTerms] = useRecoilState(selectedTermsState);
   const [isAllSelected, setIsAllSelected] = useState(false);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const TermsAndConditions = () => {
     } else {
       setSelectedTerms([]);
     }
-  }, [isAllSelected]);
+  }, [isAllSelected, setSelectedTerms]);
 
   const handleSelectTerm = (id: string) => {
     setSelectedTerms((prevSelected) =>

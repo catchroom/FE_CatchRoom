@@ -22,7 +22,10 @@ const ClientProvider = ({ children }: { children: ReactNode }) => {
       <ThemeProvider>
         <RecoilRoot>
           {children}
-          <ReactQueryDevtools initialIsOpen={false} />
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition="top-right"
+          />
         </RecoilRoot>
       </ThemeProvider>
     </QueryClientProvider>
