@@ -1,22 +1,23 @@
 'use client';
 import React from 'react';
 import SetTime from '../setTime';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { hourState, minuteState, timeState } from '@/atoms/sale/timeAtom';
-import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
-import { outerDatePickerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
+import BottomSheets from '@/components/common/bottomSheets';
+import CalendarComponent from '@/components/common/calendar';
+import { getDateWithDay } from '@/utils/get-date-with-day';
+import { saleSingleDate } from '@/atoms/search-detail/searchStates';
 const SaleEndContainer = () => {
   const time = useRecoilValue(timeState);
   const hour = useRecoilValue(hourState);
   const minute = useRecoilValue(minuteState);
 
-  const setModalOpen = useSetRecoilState(outerDatePickerBottomSheetsControl);
-
-  const handleButtonClick = () => {
-    setModalOpen(false);
-  };
+  const selected = useRecoilValue(saleSingleDate);
+  const selectedDateString = getDateWithDay(selected);
 
   const title =
+    selectedDateString +
+    ' ' +
     time.toString() +
     ' ' +
     (hour < 10
@@ -29,23 +30,22 @@ const SaleEndContainer = () => {
       <p className="text-p1 opacity-50 mt-1 mb-3">
         판매 종료일 이후 판매글은 미노출 됩니다
       </p>
-      <BottomSheetsWithoutCloseBtn
-        buttonSelect="timePicker"
+      <BottomSheets
         title={title}
-        outerControl={true}
-        outerControlAtom="datePicker"
+        innerTitle="판매 종료일을 설정해주세요"
+        placeholder={title}
+        buttonSelect="search"
+        icon="calendar"
+        closeButton={true}
+        innerButtonTitle={title + '로 설정하기'}
       >
-        <SetTime />
-        <div className="w-full border-t border-border-sub py-5">
-          <button
-            onClick={handleButtonClick}
-            type="button"
-            className="w-full bg-action-primary text-text-on text-t2 font-medium p-4 py-2.5 rounded-md transition-colors duration-300 ease-in"
-          >
-            {title}로 설정하기
-          </button>
+        <div className="w-full flex flex-col">
+          <div className="w-full h-[480px]">
+            <CalendarComponent useSingleDate={true} outerControlAtom="sale" />
+          </div>
+          <SetTime />
         </div>
-      </BottomSheetsWithoutCloseBtn>
+      </BottomSheets>
     </div>
   );
 };

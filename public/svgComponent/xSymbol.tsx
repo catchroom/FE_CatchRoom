@@ -1,8 +1,8 @@
 import * as React from "react";
-const XSymbolIcon = () => (
+const XSymbolIcon = ({w=18, y=17} : {w?:number, y?:number}) => (
   <svg
-    width={18}
-    height={17}
+    width={w}
+    height={y}
     viewBox="0 0 18 17"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

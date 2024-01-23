@@ -1,11 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Radio } from '@material-tailwind/react';
+import { useRecoilState } from 'recoil';
+import { selectedPaymentMethodState } from '@/atoms/order/paymentMethodAtom';
 
 const PaymentMethods = () => {
-  const [isEasyPaymentOpen, setIsEasyPaymentOpen] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState('');
+  const [isEasyPaymentOpen, setIsEasyPaymentOpen] = useState(true);
+  const [selectedEasyPayment, setSelectedEasyPayment] = useState('kakaoPay');
+  const [selectedPayment, setSelectedPayment] = useRecoilState(
+    selectedPaymentMethodState,
+  );
+
+  useEffect(() => {
+    setSelectedPayment('easy');
+  }, [setSelectedPayment]);
 
   const toggleEasyPaymentDropdown = () => {
     setIsEasyPaymentOpen(!isEasyPaymentOpen);
@@ -19,6 +28,13 @@ const PaymentMethods = () => {
   const closeEasyPaymentDropdown = () => {
     setIsEasyPaymentOpen(false);
     setSelectedPayment('creditCard');
+  };
+
+  const handleEasyPaymentChange = (e: {
+    target: { id: React.SetStateAction<string> };
+  }) => {
+    console.log(e.target.id);
+    setSelectedEasyPayment(e.target.id);
   };
 
   return (
@@ -61,9 +77,11 @@ const PaymentMethods = () => {
               className="flex w-full cursor-pointer items-center  "
             >
               <Radio
-                name="horizontal-list"
+                name="easyPayment"
                 id="kakaoPay"
                 ripple={false}
+                checked={selectedEasyPayment === 'kakaoPay'}
+                onChange={handleEasyPaymentChange}
                 className="hover:before:opacity-0 before: border-icon-secondary "
                 color="pink"
                 containerProps={{
@@ -78,9 +96,11 @@ const PaymentMethods = () => {
               className="flex w-full cursor-pointer items-center px-3 py-2"
             >
               <Radio
-                name="horizontal-list"
+                name="easyPayment"
                 id="naverPay"
                 ripple={false}
+                checked={selectedEasyPayment === 'naverPay'}
+                onChange={handleEasyPaymentChange}
                 className="hover:before:opacity-0 before: border-icon-secondary"
                 color="pink"
                 containerProps={{
@@ -95,9 +115,11 @@ const PaymentMethods = () => {
               className="flex w-full cursor-pointer items-center px-3 py-2"
             >
               <Radio
-                name="horizontal-list"
+                name="easyPayment"
                 id="tossPay"
                 ripple={false}
+                checked={selectedEasyPayment === 'tossPay'}
+                onChange={handleEasyPaymentChange}
                 className="hover:before:opacity-0 before: border-icon-secondary"
                 color="pink"
                 containerProps={{
@@ -114,9 +136,11 @@ const PaymentMethods = () => {
               className="flex w-full cursor-pointer items-center  "
             >
               <Radio
-                name="horizontal-list"
+                name="easyPayment"
                 id="payco"
                 ripple={false}
+                checked={selectedEasyPayment === 'payco'}
+                onChange={handleEasyPaymentChange}
                 className="hover:before:opacity-0 before: border-icon-secondary"
                 color="pink"
                 containerProps={{

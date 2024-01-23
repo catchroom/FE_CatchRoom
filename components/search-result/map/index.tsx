@@ -177,7 +177,7 @@ const Map = ({ markers }: MapProps) => {
 
   // eslint-disable-next-line react/react-in-jsx-scope
   return (
-    <div id="map" className="w-full h-full ">
+    <div id="map" className="w-full h-full z-[3] ">
       <CatchSpecialComponentWrapper selectedMarkerInfo={selectedMarkerInfo} />
       <Link href="/search-result/list" passHref>
         <ToggleViewButtonWrapper
