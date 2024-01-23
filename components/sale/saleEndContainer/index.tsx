@@ -38,8 +38,13 @@ const SaleEndContainer = () => {
     time.toString() +
     ' ' +
     (hour < 10
-      ? '0' + hour.toString() + ':' + minute.toString()
-      : hour.toString() + ':' + minute.toString());
+      ? '0' +
+        hour.toString() +
+        ':' +
+        (minute < 10 ? '0' + minute.toString() : minute.toString())
+      : hour.toString() +
+        ':' +
+        (minute < 10 ? '0' + minute.toString() : minute.toString()));
 
   return (
     <div className="w-full flex flex-col mt-5">
@@ -57,7 +62,7 @@ const SaleEndContainer = () => {
         innerButtonTitle={title + '로 설정하기'}
       >
         <div className="w-full flex flex-col">
-          <div className="w-full h-[480px]">
+          <div className="w-full h-[476px]">
             <CalendarComponent
               useSingleDate={true}
               outerControlAtom="sale"
