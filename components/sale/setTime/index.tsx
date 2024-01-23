@@ -65,23 +65,23 @@ const SetTime = () => {
         </div>
         <div className="flex items-center">
           <div className="flex flex-col gap-8 items-center pl-3">
-            <div {...decreaseHourLongPress} onClick={increaseHour}>
+            <div {...IncreaseHourLongPress} onClick={increaseHour}>
               <UpArrow />
             </div>
 
             <p>{hour < 10 ? '0' + hour.toString() : hour}</p>
-            <div {...IncreaseHourLongPress} onClick={decreaseHour}>
+            <div {...decreaseHourLongPress} onClick={decreaseHour}>
               <DownArrowIcon color="#9FA3AB" />
             </div>
           </div>
           <div className="flex items-center justify-center mx-2 mt-2">:</div>
           <div className="flex flex-col gap-8 items-center pr-3">
-            <div {...decreaseMinuteLongPress} onClick={increaseMinute}>
+            <div {...IncreaseMinuteLongPress} onClick={increaseMinute}>
               <UpArrow />
             </div>
 
             <p>{minute < 10 ? '0' + minute.toString() : minute}</p>
-            <div {...IncreaseMinuteLongPress} onClick={decreaseMinute}>
+            <div {...decreaseMinuteLongPress} onClick={decreaseMinute}>
               <DownArrowIcon color="#9FA3AB" />
             </div>
           </div>
