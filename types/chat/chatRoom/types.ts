@@ -20,17 +20,20 @@ export type ChatRoomType = {
   buyerId: number;
   sellerId: number;
   productId: number;
+  accommodationName: string;
+  sellPrice: number;
   loginUserIdentity: string;
   accommodationUrl: string;
   partnerNickName: string;
-  lastChatmessageDto: ChatMessageDto;
   dealState: string;
+  buyerState: string;
+  sellerState: string;
+  lastChatmessageDto: ChatMessageDto;
 };
 
 export type ChatMessageDto = {
   type: string;
   roomId: string;
-  sender: string;
   userId: number;
   message: string;
   time: string;

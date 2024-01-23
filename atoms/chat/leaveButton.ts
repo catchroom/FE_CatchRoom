@@ -9,3 +9,8 @@ export const deleteModalIdAtom = atom({
   key: 'deleteModalIdAtom',
   default: '',
 });
+
+export const dealModalAtom = atom({
+  key: 'dealModalAtom',
+  default: false,
+});

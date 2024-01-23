@@ -45,6 +45,7 @@ export const useChatConnection = (roomId: string) => {
       },
       () => {
         ws.current?.subscribe(`/sub/chat/room/${roomId}`, (message) => {
+          console.log(message);
           const recv = JSON.parse(message.body);
           setChatList((prev) => [...prev, recv]);
         });
@@ -78,6 +79,7 @@ export const useChatConnection = (roomId: string) => {
     });
   };
 
+  // 가격 제안
   const negoPrice = (price: number) => {
     if (!ws.current) return;
     ws.current.publish({
@@ -86,7 +88,7 @@ export const useChatConnection = (roomId: string) => {
       },
       destination: `/pub/chat/message`,
       body: JSON.stringify({
-        type: 'TALK',
+        type: 'NEGO_REQ',
         roomId: roomId,
         message: '가격 제안',
         userId: userId,
