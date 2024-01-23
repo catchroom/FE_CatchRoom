@@ -15,7 +15,7 @@ const Divide = () => {
   const viewState = useRecoilValue(divideAtom);
   const viewCase = checkViewState(viewState);
   const { data: mypageData, isLoading } = useMyPageQuery(viewCase);
-  const Loading = isLoading && <div>loading...</div>;
+  const Loading = isLoading && <div>loading... spinner</div>;
   console.log(mypageData);
 
   return (
