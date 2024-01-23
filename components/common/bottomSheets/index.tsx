@@ -179,7 +179,7 @@ const BottomSheets = ({
                     <SheetCloseSVG />
                   </button>
                 </div>
-                <div className="w-full h-full flex flex-col items-center gap-12">
+                <div className="w-full h-full flex flex-col items-center">
                   {children}
                   {closeButton && innerButtonTitle && (
                     <SimpleButton

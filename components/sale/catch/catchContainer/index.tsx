@@ -65,6 +65,7 @@ const CatchContainer = () => {
     useRecoilState(catchPercentState);
 
   useEffect(() => {
+    console.log(selectedPercent, disable);
     if (selectedPercent !== 0) {
       setDisable(false);
       if (selectedPercent <= 40) setSelectCatchPercent(50);
@@ -76,6 +77,7 @@ const CatchContainer = () => {
       }
     } else setDisable(true);
     setSelectedCatchPrice(price * ((100 - percent) / 100));
+    console.log(selectedPercent, disable);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);
 
@@ -94,7 +96,7 @@ const CatchContainer = () => {
     setOpen((prev) => !prev);
   };
   return (
-    <div className="w-full flex flex-col gap-6">
+    <div className="w-full flex flex-col relative">
       <div className="flex justify-between">
         <div className="flex gap-1 items-center">
           <h2 className="text-h5 font-bold">캐치특가 자동 설정</h2>
@@ -114,7 +116,7 @@ const CatchContainer = () => {
       </div>
       {open && (
         <div
-          className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom"
+          className="flex flex-col p-3 absolute top-12 rounded w-full gap-2.5 bg-surface border border-border-sub shadow-custom"
           data-testid="catch-describe"
         >
           <p className="text-p1 font-bold">
@@ -129,7 +131,7 @@ const CatchContainer = () => {
       {isCatch && (
         <>
           <div>
-            <p className="text-t2 mb-2">캐치특가 적용 가격</p>
+            <p className="text-t2 mb-2 mt-6">캐치특가 적용 가격</p>
             <BottomSheets
               title={title}
               innerTitle="캐치특가 판매가를 선택해주세요"
@@ -143,7 +145,7 @@ const CatchContainer = () => {
             </BottomSheets>
           </div>
           <div>
-            <p className="text-t2 mb-2">캐치특가 적용 날짜</p>
+            <p className="text-t2 mb-2 mt-6">캐치특가 적용 날짜</p>
             <BottomSheets
               title={selectedDateString}
               innerTitle="캐치특가 적용날짜를 설정해주세요"
@@ -151,7 +153,7 @@ const CatchContainer = () => {
               buttonSelect="search"
               icon="calendar"
               closeButton={true}
-              innerButtonTitle={selectedDateString}
+              innerButtonTitle={selectedDateString + '로 설정하기'}
             >
               <div className="w-full h-[480px]">
                 <CalendarComponent
