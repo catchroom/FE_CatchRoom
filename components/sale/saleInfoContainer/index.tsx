@@ -2,7 +2,6 @@
 import CheckInDateComponent from '@/components/common/checkInDateComponent';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import Link from 'next/link';
 import { useQueryGetSaleProduct } from '@/api/sale/query';
 import { formatDateWithDay } from '@/utils/get-dot-date';
 import { useSetRecoilState } from 'recoil';
@@ -33,7 +32,7 @@ const SaleInfoContainer = ({ id }: Props) => {
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
-        <Link href="/" className="w-[100px] h-[100px] relative">
+        <div className="w-[100px] h-[100px] relative">
           <Image
             src={data?.accommdationUrl}
             alt="숙소 이미지"
@@ -42,7 +41,7 @@ const SaleInfoContainer = ({ id }: Props) => {
             sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 80px"
             priority
           />
-        </Link>
+        </div>
 
         <div className="flex flex-col">
           <p className="font-semibold text-h5">{data?.accommdationName}</p>

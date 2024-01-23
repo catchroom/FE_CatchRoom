@@ -57,7 +57,6 @@ const FromSeller = () => {
     } else {
       setContent(currentValue);
     }
-    console.log(content);
   };
 
   const handleCheckbox = () => {
