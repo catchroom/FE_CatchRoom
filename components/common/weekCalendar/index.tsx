@@ -7,15 +7,6 @@ const WeekCalendar = () => {
   const [selectedDate, setSelectedDate] =
     useRecoilState<Date>(weekCalendarDate);
 
-  console.log(
-    selectedDate.getFullYear() +
-      '년 ' +
-      selectedDate.getMonth() +
-      1 +
-      '월 ' +
-      selectedDate.getDate() +
-      '일 선택됨',
-  );
   // 오늘 날짜 기준으로 6일 후의 날짜를 계산
   const getDateAfterSixDays = (baseDate: Date) => {
     const sixDaysLater = new Date(baseDate);
