@@ -19,7 +19,7 @@ export const SEARCH_DEFAULT: SearchBtnTypes = {
     {
       icon: 'calendar',
       placeholder: '날짜',
-      BottomSheetTitle: '검색할 날짜 범위를 선택해주세요',
+      BottomSheetTitle: '희망하는 입실날짜 범위를 선택해주세요',
     },
     {
       icon: 'house',

@@ -1,15 +1,19 @@
 export type catchItems = {
-  id?: number;
+  productId?: number;
+  image?: string;
+  accommodationName: string;
   roomName: string;
-  roomType: string;
   resDate: string;
-  oldPrice: number;
-  discount: number;
+  catchType: boolean;
+  originalPrice: number;
+  discountRate: number;
+  sellPrice: number;
   isDelete?: boolean;
   isHeart?: boolean;
   heartState?: boolean;
   pageHandler?: () => void;
   heartBtnHandler?: () => void;
   deleteBtnHandler?: () => void;
-  location?: string;
+  latitude?: string;
+  longitude?: string;
 };
