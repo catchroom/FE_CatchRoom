@@ -3,6 +3,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import { useChatConnection } from '@/hooks/useChatConnection';
 import ChatMessageSender from '../sender';
+import ProductInfo from '../productInfo';
 
 const ChatRoomControl = ({
   children,
@@ -23,6 +24,9 @@ const ChatRoomControl = ({
 
   return (
     <div className="w-full h-full">
+      <div>
+        <ProductInfo />
+      </div>
       {children}
       <ChatMessageSender publish={sendMessage} />
     </div>

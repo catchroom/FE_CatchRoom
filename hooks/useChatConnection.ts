@@ -16,7 +16,7 @@ export const useChatConnection = (roomId: string) => {
   const userId = cookies.id;
 
   const { data } = useGetPreviousChat(roomId, accessToken);
-  console.log(data);
+  console.log('새로운 데이터가 왔어요~');
   const ws = useRef<CompatClient | null>(null);
 
   // 초기 데이터 로딩
@@ -78,5 +78,22 @@ export const useChatConnection = (roomId: string) => {
     });
   };
 
-  return { connect, disconnect, sendMessage };
+  const negoPrice = (price: number) => {
+    if (!ws.current) return;
+    ws.current.publish({
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      destination: `/pub/chat/message`,
+      body: JSON.stringify({
+        type: 'TALK',
+        roomId: roomId,
+        message: '가격 제안',
+        userId: userId,
+        negoPrice: price,
+      }),
+    });
+  };
+
+  return { connect, disconnect, sendMessage, negoPrice };
 };

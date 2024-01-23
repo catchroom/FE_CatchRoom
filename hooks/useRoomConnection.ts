@@ -52,6 +52,25 @@ export const useRoomConnection = () => {
     );
   };
 
+  const deleteRoom = (roomId: string) => {
+    console.log('삭제 시작');
+    if (!ws.current) return console.log('연결 안됨');
+    console.log('삭제 진행중');
+    ws.current.publish({
+      destination: `/pub/chat/message`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        type: 'DELETE',
+        roomId: roomId,
+        userId: userId,
+        message: '채팅방이 삭제되었습니다.',
+      }),
+    });
+    console.log('삭제 완료');
+  };
+
   // 연결 해제
   const disconnect = () => {
     if (!ws.current) return;
@@ -60,5 +79,5 @@ export const useRoomConnection = () => {
     ws.current.deactivate();
   };
 
-  return { connect, disconnect };
+  return { connect, disconnect, deleteRoom };
 };

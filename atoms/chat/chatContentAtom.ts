@@ -1,8 +1,4 @@
-import {
-  ChatMessageDto,
-  ChatRoomType,
-  MessageProps,
-} from '@/types/chat/chatRoom/types';
+import { ChatRoomType, MessageProps } from '@/types/chat/chatRoom/types';
 import { atom } from 'recoil';
 
 export type ChatContentType = {
@@ -29,15 +25,5 @@ export const chatAllRoomAtom = atom<ChatRoomType[]>({
 
 export const chatRoomAtom = atom<ChatRoomType>({
   key: 'chatRoomAtom',
-  default: {
-    chatRoomNumber: '',
-    buyerId: -1,
-    sellerId: -1,
-    productId: -1,
-    loginUserIdentity: '',
-    accommodationUrl: '',
-    partnerNickName: '',
-    lastChatmessageDto: {} as ChatMessageDto,
-    dealState: '',
-  },
+  default: {} as ChatRoomType,
 });
