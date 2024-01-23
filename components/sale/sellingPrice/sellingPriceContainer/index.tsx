@@ -7,6 +7,7 @@ import {
   percentState,
   priceState,
   productPriceState,
+  totalPriceState,
 } from '@/atoms/sale/priceAtom';
 import { isCatchPriceState } from '@/atoms/sale/catchAtom';
 
@@ -15,6 +16,7 @@ const SellingPriceContainer = () => {
   const selectedPrice = useRecoilValue(priceState);
   const selectedPercent = useRecoilValue(percentState);
   const setIsCatchPrice = useSetRecoilState(isCatchPriceState);
+  const setTotalPrice = useSetRecoilState(totalPriceState);
 
   const title =
     selectedPrice === 0
@@ -25,6 +27,11 @@ const SellingPriceContainer = () => {
 
   const charge = selectedPrice * 0.05;
   const totalPrice = selectedPrice - charge;
+
+  useEffect(() => {
+    setTotalPrice(totalPrice);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalPrice]);
 
   useEffect(() => {
     if (selectedPercent >= 50) setIsCatchPrice(true);

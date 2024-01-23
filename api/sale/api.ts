@@ -1,3 +1,4 @@
+import { ProductItem } from '@/types/sale/type';
 import { apiClient } from '../user/apiClient';
 
 export const getSaleProduct = async (id: number) => {
@@ -5,31 +6,9 @@ export const getSaleProduct = async (id: number) => {
   return res.data;
 };
 
-export const postSaleProduct = async (
-  //뮤테이션 훅으로 바꿔보기..?
-  id: number,
-  end_date: Date,
-  sell_price: number,
-  actual_profit: number,
-  rate: number,
-  is_catch: boolean,
-  is_auto_catch: boolean,
-  catch_price: number,
-  catch_price_start_date: Date,
-  introduction: string,
-  is_nego: boolean,
-) => {
+export const postSaleProduct = async (product: ProductItem) => {
   const res = await apiClient.post(`/v1/sales/product`, {
-    id,
-    end_date,
-    sell_price,
-    actual_profit,
-    rate,
-    is_catch,
-    is_auto_catch,
-    catch_price,
-    introduction,
-    is_nego,
+    product,
   });
   return res.data;
 };

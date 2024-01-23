@@ -14,3 +14,8 @@ export const percentState = atom<number>({
   key: 'percentState',
   default: 0,
 });
+
+export const totalPriceState = atom<number>({
+  key: 'totalPriceState',
+  default: 0,
+});
