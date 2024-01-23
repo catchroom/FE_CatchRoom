@@ -25,29 +25,24 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 const FromSeller = () => {
   const [agreePriceOffer, setAgreedPriceOffer] = useState<boolean>(false);
   const [wordCount, setWordCount] = useState(0);
-
+  const router = useRouter();
   const { register, setValue } = useForm<FromSeller>({
     resolver: zodResolver(sellerSchema),
     mode: 'onChange',
   });
-
-  const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [content, setContent] = useState('판매합니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ');
-
+  const [content, setContent] = useState('');
   const mutation = useMutaionPostSaleProduct();
-
   const setHeaderUnVisible = useSetRecoilState(isHeaderSate);
   const params = useSearchParams();
   const id = params?.get('id');
-
+  const catchPriceStartDate = useRecoilValue(catchSingleDate);
   const endDate = useRecoilValue(saleSingleDate);
   const [sellPrice, setSellPrice] = useRecoilState(priceState);
   const actualProfit = useRecoilValue(totalPriceState);
   const [discountRate, setDiscountRate] = useRecoilState(percentState);
   const [isAutoCatch, setIsAutoCatch] = useRecoilState(catchState);
   const catchprice = useRecoilValue(catchPriceState);
-  const catchPriceStartDate = useRecoilValue(catchSingleDate);
   const isCatch = discountRate >= 50 ? true : false;
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -80,7 +75,6 @@ const FromSeller = () => {
     setDiscountRate(0);
     router.push('/');
   };
-
   const handleButtonClick = () => {
     //api 호출
 
@@ -90,22 +84,27 @@ const FromSeller = () => {
       sellPrice: sellPrice,
       actualProfit: actualProfit,
       catchprice: catchprice,
-      endDate: endDate!,
+      endDate: endDate!.toISOString(),
       introduction: content,
       isAutoCatch: isAutoCatch,
       isCatch: isCatch,
       isNego: agreePriceOffer,
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      catchPriceStartDate: catchPriceStartDate?.toDateString()!,
+      catchPriceStartDate: catchPriceStartDate?.toISOString().split('T')[0]!,
     };
-    console.log(productData);
-    mutation.mutate(productData);
-    if (mutation.isSuccess) {
-      router.push('/room-info');
-      setHeaderUnVisible(false);
-    } else {
-      setOpen(true);
-    }
+    mutation.mutate(productData, {
+      onSuccess: handleMutationSucess,
+      onError: handleMutationError,
+    });
+  };
+
+  const handleMutationSucess = () => {
+    router.push('/room-info');
+    setHeaderUnVisible(false);
+  };
+  const handleMutationError = () => {
+    setOpen(true);
+    setHeaderUnVisible(false);
   };
 
   return (

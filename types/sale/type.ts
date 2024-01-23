@@ -4,7 +4,7 @@ export type ProductItem = {
   sellPrice: number;
   actualProfit: number;
   catchprice: number;
-  endDate: Date;
+  endDate: string;
   introduction: string;
   isAutoCatch: boolean;
   isCatch: boolean;
