@@ -1,28 +1,26 @@
 'use client';
 
-import { useGetPreviousChat } from '@/api/chat/query';
-import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
+import { useGetChatRoom } from '@/api/chat/query';
+import { chatAllRoomAtom } from '@/atoms/chat/chatContentAtom';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSetRecoilState } from 'recoil';
 import SockJS from 'sockjs-client';
 
-export const useChatConnection = (roomId: string) => {
-  const setChatList = useSetRecoilState(chatContentAtom);
+export const useRoomConnection = () => {
+  const ws = useRef<CompatClient | null>(null);
+  const setChatList = useSetRecoilState(chatAllRoomAtom);
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
   const userId = cookies.id;
 
-  const { data } = useGetPreviousChat(roomId, accessToken);
-  console.log(data);
-  const ws = useRef<CompatClient | null>(null);
+  const { data } = useGetChatRoom(accessToken);
 
   // 초기 데이터 로딩
   useEffect(() => {
     if (!data) return;
-    console.log(data);
     setChatList(data);
   }, [data, setChatList]);
 
@@ -35,7 +33,9 @@ export const useChatConnection = (roomId: string) => {
       reportErrors: true,
       debug: true,
     });
+
     const wsClient = Stomp.over(() => sockjs);
+
     ws.current = wsClient;
     ws.current.connect(
       {
@@ -44,9 +44,9 @@ export const useChatConnection = (roomId: string) => {
         },
       },
       () => {
-        ws.current?.subscribe(`/sub/chat/room/${roomId}`, (message) => {
+        ws.current?.subscribe(`/sub/chat/roomlist/${userId}`, (message) => {
           const recv = JSON.parse(message.body);
-          setChatList((prev) => [...prev, recv]);
+          setChatList(recv);
         });
       },
     );
@@ -55,28 +55,10 @@ export const useChatConnection = (roomId: string) => {
   // 연결 해제
   const disconnect = () => {
     if (!ws.current) return;
-    ws.current.unsubscribe(`/sub/chat/room/${roomId}`);
+    ws.current.unsubscribe(`/sub/chat/roomlist/${userId}`);
     ws.current.disconnect();
     ws.current.deactivate();
   };
 
-  // 메시지 전송
-  const sendMessage = (message: string) => {
-    if (!ws.current) return;
-    ws.current.publish({
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      destination: `/pub/chat/message`,
-      body: JSON.stringify({
-        type: 'TALK',
-        roomId: roomId,
-        message: message,
-        userId: userId,
-        negoPrice: -1,
-      }),
-    });
-  };
-
-  return { connect, disconnect, sendMessage };
+  return { connect, disconnect };
 };

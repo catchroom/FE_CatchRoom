@@ -47,7 +47,7 @@ const ChatMessageSender = ({
     <div className="w-full max-w-[480px] sticky bottom-0">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white w-full flex items-center border-t border-border-sub"
+        className="bg-white w-full flex items-center border-t border-border-sub "
       >
         <div className="w-full gap-2 h-fit flex py-4 px-3">
           <textarea
@@ -59,7 +59,7 @@ const ChatMessageSender = ({
               textareaRef.current = e;
             }}
             onChange={handleInputChange}
-            className="grow bg-surface-gray px-4 py-2 text-start h-[40px] max-h-[120px] text-t2 rounded-[20px]"
+            className="grow resize-none bg-surface-gray px-4 py-2 text-start h-[40px] max-h-[120px] text-t2 rounded-[20px]"
           />
           <button
             type="submit"

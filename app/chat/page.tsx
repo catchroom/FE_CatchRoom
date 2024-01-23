@@ -7,7 +7,6 @@ import { loadedChatList } from '@/api/chat/serverApi';
 
 const Page = async () => {
   const data = await loadedChatList();
-  console.log(data);
 
   return (
     <div className="w-full h-full">

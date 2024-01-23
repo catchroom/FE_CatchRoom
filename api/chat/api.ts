@@ -1,15 +1,14 @@
 import axios from 'axios';
 
 export const fetchChatRoom = async (token: string) => {
-  const data = await axios.get('https://catchroom.xyz/v1/chat/room/list', {
+  const data = await axios.get('https://catchroom.store/v1/chat/room/list', {
     headers: {
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   });
 
   const result = await data.data;
-  return result.data;
+  return result;
 };
 
 export const fetchPreviousChat = async (roomId: string, token: string) => {

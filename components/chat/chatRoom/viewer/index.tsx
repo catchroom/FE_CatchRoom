@@ -8,7 +8,7 @@ import MessageItem from '@/components/chat/chatRoom/messageItem';
 const ChatMessageViewer = () => {
   const messages = useRecoilValue(chatContentAtom);
   return (
-    <div className="pt-3 px-5">
+    <div className="py-3 px-5 bg-mint min-h-[calc(100vh-53px)]">
       {messages.map((item, index) => (
         <MessageItem
           key={index}

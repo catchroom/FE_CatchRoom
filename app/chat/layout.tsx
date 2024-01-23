@@ -7,7 +7,7 @@ const MypageLayout = ({ children }: { children: ReactNode }) => {
       <div className="w-full inset-0 ">
         <Header title="채팅" showBackButton showBorder />
       </div>
-      <div className="w-full absolute h-[calc(100vh-61px)] overflow-auto top-[53px]">
+      <div className="w-full absolute h-[calc(100vh-53px)] overflow-auto top-[53px]">
         {children}
       </div>
     </div>
