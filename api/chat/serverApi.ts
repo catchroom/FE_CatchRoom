@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 export const loadedChatList = async () => {
   const accessToken = cookies().get('accessToken')?.value;
   if (!accessToken) {
-    return alert('로그인이 필요합니다.');
+    return null;
   }
 
   const res = await fetch('https://catchroom.store/v1/chat/room/list', {

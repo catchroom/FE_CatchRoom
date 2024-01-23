@@ -45,6 +45,7 @@ export const useChatConnection = (roomId: string) => {
       },
       () => {
         wsClient.subscribe(`/sub/chat/room/${roomId}`, (message) => {
+          console.log(message);
           const recv = JSON.parse(message.body);
           setChatList((prev) => [...prev, recv]);
         });
