@@ -23,9 +23,13 @@ export const isAllDayCheckedState = atom<boolean>({
   key: 'isAllDayCheckedState',
   default: true,
 });
-export const singleDate = atom<Date | undefined>({
-  key: 'singleDate',
-  default: undefined,
+export const saleSingleDate = atom<Date | undefined>({
+  key: 'saleSingleDate',
+  default: new Date(),
+});
+export const catchSingleDate = atom<Date | undefined>({
+  key: 'catchSingleDate',
+  default: new Date(),
 });
 export const rangeDate = atom<DateRange | undefined>({
   key: 'rangeDate',

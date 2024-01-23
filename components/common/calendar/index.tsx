@@ -9,7 +9,11 @@ import './custom-styles.css';
 import MidLineIcon from '@/public/svgComponent/calendar/midline';
 
 import { CalendarContainerProps } from '@/types/common/calendar/type';
-import { rangeDate, singleDate } from '@/atoms/search-detail/searchStates';
+import {
+  catchSingleDate,
+  rangeDate,
+  saleSingleDate,
+} from '@/atoms/search-detail/searchStates';
 
 const CalendarComponent = ({
   useSingleDate,
@@ -17,8 +21,16 @@ const CalendarComponent = ({
   checkInYear,
   checkInMonth,
   checkInDay,
+  outerControlAtom = 'sale',
 }: CalendarContainerProps) => {
-  const [selected, setSelected] = useRecoilState(singleDate);
+  const outerControlState = {
+    sale: saleSingleDate,
+    catch: catchSingleDate,
+  };
+
+  const [selected, setSelected] = useRecoilState(
+    outerControlState[outerControlAtom],
+  );
   const [range, setRange] = useRecoilState(rangeDate);
 
   const today = new Date();
