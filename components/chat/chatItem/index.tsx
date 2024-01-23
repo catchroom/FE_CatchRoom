@@ -2,22 +2,29 @@
 
 import React from 'react';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { isModalState } from '@/atoms/chat/leaveButton';
 import { useSetRecoilState } from 'recoil';
-import { ChatRoomType } from '@/types/chat/chatRoom/types';
+import { ChatMessageDto, ChatRoomType } from '@/types/chat/chatRoom/types';
+import moment from 'moment';
+import 'moment/locale/ko';
+import { chatRoomAtom } from '@/atoms/chat/chatContentAtom';
 
-const ChatItem = ({
-  buyerId,
-  chatRoomNumber,
-  sellerId,
-  productId,
-  accommodationUrl,
-  loginUserIdentity,
-}: ChatRoomType) => {
-  const router = useRouter();
+const ChatItem = ({ item }: { item: ChatRoomType }) => {
+  const setRoomInfo = useSetRecoilState(chatRoomAtom);
   const setIsOpen = useSetRecoilState(isModalState);
+
+  // 최근 메세지 시간 보여주는 데이터
+  const getRecentTime = (chatMessageDto: ChatMessageDto) => {
+    if (!chatMessageDto) return '';
+    else return moment(chatMessageDto.time).startOf('hour').fromNow();
+  };
+
+  // 최근 메세지 보여주는 데이터
+  const viewRecentMessage = (chatMessageDto: ChatMessageDto) => {
+    if (!chatMessageDto) return '최근 메세지가 없습니다.';
+    else return chatMessageDto.message;
+  };
 
   // 모달 열고 닫기
   const handleModalOpen = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -27,10 +34,9 @@ const ChatItem = ({
 
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
-    router.push(`/chat/chatRoom?chatId=${chatRoomNumber}`);
+    setRoomInfo(item);
+    window.location.href = `/chat/${item.chatRoomNumber}`;
   };
-
-  console.log(buyerId, chatRoomNumber, sellerId, productId, loginUserIdentity);
 
   return (
     <div
@@ -40,7 +46,7 @@ const ChatItem = ({
       {/* 채팅방 사진 보여주는 데이터 */}
       <div className="w-12 h-12 relative">
         <Image
-          src={accommodationUrl}
+          src={item.accommodationUrl}
           className="rounded-md"
           alt="숙소사진"
           fill={true}
@@ -48,16 +54,17 @@ const ChatItem = ({
         />
       </div>
       <div className="grow">
-        <div data-testId="banner-top" className="flex items-center">
-          <p className="text-t3 font-semibold  text-text pr-2">
-            닉네임 : {buyerId}
+        <div data-testid="banner-top" className="flex items-center gap-2">
+          <p className="text-t3 font-semibold text-text">
+            {item.partnerNickName}
+          </p>
+          <p className="text-text-sub">
+            {getRecentTime(item.lastChatmessageDto)}
           </p>
         </div>
-        <div className="flex">
-          <p className="line-clamp-1 text-text">
-            lastMessage : {loginUserIdentity}
-          </p>
-        </div>
+        <p className="text-text text-t2">
+          {viewRecentMessage(item.lastChatmessageDto)}
+        </p>
       </div>
       <div className="ml-auto" onClick={handleModalOpen}>
         <XSymbolIcon />

@@ -28,7 +28,7 @@ const Header = ({
   const setPrice = useSetRecoilState(priceState);
   const setAllCheck = useSetRecoilState(allCheckState);
 
-  const headerClass = `w-full max-w-[480px] fixed z-20 grid grid-cols-3 items-center px-6 py-3 bg-bg ${
+  const headerClass = `w-full max-w-[480px] fixed z-10 grid grid-cols-3 items-center px-6 py-3 bg-bg ${
     showBorder ? 'border-b border-gray-300' : ''
   }`;
 

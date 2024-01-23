@@ -49,6 +49,7 @@ const LoginButton = () => {
     onSuccess: (data) => {
       setCookie('accessToken', data.data.accessToken);
       setCookie('refreshToken', data.data.refreshToken);
+      setCookie('id', data.data.id);
       alert('로그인 되었습니다.');
     },
     onError: (error) => {

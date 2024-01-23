@@ -3,7 +3,7 @@
 import PaymentModal from '@/components/order/modal';
 import Modal from '@/components/common/modal';
 import { PaymentButtonProps } from '@/types/order/paymentButton/type';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
 
@@ -11,6 +11,7 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   const selectedTerms = useRecoilValue(selectedTermsState);
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('orderConfirmation');
+  // const formSubmitted = useRecoilValue(formSubmittedState);
 
   const handleSubmit = () => {
     if (formRef.current) {
@@ -39,7 +40,18 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
     setModalOpen(false);
   };
   const formattedAmount = `${amount.toLocaleString('ko-KR')}원`;
+  useEffect(() => {
+    const handleGuestInfoUpdate = (e) => {
+      console.log('Updated guest info:', e.detail);
+      // 필요한 경우 여기서 추가적인 로직 수행
+    };
 
+    window.addEventListener('guestInfoUpdated', handleGuestInfoUpdate);
+
+    return () => {
+      window.removeEventListener('guestInfoUpdated', handleGuestInfoUpdate);
+    };
+  }, []);
   return (
     <>
       <div className="fixed bottom-0 bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-1 ">
@@ -53,6 +65,16 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
 
       {modalType === 'orderConfirmation' && (
         <PaymentModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      )}
+
+      {isModalOpen && modalType === 'guestInfoFailure' && (
+        <Modal
+          title="결제 실패"
+          content="이용자 정보를 모두 입력해주세요"
+          onConfirm={handleCloseModal}
+          confirmString="확인"
+          showConfirmButton={true}
+        />
       )}
 
       {isModalOpen && modalType === 'formValidationFailure' && (
