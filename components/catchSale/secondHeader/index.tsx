@@ -18,7 +18,7 @@ const SecondHeader = () => {
   };
 
   return (
-    <div className="flex justify-between w-full p-5 items-center">
+    <div className="flex  fixed z-20 justify-between w-full p-5 items-center mt-[52px] bg-bg">
       <div className="font-bold text-t2">총 12건</div>
       <div className="flex gap-1 text-p2">
         {/* 드롭다운 UI 나오면 변경 예정 */}

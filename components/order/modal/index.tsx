@@ -9,7 +9,7 @@ const PaymentModal = ({ isOpen, onClose }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0  bg-gray-1000 bg-opacity-50 flex justify-center items-center">
+    <div className="fixed z-20 inset-0  bg-gray-1000 bg-opacity-50 flex justify-center items-center">
       <div className="relative bg-white w-full max-w-sm m-auto rounded">
         <div className="p-5">
           <BookingDetails
