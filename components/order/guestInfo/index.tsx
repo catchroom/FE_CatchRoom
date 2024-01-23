@@ -1,37 +1,47 @@
 'use client';
-import React, { useEffect, forwardRef, RefObject } from 'react';
+import React, { forwardRef, useImperativeHandle, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { guestInfoSchema } from '@/constants/zodSchema';
 import CheckBoxComponent from '@/components/common/checkBox';
 import DeleteIcon from '@/public/svgComponent/deleteIcon';
-import { useRecoilState } from 'recoil';
-import { guestInfoState } from '@/atoms/order/guestInfoAtom';
-import { formSubmittedState } from '@/atoms/order/formSubmissionAtom';
-type GuestInfoProps = {
-  name: string;
-  phoneNumber: string;
-};
+import {
+  GuestInfoFormData,
+  GuestInfoProps,
+} from '@/types/order/guestInfo/types';
 
-const GuestInfo = forwardRef<HTMLFormElement, GuestInfoProps>(
-  ({ name: defaultName, phoneNumber: defaultPhoneNumber }, ref) => {
-    // const formRef = useRef(null);
-    const [, setGuestInfo] = useRecoilState(guestInfoState);
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-    const [, setFormSubmitted] = useRecoilState(formSubmittedState);
+const GuestInfo = forwardRef(
+  (
+    { name: defaultName, phoneNumber: defaultPhoneNumber }: GuestInfoProps,
+    ref,
+  ) => {
+    useImperativeHandle(ref, () => ({
+      submitForm: () => handleSubmit(onSubmit)(),
+      getValues,
+    }));
 
     const {
       register,
       handleSubmit,
       setValue,
       watch,
+      clearErrors,
+      getValues,
+
       formState: { errors },
-    } = useForm({
+    } = useForm<GuestInfoFormData>({
       resolver: zodResolver(guestInfoSchema),
+      mode: 'onBlur',
+      defaultValues: {
+        sameAsReservation: true,
+        name: defaultName,
+        phone: defaultPhoneNumber,
+      },
     });
 
-    const clearInput = (fieldName: string) => {
+    const clearInput = (fieldName: 'name' | 'phone') => {
       setValue(fieldName, '');
+      setValue('sameAsReservation', false);
     };
 
     const isChecked = watch('sameAsReservation', false);
@@ -39,62 +49,31 @@ const GuestInfo = forwardRef<HTMLFormElement, GuestInfoProps>(
     const watchedName = watch('name');
     const watchedPhone = watch('phone');
 
-    // eslint-disable-next-line
-    // const onSubmit = (data: any) => {
-    //   setGuestInfo(data);
-    //   console.log(data);
-    //   const isFormEmpty = !data.name && !data.phone;
-
-    //   if (Object.keys(errors).length > 0 || isFormEmpty) {
-    //     setIsModalOpen(true);
-    //   } else {
-    //     console.log('폼 제출 성공');
-    //   }
-    // };
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onSubmit = (data: any) => {
-      setGuestInfo(data);
-      setFormSubmitted(true);
-      console.log('Form submitted with data:', data);
-      const event = new CustomEvent('guestInfoUpdated', { detail: data });
-      window.dispatchEvent(event);
+    const onSubmit = (data: GuestInfoFormData) => {
+      console.log(data);
     };
 
     useEffect(() => {
       if (isChecked) {
         setValue('name', defaultName);
         setValue('phone', defaultPhoneNumber);
+        clearErrors(['name', 'phone']);
       } else {
         setValue('name', '');
         setValue('phone', '');
       }
-    }, [isChecked, setValue, defaultName, defaultPhoneNumber]);
+    }, [isChecked, setValue, defaultName, defaultPhoneNumber, clearErrors]);
 
     const handleSelectState = () => {
       setValue('sameAsReservation', !isChecked);
     };
-
-    // let modalContent = '이용자 정보를 입력해주세요.';
-    // if (errors.name && errors.phone) {
-    //   modalContent = '이용자 정보를 모두 입력해주세요.';
-    // } else if (errors.name) {
-    //   modalContent = '이름을 입력해주세요.';
-    // } else if (errors.phone) {
-    //   modalContent = '휴대폰번호를 입력해주세요.';
-    // }
-
     const baseInputStyle = `w-full rounded-md border border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2`;
     const inputWrapperStyle =
       'relative flex items-center border border-border-sub rounded-md';
 
     return (
       <div>
-        <form
-          ref={ref as RefObject<HTMLFormElement>}
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col mb-8"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col mb-8">
           <div className="mx-[-20px]">
             <div className="w-full border-t-8 border-border-sub mb-6"></div>
           </div>
@@ -129,7 +108,9 @@ const GuestInfo = forwardRef<HTMLFormElement, GuestInfoProps>(
               </div>
               {errors.name && watchedName && (
                 <p className="border-border-critical text-text-sub text-p3">
-                  {/* {errors.name.message} */}
+                  {typeof errors.name.message === 'string'
+                    ? errors.name.message
+                    : ''}
                 </p>
               )}
               <div className={inputWrapperStyle}>
@@ -154,25 +135,18 @@ const GuestInfo = forwardRef<HTMLFormElement, GuestInfoProps>(
               </div>
               {errors.phone && watchedPhone && (
                 <p className="border-border-critical text-text-sub text-p3">
-                  {/* {errors.phone.message} */}
+                  {typeof errors.phone.message === 'string'
+                    ? errors.phone.message
+                    : ''}
                 </p>
               )}
             </div>
           </div>
-          {/* <button type="submit">제출</button> */}
         </form>
-        {/* {isModalOpen && (
-        <Modal
-          title="입력 오류"
-          content={modalContent}
-          onConfirm={() => setIsModalOpen(false)}
-          confirmString="확인"
-          showConfirmButton={true}
-        />
-      )} */}
       </div>
     );
   },
 );
 GuestInfo.displayName = 'GuestInfo';
+
 export default GuestInfo;

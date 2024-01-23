@@ -6,4 +6,5 @@ export type HeaderProps = {
   showHomeButton?: boolean;
   showBorder?: boolean;
   isSale?: boolean;
+  closeButtonRedirectPath?: string;
 };

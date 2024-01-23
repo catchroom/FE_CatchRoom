@@ -1,16 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Radio } from '@material-tailwind/react';
 import { useRecoilState } from 'recoil';
 import { selectedPaymentMethodState } from '@/atoms/order/paymentMethodAtom';
 
 const PaymentMethods = () => {
-  const [isEasyPaymentOpen, setIsEasyPaymentOpen] = useState(false);
+  const [isEasyPaymentOpen, setIsEasyPaymentOpen] = useState(true);
   const [selectedEasyPayment, setSelectedEasyPayment] = useState('kakaoPay');
   const [selectedPayment, setSelectedPayment] = useRecoilState(
     selectedPaymentMethodState,
   );
+
+  useEffect(() => {
+    setSelectedPayment('easy');
+  }, [setSelectedPayment]);
 
   const toggleEasyPaymentDropdown = () => {
     setIsEasyPaymentOpen(!isEasyPaymentOpen);
