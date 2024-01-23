@@ -62,7 +62,7 @@ const CatchSpecialComponent = ({
         {/* 숙소 이미지 및 캐치특가 */}
         <div className="relative w-[120px] max-w-[120px] h-[140px] max-h-[140px] overflow-auto rounded-md mr-4">
           {discount >= 50 ? (
-            <div className="absolute flex items-center z-10 px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
+            <div className="absolute flex items-center z-[4] px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
               캐치 특가
             </div>
           ) : (

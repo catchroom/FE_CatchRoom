@@ -14,7 +14,7 @@ const Page = () => {
   return (
     <div className="w-full flex flex-col">
       <CatchItemContainer />
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[3]">
         <Link href="/search-result/map" passHref>
           <ToggleViewButton
             currentView={currentView}
