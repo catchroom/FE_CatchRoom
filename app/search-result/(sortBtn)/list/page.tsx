@@ -11,6 +11,7 @@ import {
   adultCountState,
   childCountState,
 } from '@/atoms/search-detail/searchStates';
+import { sortState } from '@/atoms/search-result/sortAtom';
 import { format } from 'date-fns';
 import { formatDate } from '@/utils/formatDate';
 import { useAccommodationList } from '@/api/search-result/query';
@@ -43,6 +44,7 @@ const Page = () => {
   const selectedRoomIndices = useRecoilValue(roomIndex);
   const adultCount = useRecoilValue(adultCountState);
   const childCount = useRecoilValue(childCountState);
+  const sortOption = useRecoilValue(sortState);
 
   useEffect(() => {
     setSearchParams((prev) => ({
@@ -75,6 +77,13 @@ const Page = () => {
       pax: adultCount + childCount,
     }));
   }, [adultCount, childCount]);
+
+  useEffect(() => {
+    setSearchParams((prev) => ({
+      ...prev,
+      filter: sortOption,
+    }));
+  }, [sortOption]);
 
   if (isLoading) {
     return <div>Loading</div>;

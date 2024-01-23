@@ -6,15 +6,22 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import { DROP_DOWN } from '@/constants/catchSale';
+import { sortState } from '@/atoms/search-result/sortAtom';
 
 const ProductListControls = () => {
   const [dropdownTitle, setDropdownTitle] = useRecoilState(dropdownState);
   const setModal = useSetRecoilState(outerBottomSheetsControl);
+  const setSortOption = useSetRecoilState(sortState);
 
-  const handleOptionClick = (title: string) => {
-    setDropdownTitle(title);
-    setModal(false);
+  const handleOptionClick = (selectedOption: string) => {
+    const option = DROP_DOWN.find((item) => item.name === selectedOption);
+    if (option) {
+      setDropdownTitle(option.name);
+      setSortOption(option.value);
+      setModal(false);
+    }
   };
+
   return (
     <div className="fixed z-[5] flex items-center justify-between w-full max-w-[480px] p-5 mt-32 border-border-sub text-p1 font-semibold">
       <p className="text-t2 font-bold">총 12건</p>
