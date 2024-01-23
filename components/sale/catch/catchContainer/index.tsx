@@ -39,6 +39,11 @@ const CatchContainer = () => {
   const [selected, setSelected] = useRecoilState(catchSingleDate); // 캐치특가 선택 날짜
 
   useEffect(() => {
+    setIsCatch(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (selectedSaleEndDate instanceof Date) {
       const endDate = new Date(selectedSaleEndDate);
       endDate.setDate(endDate.getDate() - 1);
@@ -65,15 +70,12 @@ const CatchContainer = () => {
     useRecoilState(catchPercentState);
 
   useEffect(() => {
-    console.log(selectedPercent, disable);
     if (selectedPercent !== 0) {
-      setDisable(false);
       if (selectedPercent <= 40) setSelectCatchPercent(50);
       else if (selectedPercent >= 50 && selectedPercent <= 80) {
         setSelectCatchPercent(selectedPercent + 10);
       } else if (selectedPercent >= 90) {
         setIsCatch(false);
-        setDisable(true);
       }
     } else setDisable(true);
     setSelectedCatchPrice(price * ((100 - percent) / 100));
@@ -88,7 +90,7 @@ const CatchContainer = () => {
         ? selectedPrice.toLocaleString() + '원'
         : selectedCatchPrice.toLocaleString() + '원';
 
-  const buttonSelect = selectedCatchPrice === 0 ? 'input' : 'price';
+  const buttonSelect = selectedPrice === 0 ? 'input' : 'price';
   const handleToggleButton = () => {
     setIsCatch((prev) => !prev);
   };
@@ -114,7 +116,7 @@ const CatchContainer = () => {
           isDisabled={disable}
         />
       </div>
-      {open && (
+      {isCatch && open && (
         <div
           className="flex flex-col p-3 absolute top-12 rounded w-full gap-2.5 bg-surface border border-border-sub shadow-custom"
           data-testid="catch-describe"
@@ -140,6 +142,7 @@ const CatchContainer = () => {
               price={selectedCatchPrice}
               percent={selectedCatchPercent}
               outerControlAtom="catch"
+              isCatch={true}
             >
               <BottomSheetsContent price={price} />
             </BottomSheets>
