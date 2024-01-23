@@ -14,18 +14,14 @@ const checkViewState = (viewState: boolean): keyof QueryData => {
 const Divide = () => {
   const viewState = useRecoilValue(divideAtom);
   const viewCase = checkViewState(viewState);
-  const { data: mypageData } = useMyPageQuery(viewCase);
-  console.log(mypageData);
+  const { data } = useMyPageQuery(viewCase);
 
   return (
     <div>
-      {mypageData && mypageData.data.length > 0 ? (
-        mypageData.data.map((item: MypageSellingType) => (
+      {data &&
+        data.data.map((item: MypageSellingType) => (
           <MItem key={item.accommodationName} item={item} />
-        ))
-      ) : (
-        <div>데이터가 없어용</div>
-      )}
+        ))}
     </div>
   );
 };

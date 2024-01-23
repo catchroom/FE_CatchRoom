@@ -13,12 +13,12 @@ export const getDotDate = (
 
   let formattedDate = `${year}.${
     date.getMonth() + 1
-  }.${date.getDate()} ${hours}:${minutes} ${dayOfWeek}`;
+  }.${date.getDate()} ${dayOfWeek} ${hours}:${minutes} `;
 
   if (noYear) {
     formattedDate = `${
       date.getMonth() + 1
-    }.${date.getDate()} ${hours}:${minutes} ${dayOfWeek}`;
+    }.${date.getDate()} ${dayOfWeek} ${hours}:${minutes} `;
   }
 
   if (noDay) {

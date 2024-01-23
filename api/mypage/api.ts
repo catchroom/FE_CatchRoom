@@ -160,13 +160,13 @@ export const getWishlist = async () => {
   return res.data;
 };
 
-////////////여기부터 다시 진행///////////////////////
-
 // 24. 나의 찜 삭제하기 *****delete
 export const deleteHeart = async (id: number) => {
   const res = await apiClient.delete(`/v1/mypage/wishlist?id=${id}`);
   return res.data;
 };
+
+////////////여기부터 다시 진행, 34랑 38 안함///////////////////////
 
 // 34. 나의 판매 내역 삭제하기 *****delete  ->34와 동일
 export const deleteSalesList = async (id: number) => {

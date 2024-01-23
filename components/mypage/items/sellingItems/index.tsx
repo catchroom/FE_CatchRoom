@@ -40,8 +40,6 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
     isReview = 'outDatedReview';
   }
 
-  console.log(isNotIng, sellState);
-
   return (
     <div className="w-full px-5 py-3 flex flex-col gap-3">
       <div id="container" className="w-full flex flex-col">
