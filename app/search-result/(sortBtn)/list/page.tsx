@@ -3,7 +3,7 @@ import AccommodationList from '@/components/search-result/list/accommodationList
 import ToggleViewButton from '@/components/search-result/toggleViewButton';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   regionIndex,
   rangeDate,
@@ -12,6 +12,7 @@ import {
   childCountState,
 } from '@/atoms/search-detail/searchStates';
 import { sortState } from '@/atoms/search-result/sortAtom';
+import { accommodationsCountState } from '@/atoms/search-result/countAtom';
 import { format } from 'date-fns';
 import { formatDate } from '@/utils/formatDate';
 import { useAccommodationList } from '@/api/search-result/query';
@@ -41,11 +42,13 @@ const Page = () => {
 
   const selectedRegion = useRecoilValue(regionIndex);
   const dateRange = useRecoilValue(rangeDate);
-  const selectedRoomIndices = useRecoilValue(roomIndex);
+  const selectedType = useRecoilValue(roomIndex);
   const adultCount = useRecoilValue(adultCountState);
   const childCount = useRecoilValue(childCountState);
   const sortOption = useRecoilValue(sortState);
+  const setAccommodationsCount = useSetRecoilState(accommodationsCountState);
 
+  //지역
   useEffect(() => {
     setSearchParams((prev) => ({
       ...prev,
@@ -53,6 +56,7 @@ const Page = () => {
     }));
   }, [selectedRegion]);
 
+  //체크인 범위
   useEffect(() => {
     const startDate = dateRange?.from ?? new Date();
     const endDate = dateRange?.to ?? new Date();
@@ -64,13 +68,15 @@ const Page = () => {
     }));
   }, [dateRange]);
 
+  //숙박 유형
   useEffect(() => {
     setSearchParams((prev) => ({
       ...prev,
-      type: selectedRoomIndices.join(','),
+      type: selectedType.join(','),
     }));
-  }, [selectedRoomIndices]);
+  }, [selectedType]);
 
+  //인원 수
   useEffect(() => {
     setSearchParams((prev) => ({
       ...prev,
@@ -78,12 +84,20 @@ const Page = () => {
     }));
   }, [adultCount, childCount]);
 
+  //정렬 타입
   useEffect(() => {
     setSearchParams((prev) => ({
       ...prev,
       filter: sortOption,
     }));
   }, [sortOption]);
+
+  // 총 개수
+  useEffect(() => {
+    if (accommodations) {
+      setAccommodationsCount(accommodations.length);
+    }
+  }, [accommodations, setAccommodationsCount]);
 
   if (isLoading) {
     return <div>Loading</div>;

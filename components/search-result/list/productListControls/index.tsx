@@ -7,11 +7,14 @@ import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import { DROP_DOWN } from '@/constants/catchSale';
 import { sortState } from '@/atoms/search-result/sortAtom';
+import { accommodationsCountState } from '@/atoms/search-result/countAtom';
+import { useRecoilValue } from 'recoil';
 
 const ProductListControls = () => {
   const [dropdownTitle, setDropdownTitle] = useRecoilState(dropdownState);
   const setModal = useSetRecoilState(outerBottomSheetsControl);
   const setSortOption = useSetRecoilState(sortState);
+  const accommodationsCount = useRecoilValue(accommodationsCountState);
 
   const handleOptionClick = (selectedOption: string) => {
     const option = DROP_DOWN.find((item) => item.name === selectedOption);
@@ -24,7 +27,7 @@ const ProductListControls = () => {
 
   return (
     <div className="fixed z-[5] flex items-center justify-between w-full max-w-[480px] p-5 mt-32 border-border-sub text-p1 font-semibold">
-      <p className="text-t2 font-bold">총 12건</p>
+      <p className="text-t2 font-bold">총 {accommodationsCount}건</p>
       <div className="flex">
         <BottomSheetsWithoutCloseBtn
           title={dropdownTitle}
