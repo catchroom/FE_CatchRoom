@@ -24,8 +24,9 @@ const SetTime = () => {
     setHour((prevHour) => {
       if (prevHour === 11) {
         setIsTimeChange(true);
-        return 0;
-      } else return prevHour + 1;
+        return 12;
+      } else if (prevHour === 12) return 1;
+      else return prevHour + 1;
     });
   const increaseMinute = () =>
     setMinute((prevMinute) => (prevMinute === 59 ? 0 : prevMinute + 1));
@@ -34,9 +35,8 @@ const SetTime = () => {
     setHour((prevHour) => {
       if (prevHour === 1) {
         setIsTimeChange(true);
-        return 0;
-      } else if (prevHour === 0) return 11;
-      else return prevHour - 1;
+        return 12;
+      } else return prevHour - 1;
     });
   const decreaseMinute = () =>
     setMinute((prevMinute) => (prevMinute === 0 ? 59 : prevMinute - 1));
@@ -65,23 +65,23 @@ const SetTime = () => {
         </div>
         <div className="flex items-center">
           <div className="flex flex-col gap-8 items-center pl-3">
-            <div {...decreaseHourLongPress} onClick={decreaseHour}>
+            <div {...decreaseHourLongPress} onClick={increaseHour}>
               <UpArrow />
             </div>
 
             <p>{hour < 10 ? '0' + hour.toString() : hour}</p>
-            <div {...IncreaseHourLongPress} onClick={increaseHour}>
+            <div {...IncreaseHourLongPress} onClick={decreaseHour}>
               <DownArrowIcon color="#9FA3AB" />
             </div>
           </div>
           <div className="flex items-center justify-center mx-2 mt-2">:</div>
           <div className="flex flex-col gap-8 items-center pr-3">
-            <div {...decreaseMinuteLongPress} onClick={decreaseMinute}>
+            <div {...decreaseMinuteLongPress} onClick={increaseMinute}>
               <UpArrow />
             </div>
 
             <p>{minute < 10 ? '0' + minute.toString() : minute}</p>
-            <div {...IncreaseMinuteLongPress} onClick={increaseMinute}>
+            <div {...IncreaseMinuteLongPress} onClick={decreaseMinute}>
               <DownArrowIcon color="#9FA3AB" />
             </div>
           </div>
