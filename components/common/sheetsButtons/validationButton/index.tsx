@@ -3,9 +3,10 @@
 import React, { MouseEventHandler, useState } from 'react';
 import { motion } from 'framer-motion';
 import Modal from '../../modal';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { priceState } from '@/atoms/sale/priceAtom';
 import { allCheckState } from '@/atoms/sale/checkAtom';
+import { isHeaderSate } from '@/atoms/sale/headerAtom';
 
 const ValidationButton = ({
   name,
@@ -29,7 +30,11 @@ const ValidationButton = ({
   const [modalContent] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
 
+  const setHeaderUnVisible = useSetRecoilState(isHeaderSate);
+
   const handleValidation: MouseEventHandler<HTMLButtonElement> = (e) => {
+    setHeaderUnVisible(true);
+
     if (price === 0) {
       //판매가 설정을 안했을 때
       setOpen(true);

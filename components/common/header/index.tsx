@@ -8,9 +8,10 @@ import MoreIcon from '@/public/svg/dots-vertical.svg';
 import HomeIcon from '@/public/svg/home.svg';
 import { HeaderProps } from '@/types/common/header/types';
 import Modal from '../modal';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { priceState } from '@/atoms/sale/priceAtom';
 import { allCheckState } from '@/atoms/sale/checkAtom';
+import { isHeaderSate } from '@/atoms/sale/headerAtom';
 
 const Header = ({
   title,
@@ -27,9 +28,11 @@ const Header = ({
   const setPrice = useSetRecoilState(priceState);
   const setAllCheck = useSetRecoilState(allCheckState);
 
-  const headerClass = `w-full max-w-[480px] fixed top-0 z-10 grid grid-cols-3 items-center px-6 py-3 bg-bg ${
+  const headerUnVisible = useRecoilValue(isHeaderSate);
+
+  const headerClass = `w-full max-w-[480px] fixed top-0 grid grid-cols-3 items-center px-6 py-3 bg-bg ${
     showBorder ? 'border-b border-gray-300' : ''
-  }`;
+  } ${headerUnVisible} ? 'z-0' : 'z-10'  `;
 
   const handleCloseBtn = () => {
     if (isSale) {
