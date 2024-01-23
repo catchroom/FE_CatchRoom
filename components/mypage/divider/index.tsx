@@ -15,13 +15,17 @@ const Divide = () => {
   const viewState = useRecoilValue(divideAtom);
   const viewCase = checkViewState(viewState);
   const { data: mypageData } = useMyPageQuery(viewCase);
+  console.log(mypageData);
 
   return (
     <div>
-      {mypageData &&
-        mypageData.data.salesList.map((item: MypageSellingType) => (
-          <MItem key={item.productNum} item={item} />
-        ))}
+      {mypageData && mypageData.data.length > 0 ? (
+        mypageData.data.map((item: MypageSellingType) => (
+          <MItem key={item.accommodationName} item={item} />
+        ))
+      ) : (
+        <div>데이터가 없어용</div>
+      )}
     </div>
   );
 };

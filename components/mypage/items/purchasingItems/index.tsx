@@ -2,22 +2,29 @@
 
 import React from 'react';
 import ReviewButtons from '../reviewButtons';
-import { StateType, decodeState, getDotDate } from '@/utils/get-dot-date';
+import { ReviewType, getDotDate } from '@/utils/get-dot-date';
 import Image from 'next/image';
 import CalendarSVG from '@/public/svgComponent/mediumCalendar';
-import { MypageSellingType } from '@/types/mypage/data-types';
+import { MypagePurchaseType } from '@/types/mypage/data-types';
 import { useRouter } from 'next/navigation';
 
-const PurchasingItems = ({ item }: { item: MypageSellingType }) => {
+const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
   const router = useRouter();
-  const state = decodeState(
-    item.state as StateType,
-    getDotDate(item.productEndDate, true),
-  );
 
   const handleClick = () => {
     router.push(`/order`);
   };
+
+  let isReview: ReviewType = 'noReview';
+  if (item.reviewStatusType === '리뷰 삭제 완료') {
+    isReview = 'deleteReview';
+  } else if (item.reviewStatusType === '리뷰 작성 완료') {
+    isReview = 'onReview';
+  } else if (item.reviewStatusType === '리뷰 작성 가능') {
+    isReview = 'noReview';
+  } else if (item.reviewStatusType === '리뷰 작성기한 만료') {
+    isReview = 'outDatedReview';
+  }
 
   return (
     <div id="container" className="w-full px-5 py-3 flex flex-col gap-3">
@@ -27,7 +34,7 @@ const PurchasingItems = ({ item }: { item: MypageSellingType }) => {
           <div className="relative w-[120px] h-[120px]">
             {/* 호텔 이미지 */}
             <Image
-              src={item.thumbnailUrl}
+              src={item.thumbNailUrl}
               alt="room3"
               fill={true}
               sizes="(max-width: 480px) 500px, (max-width: 320px) 500px, 180px"
@@ -58,17 +65,21 @@ const PurchasingItems = ({ item }: { item: MypageSellingType }) => {
                 </span>
               </div>
               <div className="text-text">
-                <h3 className="text-t1 font-bold">{item.productName}</h3>
-                <p className="text-t2 font-semibold">{item.sellPrice}원</p>
+                <h3 className="text-t1 font-bold">{item.accommodationName}</h3>
+                <p className="text-t2 font-semibold">
+                  {item.buyPrice.toLocaleString('us-EN')}원
+                </p>
               </div>
             </div>
             <div className="flex gap-2 text-sub text-t3 font-medium">
-              <p>{state}</p>
+              <p>구매일 : {getDotDate(item.buyDate)}</p>
             </div>
           </div>
         </div>
       </div>
-      <ReviewButtons id={item.productNum} isReview={item.isReview} />
+      {item?.reviewStatusType && (
+        <ReviewButtons id={item.id} isReview={isReview} />
+      )}
     </div>
   );
 };

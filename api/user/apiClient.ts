@@ -33,6 +33,7 @@ apiClient.interceptors.response.use(
 
     if (error.isAxiosError && !originalRequest._retry) {
       originalRequest._retry = true;
+      // nookies.destroy(null, 'accessToken'); //액세스 토큰 만료시 지워버리기
 
       // console.log('originalRequest', originalRequest);
       // console.log('refresh', refreshToken);
@@ -44,6 +45,7 @@ apiClient.interceptors.response.use(
 
         nookies.set(null, 'accessToken', accessToken, {
           path: '/',
+          maxAge: 60 * 30,
         });
         console.log('집어넣는 토큰', accessToken);
 

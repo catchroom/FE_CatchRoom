@@ -63,7 +63,7 @@ const LoginForm = () => {
 
           nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
-            maxAge: 60 * 29, //29분
+            maxAge: 60 * 30, //30분
           });
           nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',

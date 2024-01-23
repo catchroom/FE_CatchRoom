@@ -6,6 +6,7 @@ import {
   salesHistoryListed,
   salesHistoryExpired,
   purchaseHistory,
+  getWishlist,
 } from './api';
 
 // 8
@@ -75,6 +76,20 @@ export const useQueryGetPurchaseHistory = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['purchaseHistory'],
     queryFn: purchaseHistory,
+    select: ({ data }) => data,
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};
+
+// 23
+export const useQueryGetWishlist = () => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['getWishlist'],
+    queryFn: getWishlist,
     select: ({ data }) => data,
   });
   return {

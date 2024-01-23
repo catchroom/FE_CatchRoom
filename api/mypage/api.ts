@@ -1,5 +1,6 @@
 import { apiClient } from '../user/apiClient';
 // 노션의 api 명세서 번호 기준으로 표시
+//import nookies from 'nookies';
 
 //6. 로그아웃
 export const logout = async () => {
@@ -97,8 +98,6 @@ export const depositDetail = async () => {
   return res.data;
 };
 
-/////////////////////////연결 시작하기///////////////////////
-
 // 15. 나의 판매 내역 - 게시중 get
 export const salesHistoryListed = async () => {
   const res = await apiClient.get(`/v1/mypage/saleshistory/now`);
@@ -111,17 +110,13 @@ export const salesHistoryExpired = async () => {
   return res.data;
 };
 
-// 17. 나의 판매 내역 삭제하기 *****delete  ->34와 동일
-export const deleteSalesList = async (id: number) => {
-  const res = await apiClient.delete(`/v1/sales/product?id=${id}`);
-  return res.data;
-};
-
 // 18. 나의 구매 내역 get
 export const purchaseHistory = async () => {
   const res = await apiClient.get(`/v1/mypage/purchasehistory`);
   return res.data;
 };
+
+/////////////////////////연결 시작하기///////////////////////
 
 // 19. 작성한 리뷰 보기 get
 export const viewReviews = async (type: '구매' | '판매') => {
@@ -157,16 +152,21 @@ export const deleteReview = async (id: number) => {
   return res.data;
 };
 
-// 23. 나의 찜 목록 보기 get
-export const viewWishlist = async () => {
-  const res = await apiClient.delete(`/v1/mypage/wishlist`);
-  // wishlist를 파라미터로 받을지?
+// 23. 나의 찜 목록 보기
+export const getWishlist = async () => {
+  const res = await apiClient.get(`/v1/mypage/wishlist`);
   return res.data;
 };
 
 // 24. 나의 찜 삭제하기 *****delete
 export const deleteHeart = async (id: number) => {
   const res = await apiClient.delete(`/v1/mypage/wishlist?id=${id}`);
+  return res.data;
+};
+
+// 34. 나의 판매 내역 삭제하기 *****delete  ->34와 동일
+export const deleteSalesList = async (id: number) => {
+  const res = await apiClient.delete(`/v1/sales/product?id=${id}`);
   return res.data;
 };
 
