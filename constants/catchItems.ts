@@ -1,5 +1,5 @@
 export type RoomItemType = {
-  id: number;
+  wishId: number;
   accommodationName: string;
   roomName: string;
   checkIn: string;

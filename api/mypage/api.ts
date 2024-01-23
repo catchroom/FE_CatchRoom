@@ -98,25 +98,25 @@ export const depositDetail = async () => {
   return res.data;
 };
 
-// 15. 나의 판매 내역 - 게시중 get
+// 15. 나의 판매 내역 - 게시중
 export const salesHistoryListed = async () => {
   const res = await apiClient.get(`/v1/mypage/saleshistory/now`);
   return res.data;
 };
 
-// 16. 나의 판매 내역 - 게시만료 get
+// 16. 나의 판매 내역 - 게시만료
 export const salesHistoryExpired = async () => {
   const res = await apiClient.get(`/v1/mypage/saleshistory/done`);
   return res.data;
 };
 
-// 18. 나의 구매 내역 get
+// 18. 나의 구매 내역
 export const purchaseHistory = async () => {
   const res = await apiClient.get(`/v1/mypage/purchasehistory`);
   return res.data;
 };
 
-/////////////////////////연결 시작하기///////////////////////
+/////////////////////////연결 시작하기(리뷰)///////////////////////
 
 // 19. 작성한 리뷰 보기 get
 export const viewReviews = async (type: '구매' | '판매') => {
@@ -152,11 +152,15 @@ export const deleteReview = async (id: number) => {
   return res.data;
 };
 
+////////////////////19-22 안함//////////////////
+
 // 23. 나의 찜 목록 보기
 export const getWishlist = async () => {
   const res = await apiClient.get(`/v1/mypage/wishlist`);
   return res.data;
 };
+
+////////////여기부터 다시 진행///////////////////////
 
 // 24. 나의 찜 삭제하기 *****delete
 export const deleteHeart = async (id: number) => {
