@@ -21,6 +21,7 @@ const Header = ({
   showBorder = false,
   showHomeButton = false,
   isSale = false,
+  closeButtonRedirectPath = '',
 }: HeaderProps) => {
   const router = useRouter();
 
@@ -37,7 +38,11 @@ const Header = ({
   const handleCloseBtn = () => {
     if (isSale) {
       setModalOpen(true);
-    } else router.back();
+    } else if (closeButtonRedirectPath) {
+      router.push(closeButtonRedirectPath);
+    } else {
+      router.back();
+    }
   };
 
   const onConfirm = () => {
@@ -74,7 +79,7 @@ const Header = ({
             <BackIcon />
           </button>
         ) : showCloseButton ? (
-          <button onClick={() => router.back()} className="justify-self-start">
+          <button onClick={handleCloseBtn} className="justify-self-start">
             <CloseIcon />
           </button>
         ) : (
