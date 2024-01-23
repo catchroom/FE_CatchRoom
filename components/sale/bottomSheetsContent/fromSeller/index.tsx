@@ -73,6 +73,7 @@ const FromSeller = () => {
     setIsAutoCatch(false);
     setSellPrice(0);
     setDiscountRate(0);
+    setHeaderUnVisible(false);
     router.push('/');
   };
   const handleButtonClick = () => {

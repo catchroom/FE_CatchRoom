@@ -50,7 +50,6 @@ const ValidationButton = ({
 
     if (fn && allCheck && price !== 0) {
       fn(e);
-      // postSaleProduct();
     }
   };
 
