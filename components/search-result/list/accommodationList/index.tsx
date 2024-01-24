@@ -30,7 +30,7 @@ const AccommodationList = ({
               originalPrice={accommodation.originalPrice}
               discountRate={accommodation.discountRate}
               sellPrice={accommodation.sellPrice}
-              pageHandler={() => pageHandler()}
+              pageHandler={() => pageHandler(accommodation.productId)}
             />
           );
         })}

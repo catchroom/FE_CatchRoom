@@ -26,7 +26,7 @@ const CatchSpecialComponentWrapper = ({
         originalPrice={selectedMarkerInfo.originalPrice}
         discountRate={selectedMarkerInfo.discountRate}
         sellPrice={selectedMarkerInfo.sellPrice}
-        pageHandler={() => pageHandler()}
+        pageHandler={() => pageHandler(selectedMarkerInfo.productId)}
       />
     </div>
   );
