@@ -10,7 +10,7 @@ const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8, color=
   <svg
     width={width}
     height={height}
-    viewBox={`0 0 20 20`}
+    viewBox={`0 0 ${width} ${height}`}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >

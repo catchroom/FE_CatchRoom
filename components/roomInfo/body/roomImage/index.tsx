@@ -1,12 +1,18 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { IMAGE_SRC } from '@/constants/roomImage';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { useParams } from 'next/navigation';
+import { useRoomItem } from '@/api/room-info/query';
+import { AccommodationUrl } from '@/types/common/product/types';
+import { UseParamsType } from '@/types/room-info/types';
 
 const RoomImageComponent = () => {
   // 받아와야 할 데이터
+  const { id } = useParams() as UseParamsType;
+  const { data, isLoading } = useRoomItem(id);
+
   // (숙소 관련 이미지들)
   const [imgIndex, setImgIndex] = useState<number>(0);
 
@@ -25,25 +31,35 @@ const RoomImageComponent = () => {
         pagination={{ clickable: true }}
         initialSlide={imgIndex}
       >
-        {IMAGE_SRC.data.map((data, index) => (
-          <SwiperSlide key={index}>
-            <div className="relative w-full h-[16.25rem]">
-              <Image
-                key={index}
-                src={data.src}
-                layout="fill"
-                objectFit="cover"
-                alt={data.src}
-              />
-            </div>
-          </SwiperSlide>
-        ))}
+        {isLoading && (
+          <div className="relative w-full h-[16.25rem] animate-pulse">
+            <div className="w-full h-full bg-gray-400" />
+          </div>
+        )}
+        {data &&
+          data.accommodationUrl.map((data: AccommodationUrl) => (
+            <SwiperSlide key={data.id}>
+              <div className="relative w-full h-[16.25rem]">
+                {!isLoading && (
+                  <Image
+                    key={data.id}
+                    src={data.url}
+                    layout="fill"
+                    objectFit="cover"
+                    alt={data.url}
+                  />
+                )}
+              </div>
+            </SwiperSlide>
+          ))}
       </Swiper>
-      <div className="absolute bottom-0 right-0 rounded-full bg-black bg-opacity-40 flex items-center justify-center px-3 py-1 mr-5 mb-6 z-10">
-        <p className="text-white opacity-100 text-t3 font-medium">
-          {imgIndex + 1}/{IMAGE_SRC.data.length}
-        </p>
-      </div>
+      {!isLoading && (
+        <div className="absolute bottom-0 right-0 rounded-full bg-black bg-opacity-40 flex items-center justify-center px-3 py-1 mr-5 mb-6 z-10">
+          <p className="text-white opacity-100 text-t3 font-medium">
+            {imgIndex + 1}/{data && data.accommodationUrl.length}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

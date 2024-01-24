@@ -42,10 +42,11 @@ const ItemsComponent = () => {
     <div className=" overflow-y-hidden">
       <div className="w-full flex flex-col mt-56 gap-12 p-6 pt-2">
         {data &&
-          data.map((data: DeadLineItem) => {
+          data.list.map((data: DeadLineItem) => {
             return (
               <CatchSpecialComponent
                 key={data.productId}
+                pageHandler={() => pageHandler(data.productId)}
                 image={data.image}
                 accommodationName={data.accommodationName}
                 roomName={data.roomName}
@@ -54,16 +55,15 @@ const ItemsComponent = () => {
                 originalPrice={data.originalPrice}
                 discountRate={data.discountRate}
                 sellPrice={data.sellPrice}
-                pageHandler={() => pageHandler()}
               />
             );
           })}
-        {/* {data.length === 0 && (
+        {data && data.size === 0 && (
           <div className="flex flex-col items-center justify-center pt-52 text-t3 text-text-sub">
             <p>선택한 날짜에 체크인 가능한 숙소가 없어요.</p>
             <p>다른 날짜를 선택해주세요.</p>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );
