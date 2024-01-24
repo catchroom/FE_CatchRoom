@@ -44,7 +44,6 @@ const FromSeller = () => {
   const [isAutoCatch, setIsAutoCatch] = useRecoilState(catchState);
   const catchprice = useRecoilValue(catchPriceState);
   const isCatch = discountRate >= 50 ? true : false;
-  const [modalContent, SetModalContent] = useState('');
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const currentValue = e.target.value;
@@ -100,17 +99,10 @@ const FromSeller = () => {
   };
 
   const handleMutationSucess = () => {
-    if (mutation.data.code === 4000) {
-      router.push('/room-info');
-      setHeaderUnVisible(false);
-    } else {
-      SetModalContent('체크인 기간 만료된 숙박권은 판매가 불가합니다.');
-      setOpen(true);
-      setHeaderUnVisible(false);
-    }
+    router.push('/room-info');
+    setHeaderUnVisible(false);
   };
   const handleMutationError = () => {
-    SetModalContent('사유 : 서버 에러');
     setOpen(true);
     setHeaderUnVisible(false);
   };
@@ -120,7 +112,7 @@ const FromSeller = () => {
       {open && (
         <Modal
           title="등록 실패"
-          content={modalContent}
+          content="체크인 기간 만료된 숙박권은 판매가 불가합니다."
           showConfirmButton={true}
           onConfirm={onConfirm}
           confirmString="홈으로 이동"
