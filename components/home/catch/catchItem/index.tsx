@@ -34,7 +34,7 @@ const CatchItem = ({
   const checkOutString = formatDateWithDay(checkOut);
 
   return (
-    <div className="flex flex-col relative w-[20rem] mt-5 rounded-lg border border-gray-200">
+    <div className="flex flex-col relative w-full mt-5 rounded-lg border border-gray-200">
       <div className="absolute flex top-[12px] left-4 bg-black gap-1 p-[10px] rounded-3xl items-center z-10">
         <White />
         <span className="text-white">{region}</span>

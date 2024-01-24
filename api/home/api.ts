@@ -18,3 +18,17 @@ export const getCatchItemsList = async (dataType: number) => {
   const data = await res.json();
   return data.data;
 };
+
+export const getReviewList = async (dataType: number) => {
+  const res = await fetch(
+    `https://catchroom.xyz/v1/main/review/list?dataType=${dataType}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  const data = await res.json();
+  return data.data;
+};

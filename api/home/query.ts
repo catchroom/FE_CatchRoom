@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { postSaleProduct } from '../sale/api';
-import { getCatchItemsList, getSalesHistory } from './api';
+import { getCatchItemsList, getReviewList, getSalesHistory } from './api';
 import { ProductItem } from '@/types/sale/type';
 //30
 export const useQueryGetSalesHistory = () => {
@@ -27,6 +27,14 @@ export const useQueryGetCatchItemsList = (dataType: number) => {
   const { data, isLoading } = useQuery({
     queryKey: ['getCatchItemsList'],
     queryFn: () => getCatchItemsList(dataType),
+  });
+  return { data, isLoading };
+};
+
+export const useQueryGetReviewList = (dataType: number) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['getReviewList'],
+    queryFn: () => getReviewList(dataType),
   });
   return { data, isLoading };
 };
