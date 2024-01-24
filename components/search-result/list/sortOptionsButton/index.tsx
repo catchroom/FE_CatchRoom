@@ -17,7 +17,7 @@ const SortOptionsButton = ({
       className="flex  items-center justify-between gap-1 text-t3 font-semibold"
     >
       {name}
-      <DownArrowIcon width={12} height={7} />
+      <DownArrowIcon width={20} height={20} />
     </button>
   );
 };
