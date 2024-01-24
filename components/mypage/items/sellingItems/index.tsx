@@ -1,28 +1,44 @@
 import React from 'react';
 import Image from 'next/image';
-// eslint-disable-next-line
-import { StateType, decodeState, getDotDate } from '@/utils/get-dot-date';
 import { MypageSellingType } from '@/types/mypage/data-types';
 import CalendarSVG from '@/public/svgComponent/mediumCalendar';
 import ReviewButtons from '../reviewButtons';
 import DeleteButtons from '../deleteButtons';
+import { ReviewType, getDotDate } from '@/utils/get-dot-date';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
-  const state = decodeState(
-    item.state as StateType,
-    getDotDate(item.productEndDate, true),
-  );
-
   const reEnroll =
-    item.state === 'expirationDate' ? (
+    item.dealState === 'DONEDEAL' ? (
       <span className=" text-text-primary underline">기한 수정</span>
     ) : null;
 
-  const isCatch = item.isCatch === true && item.state === 'ing' ? true : false;
+  const isCatch =
+    item?.dealState !== 'DONEDEAL' && item.isCatch === true ? true : false;
 
-  const isNotIng = item.state !== 'ing' ? true : false;
+  // 게시만료일때만 => 판매완료, 기한만료, 판매불가 따지기
+  const isNotIng = item?.dealState
+    ? item.dealState === 'UNSOLD' || 'EXPIRED' || 'DONEDEAL'
+      ? true
+      : false
+    : false;
 
-  console.log(isNotIng);
+  let sellState = '판매 완료';
+  if (item?.dealState === 'EXPIRED') {
+    sellState = '체크인 만료';
+  } else if (item?.dealState === 'UNSOLD') {
+    sellState = '기한 만료';
+  }
+
+  let isReview: ReviewType = 'noReview';
+  if (item.reviewStatusType === '리뷰 삭제 완료') {
+    isReview = 'deleteReview';
+  } else if (item.reviewStatusType === '리뷰 작성 완료') {
+    isReview = 'onReview';
+  } else if (item.reviewStatusType === '리뷰 작성 가능') {
+    isReview = 'noReview';
+  } else if (item.reviewStatusType === '리뷰 작성기한 만료') {
+    isReview = 'outDatedReview';
+  }
 
   return (
     <div className="w-full px-5 py-3 flex flex-col gap-3">
@@ -33,11 +49,13 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
             {/* 호텔 이미지 */}
             {isNotIng && (
               <div className="absolute flex z-10 items-center justify-center inset-0 backdrop-saturate-50 backdrop-brightness-75">
-                <p className="text-text-on font-semibold text-t2">판매완료</p>
+                <p className="text-text-on font-semibold text-t2">
+                  {sellState}
+                </p>
               </div>
             )}
             <Image
-              src={item.thumbnailUrl}
+              src={item.thumbNailUrl}
               alt="room3"
               fill={true}
               sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 60px"
@@ -60,22 +78,28 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
                   <CalendarSVG />
                   {getDotDate(item.checkIn)} - {getDotDate(item.checkOut)}
                 </p>
-                {isNotIng && <DeleteButtons />}
+                {isNotIng && <DeleteButtons id={parseInt(item.productId)} />}
               </div>
               <div className="text-text">
-                <h3 className="text-t1 font-bold">{item.productName}</h3>
-                <p className="text-t2 font-semibold">{item.sellPrice}원</p>
+                <h3 className="text-t1 font-bold">{item.accommodationName}</h3>
+                <p className="text-t2 font-semibold">
+                  {item.sellPrice.toLocaleString('us-EN')}원
+                </p>
               </div>
             </div>
             <div className="flex gap-2 text-sub text-t3 font-medium">
-              <p>{state}</p>
+              <p>
+                {item?.dealState
+                  ? '게시기한 만료'
+                  : `게시 만료일 : ${getDotDate(item.endDate, false)}`}
+              </p>
               {reEnroll}
             </div>
           </div>
         </div>
       </div>
-      {isNotIng && (
-        <ReviewButtons id={item.productNum} isReview={item.isReview} />
+      {item?.reviewStatusType && (
+        <ReviewButtons id={item.id} isReview={isReview} />
       )}
     </div>
   );

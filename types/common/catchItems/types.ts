@@ -2,9 +2,11 @@ export type catchItems = {
   productId?: number;
   image?: string;
   accommodationName: string;
-  roomName: string;
-  resDate: string;
-  catchType: boolean;
+  roomName?: string;
+  resDate?: string;
+  checkIn?: string;
+  checkOut?: string;
+  catchType?: boolean;
   originalPrice: number;
   discountRate: number;
   sellPrice: number;
@@ -16,4 +18,5 @@ export type catchItems = {
   deleteBtnHandler?: () => void;
   latitude?: string;
   longitude?: string;
+  region?: string;
 };

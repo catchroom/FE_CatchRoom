@@ -27,9 +27,9 @@ const config: Config = withMT({
     },
 
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
+      sm: '290px',
+      md: '320px',
+      lg: '390px',
     },
 
     colors: {

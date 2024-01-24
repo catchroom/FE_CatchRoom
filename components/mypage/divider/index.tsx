@@ -14,16 +14,14 @@ const checkViewState = (viewState: boolean): keyof QueryData => {
 const Divide = () => {
   const viewState = useRecoilValue(divideAtom);
   const viewCase = checkViewState(viewState);
-  const { data: mypageData, isLoading } = useMyPageQuery(viewCase);
-  const Loading = isLoading && <div>loading... spinner</div>;
-  console.log(mypageData);
+  const { data } = useMyPageQuery(viewCase);
+  console.log(data);
 
   return (
     <div>
-      {Loading}
-      {mypageData &&
-        mypageData.data.salesList.map((item: MypageSellingType) => (
-          <MItem key={item.productNum} item={item} />
+      {data &&
+        data.data.map((item: MypageSellingType) => (
+          <MItem key={item.accommodationName} item={item} />
         ))}
     </div>
   );

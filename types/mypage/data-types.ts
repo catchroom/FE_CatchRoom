@@ -1,19 +1,36 @@
-import { ReviewType } from '@/utils/get-dot-date';
+// import { ReviewType } from '@/utils/get-dot-date';
 
 export type MypageSellingType = {
-  accommodationId: string;
-  historyId: string;
-  productNum: string;
+  id: number;
+  accommodationName: string;
   checkIn: string;
   checkOut: string;
-  productName: string;
-  thumbnailUrl: string;
-  sellPrice: number;
-  state: string;
   writeDate: string;
-  productEndDate: string;
+  endDate: string;
+  sellPrice: number;
+  thumbNailUrl: string;
   isCatch: boolean;
-  isReview: ReviewType;
+  orderHistoryId: string;
+  productId: string;
+
+  // 판매완료에서 보이는 애들
+  dealState?: string;
+  reviewId?: number;
+  reviewStatusType?: string;
+};
+
+export type MypagePurchaseType = {
+  id: number;
+  accommodationName: string;
+  checkIn: string;
+  checkOut: string;
+  buyDate: string;
+  buyPrice: number;
+  thumbNailUrl: string;
+  isCatch: boolean;
+  reviewId: number;
+  reviewStatusType: string;
+  productId: string;
 };
 
 export type AccommodationType = {
