@@ -11,6 +11,7 @@ import { outerMoreBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsC
 import Modal from '@/components/common/modal';
 import { useParams, useRouter } from 'next/navigation';
 import { useMutationDeleteSaleProduct } from '@/api/sale/query';
+import { isProductState } from '@/atoms/sale/productAtom';
 
 const HeaderComponent = () => {
   const setMoreBottomSheetOpen = useSetRecoilState(
@@ -26,10 +27,9 @@ const HeaderComponent = () => {
   const { id } = useParams() as UseParamsType;
 
   const mutation = useMutationDeleteSaleProduct();
+  const setIsProduct = useSetRecoilState(isProductState);
 
   //const { id } = useSearchParams();
-  console.log(router);
-
   // 지민님 작업 끝나시면 이어서 할 예정.
   // const { data } = useRoomItem(id);
 
@@ -70,8 +70,8 @@ const HeaderComponent = () => {
 
   const handleEditBtnClick = () => {
     setMoreBottomSheetOpen(false);
-    //판매할 id 추가해야함
-    router.push('/sale');
+    setIsProduct(true);
+    router.push(`/sale?id=${id}`);
   };
 
   const handleDeleteBtnClick = () => {
@@ -80,7 +80,6 @@ const HeaderComponent = () => {
   };
 
   const onConfirm = () => {
-    //삭제 api 넣으면됨
     mutation.mutate(+id, {
       onSuccess: handleMutationSucess,
       onError: handleMutationError,
