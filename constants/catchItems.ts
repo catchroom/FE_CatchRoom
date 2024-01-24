@@ -1,10 +1,27 @@
 export type RoomItemType = {
-  id: number;
+  wishId?: number;
+  id?: number;
+  accommodationName?: string;
+  roomName?: string;
+  roomType?: string;
+  checkIn?: string;
+  resDate?: string;
+  sellPrice?: number;
+  oldPrice?: number;
+  discountRate?: 30 | 40 | 50 | 60 | 70 | 80 | 90;
+  location: string;
+  discount?: 30 | 40 | 50 | 60 | 70 | 80 | 90;
+};
+
+export type ItemType = {
+  wishId: number;
+  accommodationName: string;
   roomName: string;
-  roomType: string;
-  resDate: string;
-  oldPrice: number;
-  discount: 30 | 40 | 50 | 60 | 70 | 80 | 90;
+  checkIn: string;
+  checkOut: string;
+  sellPrice: number;
+  discountPrice: number;
+  discountRate: 30 | 40 | 50 | 60 | 70 | 80 | 90;
   location: string;
 };
 

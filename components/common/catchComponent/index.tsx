@@ -91,13 +91,13 @@ const CatchSpecialComponent = ({
           <div className="flex flex-col items-start">
             <div className="flex flex-wrap text-p2 text-gray-600">
               <p className="line-through">
-                구매가&nbsp;{originalPrice?.toLocaleString()}원
+                구매가&nbsp;{originalPrice?.toLocaleString('us-EN')}원
               </p>
             </div>
             <div className="flex flex-wrap items-center">
               <p className="text-t1 text-main font-bold">{discountRate}%</p>
               <p className=" text-t1 font-bold ml-2">
-                {sellPrice?.toLocaleString()}원
+                {sellPrice?.toLocaleString('us-EN')}원
               </p>
             </div>
           </div>
