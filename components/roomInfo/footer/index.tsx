@@ -11,6 +11,10 @@ import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
 const FooterComponent = () => {
   const [viewerState] = useRecoilState(viewerTestButton);
 
+  // 지민님 작업 끝나시면 이어서 할 예정.
+  // const { id } = useParams();
+  // const { data } = useRoomItem(id);
+
   const buttonClass =
     'font-pretend h-full rounded-[4px] text-t1 font-semibold shadow-none';
 

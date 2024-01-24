@@ -18,6 +18,11 @@ const HeaderComponent = () => {
 
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
+  // 지민님 작업 끝나시면 이어서 할 예정.
+  // const { id } = useParams();
+  // const { data } = useRoomItem(id);
+
   // ----------- 헤더부분에 스크롤에 따라 숙소이름 뜨게하려는 중...
 
   // const [scroll, setScroll] = useState<boolean>(false);

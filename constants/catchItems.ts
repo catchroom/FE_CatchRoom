@@ -13,6 +13,18 @@ export type RoomItemType = {
   discount?: 30 | 40 | 50 | 60 | 70 | 80 | 90;
 };
 
+export type ItemType = {
+  wishId: number;
+  accommodationName: string;
+  roomName: string;
+  checkIn: string;
+  checkOut: string;
+  sellPrice: number;
+  discoutPrice: number;
+  discountRate: 30 | 40 | 50 | 60 | 70 | 80 | 90;
+  location: string;
+};
+
 type ItemsInfoType = {
   roomItems: RoomItemType[];
 };

@@ -35,20 +35,20 @@ export const getDotDate = (
   return formattedDate;
 };
 
-// export const decodeState = (state: StateType, date?: string) => {
-//   switch (state) {
-//     case 'ing':
-//       return `게시 만료일 ~ ${date}`;
-//     case 'done':
-//       return `판매일 ${date}`;
-//     case 'expirationDate':
-//       return '게시기한 만료';
-//     case 'notForSale':
-//       return '체크인 만료';
-//     default:
-//       return `구매일 ${date}`;
-//   }
-// };
+export const decodeState = (state: StateType, date?: string) => {
+  switch (state) {
+    case 'ing':
+      return `게시 만료일 ~ ${date}`;
+    case 'done':
+      return `판매일 ${date}`;
+    case 'expirationDate':
+      return '게시기한 만료';
+    case 'notForSale':
+      return '체크인 만료';
+    default:
+      return `구매일 ${date}`;
+  }
+};
 
 export const decodeReviewState = (ismodify: ReviewType) => {
   switch (ismodify) {
@@ -69,11 +69,27 @@ export type ReviewType =
   | 'deleteReview'
   | 'outDatedReview';
 
-// // decodeState return type
-// export type StateType =
-//   | 'ing'
-//   | 'done'
-//   | 'expirationDate'
-//   | 'notForSale'
-//   | 'purchased';
-// export type decodeStateReturnType = ReturnType<typeof decodeState>;
+// decodeState return type
+export type StateType =
+  | 'ing'
+  | 'done'
+  | 'expirationDate'
+  | 'notForSale'
+  | 'purchased';
+export type decodeStateReturnType = ReturnType<typeof decodeState>;
+
+export const formatDateWithDay = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const monthDay = `${month < 10 ? '0' + month : month}.${
+    day < 10 ? '0' + day : day
+  }`;
+  const dayOfWeek = date
+    .toLocaleDateString('ko-KR', {
+      weekday: 'short',
+    })
+    .replace('.', '');
+
+  return `${monthDay} (${dayOfWeek})`;
+};

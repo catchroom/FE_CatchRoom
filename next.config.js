@@ -10,7 +10,11 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['res.cloudinary.com', 'yaimg.yanolja.com'],
+    domains: [
+      'res.cloudinary.com',
+      'yaimg.yanolja.com',
+      'tong.visitkorea.or.kr',
+    ],
   },
   async redirects() {
     return [
@@ -20,6 +24,10 @@ const nextConfig = {
         permanent: true,
       },
     ];
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 

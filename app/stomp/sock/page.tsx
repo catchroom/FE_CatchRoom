@@ -11,11 +11,12 @@ import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 const ROOMID = '02d6b08d-60f8-4c21-b5b2-0ba7af752e29';
 
 export type ChatContentType = {
-  type: 'ENTER' | 'TALK' | 'QUIT';
+  type: 'ENTER' | 'TALK' | 'QUIT' | 'NEGO_REQ' | 'NEGO_ALLOW' | 'NEGO_DENIED ';
   message: string;
   sender: string;
   roomId: string;
-  userId: string;
+  userId: number;
+  time: string;
 };
 
 const StompPage = ({ children }: { children: ReactNode }) => {
@@ -58,20 +59,6 @@ const StompPage = ({ children }: { children: ReactNode }) => {
     };
     // eslint-disable-next-line
   }, []);
-
-  // const sendMessage = () => {
-  //   if (!ws) return;
-  //   ws.publish({
-  //     destination: `/pub/chat/message`,
-  //     body: JSON.stringify({
-  //       roomId: ROOMID,
-  //       sender: '민섭',
-  //       type: 'TALK',
-  //       userId: 'user1',
-  //       message: '안녕하세용',
-  //     }),
-  //   });
-  // };
 
   const negoMessage = () => {
     if (!ws) return;

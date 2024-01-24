@@ -2,12 +2,12 @@
 
 import { useToastAlert } from '@/hooks/useToastAlert';
 import React, { useState } from 'react';
-import { RoomItemType } from '@/constants/catchItems';
+import { ItemType } from '@/constants/catchItems';
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import { getDotDate } from '@/utils/get-dot-date';
 import { deleteHeart } from './../../../../api/mypage/api';
 
-const WishListHeartControl = ({ item }: { item: RoomItemType }) => {
+const WishListHeartControl = ({ item }: { item: ItemType }) => {
   const { alertOpenHandler } = useToastAlert('찜을 취소했어요.');
   const [heartState, setHeartState] = useState(true);
 
@@ -20,14 +20,16 @@ const WishListHeartControl = ({ item }: { item: RoomItemType }) => {
   return (
     <CatchSpecialComponent
       key={item.wishId}
-      roomName={item.accommodationName}
-      roomType={item.roomName}
-      resDate={getDotDate(item.checkIn)}
-      oldPrice={item.sellPrice}
-      discount={item.discountRate}
+      accommodationName={item.accommodationName}
+      roomName={item.roomName}
+      resDate={`${getDotDate(item.checkIn)} - ${getDotDate(item.checkOut)}`}
+      originalPrice={item.sellPrice}
+      sellPrice={item.discoutPrice}
+      discountRate={item.discountRate}
       isHeart={true}
       heartState={heartState}
       heartBtnHandler={heartBtnHandler}
+      catchType={false}
     />
   );
 };

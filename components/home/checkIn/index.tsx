@@ -2,13 +2,26 @@
 import React from 'react';
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import WeekCalendar from '@/components/common/weekCalendar';
-import { ITEMS_INFO } from '@/constants/catchItems';
 import { useBtnLoading } from '@/hooks/useBtnLoading';
 import { Button } from '@material-tailwind/react';
 import { useProductInfoPage } from '@/hooks/useProductInfoPage';
+import { weekCalendarDate } from '@/atoms/checkInImnt/weekCalendar';
+import { useRecoilValue } from 'recoil';
+import { useDeadLineItems } from '@/api/deadline-items/query';
+import { DeadLineItem } from '@/types/deadline-items/types';
 
 const CheckInComponent = () => {
-  const { isLoading, btnHandler } = useBtnLoading('/deadline-items');
+  const { isBtnLoading, btnHandler } = useBtnLoading('/deadline-items');
+  const currentDate = useRecoilValue(weekCalendarDate);
+  const currentDateFormat =
+    currentDate.getFullYear() +
+    '-' +
+    currentDate.getMonth() +
+    1 +
+    '-' +
+    currentDate.getDate();
+
+  const { data } = useDeadLineItems(currentDateFormat);
 
   const { pageHandler } = useProductInfoPage();
 
@@ -24,31 +37,41 @@ const CheckInComponent = () => {
         </div>
 
         {/* 캐치특가 상품 목록 */}
-        <div className="w-full h-[27.14rem] flex flex-wrap gap-9 overflow-hidden">
-          {ITEMS_INFO.roomItems.slice(0, 3).map((item) => {
-            return (
-              <CatchSpecialComponent
-                key={item.roomName}
-                pageHandler={() => pageHandler()}
-                roomName={item.roomName}
-                roomType={item.roomType}
-                resDate={item.resDate}
-                oldPrice={item.oldPrice}
-                discount={item.discount}
-              />
-            );
-          })}
+        <div className="w-full h-[434px] flex flex-col justify-start gap-9 overflow-hidden">
+          {data &&
+            data.list.map((data: DeadLineItem) => {
+              return (
+                <CatchSpecialComponent
+                  key={data.productId}
+                  image={data.image}
+                  accommodationName={data.accommodationName}
+                  roomName={data.roomName}
+                  resDate={data.checkIn + ' - ' + data.checkOut}
+                  catchType={data.catchType}
+                  originalPrice={data.originalPrice}
+                  sellPrice={data.sellPrice}
+                  discountRate={data.discountRate}
+                  pageHandler={() => pageHandler(data.productId)}
+                />
+              );
+            })}
+          {data && data.size === 0 && (
+            <div className="flex flex-col items-center justify-center pt-32 text-t3 text-text-sub">
+              <p>선택한 날짜에 체크인 가능한 숙소가 없어요.</p>
+              <p>다른 날짜를 선택해주세요.</p>
+            </div>
+          )}
         </div>
 
         {/* 전체보기 버튼 컴포넌트 */}
         <div className="relative bottom-16 w-full z-20 bg-white rounded-[4px]">
           <Button
             placeholder="button"
-            loading={isLoading ? true : false}
+            loading={isBtnLoading ? true : false}
             className="absolute font-pretend z-20 flex items-center justify-center w-full h-[2.75rem] rounded-[4px] border border-border-primary text-t1 text-text-primary font-bold bg-white shadow-none"
             onClick={btnHandler}
           >
-            {isLoading ? '' : '전체보기'}
+            {isBtnLoading ? '' : '전체보기'}
           </Button>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-[130px] rounded-lg bg-gradient-to-t from-[#ffffffbd] to-transparent" />

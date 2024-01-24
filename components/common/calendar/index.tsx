@@ -9,7 +9,11 @@ import './custom-styles.css';
 import MidLineIcon from '@/public/svgComponent/calendar/midline';
 
 import { CalendarContainerProps } from '@/types/common/calendar/type';
-import { rangeDate, singleDate } from '@/atoms/search-detail/searchStates';
+import {
+  catchSingleDate,
+  rangeDate,
+  saleSingleDate,
+} from '@/atoms/search-detail/searchStates';
 
 const CalendarComponent = ({
   useSingleDate,
@@ -17,8 +21,16 @@ const CalendarComponent = ({
   checkInYear,
   checkInMonth,
   checkInDay,
+  outerControlAtom = 'sale',
 }: CalendarContainerProps) => {
-  const [selected, setSelected] = useRecoilState(singleDate);
+  const outerControlState = {
+    sale: saleSingleDate,
+    catch: catchSingleDate,
+  };
+
+  const [selected, setSelected] = useRecoilState(
+    outerControlState[outerControlAtom],
+  );
   const [range, setRange] = useRecoilState(rangeDate);
 
   const today = new Date();
@@ -54,7 +66,7 @@ const CalendarComponent = ({
     <>
       <p className={leftFooterStyle}>시작 날짜</p>
       <MidLineIcon />
-      <p className={`${rightFooterStyle} text-text-disabled`}>끝 날짜</p>
+      <p className={`${rightFooterStyle} text-text-disabled`}>종료 날짜</p>
     </>
   );
 
@@ -66,25 +78,15 @@ const CalendarComponent = ({
             {format(range.from, 'MM월 dd일')}
           </p>
           <MidLineIcon />
-          <p className={rightFooterStyle}>끝 날짜</p>
+          <p className={rightFooterStyle}>종료 날짜</p>
         </>
       );
     } else if (range.to) {
       footer = (
         <>
-          {format(range.from, 'P') === format(range.to, 'P') ? (
-            <p className={leftFooterStyle}>{format(range.from, 'MM월 dd일')}</p>
-          ) : (
-            <>
-              <p className={leftFooterStyle}>
-                {format(range.from, 'MM월 dd일')}
-              </p>
-              <MidLineIcon />
-              <p className={rightFooterStyle}>
-                {format(range.to, 'MM월 dd일')}
-              </p>
-            </>
-          )}
+          <p className={leftFooterStyle}>{format(range.from, 'MM월 dd일')}</p>
+          <MidLineIcon />
+          <p className={rightFooterStyle}>{format(range.to, 'MM월 dd일')}</p>
         </>
       );
     }
@@ -116,18 +118,20 @@ const CalendarComponent = ({
             footer={
               searchAll ? (
                 <div className="flex flex-col mt-5">
-                  <span className="mb-3 text-text-disabled">선택한 날짜</span>
+                  <span className="mb-3 text-text-disabled">
+                    입실 희망 날짜
+                  </span>
                   <div className="flex items-center text-text-disabled">
                     <p className={leftFooterStyle}>시작 날짜</p>
                     <MidLineIcon />
                     <p className={`${rightFooterStyle} text-text-disabled`}>
-                      끝 날짜
+                      종료 날짜
                     </p>
                   </div>
                 </div>
               ) : (
                 <div className="flex flex-col mt-5">
-                  <span className="mb-3">선택한 날짜</span>
+                  <span className="mb-3">입실 희망 날짜</span>
                   <div className="flex items-center">{footer}</div>
                 </div>
               )

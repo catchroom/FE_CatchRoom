@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie';
 
 // test 완료되면 지우도록 하겠습니다
 
-const ROOMID = '4983cb81-2bbc-4ce6-9e93-322c98c8fe4d';
+const ROOMID = '9539df9d-d9aa-44ac-80b9-8805ce0fc7d7';
 
 type Content = {
   type: 'ENTER' | 'TALK' | 'LEAVE';
@@ -26,12 +26,8 @@ const StompPage = ({ children }: { children: ReactNode }) => {
   const connect = () => {
     const sockjs = new SockJS('https://catchroom.store/ws-stomp');
     const ws = Stomp.over(sockjs);
-
     setWs(ws);
 
-    console.log('connect');
-
-    // eslint-disable-next-line
     ws.connect(
       {
         headers: {
@@ -52,20 +48,24 @@ const StompPage = ({ children }: { children: ReactNode }) => {
           },
           body: JSON.stringify({
             roomId: ROOMID,
-            sender: '지운',
+            sender: '민섭',
             type: 'ENTER',
             userId: 4,
-            message: '소켓 연결 성공!',
           }),
         });
       },
     );
   };
 
+  const disconnect = () => {
+    if (!ws) return;
+    ws.disconnect();
+  };
+
   useEffect(() => {
     connect();
     return () => {
-      ws?.disconnect();
+      disconnect();
     };
     // eslint-disable-next-line
   }, []);
@@ -79,10 +79,10 @@ const StompPage = ({ children }: { children: ReactNode }) => {
       destination: `/pub/chat/message`,
       body: JSON.stringify({
         roomId: ROOMID,
-        sender: '지운',
+        sender: '민섭',
         type: 'TALK',
         userId: 4,
-        message: '안녕하세용',
+        message: '이게 마지막 메세지입니당근',
       }),
     });
   };
@@ -97,9 +97,9 @@ const StompPage = ({ children }: { children: ReactNode }) => {
       body: JSON.stringify({
         type: 'NEGO_REQ',
         roomId: ROOMID,
-        message: '네고해요',
-        sender: '네고',
-        userId: 4,
+        message: '네고 오케이 콜',
+        sender: '네고왕김네고',
+        userId: 6,
         negoPrice: 10000,
       }),
     });

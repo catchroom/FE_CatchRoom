@@ -1,8 +1,7 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import QuestionMark from '@/public/svgComponent/questionMark';
 import SlideButton from '@/components/common/slideButton';
-import BigCalendarIcon from '@/public/svgComponent/bigCalendar';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   catchPercentState,
@@ -11,18 +10,59 @@ import {
 } from '@/atoms/sale/catchAtom';
 import BottomSheets from '@/components/common/bottomSheets';
 import BottomSheetsContent from '../bottomSheetsContent';
-import { percentState, priceState } from '@/atoms/sale/priceAtom';
+import {
+  percentState,
+  priceState,
+  productPriceState,
+} from '@/atoms/sale/priceAtom';
+import CalendarComponent from '@/components/common/calendar';
+import { getDateWithDay } from '@/utils/get-date-with-day';
+import {
+  catchSingleDate,
+  saleSingleDate,
+} from '@/atoms/search-detail/searchStates';
 
-type PropsType = {
-  price: number;
-};
-const CatchContainer = ({ price }: PropsType) => {
+const CatchContainer = () => {
+  const price = useRecoilValue(productPriceState); //product price
+
   const [open, setOpen] = useState(false);
   const [isCatch, setIsCatch] = useRecoilState(catchState);
   const [disable, setDisable] = useState(false);
 
   const selectedPrice = useRecoilValue(priceState);
   const selectedPercent = useRecoilValue(percentState);
+
+  const percent = selectedPercent <= 40 ? 50 : selectedPercent + 10;
+
+  const selectedSaleEndDate = useRecoilValue(saleSingleDate);
+
+  const [selected, setSelected] = useRecoilState(catchSingleDate); // 캐치특가 선택 날짜
+
+  useEffect(() => {
+    setIsCatch(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (selectedSaleEndDate instanceof Date) {
+      const endDate = new Date(selectedSaleEndDate);
+      endDate.setDate(endDate.getDate() - 1);
+      setSelected(endDate);
+      const today = new Date();
+      if (selectedSaleEndDate.toDateString() === today.toDateString()) {
+        setDisable(true);
+        setIsCatch(false);
+      } else setDisable(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSaleEndDate]);
+
+  const selectedDateString = getDateWithDay(selected);
+
+  const date = useMemo(() => new Date(selected!), [selected]);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
 
   const [selectedCatchPrice, setSelectedCatchPrice] =
     useRecoilState(catchPriceState);
@@ -31,16 +71,15 @@ const CatchContainer = ({ price }: PropsType) => {
 
   useEffect(() => {
     if (selectedPercent !== 0) {
-      setDisable(false);
       if (selectedPercent <= 40) setSelectCatchPercent(50);
       else if (selectedPercent >= 50 && selectedPercent <= 80) {
         setSelectCatchPercent(selectedPercent + 10);
       } else if (selectedPercent >= 90) {
         setIsCatch(false);
-        setDisable(true);
       }
-    }
+    } else setDisable(true);
     setSelectedCatchPrice(price * ((100 - percent) / 100));
+    console.log(selectedPercent, disable);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);
 
@@ -51,9 +90,7 @@ const CatchContainer = ({ price }: PropsType) => {
         ? selectedPrice.toLocaleString() + '원'
         : selectedCatchPrice.toLocaleString() + '원';
 
-  const percent = selectedPercent <= 40 ? 50 : selectedPercent + 10;
-
-  const buttonSelect = selectedCatchPrice === 0 ? 'input' : 'price';
+  const buttonSelect = selectedPrice === 0 ? 'input' : 'price';
   const handleToggleButton = () => {
     setIsCatch((prev) => !prev);
   };
@@ -61,7 +98,7 @@ const CatchContainer = ({ price }: PropsType) => {
     setOpen((prev) => !prev);
   };
   return (
-    <div className="w-full flex flex-col gap-6">
+    <div className="w-full flex flex-col relative">
       <div className="flex justify-between">
         <div className="flex gap-1 items-center">
           <h2 className="text-h5 font-bold">캐치특가 자동 설정</h2>
@@ -79,9 +116,9 @@ const CatchContainer = ({ price }: PropsType) => {
           isDisabled={disable}
         />
       </div>
-      {open && (
+      {isCatch && open && (
         <div
-          className="flex flex-col p-3 rounded w-full gap-2.5 border border-border-sub shadow-custom"
+          className="flex flex-col p-3 absolute top-12 rounded w-full gap-2.5 bg-surface border border-border-sub shadow-custom"
           data-testid="catch-describe"
         >
           <p className="text-p1 font-bold">
@@ -96,7 +133,7 @@ const CatchContainer = ({ price }: PropsType) => {
       {isCatch && (
         <>
           <div>
-            <p className="text-t2 mb-2">캐치특가 적용 가격</p>
+            <p className="text-t2 mb-2 mt-6">캐치특가 적용 가격</p>
             <BottomSheets
               title={title}
               innerTitle="캐치특가 판매가를 선택해주세요"
@@ -105,19 +142,32 @@ const CatchContainer = ({ price }: PropsType) => {
               price={selectedCatchPrice}
               percent={selectedCatchPercent}
               outerControlAtom="catch"
+              isCatch={true}
             >
               <BottomSheetsContent price={price} />
             </BottomSheets>
           </div>
           <div>
-            <p className="text-t2 mb-2">캐치특가 적용 날짜</p>
-            <div className="flex w-full px-4 border border-border-sub gap-2 mt-2 h-[3.8rem] rounded items-center">
-              <BigCalendarIcon />
-              {/* 바텀시트 모달로 변경예정 */}
-              <button className="w-full flex items-start">
-                캐치특가 적용날짜를 선택해주세요
-              </button>
-            </div>
+            <p className="text-t2 mb-2 mt-6">캐치특가 적용 날짜</p>
+            <BottomSheets
+              title={selectedDateString}
+              innerTitle="캐치특가 적용날짜를 설정해주세요"
+              placeholder={selectedDateString}
+              buttonSelect="search"
+              icon="calendar"
+              closeButton={true}
+              innerButtonTitle={selectedDateString + '로 설정하기'}
+            >
+              <div className="w-full h-[480px]">
+                <CalendarComponent
+                  useSingleDate={true}
+                  outerControlAtom="catch"
+                  checkInYear={year}
+                  checkInMonth={month}
+                  checkInDay={day}
+                />
+              </div>
+            </BottomSheets>
           </div>
         </>
       )}

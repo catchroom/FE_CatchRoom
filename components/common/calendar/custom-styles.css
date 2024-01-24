@@ -15,11 +15,8 @@
 .rdp-caption_start {
   width: 100%;
 }
-.rdp-tbody {
-  margin-bottom: 40px;
-}
 .rdp-months {
-  padding: 32px 0 24px 0;
+  padding: 32px 0;
 }
 
 /*------------------- 커스텀 스타일 적용 -------------------*/

@@ -12,7 +12,7 @@ const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
           결제 금액
         </h5>
         <div className="flex justify-between items-center">
-          <span className="text-t2 text-text-DEFAULT leading-6">판매가</span>
+          <span className="text-t2 text-text-DEFAULT leading-6">상품금액</span>
           <span className="text-t2 text-text-DEFAULT leading-6">
             {price.toLocaleString()}원
           </span>
@@ -27,7 +27,9 @@ const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
         </div>
         <div className="border-t-2 border-border-sub"></div>
         <div className="flex justify-between items-center">
-          <span className="text-t2 text-gray-1000 leading-6">총 결제 금액</span>
+          <span className="text-t2 text-gray-1000 leading-6">
+            최종 결제 금액
+          </span>
           <span className="text-text-DEFAULT font-semibold leading-7">
             {totalPrice.toLocaleString()}원
           </span>

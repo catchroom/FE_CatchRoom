@@ -54,7 +54,7 @@ const CustomerBottomSheet = ({
             closeButton
             innerButtonTitle={'확인'}
           >
-            <div className="mt-5 w-full">
+            <div className="my-5 w-full">
               {prop.icon === 'person' && (
                 <div className="flex flex-col justify-between w-full h-[7rem] p-auto bg-white border border-border-sub rounded-md p-5">
                   <div className="flex flex-row justify-between">

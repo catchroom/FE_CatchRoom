@@ -1,10 +1,18 @@
 export type MessageProps = {
-  type?: 'ENTER' | 'TALK' | 'QUIT' | undefined;
+  type?:
+    | 'ENTER'
+    | 'TALK'
+    | 'QUIT'
+    | 'NEGO_REQ'
+    | 'NEGO_ALLOW'
+    | 'NEGO_DENIED'
+    | undefined;
   message?: string;
-  sender?: string;
   roomId?: string;
-  userId?: string;
+  userId?: number;
   time?: string;
+  negoPrice?: number;
+  isSeller?: boolean;
 };
 
 export type ChatRoomType = {
@@ -14,16 +22,18 @@ export type ChatRoomType = {
   productId: number;
   loginUserIdentity: string;
   accommodationUrl: string;
+  partnerNickName: string;
+  lastChatmessageDto: ChatMessageDto;
+  dealState: string;
 };
 
-// export type MessageProps = {
-//   messageType?: number;
-//   sellerNickname?: string;
-//   sendUserNickname?: string;
-//   isSeller?: boolean;
-//   isSendUser?: boolean;
-//   content?: string;
-//   date?: string;
-//   offerPrice?: string;
-//   approvePrice?: string;
-// };
+export type ChatMessageDto = {
+  type: string;
+  roomId: string;
+  sender: string;
+  userId: number;
+  message: string;
+  time: string;
+  userCount: number;
+  negoPrice: number;
+};
