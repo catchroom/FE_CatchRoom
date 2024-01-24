@@ -1,11 +1,12 @@
 import React from 'react';
 import { MessageProps } from '@/types/chat/chatRoom/types';
 import Image from 'next/image';
+import { formatTime } from '@/utils/formatTime';
 
-const DeclineMessage = ({ offerPrice, date, isSeller }: MessageProps) => {
+const DeclineMessage = ({ negoPrice, time, isSeller }: MessageProps) => {
   return (
     <>
-      <p className=" text-gray-500 text-t3">{date}</p>
+      <p className=" text-gray-500 text-t3">{formatTime(time)}</p>
       <div className="bg-white w-full h-30 flex flex-col items-center border-solid border border-gray-300 rounded-sm ">
         <Image
           src="/productImage.png"
@@ -18,7 +19,7 @@ const DeclineMessage = ({ offerPrice, date, isSeller }: MessageProps) => {
           {isSeller ? (
             <>
               <p className="text-t2 font-semibold">제안을 거절했어요</p>
-              <p className="text-p2 text-gray-500">요청 금액: {offerPrice}원</p>
+              <p className="text-p2 text-gray-500">요청 금액: {negoPrice}원</p>
             </>
           ) : (
             <>

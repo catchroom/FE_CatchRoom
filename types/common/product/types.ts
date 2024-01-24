@@ -1,9 +1,9 @@
 export type ProductItem = {
   id: number;
-  productName: string;
-  check_in: Date;
-  check_out: Date;
-  accommodation_url: string;
+  accommdationName: string;
+  checkIn: string;
+  checkOut: string;
+  accommdationUrl: string;
   roomType: string;
   price: number;
 };

@@ -54,6 +54,7 @@ const BottomSheets = ({
   price,
   percent,
   outerControlAtom = 'default',
+  isCatch = false,
 }: {
   children: ReactNode;
   title: string;
@@ -76,6 +77,7 @@ const BottomSheets = ({
   percent?: number;
   theme?: boolean;
   outerControlAtom?: 'default' | 'sale' | 'catch';
+  isCatch?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -115,7 +117,7 @@ const BottomSheets = ({
   };
 
   const ButtonsComponentsObjects: Record<string, React.JSX.Element> = {
-    input: <InputButton name={title} fn={modalOpen} />,
+    input: <InputButton name={title} fn={modalOpen} isCatch={isCatch} />,
     simple: <SimpleButton name={title} fn={modalOpen} />,
     search: (
       <SearchBoxButton
@@ -179,7 +181,7 @@ const BottomSheets = ({
                     <SheetCloseSVG />
                   </button>
                 </div>
-                <div className="w-full h-full flex flex-col items-center gap-12">
+                <div className="w-full h-full flex flex-col items-center">
                   {children}
                   {closeButton && innerButtonTitle && (
                     <SimpleButton

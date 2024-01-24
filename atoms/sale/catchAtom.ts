@@ -14,3 +14,8 @@ export const catchPercentState = atom<number>({
   key: 'catchPercentState',
   default: 0,
 });
+
+export const isCatchPriceState = atom<boolean>({
+  key: 'isCatchPriceState',
+  default: false,
+});

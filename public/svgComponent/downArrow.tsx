@@ -10,12 +10,12 @@ const DownArrowIcon: React.FC<DownArrowIconProps> = ({width=14, height=8, color=
   <svg
     width={width}
     height={height}
-    viewBox={`0 0 14 8`}
+    viewBox={`0 0 20 20`}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M13 0.999999L7 7L1 1"
+      d="M4.1665 7.5L9.99984 13.3333L15.8332 7.5"
       stroke={color}
       strokeWidth={1.2}
       strokeLinecap="round"
