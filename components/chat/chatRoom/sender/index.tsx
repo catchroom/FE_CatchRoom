@@ -1,5 +1,7 @@
 'use client';
 
+'use client';
+
 import SendIconSVG from '@/public/svgComponent/sendIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useRef } from 'react';

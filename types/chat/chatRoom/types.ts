@@ -29,6 +29,7 @@ export type ChatRoomType = {
   buyerState: string;
   sellerState: string;
   lastChatmessageDto: ChatMessageDto;
+  dealState: string;
 };
 
 export type ChatMessageDto = {
