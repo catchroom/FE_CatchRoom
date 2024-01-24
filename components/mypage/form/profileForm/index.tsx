@@ -83,7 +83,7 @@ const ProfileForm = () => {
         setNickname(res.data.nickName);
       }
     });
-  }, []);
+  }, [reset]);
 
   return (
     <form

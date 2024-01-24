@@ -162,6 +162,20 @@ const config: Config = withMT({
     },
 
     extend: {
+      animation: {
+        wiggle: 'wiggle 0.7s ease-in-out infinite ',
+        move: 'move 2s ease-in-out infinite ',
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(8deg)' },
+        },
+        move: {
+          '0%': { transform: 'translateX( -60px )' },
+          '100%': { transform: 'translateX( 100px )' },
+        },
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

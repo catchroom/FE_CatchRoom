@@ -16,3 +16,8 @@ export const minuteState = atom<number>({
   key: 'minuteState',
   default: 59,
 });
+
+export const checkInDateState = atom<string | undefined>({
+  key: 'checkInDateState',
+  default: undefined,
+});
