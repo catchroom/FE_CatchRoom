@@ -5,8 +5,8 @@ import { MessageProps } from '@/types/chat/chatRoom/types';
 import ApproveMessage from '@/components/chat/chatRoom/approveMessage';
 import OfferMessage from '../offerMessage';
 import DeclineMessage from '../declineMessage';
-import { useRecoilState } from 'recoil';
-import { chatRoomAtom } from '@/atoms/chat/chatContentAtom';
+import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
+import { useCookies } from 'react-cookie';
 
 const MessageItem = ({
   type,
@@ -15,10 +15,10 @@ const MessageItem = ({
   time,
   negoPrice,
 }: MessageProps) => {
-  const [isChatRoomInfo] = useRecoilState(chatRoomAtom);
-
-  const loginUserId = 4;
-  const sellerId = isChatRoomInfo.sellerId;
+  const [chatInfo] = useSsrAtom();
+  const [cookies] = useCookies();
+  const sellerId = chatInfo.sellerId;
+  const loginUserId = cookies.id;
 
   // 로그인한 유저가 해당 메시지의 보낸 사람일 때
   if (loginUserId === userId) {

@@ -56,7 +56,7 @@ const OfferMessage = ({ negoPrice, time, isSeller }: MessageProps) => {
           <div className="float-right w-full p-5">
             <p className="text-t2 font-semibold pb-2">가격을 제안했어요</p>
             <p className="text-p2 text-gray-500">
-              승인 금액: {formatCurrency(negoPrice)}원
+              제안 금액: {formatCurrency(negoPrice)}원
             </p>
           </div>
         </div>
