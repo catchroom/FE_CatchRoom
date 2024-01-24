@@ -6,8 +6,8 @@ import {
   postSaleProduct,
 } from './api';
 import { ProductItem } from '@/types/sale/type';
-import { useRecoilValue } from 'recoil';
-import { isProductState } from '@/atoms/sale/productAtom';
+// import { useRecoilValue } from 'recoil';
+// import { isProductState } from '@/atoms/sale/productAtom';
 
 //31
 export const useQueryGetSaleProduct = (id: number) => {
@@ -53,15 +53,15 @@ export const useQueryGetProductInfo = (id: number) => {
   };
 };
 
-export const useConditionalQuery = (id: number) => {
-  const isProduct = useRecoilValue(isProductState);
+// export const useConditionalQuery = (id: number) => {
+//   const isProduct = useRecoilValue(isProductState);
 
-  const queryKey = isProduct ? 'getProductInfo' : 'getSaleProduct';
-  const queryFn = isProduct ? getProductInfo : getSaleProduct;
+//   const queryKey = isProduct ? 'getProductInfo' : 'getSaleProduct';
+//   const queryFn = isProduct ? getProductInfo : getSaleProduct;
 
-  return useQuery({
-    queryKey: [queryKey, id],
-    queryFn: () => queryFn(id),
-    select: ({ data }) => data,
-  });
-};
+//   return useQuery({
+//     queryKey: [queryKey, id],
+//     queryFn: () => queryFn(id),
+//     select: ({ data }) => data,
+//   });
+// };

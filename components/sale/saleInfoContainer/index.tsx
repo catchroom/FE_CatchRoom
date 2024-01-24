@@ -2,7 +2,7 @@
 import CheckInDateComponent from '@/components/common/checkInDateComponent';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import { useConditionalQuery } from '@/api/sale/query';
+import { useQueryGetSaleProduct } from '@/api/sale/query';
 import { formatDateWithDay } from '@/utils/get-dot-date';
 import { useSetRecoilState } from 'recoil';
 import { checkInDateState } from '@/atoms/sale/timeAtom';
@@ -16,7 +16,7 @@ type Props = {
 const SaleInfoContainer = ({ id }: Props) => {
   // const [isProduct, setIsProduct] = useRecoilState(isProductState);
 
-  const { data } = useConditionalQuery(+id!);
+  const { data } = useQueryGetSaleProduct(+id!);
   console.log(data);
 
   // if(isProduct) {
