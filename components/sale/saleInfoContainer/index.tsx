@@ -1,50 +1,60 @@
+'use client';
 import CheckInDateComponent from '@/components/common/checkInDateComponent';
-import { ProductItem } from '@/types/common/product/types';
 import Image from 'next/image';
-import React from 'react';
-import roomImg from '@/public/sample/Rectangle-70.png';
-import Link from 'next/link';
+import React, { useEffect } from 'react';
+import { useQueryGetSaleProduct } from '@/api/sale/query';
+import { formatDateWithDay } from '@/utils/get-dot-date';
+import { useSetRecoilState } from 'recoil';
+import { checkInDateState } from '@/atoms/sale/timeAtom';
+import { productPriceState } from '@/atoms/sale/priceAtom';
 
-const item: ProductItem = {
-  id: 1,
-  productName: '제주신라호텔',
-  check_in: new Date(),
-  check_out: new Date(),
-  accommodation_url: 'https://www.google.com',
-  roomType: '스탠다드 더블',
-  price: 180000,
+type Props = {
+  id: string | string[] | undefined;
 };
 
-const SaleInfoContainer = () => {
+const SaleInfoContainer = ({ id }: Props) => {
+  const { data } = useQueryGetSaleProduct(+id! as number);
+
+  const checkInString = formatDateWithDay(data?.checkIn);
+  const checkOutString = formatDateWithDay(data?.checkOut);
+
+  const setCheckInDate = useSetRecoilState(checkInDateState);
+  const setProductPrice = useSetRecoilState(productPriceState);
+
+  useEffect(() => {
+    setCheckInDate(data?.checkIn);
+  }, [data, setCheckInDate]);
+
+  useEffect(() => {
+    setProductPrice(data?.price);
+  }, [data, setProductPrice]);
+
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
-        <Link
-          href={item.accommodation_url}
-          className="w-[100px] h-[100px] relative"
-        >
+        <div className="w-[100px] h-[100px] relative">
           <Image
-            src={roomImg}
+            src={data?.accommdationUrl}
             alt="숙소 이미지"
             fill={true}
             className="rounded-[0.6rem]"
             sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 80px"
             priority
           />
-        </Link>
+        </div>
 
         <div className="flex flex-col">
-          <p className="font-semibold text-h5">{item.productName}</p>
-          <p className="font-semibold text-t2 opacity-50">{item.roomType}</p>
+          <p className="font-semibold text-h5">{data?.accommdationName}</p>
+          <p className="font-semibold text-t2 opacity-50">{data?.roomType}</p>
           <p className="text-p1 mt-4">
             <span className="opacity-50 mr-2">구매가</span>
-            {item.price.toLocaleString()}원
+            {data?.price.toLocaleString()}원
           </p>
         </div>
       </div>
       <CheckInDateComponent
-        CheckInDate="01.12 (월)"
-        CheckOutDate="01.13 (화)"
+        CheckInDate={checkInString}
+        CheckOutDate={checkOutString}
       />
     </div>
   );

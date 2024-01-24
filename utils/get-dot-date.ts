@@ -66,3 +66,19 @@ export type StateType =
   | 'notForSale'
   | 'purchased';
 export type decodeStateReturnType = ReturnType<typeof decodeState>;
+
+export const formatDateWithDay = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const monthDay = `${month < 10 ? '0' + month : month}.${
+    day < 10 ? '0' + day : day
+  }`;
+  const dayOfWeek = date
+    .toLocaleDateString('ko-KR', {
+      weekday: 'short',
+    })
+    .replace('.', '');
+
+  return `${monthDay} (${dayOfWeek})`;
+};

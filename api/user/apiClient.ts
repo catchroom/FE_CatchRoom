@@ -44,6 +44,7 @@ apiClient.interceptors.response.use(
 
         nookies.set(null, 'accessToken', accessToken, {
           path: '/',
+          maxAge: 60 * 30,
         });
         console.log('집어넣는 토큰', accessToken);
 
