@@ -24,7 +24,7 @@ const WishListHeartControl = ({ item }: { item: ItemType }) => {
       roomName={item.roomName}
       resDate={`${getDotDate(item.checkIn)} - ${getDotDate(item.checkOut)}`}
       originalPrice={item.sellPrice}
-      sellPrice={item.discoutPrice}
+      sellPrice={item.discountPrice}
       discountRate={item.discountRate}
       isHeart={true}
       heartState={heartState}

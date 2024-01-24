@@ -11,7 +11,7 @@ export type MypageSellingType = {
   thumbNailUrl: string;
   isCatch: boolean;
   orderHistoryId: string;
-  proudctId: string; //백엔드 오타 수정
+  productId: string; //백엔드 오타 수정
 
   // 판매완료에서 보이는 애들
   dealState?: string;
@@ -30,7 +30,7 @@ export type MypagePurchaseType = {
   isCatch: boolean;
   reviewId: number;
   reviewStatusType: string;
-  proudctId: string; //백엔드 오타 수정
+  productId: string; //백엔드 오타 수정
 };
 
 export type AccommodationType = {

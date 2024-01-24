@@ -20,7 +20,7 @@ export type ItemType = {
   checkIn: string;
   checkOut: string;
   sellPrice: number;
-  discoutPrice: number;
+  discountPrice: number;
   discountRate: 30 | 40 | 50 | 60 | 70 | 80 | 90;
   location: string;
 };
