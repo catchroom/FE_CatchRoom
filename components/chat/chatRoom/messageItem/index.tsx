@@ -26,7 +26,7 @@ const MessageItem = ({
       case 'TALK':
         return <SendMessage message={message} time={time} />;
       case 'NEGO_REQ':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
               <OfferMessage negoPrice={negoPrice} time={time} isSeller={true} />
@@ -44,7 +44,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_ALLOW':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
               <ApproveMessage
@@ -66,7 +66,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_DENIED':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <DeclineMessage
@@ -96,7 +96,7 @@ const MessageItem = ({
         return <ReceiveMessage message={message} time={time} />;
 
       case 'NEGO_REQ':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12  flex  flex-row-reverse gap-x-3 items-end mr-auto mb-3 ">
               <OfferMessage negoPrice={negoPrice} time={time} isSeller={true} />
@@ -114,7 +114,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_ALLOW':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
               <ApproveMessage
@@ -136,7 +136,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_DENIED':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <DeclineMessage
