@@ -30,8 +30,8 @@ const CatchItem = ({
     router.push(`/room-info?id=${productId}`);
   };
 
-  const checkInString = formatDateWithDay(checkIn);
-  const checkOutString = formatDateWithDay(checkOut);
+  const checkInString = formatDateWithDay(checkIn!);
+  const checkOutString = formatDateWithDay(checkOut!);
 
   return (
     <div className="flex flex-col relative w-full mt-5 rounded-lg border border-gray-200">

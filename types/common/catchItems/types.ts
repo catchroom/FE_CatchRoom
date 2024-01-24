@@ -4,8 +4,8 @@ export type catchItems = {
   accommodationName: string;
   roomName?: string;
   resDate?: string;
-  checkIn: string;
-  checkOut: string;
+  checkIn?: string;
+  checkOut?: string;
   catchType?: boolean;
   originalPrice: number;
   discountRate: number;

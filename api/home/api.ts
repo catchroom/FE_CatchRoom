@@ -32,3 +32,22 @@ export const getReviewList = async (dataType: number) => {
   const data = await res.json();
   return data.data;
 };
+
+export const getCatchItemsListForScroll = async (
+  dataType: number,
+  pageNumber: number,
+  filter: string,
+  region: string | number[],
+) => {
+  const res = await fetch(
+    `https://catchroom.xyz/v1/main/product/list?dataType=${dataType}&pageNumber=${pageNumber}&filter=${filter}&region=${region}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  const data = await res.json();
+  return data.data;
+};

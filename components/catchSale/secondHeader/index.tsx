@@ -18,30 +18,35 @@ const SecondHeader = () => {
   };
 
   return (
-    <div className="flex  fixed z-20 justify-between w-full p-5 items-center mt-[52px] bg-bg">
-      <div className="font-bold text-t2">총 12건</div>
-      <div className="flex gap-1 text-p2">
-        {/* 드롭다운 UI 나오면 변경 예정 */}
-        <div className="flex items-center py-2 px-3 gap-1 border border-border-sub rounded-[20px]">
-          <Black />
-          전체
-          <DownArrowComponent />
-        </div>
-        <BottomSheetsWithoutCloseBtn
-          title={dropdownTitle}
-          outerControl={true}
-          buttonSelect="dropdown"
-        >
-          <div className="flex flex-col py-3 gap-7 items-center text-t1 font-bold">
-            {DROP_DOWN.map((item) => {
-              return (
-                <p key={item.name} onClick={() => handleOptionClick(item.name)}>
-                  {item.name}
-                </p>
-              );
-            })}
+    <div className="w-full max-w-[480px] fixed z-20 mt-[52px]">
+      <div className="flex   justify-between w-full p-5 items-center  bg-bg">
+        <div className="font-bold text-t2">총 12건</div>
+        <div className="flex gap-1 text-p2">
+          {/* 드롭다운 UI 나오면 변경 예정 */}
+          <div className="flex items-center py-2 px-3 gap-1 border border-border-sub rounded-[20px]">
+            <Black />
+            전체
+            <DownArrowComponent />
           </div>
-        </BottomSheetsWithoutCloseBtn>
+          <BottomSheetsWithoutCloseBtn
+            title={dropdownTitle}
+            outerControl={true}
+            buttonSelect="dropdown"
+          >
+            <div className="flex flex-col py-3 gap-7 items-center text-t1 font-bold">
+              {DROP_DOWN.map((item) => {
+                return (
+                  <p
+                    key={item.name}
+                    onClick={() => handleOptionClick(item.name)}
+                  >
+                    {item.name}
+                  </p>
+                );
+              })}
+            </div>
+          </BottomSheetsWithoutCloseBtn>
+        </div>
       </div>
     </div>
   );
