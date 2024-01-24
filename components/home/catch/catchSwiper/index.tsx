@@ -25,7 +25,7 @@ const CatchSwiper = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  if (isLoading && isLoading) return <CatchSkeletonUI />;
+  if (isLoading) return <CatchSkeletonUI />;
   return (
     <Swiper spaceBetween={12} slidesPerView={slidesPerView} loop={true}>
       {data?.list.map((item: catchItems) => {
