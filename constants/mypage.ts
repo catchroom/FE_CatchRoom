@@ -37,7 +37,7 @@ export const MYPAGE_CONSTANTS: Root = {
     TITLE: '기타',
     BANNERS: [
       {
-        TITLE: '서비스 약관',
+        TITLE: '이용약관',
         LOCATION: '/mypage/dashboard/terms',
       },
       {
