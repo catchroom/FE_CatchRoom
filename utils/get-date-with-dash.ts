@@ -6,5 +6,5 @@ export const getDateWithSlash = (dateStr: string): string => {
   const formattedMonth = month.padStart(2, '0');
   const formattedDay = day.padStart(2, '0');
 
-  return `${formattedMonth}/${formattedDay}`;
+  return `${formattedMonth}-${formattedDay}`;
 };
