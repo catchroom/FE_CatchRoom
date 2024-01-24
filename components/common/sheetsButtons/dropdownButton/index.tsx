@@ -21,7 +21,7 @@ const DropdownButton = ({
     >
       {useLocationIcon && <MapPinSmFillIcon />}
       {name}
-      <DownArrowIcon width={12} height={7} />
+      <DownArrowIcon width={21} height={21} />
     </button>
   );
 };
