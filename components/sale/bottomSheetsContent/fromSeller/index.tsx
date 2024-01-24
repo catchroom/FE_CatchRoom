@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutaionPostSaleProduct } from '@/api/home/query';
+import { useMutaionPostSaleProduct } from '@/api/sale/query';
 import { catchPriceState, catchState } from '@/atoms/sale/catchAtom';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
 import {

@@ -63,7 +63,7 @@ const CatchSpecialComponent = ({
         {/* 숙소 이미지 및 캐치특가 */}
         <div className="relative w-[120px] max-w-[120px] overflow-auto rounded-md mr-4">
           {catchType ? (
-            <div className="absolute flex items-center z-10 px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
+            <div className="absolute flex items-center z-[4] px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
               캐치 특가
             </div>
           ) : (
@@ -91,13 +91,13 @@ const CatchSpecialComponent = ({
           <div className="flex flex-col items-start">
             <div className="flex flex-wrap text-p2 text-gray-600">
               <p className="line-through">
-                구매가&nbsp;{originalPrice.toLocaleString()}원
+                구매가&nbsp;{originalPrice?.toLocaleString()}원
               </p>
             </div>
             <div className="flex flex-wrap items-center">
               <p className="text-t1 text-main font-bold">{discountRate}%</p>
               <p className=" text-t1 font-bold ml-2">
-                {sellPrice.toLocaleString()}원
+                {sellPrice?.toLocaleString()}원
               </p>
             </div>
           </div>

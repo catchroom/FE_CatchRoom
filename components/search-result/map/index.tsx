@@ -28,8 +28,9 @@ const Map = ({ markers }: MapProps) => {
   };
 
   // let map: { setCenter: (arg0: any) => void };
+  // let map: { panTo: (arg0: any) => void };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let map: { panTo: (arg0: any) => void };
+  let map: { setBounds: (arg0: any) => void };
   useEffect(() => {
     const mapScript = document.createElement('script');
     mapScript.async = true;
@@ -44,7 +45,7 @@ const Map = ({ markers }: MapProps) => {
               markers[0].latitude,
               markers[0].longitude,
             ),
-            level: 7,
+            level: 10,
           };
 
         // const map = new window.kakao.maps.Map(mapContainer, mapOption);
@@ -78,6 +79,7 @@ const Map = ({ markers }: MapProps) => {
           customOverlay.setMap(map);
         });
         updateOverlayZIndex(); // 초기 오버레이 z-index 설정
+        adjustMapBounds();
       });
     };
 
@@ -94,6 +96,16 @@ const Map = ({ markers }: MapProps) => {
     });
   };
 
+  const adjustMapBounds = () => {
+    // eslint-disable-next-line prefer-const
+    let bounds = new window.kakao.maps.LatLngBounds();
+    markers.forEach((marker) => {
+      bounds.extend(
+        new window.kakao.maps.LatLng(marker.latitude, marker.longitude),
+      );
+    });
+    map.setBounds(bounds);
+  };
   // 커스텀 오버레이 생성
   const createCustomOverlayContent = (
     markerData: MarkerProps,
@@ -104,17 +116,7 @@ const Map = ({ markers }: MapProps) => {
     const overlayContent = document.createElement('div');
     overlayContent.className = 'custom-overlay';
     overlayContent.onclick = () => {
-      // 지도 중심 재설정
-      // const overlayPosition = new window.kakao.maps.LatLng(
-      //   markerData.latitude,
-      //   markerData.longitude,
-      // );
-      // map.panTo(overlayPosition);
-
-      // //선택된 오버레이 인덱스와 정보를 업데이트
-      // setSelectedOverlayIndex(index);
-      // setSelectedMarkerInfo(markerData);
-
+      setSelectedMarkerInfo(markerData); // 클릭된 숙소 정보를 상태에 저장
       onClick();
     };
 
@@ -141,7 +143,8 @@ const Map = ({ markers }: MapProps) => {
     `;
 
     const priceSpan = document.createElement('span');
-    priceSpan.textContent = `${markerData.price.toLocaleString()}원`;
+    priceSpan.textContent = `${markerData.sellPrice.toLocaleString()}원`;
+    // priceSpan.textContent = `${markerData.sellPrice}원`;
     priceSpan.style.color = '#15181e';
     priceSpan.style.fontWeight = '700';
 
@@ -177,7 +180,7 @@ const Map = ({ markers }: MapProps) => {
 
   // eslint-disable-next-line react/react-in-jsx-scope
   return (
-    <div id="map" className="w-full h-full z-[3] ">
+    <div id="map" className="w-full h-full ">
       <CatchSpecialComponentWrapper selectedMarkerInfo={selectedMarkerInfo} />
       <Link href="/search-result/list" passHref>
         <ToggleViewButtonWrapper
