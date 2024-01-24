@@ -10,3 +10,8 @@ export const postSaleProduct = async (product: ProductItem) => {
   const res = await apiClient.post(`/v1/sales/product`, product);
   return res.data;
 };
+
+export const deleteSaleProduct = async (id: number) => {
+  const res = await apiClient.delete(`/v1/sales/product?id=${id}`);
+  return res.data;
+};

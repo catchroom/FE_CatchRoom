@@ -9,18 +9,28 @@ import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
 import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
 import { outerMoreBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import Modal from '@/components/common/modal';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useMutationDeleteSaleProduct } from '@/api/sale/query';
 
 const HeaderComponent = () => {
   const setMoreBottomSheetOpen = useSetRecoilState(
     outerMoreBottomSheetsControl,
   );
 
+  type UseParamsType = {
+    id: string;
+  };
+
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const { id } = useParams() as UseParamsType;
+
+  const mutation = useMutationDeleteSaleProduct();
+
+  //const { id } = useSearchParams();
+  console.log(router);
 
   // 지민님 작업 끝나시면 이어서 할 예정.
-  // const { id } = useParams();
   // const { data } = useRoomItem(id);
 
   // ----------- 헤더부분에 스크롤에 따라 숙소이름 뜨게하려는 중...
@@ -70,8 +80,20 @@ const HeaderComponent = () => {
   };
 
   const onConfirm = () => {
+    //삭제 api 넣으면됨
+    mutation.mutate(+id, {
+      onSuccess: handleMutationSucess,
+      onError: handleMutationError,
+    });
+  };
+
+  const handleMutationSucess = () => {
     handleModalOpen();
     router.push('/mypage/dashboard/sales');
+  };
+
+  const handleMutationError = () => {
+    handleModalOpen();
   };
 
   const onCancel = () => {
