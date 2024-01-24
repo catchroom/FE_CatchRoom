@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { accommodationList } from './api';
-
 type SearchParams = {
   checkInStart: string;
   checkInEnd: string;

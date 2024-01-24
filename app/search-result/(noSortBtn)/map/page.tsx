@@ -1,33 +1,53 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Map from '@/components/search-result/map';
+import { formatDate } from '@/utils/formatDate';
+import { useAccommodationList } from '@/api/search-result/query';
+import { MarkerProps } from '@/types/search-result/map/type';
 
-const markersData = [
-  {
-    latitude: 33.4853707,
-    longitude: 126.4815713,
-    price: 100000,
-    discountRate: 50,
-    catchType: true,
-  },
-  {
-    latitude: 33.4851906703734,
-    longitude: 126.48851314849429,
-    price: 1200000,
-    discountRate: 20,
-    catchType: true,
-  },
-  {
-    latitude: 33.51876726662839,
-    longitude: 126.51808833334624,
-    price: 220000,
-    discountRate: 30,
-    catchType: false,
-  },
-];
+const Page = () => {
+  const today = new Date();
+  const tomorrow = new Date(today);
+  const [searchParams] = useState({
+    region: 'all',
+    checkInStart: formatDate(today),
+    checkInEnd: formatDate(tomorrow),
+    type: '0,1,2,3,4',
+    pax: 0,
+    filter: 'HIGH_DISCOUNT',
+    pageNumber: 1,
+  });
 
-const page = () => {
+  const {
+    data: accommodations,
+    isLoading,
+    error,
+  } = useAccommodationList(searchParams);
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
+  if (error) {
+    return <div>Error</div>;
+  }
+
+  const markersData = accommodations.map((accommodation: MarkerProps) => ({
+    key: accommodation.productId,
+    latitude: accommodation.latitude,
+    longitude: accommodation.longitude,
+    sellPrice: accommodation.sellPrice,
+    discountRate: accommodation.discountRate,
+    catchType: accommodation.catchType,
+    originalPrice: accommodation.originalPrice,
+    image: accommodation.image,
+    accommodationName: accommodation.accommodationName,
+    roomName: accommodation.roomName,
+    checkIn: accommodation.checkIn,
+    checkOut: accommodation.checkOut,
+  }));
+
   return (
     <>
       <Map markers={markersData} />
@@ -35,4 +55,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

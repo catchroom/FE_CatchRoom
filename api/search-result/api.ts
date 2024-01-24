@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// 29. 검색 상품 리스트 조회
+// 29. s검색 상품 리스트 조회
 export const accommodationList = async (searchParams: {
   checkInStart: string;
   checkInEnd: string;
