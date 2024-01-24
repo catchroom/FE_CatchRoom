@@ -34,7 +34,7 @@ export const useQueryGetReviewList = (dataType: number) => {
   });
   return { data, isLoading };
 };
-
+//무한스크롤 시도
 // export const useQueryGetCatchItemsListForScroll = (dataType: number) => {
 //   return useInfiniteQuery(
 //     ['getCatchItemsListForScroll', dataType],
@@ -52,10 +52,12 @@ export const useQueryGetReviewList = (dataType: number) => {
 export const useQueryGetCatchItemsListForScroll = (
   dataType: number,
   filter: string,
+  regionFilter: string,
 ) => {
+  const regionValue = regionFilter === '' ? 'all' : regionFilter;
   const { data, isLoading } = useQuery({
-    queryKey: ['getCatchItemsListForScroll', dataType, filter],
-    queryFn: () => getCatchItemsListForScroll(dataType, 1, filter, 'all'),
+    queryKey: ['getCatchItemsListForScroll', dataType, filter, regionValue],
+    queryFn: () => getCatchItemsListForScroll(dataType, 1, filter, regionValue),
   });
   return { data, isLoading };
 };

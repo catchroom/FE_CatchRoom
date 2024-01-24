@@ -1,12 +1,11 @@
 'use client';
 import React from 'react';
-import DownArrowComponent from '@/public/svgComponent/downArrow';
-import Black from '@/public/svgComponent/marker/black';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import { DROP_DOWN } from '@/constants/catchSale';
 import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
+import RegionBottomSheet from '@/components/common/searchBtmSheets/region';
 
 const SecondHeader = () => {
   const [dropdownTitle, setDropdownTitle] = useRecoilState(dropdownState);
@@ -22,12 +21,7 @@ const SecondHeader = () => {
       <div className="flex   justify-between w-full p-5 items-center  bg-bg">
         <div className="font-bold text-t2">총 12건</div>
         <div className="flex gap-1 text-p2">
-          {/* 드롭다운 UI 나오면 변경 예정 */}
-          <div className="flex items-center py-2 px-3 gap-1 border border-border-sub rounded-[20px]">
-            <Black />
-            전체
-            <DownArrowComponent />
-          </div>
+          <RegionBottomSheet buttonStyle="dropdown" usePinIcon={true} />
           <BottomSheetsWithoutCloseBtn
             title={dropdownTitle}
             outerControl={true}

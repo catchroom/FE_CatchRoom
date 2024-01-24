@@ -5,6 +5,7 @@ import { useQueryGetCatchItemsListForScroll } from '@/api/home/query';
 import { catchItems } from '@/types/common/catchItems/types';
 import { useRecoilValue } from 'recoil';
 import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
+import { regionIndex } from '@/atoms/search-detail/searchStates';
 
 const CatchItemContainer = () => {
   // const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
@@ -31,7 +32,14 @@ const CatchItemContainer = () => {
     '체크인 임박순': 'NEAR_CHECKIN',
     '낮은 가격순': 'LOW_PRICE',
   };
-  const { data } = useQueryGetCatchItemsListForScroll(2, filter[dropdown]);
+
+  const region = useRecoilValue(regionIndex);
+  const regionFormat = region.join(',');
+  const { data } = useQueryGetCatchItemsListForScroll(
+    2,
+    filter[dropdown],
+    regionFormat,
+  );
   console.log(data);
   return (
     <div className=" overflow-y-hidden">
@@ -46,6 +54,7 @@ const CatchItemContainer = () => {
             discountRate={item.discountRate}
             sellPrice={item.sellPrice}
             catchType={item.catchType}
+            image={item.image}
             // ref={index === group.items.length - 1 ? lastItemRef : undefined}
           />
         ))}
