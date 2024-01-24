@@ -1,4 +1,5 @@
 import { ReviewItemType } from '@/types/home/types';
+import { getDateWithSlash } from '@/utils/get-date-with-dash';
 import Image from 'next/image';
 import React from 'react';
 
@@ -9,7 +10,7 @@ const ReviewItem = ({
   image,
   userName,
 }: ReviewItemType) => {
-  const reviewDate = new Date(date);
+  const reviewDate = getDateWithSlash(date);
   return (
     <div className="flex rounded-md bg-white w-full h-[140px]">
       <div className="relative w-full h-full max-w-[110px] min-h-[140px]">
@@ -29,7 +30,7 @@ const ReviewItem = ({
         <p className="text-t2 font-bold">{productName}</p>
         <p className="mt-2 text-t3 line-clamp-2">{content}</p>
         <p className="mt-3 text-t4 text-text-sub">
-          {userName} • {reviewDate.toLocaleDateString()}
+          {userName} • {reviewDate}
         </p>
       </div>
     </div>
