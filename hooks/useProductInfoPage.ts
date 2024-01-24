@@ -10,13 +10,8 @@ import { useRouter } from 'next/navigation';
 export const useProductInfoPage = () => {
   const router = useRouter();
 
-  // 추후 api 연동 시 수정 예정!
-  const pageHandler = (roomId?: string) => {
-    if (!roomId) {
-      router.push(`/room-info`);
-      return;
-    }
-    router.push(`/room-info${roomId}`);
+  const pageHandler = (roomId: number) => {
+    router.push(`/room-info/${roomId}`);
   };
 
   return { pageHandler };

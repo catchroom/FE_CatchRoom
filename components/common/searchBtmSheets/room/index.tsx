@@ -96,7 +96,7 @@ const RoomBottomSheet = ({
             closeButton
             innerButtonTitle={'확인'}
           >
-            <div className="mt-5 w-full">
+            <div className="my-5 w-full">
               {prop.icon === 'house' && (
                 <>
                   <CheckBoxComponent
