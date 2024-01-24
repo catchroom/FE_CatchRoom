@@ -4,7 +4,7 @@ import Modal from '@/components/common/modal';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-const ReviewContent = ({ id, fn }: { id: string; fn?: () => void }) => {
+const ReviewContent = ({ id, fn }: { id: number; fn?: () => void }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
 

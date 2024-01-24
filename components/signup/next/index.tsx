@@ -73,7 +73,7 @@ const SignUpInfo = () => {
                   setPassword('');
                   nookies.set(null, 'accessToken', response.data.accessToken, {
                     path: '/',
-                    maxAge: 60 * 29, //29분
+                    maxAge: 60 * 30, //29분
                   });
                   nookies.set(
                     null,

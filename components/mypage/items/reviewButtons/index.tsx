@@ -9,11 +9,11 @@ import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsContr
 
 const ReviewButtons = ({
   id,
-  isReview,
+  isReview = 'noReview',
 }: {
-  id: string;
+  id: number;
   name?: string;
-  isReview: ReviewType;
+  isReview?: ReviewType;
 }) => {
   const setBottomSheets = useSetRecoilState(outerBottomSheetsControl);
   const router = useRouter();

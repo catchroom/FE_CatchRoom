@@ -11,7 +11,6 @@ import { loginSchema } from '@/constants/zodSchema';
 import Modal from '../common/modal';
 import nookies from 'nookies';
 import { login } from '@/api/user/api';
-// import { getNewToken } from '@/api/user/api';
 
 export const commonInputStyle =
   'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
@@ -55,15 +54,9 @@ const LoginForm = () => {
       .then((response) => {
         console.log(response);
         if (response.code === 1006) {
-          // setTimeout(() => {
-          //   getNewToken().then((newToken) => {
-          //     console.log(newToken);
-          //   });
-          // }, 200);
-
           nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
-            maxAge: 60 * 29, //29분
+            maxAge: 60 * 30, //30분
           });
           nookies.set(null, 'refreshToken', response.data.refreshToken, {
             path: '/',
