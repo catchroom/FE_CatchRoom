@@ -18,7 +18,7 @@ const HistoryList = ({
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="w-full flex items-center">
-        <p className="text-t3">{getDotDate(item.date, true, false)}</p>
+        <p className="text-t3">{getDotDate(item.date, false, false, false)}</p>
       </div>
       <div className="flex justify-between items-center text-p2 font-semibold">
         <p className={`text-text`}>
@@ -27,7 +27,7 @@ const HistoryList = ({
         </p>
         <div className={`${isWithdraw ? 'text-text-primary' : 'text-text'}`}>
           <span>{isWithdraw ? '- ' : '+ '}</span>
-          {item.money.toLocaleString()}원
+          {item.money.toLocaleString('us-EN')}원
         </div>
       </div>
     </div>

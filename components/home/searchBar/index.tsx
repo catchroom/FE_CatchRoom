@@ -13,7 +13,7 @@ const SearchBar = () => {
 
   return (
     <button
-      className="flex justify-between w-full p-4 rounded-[4px] text-text-sub text-t2 font-normal bg-surface-gray "
+      className="flex justify-between w-full p-4 rounded-[4px] text-text-sub text-t2 font-normal bg-surface-secondary"
       onClick={pageHandler}
     >
       <p>지역, 여행 일정, 숙소 유형으로 검색해보세요</p>
