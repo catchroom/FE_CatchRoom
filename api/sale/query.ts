@@ -1,5 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import { getSaleProduct } from './api';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { getSaleProduct, postSaleProduct } from './api';
+import { ProductItem } from '@/types/sale/type';
 
 //31
 export const useQueryGetSaleProduct = (id: number) => {
@@ -13,4 +14,12 @@ export const useQueryGetSaleProduct = (id: number) => {
     error,
     data,
   };
+};
+
+export const useMutaionPostSaleProduct = () => {
+  const mutation = useMutation({
+    mutationKey: ['postSaleProduct'],
+    mutationFn: (productItem: ProductItem) => postSaleProduct(productItem),
+  });
+  return mutation;
 };
