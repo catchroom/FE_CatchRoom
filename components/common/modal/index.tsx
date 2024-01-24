@@ -47,11 +47,11 @@ const Modal = ({
             </div>
           )}
         </div>
-        <div className="flex justify-evenly w-full gap-2">
+        <div className="flex justify-evenly w-full">
           {showCancelButton && (
             <button
               onClick={onCancel}
-              className="w-full text-main py-2 px-4 rounded cursor-pointer border-t border-r border-border-sub"
+              className="w-full text-main py-2 px-4 rounded cursor-pointer border-t border-r border-border-sub w-full"
             >
               {cancelString}
             </button>
@@ -59,7 +59,7 @@ const Modal = ({
           {showConfirmButton && (
             <button
               onClick={onConfirm}
-              className="w-full  text-main py-2 px-4 rounded font-bold cursor-pointer border-t border-border-sub"
+              className="w-full  text-main py-2 px-4 rounded font-bold cursor-pointer border-t border-border-sub w-full"
             >
               {confirmString}
             </button>
