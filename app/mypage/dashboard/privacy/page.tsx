@@ -56,7 +56,7 @@ const page = () => {
           항목, 보유기간은 다음과 같습니다.
         </div>
         <div className="w-full overflow-x-scroll">
-          <table className="border border-border-sub w-screen">
+          <table className="border border-border-sub w-[960px]">
             <thead className="border border-border-sub bg-surface-gray">
               <tr className="border border-border-sub ">
                 <th className="border border-border-sub w-20 p-5">분류</th>
@@ -239,7 +239,7 @@ const page = () => {
           <br />
           <br />
           <div className="w-full overflow-x-scroll">
-            <table className=" w-screen">
+            <table className="w-[960px]">
               <thead className=" bg-surface-gray">
                 <tr className="border border-border-sub  p-5">
                   <th className="border border-border-sub p-5">보유 정보</th>
