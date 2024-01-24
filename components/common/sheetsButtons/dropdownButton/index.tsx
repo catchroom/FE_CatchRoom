@@ -21,7 +21,9 @@ const DropdownButton = ({
     >
       {useLocationIcon && <MapPinSmFillIcon />}
       {name}
-      <DownArrowIcon width={12} height={7} />
+      <div className="flex justify-center items-center">
+        <DownArrowIcon width={21} height={21} />
+      </div>
     </button>
   );
 };

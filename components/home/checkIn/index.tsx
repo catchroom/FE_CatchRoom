@@ -39,7 +39,7 @@ const CheckInComponent = () => {
         {/* 캐치특가 상품 목록 */}
         <div className="w-full h-[434px] flex flex-col justify-start gap-9 overflow-hidden">
           {data &&
-            data.map((data: DeadLineItem) => {
+            data.list.map((data: DeadLineItem) => {
               return (
                 <CatchSpecialComponent
                   key={data.productId}
@@ -51,16 +51,16 @@ const CheckInComponent = () => {
                   originalPrice={data.originalPrice}
                   sellPrice={data.sellPrice}
                   discountRate={data.discountRate}
-                  pageHandler={() => pageHandler()}
+                  pageHandler={() => pageHandler(data.productId)}
                 />
               );
             })}
-          {/* {data.length === 0 && (
+          {data && data.size === 0 && (
             <div className="flex flex-col items-center justify-center pt-32 text-t3 text-text-sub">
               <p>선택한 날짜에 체크인 가능한 숙소가 없어요.</p>
               <p>다른 날짜를 선택해주세요.</p>
             </div>
-          )} */}
+          )}
         </div>
 
         {/* 전체보기 버튼 컴포넌트 */}

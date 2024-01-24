@@ -1,4 +1,4 @@
-import { ButtonType } from '@/types/roomInfo/types';
+import { ButtonType } from '@/types/room-info/types';
 import { atom } from 'recoil';
 
 export const activeButtonState = atom<ButtonType>({
