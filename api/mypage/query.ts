@@ -7,6 +7,7 @@ import {
   salesHistoryExpired,
   purchaseHistory,
   getWishlist,
+  // viewReviews,
 } from './api';
 
 // 8
@@ -98,3 +99,17 @@ export const useQueryGetWishlist = () => {
     data,
   };
 };
+
+// 19
+// export const useQueryGetReview = () => {
+//   const { isLoading, error, data } = useQuery({
+//     queryKey: ['viewReviews'],
+//     queryFn: (type: '구매' | '판매') => viewReviews(type),
+//     select: ({ data }) => data,
+//   });
+//   return {
+//     isLoading,
+//     error,
+//     data,
+//   };
+// };

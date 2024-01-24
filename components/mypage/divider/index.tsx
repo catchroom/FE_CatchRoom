@@ -15,6 +15,7 @@ const Divide = () => {
   const viewState = useRecoilValue(divideAtom);
   const viewCase = checkViewState(viewState);
   const { data } = useMyPageQuery(viewCase);
+  console.log(data);
 
   return (
     <div>

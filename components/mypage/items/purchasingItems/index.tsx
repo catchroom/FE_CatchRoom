@@ -12,7 +12,7 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/order`);
+    router.push(`/order/complete/detail`);
   };
 
   let isReview: ReviewType = 'noReview';
