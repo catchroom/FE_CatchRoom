@@ -4,6 +4,7 @@ import Modal from '@/components/common/modal';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useQueryGetReview } from '@/api/mypage/query';
+import { deleteReviews } from '@/api/mypage/api';
 
 const ReviewContent = ({
   id, //리뷰 아이디
@@ -24,7 +25,8 @@ const ReviewContent = ({
   console.log(data);
 
   const handleEdit = () => {
-    router.push(`/mypage/dashboard/review?id=${productId}`);
+    //쿼리스트링으로 수정이라는 파라미터 보내서, 이게 있으면 get해오고 put되게 추가
+    router.push(`/mypage/dashboard/review?id=${productId}&type=${type}`);
   };
 
   const closeModal = () => {
@@ -37,6 +39,7 @@ const ReviewContent = ({
 
   const handleDelete = () => {
     fn && fn();
+    deleteReviews(type, id).then((res) => console.log(res.data));
     closeModal();
   };
 
