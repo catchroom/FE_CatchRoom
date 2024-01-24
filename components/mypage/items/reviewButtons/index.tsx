@@ -10,9 +10,11 @@ import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsContr
 const ReviewButtons = ({
   id,
   type,
+  reviewId,
   isReview = 'noReview',
 }: {
   id: number;
+  reviewId?: number;
   type: '구매' | '판매';
   name?: string;
   isReview?: ReviewType;
@@ -41,7 +43,14 @@ const ReviewButtons = ({
         buttonSelect="border"
         theme={true}
       >
-        <ReviewContent id={id} fn={closeBottomSheets} />
+        {reviewId && (
+          <ReviewContent
+            id={reviewId}
+            fn={closeBottomSheets}
+            type={type}
+            productId={id}
+          />
+        )}
       </BottomSheets>
     ),
     noReview: (

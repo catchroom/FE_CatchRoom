@@ -12,6 +12,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
       <span className=" text-text-primary underline">기한 수정</span>
     ) : null;
 
+  const listState = '판매';
   const isCatch =
     item?.dealState !== 'DONEDEAL' && item.isCatch === true ? true : false;
 
@@ -101,8 +102,9 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
       {item?.reviewStatusType && (
         <ReviewButtons
           id={parseInt(item.productId)}
-          type="판매"
+          type={listState}
           isReview={isReview}
+          reviewId={item?.reviewId}
         />
       )}
     </div>

@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 
 const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
   const router = useRouter();
-
+  const listState = '구매';
   const handleClick = () => {
     router.push(`/order/complete/detail`);
   };
@@ -80,8 +80,9 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
       {item?.reviewStatusType && (
         <ReviewButtons
           id={parseInt(item.productId)}
-          type="구매"
+          type={listState}
           isReview={isReview}
+          reviewId={item?.reviewId}
         />
       )}
     </div>
