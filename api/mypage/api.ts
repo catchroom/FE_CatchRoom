@@ -119,36 +119,51 @@ export const purchaseHistory = async () => {
 /////////////////////////연결 시작하기(리뷰)///////////////////////
 
 // 19. 작성한 리뷰 보기 get
-export const viewReviews = async (type: '구매' | '판매') => {
-  const res = await apiClient.get(`/v1/mypage/review?productId=?&type=${type}`);
+export const viewReviews = async (type: '구매' | '판매', reviewId: number) => {
+  const res = await apiClient.get(
+    `/v1/mypage/review?type=${type}&reviewId=${reviewId}`,
+  );
   return res.data;
 };
 
 // 20. 리뷰 작성하기 **post**
-export const postReview = async (type: number, content: number) => {
-  const res = await apiClient.post(
-    `/v1/mypage/review?productId=?&type=(구매or판매)`,
-    {
-      type,
-      content,
-    },
-  );
+export const postReview = async (
+  type: '구매' | '판매',
+  content: string,
+  productId: number,
+) => {
+  const res = await apiClient.post(`/v1/mypage/review`, {
+    type,
+    content,
+    productId,
+  });
 
   return res.data;
 };
 
 // 21. 리뷰 수정하기 put*
-export const editReview = async (id: number, message: string) => {
-  const res = await apiClient.post(`/v1/mypage/review?id=${id}`, {
-    message,
+export const editReview = async (
+  type: '구매' | '판매',
+  content: string,
+  productId: number,
+) => {
+  const res = await apiClient.put(`/v1/mypage/review`, {
+    type,
+    content,
+    productId,
   });
 
   return res.data;
 };
 
 // 22. 리뷰 삭제하기 *****delete
-export const deleteReview = async (id: number) => {
-  const res = await apiClient.delete(`/v1/mypage/review?id=${id}`);
+export const deleteReviews = async (
+  type: '구매' | '판매',
+  reviewId: number,
+) => {
+  const res = await apiClient.delete(
+    `/v1/mypage/review?type=${type}&reviewId=${reviewId}`,
+  );
   return res.data;
 };
 
@@ -172,7 +187,13 @@ export const deleteSalesList = async (id: number) => {
   return res.data;
 };
 
-////////////38 아직 안함///////////////////////
+////////////28, 38 아직 안함///////////////////////
+
+//28. 리뷰에서 필요한 정보 조회 (숙소 이름, 이미지, 가격)
+export const getRoomInfo = async (id: string) => {
+  const res = await apiClient.get(`/v1/product?id=${id}`);
+  return res.data;
+};
 
 // 38. 구매 내역 상세보기
 export const purchaseHistoryDetail = async (id: number) => {

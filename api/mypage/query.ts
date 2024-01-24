@@ -7,7 +7,6 @@ import {
   salesHistoryExpired,
   purchaseHistory,
   getWishlist,
-  // viewReviews,
 } from './api';
 
 // 8
@@ -105,6 +104,20 @@ export const useQueryGetWishlist = () => {
 //   const { isLoading, error, data } = useQuery({
 //     queryKey: ['viewReviews'],
 //     queryFn: (type: '구매' | '판매') => viewReviews(type),
+//     select: ({ data }) => data,
+//   });
+//   return {
+//     isLoading,
+//     error,
+//     data,
+//   };
+// };
+
+// 28
+// export const useQueryGetRoomInfo = (id: string | string[] | undefined) => {
+//   const { isLoading, error, data } = useQuery({
+//     queryKey: ['getRoomInfo', id],
+//     queryFn: () => getRoomInfo(id),
 //     select: ({ data }) => data,
 //   });
 //   return {

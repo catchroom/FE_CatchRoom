@@ -6,8 +6,9 @@ import { useToastAlert } from '@/hooks/useToastAlert';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { postReview } from '@/api/mypage/api';
 
-const ReviewForm = () => {
+const ReviewForm = ({ id, type }: { id: number; type: '구매' | '판매' }) => {
   const { alertOpenHandler } = useToastAlert('리뷰를 등록했습니다.');
   const [wordCount, setWordCount] = useState(0);
   const { register, handleSubmit, setValue } = useForm<FormReview>({
@@ -15,9 +16,11 @@ const ReviewForm = () => {
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<FormReview> = (data) => {
+  const onSubmit: SubmitHandler<FormReview> = async (data) => {
     if (reviewSchema.safeParse(data).success) {
       console.log(data);
+      postReview(type, data.content, id).then((res) => res.data);
+      alertOpenHandler();
     }
   };
 

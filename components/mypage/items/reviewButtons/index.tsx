@@ -9,16 +9,20 @@ import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsContr
 
 const ReviewButtons = ({
   id,
+  type,
   isReview = 'noReview',
 }: {
   id: number;
+  type: '구매' | '판매';
   name?: string;
   isReview?: ReviewType;
 }) => {
   const setBottomSheets = useSetRecoilState(outerBottomSheetsControl);
   const router = useRouter();
-  const handleClick = () => {
-    router.push(`/mypage/dashboard/review?id=${id}`);
+
+  const handleClick = (id: number, type: '구매' | '판매') => {
+    console.log(id, type);
+    router.push(`/mypage/dashboard/review?id=${id}&type=${type}`);
   };
 
   const reviewTitle = decodeReviewState(isReview);
@@ -40,7 +44,9 @@ const ReviewButtons = ({
         <ReviewContent id={id} fn={closeBottomSheets} />
       </BottomSheets>
     ),
-    noReview: <BorderButton fn={handleClick} name={reviewTitle} />,
+    noReview: (
+      <BorderButton fn={() => handleClick(id, type)} name={reviewTitle} />
+    ),
     deleteReview: <BorderButton name={reviewTitle} gray={true} deeperGray />,
     outDatedReview: <BorderButton name={reviewTitle} gray={true} deeperGray />,
   };

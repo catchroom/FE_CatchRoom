@@ -99,7 +99,11 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
         </div>
       </div>
       {item?.reviewStatusType && (
-        <ReviewButtons id={item.id} isReview={isReview} />
+        <ReviewButtons
+          id={parseInt(item.productId)}
+          type="판매"
+          isReview={isReview}
+        />
       )}
     </div>
   );

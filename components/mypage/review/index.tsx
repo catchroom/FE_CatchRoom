@@ -16,7 +16,7 @@ const ReviewHeader = ({ DATA }: { DATA: TradeItem }) => {
       <div>
         <p className=" text-t2">{DATA.name}</p>
         <p className=" text-t3 font-semibold">
-          {DATA.sell_price.toLocaleString('us-EN')}원
+          {DATA.sell_price?.toLocaleString('us-EN')}원
         </p>
       </div>
     </div>

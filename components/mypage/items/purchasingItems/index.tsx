@@ -67,7 +67,7 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
               <div className="text-text">
                 <h3 className="text-t1 font-bold">{item.accommodationName}</h3>
                 <p className="text-t2 font-semibold">
-                  {item.buyPrice.toLocaleString('us-EN')}원
+                  {item.buyPrice?.toLocaleString('us-EN')}원
                 </p>
               </div>
             </div>
@@ -78,7 +78,11 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
         </div>
       </div>
       {item?.reviewStatusType && (
-        <ReviewButtons id={item.id} isReview={isReview} />
+        <ReviewButtons
+          id={parseInt(item.productId)}
+          type="구매"
+          isReview={isReview}
+        />
       )}
     </div>
   );

@@ -26,14 +26,19 @@ const page = ({
   };
 }) => {
   // 해당 숙소 id로 fetch 요청
-  const { id } = searchParams;
-  console.log(id);
+  const id = parseInt(searchParams.id as string);
+  const type = searchParams.type as '구매' | '판매';
+  console.log(id, type);
+
+  if (isNaN(id) || (type !== '구매' && type !== '판매')) {
+    return null;
+  }
 
   return (
     <div className="w-full h-full">
       <ReviewHeader DATA={DATA} />
       <div className="w-full h-full p-5">
-        <ReviewForm />
+        <ReviewForm id={id} type={type} />
       </div>
     </div>
   );
