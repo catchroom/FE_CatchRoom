@@ -7,6 +7,7 @@ import OfferMessage from '../offerMessage';
 import DeclineMessage from '../declineMessage';
 import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
 import { useCookies } from 'react-cookie';
+import UserOut from '../userOut';
 
 const MessageItem = ({
   type,
@@ -97,6 +98,8 @@ const MessageItem = ({
             </div>
           );
         }
+      case 'DELETE':
+        return <UserOut partnerNickName={chatInfo.partnerNickName as string} />;
     }
   }
   // 로그인한 유저가 해당 메시지의 받는 사람일 때
@@ -175,6 +178,8 @@ const MessageItem = ({
             </div>
           );
         }
+      case 'DELETE':
+        return <UserOut partnerNickName={chatInfo.partnerNickName as string} />;
     }
   }
 };

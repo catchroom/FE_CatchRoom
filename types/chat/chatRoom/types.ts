@@ -6,6 +6,7 @@ export type MessagePropsNoPartial = {
     | 'NEGO_REQ'
     | 'NEGO_ALLOW'
     | 'NEGO_DENIED'
+    | 'DELETE'
     | undefined;
   message: string;
   roomId: string;

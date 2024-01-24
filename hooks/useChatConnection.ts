@@ -96,6 +96,7 @@ export const useChatConnection = (roomId: string) => {
       }),
     });
   };
+
   // 가격 승인
   const acceptPrice = (price: number) => {
     if (!ws.current) return;
