@@ -96,6 +96,48 @@ export const useChatConnection = (roomId: string) => {
       }),
     });
   };
+  // 가격 승인
+  const acceptPrice = (price: number) => {
+    if (!ws.current) return;
+    ws.current.publish({
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      destination: `/pub/chat/message`,
+      body: JSON.stringify({
+        type: 'NEGO_ALLOW',
+        roomId: roomId,
+        message: '제안 수락',
+        userId: userId,
+        negoPrice: price,
+      }),
+    });
+  };
 
-  return { connect, disconnect, sendMessage, negoPrice };
+  // 가격 승인
+  const denyPrice = (price: number) => {
+    if (!ws.current) return;
+    ws.current.publish({
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      destination: `/pub/chat/message`,
+      body: JSON.stringify({
+        type: 'NEGO_DENIED',
+        roomId: roomId,
+        message: '제안 거절',
+        userId: userId,
+        negoPrice: price,
+      }),
+    });
+  };
+
+  return {
+    connect,
+    disconnect,
+    sendMessage,
+    negoPrice,
+    acceptPrice,
+    denyPrice,
+  };
 };

@@ -1,5 +1,5 @@
-export type MessageProps = {
-  type?:
+export type MessagePropsNoPartial = {
+  type:
     | 'ENTER'
     | 'TALK'
     | 'QUIT'
@@ -7,13 +7,16 @@ export type MessageProps = {
     | 'NEGO_ALLOW'
     | 'NEGO_DENIED'
     | undefined;
-  message?: string;
-  roomId?: string;
-  userId?: number;
-  time?: string;
-  negoPrice?: number;
+  message: string;
+  roomId: string;
+  userId: number;
+  time: string;
+  negoPrice: number;
   isSeller?: boolean;
+  accept: (price: number) => void;
+  deny: (price: number) => void;
 };
+export type MessageProps = Partial<MessagePropsNoPartial>;
 
 export type ChatRoomType = {
   chatRoomNumber: string;
@@ -29,7 +32,6 @@ export type ChatRoomType = {
   buyerState: string;
   sellerState: string;
   lastChatmessageDto: ChatMessageDto;
-  dealState: string;
 };
 
 export type ChatMessageDto = {

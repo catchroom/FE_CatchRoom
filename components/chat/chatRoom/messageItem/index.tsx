@@ -1,7 +1,7 @@
 import React from 'react';
 import SendMessage from '../sendMessage';
 import ReceiveMessage from '../receiveMessage';
-import { MessageProps } from '@/types/chat/chatRoom/types';
+import { MessagePropsNoPartial } from '@/types/chat/chatRoom/types';
 import ApproveMessage from '@/components/chat/chatRoom/approveMessage';
 import OfferMessage from '../offerMessage';
 import DeclineMessage from '../declineMessage';
@@ -14,7 +14,9 @@ const MessageItem = ({
   userId,
   time,
   negoPrice,
-}: MessageProps) => {
+  accept,
+  deny,
+}: MessagePropsNoPartial) => {
   const [chatInfo] = useSsrAtom();
   const [cookies] = useCookies();
   const sellerId = chatInfo.sellerId;
@@ -29,13 +31,21 @@ const MessageItem = ({
         if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
-              <OfferMessage negoPrice={negoPrice} time={time} isSeller={true} />
+              <OfferMessage
+                accept={accept}
+                deny={deny}
+                negoPrice={negoPrice}
+                time={time}
+                isSeller={true}
+              />
             </div>
           );
         } else {
           return (
             <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
               <OfferMessage
+                accept={accept}
+                deny={deny}
                 negoPrice={negoPrice}
                 time={time}
                 isSeller={false}
@@ -99,13 +109,21 @@ const MessageItem = ({
         if (loginUserId === sellerId) {
           return (
             <div className="w-9/12  flex  flex-row-reverse gap-x-3 items-end mr-auto mb-3 ">
-              <OfferMessage negoPrice={negoPrice} time={time} isSeller={true} />
+              <OfferMessage
+                accept={accept}
+                deny={deny}
+                negoPrice={negoPrice}
+                time={time}
+                isSeller={true}
+              />
             </div>
           );
         } else {
           return (
             <div className="w-9/12  flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <OfferMessage
+                accept={accept}
+                deny={deny}
                 negoPrice={negoPrice}
                 time={time}
                 isSeller={false}
@@ -136,7 +154,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_DENIED':
-        if (loginUserId === sellerId) {
+        if (userId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <DeclineMessage
