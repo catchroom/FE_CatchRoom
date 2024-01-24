@@ -56,12 +56,12 @@ const CatchItem = ({
           </div>
         </div>
       </div>
-      <div className="w-[320px] h-[184px] relative">
+      <div className="h-[184px] relative">
         <Image
           src={image!}
           alt="숙소이미지"
           fill={true}
-          sizes="(max-width: 480px) 320px, (max-width: 390px) 240px, 240px"
+          sizes="(max-width: 480px) 364px, (max-width: 390px) 240px, 240px"
           className="rounded-t-xl"
         />
       </div>

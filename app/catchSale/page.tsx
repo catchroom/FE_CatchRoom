@@ -1,4 +1,3 @@
-'use client';
 import CatchItemContainer from '@/components/catchSale/catchItemContainer';
 import SecondHeader from '@/components/catchSale/secondHeader';
 import Header from '@/components/common/header';
