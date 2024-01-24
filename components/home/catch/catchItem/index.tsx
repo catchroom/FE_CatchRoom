@@ -88,7 +88,7 @@ const CatchItem = ({
           </div>
           <div className="text-t1">
             <span className="text-main text-p1 mr-1">{discountRate}%</span>
-            {sellPrice.toLocaleString()}원
+            {sellPrice?.toLocaleString()}원
           </div>
         </div>
       </div>
