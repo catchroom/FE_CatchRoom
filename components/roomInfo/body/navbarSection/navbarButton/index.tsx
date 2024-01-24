@@ -2,7 +2,7 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { activeButtonState } from '@/atoms/roomInfo/navbarButton';
-import { ButtonType } from '@/types/roomInfo/types';
+import { ButtonType } from '@/types/room-info/types';
 
 const NavbarButtonComponent = () => {
   const [activeButton, setActiveButton] = useRecoilState(activeButtonState);
