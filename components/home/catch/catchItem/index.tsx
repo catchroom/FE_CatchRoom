@@ -74,7 +74,7 @@ const CatchItem = ({
             </p>
           </div>
           <p className="line-through text-p2 text-text-sub">
-            구매가 {originalPrice.toLocaleString()}
+            구매가 {originalPrice?.toLocaleString()}
           </p>
         </div>
         <div
