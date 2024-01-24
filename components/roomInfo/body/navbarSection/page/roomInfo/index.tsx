@@ -46,7 +46,8 @@ const NavRoomInfoComponent = () => {
             {data && data.data.roomMaxCapacity}
           </p>
           <p className="flex items-center gap-1 text-p3 text-text-sub">
-            <SmBedIcon />퀸 침대 1개
+            <SmBedIcon />퀸 침대{' '}
+            {data && Math.round(data.data.roomNormalCapacity / 2)}개
           </p>
         </div>
       </div>
