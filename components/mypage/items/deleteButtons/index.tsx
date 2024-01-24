@@ -17,8 +17,12 @@ const DeleteButtons = ({ id }: { id: number }) => {
   const modalOpen = (id: number) => {
     setOpenModal(true);
     console.log(id);
-    deleteSalesList(id).then((res) => console.log(res));
-    alertOpenHandler();
+    deleteSalesList(id).then((res) => {
+      console.log(res);
+      if (res.code === 4030) {
+        alertOpenHandler();
+      }
+    });
   };
 
   return (

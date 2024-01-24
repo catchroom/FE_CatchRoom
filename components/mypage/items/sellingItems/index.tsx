@@ -78,8 +78,8 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
                   <CalendarSVG />
                   {getDotDate(item.checkIn)} - {getDotDate(item.checkOut)}
                 </p>
-
-                {isNotIng && <DeleteButtons id={item.productId} />}
+                {/* ****** 백엔드 오타 수정 요청 */}
+                {isNotIng && <DeleteButtons id={parseInt(item.proudctId)} />}
               </div>
               <div className="text-text">
                 <h3 className="text-t1 font-bold">{item.accommodationName}</h3>
