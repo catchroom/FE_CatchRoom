@@ -16,6 +16,8 @@ const ProductInfo = () => {
     setModalOpen(true);
   };
 
+  const notViewOnSeller = chatInfo.buyerState === 'SELLER' ? true : false;
+
   return (
     <div className="bg-surface w-full flex gap-3 items-center p-[16px] border-b border-border-sub">
       <div className="relative w-11 h-11">
@@ -54,7 +56,7 @@ const ProductInfo = () => {
         </div>
       </div>
       {/* 가격 제안 페이지에서는 제안버튼 미노출 */}
-      {!modalState && (
+      {!modalState && notViewOnSeller && (
         <DefaultBtn
           label="가격 제안하기"
           theme="basic"
