@@ -9,6 +9,7 @@ import {
   getWishlist,
   viewReviews,
   getRoomInfo,
+  purchaseHistoryDetail,
 } from './api';
 
 // 8
@@ -128,6 +129,20 @@ export const useQueryGetRoomInfo = (id: number) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['getRoomInfo', id],
     queryFn: () => getRoomInfo(id),
+    select: ({ data }) => data,
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};
+
+// 38
+export const useQueryGetPurchaseDetail = (id: number) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['purchaseHistoryDetail', id],
+    queryFn: () => purchaseHistoryDetail(id),
     select: ({ data }) => data,
   });
   return {

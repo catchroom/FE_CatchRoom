@@ -11,8 +11,9 @@ import { useRouter } from 'next/navigation';
 const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
   const router = useRouter();
   const listState = '구매';
+
   const handleClick = () => {
-    router.push(`/order/complete/detail`);
+    router.push(`/order/complete/detail?id=${item.productId}`);
   };
 
   let isReview: ReviewType = 'noReview';

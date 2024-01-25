@@ -160,7 +160,7 @@ export const getRoomInfo = async (id: number) => {
   return res.data;
 };
 
-// 22. 리뷰 삭제하기 *****delete
+// 22. 리뷰 삭제하기
 export const deleteReviews = async (
   type: '구매' | '판매',
   reviewId: number,
@@ -189,12 +189,10 @@ export const deleteSalesList = async (id: number) => {
   return res.data;
 };
 
-////////////38 아직 안함///////////////////////
-
 // 38. 구매 내역 상세보기
 export const purchaseHistoryDetail = async (id: number) => {
   const res = await apiClient.get(
-    `/v1/mypage/purchasehistory/detail?buyHistoryid=${id}`,
+    `/v1/buy/mypage/purchasehistory/detail?productId=${id}`,
   );
   return res.data;
 };
