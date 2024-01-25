@@ -4,14 +4,16 @@ import CompleteMessage from '@/components/complete/completeMessage';
 import NavButton from '@/components/complete/navButton';
 import ProductDetails from '@/components/complete/productDetails';
 import ReservationInfo from '@/components/complete/reservationInfo';
+import { UseParamsType } from '@/types/room-info/types';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 
 const Page = () => {
   const params = useParams<{ id: string }>();
+  const { id } = useParams() as UseParamsType;
   const productId = params ? parseInt(params.id, 10) : 0;
-
+  const router = useRouter();
   const { data, isLoading, error } = useQueryGetOrderOrderComplete(productId);
 
   if (isLoading) return <div>Loading...</div>;
@@ -31,6 +33,9 @@ const Page = () => {
       name: data?.user.userName,
       phoneNumber: data?.user.userPhoneNumber,
     },
+  };
+  const handleViewDetailClick = () => {
+    router.push(`/order/complete/detail?id=${id}`);
   };
 
   return (
@@ -64,12 +69,11 @@ const Page = () => {
             </Link>
           </div>
           <div className="w-full h-full">
-            <Link href="/order/complete/detail">
-              <NavButton
-                label="상세보기"
-                colorClass="bg-border-primary text-white"
-              />
-            </Link>
+            <NavButton
+              label="상세보기"
+              colorClass="bg-border-primary text-white"
+              onClick={handleViewDetailClick}
+            />
           </div>
         </div>
       </div>
