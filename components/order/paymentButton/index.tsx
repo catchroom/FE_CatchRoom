@@ -52,7 +52,11 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
       </div>
 
       {modalType === 'orderConfirmation' && (
-        <PaymentModal isOpen={isModalOpen} onClose={handleCloseModal} />
+        <PaymentModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          formRef={formRef}
+        />
       )}
 
       {isModalOpen && modalType === 'formValidationFailure' && (
