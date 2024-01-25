@@ -3,9 +3,10 @@ import React from 'react';
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import { useQueryGetCatchItemsListForScroll } from '@/api/home/query';
 import { catchItems } from '@/types/common/catchItems/types';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { regionIndex } from '@/atoms/search-detail/searchStates';
+import { totalSizeState } from '@/atoms/catchSale/totalSizeAtom';
 
 const CatchItemContainer = () => {
   // const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
@@ -26,6 +27,7 @@ const CatchItemContainer = () => {
   // );
 
   const dropdown = useRecoilValue(dropdownState);
+  const setTotalSize = useSetRecoilState(totalSizeState);
 
   const filter: Record<string, string> = {
     '할인율 높은순': 'HIGH_DISCOUNT',
@@ -41,6 +43,9 @@ const CatchItemContainer = () => {
     regionFormat,
   );
   console.log(data);
+  if (data) {
+    setTotalSize(data.size);
+  }
   return (
     <div className=" overflow-y-hidden">
       <div className="w-full flex flex-col gap-12 px-6 mt-36">
