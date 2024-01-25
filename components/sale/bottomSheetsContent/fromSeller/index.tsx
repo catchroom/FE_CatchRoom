@@ -23,7 +23,7 @@ import { FromSeller, sellerSchema } from '@/constants/zodSchema';
 import { ProductItem } from '@/types/sale/type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -53,6 +53,11 @@ const FromSeller = () => {
   const catchprice = useRecoilValue(catchPriceState);
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
+
+  useEffect(() => {
+    if (isProduct) setValue('sellerContent', sellerContent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const currentValue = e.target.value;
