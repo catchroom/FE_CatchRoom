@@ -57,32 +57,41 @@ const FromSeller = () => {
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
 
-  const time = useRecoilValue(timeState);
-  const hour = useRecoilValue(hourState);
-  const minute = useRecoilValue(minuteState);
+  const [time, setTime] = useRecoilState(timeState);
+  const [hour, setHour] = useRecoilState(hourState);
+  const [minute, setMinute] = useRecoilState(minuteState);
+
+  const [timeISOString, setTimeISOString] = useState('');
 
   const setIsFromSalePageState = useSetRecoilState(isFromSalePageState);
 
   useEffect(() => {
-    if (isProduct) setValue('sellerContent', sellerContent);
+    // isProduct가 true이고, sellerContent에 값이 있을 때만 setValue 호출
+    if (isProduct && sellerContent) {
+      setValue('sellerContent', sellerContent);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isProduct]);
 
-  console.log(endDate!.toLocaleDateString());
+  useEffect(() => {
+    if (!endDate) return;
+    const combinedDateTime = new Date(
+      endDate!.getFullYear(),
+      endDate!.getMonth(),
+      endDate!.getDate(),
+      time === '오전' ? (hour === 12 ? 0 : hour) : hour === 12 ? 12 : hour + 12,
+      minute,
+    );
+    console.log('fromseller', combinedDateTime);
 
-  const combinedDateTime = new Date(
-    endDate!.getFullYear(),
-    endDate!.getMonth(),
-    endDate!.getDate(),
-    time === '오전' ? hour : hour + 12,
-    minute,
-  );
-  console.log(combinedDateTime);
-
-  const timezoneOffset = combinedDateTime.getTimezoneOffset() * 60000;
-  const adjustedEndDate = new Date(combinedDateTime.getTime() - timezoneOffset);
-  const isoString = adjustedEndDate!.toISOString();
-  console.log(isoString);
+    const timezoneOffset = combinedDateTime.getTimezoneOffset() * 60000;
+    const adjustedEndDate = new Date(
+      combinedDateTime.getTime() - timezoneOffset,
+    );
+    const isoString = adjustedEndDate?.toISOString();
+    console.log(isoString);
+    setTimeISOString(isoString);
+  }, [endDate, time, hour, minute]);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const currentValue = e.target.value;
@@ -115,25 +124,40 @@ const FromSeller = () => {
     setIsNego(false);
     setSellerContent('');
     setIsProduct(false);
+    setTime('오후');
+    setHour(11);
+    setMinute(59);
     router.push('/');
   };
   const handleButtonClick = () => {
     let productData: ProductItem;
 
     if (isProduct) {
-      // isProduct가 true일 때: orderHistoryId를 제외한 객체 생성
-      productData = {
-        discountRate: discountRate,
-        sellPrice: sellPrice,
-        actualProfit: actualProfit,
-        catchprice: catchprice,
-        endDate: endDate!.toISOString(),
-        introduction: sellerContent,
-        isAutoCatch: isAutoCatch,
-        isCatch: isCatch,
-        isNego: isNego,
-        catchPriceStartDate: catchPriceStartDate!.toISOString().split('T')[0]!,
-      };
+      if (!isAutoCatch) {
+        productData = {
+          discountRate: discountRate,
+          sellPrice: sellPrice,
+          actualProfit: actualProfit,
+          endDate: timeISOString,
+          introduction: sellerContent,
+          isAutoCatch: isAutoCatch,
+          isCatch: isCatch,
+          isNego: isNego,
+        };
+      } else {
+        productData = {
+          discountRate: discountRate,
+          sellPrice: sellPrice,
+          actualProfit: actualProfit,
+          catchprice: catchprice,
+          endDate: timeISOString,
+          introduction: sellerContent,
+          isAutoCatch: isAutoCatch,
+          isCatch: isCatch,
+          isNego: isNego,
+          catchPriceStartDate: formatDate(catchPriceStartDate!),
+        };
+      }
     } else {
       // isProduct가 false일 때: orderHistoryId를 포함한 객체 생성
       if (!isAutoCatch) {
@@ -142,7 +166,7 @@ const FromSeller = () => {
           discountRate: discountRate,
           sellPrice: sellPrice,
           actualProfit: actualProfit,
-          endDate: isoString,
+          endDate: timeISOString,
           introduction: sellerContent,
           isAutoCatch: isAutoCatch,
           isCatch: isCatch,
@@ -155,7 +179,7 @@ const FromSeller = () => {
           sellPrice: sellPrice,
           actualProfit: actualProfit,
           catchprice: catchprice,
-          endDate: isoString,
+          endDate: timeISOString,
           introduction: sellerContent,
           isAutoCatch: isAutoCatch,
           isCatch: isCatch,
@@ -192,9 +216,15 @@ const FromSeller = () => {
     setDiscountRate(0);
     setIsNego(false);
     setSellerContent('');
+    setTime('오후');
+    setHour(11);
+    setMinute(59);
     setIsProduct(false);
     if (data.code === 4010 || data.code === 4020) {
       router.push(`/room-info/${data.data.id}`);
+      setHeaderUnVisible(false);
+    } else if (data.code === 4020) {
+      router.push(`/`);
       setHeaderUnVisible(false);
     } else if (data.code === 4012) {
       setModalContent('이미 등록된 상품입니다.');

@@ -5,7 +5,12 @@ import React, { useEffect } from 'react';
 import { useConditionalQuery } from '@/api/sale/query';
 import { formatDateWithDay } from '@/utils/get-dot-date';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { checkInDateState } from '@/atoms/sale/timeAtom';
+import {
+  checkInDateState,
+  hourState,
+  minuteState,
+  timeState,
+} from '@/atoms/sale/timeAtom';
 import {
   percentState,
   priceState,
@@ -39,11 +44,23 @@ const SaleInfoContainer = ({ id }: Props) => {
   const setCatchEndDate = useSetRecoilState(catchSingleDate); //캐치특가 종료시점
   const setIsNego = useSetRecoilState(isNegoState);
   const setSellerContent = useSetRecoilState(sellerContentState);
-
+  const setTime = useSetRecoilState(timeState);
+  const setHour = useSetRecoilState(hourState);
+  const setMinute = useSetRecoilState(minuteState);
   useEffect(() => {
     if (isProduct && data) {
       const endDate = new Date(data?.endDate);
-      console.log(endDate);
+      const hour = endDate.getHours();
+      if (hour < 12 || hour === 0) {
+        setTime('오전');
+        if (hour === 0) setHour(hour + 12);
+        else setHour(hour);
+      } else {
+        setTime('오후');
+        if (hour === 12) setHour(hour);
+        else setHour(hour - 12);
+      }
+      setMinute(endDate.getMinutes());
       if (data.isCatch) {
         const catchDate = new Date(data?.catchPriceStartDate);
         setCatchEndDate(catchDate);
