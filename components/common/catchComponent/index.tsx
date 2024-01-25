@@ -5,6 +5,7 @@ import React from 'react';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import CalendarIcon from '@/public/svgComponent/calendar';
 import HeartButton from '../heartButton';
+import { formatDateWithDay } from '@/utils/get-dot-date';
 
 /**
  * 상품들을 조회할 수 있는 컴포넌트입니다.
@@ -34,7 +35,8 @@ const CatchSpecialComponent = ({
   image = '/sample/room3.png',
   accommodationName,
   roomName,
-  resDate,
+  checkIn,
+  checkOut,
   catchType,
   originalPrice,
   discountRate,
@@ -52,16 +54,28 @@ const CatchSpecialComponent = ({
     console.log('삭제버튼이 클릭됐습니다.');
   },
 }: catchItems) => {
+  const checkInString = formatDateWithDay(checkIn!);
+  const checkOutString = formatDateWithDay(checkOut!);
+
   const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     deleteBtnHandler();
   };
 
+  // 반응형 작업중입니다! 지우지 말아주세요~
+  // const truncateString = (str: string) => {
+  //   if (str.length > 10) {
+  //     return str.substring(0, 10) + '...';
+  //   } else {
+  //     return str;
+  //   }
+  // };
+
   return (
     <div className="relative w-full h-36">
       <div className="flex cursor-pointer" onClick={pageHandler}>
         {/* 숙소 이미지 및 캐치특가 */}
-        <div className="relative w-[120px] max-w-[120px] overflow-auto rounded-md mr-4">
+        <div className="relative flex w-[120px] max-w-[120px] overflow-hidden rounded-md mr-4">
           {catchType ? (
             <div className="absolute flex items-center z-[4] px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
               캐치 특가
@@ -77,26 +91,26 @@ const CatchSpecialComponent = ({
           <div className="mb-3 ">
             <div className="flex items-center gap-1 text-t3 font-semibold">
               <CalendarIcon />
-              {resDate}
+              {checkInString} - {checkOutString}
             </div>
-            <div className="flex flex-col items-start mt-3 gap-3">
-              <div className="text-t1 font-bold leading-none">
+            <div className=" flex flex-col items-start mt-3 gap-3 ">
+              <div className="text-t1 font-bold leading-none truncate overflow-ellipsis">
                 {accommodationName}
               </div>
-              <div className="text-t1 font-bold leading-none text-text-sub">
-                {roomName}
+              <div className="text-t1 font-bold leading-none text-text-sub break-keep overflow-ellipsis">
+                {roomName!}
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start lg:items-end ">
             <div className="flex flex-wrap text-p2 text-gray-600">
               <p className="line-through">
                 구매가&nbsp;{originalPrice?.toLocaleString('us-EN')}원
               </p>
             </div>
             <div className="flex flex-wrap items-center">
-              <p className="text-t1 text-main font-bold">{discountRate}%</p>
-              <p className=" text-t1 font-bold ml-2">
+              <p className="text-t1 text-main font-semibold">{discountRate}%</p>
+              <p className=" text-t1 font-bold ml-2 lg:text-h5">
                 {sellPrice?.toLocaleString('us-EN')}원
               </p>
             </div>
