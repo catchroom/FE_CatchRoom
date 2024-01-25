@@ -1,20 +1,30 @@
 import axios from 'axios';
+import { apiClient } from '../user/apiClient';
 
-export const fetchChatRoom = async (token: string) => {
-  const data = await axios.get('https://catchroom.store/v1/chat/room/list', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+// 1. 상품 상세조회 화면 API
+export const roomItemInfo = async (id: string | string[] | undefined) => {
+  const res = await apiClient.get(`/v1/product?id=${id}`);
 
-  const result = await data.data;
-  return result;
+  const data = res.data.data;
+  const userIdentity = res.data.data.userIdentity;
+  const accommodationUrl = res.data.data.accommodationUrl;
+  return { data, userIdentity, accommodationUrl };
 };
 
-export const fetchPreviousChat = async (roomId: string, token: string) => {
-  console.log('roomId는', roomId);
-  const data = await axios.get(
-    `https://catchroom.store/v1/chat/room/find?id=${roomId}&page=0`,
+// 2. 채팅방 생성
+export const createChatRoom = async (
+  buyerId: number,
+  sellerId: number,
+  productId: number,
+  token: string,
+) => {
+  const data = await axios.post(
+    'https://catchroom.xyz/v1/chat/room/create',
+    {
+      buyerId,
+      sellerId,
+      productId,
+    },
     {
       headers: {
         'Content-Type': 'application/json',
@@ -23,6 +33,8 @@ export const fetchPreviousChat = async (roomId: string, token: string) => {
     },
   );
 
-  const result = await data.data;
-  return result.data;
+  const result = await data.data.data.chatRoomNumber;
+  console.log(result);
+  console.log(buyerId, sellerId, productId);
+  return result;
 };
