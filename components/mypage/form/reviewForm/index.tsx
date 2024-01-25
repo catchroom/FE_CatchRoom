@@ -27,9 +27,7 @@ const ReviewForm = ({
 
   console.log(type, id, reviewId);
 
-  const { data } = useQueryGetReview(type, reviewId, {
-    enabled: !isNaN(reviewId),
-  });
+  const { data } = useQueryGetReview(type, reviewId);
   console.log(data);
 
   const onSubmit: SubmitHandler<FormReview> = async (reviewData) => {
@@ -87,7 +85,7 @@ const ReviewForm = ({
         <p className="text-text-primary">리뷰는 최소 1자 이상 입력해주세요.</p>
       )}
       <div className="w-full max-w-[480px] fixed bottom-5 left-1/2 -translate-x-1/2 px-5">
-        <SimpleButton name={reviewId ? '수정' : '등록'} type="submit" />
+        <SimpleButton name={data ? '수정' : '등록'} type="submit" />
       </div>
     </form>
   );

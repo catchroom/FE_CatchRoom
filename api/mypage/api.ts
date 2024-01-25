@@ -154,15 +154,11 @@ export const editReview = async (
   return res.data;
 };
 
-////////////////
-
 //28. 리뷰에서 필요한 정보 조회 (숙소 이름, 이미지, 가격)
 export const getRoomInfo = async (id: string) => {
   const res = await apiClient.get(`/v1/product?id=${id}`);
   return res.data;
 };
-
-////////////////////20,28 안함//////////////////
 
 // 22. 리뷰 삭제하기 *****delete
 export const deleteReviews = async (

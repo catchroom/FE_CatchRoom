@@ -113,7 +113,7 @@ export const useQueryGetReview = (
       return viewReviews(type, reviewId);
     },
     select: ({ data }) => data,
-    enabled: reviewId !== undefined && !isNaN(reviewId),
+    enabled: !!reviewId && typeof reviewId === 'number',
   });
   return {
     isLoading,
