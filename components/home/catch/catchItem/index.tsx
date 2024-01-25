@@ -27,7 +27,7 @@ const CatchItem = ({
   };
 
   const handleItemClick = () => {
-    router.push(`/room-info?id=${productId}`);
+    router.push(`/room-info/${productId}`);
   };
 
   const checkInString = formatDateWithDay(checkIn!);
