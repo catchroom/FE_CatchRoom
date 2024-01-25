@@ -29,7 +29,7 @@ type Props = {
 const SaleInfoContainer = ({ id }: Props) => {
   const isProduct = useRecoilValue(isProductState);
 
-  const { data } = useConditionalQuery(isProduct, +id!);
+  const { data, isLoading } = useConditionalQuery(isProduct, +id!);
   console.log(data);
 
   const setPercent = useSetRecoilState(percentState); //할인율
@@ -72,6 +72,7 @@ const SaleInfoContainer = ({ id }: Props) => {
     setProductPrice(data?.price);
   }, [data, setProductPrice]);
 
+  if (isLoading) return <div>Loding...</div>;
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">

@@ -153,8 +153,8 @@ const FromSeller = () => {
     console.log(data);
     if (data.code === 4010 || data.code === 4020) {
       setIsFromSalePageState(true);
-      setHeaderUnVisible(false);
       router.push(`/room-info/${data.data.id}`);
+      setHeaderUnVisible(false);
     } else if (data.code === 4012) {
       setModalContent('이미 등록된 상품입니다.');
       setOpen(true);
