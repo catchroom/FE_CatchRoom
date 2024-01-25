@@ -1,16 +1,21 @@
 'use client';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import LeftButtonIcon from './leftButtonIcon';
+import { useRecoilState } from 'recoil';
+import { isFromSalePageState } from '@/atoms/sale/pageAtom';
 
 const LeftButton = () => {
   const router = useRouter();
-  const pathname = usePathname();
+
+  const [isFromSalePage, setIsFromSalePage] =
+    useRecoilState(isFromSalePageState);
 
   const backPageHandler = () => {
     // 현재 경로가 /sale인지 확인
-    if (pathname === '/sale') {
+    if (isFromSalePage) {
       // /sale 경로일 경우 홈(/)으로 리다이렉트
+      setIsFromSalePage(false);
       router.push('/');
     } else {
       // 그 외의 경우 이전 페이지로 돌아감

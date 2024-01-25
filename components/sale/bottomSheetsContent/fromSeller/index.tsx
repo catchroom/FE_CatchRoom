@@ -3,6 +3,7 @@
 import { useMutationProduct } from '@/api/sale/query';
 import { catchPriceState, catchState } from '@/atoms/sale/catchAtom';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
+import { isFromSalePageState } from '@/atoms/sale/pageAtom';
 import {
   percentState,
   priceState,
@@ -53,6 +54,8 @@ const FromSeller = () => {
   const catchprice = useRecoilValue(catchPriceState);
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
+
+  const setIsFromSalePageState = useSetRecoilState(isFromSalePageState);
 
   useEffect(() => {
     if (isProduct) setValue('sellerContent', sellerContent);
@@ -149,8 +152,9 @@ const FromSeller = () => {
   const handleMutationSucess = (data: APIresponse) => {
     console.log(data);
     if (data.code === 4010 || data.code === 4020) {
-      router.push(`/room-info/${data.data.id}`);
+      setIsFromSalePageState(true);
       setHeaderUnVisible(false);
+      router.push(`/room-info/${data.data.id}`);
     } else if (data.code === 4012) {
       setModalContent('이미 등록된 상품입니다.');
       setOpen(true);
