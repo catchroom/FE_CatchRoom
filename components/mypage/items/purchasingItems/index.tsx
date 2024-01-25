@@ -10,9 +10,10 @@ import { useRouter } from 'next/navigation';
 
 const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
   const router = useRouter();
+  const listState = '구매';
 
   const handleClick = () => {
-    router.push(`/order/complete/detail`);
+    router.push(`/order/complete/detail?id=${item.productId}`);
   };
 
   let isReview: ReviewType = 'noReview';
@@ -67,7 +68,7 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
               <div className="text-text">
                 <h3 className="text-t1 font-bold">{item.accommodationName}</h3>
                 <p className="text-t2 font-semibold">
-                  {item.buyPrice.toLocaleString('us-EN')}원
+                  {item.buyPrice?.toLocaleString('us-EN')}원
                 </p>
               </div>
             </div>
@@ -78,7 +79,12 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
         </div>
       </div>
       {item?.reviewStatusType && (
-        <ReviewButtons id={item.id} isReview={isReview} />
+        <ReviewButtons
+          id={parseInt(item.productId)}
+          type={listState}
+          isReview={isReview}
+          reviewId={item?.reviewId}
+        />
       )}
     </div>
   );

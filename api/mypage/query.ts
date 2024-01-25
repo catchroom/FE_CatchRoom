@@ -7,7 +7,9 @@ import {
   salesHistoryExpired,
   purchaseHistory,
   getWishlist,
-  // viewReviews,
+  viewReviews,
+  getRoomInfo,
+  purchaseHistoryDetail,
 } from './api';
 
 // 8
@@ -101,15 +103,51 @@ export const useQueryGetWishlist = () => {
 };
 
 // 19
-// export const useQueryGetReview = () => {
-//   const { isLoading, error, data } = useQuery({
-//     queryKey: ['viewReviews'],
-//     queryFn: (type: '구매' | '판매') => viewReviews(type),
-//     select: ({ data }) => data,
-//   });
-//   return {
-//     isLoading,
-//     error,
-//     data,
-//   };
-// };
+export const useQueryGetReview = (
+  type: '구매' | '판매',
+  reviewId: number | undefined,
+) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['viewReviews', type, reviewId],
+    queryFn: (context) => {
+      const type = context.queryKey[1] as '구매' | '판매';
+      const reviewId = context.queryKey[2] as number;
+      return viewReviews(type, reviewId);
+    },
+    select: ({ data }) => data,
+    enabled: !!reviewId && typeof reviewId === 'number',
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};
+
+// 28
+export const useQueryGetRoomInfo = (id: number) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['getRoomInfo', id],
+    queryFn: () => getRoomInfo(id),
+    select: ({ data }) => data,
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};
+
+// 38
+export const useQueryGetPurchaseDetail = (id: number) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['purchaseHistoryDetail', id],
+    queryFn: () => purchaseHistoryDetail(id),
+    select: ({ data }) => data,
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};

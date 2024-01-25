@@ -3,13 +3,31 @@
 import Modal from '@/components/common/modal';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { useQueryGetReview } from '@/api/mypage/query';
+import { deleteReviews } from '@/api/mypage/api';
 
-const ReviewContent = ({ id, fn }: { id: number; fn?: () => void }) => {
+const ReviewContent = ({
+  id, //리뷰 아이디
+  fn,
+  type,
+  productId, //판매내역 id
+}: {
+  id: number;
+  productId: number;
+  fn?: () => void;
+  type: '구매' | '판매';
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
+  console.log(type, id, productId);
+
+  const { data } = useQueryGetReview(type, id);
+  console.log(data);
 
   const handleEdit = () => {
-    router.push(`/mypage/dashboard/review?id=${id}`);
+    router.push(
+      `/mypage/dashboard/review?id=${productId}&type=${type}&reviewId=${id}`,
+    );
   };
 
   const closeModal = () => {
@@ -22,12 +40,13 @@ const ReviewContent = ({ id, fn }: { id: number; fn?: () => void }) => {
 
   const handleDelete = () => {
     fn && fn();
+    deleteReviews(type, id).then((res) => console.log(res.data));
     closeModal();
   };
 
   return (
     <div className="w-full flex flex-col mt-6 gap-6">
-      <p>저렴하게 잘 이용했어요!</p>
+      <p>{data?.content}</p>
       <div className="w-full flex justify-end">
         <button className="p-1 h-9 w-[60px]" onClick={handleEdit}>
           수정

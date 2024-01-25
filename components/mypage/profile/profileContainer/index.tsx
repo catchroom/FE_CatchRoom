@@ -4,6 +4,7 @@ import { useQueryGetProfile } from '@/api/mypage/query';
 
 const ProfileContainer = ({ children }: { children: ReactNode }) => {
   const { data } = useQueryGetProfile();
+
   return (
     <section className="w-full flex justify-between items-center py-3">
       <div className="left">

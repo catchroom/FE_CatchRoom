@@ -103,12 +103,14 @@ const SignUpInfo = () => {
     if (nickname === '') {
       setError('nickname', {
         type: 'nickname',
-        message: '닉네임을 입력해주세요.',
+        message:
+          '공백을 제외한 한글 + 영문 + 숫자만 2~8자리 조합으로 설정 해주세요.',
       });
     } else if (errors.nickname?.message) {
       setError('nickname', {
         type: 'nickname',
-        message: '닉네임은 한글/영문/숫자 혼합해서 2~8자로 설정해주세요.',
+        message:
+          '공백을 제외한 한글 + 영문 + 숫자만 2~8자리 조합으로 설정 해주세요.',
       });
     } else {
       nicknameCheck(nickname).then((response) => {

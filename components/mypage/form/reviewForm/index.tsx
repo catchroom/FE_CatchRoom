@@ -6,8 +6,18 @@ import { useToastAlert } from '@/hooks/useToastAlert';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { postReview, editReview } from '@/api/mypage/api';
+import { useQueryGetReview } from '@/api/mypage/query';
 
-const ReviewForm = () => {
+const ReviewForm = ({
+  id,
+  type,
+  reviewId,
+}: {
+  id: number;
+  type: '구매' | '판매';
+  reviewId?: number;
+}) => {
   const { alertOpenHandler } = useToastAlert('리뷰를 등록했습니다.');
   const [wordCount, setWordCount] = useState(0);
   const { register, handleSubmit, setValue } = useForm<FormReview>({
@@ -15,9 +25,20 @@ const ReviewForm = () => {
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<FormReview> = (data) => {
-    if (reviewSchema.safeParse(data).success) {
-      console.log(data);
+  console.log(type, id, reviewId);
+
+  const { data } = useQueryGetReview(type, reviewId);
+  console.log(data);
+
+  const onSubmit: SubmitHandler<FormReview> = async (reviewData) => {
+    if (reviewSchema.safeParse(reviewData).success) {
+      console.log(reviewData);
+      if (reviewId) {
+        editReview(type, reviewData.content, reviewId).then((res) => res.data);
+      } else {
+        postReview(type, reviewData.content, id).then((res) => res.data);
+      }
+      alertOpenHandler();
     }
   };
 
@@ -38,10 +59,6 @@ const ReviewForm = () => {
     }
   };
 
-  const handleClick = () => {
-    alertOpenHandler();
-  };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -49,7 +66,10 @@ const ReviewForm = () => {
     >
       <textarea
         autoFocus
-        placeholder="거래 경험을 자유롭게 작성해주세요. (추후 플랫폼 개선에 큰 도움이 됩니다.)"
+        placeholder={
+          data?.content ||
+          '거래 경험을 자유롭게 작성해주세요. (추후 플랫폼 개선에 큰 도움이 됩니다.)'
+        }
         maxLength={100}
         {...register('content')}
         onChange={handleContentChange}
@@ -65,7 +85,7 @@ const ReviewForm = () => {
         <p className="text-text-primary">리뷰는 최소 1자 이상 입력해주세요.</p>
       )}
       <div className="w-full max-w-[480px] fixed bottom-5 left-1/2 -translate-x-1/2 px-5">
-        <SimpleButton fn={handleClick} name="등록" type="submit" />
+        <SimpleButton name={data ? '수정' : '등록'} type="submit" />
       </div>
     </form>
   );
