@@ -6,8 +6,9 @@ import { useRecoilValue } from 'recoil';
 import ChatItem from '../../chatItem';
 import { ChatRoomType } from '@/types/chat/chatRoom/types';
 
-const ChatListViewer = () => {
+const ChatListViewer = ({ initialData }: { initialData: ChatRoomType[] }) => {
   const chatList = useRecoilValue(chatAllRoomAtom);
+  console.log(chatList);
 
   // 채팅방 리스트
   const chatListComponent =
@@ -19,7 +20,22 @@ const ChatListViewer = () => {
       <p>채팅방이 없습니다.</p>
     );
 
-  return <>{chatList && chatList.length > 0 && chatListComponent}</>;
+  const initialDataComponent =
+    initialData && initialData.length > 0 ? (
+      initialData.map((item: ChatRoomType, index: number) => {
+        return <ChatItem item={item} key={index} />;
+      })
+    ) : (
+      <p>채팅방이 없습니다.</p>
+    );
+
+  return (
+    <>
+      {chatList && chatList.length > 0
+        ? chatListComponent
+        : initialDataComponent}
+    </>
+  );
 };
 
 export default ChatListViewer;

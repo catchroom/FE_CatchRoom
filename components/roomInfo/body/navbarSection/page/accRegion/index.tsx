@@ -11,7 +11,7 @@ const NavAccRegionComponent = () => {
   const { id } = useParams() as UseParamsType;
   const { data } = useRoomItem(id);
 
-  const address = data && data.data.address;
+  const address = data?.data.address;
 
   const { alertOpenHandler } = useToastAlert('주소를 복사했어요!');
 

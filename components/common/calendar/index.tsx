@@ -59,8 +59,8 @@ const CalendarComponent = ({
     to: new Date(2099, 12, 31),
   };
 
-  const leftFooterStyle = 'text-h3 font-semibold mr-3 break-keep';
-  const rightFooterStyle = 'text-h3 font-semibold ml-3 break-keep';
+  const leftFooterStyle = 'text-h3 font-medium mr-3 break-keep';
+  const rightFooterStyle = 'text-h3 font-medium ml-3 break-keep';
 
   let footer = (
     <>
@@ -131,7 +131,7 @@ const CalendarComponent = ({
                 </div>
               ) : (
                 <div className="flex flex-col mt-5">
-                  <span className="mb-3">입실 희망 날짜</span>
+                  <span className="mb-3 text-text-sub">입실 희망 날짜</span>
                   <div className="flex items-center">{footer}</div>
                 </div>
               )

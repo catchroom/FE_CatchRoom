@@ -11,7 +11,7 @@ const fetchNewChatRoom = async (token: string) => {
     'https://catchroom.xyz/v1/chat/room/create',
     {
       buyerId: 4,
-      sellerId: 6,
+      sellerId: 28,
       productId: 4,
     },
     {

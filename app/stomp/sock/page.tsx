@@ -5,6 +5,7 @@ import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useRecoilState } from 'recoil';
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
+import { MessageProps } from '@/types/chat/chatRoom/types';
 // import { loadedChatMessage } from '@/api/chat/api';
 // test 완료되면 지우도록 하겠습니다
 
@@ -20,8 +21,7 @@ export type ChatContentType = {
 };
 
 const StompPage = ({ children }: { children: ReactNode }) => {
-  const [message, setMessage] =
-    useRecoilState<ChatContentType[]>(chatContentAtom);
+  const [message, setMessage] = useRecoilState<MessageProps[]>(chatContentAtom);
   const [ws, setWs] = useState<CompatClient | null>(null);
 
   const connect = () => {
@@ -77,9 +77,7 @@ const StompPage = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {message.map((item, index) => (
-        <div key={index}>
-          {item.sender} : {item.message}
-        </div>
+        <div key={index}>{item.message}</div>
       ))}
       {children}
       <div className="w-full flex justify-between">
