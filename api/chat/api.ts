@@ -14,7 +14,7 @@ export const fetchChatRoom = async (token: string) => {
 export const fetchPreviousChat = async (roomId: string, token: string) => {
   console.log('roomId는', roomId);
   const data = await axios.get(
-    `https://catchroom.store/v1/chat/room/find?id=${roomId}`,
+    `https://catchroom.store/v1/chat/room/find?id=${roomId}&page=0`,
     {
       headers: {
         'Content-Type': 'application/json',

@@ -45,7 +45,7 @@ export const useChatConnection = (roomId: string) => {
       },
       () => {
         ws.current?.subscribe(`/sub/chat/room/${roomId}`, (message) => {
-          console.log(message);
+          console.log('메세지가 도착했습니다.');
           const recv = JSON.parse(message.body);
           setChatList((prev) => [...prev, recv]);
         });

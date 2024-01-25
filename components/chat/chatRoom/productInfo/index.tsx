@@ -16,13 +16,15 @@ const ProductInfo = () => {
     setModalOpen(true);
   };
 
+  console.log(chatInfo);
+
   const ViewOnSeller = chatInfo.loginUserIdentity === 'SELLER' ? true : false;
-  const invalidSale = chatInfo.buyerState === 'DONEDEAL' ? true : false;
+  const invalidSale = chatInfo.dealState === 'DONEDEAL' ? true : false;
 
   return (
     <div className="bg-surface w-full flex relative gap-3 items-center p-[16px] border-b border-border-sub">
       {invalidSale && (
-        <div className="absolute backdrop-blur-sm inset-0 z-20" />
+        <div className="absolute opacity-60 bg-white inset-0 z-20" />
       )}
       <div className="relative w-11 h-11">
         {chatInfo.accommodationUrl ? (
