@@ -37,7 +37,7 @@ export const MYPAGE_CONSTANTS: Root = {
     TITLE: '기타',
     BANNERS: [
       {
-        TITLE: '서비스 약관',
+        TITLE: '이용약관',
         LOCATION: '/mypage/dashboard/terms',
       },
       {
@@ -59,6 +59,26 @@ export const MYPAGE_APP_ROUTE = [
   {
     TITLE: '내 계좌',
     LOCATION: '/mypage/dashboard/account',
+  },
+  {
+    TITLE: '개인정보 수집 및 이용 동의 (필수)',
+    LOCATION: '/mypage/dashboard/conditions/consent-essential',
+  },
+  {
+    TITLE: '개인정보 수집 및 이용 동의 (선택)',
+    LOCATION: '/mypage/dashboard/conditions/consent-options',
+  },
+  {
+    TITLE: '개인정보 제3자 제공 동의 (필수)',
+    LOCATION: '/mypage/dashboard/conditions/consent-third',
+  },
+  {
+    TITLE: '캐치특가 자동 설정 (필수)',
+    LOCATION: '/mypage/dashboard/conditions/consent-catch',
+  },
+  {
+    TITLE: '숙소 이용 및 취소/환불규정 동의 (필수)',
+    LOCATION: '/mypage/dashboard/conditions/consent-refund',
   },
 ];
 

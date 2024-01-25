@@ -82,7 +82,7 @@ const CalendarBottomSheet = ({
             closeButton
             innerButtonTitle={'확인'}
           >
-            <div className="my-5 pb-2 w-full">
+            <div className="my-6 pb-2 w-full">
               {prop.icon === 'calendar' && (
                 <>
                   <CheckBoxComponent

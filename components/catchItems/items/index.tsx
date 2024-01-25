@@ -40,7 +40,7 @@ const ItemsComponent = () => {
 
   return (
     <div className=" overflow-y-hidden">
-      <div className="w-full flex flex-col mt-56 gap-12 p-6 pt-2">
+      <div className="w-full flex flex-col mt-56 gap-[2rem] p-6 pt-2">
         {data &&
           data.list.map((data: DeadLineItem) => {
             return (
@@ -50,7 +50,8 @@ const ItemsComponent = () => {
                 image={data.image}
                 accommodationName={data.accommodationName}
                 roomName={data.roomName}
-                resDate={data.checkIn + ' - ' + data.checkOut}
+                checkIn={data.checkIn}
+                checkOut={data.checkOut}
                 catchType={data.catchType}
                 originalPrice={data.originalPrice}
                 discountRate={data.discountRate}

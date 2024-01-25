@@ -120,7 +120,7 @@ const RegionBottomSheet = ({
             closeButton
             innerButtonTitle={'확인'}
           >
-            <div className="my-5 w-full">
+            <div className="my-6 w-full">
               {prop.icon === 'pin' && (
                 <>
                   <CheckBoxComponent

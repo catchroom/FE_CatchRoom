@@ -1,11 +1,16 @@
 'use client';
-import React from 'react';
-import { useRecoilState } from 'recoil';
+import React, { useEffect } from 'react';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { activeButtonState } from '@/atoms/roomInfo/navbarButton';
 import { ButtonType } from '@/types/room-info/types';
 
 const NavbarButtonComponent = () => {
   const [activeButton, setActiveButton] = useRecoilState(activeButtonState);
+  const resetNavBtnState = useResetRecoilState(activeButtonState);
+
+  useEffect(() => {
+    resetNavBtnState(); // eslint-disable-next-line
+  }, []);
 
   const relativeStyle = 'relative flex w-1/3 h-[34px]';
   const absoluteStyle =
