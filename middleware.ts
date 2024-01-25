@@ -13,6 +13,10 @@ export function middleware(request: NextRequest) {
     if (request.nextUrl.pathname.startsWith('/mypage')) {
       if (request.nextUrl.pathname === '/mypage/dashboard/terms') {
         return NextResponse.next();
+      } else if (
+        request.nextUrl.pathname.startsWith('/mypage/dashboard/conditions')
+      ) {
+        return NextResponse.next();
       } else if (request.nextUrl.pathname === '/mypage/dashboard/privacy') {
         return NextResponse.next();
       } else {

@@ -1,22 +1,27 @@
-import { TradeItem } from '@/types/mypage/types';
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
+import { useQueryGetRoomInfo } from '@/api/mypage/query';
 
-const ReviewHeader = ({ DATA }: { DATA: TradeItem }) => {
+const ReviewHeader = ({ id }: { id: number }) => {
+  const { data } = useQueryGetRoomInfo(id);
+  console.log(data);
+
   return (
     <div id="top" className="w-full flex gap-3 p-4 border-b border-border-sub">
       <Image
-        src={DATA.url}
-        alt="room3"
+        src={data?.accommodationUrl[0].url}
+        alt="data"
         width={300}
         height={300}
         priority
         className="w-12 h-12 rounded-sm object-cover"
       />
       <div>
-        <p className=" text-t2">{DATA.name}</p>
-        <p className=" text-t3 font-semibold">
-          {DATA.sell_price.toLocaleString('us-EN')}원
+        <p className="text-t2">{data?.accommodationName}</p>
+        <p className="text-t3 font-semibold">
+          {data?.sellPrice?.toLocaleString('us-EN')}원
         </p>
       </div>
     </div>

@@ -31,12 +31,12 @@ const SignUpAuth = () => {
     if (email === '') {
       setError('email', {
         type: 'email',
-        message: '이메일을 입력해주세요.',
+        message: '올바르지 않은 이메일 형식입니다 이메일을 다시 확인해주세요.',
       });
     } else if (errors.email?.message) {
       setError('email', {
         type: 'email',
-        message: '이메일 형식을 확인해주세요.',
+        message: '올바르지 않은 이메일 형식입니다 이메일을 다시 확인해주세요.',
       });
     } else {
       emailCheck(email).then((response) => {

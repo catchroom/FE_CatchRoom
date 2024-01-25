@@ -31,6 +31,7 @@ export type MypagePurchaseType = {
   reviewId: number;
   reviewStatusType: string;
   productId: string;
+  buyHistoryId?: number;
 };
 
 export type AccommodationType = {

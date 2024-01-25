@@ -23,47 +23,45 @@ apiClient.interceptors.response.use(
   (response) => {
     return response;
   },
-  async (error) => {
-    const originalRequest = error.config;
+  async (outerError) => {
+    const originalRequest = outerError.config;
+    console.log('outerError.response', JSON.stringify(outerError.response));
+    console.log(outerError.response.data.code); //5001
 
     if (
-      error.response &&
-      error.response.status === 401 &&
+      (outerError.response.data.code === 5000 ||
+        outerError.response.data.code === 5001 ||
+        outerError.response.status === 401) &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
-      // nookies.destroy(null, 'accessToken'); //액세스 토큰 만료시 지워버리기
 
-      return getNewToken()
-        .then((res) => {
-          // console.log('발급요청 성공 토큰', res.data);
+      // console.log('재발급 전', accessToken);
 
-          const accessToken = res.data;
+      try {
+        const res = await getNewToken();
+        const accessToken = res.data;
 
-          nookies.set(null, 'accessToken', accessToken, {
-            path: '/',
-            maxAge: 60 * 30,
-          });
+        console.log('재발급', res.data);
 
-          // 재시도
-          originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-          return apiClient.request(originalRequest).then(
-            (response) => {
-              console.log('재시도 성공:', response.data);
-              return response;
-            },
-            (error) => {
-              console.log('재시도 실패:', error);
-              return Promise.reject(error);
-            },
-          );
-        })
-        .catch((error) => {
-          console.log(error);
-          return Promise.reject(error);
+        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+        const response = await apiClient.request(originalRequest);
+        //헤더에 담긴지 확인
+
+        nookies.set(null, 'accessToken', accessToken, {
+          path: '/',
+          maxAge: 60 * 30,
         });
+
+        console.log('재시도 성공:', response.data);
+
+        return response;
+      } catch (innerError) {
+        console.log('재시도 실패:', innerError);
+        return Promise.reject(originalRequest);
+      }
     }
 
-    return Promise.reject(error);
+    return Promise.reject(outerError);
   },
 );

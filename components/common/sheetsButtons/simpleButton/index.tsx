@@ -20,7 +20,7 @@ const SimpleButton = ({
 
   return (
     <motion.button
-      whileTap={{ scale: 0.97 }}
+      whileTap={{ scale: disabled ? 1 : 0.97 }}
       data-testid="sampleButton"
       onClick={fn}
       disabled={disabled}

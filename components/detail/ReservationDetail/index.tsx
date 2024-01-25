@@ -41,15 +41,17 @@ const ReservationDetail = ({
           <h3 className="text-t2 font-bold text-text-DEFAULT ">결제 금액</h3>
           <div className="flex justify-between items-center ">
             <h3 className="text-t2 text-text-sub">상품 금액</h3>
-            <p className="text-t2 ">{sellPrice.toLocaleString()}원</p>
+            <p className="text-t2 ">{sellPrice?.toLocaleString('us-EN')}원</p>
           </div>
           <div className="flex justify-between items-center">
             <h3 className="text-t2 text-text-sub">거래 수수료율 5%</h3>
-            <p className="text-t2">{commission.toLocaleString()}원</p>
+            <p className="text-t2">{commission?.toLocaleString('us-EN')}원</p>
           </div>
           <div className="flex justify-between items-center">
             <h3 className="text-t2 ">최종 결제 금액</h3>
-            <p className="text-t2 font-bold">{totalPrice.toLocaleString()}원</p>
+            <p className="text-t2 font-bold">
+              {totalPrice?.toLocaleString('us-EN')}원
+            </p>
           </div>
           <div className="flex justify-between items-center">
             <h3 className="text-t2 text-text-sub">결제 수단</h3>
