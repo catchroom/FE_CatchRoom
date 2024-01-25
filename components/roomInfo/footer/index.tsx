@@ -2,24 +2,23 @@
 
 import React from 'react';
 import { Button } from '@material-tailwind/react';
+import { UseParamsType } from '@/types/room-info/types';
+import { useParams } from 'next/navigation';
+// import { useRoomItem } from '@/api/room-info/query';
 import { useRecoilState } from 'recoil';
 import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
-import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 // 판매자 유무에 따른 버튼노출 처리 필요
 // 현재 헤더의 화면전환 버튼을 이용한 전역상태로 바뀌는 중
-type Params = {
-  id: string;
-};
-
 const FooterComponent = () => {
   const router = useRouter();
   const [viewerState] = useRecoilState(viewerTestButton);
 
   // 지민님 작업 끝나시면 이어서 할 예정.
-  const { id } = useParams() as Params;
+  const { id } = useParams() as UseParamsType;
   // const { data } = useRoomItem(id);
+  // const userState = data?.data.userIdentity;
 
   const handlePurchaseClick = () => {
     router.push(`/order/${id}`);

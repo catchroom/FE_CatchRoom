@@ -20,18 +20,13 @@ const UserCounterComponent = ({ countState, allCount }: UserCounterProps) => {
   );
 
   useEffect(() => {
-    if (count === 1) {
+    if ((countState === 'adult' && count === 1) || count === 0)
       setMBtnState(false);
-    } else {
-      setMBtnState(true);
-    }
+    else setMBtnState(true);
 
-    if (count === 10 || allCount === 10) {
-      setPBtnState(false);
-    } else {
-      setPBtnState(true);
-    }
-  }, [count, allCount]);
+    if (count === 10 || allCount === 10) setPBtnState(false);
+    else setPBtnState(true);
+  }, [count, allCount, countState]);
 
   const onDecrease = () => {
     setCount((prev) => prev - 1);
@@ -42,7 +37,18 @@ const UserCounterComponent = ({ countState, allCount }: UserCounterProps) => {
 
   return (
     <div className="relative flex justify-between w-[80px]">
-      <button onClick={onDecrease} disabled={count === 1 ? true : false}>
+      <button
+        onClick={onDecrease}
+        disabled={
+          countState === 'adult'
+            ? count === 1
+              ? true
+              : false
+            : count === 0
+              ? true
+              : false
+        }
+      >
         <MinusBtnIcon isActive={mBtnState} />
       </button>
       <p className="absolute left-1/2 transform -translate-x-1/2">{count}</p>
