@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { CHECKIN_TIME, CHECKOUT_TIME } from '@/constants/CheckInOut';
+import { getDotDate } from '@/utils/get-dot-date';
 
 const ReservationSummary = ({
   reservationNumber,
@@ -13,8 +14,18 @@ const ReservationSummary = ({
   checkIn,
   checkOut,
   sellPrice,
-  // eslint-disable-next-line
-}: any) => {
+}: {
+  reservationNumber: string;
+  accommodationName: string;
+  roomName: string;
+  normalCapacity: number;
+  maxCapacity: number;
+  imageUrl: string;
+  transportation: string;
+  checkIn: string;
+  checkOut: string;
+  sellPrice: number;
+}) => {
   const transportationLabels: { [key: string]: string } = {
     WALK: '도보 방문',
   };
@@ -55,7 +66,7 @@ const ReservationSummary = ({
               <p className=" text-t3 text-text-sub">{transportationLabel}</p>
 
               <p className="mt-2 text-t3 text-text-DEFAULT">
-                {checkIn} (화) ~ {checkOut} (수) | 1박
+                {getDotDate(checkIn)} ~ {getDotDate(checkOut)} | 1박
               </p>
               <p className="mt-1 text-t3 text-text-sub">
                 체크인 {CHECKIN_TIME} | 체크아웃 {CHECKOUT_TIME}
@@ -69,7 +80,7 @@ const ReservationSummary = ({
           <div className="flex gap-1 justify-end items-center">
             <p className="  text-t3 text-text-sub">숙박</p>
             <p className="  text-t2 text-text-default font-bold leading-5">
-              {sellPrice.toLocaleString()}원
+              {sellPrice?.toLocaleString('us-EN')}원
             </p>
           </div>
         </section>

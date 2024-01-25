@@ -27,7 +27,7 @@ const HistoryList = ({
         </p>
         <div className={`${isWithdraw ? 'text-text-primary' : 'text-text'}`}>
           <span>{isWithdraw ? '- ' : '+ '}</span>
-          {item.money.toLocaleString('us-EN')}원
+          {item.money?.toLocaleString('us-EN')}원
         </div>
       </div>
     </div>

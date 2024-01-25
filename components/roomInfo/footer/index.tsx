@@ -40,7 +40,6 @@ const FooterComponent = () => {
     router.push(`/chat/${chatRoomId}`);
   };
 
-
   const buttonClass =
     'font-pretend h-full rounded-[4px] text-t1 font-semibold shadow-none';
 
