@@ -37,7 +37,7 @@ const OrderDetail = ({ id }: { id: number }) => {
       <ReservationDetail
         bookingHolder={bookingDetails.bookingHolder}
         guest={bookingDetails.guest}
-        totalPrice={data?.sellPrice.price - commission}
+        totalPrice={data?.sellPrice.price + commission}
         paymentMethod={data?.paymentMethod}
         sellPrice={data?.sellPrice.price}
         commission={commission}
