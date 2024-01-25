@@ -19,12 +19,9 @@ const PriceComponent = () => {
           </>
         ) : (
           <>
-            <span className="text-t2 font-semibold">구매가</span>
+            <span className="text-t2 font-normal">구매가</span>
             <p className="text-t2 text-gray-600  font-semibold">
-              {data &&
-                data.data.originalPrice &&
-                data.data.originalPrice.toLocaleString()}
-              원
+              {data?.data.originalPrice?.toLocaleString()}원
             </p>
           </>
         )}
@@ -38,16 +35,13 @@ const PriceComponent = () => {
           </>
         ) : (
           <>
-            <span className="text-t2 font-semibold">판매가</span>
+            <span className="text-t2 font-normal">판매가</span>
             <div className="flex flex-wrap items-center justify-center">
               <p className=" text-main font-bold">
                 {data && data.data.discountRate}%
               </p>
               <p className="ml-2 text-h4 font-bold">
-                {data &&
-                  data.data.sellPrice &&
-                  data.data.sellPrice.toLocaleString()}
-                원
+                {data?.data.sellPrice?.toLocaleString()}원
               </p>
             </div>
           </>
