@@ -1,10 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import {
-  getCatchItemsList,
-  getReviewList,
-  getReviewListForScroll,
-  getSalesHistory,
-} from './api';
+import { getCatchItemsList, getReviewList, getSalesHistory } from './api';
 // import { useInfiniteQuery } from 'react-query';
 //30
 export const useQueryGetSalesHistory = () => {
@@ -35,10 +30,10 @@ export const useQueryGetReviewList = (dataType: number) => {
   return { data, isLoading };
 };
 
-export const useQueryGetReviewListForScroll = (dataType: number) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ['getReviewListForScroll'],
-    queryFn: () => getReviewListForScroll(dataType, 1),
-  });
-  return { data, isLoading };
-};
+// export const useQueryGetReviewListForScroll = (dataType: number) => {
+//   const { data, isLoading } = useQuery({
+//     queryKey: ['getReviewListForScroll'],
+//     queryFn: () => getReviewListForScroll(dataType, 1),
+//   });
+//   return { data, isLoading };
+// };

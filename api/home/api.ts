@@ -58,12 +58,15 @@ export const getReviewList = async (dataType: number) => {
   return data.data;
 };
 
-export const getReviewListForScroll = async (
-  dataType: number,
-  pageNumber: number,
-) => {
+export const getReviewListForScroll = async ({
+  dataType,
+  pageParam,
+}: {
+  dataType: number;
+  pageParam: number;
+}) => {
   const res = await fetch(
-    `https://catchroom.xyz/v1/main/review/list?dataType=${dataType}&pageNumber=${pageNumber}`,
+    `https://catchroom.xyz/v1/main/review/list?dataType=${dataType}&pageNumber=${pageParam}`,
     {
       method: 'GET',
       headers: {
