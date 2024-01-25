@@ -2,26 +2,61 @@
 import CheckInDateComponent from '@/components/common/checkInDateComponent';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import { useQueryGetSaleProduct } from '@/api/sale/query';
+import { useConditionalQuery } from '@/api/sale/query';
 import { formatDateWithDay } from '@/utils/get-dot-date';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { checkInDateState } from '@/atoms/sale/timeAtom';
-import { productPriceState } from '@/atoms/sale/priceAtom';
-// import { isProductState } from '@/atoms/sale/productAtom';
+import {
+  percentState,
+  priceState,
+  productPriceState,
+} from '@/atoms/sale/priceAtom';
+import {
+  isNegoState,
+  isProductState,
+  sellerContentState,
+} from '@/atoms/sale/productAtom';
+import {
+  catchSingleDate,
+  saleSingleDate,
+} from '@/atoms/search-detail/searchStates';
+import { catchState } from '@/atoms/sale/catchAtom';
 
 type Props = {
   id: string | string[] | undefined;
 };
 
 const SaleInfoContainer = ({ id }: Props) => {
-  // const [isProduct, setIsProduct] = useRecoilState(isProductState);
+  const isProduct = useRecoilValue(isProductState);
 
-  const { data } = useQueryGetSaleProduct(+id!);
+  const { data, isLoading } = useConditionalQuery(isProduct, +id!);
   console.log(data);
 
-  // if(isProduct) {
+  const setPercent = useSetRecoilState(percentState); //할인율
+  const setPrice = useSetRecoilState(priceState); //판매가
+  const setEndDate = useSetRecoilState(saleSingleDate); //판매종료시점
+  const setIsCatch = useSetRecoilState(catchState); //캐치특가 자동설정 여부
+  const setCatchEndDate = useSetRecoilState(catchSingleDate); //캐치특가 종료시점
+  const setIsNego = useSetRecoilState(isNegoState);
+  const setSellerContent = useSetRecoilState(sellerContentState);
 
-  // }
+  useEffect(() => {
+    if (isProduct && data) {
+      const endDate = new Date(data?.endDate);
+      console.log(endDate);
+      if (data.isCatch) {
+        const catchDate = new Date(data?.catchPriceStartDate);
+        setCatchEndDate(catchDate);
+      }
+      setPercent(data?.discountRate);
+      setPrice(data?.sellPrice);
+      setIsCatch(data?.isAutoCatch);
+      setEndDate(endDate);
+      setIsNego(data?.isNego);
+      setSellerContent(data?.introduction);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const checkInString = formatDateWithDay(data?.checkIn);
   const checkOutString = formatDateWithDay(data?.checkOut);
@@ -37,6 +72,7 @@ const SaleInfoContainer = ({ id }: Props) => {
     setProductPrice(data?.price);
   }, [data, setProductPrice]);
 
+  if (isLoading) return <div>Loding...</div>;
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">

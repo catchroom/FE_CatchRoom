@@ -36,6 +36,8 @@ const CatchContainer = () => {
 
   const selectedSaleEndDate = useRecoilValue(saleSingleDate);
 
+  console.log('캐치특가', selectedSaleEndDate);
+
   const [selected, setSelected] = useRecoilState(catchSingleDate); // 캐치특가 선택 날짜
 
   useEffect(() => {

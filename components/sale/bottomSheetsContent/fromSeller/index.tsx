@@ -1,13 +1,19 @@
 'use client';
 
-import { useMutaionPostSaleProduct } from '@/api/sale/query';
+import { useMutationProduct } from '@/api/sale/query';
 import { catchPriceState, catchState } from '@/atoms/sale/catchAtom';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
+import { isFromSalePageState } from '@/atoms/sale/pageAtom';
 import {
   percentState,
   priceState,
   totalPriceState,
 } from '@/atoms/sale/priceAtom';
+import {
+  isNegoState,
+  isProductState,
+  sellerContentState,
+} from '@/atoms/sale/productAtom';
 import {
   catchSingleDate,
   saleSingleDate,
@@ -18,12 +24,14 @@ import { FromSeller, sellerSchema } from '@/constants/zodSchema';
 import { ProductItem } from '@/types/sale/type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const FromSeller = () => {
-  const [agreePriceOffer, setAgreedPriceOffer] = useState<boolean>(false);
+  const [isProduct, setIsProduct] = useRecoilState(isProductState);
+  const [isNego, setIsNego] = useRecoilState(isNegoState);
+  const [sellerContent, setSellerContent] = useRecoilState(sellerContentState);
   const [wordCount, setWordCount] = useState(0);
   const router = useRouter();
   const { register, setValue } = useForm<FromSeller>({
@@ -31,8 +39,9 @@ const FromSeller = () => {
     mode: 'onChange',
   });
   const [open, setOpen] = useState(false);
-  const [content, setContent] = useState('');
-  const mutation = useMutaionPostSaleProduct();
+
+  const mutation = useMutationProduct();
+
   const setHeaderUnVisible = useSetRecoilState(isHeaderSate);
   const params = useSearchParams();
   const id = params?.get('id');
@@ -46,6 +55,13 @@ const FromSeller = () => {
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
 
+  const setIsFromSalePageState = useSetRecoilState(isFromSalePageState);
+
+  useEffect(() => {
+    if (isProduct) setValue('sellerContent', sellerContent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const currentValue = e.target.value;
     setWordCount(currentValue.length);
@@ -54,14 +70,14 @@ const FromSeller = () => {
       const slicedValue = currentValue.slice(0, 100);
       setValue('sellerContent', slicedValue);
       setWordCount(slicedValue.length);
-      setContent(slicedValue);
+      setSellerContent(slicedValue);
     } else {
-      setContent(currentValue);
+      setSellerContent(currentValue);
     }
   };
 
   const handleCheckbox = () => {
-    setAgreedPriceOffer((prev) => !prev);
+    setIsNego((prev) => !prev);
   };
 
   const handleModalOpen = () => {
@@ -74,29 +90,56 @@ const FromSeller = () => {
     setSellPrice(0);
     setDiscountRate(0);
     setHeaderUnVisible(false);
+    setIsNego(false);
+    setSellerContent('');
+    setIsProduct(false);
     router.push('/');
   };
   const handleButtonClick = () => {
-    //api 호출
+    let productData: ProductItem;
 
-    const productData: ProductItem = {
-      orderHistoryId: +id!,
-      discountRate: discountRate,
-      sellPrice: sellPrice,
-      actualProfit: actualProfit,
-      catchprice: catchprice,
-      endDate: endDate!.toISOString(),
-      introduction: content,
-      isAutoCatch: isAutoCatch,
-      isCatch: isCatch,
-      isNego: agreePriceOffer,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      catchPriceStartDate: catchPriceStartDate?.toISOString().split('T')[0]!,
-    };
-    mutation.mutate(productData, {
-      onSuccess: handleMutationSucess,
-      onError: handleMutationError,
-    });
+    if (isProduct) {
+      // isProduct가 true일 때: orderHistoryId를 제외한 객체 생성
+      productData = {
+        discountRate: discountRate,
+        sellPrice: sellPrice,
+        actualProfit: actualProfit,
+        catchprice: catchprice,
+        endDate: endDate!.toISOString(),
+        introduction: sellerContent,
+        isAutoCatch: isAutoCatch,
+        isCatch: isCatch,
+        isNego: isNego,
+        catchPriceStartDate: catchPriceStartDate!.toISOString().split('T')[0]!,
+      };
+    } else {
+      // isProduct가 false일 때: orderHistoryId를 포함한 객체 생성
+      productData = {
+        orderHistoryId: +id!,
+        discountRate: discountRate,
+        sellPrice: sellPrice,
+        actualProfit: actualProfit,
+        catchprice: catchprice,
+        endDate: endDate!.toISOString(),
+        introduction: sellerContent,
+        isAutoCatch: isAutoCatch,
+        isCatch: isCatch,
+        isNego: isNego,
+        catchPriceStartDate: catchPriceStartDate!.toISOString().split('T')[0]!,
+      };
+    }
+
+    mutation.mutate(
+      {
+        id: +id!,
+        product: productData,
+        isProduct: isProduct,
+      },
+      {
+        onSuccess: handleMutationSucess,
+        onError: handleMutationError,
+      },
+    );
   };
 
   type APIresponse = {
@@ -108,7 +151,8 @@ const FromSeller = () => {
   };
   const handleMutationSucess = (data: APIresponse) => {
     console.log(data);
-    if (data.code === 4010) {
+    if (data.code === 4010 || data.code === 4020) {
+      setIsFromSalePageState(true);
       router.push(`/room-info/${data.data.id}`);
       setHeaderUnVisible(false);
     } else if (data.code === 4012) {
@@ -149,7 +193,7 @@ const FromSeller = () => {
         <CheckBoxComponent
           id="priceOffer"
           labelText="가격 제안 받기"
-          isBoxChecked={agreePriceOffer}
+          isBoxChecked={isNego}
           isLabelTextBold={true}
           handleSelectState={handleCheckbox}
         />
