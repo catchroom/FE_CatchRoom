@@ -30,7 +30,7 @@ const SearchBoxButton = ({
         {icon === 'calendar' && <CalendarIcon />}
         {icon === 'house' && <HouseIcon />}
         {icon === 'person' && <PersonIcon />}
-        <p className="ml-2">{placeholder}</p>
+        <p className="ml-2 text-p1">{placeholder}</p>
       </div>
       <DownArrowIcon />
     </button>
