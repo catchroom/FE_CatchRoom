@@ -1,12 +1,13 @@
 import React from 'react';
 import SendMessage from '../sendMessage';
 import ReceiveMessage from '../receiveMessage';
-import { MessageProps } from '@/types/chat/chatRoom/types';
+import { MessagePropsNoPartial } from '@/types/chat/chatRoom/types';
 import ApproveMessage from '@/components/chat/chatRoom/approveMessage';
 import OfferMessage from '../offerMessage';
 import DeclineMessage from '../declineMessage';
-import { useRecoilState } from 'recoil';
-import { chatRoomAtom } from '@/atoms/chat/chatContentAtom';
+import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
+import { useCookies } from 'react-cookie';
+import UserOut from '../userOut';
 
 const MessageItem = ({
   type,
@@ -14,11 +15,13 @@ const MessageItem = ({
   userId,
   time,
   negoPrice,
-}: MessageProps) => {
-  const [isChatRoomInfo] = useRecoilState(chatRoomAtom);
-
-  const loginUserId = 4;
-  const sellerId = isChatRoomInfo.sellerId;
+  accept,
+  deny,
+}: MessagePropsNoPartial) => {
+  const [chatInfo] = useSsrAtom();
+  const [cookies] = useCookies();
+  const sellerId = chatInfo.sellerId;
+  const loginUserId = cookies.id;
 
   // 로그인한 유저가 해당 메시지의 보낸 사람일 때
   if (loginUserId === userId) {
@@ -26,16 +29,24 @@ const MessageItem = ({
       case 'TALK':
         return <SendMessage message={message} time={time} />;
       case 'NEGO_REQ':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
-              <OfferMessage negoPrice={negoPrice} time={time} isSeller={true} />
+              <OfferMessage
+                accept={accept as (price: number) => void}
+                deny={deny}
+                negoPrice={negoPrice}
+                time={time}
+                isSeller={true}
+              />
             </div>
           );
         } else {
           return (
             <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
               <OfferMessage
+                accept={accept}
+                deny={deny}
                 negoPrice={negoPrice}
                 time={time}
                 isSeller={false}
@@ -44,7 +55,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_ALLOW':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
               <ApproveMessage
@@ -66,7 +77,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_DENIED':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <DeclineMessage
@@ -87,6 +98,8 @@ const MessageItem = ({
             </div>
           );
         }
+      case 'DELETE':
+        return <UserOut partnerNickName={chatInfo.partnerNickName as string} />;
     }
   }
   // 로그인한 유저가 해당 메시지의 받는 사람일 때
@@ -96,16 +109,24 @@ const MessageItem = ({
         return <ReceiveMessage message={message} time={time} />;
 
       case 'NEGO_REQ':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12  flex  flex-row-reverse gap-x-3 items-end mr-auto mb-3 ">
-              <OfferMessage negoPrice={negoPrice} time={time} isSeller={true} />
+              <OfferMessage
+                accept={accept}
+                deny={deny}
+                negoPrice={negoPrice}
+                time={time}
+                isSeller={true}
+              />
             </div>
           );
         } else {
           return (
             <div className="w-9/12  flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
               <OfferMessage
+                accept={accept}
+                deny={deny}
                 negoPrice={negoPrice}
                 time={time}
                 isSeller={false}
@@ -114,7 +135,7 @@ const MessageItem = ({
           );
         }
       case 'NEGO_ALLOW':
-        if (userId === sellerId) {
+        if (loginUserId === sellerId) {
           return (
             <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
               <ApproveMessage
@@ -157,6 +178,8 @@ const MessageItem = ({
             </div>
           );
         }
+      case 'DELETE':
+        return <UserOut partnerNickName={chatInfo.partnerNickName as string} />;
     }
   }
 };

@@ -1,26 +1,47 @@
 'use client';
 
 import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
-import React from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
 import MessageItem from '@/components/chat/chatRoom/messageItem';
+import InfiniteScrollWrapper from '../infiniteWrapper';
 
-const ChatMessageViewer = () => {
-  const messages = useRecoilValue(chatContentAtom);
-  console.log('메세지 받은 내용 ', messages);
+const ChatMessageViewer = ({
+  accept,
+  deny,
+  roomId,
+}: {
+  accept: (price: number) => void;
+  deny: (price: number) => void;
+  roomId: string;
+}) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [messages, setPreviousMessages] = useRecoilState(chatContentAtom);
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   return (
-    <div className="pt-3 px-5">
+    <div className="w-full p-5 min-h-[calc(100vh-200px)]">
+      <InfiniteScrollWrapper accept={accept} deny={deny} roomId={roomId} />
       {messages.map((item, index) => (
         <MessageItem
+          accept={accept}
+          deny={deny}
           key={index}
           type={item.type}
-          message={item.message}
-          userId={item.userId}
-          roomId={item.roomId}
-          time={item.time}
-          negoPrice={item.negoPrice}
+          message={item.message as string}
+          userId={item.userId as number}
+          roomId={item.roomId as string}
+          time={item.time as string}
+          negoPrice={item.negoPrice as number}
         />
       ))}
+      <div ref={messageEndRef} />
     </div>
   );
 };

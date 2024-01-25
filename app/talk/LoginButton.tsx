@@ -6,6 +6,26 @@ import axios from 'axios';
 import React from 'react';
 import { useCookies } from 'react-cookie';
 
+const createNewRoom = async (token: string) => {
+  const data = await axios.post(
+    'https://catchroom.xyz/v1/chat/room/create',
+    {
+      buyerId: 4,
+      sellerId: 28,
+      productId: 108,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const result = await data.data;
+  return result;
+};
+
 const fetchNewToken = async (token: string) => {
   const data = await axios.post(
     'https://catchroom.xyz/v1/user/accesstoken',
@@ -27,6 +47,8 @@ const fetchLogin = async () => {
     {
       email: 'hyem5019@email.com',
       password: 'qweras!123',
+      // email: 'test927@naver.com',
+      // password: 'test927@',
     },
     {
       headers: {
@@ -70,6 +92,17 @@ const LoginButton = () => {
     },
   });
 
+  const createMutation = useMutation({
+    mutationKey: ['newChatRoom'],
+    mutationFn: (token: string) => createNewRoom(token),
+    onSuccess: (data) => {
+      console.log(data, '성공데스');
+    },
+    onError: (error) => {
+      console.log(error, '실패데스');
+    },
+  });
+
   const loginHandleClick = () => {
     loginMutation.mutate();
   };
@@ -78,10 +111,15 @@ const LoginButton = () => {
     mutation.mutate(cookies.refreshToken);
   };
 
+  const createHandleClick = () => {
+    createMutation.mutate(cookies.accessToken);
+  };
+
   return (
     <div className="flex gap-5">
       <SimpleButton name="로그인" fn={loginHandleClick} />
       <SimpleButton name="토큰 재발급" fn={handleClick} />
+      <SimpleButton name="채팅방 생성 누르기 X" fn={createHandleClick} />
     </div>
   );
 };

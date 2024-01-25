@@ -3,16 +3,19 @@
 import React from 'react';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import Image from 'next/image';
-import { isModalState } from '@/atoms/chat/leaveButton';
+import { deleteModalIdAtom, isModalState } from '@/atoms/chat/leaveButton';
 import { useSetRecoilState } from 'recoil';
 import { ChatMessageDto, ChatRoomType } from '@/types/chat/chatRoom/types';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { chatRoomAtom } from '@/atoms/chat/chatContentAtom';
+import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
+import { useRouter } from 'next/navigation';
 
 const ChatItem = ({ item }: { item: ChatRoomType }) => {
-  const setRoomInfo = useSetRecoilState(chatRoomAtom);
+  const setDeleteRoomInfo = useSetRecoilState(deleteModalIdAtom);
+  const [, setValue] = useSsrAtom();
   const setIsOpen = useSetRecoilState(isModalState);
+  const router = useRouter();
 
   // 최근 메세지 시간 보여주는 데이터
   const getRecentTime = (chatMessageDto: ChatMessageDto) => {
@@ -29,18 +32,20 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
   // 모달 열고 닫기
   const handleModalOpen = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
+    setDeleteRoomInfo(item.chatRoomNumber);
     setIsOpen((prev) => !prev);
   };
 
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
-    setRoomInfo(item);
-    window.location.href = `/chat/${item.chatRoomNumber}`;
+    console.log('clickInfo', item);
+    setValue(item);
+    router.push(`/chat/${item.chatRoomNumber}`);
   };
 
   return (
     <div
-      className=" w-full flex gap-3 items-center p-4 border border-divider bg-white cursor-pointer"
+      className=" w-full flex gap-3 items-center px-3 py-4 border border-divider bg-white cursor-pointer"
       onClick={handleClick}
     >
       {/* 채팅방 사진 보여주는 데이터 */}
@@ -67,7 +72,7 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
         </p>
       </div>
       <div className="ml-auto" onClick={handleModalOpen}>
-        <XSymbolIcon />
+        <XSymbolIcon w={20} y={20} />
       </div>
     </div>
   );
