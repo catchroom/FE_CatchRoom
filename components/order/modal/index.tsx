@@ -52,9 +52,14 @@ const PaymentModal = ({ isOpen, onClose, formRef }: ModalProps) => {
     }
   };
 
-  const handleMutationSuccess = () => {
-    console.log('Mutation 성공:');
-    router.push('/order/complete');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleMutationSuccess = (data: any) => {
+    if (data.code === 2039) {
+      console.log('Mutation 성공:');
+      router.push(`/order/complete/${productId}`);
+    } else if (data.code === 2042) {
+      console.log('판매 중인 상품이 아닙니다.');
+    } else console.log(data);
   };
 
   const handleMutationError = () => {
