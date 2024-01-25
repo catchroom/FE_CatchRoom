@@ -22,7 +22,6 @@ export const useChatConnection = (roomId: string) => {
   // 초기 데이터 로딩
   useEffect(() => {
     if (!data) return;
-    console.log(data);
     setChatList(data);
   }, [data, setChatList]);
 
@@ -45,7 +44,6 @@ export const useChatConnection = (roomId: string) => {
       },
       () => {
         ws.current?.subscribe(`/sub/chat/room/${roomId}`, (message) => {
-          console.log('메세지가 도착했습니다.');
           const recv = JSON.parse(message.body);
           setChatList((prev) => [...prev, recv]);
         });
@@ -140,5 +138,8 @@ export const useChatConnection = (roomId: string) => {
     negoPrice,
     acceptPrice,
     denyPrice,
+    roomId,
+    userId,
+    accessToken,
   };
 };

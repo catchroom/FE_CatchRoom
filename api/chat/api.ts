@@ -26,3 +26,27 @@ export const fetchPreviousChat = async (roomId: string, token: string) => {
   const result = await data.data;
   return result.data;
 };
+
+export const infinitePreviousChat = async ({
+  pageParam,
+  roomId,
+  token,
+}: {
+  pageParam: number;
+  roomId: string;
+  token: string;
+}) => {
+  console.log('pageParam은', pageParam);
+  const data = await axios.get(
+    `https://catchroom.store/v1/chat/room/find?page=${pageParam}&id=${roomId}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const result = await data.data;
+  return result.data;
+};

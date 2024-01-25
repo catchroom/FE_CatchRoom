@@ -33,7 +33,7 @@ const MessageItem = ({
           return (
             <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
               <OfferMessage
-                accept={accept}
+                accept={accept as (price: number) => void}
                 deny={deny}
                 negoPrice={negoPrice}
                 time={time}
