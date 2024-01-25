@@ -40,7 +40,9 @@ const SaleEndContainer = () => {
   const month = isProduct ? checkIn!.getMonth() + 1 : date!.getMonth() + 1;
   const day = isProduct ? checkIn!.getDate() : date!.getDate();
 
-  console.log(checkIn, month, day);
+  const combinedDateTime = new Date(year, month, day, hour, minute);
+  console.log(combinedDateTime);
+
   const title =
     selected === undefined
       ? '판매일을 선택해주세요.'

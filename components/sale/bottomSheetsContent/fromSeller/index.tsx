@@ -14,6 +14,7 @@ import {
   isProductState,
   sellerContentState,
 } from '@/atoms/sale/productAtom';
+import { hourState, minuteState, timeState } from '@/atoms/sale/timeAtom';
 import {
   catchSingleDate,
   saleSingleDate,
@@ -22,6 +23,7 @@ import CheckBoxComponent from '@/components/common/checkBox';
 import Modal from '@/components/common/modal';
 import { FromSeller, sellerSchema } from '@/constants/zodSchema';
 import { ProductItem } from '@/types/sale/type';
+import { formatDate } from '@/utils/formatDate';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -55,12 +57,32 @@ const FromSeller = () => {
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
 
+  const time = useRecoilValue(timeState);
+  const hour = useRecoilValue(hourState);
+  const minute = useRecoilValue(minuteState);
+
   const setIsFromSalePageState = useSetRecoilState(isFromSalePageState);
 
   useEffect(() => {
     if (isProduct) setValue('sellerContent', sellerContent);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(endDate!.toLocaleDateString());
+
+  const combinedDateTime = new Date(
+    endDate!.getFullYear(),
+    endDate!.getMonth(),
+    endDate!.getDate(),
+    time === '오전' ? hour : hour + 12,
+    minute,
+  );
+  console.log(combinedDateTime);
+
+  const timezoneOffset = combinedDateTime.getTimezoneOffset() * 60000;
+  const adjustedEndDate = new Date(combinedDateTime.getTime() - timezoneOffset);
+  const isoString = adjustedEndDate!.toISOString();
+  console.log(isoString);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const currentValue = e.target.value;
@@ -114,19 +136,33 @@ const FromSeller = () => {
       };
     } else {
       // isProduct가 false일 때: orderHistoryId를 포함한 객체 생성
-      productData = {
-        orderHistoryId: +id!,
-        discountRate: discountRate,
-        sellPrice: sellPrice,
-        actualProfit: actualProfit,
-        catchprice: catchprice,
-        endDate: endDate!.toISOString(),
-        introduction: sellerContent,
-        isAutoCatch: isAutoCatch,
-        isCatch: isCatch,
-        isNego: isNego,
-        catchPriceStartDate: catchPriceStartDate!.toISOString().split('T')[0]!,
-      };
+      if (!isAutoCatch) {
+        productData = {
+          orderHistoryId: +id!,
+          discountRate: discountRate,
+          sellPrice: sellPrice,
+          actualProfit: actualProfit,
+          endDate: isoString,
+          introduction: sellerContent,
+          isAutoCatch: isAutoCatch,
+          isCatch: isCatch,
+          isNego: isNego,
+        };
+      } else {
+        productData = {
+          orderHistoryId: +id!,
+          discountRate: discountRate,
+          sellPrice: sellPrice,
+          actualProfit: actualProfit,
+          catchprice: catchprice,
+          endDate: isoString,
+          introduction: sellerContent,
+          isAutoCatch: isAutoCatch,
+          isCatch: isCatch,
+          isNego: isNego,
+          catchPriceStartDate: formatDate(catchPriceStartDate!),
+        };
+      }
     }
 
     mutation.mutate(
@@ -151,8 +187,13 @@ const FromSeller = () => {
   };
   const handleMutationSucess = (data: APIresponse) => {
     console.log(data);
+    setIsFromSalePageState(true);
+    setSellPrice(0);
+    setDiscountRate(0);
+    setIsNego(false);
+    setSellerContent('');
+    setIsProduct(false);
     if (data.code === 4010 || data.code === 4020) {
-      setIsFromSalePageState(true);
       router.push(`/room-info/${data.data.id}`);
       setHeaderUnVisible(false);
     } else if (data.code === 4012) {

@@ -54,6 +54,7 @@ const SaleInfoContainer = ({ id }: Props) => {
       setEndDate(endDate);
       setIsNego(data?.isNego);
       setSellerContent(data?.introduction);
+      console.log('hi');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
