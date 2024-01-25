@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { CHECKIN_TIME, CHECKOUT_TIME } from '@/constants/CheckInOut';
+import { getDotDate } from '@/utils/get-dot-date';
 
 const ReservationSummary = ({
   reservationNumber,
@@ -65,7 +66,7 @@ const ReservationSummary = ({
               <p className=" text-t3 text-text-sub">{transportationLabel}</p>
 
               <p className="mt-2 text-t3 text-text-DEFAULT">
-                {checkIn} ~ {checkOut} | 1박
+                {getDotDate(checkIn)} ~ {getDotDate(checkOut)} | 1박
               </p>
               <p className="mt-1 text-t3 text-text-sub">
                 체크인 {CHECKIN_TIME} | 체크아웃 {CHECKOUT_TIME}
