@@ -29,9 +29,13 @@ const ChatMessageSender = ({
   // textarea 높이 조절
   const resizeHeight = (textareaRef: React.RefObject<HTMLTextAreaElement>) => {
     if (textareaRef.current) {
+      const originalHeight = textareaRef.current.scrollHeight;
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + 'px';
+      const newHeight = textareaRef.current.scrollHeight;
+
+      // Increase scrollTop to make the content expand upwards
+      textareaRef.current.scrollTop += newHeight - originalHeight;
+      textareaRef.current.style.height = newHeight + 'px';
     }
   };
 
@@ -59,10 +63,11 @@ const ChatMessageSender = ({
   const onSubmit: SubmitHandler<ChatMessage> = (data) => {
     publish(data.message);
     reset();
+    resizeHeight(textareaRef);
   };
 
   return (
-    <div className="w-full max-w-[480px] sticky bottom-0">
+    <div className="w-full max-w-[480px] fixed bottom-0">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white w-full flex items-center border-t border-border-sub "

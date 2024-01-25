@@ -35,58 +35,57 @@ const ChatMessageViewer = ({
   }, [messages]);
 
   return (
-    <div className={`h-[calc(100vh-130px)] relative`}>
-      <InfiniteScroll
-        dataLength={data?.pages.length || 0}
-        next={fetchNextPage}
-        hasMore={hasNextPage}
-        inverse={true}
-        scrollableTarget="scrollableDiv"
-        loader={<div className="loader" key={0}></div>}
+    <InfiniteScroll
+      dataLength={data?.pages.length || 0}
+      next={fetchNextPage}
+      hasMore={hasNextPage}
+      inverse={true}
+      scrollableTarget="scrollableDiv"
+      loader={<div className="loader" key={0}></div>}
+      className="h-[calc(100vh-133px)] flex flex-col relative"
+    >
+      <div
+        id="scrollableDiv"
+        className="w-full p-5 h-[calc(100vh-200px)] overflow-x-hidden overflow-y-scroll flex flex-col-reverse"
       >
-        <div
-          id="scrollableDiv"
-          className="w-full p-5 max-h-[calc(100vh-200px)] min-h-[calc(100vh-200px)] overflow-auto flex flex-col-reverse"
-        >
-          <div ref={messageEndRef} />
-          {messages.map((item, index) => (
-            <MessageItem
-              accept={accept}
-              deny={deny}
-              key={index}
-              type={item.type}
-              message={item.message as string}
-              userId={item.userId as number}
-              roomId={item.roomId as string}
-              time={item.time as string}
-              negoPrice={item.negoPrice as number}
-            />
-          ))}
-          {data ? (
-            data.pages.map((page, pageIndex) => (
-              <div key={pageIndex}>
-                {page.map((item: MessageItemProps, index: number) => (
-                  <MessageItem
-                    accept={accept}
-                    deny={deny}
-                    key={index}
-                    type={item.type}
-                    message={item.message as string}
-                    userId={item.userId as number}
-                    roomId={item.roomId as string}
-                    time={item.time as string}
-                    negoPrice={item.negoPrice as number}
-                  />
-                ))}
-              </div>
-            ))
-          ) : (
-            <></>
-          )}
-        </div>
-        <ChatMessageSender publish={send} />
-      </InfiniteScroll>
-    </div>
+        <div ref={messageEndRef} />
+        {messages.map((item, index) => (
+          <MessageItem
+            accept={accept}
+            deny={deny}
+            key={index}
+            type={item.type}
+            message={item.message as string}
+            userId={item.userId as number}
+            roomId={item.roomId as string}
+            time={item.time as string}
+            negoPrice={item.negoPrice as number}
+          />
+        ))}
+        {data ? (
+          data.pages.map((page, pageIndex) => (
+            <div key={pageIndex}>
+              {page.map((item: MessageItemProps, index: number) => (
+                <MessageItem
+                  accept={accept}
+                  deny={deny}
+                  key={index}
+                  type={item.type}
+                  message={item.message as string}
+                  userId={item.userId as number}
+                  roomId={item.roomId as string}
+                  time={item.time as string}
+                  negoPrice={item.negoPrice as number}
+                />
+              ))}
+            </div>
+          ))
+        ) : (
+          <></>
+        )}
+      </div>
+      <ChatMessageSender publish={send} />
+    </InfiniteScroll>
   );
 };
 
