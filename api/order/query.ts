@@ -1,4 +1,4 @@
-import { getOrderProduct, postOrderInfo } from './api';
+import { getOrderComplete, getOrderProduct, postOrderInfo } from './api';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { OrderData } from '@/types/order/purchase/types';
 
@@ -12,11 +12,21 @@ export const useQueryGetOrderProduct = (productId: number) => {
   return { data, isLoading, error };
 };
 
-//38. 상품 구매하기
+//36. 상품 구매하기
 export const useMutationPostOrderInfo = () => {
   const mutation = useMutation({
     mutationKey: ['postOrderInfo'],
     mutationFn: (orderData: OrderData) => postOrderInfo(orderData),
   });
   return mutation;
+};
+
+//38. 나의 구매 내역 상세보기
+export const useQueryGetOrderOrderComplete = (productId: number) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['getOrderComplete', productId],
+    queryFn: () => getOrderComplete(productId),
+    select: ({ data }) => data,
+  });
+  return { data, isLoading, error };
 };
