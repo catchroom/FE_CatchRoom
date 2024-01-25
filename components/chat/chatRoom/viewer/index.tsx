@@ -9,9 +9,11 @@ import InfiniteScrollWrapper from '../infiniteWrapper';
 const ChatMessageViewer = ({
   accept,
   deny,
+  roomId,
 }: {
   accept: (price: number) => void;
   deny: (price: number) => void;
+  roomId: string;
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [messages, setPreviousMessages] = useRecoilState(chatContentAtom);
@@ -25,7 +27,7 @@ const ChatMessageViewer = ({
 
   return (
     <div className="w-full p-5 min-h-[calc(100vh-200px)]">
-      <InfiniteScrollWrapper accept={accept} deny={deny} />
+      <InfiniteScrollWrapper accept={accept} deny={deny} roomId={roomId} />
       {messages.map((item, index) => (
         <MessageItem
           accept={accept}

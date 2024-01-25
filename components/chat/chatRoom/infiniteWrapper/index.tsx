@@ -10,11 +10,12 @@ import MessageItem from '../messageItem';
 const InfiniteScrollWrapper = ({
   accept,
   deny,
+  roomId,
 }: {
   accept: (price: number) => void;
   deny: (price: number) => void;
+  roomId: string;
 }) => {
-  const roomId = 'df16caeb-d73a-470a-af14-b7edf276ddc2';
   const [cookies] = useCookies();
   const token = cookies.accessToken;
 
@@ -22,7 +23,7 @@ const InfiniteScrollWrapper = ({
     queryKey: ['messages'],
     queryFn: ({ pageParam }) =>
       infinitePreviousChat({ pageParam, roomId, token }),
-    initialPageParam: 0,
+    initialPageParam: 1,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
       if (lastPage.length === 0) {
         return undefined;
