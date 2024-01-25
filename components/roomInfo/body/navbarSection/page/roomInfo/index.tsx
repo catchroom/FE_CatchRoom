@@ -20,7 +20,7 @@ const NavRoomInfoComponent = () => {
           </>
         ) : (
           <>
-            {data && data.data.roomUrl && (
+            {data?.data.roomUrl && (
               <Image
                 src={data.data.roomUrl[0].url}
                 layout="fill"
@@ -42,8 +42,8 @@ const NavRoomInfoComponent = () => {
         <div>
           <p className="flex items-center gap-1 text-p3 text-text-sub leading-5">
             <SmPersonIcon />
-            기준 {data && data.data.roomNormalCapacity}인 / 최대
-            {data && data.data.roomMaxCapacity}
+            기준 {data?.data.roomNormalCapacity}인 / 최대{' '}
+            {data?.data.roomMaxCapacity}인
           </p>
           <p className="flex items-center gap-1 text-p3 text-text-sub">
             <SmBedIcon />퀸 침대

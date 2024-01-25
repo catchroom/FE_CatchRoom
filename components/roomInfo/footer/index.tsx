@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { Button } from '@material-tailwind/react';
+// import { UseParamsType } from '@/types/room-info/types';
+// import { useParams } from 'next/navigation';
+// import { useRoomItem } from '@/api/room-info/query';
 import { useRecoilState } from 'recoil';
 import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
 import { UseParamsType } from '@/types/room-info/types';
@@ -36,6 +39,7 @@ const FooterComponent = () => {
     );
     router.push(`/chat/${chatRoomId}`);
   };
+
 
   const buttonClass =
     'font-pretend h-full rounded-[4px] text-t1 font-semibold shadow-none';

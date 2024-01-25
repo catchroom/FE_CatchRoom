@@ -7,16 +7,21 @@ import LOGOImage from '@/public/Yanolja_CI.png';
 import LoadingText from '@/components/common/loading/loadingText';
 import { useRecoilState } from 'recoil';
 import { dealModalAtom } from '@/atoms/chat/leaveButton';
+import { useRouter } from 'next/navigation';
 
 const ProductInfo = () => {
   const [modalState, setModalOpen] = useRecoilState(dealModalAtom);
   const [chatInfo] = useSsrAtom();
 
+  const router = useRouter();
+
+  const handleClickInfo = () => {
+    router.push(`/accommodation/${chatInfo.chatRoomNumber}`);
+  };
+
   const handleNegoPrice = () => {
     setModalOpen(true);
   };
-
-  console.log(chatInfo);
 
   const ViewOnSeller = chatInfo.loginUserIdentity === 'SELLER' ? true : false;
   const invalidSale = chatInfo.dealState === 'DONEDEAL' ? true : false;
@@ -26,39 +31,41 @@ const ProductInfo = () => {
       {invalidSale && (
         <div className="absolute opacity-60 bg-white inset-0 z-20" />
       )}
-      <div className="relative w-11 h-11">
-        {chatInfo.accommodationUrl ? (
-          <Image
-            src={`${chatInfo.accommodationUrl}`}
-            className="rounded-lg"
-            alt="숙소사진"
-            fill={true}
-            sizes="(max-width: 640px) 50vw, 100vw"
-          />
-        ) : (
-          <Image
-            src={LOGOImage}
-            className="rounded-lg object-fill animate-pulse delay-[2000ms]"
-            alt="숙소사진"
-            fill={true}
-            sizes="(max-width: 640px) 50vw, 100vw"
-          />
-        )}
-      </div>
-      <div className="flex flex-col">
-        <div className=" text-t2">
-          {LoadingText({
-            condition: chatInfo.accommodationName ? true : false,
-            viewText: chatInfo.accommodationName,
-            loadingText: '로딩중...',
-          })}
+      <div className="flex gap-3 items-center" onClick={handleClickInfo}>
+        <div className="relative w-11 h-11">
+          {chatInfo.accommodationUrl ? (
+            <Image
+              src={`${chatInfo.accommodationUrl}`}
+              className="rounded-lg"
+              alt="숙소사진"
+              fill={true}
+              sizes="(max-width: 640px) 50vw, 100vw"
+            />
+          ) : (
+            <Image
+              src={LOGOImage}
+              className="rounded-lg object-fill animate-pulse delay-[2000ms]"
+              alt="숙소사진"
+              fill={true}
+              sizes="(max-width: 640px) 50vw, 100vw"
+            />
+          )}
         </div>
-        <div className="text-t3 font-semibold">
-          {LoadingText({
-            condition: chatInfo.sellPrice ? true : false,
-            viewText: chatInfo.sellPrice,
-            loadingText: '로딩중...',
-          })}
+        <div className="flex flex-col">
+          <div className=" text-t2">
+            {LoadingText({
+              condition: chatInfo.accommodationName ? true : false,
+              viewText: chatInfo.accommodationName,
+              loadingText: '로딩중...',
+            })}
+          </div>
+          <div className="text-t3 font-semibold">
+            {LoadingText({
+              condition: chatInfo.sellPrice ? true : false,
+              viewText: chatInfo.sellPrice,
+              loadingText: '로딩중...',
+            })}
+          </div>
         </div>
       </div>
       {/* 가격 제안 페이지에서는 제안버튼 미노출 */}

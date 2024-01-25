@@ -1,5 +1,5 @@
 export type ProductItem = {
-  orderHistoryId: number;
+  orderHistoryId?: number;
   discountRate: number;
   sellPrice: number;
   actualProfit: number;

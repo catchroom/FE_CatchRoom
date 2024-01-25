@@ -33,7 +33,11 @@ const ChatRoomControl = ({ roomId }: { roomId: string }) => {
       <ProductInfo />
       <div className="relative">
         <div className={`h-[calc(100vh-130px)] overflow-scroll relative`}>
-          <ChatMessageViewer accept={acceptPrice} deny={denyPrice} />
+          <ChatMessageViewer
+            accept={acceptPrice}
+            deny={denyPrice}
+            roomId={roomId}
+          />
           <ChatMessageSender publish={sendMessage} />
         </div>
         {modalState && <OfferModal publish={negoPrice} />}
