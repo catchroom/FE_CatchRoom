@@ -37,7 +37,7 @@ const Page = () => {
     <>
       <div className="flex flex-col container mx-auto w-full px-5 pt-16 pb-5  bg-bg">
         <div>
-          <CompleteMessage guest={nickName} />
+          <CompleteMessage nickName={nickName} />
         </div>
         <div className="flex flex-col container p-5 bg-white">
           <ProductDetails
