@@ -1,3 +1,5 @@
+'use client';
+
 import { TradeItem } from '@/types/mypage/types';
 import Image from 'next/image';
 import React from 'react';

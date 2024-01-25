@@ -29,24 +29,30 @@ apiClient.interceptors.response.use(
     console.log(outerError.response.data.code); //5001
 
     if (
-      (outerError.response.data.code === 401 ||
-        outerError.response.data.code === 5000 ||
+      (outerError.response.data.code === 5000 ||
         outerError.response.data.code === 5001 ||
         outerError.response.status === 401) &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
 
+      // console.log('재발급 전', accessToken);
+
       try {
         const res = await getNewToken();
         const accessToken = res.data;
+
+        console.log('재발급', res.data);
+
+        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+        const response = await apiClient.request(originalRequest);
+        //헤더에 담긴지 확인
+
         nookies.set(null, 'accessToken', accessToken, {
           path: '/',
           maxAge: 60 * 30,
         });
 
-        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-        const response = await apiClient.request(originalRequest);
         console.log('재시도 성공:', response.data);
 
         return response;

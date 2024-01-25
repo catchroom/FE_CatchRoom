@@ -26,7 +26,9 @@ const ReviewContent = ({
 
   const handleEdit = () => {
     //쿼리스트링으로 수정이라는 파라미터 보내서, 이게 있으면 get해오고 put되게 추가
-    router.push(`/mypage/dashboard/review?id=${productId}&type=${type}`);
+    router.push(
+      `/mypage/dashboard/review?id=${productId}&type=${type}&reviewId=${id}`,
+    );
   };
 
   const closeModal = () => {

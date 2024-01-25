@@ -116,8 +116,6 @@ export const purchaseHistory = async () => {
   return res.data;
 };
 
-/////////////////////////연결 시작하기(리뷰)///////////////////////
-
 // 19. 작성한 리뷰 보기 get
 export const viewReviews = async (type: '구매' | '판매', reviewId: number) => {
   const res = await apiClient.get(
@@ -126,7 +124,7 @@ export const viewReviews = async (type: '구매' | '판매', reviewId: number) =
   return res.data;
 };
 
-// 20. 리뷰 작성하기 **post**
+// 20. 리뷰 작성하기
 export const postReview = async (
   type: '구매' | '판매',
   content: string,
@@ -141,20 +139,30 @@ export const postReview = async (
   return res.data;
 };
 
-// 21. 리뷰 수정하기 put*
+// 21. 리뷰 수정하기
 export const editReview = async (
   type: '구매' | '판매',
   content: string,
-  productId: number,
+  reviewId: number,
 ) => {
   const res = await apiClient.put(`/v1/mypage/review`, {
     type,
     content,
-    productId,
+    reviewId,
   });
 
   return res.data;
 };
+
+////////////////
+
+//28. 리뷰에서 필요한 정보 조회 (숙소 이름, 이미지, 가격)
+export const getRoomInfo = async (id: string) => {
+  const res = await apiClient.get(`/v1/product?id=${id}`);
+  return res.data;
+};
+
+////////////////////20,28 안함//////////////////
 
 // 22. 리뷰 삭제하기 *****delete
 export const deleteReviews = async (
@@ -166,8 +174,6 @@ export const deleteReviews = async (
   );
   return res.data;
 };
-
-////////////////////19-22 안함//////////////////
 
 // 23. 나의 찜 목록 보기
 export const getWishlist = async () => {
@@ -187,13 +193,7 @@ export const deleteSalesList = async (id: number) => {
   return res.data;
 };
 
-////////////28, 38 아직 안함///////////////////////
-
-//28. 리뷰에서 필요한 정보 조회 (숙소 이름, 이미지, 가격)
-export const getRoomInfo = async (id: string) => {
-  const res = await apiClient.get(`/v1/product?id=${id}`);
-  return res.data;
-};
+////////////38 아직 안함///////////////////////
 
 // 38. 구매 내역 상세보기
 export const purchaseHistoryDetail = async (id: number) => {

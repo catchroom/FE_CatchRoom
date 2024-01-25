@@ -101,7 +101,10 @@ export const useQueryGetWishlist = () => {
 };
 
 // 19
-export const useQueryGetReview = (type: '구매' | '판매', reviewId: number) => {
+export const useQueryGetReview = (
+  type: '구매' | '판매',
+  reviewId: number | undefined,
+) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['viewReviews', type, reviewId],
     queryFn: (context) => {
@@ -110,6 +113,7 @@ export const useQueryGetReview = (type: '구매' | '판매', reviewId: number) =
       return viewReviews(type, reviewId);
     },
     select: ({ data }) => data,
+    enabled: reviewId !== undefined && !isNaN(reviewId),
   });
   return {
     isLoading,
