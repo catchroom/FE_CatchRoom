@@ -19,6 +19,12 @@ export const deleteSaleProduct = async (id: number) => {
 
 //48. 상품 기존 등록정보 불러오기
 export const getProductInfo = async (id: number) => {
-  const res = await apiClient.delete(`/v1/sales/edit/info/product?id=${id}`);
+  const res = await apiClient.get(`/v1/sales/edit/info/product?id=${id}`);
+  return res.data;
+};
+
+//33. 상품 수정
+export const putProductInfo = async (product: ProductItem, id: number) => {
+  const res = await apiClient.put(`/v1/sales/product?id=${id}`, product);
   return res.data;
 };

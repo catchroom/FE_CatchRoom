@@ -4,24 +4,23 @@ import {
   getProductInfo,
   getSaleProduct,
   postSaleProduct,
+  putProductInfo,
 } from './api';
 import { ProductItem } from '@/types/sale/type';
-import { useRecoilValue } from 'recoil';
-import { isProductState } from '@/atoms/sale/productAtom';
 
 //31
-export const useQueryGetSaleProduct = (id: number) => {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['getSaleProduct', id],
-    queryFn: () => getSaleProduct(id),
-    select: ({ data }) => data,
-  });
-  return {
-    isLoading,
-    error,
-    data,
-  };
-};
+// export const useQueryGetSaleProduct = (id: number) => {
+//   const { isLoading, error, data } = useQuery({
+//     queryKey: ['getSaleProduct', id],
+//     queryFn: () => getSaleProduct(id),
+//     select: ({ data }) => data,
+//   });
+//   return {
+//     isLoading,
+//     error,
+//     data,
+//   };
+// };
 
 export const useMutaionPostSaleProduct = () => {
   const mutation = useMutation({
@@ -40,22 +39,20 @@ export const useMutationDeleteSaleProduct = () => {
 };
 
 //48
-export const useQueryGetProductInfo = (id: number) => {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['getProductInfo', id],
-    queryFn: () => getProductInfo(id),
-    select: ({ data }) => data,
-  });
-  return {
-    isLoading,
-    error,
-    data,
-  };
-};
+// export const useQueryGetProductInfo = (id: number) => {
+//   const { isLoading, error, data } = useQuery({
+//     queryKey: ['getProductInfo', id],
+//     queryFn: () => getProductInfo(id),
+//     select: ({ data }) => data,
+//   });
+//   return {
+//     isLoading,
+//     error,
+//     data,
+//   };
+// };
 
-export const useConditionalQuery = (id: number) => {
-  const isProduct = useRecoilValue(isProductState);
-
+export const useConditionalQuery = (isProduct: boolean, id: number) => {
   const queryKey = isProduct ? 'getProductInfo' : 'getSaleProduct';
   const queryFn = isProduct ? getProductInfo : getSaleProduct;
 
@@ -64,4 +61,13 @@ export const useConditionalQuery = (id: number) => {
     queryFn: () => queryFn(id),
     select: ({ data }) => data,
   });
+};
+
+export const useMutationPutProductInfo = () => {
+  const mutation = useMutation({
+    mutationKey: ['putProductInfo'],
+    mutationFn: ({ id, product }: { id: number; product: ProductItem }) =>
+      putProductInfo(product, id),
+  });
+  return mutation;
 };

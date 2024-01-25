@@ -8,6 +8,7 @@ import {
   priceState,
   totalPriceState,
 } from '@/atoms/sale/priceAtom';
+import { isNegoState, sellerContentState } from '@/atoms/sale/productAtom';
 import {
   catchSingleDate,
   saleSingleDate,
@@ -23,7 +24,9 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const FromSeller = () => {
-  const [agreePriceOffer, setAgreedPriceOffer] = useState<boolean>(false);
+  // const [agreePriceOffer, setAgreedPriceOffer] = useState<boolean>(false);
+  const [isNego, setIsNego] = useRecoilState(isNegoState);
+  const [sellerContent, setSellerContent] = useRecoilState(sellerContentState);
   const [wordCount, setWordCount] = useState(0);
   const router = useRouter();
   const { register, setValue } = useForm<FromSeller>({
@@ -31,7 +34,7 @@ const FromSeller = () => {
     mode: 'onChange',
   });
   const [open, setOpen] = useState(false);
-  const [content, setContent] = useState('');
+  // const [content, setContent] = useState('');
   const mutation = useMutaionPostSaleProduct();
   const setHeaderUnVisible = useSetRecoilState(isHeaderSate);
   const params = useSearchParams();
@@ -54,14 +57,14 @@ const FromSeller = () => {
       const slicedValue = currentValue.slice(0, 100);
       setValue('sellerContent', slicedValue);
       setWordCount(slicedValue.length);
-      setContent(slicedValue);
+      setSellerContent(slicedValue);
     } else {
-      setContent(currentValue);
+      setSellerContent(currentValue);
     }
   };
 
   const handleCheckbox = () => {
-    setAgreedPriceOffer((prev) => !prev);
+    setIsNego((prev) => !prev);
   };
 
   const handleModalOpen = () => {
@@ -74,6 +77,8 @@ const FromSeller = () => {
     setSellPrice(0);
     setDiscountRate(0);
     setHeaderUnVisible(false);
+    setIsNego(false);
+    setSellerContent('');
     router.push('/');
   };
   const handleButtonClick = () => {
@@ -86,10 +91,10 @@ const FromSeller = () => {
       actualProfit: actualProfit,
       catchprice: catchprice,
       endDate: endDate!.toISOString(),
-      introduction: content,
+      introduction: sellerContent,
       isAutoCatch: isAutoCatch,
       isCatch: isCatch,
-      isNego: agreePriceOffer,
+      isNego: isNego,
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       catchPriceStartDate: catchPriceStartDate?.toISOString().split('T')[0]!,
     };
@@ -149,7 +154,7 @@ const FromSeller = () => {
         <CheckBoxComponent
           id="priceOffer"
           labelText="가격 제안 받기"
-          isBoxChecked={agreePriceOffer}
+          isBoxChecked={isNego}
           isLabelTextBold={true}
           handleSelectState={handleCheckbox}
         />

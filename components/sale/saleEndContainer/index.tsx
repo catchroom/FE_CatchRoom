@@ -12,25 +12,29 @@ import BottomSheets from '@/components/common/bottomSheets';
 import CalendarComponent from '@/components/common/calendar';
 import { getDateWithDay } from '@/utils/get-date-with-day';
 import { saleSingleDate } from '@/atoms/search-detail/searchStates';
+import { isProductState } from '@/atoms/sale/productAtom';
 const SaleEndContainer = () => {
   const time = useRecoilValue(timeState);
   const hour = useRecoilValue(hourState);
   const minute = useRecoilValue(minuteState);
   const checkInDate = useRecoilValue(checkInDateState);
 
-  const date = useMemo(() => new Date(checkInDate!), [checkInDate]);
+  const isProduct = useRecoilValue(isProductState);
   const [selected, setSelected] = useRecoilState(saleSingleDate);
+  console.log(isProduct);
+  const date = useMemo(() => {
+    return isProduct ? selected : new Date(checkInDate!);
+  }, [isProduct, selected, checkInDate]);
 
   useEffect(() => {
     setSelected(date);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]);
+  }, []);
 
   const selectedDateString = getDateWithDay(selected);
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const year = date!.getFullYear();
+  const month = date!.getMonth() + 1;
+  const day = date!.getDate();
 
   const title =
     selectedDateString +
