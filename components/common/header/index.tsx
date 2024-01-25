@@ -12,6 +12,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { priceState } from '@/atoms/sale/priceAtom';
 import { allCheckState } from '@/atoms/sale/checkAtom';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
+import { isProductState } from '@/atoms/sale/productAtom';
 
 const Header = ({
   title,
@@ -28,6 +29,7 @@ const Header = ({
   const [modalOpen, setModalOpen] = useState(false);
   const setPrice = useSetRecoilState(priceState);
   const setAllCheck = useSetRecoilState(allCheckState);
+  const setIsProduct = useSetRecoilState(isProductState);
 
   const headerUnVisible = useRecoilValue(isHeaderSate);
 
@@ -49,6 +51,7 @@ const Header = ({
     handleModalOpen();
     setPrice(0);
     setAllCheck(false);
+    setIsProduct(false);
     router.back();
   };
 

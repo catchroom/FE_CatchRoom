@@ -55,6 +55,7 @@ const SaleInfoContainer = ({ id }: Props) => {
       setIsNego(data?.isNego);
       setSellerContent(data?.introduction);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const checkInString = formatDateWithDay(data?.checkIn);

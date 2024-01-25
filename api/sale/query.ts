@@ -71,3 +71,27 @@ export const useMutationPutProductInfo = () => {
   });
   return mutation;
 };
+
+type MutationVariables = {
+  id?: number;
+  product: ProductItem;
+  isProduct: boolean;
+};
+
+export const useMutationProduct = () => {
+  // eslint-disable-next-line
+  const mutation = useMutation<any, Error, MutationVariables>({
+    mutationKey: ['productMutation'],
+    mutationFn: async ({ id, product, isProduct }) => {
+      if (isProduct) {
+        // id가 제공되지 않으면 오류를 반환하거나 예외를 처리합니다.
+        if (!id) throw new Error('Product ID is required for updating.');
+        return await putProductInfo(product, id);
+      } else {
+        return await postSaleProduct(product);
+      }
+    },
+  });
+
+  return mutation;
+};

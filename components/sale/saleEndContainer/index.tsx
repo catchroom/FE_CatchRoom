@@ -21,34 +21,41 @@ const SaleEndContainer = () => {
 
   const isProduct = useRecoilValue(isProductState);
   const [selected, setSelected] = useRecoilState(saleSingleDate);
-  console.log(isProduct);
+  const checkIn = new Date(checkInDate!);
   const date = useMemo(() => {
-    return isProduct ? selected : new Date(checkInDate!);
+    return isProduct ? selected : checkIn;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isProduct, selected, checkInDate]);
+
+  console.log(isProduct, date);
 
   useEffect(() => {
     setSelected(date);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkInDate]);
 
   const selectedDateString = getDateWithDay(selected);
 
-  const year = date!.getFullYear();
-  const month = date!.getMonth() + 1;
-  const day = date!.getDate();
+  const year = isProduct ? checkIn!.getFullYear() : date!.getFullYear();
+  const month = isProduct ? checkIn!.getMonth() + 1 : date!.getMonth() + 1;
+  const day = isProduct ? checkIn!.getDate() : date!.getDate();
 
+  console.log(checkIn, month, day);
   const title =
-    selectedDateString +
-    ' ' +
-    time.toString() +
-    ' ' +
-    (hour < 10
-      ? '0' +
-        hour.toString() +
-        ':' +
-        (minute < 10 ? '0' + minute.toString() : minute.toString())
-      : hour.toString() +
-        ':' +
-        (minute < 10 ? '0' + minute.toString() : minute.toString()));
+    selected === undefined
+      ? '판매일을 선택해주세요.'
+      : selectedDateString +
+        ' ' +
+        time.toString() +
+        ' ' +
+        (hour < 10
+          ? '0' +
+            hour.toString() +
+            ':' +
+            (minute < 10 ? '0' + minute.toString() : minute.toString())
+          : hour.toString() +
+            ':' +
+            (minute < 10 ? '0' + minute.toString() : minute.toString()));
 
   return (
     <div className="w-full flex flex-col mt-5">
