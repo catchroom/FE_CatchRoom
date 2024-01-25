@@ -2,6 +2,7 @@
 
 import { useGetChatRoom } from '@/api/chat/query';
 import { chatAllRoomAtom } from '@/atoms/chat/chatContentAtom';
+import { userOutAtom } from '@/atoms/chat/leaveButton';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
@@ -11,6 +12,8 @@ import SockJS from 'sockjs-client';
 export const useRoomConnection = () => {
   const ws = useRef<CompatClient | null>(null);
   const setChatList = useSetRecoilState(chatAllRoomAtom);
+  const setUserOut = useSetRecoilState(userOutAtom);
+
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
@@ -20,9 +23,11 @@ export const useRoomConnection = () => {
 
   // 초기 데이터 로딩
   useEffect(() => {
+    setUserOut(false);
+
     if (!data) return;
     setChatList(data);
-  }, [data, setChatList]);
+  }, [data, setChatList, setUserOut]);
 
   // 연결
   const connect = () => {

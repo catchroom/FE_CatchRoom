@@ -5,12 +5,13 @@ import Image from 'next/image';
 import LOGOImage from '@/public/Yanolja_CI.png';
 import LoadingText from '@/components/common/loading/loadingText';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { dealModalAtom } from '@/atoms/chat/leaveButton';
+import { dealModalAtom, userOutAtom } from '@/atoms/chat/leaveButton';
 import { useRouter } from 'next/navigation';
 import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 
 const ProductInfo = () => {
   const [modalState, setModalOpen] = useRecoilState(dealModalAtom);
+  const setUserOut = useRecoilValue(userOutAtom);
   const chatInfo = useRecoilValue(chatRoomInfo);
   const router = useRouter();
 
@@ -27,9 +28,10 @@ const ProductInfo = () => {
 
   return (
     <div className="bg-surface w-full flex relative gap-3 items-center p-[16px] border-b border-border-sub">
-      {invalidSale && (
-        <div className="absolute opacity-60 bg-white inset-0 z-20" />
-      )}
+      {invalidSale ||
+        (setUserOut && (
+          <div className="absolute opacity-60 bg-white inset-0 z-20" />
+        ))}
       <div className="flex gap-3 items-center" onClick={handleClickInfo}>
         <div className="relative w-11 h-11">
           {chatInfo.accommodationUrl ? (
@@ -38,6 +40,7 @@ const ProductInfo = () => {
               className="rounded-lg"
               alt="숙소사진"
               fill={true}
+              priority
               sizes="(max-width: 640px) 50vw, 100vw"
             />
           ) : (

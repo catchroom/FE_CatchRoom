@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { apiClient } from '../user/apiClient';
+import { apiChatClient } from './apiChatClient';
 
 // 1. 상품 상세조회 화면 API
 export const roomItemInfo = async (id: string | string[] | undefined) => {
@@ -13,7 +13,7 @@ export const roomItemInfo = async (id: string | string[] | undefined) => {
 
 // 2. 채팅방 가져오기
 export const fetchChatRoom = async (token: string) => {
-  const data = await axios.get('https://catchroom.store/v1/chat/room/list', {
+  const data = await apiChatClient.get('/v1/chat/room/list', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -30,8 +30,8 @@ export const createChatRoom = async (
   productId: number,
   token: string,
 ) => {
-  const data = await axios.post(
-    'https://catchroom.xyz/v1/chat/room/create',
+  const data = await apiChatClient.post(
+    '/v1/chat/room/create',
     {
       buyerId,
       sellerId,
@@ -54,8 +54,8 @@ export const createChatRoom = async (
 // 이전 채팅 가져오기
 export const fetchPreviousChat = async (roomId: string, token: string) => {
   console.log('roomId는', roomId);
-  const data = await axios.get(
-    `https://catchroom.store/v1/chat/room/find?id=${roomId}&page=0`,
+  const data = await apiChatClient.get(
+    `/v1/chat/room/find?id=${roomId}&page=0`,
     {
       headers: {
         'Content-Type': 'application/json',
@@ -79,8 +79,8 @@ export const infinitePreviousChat = async ({
   token: string;
 }) => {
   console.log('pageParam은', pageParam);
-  const data = await axios.get(
-    `https://catchroom.store/v1/chat/room/find?page=${pageParam}&id=${roomId}`,
+  const data = await apiChatClient.get(
+    `/v1/chat/room/find?page=${pageParam}&id=${roomId}`,
     {
       headers: {
         'Content-Type': 'application/json',
@@ -95,14 +95,11 @@ export const infinitePreviousChat = async ({
 
 // 채팅방 정보 가져오기
 export const fetchChatInfo = async (roomId: string, token: string) => {
-  const res = await axios.get(
-    `https://catchroom.xyz/v1/chat/room/info?roomId=${roomId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const res = await apiClient.get(`/v1/chat/room/info?roomId=${roomId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
 
   const result = await res.data;
   return result;

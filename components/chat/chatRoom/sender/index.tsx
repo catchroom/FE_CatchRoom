@@ -2,10 +2,12 @@
 
 'use client';
 
+import { userOutAtom } from '@/atoms/chat/leaveButton';
 import SendIconSVG from '@/public/svgComponent/sendIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 import { z } from 'zod';
 
 const ChatMessageSchema = z.object({
@@ -19,6 +21,7 @@ const ChatMessageSender = ({
 }: {
   publish: (message: string) => void;
 }) => {
+  const userOut = useRecoilValue(userOutAtom);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [hasValue, setHasValue] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<ChatMessage>({
@@ -66,6 +69,10 @@ const ChatMessageSender = ({
     resizeHeight(textareaRef);
   };
 
+  const placeHolderMessage = userOut
+    ? '상대방이 나가면 대화를 할 수 없어요'
+    : '메세지를 입력하세요';
+
   return (
     <div className="w-full max-w-[480px] fixed bottom-0">
       <form
@@ -74,15 +81,18 @@ const ChatMessageSender = ({
       >
         <div className="w-full gap-2 h-fit flex py-4 px-3">
           <textarea
-            placeholder="메세지를 입력하세요"
+            placeholder={placeHolderMessage}
             rows={1}
             {...registerResult}
             ref={(e) => {
               ref(e);
               textareaRef.current = e;
             }}
+            disabled={userOut}
             onChange={handleInputChange}
-            className="grow resize-none bg-surface-gray px-4 py-2 text-start h-[40px] max-h-[96px] text-t2 rounded-[20px] outline-none ease-in focus:border focus:border-border-primary"
+            className={`grow resize-none ${
+              userOut ? ' bg-surface-secondary text-sub' : 'bg-surface-gray'
+            } px-4 py-2 text-start h-[40px] max-h-[96px] text-t2 rounded-[20px] outline-none ease-in focus:border focus:border-border-primary`}
           />
           <button type="submit" className="pl-3 cursor-pointer">
             <SendIconSVG send={hasValue} />

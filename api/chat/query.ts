@@ -28,6 +28,7 @@ export const useInitialChatInfo = (roomId: string, token: string) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['chatInfo'],
     queryFn: () => fetchChatInfo(roomId, token),
+    refetchInterval: 1000 * 60 * 10,
   });
 
   return { data, isLoading, error };
