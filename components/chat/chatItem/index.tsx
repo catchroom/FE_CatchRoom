@@ -45,7 +45,7 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
 
   return (
     <div
-      className=" w-full flex gap-3 items-center p-4 border border-divider bg-white cursor-pointer"
+      className=" w-full flex gap-3 items-center px-3 py-4 border border-divider bg-white cursor-pointer"
       onClick={handleClick}
     >
       {/* 채팅방 사진 보여주는 데이터 */}
@@ -72,7 +72,7 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
         </p>
       </div>
       <div className="ml-auto" onClick={handleModalOpen}>
-        <XSymbolIcon />
+        <XSymbolIcon w={20} y={20} />
       </div>
     </div>
   );

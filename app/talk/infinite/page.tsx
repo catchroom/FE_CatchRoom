@@ -1,68 +1,43 @@
 'use client';
 
 import React from 'react';
-import { infinitePreviousChat } from '@/api/chat/api';
 import { useCookies } from 'react-cookie';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 // import InfiniteScroll from 'react-infinite-scroller';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import LoginButton from '../LoginButton';
+import axios from 'axios';
+
+const fetchPage = async (token: string) => {
+  const res = await axios.get(
+    'https://catchroom.xyz/v1/chat/room/info?roomId=df16caeb-d73a-470a-af14-b7edf276ddc2',
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const result = await res.data;
+  return result;
+};
 
 const InfiniteScrollWrapper = () => {
-  const roomId = 'df16caeb-d73a-470a-af14-b7edf276ddc2';
   const [cookies] = useCookies();
   const token = cookies.accessToken;
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data: asdfasdf, error } = useQuery({
     queryKey: ['messages'],
-    queryFn: ({ pageParam }) =>
-      infinitePreviousChat({ pageParam, roomId, token }),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) {
-        return undefined;
-      }
-
-      return lastPageParam + 1;
-    },
+    queryFn: () => fetchPage(token),
   });
+
+  console.log('data불러오기', asdfasdf);
+
+  console.log('에러', error);
 
   return (
     <div>
-      <InfiniteScroll
-        dataLength={data?.pages.length || 0}
-        next={fetchNextPage}
-        hasMore={hasNextPage}
-        inverse={true}
-        scrollableTarget="scrollableDiv"
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-      >
-        <div
-          id="scrollableDiv"
-          className="w-full h-64 overflow-auto border flex flex-col-reverse"
-        >
-          {' '}
-          {data ? (
-            data.pages.map((page, pageIndex) => (
-              <div key={pageIndex}>
-                {/* eslint-disable-next-line */}
-                {page.map((item: any, index: number) => (
-                  <div key={index}>
-                    <div>{item.message}</div>
-                  </div>
-                ))}
-              </div>
-            ))
-          ) : (
-            <>메세지없음</>
-          )}
-        </div>
-      </InfiniteScroll>
       <LoginButton />
+      <div>안녕안녕</div>
     </div>
   );
 };

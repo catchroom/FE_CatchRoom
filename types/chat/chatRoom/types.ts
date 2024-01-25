@@ -17,6 +17,9 @@ export type MessagePropsNoPartial = {
   accept: (price: number) => void;
   deny: (price: number) => void;
 };
+
+export type MessageItemProps = Omit<MessagePropsNoPartial, 'accept' | 'deny'>;
+
 export type MessageProps = Partial<MessagePropsNoPartial>;
 
 export type ChatRoomType = {
