@@ -8,12 +8,10 @@ import { useSetRecoilState } from 'recoil';
 import { ChatMessageDto, ChatRoomType } from '@/types/chat/chatRoom/types';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
 import { useRouter } from 'next/navigation';
 
 const ChatItem = ({ item }: { item: ChatRoomType }) => {
   const setDeleteRoomInfo = useSetRecoilState(deleteModalIdAtom);
-  const [, setValue] = useSsrAtom();
   const setIsOpen = useSetRecoilState(isModalState);
   const router = useRouter();
 
@@ -39,7 +37,6 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
     console.log('clickInfo', item);
-    setValue(item);
     router.push(`/chat/${item.chatRoomNumber}`);
   };
 

@@ -1,7 +1,7 @@
 'use client';
 
-import { useGetPreviousChat } from '@/api/chat/query';
-import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
+import { useGetPreviousChat, useInitialChatInfo } from '@/api/chat/query';
+import { chatContentAtom, chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
@@ -10,20 +10,25 @@ import SockJS from 'sockjs-client';
 
 export const useChatConnection = (roomId: string) => {
   const setChatList = useSetRecoilState(chatContentAtom);
+  const setChatInfo = useSetRecoilState(chatRoomInfo);
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
   const userId = cookies.id;
 
   const { data } = useGetPreviousChat(roomId, accessToken);
+  const { data: chatInfo } = useInitialChatInfo(roomId, accessToken);
   console.log('새로운 데이터가 왔어요~');
   const ws = useRef<CompatClient | null>(null);
 
   // 초기 데이터 로딩
   useEffect(() => {
     if (!data) return;
-    setChatList(data);
-  }, [data, setChatList]);
+    setChatList([...data].reverse());
+
+    if (!chatInfo) return;
+    setChatInfo(chatInfo);
+  }, [chatInfo, data, setChatInfo, setChatList]);
 
   // 연결
   const connect = () => {
@@ -45,7 +50,7 @@ export const useChatConnection = (roomId: string) => {
       () => {
         ws.current?.subscribe(`/sub/chat/room/${roomId}`, (message) => {
           const recv = JSON.parse(message.body);
-          setChatList((prev) => [...prev, recv]);
+          setChatList((prev) => [recv, ...prev]);
         });
       },
     );

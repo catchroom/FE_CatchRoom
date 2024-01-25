@@ -5,9 +5,10 @@ import { MessagePropsNoPartial } from '@/types/chat/chatRoom/types';
 import ApproveMessage from '@/components/chat/chatRoom/approveMessage';
 import OfferMessage from '../offerMessage';
 import DeclineMessage from '../declineMessage';
-import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
 import { useCookies } from 'react-cookie';
 import UserOut from '../userOut';
+import { useRecoilValue } from 'recoil';
+import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 
 const MessageItem = ({
   type,
@@ -18,8 +19,8 @@ const MessageItem = ({
   accept,
   deny,
 }: MessagePropsNoPartial) => {
-  const [chatInfo] = useSsrAtom();
   const [cookies] = useCookies();
+  const chatInfo = useRecoilValue(chatRoomInfo);
   const sellerId = chatInfo.sellerId;
   const loginUserId = cookies.id;
 

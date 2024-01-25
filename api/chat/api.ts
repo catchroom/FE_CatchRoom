@@ -11,7 +11,19 @@ export const roomItemInfo = async (id: string | string[] | undefined) => {
   return { data, userIdentity, accommodationUrl };
 };
 
-// 2. 채팅방 생성
+// 2. 채팅방 가져오기
+export const fetchChatRoom = async (token: string) => {
+  const data = await axios.get('https://catchroom.store/v1/chat/room/list', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await data.data;
+  return result;
+};
+
+// 3. 채팅방 생성
 export const createChatRoom = async (
   buyerId: number,
   sellerId: number,
@@ -39,6 +51,24 @@ export const createChatRoom = async (
   return result;
 };
 
+// 이전 채팅 가져오기
+export const fetchPreviousChat = async (roomId: string, token: string) => {
+  console.log('roomId는', roomId);
+  const data = await axios.get(
+    `https://catchroom.store/v1/chat/room/find?id=${roomId}&page=0`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const result = await data.data;
+  return result.data;
+};
+
+// 이전 채팅 무한 스크롤
 export const infinitePreviousChat = async ({
   pageParam,
   roomId,
@@ -61,4 +91,19 @@ export const infinitePreviousChat = async ({
 
   const result = await data.data;
   return result.data;
+};
+
+// 채팅방 정보 가져오기
+export const fetchChatInfo = async (roomId: string, token: string) => {
+  const res = await axios.get(
+    `https://catchroom.xyz/v1/chat/room/info?roomId=${roomId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const result = await res.data;
+  return result;
 };

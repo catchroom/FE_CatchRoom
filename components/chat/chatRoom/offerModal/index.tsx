@@ -1,14 +1,14 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
-import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/components/mypage/form/formInput';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import FormError from '@/components/mypage/form/formError';
 import { ErrorMessage } from '@hookform/error-message';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { dealModalAtom } from '@/atoms/chat/leaveButton';
+import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 
 const schema = (price: number) =>
   z.object({
@@ -29,7 +29,7 @@ type Inputs = {
 
 const OfferModal = ({ publish }: { publish: (price: number) => void }) => {
   const setModalState = useSetRecoilState(dealModalAtom);
-  const [chatInfo] = useSsrAtom();
+  const chatInfo = useRecoilValue(chatRoomInfo);
   const {
     register,
     handleSubmit,

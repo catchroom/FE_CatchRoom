@@ -2,17 +2,16 @@
 import React from 'react';
 import DefaultBtn from '../../common/defaultBtn';
 import Image from 'next/image';
-import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
 import LOGOImage from '@/public/Yanolja_CI.png';
 import LoadingText from '@/components/common/loading/loadingText';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { dealModalAtom } from '@/atoms/chat/leaveButton';
 import { useRouter } from 'next/navigation';
+import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 
 const ProductInfo = () => {
   const [modalState, setModalOpen] = useRecoilState(dealModalAtom);
-  const [chatInfo] = useSsrAtom();
-
+  const chatInfo = useRecoilValue(chatRoomInfo);
   const router = useRouter();
 
   const handleClickInfo = () => {

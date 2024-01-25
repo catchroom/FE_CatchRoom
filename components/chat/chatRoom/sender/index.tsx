@@ -4,7 +4,7 @@
 
 import SendIconSVG from '@/public/svgComponent/sendIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -20,8 +20,10 @@ const ChatMessageSender = ({
   publish: (message: string) => void;
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const { register, handleSubmit } = useForm<ChatMessage>({
+  const [hasValue, setHasValue] = useState<boolean>(false);
+  const { register, handleSubmit, reset } = useForm<ChatMessage>({
     resolver: zodResolver(ChatMessageSchema),
+    mode: 'onChange',
   });
 
   // textarea 높이 조절
@@ -33,16 +35,30 @@ const ChatMessageSender = ({
     }
   };
 
+  useEffect(() => {
+    const handleInitialValue = () => {
+      setHasValue(!!textareaRef.current?.value);
+    };
+
+    handleInitialValue();
+    textareaRef.current?.addEventListener('input', handleInputChange);
+
+    return () => {
+      textareaRef.current?.removeEventListener('input', handleInputChange);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleInputChange = () => {
     resizeHeight(textareaRef);
+    setHasValue(!!textareaRef.current?.value);
   };
 
   const { ref, ...registerResult } = register('message');
 
   const onSubmit: SubmitHandler<ChatMessage> = (data) => {
-    console.log('onSubmit');
-    console.log(data.message);
     publish(data.message);
+    reset();
   };
 
   return (
@@ -61,16 +77,10 @@ const ChatMessageSender = ({
               textareaRef.current = e;
             }}
             onChange={handleInputChange}
-            className="grow resize-none bg-surface-gray px-4 py-2 text-start h-[40px] max-h-[120px] text-t2 rounded-[20px]"
+            className="grow resize-none bg-surface-gray px-4 py-2 text-start h-[40px] max-h-[96px] text-t2 rounded-[20px] outline-none ease-in focus:border focus:border-border-primary"
           />
-          <button
-            type="submit"
-            className="pl-3 cursor-pointer"
-            onClick={() => {
-              console.log('클릭');
-            }}
-          >
-            <SendIconSVG />
+          <button type="submit" className="pl-3 cursor-pointer">
+            <SendIconSVG send={hasValue} />
           </button>
         </div>
       </form>
