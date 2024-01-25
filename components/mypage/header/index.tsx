@@ -16,7 +16,7 @@ const MyPageHeader = () => {
 
   return (
     <div className="w-full max-w-[480px] fixed inset-0 left-1/2 -translate-x-1/2">
-      <Header title={title ? title : '로딩중'} showBackButton showBorder />
+      <Header title={title ? title : '리뷰 쓰기'} showBackButton showBorder />
     </div>
   );
 };

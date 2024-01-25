@@ -8,6 +8,7 @@ import {
   purchaseHistory,
   getWishlist,
   viewReviews,
+  getRoomInfo,
 } from './api';
 
 // 8
@@ -123,15 +124,15 @@ export const useQueryGetReview = (
 };
 
 // 28
-// export const useQueryGetRoomInfo = (id: string | string[] | undefined) => {
-//   const { isLoading, error, data } = useQuery({
-//     queryKey: ['getRoomInfo', id],
-//     queryFn: () => getRoomInfo(id),
-//     select: ({ data }) => data,
-//   });
-//   return {
-//     isLoading,
-//     error,
-//     data,
-//   };
-// };
+export const useQueryGetRoomInfo = (id: number) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['getRoomInfo', id],
+    queryFn: () => getRoomInfo(id),
+    select: ({ data }) => data,
+  });
+  return {
+    isLoading,
+    error,
+    data,
+  };
+};
