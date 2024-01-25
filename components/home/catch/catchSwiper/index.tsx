@@ -6,9 +6,10 @@ import 'swiper/css';
 import CatchItem from '../catchItem';
 import { useQueryGetCatchItemsList } from '@/api/home/query';
 import { catchItems } from '@/types/common/catchItems/types';
+import CatchSkeletonUI from '../catchSkeletonUI';
 
 const CatchSwiper = () => {
-  const { data } = useQueryGetCatchItemsList(1);
+  const { data, isLoading } = useQueryGetCatchItemsList(1);
 
   const [slidesPerView, setSlidesPerView] = useState(1.1);
 
@@ -24,6 +25,7 @@ const CatchSwiper = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  if (isLoading) return <CatchSkeletonUI />;
   return (
     <Swiper spaceBetween={12} slidesPerView={slidesPerView} loop={true}>
       {data?.list.map((item: catchItems) => {
