@@ -44,7 +44,7 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   return (
     <>
       <div className="cursor-pointer fixed bottom-0 w-full max-w-[480px] flex justify-center ">
-        <div className="border-t border-border-sub bg-bg w-full p-5 -ml-[8rem]">
+        <div className="border-t border-border-sub bg-bg w-full p-5 -ml-10">
           <SimpleButton
             name={formattedAmount + ' 결제하기'}
             fn={handleSubmit}
