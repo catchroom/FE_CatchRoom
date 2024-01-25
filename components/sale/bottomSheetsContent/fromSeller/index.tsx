@@ -74,7 +74,7 @@ const FromSeller = () => {
   }, [isProduct]);
 
   useEffect(() => {
-    if (!endDate) return;
+    console.log(endDate);
     const combinedDateTime = new Date(
       endDate!.getFullYear(),
       endDate!.getMonth(),
@@ -84,14 +84,17 @@ const FromSeller = () => {
     );
     console.log('fromseller', combinedDateTime);
 
-    const timezoneOffset = combinedDateTime.getTimezoneOffset() * 60000;
+    const timezoneOffset = combinedDateTime?.getTimezoneOffset() * 60000;
     const adjustedEndDate = new Date(
-      combinedDateTime.getTime() - timezoneOffset,
+      combinedDateTime?.getTime() - timezoneOffset,
     );
-    const isoString = adjustedEndDate?.toISOString();
+    const isoString = adjustedEndDate
+      ? adjustedEndDate?.toISOString()
+      : '2024-01-26T18:22:33';
     console.log(isoString);
     setTimeISOString(isoString);
-  }, [endDate, time, hour, minute]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const currentValue = e.target.value;
@@ -159,7 +162,7 @@ const FromSeller = () => {
         };
       }
     } else {
-      // isProduct가 false일 때: orderHistoryId를 포함한 객체 생성
+      //isProduct가 false일 때: orderHistoryId를 포함한 객체 생성
       if (!isAutoCatch) {
         productData = {
           orderHistoryId: +id!,
@@ -221,12 +224,9 @@ const FromSeller = () => {
     setMinute(59);
     setIsProduct(false);
     if (data.code === 4010 || data.code === 4020) {
-      router.push(`/room-info/${data.data.id}`);
       setHeaderUnVisible(false);
-    } else if (data.code === 4020) {
-      router.push(`/`);
-      setHeaderUnVisible(false);
-    } else if (data.code === 4012) {
+      return router.push(`/room-info/${data.data.id}`);
+    } else {
       setModalContent('이미 등록된 상품입니다.');
       setOpen(true);
       setHeaderUnVisible(false);
