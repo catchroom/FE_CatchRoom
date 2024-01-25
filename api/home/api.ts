@@ -19,14 +19,20 @@ export const getCatchItemsList = async (dataType: number) => {
   return data.data;
 };
 
-export const getCatchItemsListForScroll = async (
-  dataType: number,
-  pageNumber: number,
-  filter: string,
-  region: string | number[],
-) => {
+export const getCatchItemsListForScroll = async ({
+  dataType,
+  pageParam,
+  filter,
+  region,
+}: {
+  dataType: number;
+  pageParam: number;
+  filter: string;
+  region: string | number[];
+}) => {
+  console.log('hi', pageParam);
   const res = await fetch(
-    `https://catchroom.xyz/v1/main/product/list?dataType=${dataType}&pageNumber=${pageNumber}&filter=${filter}&region=${region}`,
+    `https://catchroom.xyz/v1/main/product/list?dataType=${dataType}&pageNumber=${pageParam}&filter=${filter}&region=${region}`,
     {
       method: 'GET',
       headers: {

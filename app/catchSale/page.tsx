@@ -1,4 +1,4 @@
-import CatchItemContainer from '@/components/catchSale/catchItemContainer';
+import InfiniteScrollWrapper from '@/components/catchSale/InfiniteScrollWrapper';
 import SecondHeader from '@/components/catchSale/secondHeader';
 import Header from '@/components/common/header';
 import React from 'react';
@@ -8,7 +8,7 @@ const page = () => {
     <div>
       <Header title="캐치특가 50%~" showBackButton={true} />
       <SecondHeader />
-      <CatchItemContainer />
+      <InfiniteScrollWrapper />
     </div>
   );
 };
