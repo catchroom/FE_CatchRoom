@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckInComponentProps } from '@/types/common/checkInComponent/types';
 import { CHECKIN_TIME, CHECKOUT_TIME } from '@/constants/CheckInOut';
+import { formatDateWithDay } from '@/utils/get-dot-date';
 /**
  * 개별 상품의 체크인-체크아웃 날짜를 확인할 수 있는 컴포넌트입니다.
  * props로 checkInDate, CheckInTime, CheckOutDate, CheckOutTime 네가지를 입력받아야 합니다.
@@ -14,19 +15,21 @@ const CheckInDateComponent = ({
   CheckInDate = '00.00 (월)',
   CheckOutDate = '00.00 (월)',
 }: CheckInComponentProps) => {
+  const checkInString = formatDateWithDay(CheckInDate);
+  const checkOutString = formatDateWithDay(CheckOutDate);
   return (
     <div className="relative flex flex-wrap w-full h-[5.625rem] mt-2 items-center justify-around bg-surface-gray rounded-[4px]">
       <div className="text-center">
         <div className="text-t3 font-medium text-gray-600">체크인</div>
         <div className="text-p1 font-semibold text-gray-800">
-          {CheckInDate} {CHECKIN_TIME}
+          {checkInString} {CHECKIN_TIME}
         </div>
       </div>
       <div className="absolute h-[37px] w-[1px] bg-gray-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
       <div className="text-center">
         <div className="text-t3 font-medium text-gray-600">체크아웃</div>
         <div className="text-p1 font-semibold text-gray-800">
-          {CheckOutDate} {CHECKOUT_TIME}
+          {checkOutString} {CHECKOUT_TIME}
         </div>
       </div>
     </div>
