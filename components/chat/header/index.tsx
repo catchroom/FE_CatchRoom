@@ -1,17 +1,17 @@
 'use client';
 
-import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
+import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 import { dealModalAtom } from '@/atoms/chat/leaveButton';
 import LeftArrowIcon from '@/public/svgComponent/leftArrow';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const ChatHeader = () => {
   const router = useRouter();
   const [modalState, setModalState] = useRecoilState(dealModalAtom);
-  const [chatInfo] = useSsrAtom();
+  const chatInfo = useRecoilValue(chatRoomInfo);
 
   const title = modalState ? '가격 제안' : chatInfo?.partnerNickName;
 
