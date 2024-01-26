@@ -56,7 +56,6 @@ const CatchContainer = () => {
   useEffect(() => {
     const today = new Date();
     if (!isProduct && selectedSaleEndDate instanceof Date) {
-      console.log('잘못옴');
       //만약 등록된 상품이 아니고 판매 날짜가 선택되었을 때
       const endDate = new Date(selectedSaleEndDate);
       endDate.setDate(endDate.getDate() - 1);
@@ -70,9 +69,7 @@ const CatchContainer = () => {
     }
     if (isProduct) {
       //만약 등록된 상품인데 판매 날짜가 체크인 날짜와 같으면 캐치특가 박스 disabled
-      console.log('여기야');
       if (selectedSaleEndDate!.toDateString() === today.toDateString()) {
-        console.log('잡앗다');
         setDisable(true);
         setIsCatch(false);
       } else setDisable(false);
@@ -89,18 +86,21 @@ const CatchContainer = () => {
 
   useEffect(() => {
     let catchPercent: number = 0;
-    if (disable || selectedPercent === 0 || !isCatch) return; // 만약 선택된 가격이 없고 이미 disabled 처리가 됐다면? ( 이미 체크인 날짜가 같아서 캐치특가 설정이 불가할 때 리턴)
+    console.log(isProduct, selectedPercent);
+    if (disable || selectedPercent === 0) return; // 만약 선택된 가격이 없고 이미 disabled 처리가 됐다면? ( 이미 체크인 날짜가 같아서 캐치특가 설정이 불가할 때 리턴)
     if (
       (isProduct && catchPrice === 0) ||
       (!isProduct && selectedPercent !== 0) //만약 등록된 상품인데 캐치특가가 없을 때
     ) {
       setDisable(false);
+      console.log('ㅗㅗㅗㅗ');
       if (selectedPercent <= 40) catchPercent = 50;
       else if (selectedPercent >= 50 && selectedPercent <= 80) {
         catchPercent = selectedPercent + 10;
       } else if (selectedPercent >= 90) {
         setIsCatch(false);
         setDisable(true);
+        console.log('gma');
       }
       setSelectedCatchPrice(price * ((100 - catchPercent) / 100));
       setSelectCatchPercent(catchPercent);

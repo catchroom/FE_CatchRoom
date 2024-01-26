@@ -26,6 +26,7 @@ import {
   saleSingleDate,
 } from '@/atoms/search-detail/searchStates';
 import { catchPriceState, catchState } from '@/atoms/sale/catchAtom';
+import SaleInfoSkeletonUI from './saleInfoSkeletonUI';
 
 type Props = {
   id: string | string[] | undefined;
@@ -93,7 +94,7 @@ const SaleInfoContainer = ({ id }: Props) => {
     setProductPrice(data?.price);
   }, [data, setProductPrice]);
 
-  if (isLoading) return <div>Loding...</div>;
+  if (isLoading) return <SaleInfoSkeletonUI />;
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
