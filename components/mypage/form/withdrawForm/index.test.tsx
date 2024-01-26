@@ -3,11 +3,15 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import WithdrawForm from '.';
 import { mockAnimationsApi } from 'jsdom-testing-mocks';
+import mockRouter from 'next-router-mock';
 
 mockAnimationsApi();
 
+jest.mock('next/navigation', () => require('next-router-mock'));
+
 describe('WithdrawForm test', () => {
   it('form value에 string이 들어간 경우 에러 발생 문구 생성', async () => {
+    mockRouter;
     const user = userEvent.setup();
     render(<WithdrawForm originalBalance={5000} />);
 
