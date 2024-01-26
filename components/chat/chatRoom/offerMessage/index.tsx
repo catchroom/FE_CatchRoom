@@ -37,7 +37,7 @@ const OfferMessage = ({
   return (
     <>
       <p className="text-gray-500 text-t3">{formatTime(time)}</p>
-      <div className="w-full bg-white flex flex-col items-center box-border border border-gray-300 rounded-md overflow-hidden">
+      <div className="w-60 ml-auto bg-white flex flex-col box-border border border-gray-300 rounded-md overflow-hidden">
         {chatInfo.accommodationUrl ? (
           <div className="relative w-60 h-32">
             <Image

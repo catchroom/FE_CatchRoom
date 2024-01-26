@@ -45,10 +45,10 @@ const fetchLogin = async () => {
   const data = await axios.post(
     'https://catchroom.xyz/v1/user/login',
     {
-      email: 'hyem5019@email.com',
-      password: 'qweras!123',
-      // email: 'test927@naver.com',
-      // password: 'test927@',
+      //   email: 'hyem5019@email.com',
+      //   password: 'qweras!123',
+      email: 'test927@naver.com',
+      password: 'test927@',
     },
     {
       headers: {
