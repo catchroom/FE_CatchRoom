@@ -9,19 +9,15 @@ import { weekCalendarDate } from '@/atoms/checkInImnt/weekCalendar';
 import { useRecoilValue } from 'recoil';
 import { useDeadLineItems } from '@/api/deadline-items/query';
 import { DeadLineItem } from '@/types/deadline-items/types';
+import { formatDate } from '@/utils/formatDate';
 
 const CheckInComponent = () => {
   const { isBtnLoading, btnHandler } = useBtnLoading('/deadline-items');
   const currentDate = useRecoilValue(weekCalendarDate);
-  const currentDateFormat =
-    currentDate.getFullYear() +
-    '-' +
-    currentDate.getMonth() +
-    1 +
-    '-' +
-    currentDate.getDate();
 
-  const { data } = useDeadLineItems(currentDateFormat);
+  const date = formatDate(currentDate);
+
+  const { data } = useDeadLineItems(date);
 
   const { pageHandler } = useProductInfoPage();
 
@@ -72,7 +68,7 @@ const CheckInComponent = () => {
             className="absolute font-pretend z-20 flex items-center justify-center w-full h-[2.75rem] rounded-[4px] border border-border-primary text-t1 text-text-primary font-bold bg-white shadow-none"
             onClick={btnHandler}
           >
-            {isBtnLoading ? '' : '전체보기'}
+            {isBtnLoading ? '불러오는 중..' : '전체보기'}
           </Button>
         </div>
         <div className="absolute inset-x-0 bottom-0 z-10 h-[130px] rounded-lg bg-gradient-to-t from-[#ffffffbd] to-transparent" />

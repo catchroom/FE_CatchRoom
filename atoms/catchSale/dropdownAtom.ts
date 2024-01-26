@@ -2,10 +2,10 @@ import { atom } from 'recoil';
 
 export const dropdownState = atom<string>({
   key: 'dropdownState',
-  default: '할인률 높은 순',
+  default: '할인율 높은순',
 });
 
 export const searchDropdownState = atom<string>({
   key: 'searchDropdownState',
-  default: '낮은 가격순',
+  default: '할인율 높은순',
 });

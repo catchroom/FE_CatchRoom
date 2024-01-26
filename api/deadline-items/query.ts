@@ -15,12 +15,12 @@ export const useDeadLinePageItems = (
   date: string,
   filter: string,
   regionIdx: string,
-  pageNumber: number,
+  pageParam: number,
 ) => {
-  const regionValue = regionIdx === '' ? 'all' : regionIdx;
+  const region = regionIdx === '' ? 'all' : regionIdx;
   const { data, isLoading, error } = useQuery({
-    queryKey: ['useDeadLinePageItems', date, filter, regionValue, pageNumber],
-    queryFn: () => deadLinePageItems(date, filter, regionValue, pageNumber),
+    queryKey: ['useDeadLinePageItems', date, filter, region, pageParam],
+    queryFn: () => deadLinePageItems({ date, filter, region, pageParam }),
   });
   return { data, isLoading, error };
 };
