@@ -34,6 +34,8 @@ const ChatMessageViewer = ({
     }
   }, [messages]);
 
+  console.log(messages, 'messages');
+
   return (
     <InfiniteScroll
       dataLength={data?.pages.length || 0}

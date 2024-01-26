@@ -14,7 +14,7 @@ export const useChatConnection = (roomId: string) => {
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
-  const userId = cookies.id;
+  const userId = cookies.userId;
 
   const { data } = useGetPreviousChat(roomId, accessToken);
   const { data: chatInfo } = useInitialChatInfo(roomId, accessToken);
@@ -80,6 +80,7 @@ export const useChatConnection = (roomId: string) => {
         negoPrice: -1,
       }),
     });
+    console.log('메시지 전송', userId);
   };
 
   // 가격 제안
@@ -120,6 +121,7 @@ export const useChatConnection = (roomId: string) => {
 
   // 가격 승인
   const denyPrice = (price: number) => {
+    alert('거절');
     if (!ws.current) return;
     ws.current.publish({
       headers: {

@@ -15,6 +15,7 @@ const nextConfig = {
       'yaimg.yanolja.com',
       'tong.visitkorea.or.kr',
       'cdn.visitkorea.or.kr',
+      'lh3.googleusercontent.com',
     ],
   },
   async redirects() {

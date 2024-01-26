@@ -10,8 +10,10 @@ import FormInput from '../formInput';
 import { editProfile, getUserProfile } from '@/api/mypage/api';
 import { nicknameCheck } from '@/api/user/api';
 import Modal from '@/components/common/modal';
+import { useRouter } from 'next/navigation';
 
 const ProfileForm = () => {
+  const router = useRouter();
   const [checkNickname, setCheckNickname] = useState(false);
   const [nickname, setNickname] = useState('');
   const {
@@ -45,6 +47,7 @@ const ProfileForm = () => {
             setNickname(response.data);
             if (response.code === 2002) {
               setOpenSuccessAlert(true);
+              router.push('/mypage');
             } else if (res.code == 2003) {
               console.log('프로필 수정 실패');
             }

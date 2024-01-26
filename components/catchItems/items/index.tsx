@@ -11,6 +11,7 @@ import { DeadLineItem } from '@/types/deadline-items/types';
 import CatchSpecialComponent from '@/components/common/catchComponent';
 import { useProductInfoPage } from '@/hooks/useProductInfoPage';
 import { formatDate } from '@/utils/formatDate';
+import DeadLineSkeletonUI from '@/components/home/deadLineItems/deadLineSkeletonUI/idex';
 
 const InfiniteScrollContainer = () => {
   const currentDate = useRecoilValue(weekCalendarDate);
@@ -25,8 +26,8 @@ const InfiniteScrollContainer = () => {
   const regionIdx = regionFormat.join(',');
   const region = regionIdx === '' ? 'all' : regionIdx;
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ['messages', currentDate, filterFormat, regionFormat],
+  const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
+    queryKey: ['deadLineItems', currentDate, filterFormat, regionFormat],
     queryFn: ({ pageParam }) =>
       deadLinePageItems({
         date,
@@ -48,6 +49,15 @@ const InfiniteScrollContainer = () => {
 
   return (
     <div className="overflow-y-hidden">
+      {isLoading && (
+        <div
+          id="scrollableDiv"
+          className="w-full h-full overflow-auto mt-56 p-6 pt-2"
+        >
+          <DeadLineSkeletonUI />
+        </div>
+      )}
+
       <InfiniteScroll
         scrollableTarget="scrollableDiv"
         dataLength={data?.pages.length || 0}

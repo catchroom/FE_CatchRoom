@@ -45,7 +45,8 @@ const Page = () => {
   useEffect(() => {
     setSearchParams((prev) => ({
       ...prev,
-      region: selectedRegion.join(','),
+      region:
+        selectedRegion.join(',') === '' ? 'all' : selectedRegion.join(','),
     }));
   }, [selectedRegion]);
 
@@ -65,7 +66,8 @@ const Page = () => {
   useEffect(() => {
     setSearchParams((prev) => ({
       ...prev,
-      type: selectedType.join(','),
+      type:
+        selectedType.join(',') === '' ? '0,1,2,3,4' : selectedType.join(','),
     }));
   }, [selectedType]);
 
