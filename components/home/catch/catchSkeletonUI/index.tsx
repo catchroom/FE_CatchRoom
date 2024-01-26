@@ -43,9 +43,9 @@ const CatchSkeletonUI = () => {
               <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[93px] mb-4"></div>
             </div>
             <div className="flex justify-between">
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
+              <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
 
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
+              <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
             </div>
           </div>
         </div>
@@ -72,9 +72,9 @@ const CatchSkeletonUI = () => {
               <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[93px] mb-4"></div>
             </div>
             <div className="flex justify-between">
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
+              <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
 
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
+              <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
             </div>
           </div>
         </div>
@@ -101,9 +101,9 @@ const CatchSkeletonUI = () => {
               <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[93px] mb-4"></div>
             </div>
             <div className="flex justify-between">
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
+              <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
 
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
+              <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
             </div>
           </div>
         </div>
@@ -130,9 +130,9 @@ const CatchSkeletonUI = () => {
               <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[93px] mb-4"></div>
             </div>
             <div className="flex justify-between">
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
+              <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[104px] mb-4"></div>
 
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
+              <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[110px] mb-4"></div>
             </div>
           </div>
         </div>

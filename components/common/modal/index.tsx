@@ -51,7 +51,7 @@ const Modal = ({
           {showCancelButton && (
             <button
               onClick={onCancel}
-              className="w-full text-main py-2 px-4 rounded cursor-pointer border-t border-r border-border-sub"
+              className="w-full text-main py-2 px-4 rounded-b cursor-pointer border-t border-r border-border-sub"
             >
               {cancelString}
             </button>
@@ -59,7 +59,7 @@ const Modal = ({
           {showConfirmButton && (
             <button
               onClick={onConfirm}
-              className="w-full  text-main py-2 px-4 rounded font-bold cursor-pointer border-t border-border-sub"
+              className="w-full  text-main py-2 px-4 rounded-b font-bold cursor-pointer border-t border-border-sub"
             >
               {confirmString}
             </button>
