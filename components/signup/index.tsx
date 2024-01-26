@@ -140,6 +140,9 @@ const SignUpAuth = () => {
         {errors.email && errors.email.message && (
           <p className="text-border-critical mb-3">{errors.email.message}</p>
         )}
+        {!errors.email && email && !confirmedEmail && (
+          <p className="text-border-critical mb-3">중복확인 필요합니다.</p>
+        )}
 
         <div className="relative">
           <input

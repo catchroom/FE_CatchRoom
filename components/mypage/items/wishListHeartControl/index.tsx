@@ -4,7 +4,6 @@ import { useToastAlert } from '@/hooks/useToastAlert';
 import React, { useState } from 'react';
 import { ItemType } from '@/constants/catchItems';
 import CatchSpecialComponent from '@/components/common/catchComponent';
-import { getDotDate } from '@/utils/get-dot-date';
 import { deleteHeart } from './../../../../api/mypage/api';
 
 const WishListHeartControl = ({ item }: { item: ItemType }) => {
@@ -22,7 +21,8 @@ const WishListHeartControl = ({ item }: { item: ItemType }) => {
       key={item.wishId}
       accommodationName={item.accommodationName}
       roomName={item.roomName}
-      resDate={`${getDotDate(item.checkIn)} - ${getDotDate(item.checkOut)}`}
+      checkIn={item.checkIn}
+      checkOut={item.checkOut}
       originalPrice={item.sellPrice}
       sellPrice={item.discountPrice}
       discountRate={item.discountRate}
