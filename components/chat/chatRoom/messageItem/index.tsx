@@ -22,7 +22,7 @@ const MessageItem = ({
   const [cookies] = useCookies();
   const chatInfo = useRecoilValue(chatRoomInfo);
   const sellerId = chatInfo.sellerId;
-  const loginUserId = cookies.id;
+  const loginUserId = cookies.userId;
 
   console.log(type, 'type');
 
