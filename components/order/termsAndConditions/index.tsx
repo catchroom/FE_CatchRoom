@@ -56,7 +56,7 @@ const TermsAndConditions = () => {
   }, [selectedTerms]);
 
   return (
-    <div className="flex-col space-y-4 py-5 mt-6 mb-[13rem]">
+    <div className="flex-col space-y-4 py-5 mt-6 mb-16">
       <CheckBoxComponent
         id="selectAll"
         labelText="전체 동의"
