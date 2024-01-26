@@ -6,6 +6,7 @@ import { PaymentButtonProps } from '@/types/order/paymentButton/type';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
+import { roundToTenWon } from '@/utils/roundToTenWon';
 
 const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   const selectedTerms = useRecoilValue(selectedTermsState);
@@ -38,7 +39,7 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-  const formattedAmount = `${amount?.toLocaleString('ko-KR')}원`;
+  const formattedAmount = `${roundToTenWon(amount)?.toLocaleString('ko-KR')}원`;
 
   return (
     <>

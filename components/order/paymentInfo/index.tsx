@@ -1,4 +1,5 @@
 import { PaymentInfoProps } from '@/types/order/paymentInfo/types';
+import { roundToTenWon } from '@/utils/roundToTenWon';
 import React from 'react';
 
 const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
@@ -14,7 +15,7 @@ const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
         <div className="flex justify-between items-center">
           <span className="text-t2 text-text-DEFAULT leading-6">상품금액</span>
           <span className="text-t2 text-text-DEFAULT leading-6">
-            {price?.toLocaleString()}원
+            {roundToTenWon(price)?.toLocaleString()}원
           </span>
         </div>
         <div className="flex justify-between items-center">
@@ -22,7 +23,7 @@ const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
             거래 수수료율 5%
           </span>
           <span className="text-t2 text-text-DEFAULT leading-6">
-            {commission?.toLocaleString()}원
+            {roundToTenWon(commission)?.toLocaleString()}원
           </span>
         </div>
         <div className="border-t-[1px] border-border-sub"></div>
@@ -31,7 +32,7 @@ const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
             최종 결제 금액
           </span>
           <span className="text-text-DEFAULT font-semibold leading-7">
-            {totalPrice?.toLocaleString()}원
+            {roundToTenWon(totalPrice)?.toLocaleString()}원
           </span>
         </div>
       </div>
