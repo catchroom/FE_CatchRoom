@@ -14,16 +14,12 @@ const ModalControl = () => {
   const [isOpen, setIsOpen] = useRecoilState(isModalState);
 
   useEffect(() => {
-    console.log('connect 연결');
     connect();
     return () => {
-      console.log('disconnect 연결 해제');
       disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(deleteModalInfo);
 
   const handleModalOpen = () => {
     setIsOpen((prev) => !prev);

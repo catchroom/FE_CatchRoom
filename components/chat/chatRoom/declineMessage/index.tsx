@@ -14,7 +14,7 @@ const DeclineMessage = ({ negoPrice, time, isSeller }: MessageProps) => {
 
   return (
     <div className={sellerStyle}>
-      <p className={`text-gray-500 text-t3`}>{formatTime(time)}</p>
+      <p className={`text-gray-500 text-t3 `}>{formatTime(time)}</p>
       <div
         className={`w-60 bg-white flex flex-col items-center box-border border border-border-sub rounded-md overflow-hidden`}
       >

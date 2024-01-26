@@ -21,10 +21,8 @@ const MessageItem = ({
 }: MessagePropsNoPartial) => {
   const [cookies] = useCookies();
   const chatInfo = useRecoilValue(chatRoomInfo);
-  const sellerId = chatInfo.sellerId;
   const loginUserId = cookies.userId;
-
-  console.log(type, 'type');
+  const isSeller = chatInfo.loginUserIdentity === 'BUYER' ? false : true;
 
   // 로그인한 유저가 해당 메시지의 보낸 사람일 때
   // 나
@@ -36,12 +34,11 @@ const MessageItem = ({
         return (
           <div className="w-full flex justify-end mb-3">
             <OfferMessage
-              me={true}
               accept={accept}
               deny={deny}
               negoPrice={negoPrice}
               time={time}
-              isSeller={loginUserId === sellerId}
+              isSeller={isSeller}
             />
           </div>
         );
@@ -50,10 +47,9 @@ const MessageItem = ({
         return (
           <div className="w-full flex justify-end mb-3">
             <ApproveMessage
-              me={true}
               negoPrice={negoPrice}
               time={time}
-              isSeller={loginUserId === sellerId}
+              isSeller={isSeller}
             />
           </div>
         );
@@ -65,10 +61,9 @@ const MessageItem = ({
         return (
           <div className="w-full flex justify-end mb-3 ">
             <DeclineMessage
-              me={true}
               negoPrice={negoPrice}
               time={time}
-              isSeller={loginUserId === sellerId}
+              isSeller={isSeller}
             />
           </div>
         );
@@ -83,12 +78,11 @@ const MessageItem = ({
         return (
           <div className="w-full flex mb-3">
             <OfferMessage
-              me={false}
               accept={accept}
               deny={deny}
               negoPrice={negoPrice}
               time={time}
-              isSeller={loginUserId === sellerId}
+              isSeller={isSeller}
             />
           </div>
         );
@@ -96,10 +90,9 @@ const MessageItem = ({
         return (
           <div className="w-full flex mb-3">
             <ApproveMessage
-              me={false}
               negoPrice={negoPrice}
               time={time}
-              isSeller={loginUserId === sellerId}
+              isSeller={isSeller}
             />
           </div>
         );
@@ -110,7 +103,7 @@ const MessageItem = ({
               me={false}
               negoPrice={negoPrice}
               time={time}
-              isSeller={userId === sellerId}
+              isSeller={isSeller}
             />
           </div>
         );

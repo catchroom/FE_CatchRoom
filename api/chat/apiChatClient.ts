@@ -25,8 +25,6 @@ apiChatClient.interceptors.response.use(
   },
   async (outerError) => {
     const originalRequest = outerError.config;
-    console.log('outerError.response', JSON.stringify(outerError.response));
-    console.log(outerError.response.data.code); //5001
 
     if (
       (outerError.response.data.code === 5000 ||
@@ -36,13 +34,9 @@ apiChatClient.interceptors.response.use(
     ) {
       originalRequest._retry = true;
 
-      // console.log('재발급 전', accessToken);
-
       try {
         const res = await getNewToken();
         const accessToken = res.data;
-
-        console.log('재발급', res.data);
 
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
         const response = await apiChatClient.request(originalRequest);
@@ -53,11 +47,8 @@ apiChatClient.interceptors.response.use(
           maxAge: 60 * 30,
         });
 
-        console.log('재시도 성공:', response.data);
-
         return response;
       } catch (innerError) {
-        console.log('재시도 실패:', innerError);
         return Promise.reject(originalRequest);
       }
     }

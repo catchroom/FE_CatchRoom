@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { apiClient } from '../user/apiClient';
 import { apiChatClient } from './apiChatClient';
 
@@ -25,26 +24,20 @@ export const fetchChatRoom = async (token: string) => {
 };
 
 // 3. 채팅방 생성
-export const createChatRoom = async (
-  buyerId: number,
-  sellerId: number,
-  productId: number,
-  token: string,
-) => {
-  const data = await axios.post(
-    'https://catchroom.xyz/v1/chat/room/create',
-    {
-      buyerId: buyerId,
-      sellerId: sellerId,
-      productId: productId,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
+export const createChatRoom = async ({
+  buyerId,
+  sellerId,
+  productId,
+}: {
+  buyerId: number;
+  sellerId: number;
+  productId: number;
+}) => {
+  const data = await apiClient.post('/v1/chat/room/create', {
+    buyerId: buyerId,
+    sellerId: sellerId,
+    productId: productId,
+  });
 
   const result = await data.data.data.chatRoomNumber;
   return result;
@@ -52,7 +45,6 @@ export const createChatRoom = async (
 
 // 이전 채팅 가져오기
 export const fetchPreviousChat = async (roomId: string, token: string) => {
-  console.log('roomId는', roomId);
   const data = await apiChatClient.get(
     `/v1/chat/room/find?id=${roomId}&page=0`,
     {
@@ -77,7 +69,6 @@ export const infinitePreviousChat = async ({
   roomId: string;
   token: string;
 }) => {
-  console.log('pageParam은', pageParam);
   const data = await apiChatClient.get(
     `/v1/chat/room/find?page=${pageParam}&id=${roomId}`,
     {

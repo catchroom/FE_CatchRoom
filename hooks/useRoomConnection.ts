@@ -36,7 +36,7 @@ export const useRoomConnection = () => {
         Authorization: `Bearer ${accessToken}`,
       },
       reportErrors: true,
-      debug: true,
+      debug: false,
     });
 
     const wsClient = Stomp.over(() => sockjs);

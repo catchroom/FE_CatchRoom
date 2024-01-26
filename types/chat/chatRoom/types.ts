@@ -23,7 +23,6 @@ export type MessageItemType = {
   negoPrice: number;
   time: string;
   isSeller: boolean;
-  me: boolean;
 };
 
 export type MessageItemProps = Omit<MessagePropsNoPartial, 'accept' | 'deny'>;

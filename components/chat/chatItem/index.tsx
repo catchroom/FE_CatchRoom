@@ -37,7 +37,6 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
 
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
-    console.log('clickInfo', item);
     router.push(`/chat/${item.chatRoomNumber}`);
   };
 
