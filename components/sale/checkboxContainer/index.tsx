@@ -84,7 +84,7 @@ const CheckboxContainer = () => {
           data-testid="check1"
         />
         <Link
-          href="/mypage/dashboard/terms"
+          href="/mypage/dashboard/conditions/consent-essential"
           className="text-text-primary absolute right-0"
         >
           보기
@@ -99,7 +99,7 @@ const CheckboxContainer = () => {
           data-testid="check1"
         />
         <Link
-          href="/mypage/dashboard/terms"
+          href="/mypage/dashboard/conditions/consent-third"
           className="text-text-primary absolute right-0"
         >
           보기
@@ -115,7 +115,7 @@ const CheckboxContainer = () => {
             data-testid="check3"
           />
           <Link
-            href="/mypage/dashboard/terms"
+            href="/mypage/dashboard/conditions/consent-catch"
             className="text-text-primary absolute right-0"
           >
             보기
