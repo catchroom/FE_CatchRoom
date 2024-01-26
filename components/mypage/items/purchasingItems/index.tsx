@@ -29,7 +29,12 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
 
   return (
     <div id="container" className="w-full px-5 py-3 flex flex-col gap-3">
-      <div className="w-full flex flex-col">
+      <div
+        className="w-full flex flex-col cursor-pointer"
+        onClick={() => {
+          router.push(`/room-info/${item.productId}`);
+        }}
+      >
         {/* 호텔 이미지, 이름, 가격 정보 */}
         <div className="w-full flex gap-4">
           <div className="relative w-[120px] h-[120px]">
