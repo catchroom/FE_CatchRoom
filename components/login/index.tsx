@@ -52,7 +52,6 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginData) => {
     login(data.email, data.password)
       .then((response) => {
-        console.log(response);
         if (response.code === 1006) {
           nookies.set(null, 'accessToken', response.data.accessToken, {
             path: '/',
