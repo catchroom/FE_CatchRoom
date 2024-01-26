@@ -14,7 +14,7 @@ const Searchlayout = ({
       <Header title="검색 결과" showBackButton showHomeButton />
       <FilterBar />
       <ProductListControls />
-      <main className="w-full absolute h-[calc(100vh-200px)] top-[200px] overflow-y-auto ">
+      <main className="w-full absolute h-[calc(100vh-200px)] top-[200px] overflow-y-scroll pb-20">
         {children}
       </main>
     </>

@@ -34,7 +34,7 @@ const Header = ({
 
   const headerUnVisible = useRecoilValue(isHeaderSate);
 
-  const headerClass = `w-full max-w-[480px] fixed top-0 grid grid-cols-3 items-center px-6 py-3 bg-bg ${
+  const headerClass = `w-full max-w-[480px] fixed top-0 grid grid-cols-3 items-center px-4 py-3 bg-bg ${
     showBorder ? 'border-b border-gray-300' : ''
   } ${headerUnVisible ? 'z-0' : 'z-20'} `;
 
