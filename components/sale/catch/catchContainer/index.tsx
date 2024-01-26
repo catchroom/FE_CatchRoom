@@ -55,12 +55,13 @@ const CatchContainer = () => {
 
   useEffect(() => {
     const today = new Date();
-    if (!isCatch) return;
     if (!isProduct && selectedSaleEndDate instanceof Date) {
+      console.log('잘못옴');
       //만약 등록된 상품이 아니고 판매 날짜가 선택되었을 때
       const endDate = new Date(selectedSaleEndDate);
       endDate.setDate(endDate.getDate() - 1);
       setSelected(endDate);
+      console.log(selectedSaleEndDate);
       if (selectedSaleEndDate.toDateString() === today.toDateString()) {
         // 그날짜가 체크인 날짜와 같다면 캐치특가 박스 disabled
         setDisable(true);
@@ -69,6 +70,7 @@ const CatchContainer = () => {
     }
     if (isProduct) {
       //만약 등록된 상품인데 판매 날짜가 체크인 날짜와 같으면 캐치특가 박스 disabled
+      console.log('여기야');
       if (selectedSaleEndDate!.toDateString() === today.toDateString()) {
         console.log('잡앗다');
         setDisable(true);
