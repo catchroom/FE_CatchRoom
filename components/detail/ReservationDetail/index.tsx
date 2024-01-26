@@ -1,4 +1,5 @@
 import { ReservationDetailProps } from '@/types/detail/types';
+import { formatPhoneNumber } from '@/utils/formatPhoneNumber';
 import React from 'react';
 
 const ReservationDetail = ({
@@ -22,7 +23,7 @@ const ReservationDetail = ({
           <div className="flex justify-between items-center ">
             <h3 className="text-t2 text-text-sub">연락처</h3>
             <p className="text-t2 text-gray-1000">
-              {bookingHolder.phoneNumber}
+              {formatPhoneNumber(bookingHolder.phoneNumber)}
             </p>
           </div>
         </section>
@@ -34,7 +35,7 @@ const ReservationDetail = ({
           </div>
           <div className="flex justify-between items-center ">
             <h3 className="text-t2 text-text-sub">연락처</h3>
-            <p className="text-t2 ">{guest.phoneNumber}</p>
+            <p className="text-t2 ">{formatPhoneNumber(guest.phoneNumber)}</p>
           </div>
         </section>
         <section className="flex flex-col gap-4 px-5 py-5 mb-2">

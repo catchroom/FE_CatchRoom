@@ -1,4 +1,5 @@
 import { ReservationInfoProps } from '@/types/complete/types';
+import { formatPhoneNumber } from '@/utils/formatPhoneNumber';
 import React from 'react';
 
 const ReservationInfo = ({
@@ -17,7 +18,9 @@ const ReservationInfo = ({
         </div>
         <div className="flex justify-between items-center ">
           <h3 className="text-t2 text-text-sub">연락처</h3>
-          <p className="text-t2 text-text-sub">{bookingHolder.phoneNumber}</p>
+          <p className="text-t2 text-text-sub">
+            {formatPhoneNumber(bookingHolder.phoneNumber)}
+          </p>
         </div>
       </section>
       <section className="flex flex-col gap-2 px-5 py-5 border-b border-gray-200">
@@ -28,14 +31,18 @@ const ReservationInfo = ({
         </div>
         <div className="flex justify-between items-center ">
           <h3 className="text-t2 text-text-sub">연락처</h3>
-          <p className="text-t2 text-text-sub">{guest.phoneNumber}</p>
+          <p className="text-t2 text-text-sub">
+            {formatPhoneNumber(guest.phoneNumber)}
+          </p>
         </div>
       </section>
       <section className="flex flex-col gap-2 px-5 py-5 mb-20">
         <h3 className="text-h5 font-bold text-text-DEFAULT ">결제 정보</h3>
         <div className="flex justify-between items-center ">
           <h3 className="text-t2 text-text-sub">결제 금액</h3>
-          <p className="text-t2 text-text-sub">{totalPrice.toLocaleString()}</p>
+          <p className="text-t2 text-text-sub">
+            {totalPrice?.toLocaleString()}원
+          </p>
         </div>
         <div className="flex justify-between items-center">
           <h3 className="text-t2 text-text-sub">결제 수단</h3>

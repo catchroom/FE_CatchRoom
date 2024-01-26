@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { CompleteMessageProps } from '@/types/complete/types';
 import Link from 'next/link';
 
-const CompleteMessage = ({ guest }: CompleteMessageProps) => {
+const CompleteMessage = ({ nickName }: CompleteMessageProps) => {
   return (
     <div className="flex flex-col justify-center  items-center mb-8">
       <div className="flex gap-1 justify-center">
@@ -16,7 +16,7 @@ const CompleteMessage = ({ guest }: CompleteMessageProps) => {
       <div className="flex flex-col justify-center  items-center gap-2">
         <div className="">
           <p className="text-t1 text-center text-text-sub font-semibold">
-            해당 숙박권은 {guest.name}님에게
+            해당 숙박권은 {nickName}님에게
           </p>
           <p className="text-t1 text-center text-text-sub font-semibold">
             정상적으로 양도되었어요!
