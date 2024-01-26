@@ -2,6 +2,7 @@
 
 import { useGetChatRoom } from '@/api/chat/query';
 import { chatAllRoomAtom } from '@/atoms/chat/chatContentAtom';
+import { userOutAtom } from '@/atoms/chat/leaveButton';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
@@ -11,6 +12,8 @@ import SockJS from 'sockjs-client';
 export const useRoomConnection = () => {
   const ws = useRef<CompatClient | null>(null);
   const setChatList = useSetRecoilState(chatAllRoomAtom);
+  const setUserOut = useSetRecoilState(userOutAtom);
+
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
@@ -20,9 +23,11 @@ export const useRoomConnection = () => {
 
   // 초기 데이터 로딩
   useEffect(() => {
+    setUserOut(false);
+
     if (!data) return;
     setChatList(data);
-  }, [data, setChatList]);
+  }, [data, setChatList, setUserOut]);
 
   // 연결
   const connect = () => {
@@ -53,9 +58,7 @@ export const useRoomConnection = () => {
   };
 
   const deleteRoom = (roomId: string) => {
-    console.log('삭제 시작');
-    if (!ws.current) return console.log('연결 안됨');
-    console.log('삭제 진행중');
+    if (!ws.current) return;
     ws.current.publish({
       destination: `/pub/chat/message`,
       headers: {
@@ -68,7 +71,6 @@ export const useRoomConnection = () => {
         message: '채팅방이 삭제되었습니다.',
       }),
     });
-    console.log('삭제 완료');
   };
 
   // 연결 해제

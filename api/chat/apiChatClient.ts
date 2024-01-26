@@ -1,61 +1,67 @@
 import axios from 'axios';
 import nookies from 'nookies';
+import { getNewToken } from '../user/api';
 
 export const apiChatClient = axios.create({
-  baseURL: `https://catchroom.store/`,
+  baseURL: `https://catchroom.store`,
 });
 
 apiChatClient.interceptors.request.use(
   (config) => {
-    console.log('config', config);
     const accessToken = nookies.get(null)['accessToken'];
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
     return config;
   },
-  (error) => Promise.reject(error),
+  (error) => {
+    return Promise.reject(error);
+  },
 );
 
 apiChatClient.interceptors.response.use(
   (response) => {
     return response;
   },
-  async (error) => {
-    //로그아웃 할때는 재발급 요청 안되게 추가
-    if (error.config.url === '/v1/mypage/logout') {
-      return Promise.reject(error);
-    }
-    //재발급 요청
-    if (
-      error.response.status === 401 ||
-      error.response.status === 5000 ||
-      error.response.status === 5001
-    ) {
-      const refreshToken = nookies.get(null)['refreshToken'];
-      const res = await apiChatClient.post(
-        '/v1/user/accesstoken',
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${refreshToken}`,
-          },
-        },
-      );
+  async (outerError) => {
+    const originalRequest = outerError.config;
+    console.log('outerError.response', JSON.stringify(outerError.response));
+    console.log(outerError.response.data.code); //5001
 
-      const accessToken = res.data.accessToken;
-      if (accessToken) {
+    if (
+      (outerError.response.data.code === 5000 ||
+        outerError.response.data.code === 5001 ||
+        outerError.response.status === 401) &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+
+      // console.log('재발급 전', accessToken);
+
+      try {
+        const res = await getNewToken();
+        const accessToken = res.data;
+
+        console.log('재발급', res.data);
+
+        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+        const response = await apiChatClient.request(originalRequest);
+        //헤더에 담긴지 확인
+
         nookies.set(null, 'accessToken', accessToken, {
           path: '/',
+          maxAge: 60 * 30,
         });
 
-        // 재시도
-        error.config.headers['Authorization'] = `Bearer ${accessToken}`;
-        return apiChatClient.request(error.config);
+        console.log('재시도 성공:', response.data);
+
+        return response;
+      } catch (innerError) {
+        console.log('재시도 실패:', innerError);
+        return Promise.reject(originalRequest);
       }
     }
 
-    return Promise.reject(error);
+    return Promise.reject(outerError);
   },
 );

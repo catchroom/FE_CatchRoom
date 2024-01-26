@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import { useChatConnection } from '@/hooks/useChatConnection';
-import ChatMessageSender from '../sender';
 import ProductInfo from '../productInfo';
 import { useRecoilValue } from 'recoil';
 import { dealModalAtom } from '@/atoms/chat/leaveButton';
@@ -18,6 +17,7 @@ const ChatRoomControl = ({ roomId }: { roomId: string }) => {
     negoPrice,
     acceptPrice,
     denyPrice,
+    accessToken,
   } = useChatConnection(roomId);
 
   useEffect(() => {
@@ -32,14 +32,13 @@ const ChatRoomControl = ({ roomId }: { roomId: string }) => {
     <div className="w-full h-full relative">
       <ProductInfo />
       <div className="relative">
-        <div className={`h-[calc(100vh-130px)] overflow-scroll relative`}>
-          <ChatMessageViewer
-            accept={acceptPrice}
-            deny={denyPrice}
-            roomId={roomId}
-          />
-          <ChatMessageSender publish={sendMessage} />
-        </div>
+        <ChatMessageViewer
+          token={accessToken}
+          accept={acceptPrice}
+          deny={denyPrice}
+          send={sendMessage}
+          roomId={roomId}
+        />
         {modalState && <OfferModal publish={negoPrice} />}
       </div>
     </div>

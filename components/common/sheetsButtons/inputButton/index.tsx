@@ -20,7 +20,7 @@ const InputButton = ({
       data-testid="inputButton"
       onClick={isCatch ? handleBtnClick : fn}
       type="button"
-      className="flex items-center justify-between w-full h-[54px] px-4 py-3 text-text-sub border border-border-sub rounded-md bg-surface outline-none transition-colors duration-300 ease-in focus:border-border-critical"
+      className="flex items-center justify-between w-full h-[54px] px-4 py-3 text-text-sub border border-border-sub rounded-md bg-surface outline-none transition-colors duration-300 ease-in"
     >
       {name}
       <DownArrowIcon />

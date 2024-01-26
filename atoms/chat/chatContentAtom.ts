@@ -1,15 +1,9 @@
-import { ChatRoomType, MessageProps } from '@/types/chat/chatRoom/types';
-import { useEffect, useState } from 'react';
-import { atom, useRecoilState } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
-
-const sessionStorage =
-  typeof window !== 'undefined' ? window.sessionStorage : undefined;
-
-const { persistAtom } = recoilPersist({
-  key: 'chatRoomAtom',
-  storage: sessionStorage,
-});
+import {
+  ChatInitialInfo,
+  ChatRoomType,
+  MessageProps,
+} from '@/types/chat/chatRoom/types';
+import { atom, selector } from 'recoil';
 
 export type ChatContentType = {
   type: 'TALK' | 'ENTER';
@@ -28,27 +22,24 @@ export const chatContentAtom = atom<MessageProps[]>({
   default: [],
 });
 
+// chatContentAtom 뒤에 새로운 메시지를 추가하는 selector
+export const chatContentSelector = selector<MessageProps[]>({
+  key: 'chatContentSelector',
+  get: ({ get }) => {
+    const chatContent = get(chatContentAtom);
+
+    return chatContent.reverse();
+  },
+});
+
 export const chatAllRoomAtom = atom<ChatRoomType[]>({
   key: 'wsAtom',
   default: [],
 });
 
-export const chatRoomAtom = atom<ChatRoomType>({
-  key: 'chatRoomAtom',
-  default: {} as ChatRoomType,
-
-  effects_UNSTABLE: [persistAtom],
+export const chatRoomInfo = atom<ChatInitialInfo>({
+  key: 'chatRoomInfo',
+  default: {} as ChatInitialInfo,
 });
 
 export const defaultValue = {} as ChatRoomType;
-
-export const useSsrAtom = () => {
-  const [isInitial, setInitial] = useState(true);
-  const [value, setValue] = useRecoilState(chatRoomAtom);
-
-  useEffect(() => {
-    setInitial(false);
-  }, []);
-
-  return [isInitial ? defaultValue : value, setValue] as const;
-};

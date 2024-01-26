@@ -1,12 +1,12 @@
 import Header from '@/components/common/header';
-import ReviewContainer from '@/components/review/reviewContainer';
+import InfiniteScrollWrapper from '@/components/review/InfiniteScrollWrapper';
 import React from 'react';
 
 const page = () => {
   return (
     <div>
       <Header title="이용후기" showBackButton={true} />
-      <ReviewContainer />
+      <InfiniteScrollWrapper />
     </div>
   );
 };

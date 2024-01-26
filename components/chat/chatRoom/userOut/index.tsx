@@ -1,6 +1,16 @@
-import React from 'react';
+'use client';
+
+import { userOutAtom } from '@/atoms/chat/leaveButton';
+import React, { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 const UserOut = ({ partnerNickName }: { partnerNickName: string }) => {
+  const setOutState = useSetRecoilState(userOutAtom);
+
+  useEffect(() => {
+    console.log('userOut');
+    setOutState(true);
+  }, [setOutState]);
   return (
     <div className="w-3/4 mx-auto mb-3">
       <p className="bg-surface px-3 py-2 flex justify-center rounded-md text-t3 text-text-primary">
