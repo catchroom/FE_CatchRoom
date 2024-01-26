@@ -158,6 +158,7 @@ const CatchContainer = () => {
           <ul className="text-p2 text-text-sub">
             <li>∙ 체크인 당일에는 설정 불가</li>
             <li>∙ 적용 시점 시간 : 설정일 00:00부터 적용</li>
+            <li>∙ 판매가 할인율 90% 시 설정 불가</li>
           </ul>
         </div>
       )}
