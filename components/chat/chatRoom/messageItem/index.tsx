@@ -24,161 +24,96 @@ const MessageItem = ({
   const sellerId = chatInfo.sellerId;
   const loginUserId = cookies.id;
 
+  console.log(type, 'type');
+
   // 로그인한 유저가 해당 메시지의 보낸 사람일 때
+  // 나
   if (loginUserId === userId) {
     switch (type) {
       case 'TALK':
         return <SendMessage message={message} time={time} />;
       case 'NEGO_REQ':
-        if (loginUserId === sellerId) {
-          return (
-            <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
-              <OfferMessage
-                accept={accept as (price: number) => void}
-                deny={deny}
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={true}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div className="w-9/12 flex  gap-x-3 items-end ml-auto mb-3">
-              <OfferMessage
-                accept={accept}
-                deny={deny}
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={false}
-              />
-            </div>
-          );
-        }
+        return (
+          <div className="w-full flex justify-end mb-3">
+            <OfferMessage
+              me={true}
+              accept={accept}
+              deny={deny}
+              negoPrice={negoPrice}
+              time={time}
+              isSeller={loginUserId === sellerId}
+            />
+          </div>
+        );
+      // 승인
       case 'NEGO_ALLOW':
-        if (loginUserId === sellerId) {
-          return (
-            <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
-              <ApproveMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={true}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div className="w-9/12 flex gap-x-3 items-end ml-auto mb-3">
-              <ApproveMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={false}
-              />
-            </div>
-          );
-        }
-      case 'NEGO_DENIED':
-        if (loginUserId === sellerId) {
-          return (
-            <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
-              <DeclineMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={true}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div className="w-9/12 flex gap-x-3 items-end ml-auto mb-3">
-              <DeclineMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={false}
-              />
-            </div>
-          );
-        }
+        return (
+          <div className="w-full flex justify-end mb-3">
+            <ApproveMessage
+              me={true}
+              negoPrice={negoPrice}
+              time={time}
+              isSeller={loginUserId === sellerId}
+            />
+          </div>
+        );
+
       case 'DELETE':
         return <UserOut partnerNickName={chatInfo.partnerNickName as string} />;
+
+      case 'NEGO_DENIED':
+        return (
+          <div className="w-full flex justify-end mb-3 ">
+            <DeclineMessage
+              me={true}
+              negoPrice={negoPrice}
+              time={time}
+              isSeller={loginUserId === sellerId}
+            />
+          </div>
+        );
     }
   }
-  // 로그인한 유저가 해당 메시지의 받는 사람일 때
+  // 상대방
   else {
     switch (type) {
       case 'TALK':
         return <ReceiveMessage message={message} time={time} />;
-
       case 'NEGO_REQ':
-        if (loginUserId === sellerId) {
-          return (
-            <div className="w-9/12  flex  flex-row-reverse gap-x-3 items-end mr-auto mb-3 ">
-              <OfferMessage
-                accept={accept}
-                deny={deny}
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={true}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div className="w-9/12  flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
-              <OfferMessage
-                accept={accept}
-                deny={deny}
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={false}
-              />
-            </div>
-          );
-        }
+        return (
+          <div className="w-full flex mb-3">
+            <OfferMessage
+              me={false}
+              accept={accept}
+              deny={deny}
+              negoPrice={negoPrice}
+              time={time}
+              isSeller={loginUserId === sellerId}
+            />
+          </div>
+        );
       case 'NEGO_ALLOW':
-        if (loginUserId === sellerId) {
-          return (
-            <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end  mr-auto mb-3">
-              <ApproveMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={true}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
-              <ApproveMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={false}
-              />
-            </div>
-          );
-        }
+        return (
+          <div className="w-full flex mb-3">
+            <ApproveMessage
+              me={false}
+              negoPrice={negoPrice}
+              time={time}
+              isSeller={loginUserId === sellerId}
+            />
+          </div>
+        );
       case 'NEGO_DENIED':
-        if (userId === sellerId) {
-          return (
-            <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
-              <DeclineMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={true}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div className="w-9/12 flex flex-row-reverse gap-x-3 items-end mr-auto mb-3">
-              <DeclineMessage
-                negoPrice={negoPrice}
-                time={time}
-                isSeller={false}
-              />
-            </div>
-          );
-        }
+        return (
+          <div className="w-full flex mb-3">
+            <DeclineMessage
+              me={false}
+              negoPrice={negoPrice}
+              time={time}
+              isSeller={userId === sellerId}
+            />
+          </div>
+        );
       case 'DELETE':
         return <UserOut partnerNickName={chatInfo.partnerNickName as string} />;
     }
