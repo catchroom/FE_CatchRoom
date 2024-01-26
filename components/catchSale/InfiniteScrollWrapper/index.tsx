@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { regionIndex } from '@/atoms/search-detail/searchStates';
+import { useProductInfoPage } from '@/hooks/useProductInfoPage';
 
 const InfiniteScrollWrapper = () => {
   const dataType = 2;
@@ -28,6 +29,7 @@ const InfiniteScrollWrapper = () => {
   const region = regionFormat === '' ? 'all' : regionValue;
 
   const filter = filterRecord[dropdown];
+  console.log(filter);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['messages', filter, region],
@@ -45,6 +47,8 @@ const InfiniteScrollWrapper = () => {
   useEffect(() => {
     setTotalSize(data?.pages[0].size);
   }, [data?.pages, setTotalSize]);
+
+  const { pageHandler } = useProductInfoPage();
 
   return (
     <InfiniteScroll
@@ -66,6 +70,7 @@ const InfiniteScrollWrapper = () => {
                 <CatchSpecialComponent
                   key={item.productId}
                   accommodationName={item.accommodationName}
+                  pageHandler={() => pageHandler(item.productId!)}
                   roomName={item.roomName}
                   checkIn={item.checkIn}
                   checkOut={item.checkOut}

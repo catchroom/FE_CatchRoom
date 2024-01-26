@@ -10,7 +10,7 @@ const ReviewItem = ({
   content,
 }: ReviewItemType) => {
   return (
-    <div className="flex p-5 relative border-b border-divider-sub gap-5 w-full ">
+    <div className="flex relative border-b border-divider-sub gap-5 w-full p-5 ">
       <div className="flex flex-col gap-4 w-full">
         <h1 className="text-t1 font-bold">{productName}</h1>
         <div className="text-t3 w-full min-w-[230px]">{content}</div>
