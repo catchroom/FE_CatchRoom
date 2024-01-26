@@ -22,7 +22,6 @@ const FooterComponent = () => {
   const accessToken = cookies.accessToken;
 
   const { id } = useParams() as UseParamsType;
-  console.log(id);
   const router = useRouter();
   const { data } = useRoomItem(id);
 
