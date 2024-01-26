@@ -46,26 +46,30 @@ const PaymentMethods = () => {
         결제 수단
       </h5>
 
-      <div className="flex flex-row mt-3 items-start gap-2">
+      <div className="flex flex-row  h-[2.75rem] mt-3 items-start gap-2">
         <button
           onClick={toggleEasyPaymentDropdown}
-          className={`flex-1 border bg-surface ${
+          className={`flex flex-1  justify-center items-center border bg-surface h-[2.75rem] ${
             selectedPayment === 'easy'
               ? 'border-border-primary'
               : 'border-border-sub'
           } rounded focus:text-text-primary outline-none`}
         >
-          <div className="p-4 leading-6">간편결제</div>
+          <div className="p-4 leading-6 justify-center items-center">
+            간편결제
+          </div>
         </button>
         <button
           onClick={closeEasyPaymentDropdown}
-          className={`flex-1 border bg-surface ${
+          className={`flex flex-1 justify-center items-center border bg-surface h-[2.75rem] ${
             selectedPayment === 'creditCard'
               ? 'border-border-primary'
               : 'border-border-sub'
           } rounded focus:text-text-primary outline-none`}
         >
-          <div className="p-4 leading-6">신용카드</div>
+          <div className="p-4 justify-center items-center leading-6">
+            신용카드
+          </div>
         </button>
       </div>
 
