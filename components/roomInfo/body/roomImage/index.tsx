@@ -25,11 +25,13 @@ const RoomImageComponent = () => {
   return (
     <div className="relative bg-blue-gray-50 mt-[3.75rem]">
       <Swiper
-        loop={true}
         onSwiper={handleSwiper}
         navigation
         pagination={{ clickable: true }}
         initialSlide={imgIndex}
+        spaceBetween={0}
+        slidesPerView={1}
+        loop={true}
       >
         {isLoading && (
           <div className="relative w-full h-[16.25rem] animate-pulse">
@@ -44,8 +46,9 @@ const RoomImageComponent = () => {
                   <Image
                     key={data.id}
                     src={data.url}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 100vw"
+                    priority
                     alt={data.url}
                   />
                 )}
