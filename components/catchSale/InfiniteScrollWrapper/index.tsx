@@ -28,6 +28,7 @@ const InfiniteScrollWrapper = () => {
   const region = regionFormat === '' ? 'all' : regionValue;
 
   const filter = filterRecord[dropdown];
+  console.log(filter);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['messages', filter, region],

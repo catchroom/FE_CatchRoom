@@ -70,13 +70,15 @@ const CatchContainer = () => {
   useEffect(() => {
     let catchPercent: number = 0;
     if (selectedPercent !== 0) {
+      setDisable(false);
       if (selectedPercent <= 40) catchPercent = 50;
       else if (selectedPercent >= 50 && selectedPercent <= 80) {
         catchPercent = selectedPercent + 10;
       } else if (selectedPercent >= 90) {
         setIsCatch(false);
+        setDisable(true);
       }
-    } else setDisable(true);
+    }
     setSelectedCatchPrice(price * ((100 - catchPercent) / 100));
     setSelectCatchPercent(catchPercent);
     console.log(selectedPercent, disable);
@@ -116,9 +118,9 @@ const CatchContainer = () => {
           isDisabled={disable}
         />
       </div>
-      {isCatch && open && (
+      {open && (
         <div
-          className="flex flex-col p-3 absolute top-12 rounded w-full gap-2.5 bg-surface border border-border-sub shadow-custom"
+          className="flex flex-col p-3 absolute top-12 rounded w-full gap-2.5 bg-surface border border-border-sub shadow-custom z-10"
           data-testid="catch-describe"
         >
           <p className="text-p1 font-bold">

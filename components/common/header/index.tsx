@@ -22,8 +22,8 @@ const Header = ({
   showMoreButton = false,
   showBorder = false,
   showHomeButton = false,
-  isSale = false,
   closeButtonRedirectPath = '',
+  isSale = false,
 }: HeaderProps) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -39,9 +39,8 @@ const Header = ({
   } ${headerUnVisible ? 'z-0' : 'z-20'} `;
 
   const handleCloseBtn = () => {
-    if (isSale) {
-      setModalOpen(true);
-    } else if (closeButtonRedirectPath) {
+    console.log();
+    if (closeButtonRedirectPath) {
       router.push(closeButtonRedirectPath);
     } else {
       router.back();
@@ -51,6 +50,8 @@ const Header = ({
   const handleBackBtn = () => {
     if (pathname === '/mypage/dashboard/purchase') {
       router.push('/mypage');
+    } else if (isSale) {
+      setModalOpen(true);
     } else {
       router.back();
     }
