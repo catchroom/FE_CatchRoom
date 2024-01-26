@@ -51,15 +51,31 @@ const Page = () => {
           phoneNumber={buyerPhoneNumber}
         />
         <PaymentInfo
-          price={priceData ? priceData.sellPrice : sellPrice}
-          totalPrice={priceData ? priceData.totalPrice : price}
-          commission={priceData ? priceData.commissionPrice : commissionPrice}
+          price={
+            priceData && priceData.sellPrice !== 0
+              ? priceData.sellPrice
+              : sellPrice
+          }
+          totalPrice={
+            priceData && priceData.sellPrice !== 0
+              ? priceData.totalPrice
+              : price
+          }
+          commission={
+            priceData && priceData.sellPrice !== 0
+              ? priceData.commissionPrice
+              : commissionPrice
+          }
         />
         <PaymentMethods />
         <TermsAndConditions />
         <PaymentButton
           formRef={guestInfoFormRef}
-          amount={priceData ? priceData.totalPrice : price}
+          amount={
+            priceData && priceData.sellPrice !== 0
+              ? priceData.totalPrice
+              : price
+          }
         />
       </div>
     </>

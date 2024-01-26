@@ -57,7 +57,7 @@ export const negoPriceSelector = selector<{
   key: 'negoPriceSelector',
   get: ({ get }) => {
     const sellPrice = get(negoPriceAtom);
-    const commissionPrice = sellPrice * 0.5;
+    const commissionPrice = sellPrice * 0.05;
     const totalPrice = sellPrice + commissionPrice;
 
     const returnPrice = {
