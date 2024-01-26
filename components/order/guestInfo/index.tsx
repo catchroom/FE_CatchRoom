@@ -67,7 +67,13 @@ const GuestInfo = forwardRef(
     const handleSelectState = () => {
       setValue('sameAsReservation', !isChecked);
     };
-    const baseInputStyle = `w-full rounded-md border border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2`;
+
+    const defaultInputStyle = `w-full h-[3.25rem] rounded-md border  border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2`;
+    const checkedInputStyle =
+      'w-full h-[3.25rem] rounded-md border border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2 bg-surface-gray';
+
+    const baseInputStyle = isChecked ? checkedInputStyle : defaultInputStyle;
+
     const inputWrapperStyle =
       'relative flex items-center border border-border-sub rounded-md';
 
@@ -75,7 +81,7 @@ const GuestInfo = forwardRef(
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col mb-8">
           <div className="mx-[-20px]">
-            <div className="w-full border-t-8 border-border-sub mb-6"></div>
+            <div className="w-full border-t-8  border-border-sub mb-6"></div>
           </div>
           <div className="flex flex-col gap-3">
             <span className="text-h5 font-semibold text-gray-1000 mb-3">
@@ -97,7 +103,7 @@ const GuestInfo = forwardRef(
                   }`}
                   disabled={isChecked}
                 />
-                {watchedName && (
+                {!isChecked && watchedName && (
                   <div
                     onClick={() => clearInput('name')}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2"
@@ -124,7 +130,7 @@ const GuestInfo = forwardRef(
                   }`}
                   disabled={isChecked}
                 />
-                {watchedPhone && (
+                {!isChecked && watchedPhone && (
                   <div
                     onClick={() => clearInput('phone')}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2"
