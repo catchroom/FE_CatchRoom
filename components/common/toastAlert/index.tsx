@@ -2,27 +2,30 @@
 import React, { useEffect } from 'react';
 import { Alert } from '@material-tailwind/react';
 import { motion } from 'framer-motion';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { AlertMessageState, AlertOpenState } from '@/atoms/toastAlert/alert';
 
 const ToastAlertComponent = () => {
   const [alertMessage] = useRecoilState<string>(AlertMessageState);
   const [isOpen, setIsOpen] = useRecoilState(AlertOpenState);
+  const resetAlertMessage = useResetRecoilState(AlertMessageState);
 
   const alertCloseHandler = () => {
     setIsOpen(false);
+    resetAlertMessage();
   };
 
   useEffect(() => {
     if (isOpen) {
       const floating = setTimeout(() => {
         setIsOpen(false);
+        resetAlertMessage();
       }, 4000);
       return () => {
         clearTimeout(floating);
       };
     }
-  }, [isOpen, setIsOpen]);
+  }, [isOpen, setIsOpen, resetAlertMessage]);
 
   return (
     <div className="flex items-center fixed bottom-0  w-full  mb-28  z-[2000]">
@@ -32,7 +35,7 @@ const ToastAlertComponent = () => {
         onClose={alertCloseHandler}
         animate={{
           mount: { y: 0 },
-          unmount: { y: 100 },
+          unmount: { y: 0 },
         }}
       >
         <motion.div
