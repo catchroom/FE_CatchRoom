@@ -34,7 +34,7 @@ const CatchItem = ({
   const checkOutString = formatDateWithDay(checkOut!);
 
   return (
-    <div className="flex flex-col relative w-full mt-5 rounded-lg border border-gray-200">
+    <div className="flex flex-col relative w-full mt-5 rounded-lg border border-gray-200 cursor-pointer">
       <div className="absolute flex top-[12px] left-4 bg-black gap-1 p-[10px] rounded-3xl items-center z-10">
         <White />
         <span className="text-white">{region}</span>
@@ -56,7 +56,7 @@ const CatchItem = ({
           </div>
         </div>
       </div>
-      <div className="h-[184px] relative">
+      <div className="h-[184px] relative" onClick={handleItemClick}>
         <Image
           src={image!}
           alt="숙소이미지"
@@ -65,7 +65,10 @@ const CatchItem = ({
           className="rounded-t-xl"
         />
       </div>
-      <div className="flex flex-col gap-1 p-5 bg-surface">
+      <div
+        className="flex flex-col gap-1 p-5 bg-surface"
+        onClick={handleItemClick}
+      >
         <div className="flex justify-between">
           <div className="flex">
             <CalendarIcon />
@@ -77,10 +80,7 @@ const CatchItem = ({
             구매가 {originalPrice?.toLocaleString()}
           </p>
         </div>
-        <div
-          className="flex justify-between font-bold"
-          onClick={handleItemClick}
-        >
+        <div className="flex justify-between font-bold">
           <div className="text-h5">
             {accommodationName.length > 7
               ? `${accommodationName.substring(0, 7)}...`

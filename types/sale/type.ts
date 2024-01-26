@@ -3,11 +3,11 @@ export type ProductItem = {
   discountRate: number;
   sellPrice: number;
   actualProfit: number;
-  catchprice: number;
+  catchprice?: number;
   endDate: string;
   introduction: string;
   isAutoCatch: boolean;
   isCatch: boolean;
   isNego: boolean;
-  catchPriceStartDate: string;
+  catchPriceStartDate?: string;
 };
