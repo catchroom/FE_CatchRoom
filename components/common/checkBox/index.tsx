@@ -49,7 +49,7 @@ const CheckBoxComponent = ({
       )}
       <label
         htmlFor={id}
-        className={`${isLabelTextBold ? 'font-semibold' : 'font-medium'} 
+        className={`${isLabelTextBold ? 'font-semibold' : 'font-normal'} 
         ${isLabelTextUnderline ? 'underline' : ''} pl-2 text-t2 cursor-pointer`}
       >
         {labelText}

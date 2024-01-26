@@ -71,6 +71,7 @@ const TermsAndConditions = () => {
             labelText={text}
             isBoxChecked={selectedTerms.includes(id)}
             handleSelectState={() => handleSelectTerm(id)}
+            isLabelTextBold={false}
           />
           <Link
             href={detailLink}
