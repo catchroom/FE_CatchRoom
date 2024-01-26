@@ -12,14 +12,19 @@ export const deadLineItems = async (date: string) => {
 };
 
 // 2. 날짜별 체크인 마감임박 상품 조회 전체 페이지
-export const deadLinePageItems = async (
-  date: string,
-  filter: string,
-  region: string,
-  pageNumber: number,
-) => {
+export const deadLinePageItems = async ({
+  date,
+  filter,
+  region,
+  pageParam,
+}: {
+  date: string;
+  filter: string | undefined;
+  region: string;
+  pageParam: number;
+}) => {
   const res = await axios.get(
-    `https://catchroom.xyz/v1/main/product/list?dataType=4&date=${date}&filter=${filter}&region=${region}&pageNumber=${pageNumber}`,
+    `https://catchroom.xyz/v1/main/product/list?dataType=4&date=${date}&filter=${filter}&region=${region}&pageNumber=${pageParam}`,
   );
 
   const list = res.data.data.list;

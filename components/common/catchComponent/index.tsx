@@ -62,14 +62,10 @@ const CatchSpecialComponent = ({
     deleteBtnHandler();
   };
 
-  // 반응형 작업중입니다! 지우지 말아주세요~
-  // const truncateString = (str: string) => {
-  //   if (str.length > 10) {
-  //     return str.substring(0, 10) + '...';
-  //   } else {
-  //     return str;
-  //   }
-  // };
+  const truncateString = (str: string) => {
+    if (str.length > 13) return str.substring(0, 10) + '...';
+    else return str;
+  };
 
   return (
     <div className="relative w-full h-36">
@@ -95,10 +91,10 @@ const CatchSpecialComponent = ({
             </div>
             <div className=" flex flex-col items-start mt-3 gap-3 ">
               <div className="text-t1 font-bold leading-none truncate overflow-ellipsis">
-                {accommodationName}
+                {truncateString(accommodationName)}
               </div>
               <div className="text-t1 font-bold leading-none text-text-sub break-keep overflow-ellipsis">
-                {roomName!}
+                {truncateString(roomName!)}
               </div>
             </div>
           </div>

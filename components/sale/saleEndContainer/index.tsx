@@ -27,8 +27,6 @@ const SaleEndContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isProduct, selected, checkInDate]);
 
-  console.log(isProduct, date);
-
   useEffect(() => {
     setSelected(date);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,11 +37,6 @@ const SaleEndContainer = () => {
   const year = isProduct ? checkIn!.getFullYear() : date!.getFullYear();
   const month = isProduct ? checkIn!.getMonth() + 1 : date!.getMonth() + 1;
   const day = isProduct ? checkIn!.getDate() : date!.getDate();
-
-  const realHour =
-    time === '오전' ? (hour === 12 ? 0 : hour) : hour === 12 ? 12 : hour + 12;
-  const combinedDateTime = new Date(year, month, day, realHour, minute);
-  console.log(combinedDateTime);
 
   const title =
     selected === undefined
@@ -60,7 +53,6 @@ const SaleEndContainer = () => {
           : hour.toString() +
             ':' +
             (minute < 10 ? '0' + minute.toString() : minute.toString()));
-
   return (
     <div className="w-full flex flex-col mt-5">
       <h2 className="text-h5 font-semibold">판매 종료일 설정</h2>
@@ -74,7 +66,9 @@ const SaleEndContainer = () => {
         buttonSelect="search"
         icon="calendar"
         closeButton={true}
-        innerButtonTitle={title + '로 설정하기'}
+        innerButtonTitle={
+          selected !== undefined ? title + '로 설정하기' : title
+        }
       >
         <div className="w-full flex flex-col">
           <div className="w-full h-[476px]">

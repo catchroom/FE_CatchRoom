@@ -1,29 +1,47 @@
 'use client';
-import React from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import React, { useEffect } from 'react';
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from 'recoil';
 import { searchDropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
 import { DROP_DOWN_TWO } from '@/constants/catchSale';
 import RegionBottomSheet from '@/components/common/searchBtmSheets/region';
 import { weekCalendarDate } from '@/atoms/checkInImnt/weekCalendar';
-import { regionIndex } from '@/atoms/search-detail/searchStates';
+import {
+  isRegionCheckedState,
+  regionBooleanIndex,
+  regionIndex,
+} from '@/atoms/search-detail/searchStates';
 import { useDeadLinePageItems } from '@/api/deadline-items/query';
+import { formatDate } from '@/utils/formatDate';
 
 const BottomHeader = () => {
+  const resetIsRegionChecked = useResetRecoilState(isRegionCheckedState);
+  const resetRegionIndex = useResetRecoilState(regionIndex);
+  const resetRegionBooleanIndex = useResetRecoilState(regionBooleanIndex);
+  const resetDropdownState = useResetRecoilState(searchDropdownState);
+
   const [dropdownTitle, setDropdownTitle] = useRecoilState(searchDropdownState);
   const setModal = useSetRecoilState(outerBottomSheetsControl);
   const currentDate = useRecoilValue(weekCalendarDate);
   const filter = useRecoilValue(searchDropdownState);
   const region = useRecoilValue(regionIndex);
 
-  const dateFormat =
-    currentDate.getFullYear() +
-    '-' +
-    currentDate.getMonth() +
-    1 +
-    '-' +
-    currentDate.getDate();
+  useEffect(() => {
+    resetIsRegionChecked();
+    resetRegionIndex();
+    resetRegionBooleanIndex();
+
+    resetDropdownState();
+    //eslint-disable-next-line
+  }, []);
+
+  const dateFormat = formatDate(currentDate);
 
   const filterFormat = (): string | undefined => {
     if (filter === '할인율 높은순') return 'HIGH_DISCOUNT';
@@ -46,7 +64,7 @@ const BottomHeader = () => {
 
   return (
     <div className="flex items-center justify-between w-full h-[4.75rem] p-5 border-border-sub border-t text-xl text-p1 font-semibold">
-      <p className="text-t2 font-bold">총 {data && data.list.length}건</p>
+      <p className="text-t2 font-bold">총 {data && data.size}건</p>
       <div className="flex gap-1">
         <RegionBottomSheet buttonStyle="dropdown" usePinIcon={true} />
         <BottomSheetsWithoutCloseBtn

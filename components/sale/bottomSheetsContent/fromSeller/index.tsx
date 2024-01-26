@@ -3,7 +3,6 @@
 import { useMutationProduct } from '@/api/sale/query';
 import { catchPriceState, catchState } from '@/atoms/sale/catchAtom';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
-import { isFromSalePageState } from '@/atoms/sale/pageAtom';
 import {
   percentState,
   priceState,
@@ -25,7 +24,7 @@ import { FromSeller, sellerSchema } from '@/constants/zodSchema';
 import { ProductItem } from '@/types/sale/type';
 import { formatDate } from '@/utils/formatDate';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -35,7 +34,6 @@ const FromSeller = () => {
   const [isNego, setIsNego] = useRecoilState(isNegoState);
   const [sellerContent, setSellerContent] = useRecoilState(sellerContentState);
   const [wordCount, setWordCount] = useState(0);
-  const router = useRouter();
   const { register, setValue } = useForm<FromSeller>({
     resolver: zodResolver(sellerSchema),
     mode: 'onChange',
@@ -49,21 +47,19 @@ const FromSeller = () => {
   const id = params?.get('id');
   const catchPriceStartDate = useRecoilValue(catchSingleDate);
   const endDate = useRecoilValue(saleSingleDate);
-  const [sellPrice, setSellPrice] = useRecoilState(priceState);
   const actualProfit = useRecoilValue(totalPriceState);
-  const [discountRate, setDiscountRate] = useRecoilState(percentState);
-  const [isAutoCatch, setIsAutoCatch] = useRecoilState(catchState);
-  const catchprice = useRecoilValue(catchPriceState);
+  const sellPrice = useRecoilValue(priceState);
+  const discountRate = useRecoilValue(percentState);
+  const isAutoCatch = useRecoilValue(catchState);
+  const catchPrice = useRecoilValue(catchPriceState);
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
 
-  const [time, setTime] = useRecoilState(timeState);
-  const [hour, setHour] = useRecoilState(hourState);
-  const [minute, setMinute] = useRecoilState(minuteState);
+  const hour = useRecoilValue(hourState);
+  const minute = useRecoilValue(minuteState);
+  const time = useRecoilValue(timeState);
 
   const [timeISOString, setTimeISOString] = useState('');
-
-  const setIsFromSalePageState = useSetRecoilState(isFromSalePageState);
 
   useEffect(() => {
     // isProduct가 true이고, sellerContent에 값이 있을 때만 setValue 호출
@@ -120,17 +116,7 @@ const FromSeller = () => {
   const onConfirm = () => {
     handleModalOpen();
     setHeaderUnVisible(false);
-    setIsAutoCatch(false);
-    setSellPrice(0);
-    setDiscountRate(0);
-    setHeaderUnVisible(false);
-    setIsNego(false);
-    setSellerContent('');
-    setIsProduct(false);
-    setTime('오후');
-    setHour(11);
-    setMinute(59);
-    router.push('/');
+    window.location.href = '/';
   };
   const handleButtonClick = () => {
     let productData: ProductItem;
@@ -152,7 +138,7 @@ const FromSeller = () => {
           discountRate: discountRate,
           sellPrice: sellPrice,
           actualProfit: actualProfit,
-          catchprice: catchprice,
+          catchPrice: catchPrice,
           endDate: timeISOString,
           introduction: sellerContent,
           isAutoCatch: isAutoCatch,
@@ -181,7 +167,7 @@ const FromSeller = () => {
           discountRate: discountRate,
           sellPrice: sellPrice,
           actualProfit: actualProfit,
-          catchprice: catchprice,
+          catchPrice: catchPrice,
           endDate: timeISOString,
           introduction: sellerContent,
           isAutoCatch: isAutoCatch,
@@ -214,18 +200,10 @@ const FromSeller = () => {
   };
   const handleMutationSucess = (data: APIresponse) => {
     console.log(data);
-    setIsFromSalePageState(true);
-    setSellPrice(0);
-    setDiscountRate(0);
-    setIsNego(false);
-    setSellerContent('');
-    setTime('오후');
-    setHour(11);
-    setMinute(59);
     setIsProduct(false);
     if (data.code === 4010 || data.code === 4020) {
       setHeaderUnVisible(false);
-      return router.push(`/room-info/${data.data.id}`);
+      window.location.href = `/room-info/${data.data.id}?ref=sale`;
     } else {
       setModalContent('이미 등록된 상품입니다.');
       setOpen(true);

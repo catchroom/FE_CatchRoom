@@ -33,7 +33,7 @@ const InfiniteScrollWrapper = () => {
     >
       <div
         id="scrollableDiv"
-        className="w-full max-h-[calc(100vh-52px)] overflow-auto flex flex-col mt-[52px] gap-12 px-6 pt-2"
+        className="w-full max-h-[calc(100vh-52px)] overflow-auto flex flex-col mt-[52px] gap-12 pt-2"
       >
         {' '}
         {data ? (
