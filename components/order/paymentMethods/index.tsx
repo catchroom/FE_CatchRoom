@@ -40,7 +40,7 @@ const PaymentMethods = () => {
   return (
     <>
       <div className="mx-[-20px]">
-        <div className="w-full border-t-8 border-border-sub mb-6"></div>
+        <div className="w-full border-t-8 bg-black opacity-5 mb-6"></div>
       </div>
       <h5 className="mb-2 text-h5 font-semibold text-text-DEFAULT">
         결제 수단

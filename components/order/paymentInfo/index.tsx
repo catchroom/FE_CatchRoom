@@ -5,7 +5,7 @@ const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
   return (
     <>
       <div className="mx-[-20px]">
-        <div className="w-full border-t-8 border-border-sub mb-6"></div>
+        <div className="w-full border-t-8 bg-black opacity-5 mb-6"></div>
       </div>
       <div className="flex flex-col justify-between mb-6 gap-3">
         <h5 className="text-h5 font-semibold text-text-DEFAULT mb-2">
