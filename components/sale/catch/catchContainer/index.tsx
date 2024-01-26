@@ -44,12 +44,6 @@ const CatchContainer = () => {
 
   const isProduct = useRecoilValue(isProductState);
 
-  // useEffect(() => { // 만약 등록된 상품이 아니라면 catch 설정 초기화 위한 코드
-  //   if (!isProduct) setIsCatch(false);
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   useEffect(() => {
     // 만약 등록된 상품이면 퍼센트 값을 계산하기 위함
     if (isProduct && isCatch) {

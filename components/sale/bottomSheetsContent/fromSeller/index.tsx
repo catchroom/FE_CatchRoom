@@ -49,17 +49,17 @@ const FromSeller = () => {
   const id = params?.get('id');
   const catchPriceStartDate = useRecoilValue(catchSingleDate);
   const endDate = useRecoilValue(saleSingleDate);
-  const [sellPrice, setSellPrice] = useRecoilState(priceState);
   const actualProfit = useRecoilValue(totalPriceState);
-  const [discountRate, setDiscountRate] = useRecoilState(percentState);
-  const [isAutoCatch, setIsAutoCatch] = useRecoilState(catchState);
+  const sellPrice = useRecoilValue(priceState);
+  const discountRate = useRecoilValue(percentState);
+  const isAutoCatch = useRecoilValue(catchState);
   const catchPrice = useRecoilValue(catchPriceState);
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
 
-  const [time, setTime] = useRecoilState(timeState);
-  const [hour, setHour] = useRecoilState(hourState);
-  const [minute, setMinute] = useRecoilState(minuteState);
+  const hour = useRecoilValue(hourState);
+  const minute = useRecoilValue(minuteState);
+  const time = useRecoilValue(timeState);
 
   const [timeISOString, setTimeISOString] = useState('');
 
@@ -120,17 +120,8 @@ const FromSeller = () => {
   const onConfirm = () => {
     handleModalOpen();
     setHeaderUnVisible(false);
-    setIsAutoCatch(false);
-    setSellPrice(0);
-    setDiscountRate(0);
-    setHeaderUnVisible(false);
-    setIsNego(false);
-    setSellerContent('');
-    setIsProduct(false);
-    setTime('오후');
-    setHour(11);
-    setMinute(59);
     router.push('/');
+    window.location.href = '/';
   };
   const handleButtonClick = () => {
     let productData: ProductItem;
@@ -215,17 +206,10 @@ const FromSeller = () => {
   const handleMutationSucess = (data: APIresponse) => {
     console.log(data);
     setIsFromSalePageState(true);
-    setSellPrice(0);
-    setDiscountRate(0);
-    setIsNego(false);
-    setSellerContent('');
-    setTime('오후');
-    setHour(11);
-    setMinute(59);
     setIsProduct(false);
     if (data.code === 4010 || data.code === 4020) {
       setHeaderUnVisible(false);
-      return router.push(`/room-info/${data.data.id}`);
+      window.location.href = `/room-info/${data.data.id}`;
     } else {
       setModalContent('이미 등록된 상품입니다.');
       setOpen(true);
