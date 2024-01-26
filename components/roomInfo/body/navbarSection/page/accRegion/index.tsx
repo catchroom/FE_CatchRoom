@@ -32,8 +32,9 @@ const NavAccRegionComponent = () => {
         {/* {data && data.data.longitude} 경도 */}
         <Image
           src="/sample/map.png"
-          layout="fill"
-          objectFit="cover"
+          fill
+          sizes="(max-width: 640px) 100vw, 100vw"
+          priority
           alt="숙소사진"
         />
       </div>
