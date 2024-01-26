@@ -19,10 +19,8 @@ const ReviewContent = ({
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
-  console.log(type, id, productId);
 
   const { data } = useQueryGetReview(type, id);
-  console.log(data);
 
   const handleEdit = () => {
     router.push(
@@ -40,7 +38,11 @@ const ReviewContent = ({
 
   const handleDelete = () => {
     fn && fn();
-    deleteReviews(type, id).then((res) => console.log(res.data));
+    deleteReviews(type, id).then((res) => {
+      if (res.code === 2025) {
+        window.location.href = '/mypage/dashboard/sales';
+      }
+    });
     closeModal();
   };
 

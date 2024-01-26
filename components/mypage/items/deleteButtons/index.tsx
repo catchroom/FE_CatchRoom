@@ -16,11 +16,10 @@ const DeleteButtons = ({ id }: { id: number }) => {
 
   const modalOpen = (id: number) => {
     setOpenModal(true);
-    console.log(id);
     deleteSalesList(id).then((res) => {
-      console.log(res);
       if (res.code === 4030) {
         alertOpenHandler();
+        window.location.href = '/mypage/dashboard/sales';
       }
     });
   };

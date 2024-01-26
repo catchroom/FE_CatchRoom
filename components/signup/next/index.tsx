@@ -228,11 +228,17 @@ const SignUpInfo = () => {
           />
         )}
 
-        {errors.nickname && errors.nickname.message ? (
+        {!nickname ? (
+          <div className="text-gray-600 text-p2">
+            2~8자, 한글/영문/숫자 혼합
+          </div>
+        ) : errors.nickname && errors.nickname.message ? (
           <p className="text-border-critical mb-3">{errors.nickname.message}</p>
+        ) : !confirmedNickname ? (
+          <p className="text-border-critical mb-3">중복확인 필요합니다.</p>
         ) : (
           <div className="text-gray-600 text-p2">
-            2~12자, 한글/영문/숫자 혼합
+            2~8자, 한글/영문/숫자 혼합
           </div>
         )}
 

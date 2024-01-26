@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { postReview, editReview } from '@/api/mypage/api';
 import { useQueryGetReview } from '@/api/mypage/query';
+import { useRouter } from 'next/navigation';
 
 const ReviewForm = ({
   id,
@@ -18,27 +19,35 @@ const ReviewForm = ({
   type: '구매' | '판매';
   reviewId?: number;
 }) => {
+  const router = useRouter();
+  const { data } = useQueryGetReview(type, reviewId);
+
   const { alertOpenHandler } = useToastAlert('리뷰를 등록했습니다.');
   const [wordCount, setWordCount] = useState(0);
   const { register, handleSubmit, setValue } = useForm<FormReview>({
     resolver: zodResolver(reviewSchema),
     mode: 'onChange',
+    defaultValues: { content: data?.content },
   });
-
-  console.log(type, id, reviewId);
-
-  const { data } = useQueryGetReview(type, reviewId);
-  console.log(data);
 
   const onSubmit: SubmitHandler<FormReview> = async (reviewData) => {
     if (reviewSchema.safeParse(reviewData).success) {
       console.log(reviewData);
       if (reviewId) {
-        editReview(type, reviewData.content, reviewId).then((res) => res.data);
+        editReview(type, reviewData.content, reviewId).then((res) => {
+          if (res.code === 2023) {
+            router.push('/mypage/dashboard/sales');
+            alertOpenHandler();
+          }
+        });
       } else {
-        postReview(type, reviewData.content, id).then((res) => res.data);
+        postReview(type, reviewData.content, id).then((res) => {
+          if (res.code === 2021) {
+            router.push('/mypage/dashboard/sales');
+            alertOpenHandler();
+          }
+        });
       }
-      alertOpenHandler();
     }
   };
 
