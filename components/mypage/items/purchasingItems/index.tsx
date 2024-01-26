@@ -29,12 +29,7 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
 
   return (
     <div id="container" className="w-full px-5 py-3 flex flex-col gap-3">
-      <div
-        className="w-full flex flex-col cursor-pointer"
-        onClick={() => {
-          router.push(`/room-info/${item.productId}`);
-        }}
-      >
+      <div className="w-full flex flex-col">
         {/* 호텔 이미지, 이름, 가격 정보 */}
         <div className="w-full flex gap-4">
           <div className="relative w-[120px] h-[120px]">
@@ -45,7 +40,10 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
               fill={true}
               sizes="(max-width: 480px) 500px, (max-width: 320px) 500px, 180px"
               priority
-              className="rounded-md object-cover"
+              className="rounded-md object-cover cursor-pointer"
+              onClick={() => {
+                router.push(`/room-info/${item.productId}`);
+              }}
             />
             {/* 캐치특가 여부 판단 */}
             {item.isCatch && (
