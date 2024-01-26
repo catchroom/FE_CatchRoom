@@ -14,6 +14,7 @@ const OfferMessage = ({
   accept,
   deny,
 }: {
+  me: boolean;
   negoPrice: number;
   time: string;
   isSeller: boolean;
@@ -34,10 +35,16 @@ const OfferMessage = ({
     deny(negoPrice as number);
   };
 
+  const sellerStyle = isSeller
+    ? 'flex flex-row-reverse items-end gap-3'
+    : 'flex items-end gap-3';
+
   return (
-    <>
-      <p className="text-gray-500 text-t3">{formatTime(time)}</p>
-      <div className="w-60 ml-auto bg-white flex flex-col box-border border border-gray-300 rounded-md overflow-hidden">
+    <div className={sellerStyle}>
+      <p className={`text-gray-500 text-t3`}>{formatTime(time)}</p>
+      <div
+        className={`w-60 bg-white flex flex-col box-border border border-gray-300 rounded-md overflow-hidden`}
+      >
         {chatInfo.accommodationUrl ? (
           <div className="relative w-60 h-32">
             <Image
@@ -81,7 +88,7 @@ const OfferMessage = ({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
