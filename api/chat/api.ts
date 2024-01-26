@@ -52,7 +52,6 @@ export const createChatRoom = async (
 
 // 이전 채팅 가져오기
 export const fetchPreviousChat = async (roomId: string, token: string) => {
-  console.log('roomId는', roomId);
   const data = await apiChatClient.get(
     `/v1/chat/room/find?id=${roomId}&page=0`,
     {
@@ -77,7 +76,6 @@ export const infinitePreviousChat = async ({
   roomId: string;
   token: string;
 }) => {
-  console.log('pageParam은', pageParam);
   const data = await apiChatClient.get(
     `/v1/chat/room/find?page=${pageParam}&id=${roomId}`,
     {

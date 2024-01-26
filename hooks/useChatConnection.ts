@@ -79,7 +79,6 @@ export const useChatConnection = (roomId: string) => {
         negoPrice: -1,
       }),
     });
-    console.log('메시지 전송', userId);
   };
 
   // 가격 제안

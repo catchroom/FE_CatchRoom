@@ -8,7 +8,6 @@ const UserOut = ({ partnerNickName }: { partnerNickName: string }) => {
   const setOutState = useSetRecoilState(userOutAtom);
 
   useEffect(() => {
-    console.log('userOut');
     setOutState(true);
   }, [setOutState]);
   return (
