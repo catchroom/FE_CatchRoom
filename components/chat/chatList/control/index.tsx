@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, ReactNode } from 'react';
+import React, { useEffect } from 'react';
 import { useRoomConnection } from '@/hooks/useRoomConnection';
+import ChatListViewer from '../viewer';
 
-const ChatConrol = ({ children }: { children: ReactNode }) => {
-  const { connect, disconnect } = useRoomConnection();
+const ChatConrol = () => {
+  const { connect, disconnect, deleteRoom } = useRoomConnection();
 
   useEffect(() => {
     connect();
@@ -14,7 +15,11 @@ const ChatConrol = ({ children }: { children: ReactNode }) => {
     // eslint-disable-next-line
   }, []);
 
-  return <div className="w-full h-full">{children}</div>;
+  return (
+    <div className="w-full h-full">
+      <ChatListViewer deleteRoom={deleteRoom} />
+    </div>
+  );
 };
 
 export default ChatConrol;

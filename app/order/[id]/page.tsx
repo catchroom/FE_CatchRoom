@@ -11,10 +11,13 @@ import TermsAndConditions from '@/components/order/termsAndConditions';
 import React, { useRef } from 'react';
 import { useQueryGetOrderProduct } from '@/api/order/query';
 import { useParams } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { negoPriceSelector } from '@/atoms/chat/chatContentAtom';
 // const productId = 18;
 const Page = () => {
   const params = useParams<{ id: string }>();
   const productId = params ? parseInt(params.id, 10) : 0;
+  const priceData = useRecoilValue(negoPriceSelector);
 
   const { data, isLoading, error } = useQueryGetOrderProduct(productId);
 
@@ -26,6 +29,7 @@ const Page = () => {
   const { accommodationName, productName, checkInDate, checkOutDate } =
     data.product;
   const { buyerName, buyerPhoneNumber } = data.buyer;
+
   const { sellPrice, commissionPrice, price } = data.payment;
 
   return (
@@ -47,13 +51,16 @@ const Page = () => {
           phoneNumber={buyerPhoneNumber}
         />
         <PaymentInfo
-          price={sellPrice}
-          totalPrice={price}
-          commission={commissionPrice}
+          price={priceData ? priceData.sellPrice : sellPrice}
+          totalPrice={priceData ? priceData.totalPrice : price}
+          commission={priceData ? priceData.commissionPrice : commissionPrice}
         />
         <PaymentMethods />
         <TermsAndConditions />
-        <PaymentButton formRef={guestInfoFormRef} amount={price} />
+        <PaymentButton
+          formRef={guestInfoFormRef}
+          amount={priceData ? priceData.totalPrice : price}
+        />
       </div>
     </>
   );

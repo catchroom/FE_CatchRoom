@@ -43,3 +43,29 @@ export const chatRoomInfo = atom<ChatInitialInfo>({
 });
 
 export const defaultValue = {} as ChatRoomType;
+
+export const negoPriceAtom = atom<number>({
+  key: 'negoPriceAtom',
+  default: 0,
+});
+
+export const negoPriceSelector = selector<{
+  sellPrice: number;
+  commissionPrice: number;
+  totalPrice: number;
+}>({
+  key: 'negoPriceSelector',
+  get: ({ get }) => {
+    const sellPrice = get(negoPriceAtom);
+    const commissionPrice = sellPrice * 0.5;
+    const totalPrice = sellPrice + commissionPrice;
+
+    const returnPrice = {
+      sellPrice,
+      commissionPrice,
+      totalPrice,
+    };
+
+    return returnPrice;
+  },
+});
