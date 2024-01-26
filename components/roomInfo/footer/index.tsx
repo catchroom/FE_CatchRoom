@@ -116,7 +116,7 @@ const FooterComponent = () => {
               placeholder="Button"
               type="button"
               onClick={createChat}
-              className={`${buttonClass} w-1/2 bg-white border border-main text-main`}
+              className={`${buttonClass} w-1/2 bg-white border border-main text-p3 text-main`}
             >
               채팅으로 문의하기
             </Button>

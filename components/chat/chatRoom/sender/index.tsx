@@ -92,7 +92,7 @@ const ChatMessageSender = ({
             onChange={handleInputChange}
             className={`grow resize-none ${
               userOut ? ' bg-surface-secondary text-sub' : 'bg-surface-gray'
-            } px-4 py-2 text-start h-[40px] max-h-[96px] text-t2 rounded-[20px] outline-none ease-in focus:border focus:border-border-primary`}
+            } px-4 py-2 text-start h-[40px] max-h-[96px] text-t2 rounded-[20px] outline-none ease-in focus:outline focus:outline-border-primary`}
           />
           <button type="submit" className="pl-3 cursor-pointer">
             <SendIconSVG send={hasValue} />

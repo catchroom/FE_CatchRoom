@@ -19,7 +19,7 @@ export const useRoomConnection = () => {
   const accessToken = cookies.accessToken;
   const userId = cookies.userId;
 
-  const { data } = useGetChatRoom(accessToken);
+  const { data } = useGetChatRoom(accessToken, userId);
 
   // 초기 데이터 로딩
   useEffect(() => {

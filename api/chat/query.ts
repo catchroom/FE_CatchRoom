@@ -7,10 +7,11 @@ import {
   infinitePreviousChat,
 } from './api';
 
-export const useGetChatRoom = (token: string) => {
+export const useGetChatRoom = (token: string, userId: number) => {
+  console.log(userId);
   const { data, isLoading, error } = useQuery({
     queryKey: ['chatRoom'],
-    queryFn: () => fetchChatRoom(token),
+    queryFn: () => fetchChatRoom(token, userId),
   });
 
   return { data, isLoading, error };
