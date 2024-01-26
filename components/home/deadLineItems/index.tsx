@@ -10,6 +10,7 @@ import { useRecoilValue } from 'recoil';
 import { useDeadLineItems } from '@/api/deadline-items/query';
 import { DeadLineItem } from '@/types/deadline-items/types';
 import { formatDate } from '@/utils/formatDate';
+import DeadLineSkeletonUI from './deadLineSkeletonUI/idex';
 
 const CheckInComponent = () => {
   const { isBtnLoading, btnHandler } = useBtnLoading('/deadline-items');
@@ -17,7 +18,7 @@ const CheckInComponent = () => {
 
   const date = formatDate(currentDate);
 
-  const { data } = useDeadLineItems(date);
+  const { data, isLoading } = useDeadLineItems(date);
 
   const { pageHandler } = useProductInfoPage();
 
@@ -34,6 +35,8 @@ const CheckInComponent = () => {
 
         {/* 캐치특가 상품 목록 */}
         <div className="w-full h-[436px] flex flex-col justify-start gap-[2rem] overflow-hidden">
+          {isLoading && <DeadLineSkeletonUI />}
+
           {data &&
             data.list.map((data: DeadLineItem) => {
               return (

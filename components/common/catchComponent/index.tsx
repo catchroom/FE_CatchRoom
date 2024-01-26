@@ -71,7 +71,7 @@ const CatchSpecialComponent = ({
     <div className="relative w-full h-36">
       <div className="flex cursor-pointer" onClick={pageHandler}>
         {/* 숙소 이미지 및 캐치특가 */}
-        <div className="relative flex w-[120px] max-w-[120px] overflow-hidden rounded-md mr-4">
+        <div className="relative flex flex-shrink-0 w-[120px] max-w-[120px] overflow-hidden rounded-md mr-4">
           {catchType ? (
             <div className="absolute flex items-center z-[4] px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
               캐치 특가
@@ -83,22 +83,22 @@ const CatchSpecialComponent = ({
         </div>
 
         {/* 숙소정보 */}
-        <div className="flex-grow flex-col ">
-          <div className="mb-3 ">
+        <div className="flex-grow flex-col">
+          <div className="mb-3 truncate">
             <div className="flex items-center gap-1 text-t3 font-semibold">
               <CalendarIcon />
               {checkInString} - {checkOutString}
             </div>
             <div className=" flex flex-col items-start mt-3 gap-3 ">
-              <div className="text-t1 font-bold leading-none truncate overflow-ellipsis">
+              <div className="text-t1 font-bold leading-none ">
                 {truncateString(accommodationName)}
               </div>
-              <div className="text-t1 font-bold leading-none text-text-sub break-keep overflow-ellipsis">
+              <div className="text-t1 font-bold leading-none text-text-sub break-keep">
                 {truncateString(roomName!)}
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start lg:items-end ">
+          <div className="flex flex-col items-start lg:items-end">
             <div className="flex flex-wrap text-p2 text-gray-600">
               <p className="line-through">
                 구매가&nbsp;{originalPrice?.toLocaleString('us-EN')}원
