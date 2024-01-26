@@ -8,7 +8,7 @@ const ReviewSkeletonUI = () => {
         className="space-y-8 animate-pulse  md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 rounded flex p-5"
       >
         <div className="w-full flex flex-col gap-3">
-          <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
+          <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
           <div className="flex flex-col w-full">
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
@@ -16,7 +16,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -33,7 +33,7 @@ const ReviewSkeletonUI = () => {
         className="space-y-8 animate-pulse  md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 rounded flex p-5"
       >
         <div className="w-full flex flex-col gap-3">
-          <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
+          <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
           <div className="flex flex-col w-full">
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
@@ -41,7 +41,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -58,7 +58,7 @@ const ReviewSkeletonUI = () => {
         className="space-y-8 animate-pulse  md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 rounded flex p-5"
       >
         <div className="w-full flex flex-col gap-3">
-          <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
+          <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
           <div className="flex flex-col w-full">
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
@@ -66,7 +66,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -83,7 +83,7 @@ const ReviewSkeletonUI = () => {
         className="space-y-8 animate-pulse  md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 rounded flex p-5"
       >
         <div className="w-full flex flex-col gap-3">
-          <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
+          <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
           <div className="flex flex-col w-full">
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
@@ -91,7 +91,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -108,7 +108,7 @@ const ReviewSkeletonUI = () => {
         className="space-y-8 animate-pulse  md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 rounded flex p-5"
       >
         <div className="w-full flex flex-col gap-3">
-          <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
+          <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[90px] mb-4"></div>
           <div className="flex flex-col w-full">
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
             <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[157px] mb-4"></div>
@@ -116,7 +116,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
