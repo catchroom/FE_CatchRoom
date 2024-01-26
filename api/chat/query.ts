@@ -1,15 +1,17 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import {
+  createChatRoom,
   fetchChatInfo,
   fetchChatRoom,
   fetchPreviousChat,
   infinitePreviousChat,
 } from './api';
 
-export const useGetChatRoom = (token: string) => {
+export const useGetChatRoom = (token: string, userId: number) => {
+  console.log(userId);
   const { data, isLoading, error } = useQuery({
     queryKey: ['chatRoom'],
-    queryFn: () => fetchChatRoom(token),
+    queryFn: () => fetchChatRoom(token, userId),
   });
 
   return { data, isLoading, error };
@@ -50,4 +52,21 @@ export const useInfiniteScroll = (roomId: string, token: string) => {
   });
 
   return { data, fetchNextPage, hasNextPage };
+};
+
+export const useCreateChatRoom = () => {
+  const mutation = useMutation({
+    mutationKey: ['createChatRoom'],
+    mutationFn: ({
+      buyerId,
+      sellerId,
+      productId,
+    }: {
+      buyerId: number;
+      sellerId: number;
+      productId: number;
+    }) => createChatRoom({ buyerId, sellerId, productId }),
+  });
+
+  return mutation;
 };

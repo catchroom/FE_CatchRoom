@@ -14,8 +14,15 @@ export type MessagePropsNoPartial = {
   time: string;
   negoPrice: number;
   isSeller?: boolean;
+  me?: boolean;
   accept: (price: number) => void;
   deny: (price: number) => void;
+};
+
+export type MessageItemType = {
+  negoPrice: number;
+  time: string;
+  isSeller: boolean;
 };
 
 export type MessageItemProps = Omit<MessagePropsNoPartial, 'accept' | 'deny'>;

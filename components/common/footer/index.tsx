@@ -1,6 +1,7 @@
 import React from 'react';
 import yanolja from '@/public/Yanolja_CI.png';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -20,8 +21,15 @@ const Footer = () => {
         </p>
       </div>
       <div className="flex gap-[19px] text-text-secondary underline decoration-solid text-p2">
-        <p className="cursor-pointer">개인정보 처리방침</p>
-        <p className="cursor-pointer">서비스 이용약관</p>
+        <Link href="https://team4989faq.oopy.io/">
+          <p>FAQ</p>
+        </Link>
+        <Link href="/mypage/dashboard/privacy">
+          <p className="cursor-pointer">개인정보 처리방침</p>
+        </Link>
+        <Link href="/mypage/dashboard/terms">
+          <p className="cursor-pointer">서비스 이용약관</p>
+        </Link>
         <Image src={yanolja} alt="야놀자 로고" />
       </div>
       <div className="text-t4 text-text-sub">

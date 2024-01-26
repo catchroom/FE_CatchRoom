@@ -48,7 +48,7 @@ const BottomSheetsContent = ({ price }: PropsType) => {
           );
         })}
       </div>
-      <div className="flex flex-col gap-2.5 px-4 py-3 rounded bg-surface-sub border border-border-sub mb-10">
+      <div className="flex flex-col gap-2.5 px-4 py-3 rounded bg-surface-sub border border-border-sub">
         <p className="text-t1 font-bold text-text-primary">캐치특가란?</p>
         <p className="text-p2 text-text-sub">
           구매가 대비 50% 이상 할인율 설정시 홈 상단에 노출되며 판매

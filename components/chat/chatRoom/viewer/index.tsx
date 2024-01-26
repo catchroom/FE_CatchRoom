@@ -4,7 +4,6 @@ import { chatContentAtom } from '@/atoms/chat/chatContentAtom';
 import React, { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import MessageItem from '@/components/chat/chatRoom/messageItem';
-// import InfiniteScrollWrapper from '../infiniteWrapper';
 import ChatMessageSender from '../sender';
 import { useInfiniteScroll } from '@/api/chat/query';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -24,7 +23,6 @@ const ChatMessageViewer = ({
   token: string;
 }) => {
   const { data, fetchNextPage, hasNextPage } = useInfiniteScroll(roomId, token);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const messages = useRecoilValue(chatContentAtom);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
 

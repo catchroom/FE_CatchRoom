@@ -59,8 +59,6 @@ const OfferModal = ({ publish }: { publish: (price: number) => void }) => {
       publish(Number(data.price));
       reset();
       closeModal();
-    } else {
-      console.log('제안하기 실패');
     }
   };
 

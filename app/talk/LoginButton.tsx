@@ -10,9 +10,9 @@ const createNewRoom = async (token: string) => {
   const data = await axios.post(
     'https://catchroom.xyz/v1/chat/room/create',
     {
-      buyerId: 4,
-      sellerId: 28,
-      productId: 108,
+      buyerId: 66,
+      sellerId: 68,
+      productId: 214,
     },
     {
       headers: {
@@ -45,8 +45,8 @@ const fetchLogin = async () => {
   const data = await axios.post(
     'https://catchroom.xyz/v1/user/login',
     {
-      email: 'hyem5019@email.com',
-      password: 'qweras!123',
+      email: 'test0126@gmail.com',
+      password: 'test0126?',
       // email: 'test927@naver.com',
       // password: 'test927@',
     },

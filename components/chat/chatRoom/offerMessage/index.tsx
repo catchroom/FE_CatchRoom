@@ -1,11 +1,12 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import DefaultBtn from '../../common/defaultBtn/index';
 import Image from 'next/image';
 import { formatTime } from '@/utils/formatTime';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { useRecoilValue } from 'recoil';
 import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
+import { userOutAtom } from '@/atoms/chat/leaveButton';
+import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
+import SimpleBorderButton from '@/components/common/sheetsButtons/simpleBorderButton';
 
 const OfferMessage = ({
   negoPrice,
@@ -20,24 +21,27 @@ const OfferMessage = ({
   accept: (price: number) => void;
   deny: (price: number) => void;
 }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter();
+  const isUserOut = useRecoilValue(userOutAtom);
   const chatInfo = useRecoilValue(chatRoomInfo);
 
   const handleAccept = () => {
-    console.log('accept');
     accept(negoPrice as number);
   };
 
   const handleDeny = () => {
-    console.log('deny');
     deny(negoPrice as number);
   };
 
+  const sellerStyle = isSeller
+    ? 'flex flex-row-reverse items-end gap-3'
+    : 'flex items-end gap-3';
+
   return (
-    <>
-      <p className="text-gray-500 text-t3">{formatTime(time)}</p>
-      <div className="w-full bg-white flex flex-col items-center box-border border border-gray-300 rounded-md overflow-hidden">
+    <div className={sellerStyle}>
+      <p className={`text-gray-500 text-t3`}>{formatTime(time)}</p>
+      <div
+        className={`w-60 bg-white flex flex-col box-border border border-gray-300 rounded-md overflow-hidden`}
+      >
         {chatInfo.accommodationUrl ? (
           <div className="relative w-60 h-32">
             <Image
@@ -68,20 +72,20 @@ const OfferMessage = ({
         </div>
         {isSeller && (
           <div className="flex w-full gap-1 px-4 pb-4">
-            <DefaultBtn
-              label="거절하기"
-              theme="secondary"
-              onClick={handleDeny}
+            <SimpleBorderButton
+              disabled={isUserOut && true}
+              name="거절하기"
+              fn={handleDeny}
             />
-            <DefaultBtn
-              label="승인하기"
-              theme="primary"
-              onClick={handleAccept}
+            <SimpleButton
+              disabled={isUserOut && true}
+              name="승인하기"
+              fn={handleAccept}
             />
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

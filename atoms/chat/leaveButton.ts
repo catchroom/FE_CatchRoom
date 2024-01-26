@@ -19,3 +19,8 @@ export const userOutAtom = atom({
   key: 'userOutAtom',
   default: false,
 });
+
+export const dealHistoryAtom = atom({
+  key: 'dealHistoryAtom',
+  default: false,
+});

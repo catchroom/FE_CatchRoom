@@ -17,26 +17,27 @@ export const useRoomConnection = () => {
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
-  const userId = cookies.id;
+  const userId = cookies.userId;
 
-  const { data } = useGetChatRoom(accessToken);
+  console.log(accessToken, userId, '쿠키');
+
+  const { data } = useGetChatRoom(accessToken, userId);
 
   // 초기 데이터 로딩
   useEffect(() => {
-    setUserOut(false);
-
     if (!data) return;
     setChatList(data);
-  }, [data, setChatList, setUserOut]);
+  }, [data, setChatList]);
 
   // 연결
   const connect = () => {
+    setUserOut(false);
     const sockjs = new SockJS('https://catchroom.store/ws-stomp', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       reportErrors: true,
-      debug: true,
+      debug: false,
     });
 
     const wsClient = Stomp.over(() => sockjs);
@@ -51,6 +52,7 @@ export const useRoomConnection = () => {
       () => {
         ws.current?.subscribe(`/sub/chat/roomlist/${userId}`, (message) => {
           const recv = JSON.parse(message.body);
+          console.log(recv, '받은거');
           setChatList(recv);
         });
       },

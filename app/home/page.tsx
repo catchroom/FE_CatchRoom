@@ -2,7 +2,7 @@ import BottomNav from '@/components/common/bottomNav';
 import BottomSheets from '@/components/common/bottomSheets';
 import Footer from '@/components/common/footer';
 import CatchContainer from '@/components/home/catch/catchContainer';
-import CheckInComponent from '@/components/home/checkIn';
+import CheckInComponent from '@/components/home/deadLineItems';
 import Content from '@/components/home/content';
 import Header from '@/components/home/header';
 import ReviewContainer from '@/components/home/review/reviewContainer';
