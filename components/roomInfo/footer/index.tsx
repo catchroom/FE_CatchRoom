@@ -34,15 +34,11 @@ const FooterComponent = () => {
 
   //채팅방 생성
   const createChat = () => {
+    console.log('채팅방 생성');
     if (accessToken === undefined) {
       setOpen(true);
       return;
     }
-    mutation.mutate({
-      buyerId,
-      sellerId,
-      productId: Number(id),
-    });
 
     mutation.mutate(
       {
@@ -52,6 +48,7 @@ const FooterComponent = () => {
       },
       {
         onSuccess: (data) => {
+          console.log(data);
           router.push(`/chat/${data}`);
           successOpenHandler();
         },
