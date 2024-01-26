@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { apiClient } from '../user/apiClient';
 import { apiChatClient } from './apiChatClient';
 
@@ -25,26 +24,20 @@ export const fetchChatRoom = async (token: string) => {
 };
 
 // 3. 채팅방 생성
-export const createChatRoom = async (
-  buyerId: number,
-  sellerId: number,
-  productId: number,
-  token: string,
-) => {
-  const data = await axios.post(
-    'https://catchroom.xyz/v1/chat/room/create',
-    {
-      buyerId: buyerId,
-      sellerId: sellerId,
-      productId: productId,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
+export const createChatRoom = async ({
+  buyerId,
+  sellerId,
+  productId,
+}: {
+  buyerId: number;
+  sellerId: number;
+  productId: number;
+}) => {
+  const data = await apiClient.post('/v1/chat/room/create', {
+    buyerId: buyerId,
+    sellerId: sellerId,
+    productId: productId,
+  });
 
   const result = await data.data.data.chatRoomNumber;
   return result;
