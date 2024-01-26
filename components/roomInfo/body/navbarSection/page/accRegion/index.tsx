@@ -27,7 +27,7 @@ const NavAccRegionComponent = () => {
   return (
     <div className="w-full h-[235px]">
       <div className="relative w-full h-[205px] ">
-        {/* 카카오 지도 들어갈 자리 */}
+        {/* 카카오 지도 들어갈 자리! */}
         {/* {data && data.data.latitude} 위도 */}
         {/* {data && data.data.longitude} 경도 */}
         <Image
