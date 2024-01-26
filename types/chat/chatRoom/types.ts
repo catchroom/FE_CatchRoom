@@ -38,6 +38,8 @@ export type ChatRoomType = {
   lastChatmessageDto: ChatMessageDto;
 };
 
+export type ChatInitialInfo = Omit<ChatRoomType, 'lastChatmessageDto'>;
+
 export type ChatMessageDto = {
   type: string;
   roomId: string;

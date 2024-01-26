@@ -16,7 +16,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -41,7 +41,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -66,7 +66,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -91,7 +91,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
@@ -116,7 +116,7 @@ const ReviewSkeletonUI = () => {
 
           <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[120px] mb-4"></div>
         </div>
-        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
+        <div className="flex items-center justify-center w-[140px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700 mr-5">
           <svg
             className="w-10 text-gray-200 dark:text-gray-600"
             aria-hidden="true"

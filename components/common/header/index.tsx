@@ -13,6 +13,7 @@ import { priceState } from '@/atoms/sale/priceAtom';
 import { allCheckState } from '@/atoms/sale/checkAtom';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
 import { isProductState } from '@/atoms/sale/productAtom';
+import { usePathname } from 'next/navigation';
 
 const Header = ({
   title,
@@ -25,7 +26,7 @@ const Header = ({
   closeButtonRedirectPath = '',
 }: HeaderProps) => {
   const router = useRouter();
-
+  const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
   const setPrice = useSetRecoilState(priceState);
   const setAllCheck = useSetRecoilState(allCheckState);
@@ -42,6 +43,14 @@ const Header = ({
       setModalOpen(true);
     } else if (closeButtonRedirectPath) {
       router.push(closeButtonRedirectPath);
+    } else {
+      router.back();
+    }
+  };
+
+  const handleBackBtn = () => {
+    if (pathname === '/mypage/dashboard/purchase') {
+      router.push('/mypage');
     } else {
       router.back();
     }
@@ -78,7 +87,7 @@ const Header = ({
       )}
       <header className={headerClass}>
         {showBackButton ? (
-          <button onClick={handleCloseBtn} className="justify-self-start">
+          <button onClick={handleBackBtn} className="justify-self-start">
             <BackIcon />
           </button>
         ) : showCloseButton ? (

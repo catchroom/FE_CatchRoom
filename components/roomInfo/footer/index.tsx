@@ -2,8 +2,6 @@
 
 import React from 'react';
 import { Button } from '@material-tailwind/react';
-// import { UseParamsType } from '@/types/room-info/types';
-// import { useParams } from 'next/navigation';
 // import { useRoomItem } from '@/api/room-info/query';
 import { useRecoilState } from 'recoil';
 import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
@@ -15,7 +13,6 @@ import { useCookies } from 'react-cookie';
 
 // 판매자 유무에 따른 버튼노출 처리 필요
 // 현재 헤더의 화면전환 버튼을 이용한 전역상태로 바뀌는 중
-
 const FooterComponent = () => {
   const [viewerState] = useRecoilState(viewerTestButton);
   const [cookies] = useCookies();
@@ -37,6 +34,10 @@ const FooterComponent = () => {
       accessToken,
     );
     router.push(`/chat/${chatRoomId}`);
+  };
+
+  const handlePurchaseClick = () => {
+    router.push(`/order/${id}`);
   };
 
   const buttonClass =
@@ -66,7 +67,7 @@ const FooterComponent = () => {
           <Button
             placeholder="Button"
             type="button"
-            onClick={() => console.log('구매하기 버튼 클릭')}
+            onClick={handlePurchaseClick}
             className={`${buttonClass} w-1/2 bg-main text-white`}
           >
             구매하기

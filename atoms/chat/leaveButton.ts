@@ -14,3 +14,8 @@ export const dealModalAtom = atom({
   key: 'dealModalAtom',
   default: false,
 });
+
+export const userOutAtom = atom({
+  key: 'userOutAtom',
+  default: false,
+});

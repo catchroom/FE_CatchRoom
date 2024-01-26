@@ -1,34 +1,48 @@
+'use client';
+import { useQueryGetOrderOrderComplete } from '@/api/order/query';
 import CompleteMessage from '@/components/complete/completeMessage';
 import NavButton from '@/components/complete/navButton';
 import ProductDetails from '@/components/complete/productDetails';
 import ReservationInfo from '@/components/complete/reservationInfo';
+import { UseParamsType } from '@/types/room-info/types';
 import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 
-const page = () => {
-  const accommodationName = '제주신라호텔';
-  const roomName = '스탠다드 더블';
-  const normalCapacity = 2;
-  const maxCapacity = 4;
-  const imageUrl = '/sample/room3.png';
+const Page = () => {
+  const params = useParams<{ id: string }>();
+  const { id } = useParams() as UseParamsType;
+  const productId = params ? parseInt(params.id, 10) : 0;
+  const router = useRouter();
+  const { data, isLoading, error } = useQueryGetOrderOrderComplete(productId);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data</div>;
+  if (!data) return <div>No data available</div>;
+  const { accommodationName, roomName, normalCapacity, maxCapacity, image } =
+    data.accommodation;
+  const { price } = data.sellPrice;
+  const { nickName } = data.seller;
 
   const bookingDetails = {
     bookingHolder: {
-      name: '홍길동',
-      phoneNumber: '010-1234-5678',
+      name: data?.buyer.buyerName,
+      phoneNumber: data?.buyer.buyerPhoneNumber,
     },
     guest: {
-      name: '홍길동',
-      phoneNumber: '010-1234-5678',
+      name: data?.user.userName,
+      phoneNumber: data?.user.userPhoneNumber,
     },
-    totalPrice: 200000,
-    paymentMethod: '카드',
   };
+  const handleViewDetailClick = () => {
+    router.push(`/order/complete/detail?id=${id}`);
+  };
+
   return (
     <>
       <div className="flex flex-col container mx-auto w-full px-5 pt-16 pb-5  bg-bg">
         <div>
-          <CompleteMessage guest={bookingDetails.guest} />
+          <CompleteMessage nickName={nickName} />
         </div>
         <div className="flex flex-col container p-5 bg-white">
           <ProductDetails
@@ -36,13 +50,13 @@ const page = () => {
             roomName={roomName}
             normalCapacity={normalCapacity}
             maxCapacity={maxCapacity}
-            imageUrl={imageUrl}
+            imageUrl={image}
           />
           <ReservationInfo
             bookingHolder={bookingDetails.bookingHolder}
             guest={bookingDetails.guest}
-            totalPrice={bookingDetails.totalPrice}
-            paymentMethod={bookingDetails.paymentMethod}
+            totalPrice={price}
+            paymentMethod={data.paymentMethod}
           />
         </div>
         <div className="fixed flex gap-2 ml-[-1.25rem]  bottom-0 bg-white border-t border-border-sub p-5  h-17 w-full max-w-[480px] z-50">
@@ -55,12 +69,11 @@ const page = () => {
             </Link>
           </div>
           <div className="w-full h-full">
-            <Link href="/order/complete/detail">
-              <NavButton
-                label="상세보기"
-                colorClass="bg-border-primary text-white"
-              />
-            </Link>
+            <NavButton
+              label="상세보기"
+              colorClass="bg-border-primary text-white"
+              onClick={handleViewDetailClick}
+            />
           </div>
         </div>
       </div>
@@ -68,4 +81,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

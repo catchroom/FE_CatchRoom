@@ -8,12 +8,11 @@ import { useSetRecoilState } from 'recoil';
 import { ChatMessageDto, ChatRoomType } from '@/types/chat/chatRoom/types';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { useSsrAtom } from '@/atoms/chat/chatContentAtom';
 import { useRouter } from 'next/navigation';
+import { truncate } from 'lodash-es';
 
 const ChatItem = ({ item }: { item: ChatRoomType }) => {
   const setDeleteRoomInfo = useSetRecoilState(deleteModalIdAtom);
-  const [, setValue] = useSsrAtom();
   const setIsOpen = useSetRecoilState(isModalState);
   const router = useRouter();
 
@@ -39,7 +38,6 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
   // 채팅방 클릭시 채팅방으로 이동
   const handleClick = () => {
     console.log('clickInfo', item);
-    setValue(item);
     router.push(`/chat/${item.chatRoomNumber}`);
   };
 
@@ -49,12 +47,13 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
       onClick={handleClick}
     >
       {/* 채팅방 사진 보여주는 데이터 */}
-      <div className="w-12 h-12 relative">
+      <div className="w-12 h-12 relative flex-shrink-0">
         <Image
           src={item.accommodationUrl}
           className="rounded-md"
           alt="숙소사진"
           fill={true}
+          priority
           sizes="(max-width: 640px) 50vw, 100vw"
         />
       </div>
@@ -68,7 +67,10 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
           </p>
         </div>
         <p className="text-text text-t2">
-          {viewRecentMessage(item.lastChatmessageDto)}
+          {truncate(viewRecentMessage(item.lastChatmessageDto), {
+            length: 20,
+            omission: '...',
+          })}
         </p>
       </div>
       <div className="ml-auto" onClick={handleModalOpen}>

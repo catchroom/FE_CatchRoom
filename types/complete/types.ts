@@ -12,7 +12,5 @@ export type ReservationInfoProps = {
 };
 
 export type CompleteMessageProps = {
-  guest: {
-    name: string;
-  };
+  nickName: string;
 };

@@ -32,11 +32,7 @@ const CatchContainer = () => {
   const selectedPrice = useRecoilValue(priceState);
   const selectedPercent = useRecoilValue(percentState);
 
-  const percent = selectedPercent <= 40 ? 50 : selectedPercent + 10;
-
   const selectedSaleEndDate = useRecoilValue(saleSingleDate);
-
-  console.log('캐치특가', selectedSaleEndDate);
 
   const [selected, setSelected] = useRecoilState(catchSingleDate); // 캐치특가 선택 날짜
 
@@ -72,15 +68,17 @@ const CatchContainer = () => {
     useRecoilState(catchPercentState);
 
   useEffect(() => {
+    let catchPercent: number = 0;
     if (selectedPercent !== 0) {
-      if (selectedPercent <= 40) setSelectCatchPercent(50);
+      if (selectedPercent <= 40) catchPercent = 50;
       else if (selectedPercent >= 50 && selectedPercent <= 80) {
-        setSelectCatchPercent(selectedPercent + 10);
+        catchPercent = selectedPercent + 10;
       } else if (selectedPercent >= 90) {
         setIsCatch(false);
       }
     } else setDisable(true);
-    setSelectedCatchPrice(price * ((100 - percent) / 100));
+    setSelectedCatchPrice(price * ((100 - catchPercent) / 100));
+    setSelectCatchPercent(catchPercent);
     console.log(selectedPercent, disable);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);

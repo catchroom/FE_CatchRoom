@@ -14,6 +14,7 @@ const nextConfig = {
       'res.cloudinary.com',
       'yaimg.yanolja.com',
       'tong.visitkorea.or.kr',
+      'cdn.visitkorea.or.kr',
     ],
   },
   async redirects() {
