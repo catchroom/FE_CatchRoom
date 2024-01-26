@@ -18,7 +18,6 @@ export const useChatConnection = (roomId: string) => {
 
   const { data } = useGetPreviousChat(roomId, accessToken);
   const { data: chatInfo } = useInitialChatInfo(roomId, accessToken);
-  console.log('새로운 데이터가 왔어요~');
   const ws = useRef<CompatClient | null>(null);
 
   // 초기 데이터 로딩
@@ -37,7 +36,7 @@ export const useChatConnection = (roomId: string) => {
         Authorization: `Bearer ${accessToken}`,
       },
       reportErrors: true,
-      debug: true,
+      debug: false,
     });
     const wsClient = Stomp.over(() => sockjs);
     ws.current = wsClient;

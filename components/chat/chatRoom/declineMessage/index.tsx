@@ -8,13 +8,16 @@ import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 const DeclineMessage = ({ negoPrice, time, isSeller }: MessageProps) => {
   const chatInfo = useRecoilValue(chatRoomInfo);
 
+  console.log(chatInfo, 'chatInfo');
+  console.log(isSeller, 'isSeller     ssssssssss');
+
   const sellerStyle = isSeller
     ? 'flex items-end gap-3'
     : 'flex flex-row-reverse items-end gap-3';
 
   return (
     <div className={sellerStyle}>
-      <p className={`text-gray-500 text-t3`}>{formatTime(time)}</p>
+      <p className={`text-gray-500 text-t3 `}>{formatTime(time)}</p>
       <div
         className={`w-60 bg-white flex flex-col items-center box-border border border-border-sub rounded-md overflow-hidden`}
       >
