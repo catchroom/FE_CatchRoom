@@ -12,8 +12,8 @@ export const roomItemInfo = async (id: string | string[] | undefined) => {
 };
 
 // 2. 채팅방 가져오기
-export const fetchChatRoom = async (token: string) => {
-  const data = await apiChatClient.get('/v1/chat/room/list', {
+export const fetchChatRoom = async (token: string, userId: number) => {
+  const data = await apiChatClient.get(`/v1/chat/room/list?userId=${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
