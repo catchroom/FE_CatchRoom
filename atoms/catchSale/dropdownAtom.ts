@@ -7,5 +7,5 @@ export const dropdownState = atom<string>({
 
 export const searchDropdownState = atom<string>({
   key: 'searchDropdownState',
-  default: '낮은 가격순',
+  default: '할인율 높은순',
 });
