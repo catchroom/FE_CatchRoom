@@ -26,7 +26,7 @@ const ReviewItem = ({
       </div>
       <div className="flex flex-col py-5 pl-5 pr-6">
         <p className="text-t2 font-bold">{productName}</p>
-        <p className="mt-2 text-t3 line-clamp-2">{content}</p>
+        <p className="mt-2 text-t3 line-clamp-2 max-w-[140px]">{content}</p>
         <p className="mt-3 text-t4 text-text-sub">
           {userName} • {date}
         </p>

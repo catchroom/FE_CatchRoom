@@ -25,7 +25,7 @@ import {
   catchSingleDate,
   saleSingleDate,
 } from '@/atoms/search-detail/searchStates';
-import { catchState } from '@/atoms/sale/catchAtom';
+import { catchPriceState, catchState } from '@/atoms/sale/catchAtom';
 
 type Props = {
   id: string | string[] | undefined;
@@ -47,6 +47,7 @@ const SaleInfoContainer = ({ id }: Props) => {
   const setTime = useSetRecoilState(timeState);
   const setHour = useSetRecoilState(hourState);
   const setMinute = useSetRecoilState(minuteState);
+  const setCatchPrice = useSetRecoilState(catchPriceState);
   useEffect(() => {
     if (isProduct && data) {
       const endDate = new Date(data?.endDate);
@@ -61,9 +62,11 @@ const SaleInfoContainer = ({ id }: Props) => {
         else setHour(hour - 12);
       }
       setMinute(endDate.getMinutes());
-      if (data.isCatch) {
+      if (data.isAutoCatch) {
+        console.log('데이터 받아올때 캐치특가 가격 출력, ', data.catchPrice);
         const catchDate = new Date(data?.catchPriceStartDate);
         setCatchEndDate(catchDate);
+        setCatchPrice(data.catchPrice);
       }
       setPercent(data?.discountRate);
       setPrice(data?.sellPrice);

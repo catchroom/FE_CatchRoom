@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { apiClient } from '../user/apiClient';
 import { apiChatClient } from './apiChatClient';
 
@@ -30,12 +31,12 @@ export const createChatRoom = async (
   productId: number,
   token: string,
 ) => {
-  const data = await apiChatClient.post(
-    '/v1/chat/room/create',
+  const data = await axios.post(
+    'https://catchroom.xyz/v1/chat/room/create',
     {
-      buyerId,
-      sellerId,
-      productId,
+      buyerId: buyerId,
+      sellerId: sellerId,
+      productId: productId,
     },
     {
       headers: {
@@ -46,8 +47,6 @@ export const createChatRoom = async (
   );
 
   const result = await data.data.data.chatRoomNumber;
-  console.log(result);
-  console.log(buyerId, sellerId, productId);
   return result;
 };
 

@@ -5,8 +5,10 @@ import CalendarSVG from '@/public/svgComponent/mediumCalendar';
 import ReviewButtons from '../reviewButtons';
 import DeleteButtons from '../deleteButtons';
 import { ReviewType, getDotDate } from '@/utils/get-dot-date';
+import { useRouter } from 'next/navigation';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
+  const router = useRouter();
   const reEnroll =
     item.dealState === 'DONEDEAL' ? (
       <span className=" text-text-primary underline">기한 수정</span>
@@ -43,14 +45,20 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
 
   return (
     <div className="w-full px-5 py-3 flex flex-col gap-3">
-      <div id="container" className="w-full flex flex-col">
+      <div
+        id="container"
+        className="w-full flex flex-col cursor-pointer"
+        onClick={() => {
+          router.push(`/room-info/${item.productId}`);
+        }}
+      >
         {/* 호텔 이미지, 이름, 가격 정보 */}
         <div className="flex w-full gap-4">
           <div className="relative w-[120px] h-[120px]">
             {/* 호텔 이미지 */}
             {isNotIng && (
               <div className="absolute flex z-10 items-center justify-center inset-0 backdrop-saturate-50 backdrop-brightness-75">
-                <p className="text-text-on font-semibold text-t2">
+                <p className="text-text-on font-semibold text-t2 ">
                   {sellState}
                 </p>
               </div>
