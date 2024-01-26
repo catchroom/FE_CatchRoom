@@ -10,7 +10,13 @@ const HeadWrapper = () => {
 
   const headerValue = pathname === '/chat' ? true : false;
   return (
-    <>{headerValue ? <Header title="채팅" showBackButton /> : <ChatHeader />}</>
+    <>
+      {headerValue ? (
+        <Header title="채팅" showBackButton showBorder />
+      ) : (
+        <ChatHeader />
+      )}
+    </>
   );
 };
 
