@@ -3,11 +3,11 @@
 import MoreIcon from '@/public/svgComponent/moreIcon';
 import React, { MouseEventHandler } from 'react';
 
-const MoreButton = ({ fn }: { fn: MouseEventHandler<HTMLButtonElement> }) => {
+const MoreButton = ({ fn }: { fn: MouseEventHandler<HTMLDivElement> }) => {
   return (
-    <button onClick={fn}>
+    <div onClick={fn}>
       <MoreIcon />
-    </button>
+    </div>
   );
 };
 

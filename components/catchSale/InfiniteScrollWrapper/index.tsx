@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { regionIndex } from '@/atoms/search-detail/searchStates';
+import { useProductInfoPage } from '@/hooks/useProductInfoPage';
 
 const InfiniteScrollWrapper = () => {
   const dataType = 2;
@@ -47,6 +48,8 @@ const InfiniteScrollWrapper = () => {
     setTotalSize(data?.pages[0].size);
   }, [data?.pages, setTotalSize]);
 
+  const { pageHandler } = useProductInfoPage();
+
   return (
     <InfiniteScroll
       dataLength={data?.pages.length || 0}
@@ -67,6 +70,7 @@ const InfiniteScrollWrapper = () => {
                 <CatchSpecialComponent
                   key={item.productId}
                   accommodationName={item.accommodationName}
+                  pageHandler={() => pageHandler(item.productId!)}
                   roomName={item.roomName}
                   checkIn={item.checkIn}
                   checkOut={item.checkOut}

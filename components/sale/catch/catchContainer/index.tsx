@@ -21,9 +21,11 @@ import {
   catchSingleDate,
   saleSingleDate,
 } from '@/atoms/search-detail/searchStates';
+import { isProductState } from '@/atoms/sale/productAtom';
 
 const CatchContainer = () => {
   const price = useRecoilValue(productPriceState); //product price
+  const catchPrice = useRecoilValue(catchPriceState); //catch price
 
   const [open, setOpen] = useState(false);
   const [isCatch, setIsCatch] = useRecoilState(catchState);
@@ -35,19 +37,46 @@ const CatchContainer = () => {
   const selectedSaleEndDate = useRecoilValue(saleSingleDate);
 
   const [selected, setSelected] = useRecoilState(catchSingleDate); // 캐치특가 선택 날짜
+  const [selectedCatchPrice, setSelectedCatchPrice] =
+    useRecoilState(catchPriceState);
+  const [selectedCatchPercent, setSelectCatchPercent] =
+    useRecoilState(catchPercentState);
+
+  const isProduct = useRecoilValue(isProductState);
+
+  // useEffect(() => { // 만약 등록된 상품이 아니라면 catch 설정 초기화 위한 코드
+  //   if (!isProduct) setIsCatch(false);
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
-    setIsCatch(false);
+    // 만약 등록된 상품이면 퍼센트 값을 계산하기 위함
+    if (isProduct && isCatch) {
+      console.log(price, catchPrice);
+      setSelectCatchPercent(100 - (catchPrice / price) * 100);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isProduct, isCatch]);
 
   useEffect(() => {
-    if (selectedSaleEndDate instanceof Date) {
+    const today = new Date();
+    if (!isCatch) return;
+    if (!isProduct && selectedSaleEndDate instanceof Date) {
+      //만약 등록된 상품이 아니고 판매 날짜가 선택되었을 때
       const endDate = new Date(selectedSaleEndDate);
       endDate.setDate(endDate.getDate() - 1);
       setSelected(endDate);
-      const today = new Date();
       if (selectedSaleEndDate.toDateString() === today.toDateString()) {
+        // 그날짜가 체크인 날짜와 같다면 캐치특가 박스 disabled
+        setDisable(true);
+        setIsCatch(false);
+      } else setDisable(false);
+    }
+    if (isProduct) {
+      //만약 등록된 상품인데 판매 날짜가 체크인 날짜와 같으면 캐치특가 박스 disabled
+      if (selectedSaleEndDate!.toDateString() === today.toDateString()) {
+        console.log('잡앗다');
         setDisable(true);
         setIsCatch(false);
       } else setDisable(false);
@@ -62,14 +91,13 @@ const CatchContainer = () => {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  const [selectedCatchPrice, setSelectedCatchPrice] =
-    useRecoilState(catchPriceState);
-  const [selectedCatchPercent, setSelectCatchPercent] =
-    useRecoilState(catchPercentState);
-
   useEffect(() => {
     let catchPercent: number = 0;
-    if (selectedPercent !== 0) {
+    if (disable || selectedPercent === 0 || !isCatch) return; // 만약 선택된 가격이 없고 이미 disabled 처리가 됐다면? ( 이미 체크인 날짜가 같아서 캐치특가 설정이 불가할 때 리턴)
+    if (
+      (isProduct && catchPrice === 0) ||
+      (!isProduct && selectedPercent !== 0) //만약 등록된 상품인데 캐치특가가 없을 때
+    ) {
       setDisable(false);
       if (selectedPercent <= 40) catchPercent = 50;
       else if (selectedPercent >= 50 && selectedPercent <= 80) {
@@ -78,10 +106,15 @@ const CatchContainer = () => {
         setIsCatch(false);
         setDisable(true);
       }
+      setSelectedCatchPrice(price * ((100 - catchPercent) / 100));
+      setSelectCatchPercent(catchPercent);
+    } else if (isProduct && catchPrice !== 0) {
+      if (selectedPercent >= 90) {
+        setIsCatch(false);
+        setDisable(true);
+      } else setDisable(false);
     }
-    setSelectedCatchPrice(price * ((100 - catchPercent) / 100));
-    setSelectCatchPercent(catchPercent);
-    console.log(selectedPercent, disable);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPercent]);
 

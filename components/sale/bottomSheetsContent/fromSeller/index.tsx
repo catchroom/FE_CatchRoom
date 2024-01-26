@@ -53,7 +53,7 @@ const FromSeller = () => {
   const actualProfit = useRecoilValue(totalPriceState);
   const [discountRate, setDiscountRate] = useRecoilState(percentState);
   const [isAutoCatch, setIsAutoCatch] = useRecoilState(catchState);
-  const catchprice = useRecoilValue(catchPriceState);
+  const catchPrice = useRecoilValue(catchPriceState);
   const isCatch = discountRate >= 50 ? true : false;
   const [modalContent, setModalContent] = useState('');
 
@@ -152,7 +152,7 @@ const FromSeller = () => {
           discountRate: discountRate,
           sellPrice: sellPrice,
           actualProfit: actualProfit,
-          catchprice: catchprice,
+          catchPrice: catchPrice,
           endDate: timeISOString,
           introduction: sellerContent,
           isAutoCatch: isAutoCatch,
@@ -181,7 +181,7 @@ const FromSeller = () => {
           discountRate: discountRate,
           sellPrice: sellPrice,
           actualProfit: actualProfit,
-          catchprice: catchprice,
+          catchPrice: catchPrice,
           endDate: timeISOString,
           introduction: sellerContent,
           isAutoCatch: isAutoCatch,
