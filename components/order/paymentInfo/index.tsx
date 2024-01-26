@@ -25,7 +25,7 @@ const PaymentInfo = ({ totalPrice, price, commission }: PaymentInfoProps) => {
             {commission?.toLocaleString()}원
           </span>
         </div>
-        <div className="border-t-2 border-border-sub"></div>
+        <div className="border-t-[1px] border-border-sub"></div>
         <div className="flex justify-between items-center">
           <span className="text-t2 text-gray-1000 leading-6">
             최종 결제 금액
