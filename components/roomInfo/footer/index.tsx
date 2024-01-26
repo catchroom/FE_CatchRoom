@@ -33,12 +33,12 @@ const FooterComponent = () => {
   const buyerId: number = cookies.userId;
 
   //채팅방 생성
-  const createChat = async () => {
+  const createChat = () => {
     if (accessToken === undefined) {
       setOpen(true);
       return;
     }
-    await mutation.mutateAsync({
+    mutation.mutate({
       buyerId,
       sellerId,
       productId: Number(id),

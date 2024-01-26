@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { formatTime } from '@/utils/formatTime';
 import { formatCurrency } from '@/utils/formatCurrency';
-import { useRecoilValue } from 'recoil';
-import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { chatRoomInfo, negoPriceAtom } from '@/atoms/chat/chatContentAtom';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import { userOutAtom } from '@/atoms/chat/leaveButton';
 
@@ -15,7 +15,15 @@ const AppoveMessage = ({ negoPrice, time, isSeller }: MessageItemType) => {
   //판매중(onsale)외의 상태값인 경우 버튼 비활성화처리를 위함
   const chatInfo = useRecoilValue(chatRoomInfo);
   const isUserOut = useRecoilValue(userOutAtom);
+  const setNegoPrice = useSetRecoilState(negoPriceAtom);
   const ForSale = chatInfo.dealState === 'ONSALE' ? true : false;
+
+  const productNum = chatInfo.productId;
+
+  const handleClick = () => {
+    setNegoPrice(negoPrice);
+    router.push(`/order/${productNum}`);
+  };
 
   if (isSeller) {
     return (
@@ -92,7 +100,7 @@ const AppoveMessage = ({ negoPrice, time, isSeller }: MessageItemType) => {
             </p>
             <SimpleButton
               name={`${formatCurrency(negoPrice)}` + '원 결제하기'}
-              fn={() => router.push('/order')}
+              fn={handleClick}
               disabled={!ForSale || isUserOut}
             />
           </div>
