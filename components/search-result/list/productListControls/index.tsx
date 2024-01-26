@@ -1,7 +1,7 @@
 'use client';
 
 import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { outerBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
@@ -24,6 +24,16 @@ const ProductListControls = () => {
       setModal(false);
     }
   };
+  const sortOption = useRecoilValue(sortState);
+
+  useEffect(() => {
+    const currentSortOption = DROP_DOWN.find(
+      (option) => option.value === sortOption,
+    );
+    if (currentSortOption) {
+      setDropdownTitle(currentSortOption.name);
+    }
+  }, [sortOption, setDropdownTitle]);
 
   return (
     <div className="fixed z-20 flex items-center justify-between w-full max-w-[480px] p-5 mt-32 border-border-sub text-p1 font-semibold">
