@@ -14,7 +14,7 @@ export const useChatConnection = (roomId: string) => {
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
-  const userId = cookies.id;
+  const userId = cookies.userId;
 
   const { data } = useGetPreviousChat(roomId, accessToken);
   const { data: chatInfo } = useInitialChatInfo(roomId, accessToken);

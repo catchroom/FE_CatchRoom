@@ -17,7 +17,7 @@ export const useRoomConnection = () => {
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
-  const userId = cookies.id;
+  const userId = cookies.userId;
 
   const { data } = useGetChatRoom(accessToken);
 
