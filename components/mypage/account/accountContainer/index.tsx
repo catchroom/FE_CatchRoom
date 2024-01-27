@@ -7,9 +7,21 @@ import React, { ReactNode } from 'react';
 import { useQueryGetAccount } from '@/api/mypage/query';
 import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
 import { deleteAccount } from './../../../../api/mypage/api';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { isWithDrawAtom } from '@/atoms/mypage/menuAtom';
 
 const AccountContainer = ({ children }: { children: ReactNode }) => {
   const { data } = useQueryGetAccount();
+  const setWithdrawValue = useSetRecoilState(isWithDrawAtom);
+
+  useEffect(() => {
+    if (data?.accountNumber) {
+      setWithdrawValue(true);
+    } else {
+      setWithdrawValue(false);
+    }
+  }, [data, setWithdrawValue]);
 
   return (
     <section className="w-full flex flex-col gap-4 px-4 pt-4 mb-4 bg-white ">
