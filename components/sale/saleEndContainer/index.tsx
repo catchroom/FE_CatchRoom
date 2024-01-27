@@ -38,9 +38,14 @@ const SaleEndContainer = () => {
   const month = isProduct ? checkIn!.getMonth() + 1 : date!.getMonth() + 1;
   const day = isProduct ? checkIn!.getDate() : date!.getDate();
 
+  useEffect(() => {
+    if (selected === undefined) setSelected(checkIn);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
+
   const title =
     selected === undefined
-      ? '판매일을 선택해주세요.'
+      ? getDateWithDay(new Date())
       : selectedDateString +
         ' ' +
         time.toString() +
