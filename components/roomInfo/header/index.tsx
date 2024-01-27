@@ -12,6 +12,7 @@ import { useMutationDeleteSaleProduct } from '@/api/sale/query';
 import { isProductState } from '@/atoms/sale/productAtom';
 import { UseParamsType } from '@/types/room-info/types';
 import { useRoomItem } from '@/api/room-info/query';
+import { useToastAlert } from '@/hooks/useToastAlert';
 
 const HeaderComponent = () => {
   const setMoreBottomSheetOpen = useSetRecoilState(
@@ -21,6 +22,7 @@ const HeaderComponent = () => {
   const router = useRouter();
   const { id } = useParams() as UseParamsType;
   const { data } = useRoomItem(id);
+  const { alertOpenHandler } = useToastAlert('게시글을 삭제했어요.');
 
   const mutation = useMutationDeleteSaleProduct();
   const setIsProduct = useSetRecoilState(isProductState);
@@ -102,7 +104,8 @@ const HeaderComponent = () => {
 
   const handleMutationSucess = () => {
     handleModalOpen();
-    router.push('/mypage/dashboard/sales');
+    alertOpenHandler();
+    router.push('/mypage/dashboard/sales?ref=info');
   };
 
   const handleMutationError = () => {

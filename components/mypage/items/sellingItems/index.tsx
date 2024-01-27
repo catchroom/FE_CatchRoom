@@ -51,12 +51,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
           <div className="relative w-[120px] h-[120px]">
             {/* 호텔 이미지 */}
             {isNotIng && (
-              <div
-                className="absolute flex z-10 items-center justify-center inset-0 backdrop-saturate-50 backdrop-brightness-75 cursor-pointer"
-                onClick={() => {
-                  router.push(`/room-info/${item.productId}`);
-                }}
-              >
+              <div className="absolute flex z-10 items-center justify-center inset-0 backdrop-saturate-50 backdrop-brightness-75">
                 <p className="text-text-on font-semibold text-t2 ">
                   {sellState}
                 </p>

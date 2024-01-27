@@ -92,7 +92,7 @@ const PaymentModal = ({ isOpen, onClose, formRef }: ModalProps) => {
 
   return (
     <div className="fixed z-20 inset-0  bg-gray-1000 bg-opacity-50 flex justify-center items-center">
-      <div className="relative bg-white w-full max-w-sm m-auto rounded">
+      <div className="relative bg-white w-auto max-w-[350px] m-auto rounded">
         <div className="p-5">
           <BookingDetails
             accommodationName={productName}
@@ -101,7 +101,7 @@ const PaymentModal = ({ isOpen, onClose, formRef }: ModalProps) => {
             CheckOutDate={checkOutDate}
           />
           <Disclaimer />
-          <div className="flex justify-center space-x-4 mt-5">
+          <div className="flex justify-center gap-2 mt-8 ml-2 mr-2">
             <ActionButton
               action={onClose}
               label="취소"

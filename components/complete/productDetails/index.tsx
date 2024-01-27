@@ -22,8 +22,12 @@ const ProductDetails = ({
               src={imageUrl}
               alt={accommodationName}
               layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
+              sizes="(max-width: 390px) 100vw, 390px"
+              // width={128}
+              // height={128}
+              // objectFit="cover"
+              className="rounded-lg object-cover"
+              priority
             />
           </div>
           <div>

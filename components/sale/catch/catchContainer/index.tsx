@@ -87,20 +87,18 @@ const CatchContainer = () => {
   useEffect(() => {
     let catchPercent: number = 0;
     console.log(isProduct, selectedPercent);
-    if (disable || selectedPercent === 0) return; // 만약 선택된 가격이 없고 이미 disabled 처리가 됐다면? ( 이미 체크인 날짜가 같아서 캐치특가 설정이 불가할 때 리턴)
+    if (disable && selectedPercent === 0) return; // 만약 선택된 가격이 없고 이미 disabled 처리가 됐다면? ( 이미 체크인 날짜가 같아서 캐치특가 설정이 불가할 때 리턴)
     if (
       (isProduct && catchPrice === 0) ||
       (!isProduct && selectedPercent !== 0) //만약 등록된 상품인데 캐치특가가 없을 때
     ) {
       setDisable(false);
-      console.log('ㅗㅗㅗㅗ');
       if (selectedPercent <= 40) catchPercent = 50;
       else if (selectedPercent >= 50 && selectedPercent <= 80) {
         catchPercent = selectedPercent + 10;
       } else if (selectedPercent >= 90) {
         setIsCatch(false);
         setDisable(true);
-        console.log('gma');
       }
       setSelectedCatchPrice(price * ((100 - catchPercent) / 100));
       setSelectCatchPercent(catchPercent);

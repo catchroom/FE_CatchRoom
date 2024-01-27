@@ -1,10 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const SearchBar = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const router = useRouter();
 
   const pageHandler = () => {
