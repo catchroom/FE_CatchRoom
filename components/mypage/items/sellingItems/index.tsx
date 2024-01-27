@@ -10,20 +10,19 @@ import { useSetRecoilState } from 'recoil';
 import { isProductState } from '@/atoms/sale/productAtom';
 import { getReviewState, getSellState } from '@/utils/mypage-utils';
 import ReEnrollButton from '../reEnrollButton';
+import { mypageRoutingAtom } from '@/atoms/mypage/mypageRoutingAtom';
 import { getDotDate } from '@/utils/get-dot-date';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
   const setIsProduct = useSetRecoilState(isProductState);
+  const setMypageRouting = useSetRecoilState(mypageRoutingAtom);
   const router = useRouter();
 
   const handleEditDate = () => {
     setIsProduct(true);
-    router.push(`/sale?id=${item.productId}`);
+    setMypageRouting(true);
+    router.replace(`/sale?id=${item.productId}`);
   };
-
-  console.log(item.productId);
-  console.log(item.dealState);
-  console.log(item);
 
   const listState = '판매';
 
