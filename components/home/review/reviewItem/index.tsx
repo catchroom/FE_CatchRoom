@@ -11,7 +11,7 @@ const ReviewItem = ({
 }: ReviewItemType) => {
   return (
     <div className="flex rounded-md bg-white w-full h-[140px]">
-      <div className="relative w-[110px] h-[140px] flex-shrink-0">
+      <div className="relative w-[110px] h-[140px] flex-shrink-0 md:w-[88px] md:h-[124px] sm:w-[88px] sm:h-[124px]">
         <Image
           src={image}
           fill
@@ -25,9 +25,13 @@ const ReviewItem = ({
         />
       </div>
       <div className="flex flex-col py-5 pl-5 pr-6">
-        <p className="text-t2 font-bold">{productName}</p>
-        <p className="mt-2 text-t3 line-clamp-2 max-w-[140px]">{content}</p>
-        <p className="mt-3 text-t4 text-text-sub">
+        <p className="text-t2 font-bold  md:text-p2 sm:text-p2">
+          {productName}
+        </p>
+        <p className="mt-2 text-t3 line-clamp-2 max-w-[140px] md:text-p4 sm:text-p4">
+          {content}
+        </p>
+        <p className="mt-3 text-t4 text-text-sub md:text-p4 sm:text-p4">
           {userName} • {date}
         </p>
       </div>
