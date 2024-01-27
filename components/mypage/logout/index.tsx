@@ -3,12 +3,9 @@
 import React, { useState } from 'react';
 import { logout } from '@/api/mypage/api';
 import nookies from 'nookies';
-import { useRouter } from 'next/navigation';
 import Modal from '@/components/common/modal';
 
 const Logout = () => {
-  const router = useRouter();
-
   const [openAlert, setOpenAlert] = useState(false);
   const handleModalOpen = () => {
     logout()
@@ -18,7 +15,7 @@ const Logout = () => {
           nookies.destroy(null, 'accessToken');
           nookies.destroy(null, 'refreshToken');
           nookies.destroy(null, 'userId');
-          router.push('/home');
+          window.location.href = '/home';
         }
       })
       .catch((error) => {
