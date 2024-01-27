@@ -13,7 +13,6 @@ const ChatListViewer = ({
   deleteRoom: (roomId: string) => void;
 }) => {
   const chatList = useRecoilValue(chatAllRoomAtom);
-  console.log(chatList);
 
   return (
     <>
