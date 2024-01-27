@@ -5,7 +5,7 @@ import React, { MouseEventHandler } from 'react';
 
 const MoreButton = ({ fn }: { fn: MouseEventHandler<HTMLDivElement> }) => {
   return (
-    <div onClick={fn}>
+    <div onClick={fn} className="w-4 flex justify-center">
       <MoreIcon />
     </div>
   );

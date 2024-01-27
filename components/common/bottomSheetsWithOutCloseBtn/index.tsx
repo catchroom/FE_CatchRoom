@@ -60,7 +60,9 @@ const BottomSheetsWithoutCloseBtn = ({
 
   const isOpenModal = outerControl ? outerOpen : open;
 
-  const modalOpen: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const modalOpen: MouseEventHandler<HTMLButtonElement | HTMLDivElement> = (
+    e,
+  ) => {
     e.stopPropagation();
     outerControl ? setOuterOpen(true) : setOpen(true);
   };

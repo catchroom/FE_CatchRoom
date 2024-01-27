@@ -14,6 +14,7 @@ import { allCheckState } from '@/atoms/sale/checkAtom';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
 import { isProductState } from '@/atoms/sale/productAtom';
 import { usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 const Header = ({
   title,
@@ -31,6 +32,8 @@ const Header = ({
   const setPrice = useSetRecoilState(priceState);
   const setAllCheck = useSetRecoilState(allCheckState);
   const setIsProduct = useSetRecoilState(isProductState);
+  const ref = useSearchParams();
+  const refString = ref?.get('ref');
 
   const headerUnVisible = useRecoilValue(isHeaderSate);
 
@@ -52,6 +55,8 @@ const Header = ({
       router.push('/mypage');
     } else if (isSale) {
       setModalOpen(true);
+    } else if (refString === 'info') {
+      router.push('/');
     } else {
       router.back();
     }
@@ -62,7 +67,7 @@ const Header = ({
     setPrice(0);
     setAllCheck(false);
     setIsProduct(false);
-    router.back();
+    window.location.href = '/';
   };
 
   const onCancel = () => {
