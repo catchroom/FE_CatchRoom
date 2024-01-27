@@ -38,7 +38,6 @@ const BankForm = () => {
     mode: 'onChange',
   });
   const { data } = useQueryGetAccount();
-  //console.log(data);
 
   const checkInput = () => {
     const { bank, account, name } = watch();
