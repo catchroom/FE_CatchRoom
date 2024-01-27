@@ -14,17 +14,21 @@ const BannerItem = ({
   text,
   location,
   type,
+  bottom = false,
 }: {
   text: string;
   location: string;
   type?: 'heart' | 'shopping' | 'history';
+  bottom?: boolean;
 }) => {
+  const bannerTop =
+    'flex gap-3 items-center px-2 py-[10px] font-medium text-t1';
+
+  const bannerBottom = 'flex gap-3 items-center px-2 py-[10px] text-t2 h-10';
+
   return (
     <div className="w-full">
-      <Link
-        href={location}
-        className="flex gap-3 items-center px-2 py-3 font-medium text-t1"
-      >
+      <Link href={location} className={bottom ? bannerBottom : bannerTop}>
         {type && IconDict[type]}
         <p>{text}</p>
       </Link>
