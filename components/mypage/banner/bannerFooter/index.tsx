@@ -3,7 +3,7 @@ import Footer from '@/components/common/footer';
 
 const BannerFooter = () => {
   return (
-    <div className="w-full flex flex-col items-start gap-1 bg-border px-3 py-4 text-p3 text-text-sub">
+    <div className="w-full flex flex-col items-start gap-1 bg-border px-3 text-p3 text-text-sub">
       <Footer />
     </div>
   );
