@@ -93,3 +93,19 @@ export const formatDateWithDay = (dateStr: string): string => {
 
   return `${monthDay} (${dayOfWeek})`;
 };
+
+export const getMypageDate = (inputDate: string) => {
+  // 입력된 날짜를 Date 객체로 변환
+  const parsedDate = new Date(inputDate);
+
+  // 월, 일, 요일 추출
+  const month = parsedDate.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더함
+  const day = parsedDate.getDate();
+  const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+  const dayOfWeek = daysOfWeek[parsedDate.getDay()];
+
+  // 형식에 맞게 반환
+  const formattedDate = `${month}월 ${day}일 (${dayOfWeek})`;
+
+  return formattedDate;
+};

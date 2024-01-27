@@ -31,3 +31,29 @@ export const maskPhoneNumber = (phoneNumber: string) => {
 export const noMask = (value: string) => {
   return value;
 };
+
+export const getSellState = (state: string) => {
+  switch (state) {
+    case 'EXPIRED':
+      return '기한 만료';
+    case 'UNSOLD':
+      return '체크인 만료';
+    case 'UNABLESELL':
+      return '판매 불가';
+    case 'DONEDEAL':
+      return '판매 완료';
+  }
+};
+
+export const getReviewState = (state: string) => {
+  switch (state) {
+    case '리뷰 삭제 완료':
+      return 'deleteReview';
+    case '리뷰 작성 완료':
+      return 'onReview';
+    case '리뷰 작성 가능':
+      return 'noReview';
+    case '리뷰 작성기한 만료':
+      return 'outDatedReview';
+  }
+};

@@ -55,14 +55,14 @@ const DivideWrapper = ({
       : ' border-divide-sub text-text-secondary';
   };
 
-  const defaultStyle = 'border-b p-4 w-1/2 transition-colors duration-300';
+  const defaultStyle = 'border-b-2 p-4 w-1/2 transition-colors duration-300';
   const maxHeightStyle = maxHeightControl
-    ? `max-h-[calc(100vh-120px)] overflow-y-scroll`
+    ? `max-h-[calc(100vh-140px)] overflow-y-scroll px-5`
     : `max-h-[calc(100vh-200px)] overflow-y-scroll`;
 
   return (
     <div className="w-full">
-      <div className="flex justify-around w-full font-semibold text-t2">
+      <div className="flex justify-around w-full font-semibold text-t2 mb-2">
         {VIEW_DATA.map((data) => {
           return (
             <button
