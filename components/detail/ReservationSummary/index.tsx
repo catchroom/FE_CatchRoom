@@ -28,7 +28,7 @@ const ReservationSummary = ({
 }) => {
   const transportationLabels: { [key: string]: string } = {
     WALK: '도보 방문',
-    CAR: '차량',
+    CAR: '차량 방문',
   };
 
   const transportationLabel = transportation
