@@ -40,38 +40,42 @@ const PaymentMethods = () => {
   return (
     <>
       <div className="mx-[-20px]">
-        <div className="w-full border-t-8 border-border-sub mb-6"></div>
+        <div className="w-full border-t-8 bg-black opacity-5 mb-6"></div>
       </div>
       <h5 className="mb-2 text-h5 font-semibold text-text-DEFAULT">
         결제 수단
       </h5>
 
-      <div className="flex flex-row mt-3 items-start gap-2">
+      <div className="flex flex-row  h-[2.75rem] mt-3 items-start gap-2">
         <button
           onClick={toggleEasyPaymentDropdown}
-          className={`flex-1 border bg-surface ${
+          className={`flex flex-1  justify-center items-center border bg-surface h-[2.75rem] ${
             selectedPayment === 'easy'
               ? 'border-border-primary'
               : 'border-border-sub'
           } rounded focus:text-text-primary outline-none`}
         >
-          <div className="p-4 leading-6">간편결제</div>
+          <div className="p-4 leading-6 justify-center items-center">
+            간편결제
+          </div>
         </button>
         <button
           onClick={closeEasyPaymentDropdown}
-          className={`flex-1 border bg-surface ${
+          className={`flex flex-1 justify-center items-center border bg-surface h-[2.75rem] ${
             selectedPayment === 'creditCard'
               ? 'border-border-primary'
               : 'border-border-sub'
           } rounded focus:text-text-primary outline-none`}
         >
-          <div className="p-4 leading-6">신용카드</div>
+          <div className="p-4 justify-center items-center leading-6">
+            신용카드
+          </div>
         </button>
       </div>
 
       {isEasyPaymentOpen && (
-        <div className="mt-2 flex flex-col gap-2">
-          <div className="flex flex-row gap-2">
+        <div className="mt-2 flex flex-col gap-1">
+          <div className="flex flex-row ">
             <label
               htmlFor="kakaoPay"
               className="flex w-full cursor-pointer items-center  "
@@ -89,7 +93,7 @@ const PaymentMethods = () => {
                 }}
                 crossOrigin={undefined}
               />
-              <div className="ml-3">카카오페이</div>
+              <div className="ml-2">카카오페이</div>
             </label>
             <label
               htmlFor="naverPay"
@@ -108,7 +112,7 @@ const PaymentMethods = () => {
                 }}
                 crossOrigin={undefined}
               />
-              <div className="ml-3">네이버페이</div>
+              <div className="ml-2">네이버페이</div>
             </label>
             <label
               htmlFor="tossPay"
@@ -127,7 +131,7 @@ const PaymentMethods = () => {
                 }}
                 crossOrigin={undefined}
               />
-              <div className="ml-3">토스페이</div>
+              <div className="ml-2">토스페이</div>
             </label>
           </div>
           <div className="flex-col gap-2">
@@ -148,7 +152,7 @@ const PaymentMethods = () => {
                 }}
                 crossOrigin={undefined}
               />
-              <div className="ml-3">페이코</div>
+              <div className="ml-2">페이코</div>
             </label>
           </div>
         </div>

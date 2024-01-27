@@ -28,6 +28,7 @@ const ReservationSummary = ({
 }) => {
   const transportationLabels: { [key: string]: string } = {
     WALK: '도보 방문',
+    CAR: '차량',
   };
 
   const transportationLabel = transportation
@@ -49,21 +50,24 @@ const ReservationSummary = ({
           </h2>
 
           <div className="flex gap-2 mb-1 ">
-            <div className="w-16 h-16 relative">
-              <Image
-                src={imageUrl}
-                alt={accommodationName}
-                layout="fill"
-                objectFit="cover"
-                className="rounded"
-              />
-            </div>
-
+            {imageUrl && (
+              <div className="w-16 h-16 relative">
+                <Image
+                  src={imageUrl}
+                  alt="숙소 이미지"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded"
+                />
+              </div>
+            )}
             <div>
               <p className="text-t3 font-semibold text-text-DEFAULT">
                 {roomName}
               </p>
-              <p className=" text-t3 text-text-sub">{transportationLabel}</p>
+              {transportationLabel !== '정보 없음' && (
+                <p className=" text-t3 text-text-sub">{transportationLabel}</p>
+              )}
 
               <p className="mt-2 text-t3 text-text-DEFAULT">
                 {getDotDate(checkIn)} ~ {getDotDate(checkOut)} | 1박
@@ -80,7 +84,7 @@ const ReservationSummary = ({
           <div className="flex gap-1 justify-end items-center">
             <p className="  text-t3 text-text-sub">숙박</p>
             <p className="  text-t2 text-text-default font-bold leading-5">
-              {sellPrice?.toLocaleString('us-EN')}원
+              {sellPrice?.toLocaleString('ko-KR')}원
             </p>
           </div>
         </section>

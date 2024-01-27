@@ -6,7 +6,7 @@ import { PaymentButtonProps } from '@/types/order/paymentButton/type';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { selectedTermsState } from '@/atoms/order/termsAgreementAtom';
-import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
+import { roundToTenWon } from '@/utils/roundToTenWon';
 
 const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   const selectedTerms = useRecoilValue(selectedTermsState);
@@ -39,18 +39,17 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-  const formattedAmount = `${amount.toLocaleString('ko-KR')}원`;
+  const formattedAmount = `${roundToTenWon(amount)?.toLocaleString('ko-KR')}원`;
 
   return (
     <>
-      <div className="cursor-pointer fixed bottom-0 w-full max-w-[480px] flex justify-center ">
-        <div className="border-t border-border-sub bg-bg w-full p-5 -ml-10">
-          <SimpleButton
-            name={formattedAmount + ' 결제하기'}
-            fn={handleSubmit}
-            type="button"
-          />
-        </div>
+      <div className="fixed bottom-0  bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-1 mx-auto">
+        <button
+          onClick={handleSubmit}
+          className="w-full h-[3.25rem] bg-action-primary text-white font-semibold py-3 rounded leading-7"
+        >
+          {formattedAmount} 결제하기
+        </button>
       </div>
 
       {modalType === 'orderConfirmation' && (

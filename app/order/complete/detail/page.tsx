@@ -20,7 +20,7 @@ const page = ({
         showBorder
         closeButtonRedirectPath="/mypage/dashboard/purchase"
       />
-      <div className="flex flex-col container mx-auto w-full px-5 pt-4 pb-[6.5rem] mt-14 bg-bg">
+      <div className="flex flex-col container mx-auto w-full px-5 pt-4  pb-5 mt-14 bg-bg">
         <OrderDetail id={id} />
         <InfoBox messageKey={'refundInfo'} />
       </div>

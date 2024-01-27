@@ -6,8 +6,8 @@ const ProductDetails = ({
   roomName,
 }: BasicProductDetailsProps) => {
   return (
-    <section className="p-2 mb-4">
-      <h2 className="text-h4  mb-2 leading-8 font-bold text-gray-1000">
+    <section className="px-2 pt-2 mb-5">
+      <h2 className="text-h4  leading-8 font-bold text-gray-1000">
         {accommodationName}
       </h2>
       <p className="text-t2 leading-6 font-semibold text-text-sub">

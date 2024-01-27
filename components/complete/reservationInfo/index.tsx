@@ -1,5 +1,6 @@
 import { ReservationInfoProps } from '@/types/complete/types';
 import { formatPhoneNumber } from '@/utils/formatPhoneNumber';
+import { roundToTenWon } from '@/utils/roundToTenWon';
 import React from 'react';
 
 const ReservationInfo = ({
@@ -39,9 +40,9 @@ const ReservationInfo = ({
       <section className="flex flex-col gap-2 px-5 py-5 mb-20">
         <h3 className="text-h5 font-bold text-text-DEFAULT ">결제 정보</h3>
         <div className="flex justify-between items-center ">
-          <h3 className="text-t2 text-text-sub">결제 금액</h3>
+          <h3 className="text-t2 text-text-sub">최종 결제 금액</h3>
           <p className="text-t2 text-text-sub">
-            {totalPrice?.toLocaleString()}원
+            {roundToTenWon(totalPrice)?.toLocaleString()}원
           </p>
         </div>
         <div className="flex justify-between items-center">
