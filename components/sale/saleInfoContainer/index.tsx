@@ -33,6 +33,9 @@ type Props = {
 };
 
 const SaleInfoContainer = ({ id }: Props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const isProduct = useRecoilValue(isProductState);
 
   const { data, isLoading } = useConditionalQuery(isProduct, +id!);
