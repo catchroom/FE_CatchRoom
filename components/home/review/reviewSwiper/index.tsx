@@ -13,11 +13,11 @@ const ReviewSwiper = () => {
   if (isLoading) return <ReviewSkeletonUI />;
   return (
     <Swiper spaceBetween={12} slidesPerView={1.2} loop={true}>
-      {data?.list.map((item: ReviewItemType) => {
+      {data?.list.map((item: ReviewItemType, index: number) => {
         return (
-          <SwiperSlide key={item?.productName}>
+          <SwiperSlide key={item?.productName + index}>
             <ReviewItem
-              key={item?.productName}
+              key={item?.productName + index}
               productName={item?.productName}
               content={item?.content}
               date={item?.date}
