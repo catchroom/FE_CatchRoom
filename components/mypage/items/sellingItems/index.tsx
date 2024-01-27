@@ -42,7 +42,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
           </>
         );
       case 'DONEDEAL':
-        return <p>판매완료</p>;
+        return <p>판매일 : {getDotDate(item.endDate, true, true, true)}</p>;
       case 'UNSOLD':
       case 'UNABLESELL':
         return <p>{getSellState(dealState)}</p>;
