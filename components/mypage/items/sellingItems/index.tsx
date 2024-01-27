@@ -99,7 +99,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
           </div>
         </div>
       </div>
-      {item && item.dealState && (
+      {item && item.dealState === 'DONEDEAL' && (
         <ReviewButtons
           id={parseInt(item.productId)}
           type={listState}
