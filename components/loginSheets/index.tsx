@@ -189,7 +189,7 @@ const LoginSheet = ({
                       />
                     </div>
                     <Link
-                      href="/mypage/dashboard/privacy"
+                      href="/mypage/dashboard/conditions/consent-essential"
                       className="text-raspberry"
                     >
                       보기
@@ -220,7 +220,7 @@ const LoginSheet = ({
                       />
                     </div>
                     <Link
-                      href="/mypage/dashboard/privacy"
+                      href="/mypage/dashboard/conditions/consent-options"
                       className="text-raspberry"
                     >
                       보기
