@@ -25,6 +25,7 @@ import { useToastAlert } from '@/hooks/useToastAlert';
 import { ProductItem } from '@/types/sale/type';
 import { formatDate } from '@/utils/formatDate';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -218,10 +219,14 @@ const FromSeller = () => {
       setHeaderUnVisible(false);
     }
   };
-  const handleMutationError = () => {
-    setModalContent('사유 : 서버 에러');
-    setOpen(true);
-    setHeaderUnVisible(false);
+
+  const handleMutationError = (error: Error) => {
+    console.log(error);
+    if (axios.isAxiosError(error)) {
+      console.log(error?.response?.data.data.message);
+      setModalContent('사유 :  ' + error.response?.data.data.message);
+      setOpen(true);
+    }
   };
 
   return (
