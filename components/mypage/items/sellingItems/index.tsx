@@ -6,12 +6,24 @@ import ReviewButtons from '../reviewButtons';
 import DeleteButtons from '../deleteButtons';
 import { ReviewType, getDotDate } from '@/utils/get-dot-date';
 import { useRouter } from 'next/navigation';
+import { useSetRecoilState } from 'recoil';
+import { isProductState } from '@/atoms/sale/productAtom';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
   const router = useRouter();
+  const setIsProduct = useSetRecoilState(isProductState);
+  const handleEditDate = () => {
+    setIsProduct(true);
+    router.push(`/sale?id=${item.productId}`);
+  };
   const reEnroll =
     item.dealState === 'DONEDEAL' ? (
-      <span className=" text-text-primary underline">기한 수정</span>
+      <span
+        className=" text-text-primary underline cursor-pointer"
+        onClick={handleEditDate}
+      >
+        기한 수정
+      </span>
     ) : null;
 
   const listState = '판매';
