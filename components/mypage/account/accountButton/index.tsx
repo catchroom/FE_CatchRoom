@@ -11,7 +11,7 @@ const AccountButton = ({
   return (
     <Link
       href={location}
-      className="w-1/2 flex justify-center text-t2 font-medium"
+      className="w-1/2 flex justify-center text-p2 font-medium"
     >
       <div className="text-p2">{text}</div>
     </Link>

@@ -13,7 +13,7 @@ const ProfileButton = () => {
     <button
       type="button"
       onClick={onClick}
-      className="p-3 text-p2 bg-white rounded-md border border-border-sub underline"
+      className="p-2 text-p2 bg-white rounded-md border border-border-sub underline"
     >
       설정
     </button>

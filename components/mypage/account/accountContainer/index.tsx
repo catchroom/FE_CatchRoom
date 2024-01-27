@@ -12,7 +12,7 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
   const { data } = useQueryGetAccount();
 
   return (
-    <section className="w-full flex flex-col gap-4 px-4 pt-4 bg-white ">
+    <section className="w-full flex flex-col gap-4 px-4 pt-4 mb-4 bg-white ">
       <div className="w-full flex justify-between text-h5 font-semibold">
         <div className="flex gap-2 items-center ">
           <MoneySVG />
@@ -33,7 +33,7 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
               <p>내 계좌를 등록해주세요</p>
             </div>
             <Link href="/mypage/dashboard/account">
-              <button className="underline font-medium text-text-critical">
+              <button className="underline text-p2 font-medium text-text-critical">
                 등록
               </button>
             </Link>
