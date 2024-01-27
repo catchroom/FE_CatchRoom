@@ -9,6 +9,8 @@ import { useCookies } from 'react-cookie';
 import Modal from '@/components/common/modal';
 import { useCreateChatRoom } from '@/api/chat/query';
 import { useToastAlert } from '@/hooks/useToastAlert';
+import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
+import SimpleBorderButton from '@/components/common/sheetsButtons/simpleBorderButton';
 
 // 판매자 유무에 따른 버튼노출 처리 필요
 // 현재 헤더의 화면전환 버튼을 이용한 전역상태로 바뀌는 중
@@ -104,24 +106,18 @@ const FooterComponent = () => {
             대화중인 채팅방
           </Button>
         ) : (
-          <>
-            <Button
-              placeholder="Button"
+          <div className="w-full flex gap-3">
+            <SimpleBorderButton
+              name="채팅으로 문의하기"
               type="button"
-              onClick={createChat}
-              className={`${buttonClass} w-1/2 bg-white border border-main text-p3 text-main`}
-            >
-              채팅으로 문의하기
-            </Button>
-            <Button
-              placeholder="Button"
+              fn={createChat}
+            />
+            <SimpleButton
+              name="구매하기"
               type="button"
-              onClick={handlePurchaseClick}
-              className={`${buttonClass} w-1/2 bg-main text-white`}
-            >
-              구매하기
-            </Button>
-          </>
+              fn={handlePurchaseClick}
+            />
+          </div>
         )}
       </div>
     </>

@@ -21,12 +21,8 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
   const handleEditDate = () => {
     setIsProduct(true);
     setMypageRouting(true);
-    router.push(`/sale?id=${item.productId}`);
+    router.replace(`/sale?id=${item.productId}`);
   };
-
-  console.log(item.productId);
-  console.log(item.dealState);
-  console.log(item);
 
   const listState = '판매';
 
