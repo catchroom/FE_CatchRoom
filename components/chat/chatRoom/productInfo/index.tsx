@@ -15,6 +15,8 @@ const ProductInfo = () => {
   const chatInfo = useRecoilValue(chatRoomInfo);
   const router = useRouter();
 
+  console.log(chatInfo);
+
   const handleClickInfo = () => {
     router.push(`/accommodation/${chatInfo.chatRoomNumber}`);
   };
@@ -29,7 +31,8 @@ const ProductInfo = () => {
   return (
     <div className="bg-surface w-full flex relative gap-3 items-center p-[16px] border-b border-border-sub">
       {invalidSale ||
-        (setUserOut && (
+        setUserOut ||
+        (!chatInfo.isNego && (
           <div className="absolute opacity-60 bg-white inset-0 z-20" />
         ))}
       <div className="flex gap-3 items-center" onClick={handleClickInfo}>
