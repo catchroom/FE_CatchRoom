@@ -21,6 +21,7 @@ import {
 import CheckBoxComponent from '@/components/common/checkBox';
 import Modal from '@/components/common/modal';
 import { FromSeller, sellerSchema } from '@/constants/zodSchema';
+import { useToastAlert } from '@/hooks/useToastAlert';
 import { ProductItem } from '@/types/sale/type';
 import { formatDate } from '@/utils/formatDate';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,6 +31,7 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const FromSeller = () => {
+  const { alertOpenHandler } = useToastAlert('매물을 수정했어요.');
   const [isProduct, setIsProduct] = useRecoilState(isProductState);
   const [isNego, setIsNego] = useRecoilState(isNegoState);
   const [sellerContent, setSellerContent] = useRecoilState(sellerContentState);
@@ -198,10 +200,16 @@ const FromSeller = () => {
       accommodationName: string;
     };
   };
+
+  alertOpenHandler;
   const handleMutationSucess = (data: APIresponse) => {
     console.log(data);
     setIsProduct(false);
-    if (data.code === 4010 || data.code === 4020) {
+    if (data.code === 4010) {
+      setHeaderUnVisible(false);
+      window.location.href = `/room-info/${data.data.id}?ref=sale`;
+    } else if (data.code === 4020) {
+      alertOpenHandler();
       setHeaderUnVisible(false);
       window.location.href = `/room-info/${data.data.id}?ref=sale`;
     } else {
