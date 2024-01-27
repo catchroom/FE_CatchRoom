@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import Map from '@/components/search-result/map';
-import { formatDate } from '@/utils/formatDate';
 import { useAccommodationList } from '@/api/search-result/query';
 import { MarkerProps } from '@/types/search-result/map/type';
 import { useRecoilValue } from 'recoil';
@@ -13,27 +12,11 @@ import {
   adultCountState,
   childCountState,
 } from '@/atoms/search-detail/searchStates';
-import { format } from 'date-fns';
 import NoResults from '@/components/search-result/noResults';
+import { format, addYears } from 'date-fns';
 
 const Page = () => {
-  const today = new Date();
-  const tomorrow = new Date(today);
-  const [searchParams, setSearchParams] = useState({
-    region: 'all',
-    checkInStart: formatDate(today),
-    checkInEnd: formatDate(tomorrow),
-    type: '0,1,2,3,4',
-    pax: 0,
-    filter: 'HIGH_DISCOUNT',
-    pageNumber: 1,
-  });
-
-  const {
-    data: accommodations,
-    isLoading,
-    error,
-  } = useAccommodationList(searchParams);
+  // 검색 파라미터 설정
 
   const selectedRegion = useRecoilValue(regionIndex);
   const dateRange = useRecoilValue(rangeDate);
@@ -41,6 +24,34 @@ const Page = () => {
   const adultCount = useRecoilValue(adultCountState);
   const childCount = useRecoilValue(childCountState);
 
+  const tenYearsLater = addYears(new Date(), 10);
+  const [searchParams, setSearchParams] = useState({
+    region: selectedRegion.join(',') === '' ? 'all' : selectedRegion.join(','),
+    checkInStart: dateRange?.from
+      ? format(new Date(dateRange.from), 'yyyy-MM-dd')
+      : undefined,
+    checkInEnd: dateRange?.to
+      ? format(new Date(dateRange.to), 'yyyy-MM-dd')
+      : format(tenYearsLater, 'yyyy-MM-dd'),
+    type: selectedType.join(',') === '' ? '0,1,2,3,4' : selectedType.join(','),
+    pax: adultCount + childCount,
+    filter: 'HIGH_DISCOUNT',
+    pageParam: 1,
+  });
+
+  const {
+    data: accommodations,
+    isLoading,
+    error,
+  } = useAccommodationList(
+    searchParams.checkInStart,
+    searchParams.checkInEnd,
+    searchParams.type,
+    searchParams.region,
+    searchParams.pax,
+    searchParams.filter,
+    searchParams.pageParam,
+  );
   //지역
   useEffect(() => {
     setSearchParams((prev) => ({
@@ -87,20 +98,22 @@ const Page = () => {
     return <div>Error</div>;
   }
 
-  const markersData = accommodations.map((accommodation: MarkerProps) => ({
-    key: accommodation.productId,
-    latitude: accommodation.latitude,
-    longitude: accommodation.longitude,
-    sellPrice: accommodation.sellPrice,
-    discountRate: accommodation.discountRate,
-    catchType: accommodation.catchType,
-    originalPrice: accommodation.originalPrice,
-    image: accommodation.image,
-    accommodationName: accommodation.accommodationName,
-    roomName: accommodation.roomName,
-    checkIn: accommodation.checkIn,
-    checkOut: accommodation.checkOut,
-  }));
+  const markersData =
+    accommodations?.map((accommodation: MarkerProps) => ({
+      key: accommodation.productId,
+      productId: accommodation.productId,
+      latitude: accommodation.latitude,
+      longitude: accommodation.longitude,
+      sellPrice: accommodation.sellPrice,
+      discountRate: accommodation.discountRate,
+      catchType: accommodation.catchType,
+      originalPrice: accommodation.originalPrice,
+      image: accommodation.image,
+      accommodationName: accommodation.accommodationName,
+      roomName: accommodation.roomName,
+      checkIn: accommodation.checkIn,
+      checkOut: accommodation.checkOut,
+    })) || [];
 
   return (
     <>
