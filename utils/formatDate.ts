@@ -19,3 +19,16 @@ export const formatToKoreanDate = (dateStr: string) => {
     day < 10 ? `0${day}` : day
   }(${weekday})`;
 };
+
+//mm월 dd일 (요일) 형식
+export const formatKoreanDate = (dateStr: string) => {
+  const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+
+  const date = new Date(dateStr);
+
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const dayOfWeek = daysOfWeek[date.getDay()];
+
+  return `${month}월 ${day}일 (${dayOfWeek})`;
+};

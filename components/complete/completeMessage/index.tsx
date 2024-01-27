@@ -1,6 +1,6 @@
 import React from 'react';
 import CheckIcon from '@/public/svg/check-circle.svg';
-import Image from 'next/image';
+import YanoljaLogo from '@/public/svg/Yanolja_CI 1.svg';
 import { CompleteMessageProps } from '@/types/complete/types';
 import Link from 'next/link';
 
@@ -23,13 +23,8 @@ const CompleteMessage = ({ nickName }: CompleteMessageProps) => {
           </p>
         </div>
         <Link href="https://www.yanolja.com/">
-          <div className="flex gap-1 ">
-            <Image
-              src={'/sample/Yanolja_CI 1.png'}
-              alt="야놀자 로고"
-              width="54"
-              height="10"
-            />
+          <div className="flex items-center gap-1 ">
+            <YanoljaLogo />
             <div className="text-t2 text-text-secondary underline">
               에서 확인하기
             </div>

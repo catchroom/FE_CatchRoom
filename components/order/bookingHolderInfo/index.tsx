@@ -8,7 +8,7 @@ const BookingHolderInfo = ({ name, phoneNumber }: BookingHolderInfoProps) => {
   return (
     <div className="flex flex-col mt-8 mb-6">
       <div className="mx-[-20px]">
-        <div className="w-full border-t-8 border-border-sub mb-6"></div>
+        <div className="w-full border-t-8 bg-black opacity-5 mb-6"></div>
       </div>
       <span className="text-h5 font-semibold text-gray-1000 mb-3">
         예약자 정보

@@ -40,7 +40,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-col container mx-auto w-full px-5 pt-16 pb-5  bg-bg">
+      <div className="flex flex-col container mx-auto w-full px-5 pt-16   bg-bg">
         <div>
           <CompleteMessage nickName={nickName} />
         </div>
