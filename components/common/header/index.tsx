@@ -12,6 +12,7 @@ import { useRecoilValue } from 'recoil';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
 import { usePathname } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
+import { isProductState } from '@/atoms/sale/productAtom';
 
 const Header = ({
   title,
@@ -31,6 +32,7 @@ const Header = ({
   const params = useSearchParams();
   const id = params?.get('id');
   console.log(id);
+  const isProduct = useRecoilValue(isProductState);
 
   const headerUnVisible = useRecoilValue(isHeaderSate);
 
@@ -61,7 +63,7 @@ const Header = ({
 
   const onConfirm = () => {
     handleModalOpen();
-    if (id !== undefined && id !== null) {
+    if (isProduct && id !== undefined && id !== null) {
       window.location.href = `/room-info/${+id}`;
     } else window.location.href = '/';
   };
