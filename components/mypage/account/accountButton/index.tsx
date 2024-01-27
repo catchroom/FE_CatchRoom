@@ -17,9 +17,6 @@ const AccountButton = ({
   const [openAlert, setOpenAlert] = useState(false);
   const withDrawValue = useRecoilValue(isWithDrawAtom);
 
-  console.log(withDrawValue, '있냐?');
-  console.log(location);
-
   const isWithDrawButton = text === '예치금 출금' ? true : false;
 
   const onClickRouting = (location: string) => {
