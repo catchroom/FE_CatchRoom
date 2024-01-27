@@ -40,10 +40,8 @@ const ProfileForm = () => {
   const onSubmit: SubmitHandler<FormName> = (data) => {
     if (nicknameSchema.safeParse(data).success) {
       nicknameCheck(data.nickname).then((res) => {
-        console.log(res);
         if (res.code === 1010) {
           editProfile(data.nickname).then((response) => {
-            console.log(response);
             setNickname(response.data);
             if (response.code === 2002) {
               setOpenSuccessAlert(true);

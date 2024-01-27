@@ -8,7 +8,6 @@ const PrivacyItems = () => {
   useEffect(() => {
     getUserProfile().then((res) => {
       if (res.code === 2004) {
-        //console.log(res.data);
         const { email, name, phoneNumber } = res.data;
 
         const updatedData = [
