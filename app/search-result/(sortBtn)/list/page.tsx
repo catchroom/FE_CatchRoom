@@ -2,7 +2,7 @@
 import AccommodationList from '@/components/search-result/list/accommodationList';
 import ToggleViewButton from '@/components/search-result/toggleViewButton';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   regionIndex,
@@ -20,14 +20,21 @@ import NoResults from '@/components/search-result/noResults';
 
 const Page = () => {
   const [currentView, setCurrentView] = useState<'list' | 'map'>('list');
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
+  // const tenYearsLater = new Date(
+  //   new Date().setFullYear(today.getFullYear() + 10),
+  // );
+
+  const tenYearsLater = useMemo(() => {
+    return new Date(new Date().setFullYear(today.getFullYear() + 10));
+  }, [today]);
 
   const [searchParams, setSearchParams] = useState({
     region: 'all',
     checkInStart: formatDate(today),
-    checkInEnd: formatDate(tomorrow),
+    checkInEnd: formatDate(tenYearsLater),
     type: '0,1,2,3,4',
     pax: 0,
     filter: 'HIGH_DISCOUNT',
@@ -60,14 +67,14 @@ const Page = () => {
   //체크인 범위
   useEffect(() => {
     const startDate = dateRange?.from ?? new Date();
-    const endDate = dateRange?.to ?? new Date();
+    const endDate = dateRange?.to ?? tenYearsLater; // 변경된 부분
 
     setSearchParams((prev) => ({
       ...prev,
       checkInStart: format(startDate, 'yyyy-MM-dd'),
       checkInEnd: format(endDate, 'yyyy-MM-dd'),
     }));
-  }, [dateRange]);
+  }, [dateRange, tenYearsLater]);
 
   //숙박 유형
   useEffect(() => {
