@@ -7,7 +7,7 @@ const ConfirmBtnComponent = () => {
   const { isBtnLoading, btnHandler } = useBtnLoading('/search-result/list');
 
   return (
-    <div className="fixed bottom-0 w-full px-5 mb-5 ">
+    <div className="fixed bottom-0 max-w-[480px] w-full px-5 mb-5 ">
       <Button
         placeholder="button"
         loading={isBtnLoading ? true : false}

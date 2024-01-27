@@ -20,14 +20,19 @@ export const deadLinePageItems = async ({
 }: {
   date: string;
   filter: string | undefined;
-  region: string;
+  region: string | number[];
   pageParam: number;
 }) => {
-  const res = await axios.get(
+  const res = await fetch(
     `https://catchroom.xyz/v1/main/product/list?dataType=4&date=${date}&filter=${filter}&region=${region}&pageNumber=${pageParam}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
   );
 
-  const list = res.data.data.list;
-  const size = res.data.data.size;
-  return { list, size };
+  const data = await res.json();
+  return data.data;
 };
