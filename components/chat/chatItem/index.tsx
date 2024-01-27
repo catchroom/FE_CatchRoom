@@ -17,7 +17,6 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
   const router = useRouter();
 
   // 최근 메세지 시간 보여주는 데이터
-
   const lastTime = Math.round(
     new Date().getTime() / 1000 / 60 -
       new Date(item.lastChatmessageDto?.time).getTime() / 1000 / 60,
