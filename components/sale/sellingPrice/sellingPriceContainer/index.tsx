@@ -10,6 +10,7 @@ import {
   totalPriceState,
 } from '@/atoms/sale/priceAtom';
 import { isCatchPriceState } from '@/atoms/sale/catchAtom';
+import { getNumberWithRounds } from '@/utils/get-number-with-rounds';
 
 const SellingPriceContainer = () => {
   const price = useRecoilValue(productPriceState);
@@ -27,8 +28,9 @@ const SellingPriceContainer = () => {
 
   const buttonSelect = selectedPrice === 0 ? 'input' : 'price';
 
-  const charge = selectedPrice * 0.05;
-  const totalPrice = selectedPrice - charge;
+  const charge = selectedPercent < 50 ? selectedPrice * 0.05 : 0;
+  const chargeRounds = getNumberWithRounds(charge);
+  const totalPrice = selectedPrice - chargeRounds;
 
   useEffect(() => {
     setTotalPrice(totalPrice);
@@ -75,7 +77,9 @@ const SellingPriceContainer = () => {
         </div>
         <div className="flex justify-between">
           <p>거래 수수료율 5%</p>
-          <span className="opacity-50">- {charge.toLocaleString()}원</span>
+          <span className="opacity-50">
+            - {chargeRounds.toLocaleString()}원
+          </span>
         </div>
         <hr className="border-divider-sub" />
         <div className="flex justify-between">
