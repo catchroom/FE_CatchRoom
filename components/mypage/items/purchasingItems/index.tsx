@@ -40,10 +40,7 @@ const PurchasingItems = ({ item }: { item: MypagePurchaseType }) => {
               fill={true}
               sizes="(max-width: 480px) 500px, (max-width: 320px) 500px, 180px"
               priority
-              className="rounded-md object-cover cursor-pointer"
-              onClick={() => {
-                router.push(`/room-info/${item.productId}`);
-              }}
+              className="rounded-md object-cover"
             />
             {/* 캐치특가 여부 판단 */}
             {item.isCatch && (
