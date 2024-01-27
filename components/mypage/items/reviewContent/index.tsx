@@ -38,12 +38,9 @@ const ReviewContent = ({
 
   const handleDelete = () => {
     fn && fn();
-    deleteReviews(type, id).then((res) => {
-      if (res.code === 2025) {
-        window.location.href = '/mypage/dashboard/sales';
-      }
-    });
+    deleteReviews(type, id);
     closeModal();
+    router.refresh();
   };
 
   return (

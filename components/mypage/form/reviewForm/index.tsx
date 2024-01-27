@@ -32,7 +32,6 @@ const ReviewForm = ({
 
   const onSubmit: SubmitHandler<FormReview> = async (reviewData) => {
     if (reviewSchema.safeParse(reviewData).success) {
-      console.log(reviewData);
       if (reviewId) {
         editReview(type, reviewData.content, reviewId).then((res) => {
           if (res.code === 2023) {

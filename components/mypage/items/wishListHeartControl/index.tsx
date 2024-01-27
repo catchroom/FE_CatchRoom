@@ -16,7 +16,7 @@ const WishListHeartControl = ({ item }: { item: ItemType }) => {
 
   const heartBtnHandler = () => {
     setHeartState(!heartState);
-    deleteHeart(item.wishId).then((res) => console.log(res));
+    deleteHeart(item.wishId);
     alertOpenHandler();
   };
 

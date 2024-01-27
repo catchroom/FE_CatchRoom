@@ -49,23 +49,10 @@ const BankForm = () => {
 
   const onSubmit: SubmitHandler<FormAccount> = (dataField) => {
     if (accountSchema.safeParse(dataField)) {
-      console.log(dataField);
       if (!data) {
-        registerAccount(dataField.bank, dataField.account, dataField.name).then(
-          (res) => {
-            if (res.code === 2006) {
-              console.log(res.data);
-            }
-          },
-        );
+        registerAccount(dataField.bank, dataField.account, dataField.name);
       } else if (data) {
-        editAccount(dataField.bank, dataField.account, dataField.name).then(
-          (res) => {
-            if (res.code === 2010) {
-              console.log(res.data);
-            }
-          },
-        );
+        editAccount(dataField.bank, dataField.account, dataField.name);
       }
     } else {
       console.log('error');
