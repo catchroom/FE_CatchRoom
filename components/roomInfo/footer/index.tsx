@@ -7,41 +7,56 @@ import { useRecoilState } from 'recoil';
 import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
 import { UseParamsType } from '@/types/room-info/types';
 import { useParams, useRouter } from 'next/navigation';
-import { createChatRoom } from '@/api/chat/api';
 import { useRoomItem } from '@/api/room-info/query';
 import { useCookies } from 'react-cookie';
 import Modal from '@/components/common/modal';
+import { useCreateChatRoom } from '@/api/chat/query';
+import { useToastAlert } from '@/hooks/useToastAlert';
 
 // 판매자 유무에 따른 버튼노출 처리 필요
 // 현재 헤더의 화면전환 버튼을 이용한 전역상태로 바뀌는 중
 const FooterComponent = () => {
+  const [cookies] = useCookies();
+  const mutation = useCreateChatRoom();
   const [viewerState] = useRecoilState(viewerTestButton);
   const [open, setOpen] = useState(false);
-
-  const [cookies] = useCookies();
-  const accessToken = cookies.accessToken;
+  const { alertOpenHandler } = useToastAlert('로그인이 필요한 서비스 입니다');
+  const { alertOpenHandler: successOpenHandler } =
+    useToastAlert('채팅방이 생성되었습니다.');
 
   const { id } = useParams() as UseParamsType;
   const router = useRouter();
   const { data } = useRoomItem(id);
 
   const sellerId: number = data?.data.seller_id;
-  const buyerId: number = cookies.id;
+  const accessToken = cookies.accessToken;
+  const buyerId: number = cookies.userId;
 
   //채팅방 생성
-  const createChat = async () => {
+  const createChat = () => {
+    console.log('채팅방 생성');
     if (accessToken === undefined) {
       setOpen(true);
-    } else {
-      const chatRoomId = await createChatRoom(
+      return;
+    }
+
+    mutation.mutate(
+      {
         buyerId,
         sellerId,
-        Number(id),
-        accessToken,
-      );
-      console.log(chatRoomId);
-      router.push(`/chat/${chatRoomId}`);
-    }
+        productId: Number(id),
+      },
+      {
+        onSuccess: (data) => {
+          console.log(data);
+          router.push(`/chat/${data}`);
+          successOpenHandler();
+        },
+        onError: () => {
+          alertOpenHandler();
+        },
+      },
+    );
   };
 
   const handleModalOpen = () => {
@@ -98,7 +113,7 @@ const FooterComponent = () => {
               placeholder="Button"
               type="button"
               onClick={createChat}
-              className={`${buttonClass} w-1/2 bg-white border border-main text-main`}
+              className={`${buttonClass} w-1/2 bg-white border border-main text-p3 text-main`}
             >
               채팅으로 문의하기
             </Button>

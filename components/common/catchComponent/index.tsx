@@ -79,7 +79,27 @@ const CatchSpecialComponent = ({
           ) : (
             ''
           )}
-          <Image src={image} layout="fill" objectFit="cover" alt="숙소사진" />
+          <div className="relative w-32 flex-shrink-0">
+            {image ? (
+              <Image
+                src={image}
+                fill
+                sizes="(max-width: 640px) 100vw, 100vw"
+                priority
+                alt="숙소사진"
+              />
+            ) : (
+              <div className="relative w-32 bg-gray-300 animate-pulse">
+                <svg
+                  className="object-cover w-full h-full"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="100%" height="100%" rx="8" fill="gray" />
+                </svg>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* 숙소정보 */}

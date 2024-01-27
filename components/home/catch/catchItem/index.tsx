@@ -1,12 +1,14 @@
 'use client';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { catchItems } from '@/types/common/catchItems/types';
 import White from '@/public/svgComponent/marker/white';
 import HeartButton from '@/components/common/heartButton';
 import { useRouter } from 'next/navigation';
 import CalendarIcon from '@/public/svgComponent/calendar';
 import { formatDateWithDay } from '@/utils/get-dot-date';
+import { useRoomItem, useRoomItemZim } from '@/api/room-info/query';
+import { useToastAlert } from '@/hooks/useToastAlert';
 
 const CatchItem = ({
   productId,
@@ -21,9 +23,31 @@ const CatchItem = ({
 }: catchItems) => {
   const router = useRouter();
 
-  const [isHeart, setIsHeart] = useState(false);
-  const handleHeartBtnClick = () => {
-    setIsHeart((prev) => !prev);
+  const { data } = useRoomItem(productId);
+  const userZimState = data?.data.isWishChecked;
+  const [isBtnActive, setIsBtnActive] = useState(userZimState);
+  const mutation = useRoomItemZim();
+
+  const id = productId!.toString();
+
+  useEffect(() => {
+    setIsBtnActive(userZimState);
+  }, [userZimState]);
+
+  const { alertOpenHandler } = useToastAlert(
+    isBtnActive ? '찜을 취소했어요.' : '상품을 찜 했어요.',
+  );
+
+  const activeHandler = () => {
+    alertOpenHandler();
+    mutation.mutate(
+      { id },
+      {
+        onSuccess() {
+          setIsBtnActive(!isBtnActive);
+        },
+      },
+    );
   };
 
   const handleItemClick = () => {
@@ -40,21 +64,25 @@ const CatchItem = ({
         <span className="text-white">{region}</span>
       </div>
       <div className="absolute flex top-[12px] h-[40px] right-4 justify-center items-center z-10">
-        <div className="relative ">
-          <Image
-            src="/Ellipse-22.svg"
-            width={40}
-            height={40}
-            alt="찜하기 버튼"
-          />
-          <div className="absolute bottom-1/2 right-1/2 translate-y-1/2 translate-x-1/2 cursor-pointer">
-            <HeartButton
-              isButtonActive={isHeart}
-              stateHandler={handleHeartBtnClick}
-              whiteStroke={true}
+        {data?.userIdentity === 'BUYER' ? (
+          <div className="relative ">
+            <Image
+              src="/Ellipse-22.svg"
+              width={40}
+              height={40}
+              alt="찜하기 버튼"
             />
+            <div className="absolute bottom-1/2 right-1/2 translate-y-1/2 translate-x-1/2 cursor-pointer">
+              <HeartButton
+                isButtonActive={isBtnActive}
+                stateHandler={activeHandler}
+                whiteStroke={true}
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          ''
+        )}
       </div>
       <div className="h-[184px] relative" onClick={handleItemClick}>
         <Image
@@ -62,6 +90,7 @@ const CatchItem = ({
           alt="숙소이미지"
           fill={true}
           sizes="(max-width: 480px) 364px, (max-width: 390px) 240px, 240px"
+          priority
           className="rounded-t-xl"
         />
       </div>

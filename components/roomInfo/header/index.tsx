@@ -2,43 +2,67 @@
 // import { inView } from 'framer-motion';
 import React, { useState } from 'react';
 import LeftButton from './leftButton';
-import RightButton from './rightButton';
-import { Button } from '@material-tailwind/react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
+import HeartButtonComponent from './rightButton';
+import { useSetRecoilState } from 'recoil';
 import BottomSheetsWithoutCloseBtn from '@/components/common/bottomSheetsWithOutCloseBtn';
 import { outerMoreBottomSheetsControl } from '@/atoms/commons/outerBottomSheetsControl';
 import Modal from '@/components/common/modal';
 import { useParams, useRouter } from 'next/navigation';
 import { useMutationDeleteSaleProduct } from '@/api/sale/query';
 import { isProductState } from '@/atoms/sale/productAtom';
+import { UseParamsType } from '@/types/room-info/types';
+import { useRoomItem } from '@/api/room-info/query';
+import { useToastAlert } from '@/hooks/useToastAlert';
 
 const HeaderComponent = () => {
   const setMoreBottomSheetOpen = useSetRecoilState(
     outerMoreBottomSheetsControl,
   );
-
-  type UseParamsType = {
-    id: string;
-  };
-
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { id } = useParams() as UseParamsType;
+  const { data } = useRoomItem(id);
+  const { alertOpenHandler } = useToastAlert('게시글을 삭제했어요.');
 
   const mutation = useMutationDeleteSaleProduct();
   const setIsProduct = useSetRecoilState(isProductState);
-
-  //const { id } = useSearchParams();
-  // 지민님 작업 끝나시면 이어서 할 예정.
-  // const { data } = useRoomItem(id);
 
   // ----------- 헤더부분에 스크롤에 따라 숙소이름 뜨게하려는 중...
 
   // const [scroll, setScroll] = useState<boolean>(false);
 
+  // const [titleHidden, setTitleHidden] = useState(
+  //   typeof window !== 'undefined' ? false : true,
+  // );
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY >= 100) {
+  //       setTitleHidden(true);
+  //     } else {
+  //       setTitleHidden(false);
+  //     }
+  //   };
+
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
+
+  // console.log(titleHidden);
+
   // const titleRef = useRef(null);
 
+  // const handleScroll = useCallback((e) => {
+  //   console.log(e);
+  // }, []);
+
+  // useLayoutEffect(() => {
+  //   if (titleRef.current) {
+  //     titleRef.current.addEventListener('scroll', handleScroll);
+  //     return () =>
+  //       titleRef!.current.removeEventListener('scroll', handleScroll);
+  //   }
+  // }, [handleScroll]);
   // const handleScroll = () => {
   //   console.log(window.scrollY);
   //   // 스크롤이 Top에서 50px 이상 내려오면 true값을 useState에 넣어줌
@@ -60,14 +84,6 @@ const HeaderComponent = () => {
   // }, []);
   // ---------------------------------------------------------------
 
-  // ----------------- 추후 기능구현 후 지울예정! (구매자, 판매자 스타일 변경버튼)
-  const [viewerState, setViewerState] = useRecoilState(viewerTestButton);
-
-  const viewerTestHandler = () => {
-    setViewerState(!viewerState);
-  };
-  // ---------------------------------------------------------
-
   const handleEditBtnClick = () => {
     setMoreBottomSheetOpen(false);
     setIsProduct(true);
@@ -88,7 +104,8 @@ const HeaderComponent = () => {
 
   const handleMutationSucess = () => {
     handleModalOpen();
-    router.push('/mypage/dashboard/sales');
+    alertOpenHandler();
+    router.push('/mypage/dashboard/sales?ref=info');
   };
 
   const handleMutationError = () => {
@@ -107,19 +124,10 @@ const HeaderComponent = () => {
     <>
       <div className="fixed top-0 flex justify-between w-full max-w-[480px] bg-bg p-4 z-20">
         <LeftButton />
-        {/* 스크롤에 따라 숙소이름 뜨게 하려는 용도.. */}
-        {/* <p className="text-h5 font-extrabold">123</p> */}
+        {/* 스크롤에 따라 숙소이름 뜨게 하려는 용도..
+        {titleHidden && <div className="text-h5 font-extrabold">123</div>} */}
 
-        {/* 판매자 및 구매자 화면 전환용 (테스트용이고, 추후 삭제 예정입니다!)*/}
-        <Button
-          placeholder="Button"
-          type="button"
-          onClick={viewerTestHandler}
-          className={`flex items-center  font-pretend h-[28px] rounded-[4px] text-[10px] font-semibold shadow-none bg-main text-white p-3`}
-        >
-          {viewerState ? `판매자 화면` : `구매자 화면`}
-        </Button>
-        {viewerState ? (
+        {data?.userIdentity === 'SELLER' ? (
           <button className="flex items-center justify-center w-[1.75rem] h-[1.75rem] ">
             {/* <MoreIcon /> */}
             <BottomSheetsWithoutCloseBtn
@@ -133,8 +141,10 @@ const HeaderComponent = () => {
               </div>
             </BottomSheetsWithoutCloseBtn>
           </button>
+        ) : data?.userIdentity === 'BUYER' ? (
+          <HeartButtonComponent />
         ) : (
-          <RightButton />
+          <></>
         )}
       </div>
 

@@ -4,30 +4,33 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { formatTime } from '@/utils/formatTime';
 import { formatCurrency } from '@/utils/formatCurrency';
-import { useRecoilValue } from 'recoil';
-import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { chatRoomInfo, negoPriceAtom } from '@/atoms/chat/chatContentAtom';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
-import { chatPosition } from '@/utils/get-chat-style';
+import { userOutAtom } from '@/atoms/chat/leaveButton';
 
-const AppoveMessage = ({ negoPrice, time, isSeller, me }: MessageItemType) => {
+const AppoveMessage = ({ negoPrice, time, isSeller }: MessageItemType) => {
   const router = useRouter();
 
   //판매중(onsale)외의 상태값인 경우 버튼 비활성화처리를 위함
   const chatInfo = useRecoilValue(chatRoomInfo);
+  const isUserOut = useRecoilValue(userOutAtom);
+  const setNegoPrice = useSetRecoilState(negoPriceAtom);
   const ForSale = chatInfo.dealState === 'ONSALE' ? true : false;
 
-  const style = chatPosition(me, isSeller);
+  const productNum = chatInfo.productId;
+
+  const handleClick = () => {
+    setNegoPrice(negoPrice);
+    router.push(`/order/${productNum}`);
+  };
 
   if (isSeller) {
     return (
       <div className="flex items-end gap-3">
-        <p className={`${'ml-auto'} text-gray-500 bg-raspberry text-t3`}>
-          {formatTime(time)}
-        </p>
+        <p className={`text-gray-500 text-t3`}>{formatTime(time)}</p>
         <div
-          className={`w-60 ${
-            me ? 'mr-auto' : 'ml-auto'
-          } bg-white flex flex-col items-center box-border border border-border-sub rounded-t rounded-md overflow-hidden`}
+          className={`w-60 bg-white flex flex-col items-center box-border border border-border-sub rounded-t rounded-md overflow-hidden`}
         >
           {chatInfo.accommodationUrl ? (
             <div className="relative w-60 h-32">
@@ -63,9 +66,9 @@ const AppoveMessage = ({ negoPrice, time, isSeller, me }: MessageItemType) => {
   } else {
     return (
       <div className="flex items-end flex-row-reverse gap-3">
-        <p className={`${style} text-gray-500 text-t3`}>{formatTime(time)}</p>
+        <p className={` text-gray-500 text-t3`}>{formatTime(time)}</p>
         <div
-          className={`w-60 ${style} bg-white flex flex-col items-center box-border border border-border-sub rounded-t rounded-md overflow-hidden`}
+          className={`w-60  bg-white flex flex-col items-center box-border border border-border-sub rounded-t rounded-md overflow-hidden`}
         >
           {chatInfo.accommodationUrl ? (
             <div className="relative w-60 h-32">
@@ -97,8 +100,8 @@ const AppoveMessage = ({ negoPrice, time, isSeller, me }: MessageItemType) => {
             </p>
             <SimpleButton
               name={`${formatCurrency(negoPrice)}` + '원 결제하기'}
-              fn={() => router.push('/order')}
-              disabled={!ForSale}
+              fn={handleClick}
+              disabled={!ForSale || isUserOut}
             />
           </div>
         </div>

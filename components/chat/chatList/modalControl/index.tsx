@@ -2,28 +2,18 @@
 
 import { deleteModalIdAtom, isModalState } from '@/atoms/chat/leaveButton';
 import Modal from '@/components/common/modal';
-import { useRoomConnection } from '@/hooks/useRoomConnection';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-const ModalControl = () => {
+const ModalControl = ({
+  deleteRoom,
+}: {
+  deleteRoom: (roomId: string) => void;
+}) => {
   const router = useRouter();
-  const { deleteRoom, connect, disconnect } = useRoomConnection();
   const deleteModalInfo = useRecoilValue(deleteModalIdAtom);
   const [isOpen, setIsOpen] = useRecoilState(isModalState);
-
-  useEffect(() => {
-    console.log('connect 연결');
-    connect();
-    return () => {
-      console.log('disconnect 연결 해제');
-      disconnect();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log(deleteModalInfo);
 
   const handleModalOpen = () => {
     setIsOpen((prev) => !prev);

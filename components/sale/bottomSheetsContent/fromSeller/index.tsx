@@ -21,15 +21,18 @@ import {
 import CheckBoxComponent from '@/components/common/checkBox';
 import Modal from '@/components/common/modal';
 import { FromSeller, sellerSchema } from '@/constants/zodSchema';
+import { useToastAlert } from '@/hooks/useToastAlert';
 import { ProductItem } from '@/types/sale/type';
 import { formatDate } from '@/utils/formatDate';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const FromSeller = () => {
+  const { alertOpenHandler } = useToastAlert('매물을 수정했어요.');
   const [isProduct, setIsProduct] = useRecoilState(isProductState);
   const [isNego, setIsNego] = useRecoilState(isNegoState);
   const [sellerContent, setSellerContent] = useRecoilState(sellerContentState);
@@ -198,10 +201,16 @@ const FromSeller = () => {
       accommodationName: string;
     };
   };
+
+  alertOpenHandler;
   const handleMutationSucess = (data: APIresponse) => {
     console.log(data);
     setIsProduct(false);
-    if (data.code === 4010 || data.code === 4020) {
+    if (data.code === 4010) {
+      setHeaderUnVisible(false);
+      window.location.href = `/room-info/${data.data.id}?ref=sale`;
+    } else if (data.code === 4020) {
+      alertOpenHandler();
       setHeaderUnVisible(false);
       window.location.href = `/room-info/${data.data.id}?ref=sale`;
     } else {
@@ -210,10 +219,14 @@ const FromSeller = () => {
       setHeaderUnVisible(false);
     }
   };
-  const handleMutationError = () => {
-    setModalContent('사유 : 서버 에러');
-    setOpen(true);
-    setHeaderUnVisible(false);
+
+  const handleMutationError = (error: Error) => {
+    console.log(error);
+    if (axios.isAxiosError(error)) {
+      console.log(error?.response?.data.data.message);
+      setModalContent('사유 :  ' + error.response?.data.data.message);
+      setOpen(true);
+    }
   };
 
   return (

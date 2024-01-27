@@ -14,11 +14,10 @@ export const useChatConnection = (roomId: string) => {
   const [cookies] = useCookies();
 
   const accessToken = cookies.accessToken;
-  const userId = cookies.id;
+  const userId = cookies.userId;
 
   const { data } = useGetPreviousChat(roomId, accessToken);
   const { data: chatInfo } = useInitialChatInfo(roomId, accessToken);
-  console.log('새로운 데이터가 왔어요~');
   const ws = useRef<CompatClient | null>(null);
 
   // 초기 데이터 로딩
@@ -37,7 +36,7 @@ export const useChatConnection = (roomId: string) => {
         Authorization: `Bearer ${accessToken}`,
       },
       reportErrors: true,
-      debug: true,
+      debug: false,
     });
     const wsClient = Stomp.over(() => sockjs);
     ws.current = wsClient;
@@ -80,7 +79,6 @@ export const useChatConnection = (roomId: string) => {
         negoPrice: -1,
       }),
     });
-    console.log('메시지 전송', userId);
   };
 
   // 가격 제안

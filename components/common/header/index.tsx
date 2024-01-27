@@ -8,12 +8,11 @@ import MoreIcon from '@/public/svg/dots-vertical.svg';
 import HomeIcon from '@/public/svg/home.svg';
 import { HeaderProps } from '@/types/common/header/types';
 import Modal from '../modal';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { priceState } from '@/atoms/sale/priceAtom';
-import { allCheckState } from '@/atoms/sale/checkAtom';
+import { useRecoilValue } from 'recoil';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
-import { isProductState } from '@/atoms/sale/productAtom';
 import { usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { isProductState } from '@/atoms/sale/productAtom';
 
 const Header = ({
   title,
@@ -28,9 +27,12 @@ const Header = ({
   const router = useRouter();
   const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
-  const setPrice = useSetRecoilState(priceState);
-  const setAllCheck = useSetRecoilState(allCheckState);
-  const setIsProduct = useSetRecoilState(isProductState);
+  const ref = useSearchParams();
+  const refString = ref?.get('ref');
+  const params = useSearchParams();
+  const id = params?.get('id');
+  console.log(id);
+  const isProduct = useRecoilValue(isProductState);
 
   const headerUnVisible = useRecoilValue(isHeaderSate);
 
@@ -52,6 +54,8 @@ const Header = ({
       router.push('/mypage');
     } else if (isSale) {
       setModalOpen(true);
+    } else if (refString === 'info') {
+      router.push('/');
     } else {
       router.back();
     }
@@ -59,10 +63,9 @@ const Header = ({
 
   const onConfirm = () => {
     handleModalOpen();
-    setPrice(0);
-    setAllCheck(false);
-    setIsProduct(false);
-    router.back();
+    if (isProduct && id !== undefined && id !== null) {
+      window.location.href = `/room-info/${+id}`;
+    } else window.location.href = '/';
   };
 
   const onCancel = () => {

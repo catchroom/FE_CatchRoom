@@ -23,8 +23,9 @@ const NavRoomInfoComponent = () => {
             {data?.data.roomUrl && (
               <Image
                 src={data.data.roomUrl[0].url}
-                layout="fill"
-                objectFit="cover"
+                fill
+                sizes="(max-width: 640px) 100vw, 100vw"
+                priority
                 alt="객실사진"
                 className="rounded-md"
               />
