@@ -70,6 +70,7 @@ const WithdrawForm = ({ originalBalance }: { originalBalance: number }) => {
             reset={reset}
             won={true}
             inputOn={!!balance}
+            isError={!!errors.balance}
             placeholder="출금 금액을 입력해주세요."
           />
           <ErrorMessage

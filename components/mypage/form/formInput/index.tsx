@@ -24,6 +24,7 @@ const FormInput = ({
   reset,
   won = false,
   inputOn = false,
+  isError = false,
 }: {
   value: keyof FormAccount | keyof FormName | string;
   placeholder?: string;
@@ -31,6 +32,7 @@ const FormInput = ({
   reset: (values?: resetType) => void;
   won?: boolean;
   inputOn?: boolean;
+  isError?: boolean;
 }) => {
   const registerValue = value as keyof (FormAccount | FormName);
 
@@ -41,7 +43,9 @@ const FormInput = ({
         {...register(registerValue)}
         type="text"
         placeholder={placeholder}
-        className={`${wonValue} py-3 border border-border-sub rounded-md bg-surface w-full outline-none transition-colors duration-300 ease-in focus:border-border-critical`}
+        className={`${wonValue} py-3 border  rounded-md bg-surface w-full outline-none transition-colors duration-300 ease-in ${
+          isError ? 'border-border-critical' : 'border-border-sub'
+        } `}
       />
       {won && (
         <div className="absolute left-3 top-1/2 -translate-y-1/2">
@@ -56,7 +60,9 @@ const FormInput = ({
             [value]: '',
           })
         }
-        className="absolute right-4 top-1/2 -translate-y-1/2"
+        className={`absolute right-4 top-1/2 -translate-y-1/2 transition-opacity duration-300 ease-in ${
+          inputOn ? 'opacity-100' : 'opacity-0'
+        }`}
       >
         <MyPageCancelSVG />
       </button>

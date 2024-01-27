@@ -6,10 +6,12 @@ export const MYPAGE_CONSTANTS: Root = {
     {
       TITLE: '예치금 출금',
       LOCATION: '/mypage/dashboard/withdraw',
+      BOTTOM: false,
     },
     {
       TITLE: '예치금 내역',
       LOCATION: '/mypage/dashboard/withdraw/history',
+      BOTTOM: true,
     },
   ],
 
@@ -20,16 +22,19 @@ export const MYPAGE_CONSTANTS: Root = {
         TITLE: '판매 내역',
         LOCATION: '/mypage/dashboard/sales',
         TYPE: 'history',
+        BOTTOM: false,
       },
       {
         TITLE: '구매 내역',
         LOCATION: '/mypage/dashboard/purchase',
         TYPE: 'shopping',
+        BOTTOM: true,
       },
       {
         TITLE: '찜목록',
         LOCATION: '/mypage/dashboard/wishlist',
         TYPE: 'heart',
+        BOTTOM: true,
       },
     ],
   },
@@ -39,10 +44,12 @@ export const MYPAGE_CONSTANTS: Root = {
       {
         TITLE: '이용약관',
         LOCATION: '/mypage/dashboard/terms',
+        BOTTOM: true,
       },
       {
         TITLE: '개인정보 처리방침',
         LOCATION: '/mypage/dashboard/privacy',
+        BOTTOM: true,
       },
     ],
   },
@@ -55,30 +62,42 @@ export const MYPAGE_APP_ROUTE = [
   {
     TITLE: '설정',
     LOCATION: '/mypage/dashboard/profile',
+    BOTTOM: false,
   },
   {
     TITLE: '내 계좌',
     LOCATION: '/mypage/dashboard/account',
+    BOTTOM: false,
   },
   {
     TITLE: '개인정보 수집 및 이용 동의 (필수)',
     LOCATION: '/mypage/dashboard/conditions/consent-essential',
+    BOTTOM: true,
   },
   {
     TITLE: '개인정보 수집 및 이용 동의 (선택)',
     LOCATION: '/mypage/dashboard/conditions/consent-options',
+    BOTTOM: true,
   },
   {
     TITLE: '개인정보 제3자 제공 동의 (필수)',
     LOCATION: '/mypage/dashboard/conditions/consent-third',
+    BOTTOM: true,
   },
   {
     TITLE: '캐치특가 자동 설정 (필수)',
     LOCATION: '/mypage/dashboard/conditions/consent-catch',
+    BOTTOM: true,
   },
   {
     TITLE: '숙소 이용 및 취소/환불규정 동의 (필수)',
     LOCATION: '/mypage/dashboard/conditions/consent-refund',
+    BOTTOM: true,
+  },
+  {
+    TITLE: '리뷰 쓰기',
+    LOCATION: '/mypage/dashboard/review',
+    BOTTOM: false,
   },
 ];
 
