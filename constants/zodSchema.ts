@@ -1,20 +1,13 @@
 import { z } from 'zod';
 
 export const nameSchema = z.object({
-  nickname: z
+  name: z
     .string()
     .min(2, {
-      message:
-        '공백을 제외한 한글 + 영문 + 숫자만 2~8자리 조합으로 설정 해주세요.',
+      message: '올바르지 않은 이름 형식입니다.',
     })
-    .max(
-      8,
-      '공백을 제외한 한글 + 영문 + 숫자만 2~8자리 조합으로 설정 해주세요.',
-    )
-    .regex(
-      /^[a-zA-Z0-9가-힣]*$/,
-      '공백을 제외한 한글 + 영문 + 숫자만 2~8자리 조합으로 설정 해주세요.',
-    ),
+    .max(8, '올바르지 않은 이름 형식입니다.')
+    .regex(/^[a-zA-Z가-힣]*$/, '올바르지 않은 이름 형식입니다.'),
 });
 
 export const nicknameSchema = z.object({
@@ -41,8 +34,11 @@ export const accountSchema = z.object({
     .regex(/^[0-9]*$/, '계좌번호는 숫자만 입력 가능합니다.'),
   name: z
     .string()
-    .min(2, '이름은 한글과 영어로만 입력 가능합니다.')
-    .regex(/^[a-zA-Z가-힣]*$/, '이름은 한글과 영어로만 입력 가능합니다.'),
+    .min(2, {
+      message: '올바르지 않은 이름 형식입니다.',
+    })
+    .max(8, '올바르지 않은 이름 형식입니다.')
+    .regex(/^[a-zA-Z가-힣]*$/, '올바르지 않은 이름 형식입니다.'),
   bank: z.string({
     required_error: '은행을 선택해주세요.',
   }),
@@ -126,7 +122,10 @@ export const authDataSchema = z
 export const userInfoSchema = z.object({
   name: z
     .string()
-    .min(2, '올바르지 않은 이름 형식입니다.')
+    .min(2, {
+      message: '올바르지 않은 이름 형식입니다.',
+    })
+    .max(8, '올바르지 않은 이름 형식입니다.')
     .regex(/^[a-zA-Z가-힣]*$/, '올바르지 않은 이름 형식입니다.'),
   phone: z
     .string()
