@@ -91,7 +91,7 @@ const LoginForm = () => {
           />
           {email && clickedEmailInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2"
               onClick={() => clearField('email')}
             >
               <DeleteIcon />
@@ -121,7 +121,7 @@ const LoginForm = () => {
 
           {password && clickedPwInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2 text-border-critical"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2 text-border-critical"
               onClick={() => clearField('password')}
             >
               <DeleteIcon />
