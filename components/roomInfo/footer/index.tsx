@@ -2,9 +2,6 @@
 
 import React, { useState } from 'react';
 import { Button } from '@material-tailwind/react';
-// import { useRoomItem } from '@/api/room-info/query';
-import { useRecoilState } from 'recoil';
-import { viewerTestButton } from '@/atoms/roomInfo/headerTitle';
 import { UseParamsType } from '@/types/room-info/types';
 import { useParams, useRouter } from 'next/navigation';
 import { useRoomItem } from '@/api/room-info/query';
@@ -18,7 +15,6 @@ import { useToastAlert } from '@/hooks/useToastAlert';
 const FooterComponent = () => {
   const [cookies] = useCookies();
   const mutation = useCreateChatRoom();
-  const [viewerState] = useRecoilState(viewerTestButton);
   const [open, setOpen] = useState(false);
   const { alertOpenHandler } = useToastAlert('로그인이 필요한 서비스 입니다');
   const { alertOpenHandler: successOpenHandler } =
@@ -98,7 +94,7 @@ const FooterComponent = () => {
       )}
 
       <div className="fixed flex justify-center bottom-0 gap-2 w-full max-w-[480px] h-[5.75rem] p-5 bg-white border-t border-divider-sub z-10">
-        {viewerState ? (
+        {data?.userIdentity === 'SELLER' ? (
           <Button
             placeholder="Button"
             type="button"
