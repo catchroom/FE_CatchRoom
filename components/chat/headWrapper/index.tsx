@@ -8,7 +8,8 @@ import ChatHeader from '../header';
 const HeadWrapper = () => {
   const pathname = usePathname();
 
-  const headerValue = pathname === '/chat' ? true : false;
+  const headerValue =
+    pathname === '/chat' || pathname === '/chat/unauthenticated' ? true : false;
   return (
     <>
       {headerValue ? (
