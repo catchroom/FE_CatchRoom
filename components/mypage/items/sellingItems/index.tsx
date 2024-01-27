@@ -27,9 +27,11 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
 
   let sellState = '판매 완료';
   if (item?.dealState === 'EXPIRED') {
-    sellState = '체크인 만료';
-  } else if (item?.dealState === 'UNSOLD') {
     sellState = '기한 만료';
+  } else if (item?.dealState === 'UNSOLD') {
+    sellState = '체크인 만료';
+  } else if (item?.dealState === 'UNABLE') {
+    sellState = '판매 불가';
   }
 
   let isReview: ReviewType = 'noReview';
@@ -104,7 +106,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
           </div>
         </div>
       </div>
-      {item?.reviewStatusType && (
+      {sellState === '판매 완료' && (
         <ReviewButtons
           id={parseInt(item.productId)}
           type={listState}
