@@ -25,6 +25,7 @@ export type BannerItemType = {
   TITLE: string;
   LOCATION: string;
   TYPE: 'heart' | 'shopping' | 'history';
+  BOTTOM?: boolean;
 };
 
 export type Root = {
@@ -36,25 +37,30 @@ export type Root = {
 export type AccountButton = {
   TITLE: string;
   LOCATION: string;
+  BOTTOM?: boolean;
 };
 
 export type TopBanner = {
   TITLE: string;
   BANNERS: Banners[];
+  BOTTOM?: boolean;
 };
 
 export type Banners = {
   TITLE: string;
   LOCATION: string;
   TYPE: 'heart' | 'shopping' | 'history';
+  BOTTOM?: boolean;
 };
 
 export type BottomBanner = {
   TITLE: string;
   BANNERS: Banners2[];
+  BOTTOM?: boolean;
 };
 
 export type Banners2 = {
   TITLE: string;
   LOCATION: string;
+  BOTTOM?: boolean;
 };

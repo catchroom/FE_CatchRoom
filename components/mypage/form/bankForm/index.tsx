@@ -38,7 +38,6 @@ const BankForm = () => {
     mode: 'onChange',
   });
   const { data } = useQueryGetAccount();
-  //console.log(data);
 
   const checkInput = () => {
     const { bank, account, name } = watch();
@@ -50,23 +49,10 @@ const BankForm = () => {
 
   const onSubmit: SubmitHandler<FormAccount> = (dataField) => {
     if (accountSchema.safeParse(dataField)) {
-      console.log(dataField);
       if (!data) {
-        registerAccount(dataField.bank, dataField.account, dataField.name).then(
-          (res) => {
-            if (res.code === 2006) {
-              console.log(res.data);
-            }
-          },
-        );
+        registerAccount(dataField.bank, dataField.account, dataField.name);
       } else if (data) {
-        editAccount(dataField.bank, dataField.account, dataField.name).then(
-          (res) => {
-            if (res.code === 2010) {
-              console.log(res.data);
-            }
-          },
-        );
+        editAccount(dataField.bank, dataField.account, dataField.name);
       }
     } else {
       console.log('error');
@@ -101,7 +87,7 @@ const BankForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-full h-full gap-6 py-5"
+      className="flex flex-col w-full h-full gap-4 py-5"
     >
       <div className="w-full relative">
         <BottomSheets
@@ -137,7 +123,7 @@ const BankForm = () => {
           render={({ message }) => <FormError message={message} />}
         />
       </div>
-      <div className="w-full flex flex-col relative">
+      <div className="w-full flex flex-col gap-2 relative">
         <FormInput
           value="account"
           register={register}

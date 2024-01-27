@@ -39,9 +39,9 @@ const InfiniteScrollWrapper = () => {
         {data ? (
           data.pages.map((page, pageIndex) => (
             <div key={pageIndex} className="flex flex-col gap-8">
-              {page.list.map((item: ReviewItemType) => (
+              {page.list.map((item: ReviewItemType, index: number) => (
                 <ReviewItem
-                  key={item?.productName}
+                  key={item?.productName + index}
                   productName={item?.productName}
                   userName={item?.userName}
                   date={item?.date}

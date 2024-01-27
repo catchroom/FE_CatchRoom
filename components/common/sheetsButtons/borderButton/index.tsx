@@ -20,7 +20,7 @@ const BorderButton = ({
     ? 'bg-action-secondary-disabled text-text-disabled'
     : gray
       ? 'bg-surface-gray text-text-sub'
-      : 'border border-border-primary text-text-primary';
+      : 'border border-border-primary bg-surface text-text-primary';
 
   return (
     <motion.button

@@ -69,7 +69,7 @@ const InfiniteScrollContainer = () => {
           id="scrollableDiv"
           className="w-full h-full overflow-auto mt-56 p-6 pt-2"
         >
-          {data?.pages[0].size !== 0 ? (
+          {data?.pages[0].list.length !== 0 ? (
             data?.pages.map((page, pageIndex) => (
               <div key={pageIndex} className="flex flex-col gap-[2rem]">
                 {page.list.map((data: DeadLineItem) => (

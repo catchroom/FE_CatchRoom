@@ -4,7 +4,7 @@ import React from 'react';
 
 const page = () => {
   return (
-    <div className="w-full h-full px-5 pt-3">
+    <div className="w-full h-full pt-4">
       <DivideWrapper divideCase="SALE">
         <Divide />
       </DivideWrapper>

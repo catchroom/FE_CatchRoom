@@ -33,6 +33,9 @@ type Props = {
 };
 
 const SaleInfoContainer = ({ id }: Props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const isProduct = useRecoilValue(isProductState);
 
   const { data, isLoading } = useConditionalQuery(isProduct, +id!);
@@ -98,13 +101,13 @@ const SaleInfoContainer = ({ id }: Props) => {
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
-        <div className="w-[100px] h-[100px] relative">
+        <div className="w-[100px] h-[100px] relative flex-shrink-0">
           <Image
             src={data?.accommdationUrl}
             alt="숙소 이미지"
             fill={true}
-            className="rounded-[0.6rem]"
-            sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 80px"
+            className="rounded-[0.6rem] object-cover"
+            sizes="(max-width: 480px) 80vw, (max-width: 320px) 100vw"
             priority
           />
         </div>

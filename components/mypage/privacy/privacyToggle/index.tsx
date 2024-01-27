@@ -11,7 +11,7 @@ const PrivacyToggle = ({ title }: { title: string }) => {
   };
 
   return (
-    <div className="w-full flex justify-between items-center">
+    <div className="w-full flex justify-between items-center h-6">
       <h1 className="text-t2">{title}</h1>
       <SlideButton isButtonActive={toggle} stateHandler={toggleHandler} />
     </div>

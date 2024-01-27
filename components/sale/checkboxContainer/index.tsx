@@ -10,10 +10,12 @@ import { useForm } from 'react-hook-form';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import FromSeller from '../bottomSheetsContent/fromSeller';
 import { allCheckState } from '@/atoms/sale/checkAtom';
+import { isProductState } from '@/atoms/sale/productAtom';
 
 const CheckboxContainer = () => {
   const isCatch = useRecoilValue(catchState);
   const setAllCheck = useSetRecoilState(allCheckState);
+  const isProduct = useRecoilValue(isProductState);
 
   const { watch, getValues, setValue } = useForm({
     resolver: zodResolver(checkBoxSchema(isCatch)),
@@ -30,6 +32,16 @@ const CheckboxContainer = () => {
   const check2 = watch('check2');
   const check3 = watch('check3');
 
+  useEffect(() => {
+    if (isProduct) {
+      setValue('allAgree', true);
+      setValue('check1', true);
+      setValue('check2', true);
+      setValue('check3', true);
+      setAllCheck(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
     if (isCatch) {
       const checked = getValues('allAgree');

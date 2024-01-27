@@ -15,13 +15,12 @@ const Divide = () => {
   const viewState = useRecoilValue(divideAtom);
   const viewCase = checkViewState(viewState);
   const { data } = useMyPageQuery(viewCase);
-  console.log(data);
 
   return (
-    <div>
+    <div className="flex flex-col gap-[28px]">
       {data &&
         data.data.map((item: MypageSellingType) => (
-          <MItem key={item.accommodationName} item={item} />
+          <MItem key={item.productId} item={item} />
         ))}
     </div>
   );

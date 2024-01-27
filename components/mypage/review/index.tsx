@@ -6,7 +6,6 @@ import { useQueryGetRoomInfo } from '@/api/mypage/query';
 
 const ReviewHeader = ({ id }: { id: number }) => {
   const { data } = useQueryGetRoomInfo(id);
-  console.log(data);
 
   return (
     <div id="top" className="w-full flex gap-3 p-4 border-b border-border-sub">

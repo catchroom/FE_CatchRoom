@@ -79,14 +79,15 @@ const CatchSpecialComponent = ({
           ) : (
             ''
           )}
-          <div className="relative w-32 h-32 flex-shrink-0">
+          <div className="relative w-32 flex-shrink-0">
             {image ? (
               <Image
                 src={image}
                 fill
-                sizes="(max-width: 640px) 70vw, 100vw"
+                sizes="100vw"
                 priority
                 alt="숙소사진"
+                className=" object-cover"
               />
             ) : (
               <div className="relative w-32 bg-gray-300 animate-pulse">

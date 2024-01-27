@@ -5,8 +5,6 @@ import nookies from 'nookies';
 
 const ProfileContainer = ({ children }: { children: ReactNode }) => {
   const { data } = useQueryGetProfile();
-  console.log(data);
-  //쿠키에 userId 저장하기
   nookies.set(null, 'userId', data?.userId, {
     path: '/',
   });

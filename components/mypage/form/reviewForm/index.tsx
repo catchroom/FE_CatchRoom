@@ -32,18 +32,25 @@ const ReviewForm = ({
 
   const onSubmit: SubmitHandler<FormReview> = async (reviewData) => {
     if (reviewSchema.safeParse(reviewData).success) {
-      console.log(reviewData);
       if (reviewId) {
         editReview(type, reviewData.content, reviewId).then((res) => {
           if (res.code === 2023) {
-            router.push('/mypage/dashboard/sales');
+            if (type === '판매') {
+              router.push('/mypage/dashboard/sales');
+            } else if (type === '구매') {
+              router.push('/mypage/dashboard/purchase');
+            }
             alertOpenHandler();
           }
         });
       } else {
         postReview(type, reviewData.content, id).then((res) => {
           if (res.code === 2021) {
-            router.push('/mypage/dashboard/sales');
+            if (type === '판매') {
+              router.push('/mypage/dashboard/sales');
+            } else if (type === '구매') {
+              router.push('/mypage/dashboard/purchase');
+            }
             alertOpenHandler();
           }
         });

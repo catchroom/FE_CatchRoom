@@ -6,7 +6,6 @@ import { MypagePurchaseType } from '@/types/mypage/data-types';
 
 const PurchaseList = () => {
   const { data } = useQueryGetPurchaseHistory();
-  console.log(data);
 
   return (
     <div className="flex flex-col w-full h-[calc(100vh-100px)] overflow-y-scroll gap-3">

@@ -3,9 +3,9 @@ import { useRoomItem } from '@/api/room-info/query';
 import { useToastAlert } from '@/hooks/useToastAlert';
 import MapPinSmFillIcon from '@/public/svgComponent/mapPinSmFillIcon';
 import { UseParamsType } from '@/types/room-info/types';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import React from 'react';
+import RoomMap from './roomMap';
 
 const NavAccRegionComponent = () => {
   const { id } = useParams() as UseParamsType;
@@ -27,16 +27,13 @@ const NavAccRegionComponent = () => {
   return (
     <div className="w-full h-[235px]">
       <div className="relative w-full h-[205px] ">
-        {/* 카카오 지도 들어갈 자리 */}
-        {/* {data && data.data.latitude} 위도 */}
-        {/* {data && data.data.longitude} 경도 */}
-        <Image
-          src="/sample/map.png"
-          layout="fill"
-          objectFit="cover"
-          alt="숙소사진"
+        {/* 카카오 지도 */}
+        <RoomMap
+          latitude={data?.data.latitude}
+          longitude={data?.data.longitude}
         />
       </div>
+      {/* 복사 가능한 숙소 주소 */}
       <div className="flex flex-wrap w-full justify-between text-p2 mt-3">
         <div className="flex flex-wrap items-center gap-1">
           <MapPinSmFillIcon />

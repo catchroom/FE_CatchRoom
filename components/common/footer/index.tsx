@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <div className="flex flex-col gap-3 mt-10 pb-40">
+    <div className="flex flex-col gap-3 mt-10 pb-20">
       <div className="flex flex-col text-text-sub text-p3 ">
         <h1 className="pb-1 font-bold text-p1">캐치룸</h1>
         <p>

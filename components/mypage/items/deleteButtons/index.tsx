@@ -1,24 +1,25 @@
 'use client';
 
 import Modal from '@/components/common/modal';
-import { useToastAlert } from '@/hooks/useToastAlert';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import React, { useState } from 'react';
 import { deleteSalesList } from '@/api/mypage/api';
 
 const DeleteButtons = ({ id }: { id: number }) => {
   const [openModal, setOpenModal] = useState(false);
-  const { alertOpenHandler } = useToastAlert('내역을 삭제했어요.');
 
-  const modalClose = () => {
+  const handleModalClose = () => {
     setOpenModal(false);
   };
 
-  const modalOpen = (id: number) => {
+  const handleModalOpen = () => {
     setOpenModal(true);
+  };
+
+  const handleDeleteSaleList = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     deleteSalesList(id).then((res) => {
       if (res.code === 4030) {
-        alertOpenHandler();
         window.location.href = '/mypage/dashboard/sales';
       }
     });
@@ -26,8 +27,8 @@ const DeleteButtons = ({ id }: { id: number }) => {
 
   return (
     <>
-      <span onClick={() => modalOpen(id)} className="cursor-pointer">
-        <XSymbolIcon />
+      <span onClick={handleModalOpen} className="cursor-pointer">
+        <XSymbolIcon w={20} y={20} />
       </span>
       {openModal && (
         <Modal
@@ -36,8 +37,8 @@ const DeleteButtons = ({ id }: { id: number }) => {
           showCancelButton
           showConfirmButton
           confirmString="삭제하기"
-          onCancel={modalClose}
-          onConfirm={modalClose}
+          onCancel={handleModalClose}
+          onConfirm={handleDeleteSaleList}
         />
       )}
     </>

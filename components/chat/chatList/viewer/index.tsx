@@ -13,7 +13,6 @@ const ChatListViewer = ({
   deleteRoom: (roomId: string) => void;
 }) => {
   const chatList = useRecoilValue(chatAllRoomAtom);
-  console.log(chatList);
 
   return (
     <>
@@ -22,7 +21,9 @@ const ChatListViewer = ({
           return <ChatItem item={item} key={index} />;
         })
       ) : (
-        <p>채팅방이 없습니다.</p>
+        <p className="absolute inset-0 flex flex-col items-center justify-center text-text-sub font-semibold text-t2">
+          채팅방이 없습니다.
+        </p>
       )}
       <ModalControl deleteRoom={deleteRoom} />
     </>

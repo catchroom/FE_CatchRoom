@@ -19,9 +19,8 @@ export const useRoomConnection = () => {
   const accessToken = cookies.accessToken;
   const userId = cookies.userId;
 
-  console.log(accessToken, userId, '쿠키');
-
-  const { data } = useGetChatRoom(accessToken, userId);
+  const { data, isLoading } = useGetChatRoom(accessToken, userId);
+  console.log(data, '데이터');
 
   // 초기 데이터 로딩
   useEffect(() => {
@@ -83,5 +82,5 @@ export const useRoomConnection = () => {
     ws.current.deactivate();
   };
 
-  return { connect, disconnect, deleteRoom };
+  return { connect, disconnect, deleteRoom, isLoading };
 };

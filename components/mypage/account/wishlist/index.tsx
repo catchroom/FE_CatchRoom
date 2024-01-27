@@ -8,7 +8,6 @@ import { ItemType } from '@/constants/catchItems';
 
 const WishList = () => {
   const { data } = useQueryGetWishlist();
-  console.log(data);
 
   return (
     <WishListDivider>

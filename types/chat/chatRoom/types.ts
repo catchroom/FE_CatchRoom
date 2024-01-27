@@ -42,6 +42,7 @@ export type ChatRoomType = {
   dealState: string;
   buyerState: string;
   sellerState: string;
+  isNego: boolean;
   lastChatmessageDto: ChatMessageDto;
 };
 

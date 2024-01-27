@@ -31,6 +31,7 @@ const config: Config = withMT({
       sm: '290px',
       md: '320px',
       lg: '390px',
+      xl: '433px',
     },
 
     colors: {
