@@ -17,10 +17,10 @@ const Divide = () => {
   const { data } = useMyPageQuery(viewCase);
 
   return (
-    <div>
+    <div className="flex flex-col gap-[28px]">
       {data &&
         data.data.map((item: MypageSellingType) => (
-          <MItem key={item.accommodationName} item={item} />
+          <MItem key={item.productId} item={item} />
         ))}
     </div>
   );

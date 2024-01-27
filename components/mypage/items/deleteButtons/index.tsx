@@ -28,7 +28,7 @@ const DeleteButtons = ({ id }: { id: number }) => {
   return (
     <>
       <span onClick={handleModalOpen} className="cursor-pointer">
-        <XSymbolIcon />
+        <XSymbolIcon w={20} y={20} />
       </span>
       {openModal && (
         <Modal

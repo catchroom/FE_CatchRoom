@@ -14,6 +14,16 @@ const ChatListViewer = ({
 }) => {
   const chatList = useRecoilValue(chatAllRoomAtom);
 
+  // chatList가 있고, chatList의 각 아이템의 item.lastMessageDto.time을 기준으로 정렬
+  // eslint-disable-next-line
+  // const sortedChatList = chatList?.sort((a, b) => {
+  //   if (!a.lastChatmessageDto || !b.lastChatmessageDto) return 0;
+  //   return (
+  //     new Date(b.lastChatmessageDto.time).getTime() -
+  //     new Date(a.lastChatmessageDto.time).getTime()
+  //   );
+  // });
+
   return (
     <>
       {chatList && chatList.length > 0 ? (

@@ -24,7 +24,7 @@ const Logout = () => {
   };
 
   return (
-    <div className="w-full flex">
+    <div className="w-full flex h-10 items-center">
       <p
         className="px-2 py-3 underline text-text-sub font-medium text-p2 cursor-pointer"
         onClick={() => {

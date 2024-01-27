@@ -92,7 +92,7 @@ const ProfileForm = () => {
       className="w-full flex flex-col gap-3"
     >
       <div className="w-full flex flex-col items-start">
-        <p className="whitespace-nowrap pb-1">닉네임</p>
+        <p className="whitespace-nowrap pb-1 text-t3 font-medium">닉네임</p>
         <div className="w-full flex flex-col">
           <FormInput
             register={register}

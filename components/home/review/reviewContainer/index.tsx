@@ -13,10 +13,10 @@ const ReviewContainer = () => {
   return (
     <div className="w-full mt-16">
       <div className="flex justify-between my-3">
-        <h1 className="text-h4 font-bold">이용후기</h1>
+        <h1 className="text-h4 font-bold md:text-t1 sm:text-t1">이용후기</h1>
         <span
           onClick={handleClickViewAllBtn}
-          className="underline decoration-solid cursor-pointer text-t3 text-text-sub"
+          className="underline decoration-solid cursor-pointer text-t3 text-text-sub md:text-[12px] sm:text-[12px]"
         >
           전체보기
         </span>

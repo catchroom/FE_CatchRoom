@@ -87,7 +87,7 @@ const BankForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-full h-full gap-6 py-5"
+      className="flex flex-col w-full h-full gap-4 py-5"
     >
       <div className="w-full relative">
         <BottomSheets
@@ -123,7 +123,7 @@ const BankForm = () => {
           render={({ message }) => <FormError message={message} />}
         />
       </div>
-      <div className="w-full flex flex-col relative">
+      <div className="w-full flex flex-col gap-2 relative">
         <FormInput
           value="account"
           register={register}

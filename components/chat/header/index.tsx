@@ -20,7 +20,7 @@ const ChatHeader = () => {
   };
 
   const handleBackPage = () => {
-    router.back();
+    router.push('/chat');
   };
 
   const CloseModalBtn = () => (
