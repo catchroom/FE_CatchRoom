@@ -53,19 +53,18 @@ const page = async () => {
       {/* 하단 배너 */}
       <div className="w-full h-2 bg-border" />
       <div className="px-5 py-4 bg-bg">
-        <BannerContainer text={MYPAGE_CONSTANTS.BOTTOM_BANNER.TITLE}>
-          {MYPAGE_CONSTANTS.BOTTOM_BANNER.BANNERS.map((banner) => {
-            return (
-              <BannerItem
-                key={banner.TITLE}
-                text={banner.TITLE}
-                location={banner.LOCATION}
-              />
-            );
-          })}
-          {/* 로그아웃 컴포넌트 */}
-          <Logout />
-        </BannerContainer>
+        {MYPAGE_CONSTANTS.BOTTOM_BANNER.BANNERS.map((banner) => {
+          return (
+            <BannerItem
+              bottom
+              key={banner.TITLE}
+              text={banner.TITLE}
+              location={banner.LOCATION}
+            />
+          );
+        })}
+        {/* 로그아웃 컴포넌트 */}
+        <Logout />
       </div>
       <div className="w-full h-5 bg-border" />
       <div className="px-5 bg-border pb-10">
