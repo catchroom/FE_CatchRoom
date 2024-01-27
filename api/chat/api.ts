@@ -94,3 +94,10 @@ export const fetchChatInfo = async (roomId: string, token: string) => {
   const result = await res.data;
   return result;
 };
+
+export const checkChatInfo = async (roomId: string) => {
+  const res = await apiClient.get(`/v1/chat/room/info?roomId=${roomId}`);
+
+  const result = await res.data;
+  return result;
+};

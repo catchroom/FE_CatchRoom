@@ -7,7 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useRoomItem } from '@/api/room-info/query';
 import { useCookies } from 'react-cookie';
 import Modal from '@/components/common/modal';
-import { useCreateChatRoom } from '@/api/chat/query';
+import { useChatRoomAvailable, useCreateChatRoom } from '@/api/chat/query';
 import { useToastAlert } from '@/hooks/useToastAlert';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import SimpleBorderButton from '@/components/common/sheetsButtons/simpleBorderButton';
@@ -17,10 +17,16 @@ import SimpleBorderButton from '@/components/common/sheetsButtons/simpleBorderBu
 const FooterComponent = () => {
   const [cookies] = useCookies();
   const mutation = useCreateChatRoom();
+  const checkingMutation = useChatRoomAvailable();
   const [open, setOpen] = useState(false);
   const { alertOpenHandler } = useToastAlert('로그인이 필요한 서비스 입니다');
   const { alertOpenHandler: successOpenHandler } =
     useToastAlert('채팅방이 생성되었습니다.');
+  const { alertOpenHandler: viewNoRoom } = useToastAlert(
+    '채팅방을 나가서 새로운 채팅 생성이 불가능합니다.',
+  );
+  const { alertOpenHandler: viewNoRoom2 } =
+    useToastAlert('채팅방 생성에 실패했습니다.');
 
   const { id } = useParams() as UseParamsType;
   const router = useRouter();
@@ -32,7 +38,6 @@ const FooterComponent = () => {
 
   //채팅방 생성
   const createChat = () => {
-    console.log('채팅방 생성');
     if (accessToken === undefined) {
       setOpen(true);
       return;
@@ -46,11 +51,21 @@ const FooterComponent = () => {
       },
       {
         onSuccess: (data) => {
-          console.log(data);
-          router.push(`/chat/${data}`);
-          successOpenHandler();
+          const roomId = data;
+          checkingMutation.mutate(data, {
+            onSuccess: (data) => {
+              if (data && data.buyerState === 'DONT_SEE') return viewNoRoom();
+              router.push(`/chat/${roomId}`);
+              return successOpenHandler();
+            },
+            onError: () => {
+              viewNoRoom2();
+              alertOpenHandler();
+            },
+          });
         },
         onError: () => {
+          viewNoRoom2();
           alertOpenHandler();
         },
       },
