@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import { useEffect } from 'react';
 
 type OneMarkerProps = {
@@ -45,7 +46,6 @@ const RoomMap = ({ latitude, longitude }: OneMarkerProps) => {
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
   }, [latitude, longitude, mapScript]);
 
-  // eslint-disable-next-line react/react-in-jsx-scope
   return <div id="map" className="w-full h-full rounded-lg" />;
 };
 

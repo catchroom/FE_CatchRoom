@@ -12,6 +12,7 @@ import ToastAlertComponent from '@/components/common/toastAlert';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  manifest: '/manifest.json',
   title: 'catchroom',
   description: 'Catchroom is a platform for finding re-sell rooms.',
 };

@@ -1,9 +1,9 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { deadLinePageItems } from '@/api/deadline-items/api';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { weekCalendarDate } from '@/atoms/checkInImnt/weekCalendar';
 import { searchDropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { regionIndex } from '@/atoms/search-detail/searchStates';
@@ -12,11 +12,13 @@ import CatchSpecialComponent from '@/components/common/catchComponent';
 import { useProductInfoPage } from '@/hooks/useProductInfoPage';
 import { formatDate } from '@/utils/formatDate';
 import DeadLineSkeletonUI from '@/components/home/deadLineItems/deadLineSkeletonUI/idex';
+import { deadlineItemTotalSize } from '@/atoms/deadlineItems/totalSizeAtom';
 
 const InfiniteScrollContainer = () => {
   const currentDate = useRecoilValue(weekCalendarDate);
   const filterFormat = useRecoilValue(searchDropdownState);
   const regionFormat = useRecoilValue(regionIndex);
+  const setTotalSize = useSetRecoilState(deadlineItemTotalSize);
 
   const date = formatDate(currentDate);
 
@@ -45,6 +47,10 @@ const InfiniteScrollContainer = () => {
     },
   });
 
+  useEffect(() => {
+    setTotalSize(data?.pages[0].size);
+  }, [data?.pages, setTotalSize]);
+
   const { pageHandler } = useProductInfoPage();
 
   return (
@@ -67,14 +73,14 @@ const InfiniteScrollContainer = () => {
       >
         <div
           id="scrollableDiv"
-          className="w-full h-full overflow-auto mt-56 p-6 pt-2"
+          className="w-full max-h-[calc(100vh-128px)] overflow-auto mt-56 p-6 pt-2"
         >
-          {data?.pages[0].list.length !== 0 ? (
+          {data?.pages[0].size !== 0 ? (
             data?.pages.map((page, pageIndex) => (
-              <div key={pageIndex} className="flex flex-col gap-[2rem]">
+              <div key={pageIndex} className="flex flex-col gap-[2rem] mb-8">
                 {page.list.map((data: DeadLineItem) => (
                   <CatchSpecialComponent
-                    key={data.productId}
+                    key={data.productId + data.accommodationName + pageIndex}
                     pageHandler={() => pageHandler(data.productId)}
                     image={data.image}
                     accommodationName={data.accommodationName}
