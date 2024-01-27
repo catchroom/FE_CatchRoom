@@ -11,13 +11,13 @@ const ReviewItem = ({
 }: ReviewItemType) => {
   return (
     <div className="flex rounded-md bg-white w-full h-[140px]">
-      <div className="relative w-full h-full max-w-[110px] min-h-[140px]">
+      <div className="relative w-[110px] h-[140px] flex-shrink-0">
         <Image
           src={image}
           fill
           priority
           alt="숙소 이미지"
-          sizes="(max-width: 480px) 100px, (max-width: 320px) 80px, 80px"
+          sizes="(max-width: 480px) 70vw, (max-width: 320px) 100vw"
           style={{
             borderTopLeftRadius: '6px',
             borderBottomLeftRadius: '6px',
