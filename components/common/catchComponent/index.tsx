@@ -84,7 +84,7 @@ const CatchSpecialComponent = ({
               <Image
                 src={image}
                 fill
-                sizes="100vw"
+                sizes="(max-width: 640px) 100vw, 100vw"
                 priority
                 alt="숙소사진"
                 className=" object-cover"

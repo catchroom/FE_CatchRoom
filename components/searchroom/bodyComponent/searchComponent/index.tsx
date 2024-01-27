@@ -14,7 +14,7 @@ const SearchBtnComponent = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center text-xl">
+    <div className="w-full flex flex-col items-center text-xl p-5">
       {/* 지역 선택버튼 & 바텀시트 */}
       <RegionBottomSheet buttonStyle="search" />
       {/* 날짜 선택버튼 & 바텀시트 */}
