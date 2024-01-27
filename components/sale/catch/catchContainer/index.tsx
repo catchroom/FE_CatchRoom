@@ -69,6 +69,7 @@ const CatchContainer = () => {
       defaultDate.setDate(defaultDate.getDate() - 1);
       setSelected(defaultDate);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, selectedSaleEndDate]);
 
   useEffect(() => {
@@ -112,11 +113,6 @@ const CatchContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSaleEndDate]);
-
-  // useEffect(() => {
-  //   if (selectedPercent === 90) setIsNeverChange(true);
-  //   else setIsNeverChange(false);
-  // }, [selectedPercent]);
 
   const selectedDateString = getDateWithDay(selected);
 
