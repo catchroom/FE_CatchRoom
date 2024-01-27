@@ -25,13 +25,15 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
       : false
     : false;
 
-  let sellState = '판매 완료';
+  let sellState = '';
   if (item?.dealState === 'EXPIRED') {
     sellState = '기한 만료';
   } else if (item?.dealState === 'UNSOLD') {
     sellState = '체크인 만료';
-  } else if (item?.dealState === 'UNABLE') {
+  } else if (item?.dealState === 'UNABLESELL') {
     sellState = '판매 불가';
+  } else if (item?.dealState === 'DONEDEAL') {
+    sellState = '판매 완료';
   }
 
   let isReview: ReviewType = 'noReview';
@@ -97,9 +99,11 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
             </div>
             <div className="flex gap-2 text-sub text-t3 font-medium">
               <p>
-                {item?.dealState
+                {item?.dealState === 'UNSOLD' || item?.dealState === 'EXPIRED'
                   ? '게시기한 만료'
-                  : `게시 만료일 : ${getDotDate(item.endDate, false)}`}
+                  : item?.dealState === 'UNABLE'
+                    ? '체크인 만료'
+                    : `게시 만료일 : ${getDotDate(item.endDate, false)}`}
               </p>
               {reEnroll}
             </div>

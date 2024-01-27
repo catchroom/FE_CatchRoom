@@ -64,7 +64,7 @@ const BottomHeader = () => {
 
   return (
     <div className="flex items-center justify-between w-full h-[4.75rem] p-5 border-border-sub border-t text-xl text-p1 font-semibold">
-      <p className="text-t2 font-bold">총 {data && data.size}건</p>
+      <p className="text-t2 font-bold">총 {data && data.list.length}건</p>
       <div className="flex gap-1">
         <RegionBottomSheet buttonStyle="dropdown" usePinIcon={true} />
         <BottomSheetsWithoutCloseBtn

@@ -72,8 +72,7 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
                 <div
                   className="cursor-pointer"
                   onClick={() => {
-                    deleteAccount().then((res) => {
-                      console.log(res.data);
+                    deleteAccount().then(() => {
                       window.location.href = '/mypage';
                     });
                   }}
