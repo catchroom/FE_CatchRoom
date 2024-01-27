@@ -106,7 +106,7 @@ const Header = ({
         ) : (
           <div />
         )}
-        <h1 className="justify-self-center text-t1 whitespace-nowrap font-semibold">
+        <h1 className="justify-self-center text-t1 whitespace-nowrap font-semibold px-5">
           {title}
         </h1>
         <div className="justify-self-end mt-1">
