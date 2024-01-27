@@ -19,6 +19,8 @@ const FooterComponent = () => {
   const mutation = useCreateChatRoom();
   const checkingMutation = useChatRoomAvailable();
   const [open, setOpen] = useState(false);
+
+  // alert 발생
   const { alertOpenHandler } = useToastAlert('로그인이 필요한 서비스 입니다');
   const { alertOpenHandler: successOpenHandler } =
     useToastAlert('채팅방이 생성되었습니다.');
