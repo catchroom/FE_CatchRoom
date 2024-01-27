@@ -10,13 +10,16 @@ import { useSetRecoilState } from 'recoil';
 import { isProductState } from '@/atoms/sale/productAtom';
 import { getReviewState, getSellState } from '@/utils/mypage-utils';
 import ReEnrollButton from '../reEnrollButton';
+import { mypageRoutingAtom } from '@/atoms/mypage/mypageRoutingAtom';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
   const setIsProduct = useSetRecoilState(isProductState);
+  const setMypageRouting = useSetRecoilState(mypageRoutingAtom);
   const router = useRouter();
 
   const handleEditDate = () => {
     setIsProduct(true);
+    setMypageRouting(true);
     router.push(`/sale?id=${item.productId}`);
   };
 
