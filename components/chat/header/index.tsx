@@ -4,23 +4,30 @@ import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
 import { dealModalAtom } from '@/atoms/chat/leaveButton';
 import LeftArrowIcon from '@/public/svgComponent/leftArrow';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 const ChatHeader = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [modalState, setModalState] = useRecoilState(dealModalAtom);
   const chatInfo = useRecoilValue(chatRoomInfo);
 
-  const title = modalState ? '가격 제안' : chatInfo?.partnerNickName;
+  const title =
+    pathname === '/chat'
+      ? '채팅'
+      : modalState
+        ? '가격 제안'
+        : chatInfo?.partnerNickName;
 
   const handleCloseModal = () => {
     setModalState(false);
   };
 
   const handleBackPage = () => {
-    router.back();
+    if (pathname === '/chat') return router.push('/home');
+    router.push('/chat');
   };
 
   const CloseModalBtn = () => (

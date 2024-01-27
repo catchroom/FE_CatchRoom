@@ -46,3 +46,8 @@ certificates
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# all other ignore list
+sw.*
+workbox-*
+swe-worker-*

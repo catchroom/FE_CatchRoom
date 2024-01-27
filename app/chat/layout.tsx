@@ -1,7 +1,7 @@
 import HeadWrapper from '@/components/chat/headWrapper';
 import React, { ReactNode } from 'react';
 
-const MypageLayout = ({ children }: { children: ReactNode }) => {
+const ChatPageLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="w-full">
       <div className="w-full inset-0 ">
@@ -13,4 +13,4 @@ const MypageLayout = ({ children }: { children: ReactNode }) => {
     </div>
   );
 };
-export default MypageLayout;
+export default ChatPageLayout;

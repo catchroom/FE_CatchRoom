@@ -15,10 +15,8 @@ const ProductInfo = () => {
   const chatInfo = useRecoilValue(chatRoomInfo);
   const router = useRouter();
 
-  console.log(chatInfo);
-
   const handleClickInfo = () => {
-    router.push(`/accommodation/${chatInfo.chatRoomNumber}`);
+    router.push(`/room-info/${chatInfo.productId}`);
   };
 
   const handleNegoPrice = () => {

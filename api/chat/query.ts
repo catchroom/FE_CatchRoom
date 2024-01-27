@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import {
+  checkChatInfo,
   createChatRoom,
   fetchChatInfo,
   fetchChatRoom,
@@ -66,6 +67,15 @@ export const useCreateChatRoom = () => {
       sellerId: number;
       productId: number;
     }) => createChatRoom({ buyerId, sellerId, productId }),
+  });
+
+  return mutation;
+};
+
+export const useChatRoomAvailable = () => {
+  const mutation = useMutation({
+    mutationKey: ['checkChatRoomAvailable'],
+    mutationFn: (roomId: string) => checkChatInfo(roomId),
   });
 
   return mutation;

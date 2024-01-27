@@ -17,11 +17,16 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
   const router = useRouter();
 
   // 최근 메세지 시간 보여주는 데이터
+  const lastTime = Math.round(
+    new Date().getTime() / 1000 / 60 -
+      new Date(item.lastChatmessageDto?.time).getTime() / 1000 / 60,
+  );
+
   const getRecentTime = (chatMessageDto: ChatMessageDto) => {
     if (!chatMessageDto) return '';
+    if (lastTime < 60) return `${lastTime}분전`;
     else return moment(chatMessageDto.time).startOf('hour').fromNow();
   };
-
   // 최근 메세지 보여주는 데이터
   const viewRecentMessage = (chatMessageDto: ChatMessageDto) => {
     if (!chatMessageDto) return '최근 메세지가 없습니다.';
@@ -42,7 +47,9 @@ const ChatItem = ({ item }: { item: ChatRoomType }) => {
 
   return (
     <div
-      className=" w-full flex gap-3 items-center px-3 py-4 border border-divider bg-white cursor-pointer"
+      className={`w-full flex gap-3 items-center px-3 py-4 border border-divider bg-white cursor-pointer ${
+        item?.lastChatmessageDto ? 'block' : 'hidden'
+      }`}
       onClick={handleClick}
     >
       {/* 채팅방 사진 보여주는 데이터 */}

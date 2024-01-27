@@ -35,7 +35,7 @@ export const noMask = (value: string) => {
 export const getSellState = (state: string) => {
   switch (state) {
     case 'EXPIRED':
-      return '기한 만료';
+      return '게시 기한 만료';
     case 'UNSOLD':
       return '체크인 만료';
     case 'UNABLESELL':

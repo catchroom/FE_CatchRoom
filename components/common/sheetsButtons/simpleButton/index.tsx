@@ -25,7 +25,7 @@ const SimpleButton = ({
       onClick={fn}
       disabled={disabled}
       type={type}
-      className={`${disabledStyle} w-full text-t2 font-medium p-4 py-2.5 rounded-md transition-colors duration-300 ease-in`}
+      className={`${disabledStyle} w-full text-t4 md:text-t2 font-medium p-4 py-2.5 rounded-md transition-colors duration-300 ease-in`}
     >
       {name}
     </motion.button>

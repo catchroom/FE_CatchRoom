@@ -57,7 +57,7 @@ const DivideWrapper = ({
 
   const defaultStyle = 'border-b-2 p-4 w-1/2 transition-colors duration-300';
   const maxHeightStyle = maxHeightControl
-    ? `max-h-[calc(100vh-140px)] overflow-y-scroll px-5`
+    ? `max-h-[calc(100vh-140px)] overflow-y-scroll`
     : `max-h-[calc(100vh-200px)] overflow-y-scroll`;
 
   return (
