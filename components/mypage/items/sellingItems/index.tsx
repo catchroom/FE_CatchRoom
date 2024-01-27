@@ -11,6 +11,7 @@ import { isProductState } from '@/atoms/sale/productAtom';
 import { getReviewState, getSellState } from '@/utils/mypage-utils';
 import ReEnrollButton from '../reEnrollButton';
 import { mypageRoutingAtom } from '@/atoms/mypage/mypageRoutingAtom';
+import { getDotDate } from '@/utils/get-dot-date';
 
 const MItem = ({ item }: { item: MypageSellingType }) => {
   const setIsProduct = useSetRecoilState(isProductState);
@@ -33,6 +34,25 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
 
   // 게시만료일때만 => 판매완료, 기한만료, 판매불가 따지기
   const isNothing = item?.dealState ? true : false;
+
+  const renderDealState = (dealState: string) => {
+    switch (dealState) {
+      case 'EXPIRED':
+        return (
+          <>
+            <p>{getSellState(dealState)}</p>
+            <ReEnrollButton dealState={dealState} fn={handleEditDate} />
+          </>
+        );
+      case 'DONEDEAL':
+        return <p>판매일 : {getDotDate(item.endDate, true, true, true)}</p>;
+      case 'UNSOLD':
+      case 'UNABLESELL':
+        return <p>{getSellState(dealState)}</p>;
+      default:
+        return <p>게시만료일 ~ {getDotDate(item.endDate, true, true, true)}</p>;
+    }
+  };
 
   return (
     <div className="w-full px-5 py-3 flex flex-col gap-3">
@@ -67,6 +87,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
                 캐치특가
               </span>
             )}
+            s
           </div>
           {/* 호텔 이름과 가격 정보 */}
           <div className="flex flex-col justify-between grow">
@@ -93,16 +114,12 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
               </div>
             </div>
             <div className="flex gap-2 text-sub text-t3 font-medium">
-              <p>{getSellState(item.dealState as string)}</p>
-              <ReEnrollButton
-                dealState={item?.dealState as string}
-                fn={handleEditDate}
-              />
+              {renderDealState(item.dealState as string)}
             </div>
           </div>
         </div>
       </div>
-      {item && item.dealState && (
+      {item && item.dealState === 'DONEDEAL' && (
         <ReviewButtons
           id={parseInt(item.productId)}
           type={listState}
