@@ -15,19 +15,19 @@ const termsOptions: TermOption[] = [
   {
     id: 'serviceTerms',
     text: '서비스 이용 및 취소/환불규정 동의 (필수)',
-    detailLink: '/mypage/dashboard/terms',
+    detailLink: '/mypage/dashboard/conditions/consent-refund',
   },
   {
     id: 'personalInfo',
     text: '개인정보 수집 및 이용 동의 (필수)',
-    detailLink: '/mypage/dashboard/terms',
+    detailLink: '/mypage/dashboard/conditions/consent-essential',
   },
   {
     id: 'thirdParty',
     text: '개인정보 제3자 제공 동의 (필수)',
-    detailLink: '/mypage/dashboard/terms',
+    detailLink: '/mypage/dashboard/conditions/consent-third',
   },
-]; //페이지 생성 후 링크 수정 예정
+];
 
 const TermsAndConditions = () => {
   const [selectedTerms, setSelectedTerms] = useRecoilState(selectedTermsState);
