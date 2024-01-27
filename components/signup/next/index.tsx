@@ -85,7 +85,7 @@ const SignUpInfo = () => {
                     },
                   );
 
-                  router.push('/mypage');
+                  window.location.href = '/mypage';
                 }
               })
               .catch((error) => {
