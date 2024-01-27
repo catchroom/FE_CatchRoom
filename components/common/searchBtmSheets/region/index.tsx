@@ -70,7 +70,7 @@ const RegionBottomSheet = ({
   const regionButtons = REGION_NAMES.map((buttonName: string, index) => (
     <button
       key={index}
-      className={`w-full h-[3rem] p-auto bg-white border border-border-sub rounded-md 
+      className={`w-full h-[3rem] p-auto bg-white border border-border-sub rounded-md break-keep
       ${regionBtnBlArr[index] ? 'bg-focus border-focus text-focus' : ''}`}
       onClick={() => handleRegionBtnClick(index)}
     >
