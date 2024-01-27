@@ -41,7 +41,7 @@ const AccountButton = ({
   };
 
   return (
-    <div className="w-1/2 flex justify-center text-p2 font-medium">
+    <div className="w-1/2 flex justify-center text-p2 font-medium cursor-pointer">
       <div className="text-p2" onClick={openModal}>
         {text}
       </div>
