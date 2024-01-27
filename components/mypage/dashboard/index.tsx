@@ -3,11 +3,11 @@ import PurchasingItems from '@/components/mypage/items/purchasingItems';
 import { useQueryGetPurchaseHistory } from '@/api/mypage/query';
 import React from 'react';
 import { MypagePurchaseType } from '@/types/mypage/data-types';
-import PurchasingItemsSkeleton from './skeleton';
+import PurchasingItemsSkeleton from '../divider/skeleton';
 
 const PurchaseList = () => {
   const { data, isLoading } = useQueryGetPurchaseHistory();
-
+  console.log(data);
   if (isLoading) return <PurchasingItemsSkeleton />;
 
   return (
