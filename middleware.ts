@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export function middleware(request: NextRequest) {
-  console.log(request.nextUrl.pathname, 'pathname');
   const accessToken = cookies().get('accessToken')?.value;
   // const accessToken = request.cookies.get('accessToken')?.value; 랑 동일..!
 
