@@ -23,7 +23,7 @@ const HeartButton = ({
 }: HeartButtonPropsType) => {
   return (
     <div className="flex items-center justify-center">
-      <button onClick={stateHandler}>
+      <button onClick={stateHandler} data-testid="heart-button">
         {!isButtonActive ? (
           <EmptyHeartIcon
             width={width}
