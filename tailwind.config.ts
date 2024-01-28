@@ -28,8 +28,11 @@ const config: Config = withMT({
     },
 
     screens: {
+      xs: '280px',
       sm: '290px',
       md: '320px',
+      lmd: '325px',
+      acc: '341px',
       lg: '390px',
       xl: '433px',
       home: '768px',
