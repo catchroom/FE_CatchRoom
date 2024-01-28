@@ -14,7 +14,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     switch (req.method) {
       case 'GET':
-        console.log('GET');
         // eslint-disable-next-line
         const returnData = [] as any;
         const orderQuerySnapshot = await getDocs(

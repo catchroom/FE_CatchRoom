@@ -62,12 +62,9 @@ const SignUpInfo = () => {
     if (confirmedNickname === true) {
       signUp(email, password, data.nickname, data.phone, data.name)
         .then((response) => {
-          console.log(response);
-
           if (response.code === 1000) {
             login(email, password)
               .then((response) => {
-                console.log(response);
                 if (response.code === 1006) {
                   setEmail('');
                   setPassword('');
@@ -113,7 +110,6 @@ const SignUpInfo = () => {
       });
     } else {
       nicknameCheck(nickname).then((response) => {
-        console.log(response);
         if (response.code === 1010) {
           handleModalOpen();
           setConfirmedNickname(true);

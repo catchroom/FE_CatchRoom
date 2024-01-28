@@ -24,7 +24,6 @@ const fetchRoomInfo = async (token: string, roomNumber: string) => {
 
 const FindRoomInfo = ({ roomNumber }: { roomNumber: string }) => {
   const [cookies] = useCookies();
-  console.log(cookies.accessToken, 'accessToken');
   const { data, isLoading, isError } = useQuery({
     queryKey: ['roomInfo', roomNumber],
     queryFn: () => fetchRoomInfo(cookies.accessToken, roomNumber),
@@ -33,7 +32,6 @@ const FindRoomInfo = ({ roomNumber }: { roomNumber: string }) => {
 
   const LoadingComponent = isLoading && <div>로딩중...</div>;
   const ErrorComponent = isError && <div>에러가 발생했습니다.</div>;
-  console.log(data, 'data');
 
   return (
     <div>

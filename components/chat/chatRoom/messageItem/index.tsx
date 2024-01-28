@@ -24,8 +24,6 @@ const MessageItem = ({
   const loginUserId = cookies.userId;
   const isSeller = chatInfo.loginUserIdentity === 'BUYER' ? false : true;
 
-  console.log('chatInfo', chatInfo);
-
   // 로그인한 유저가 해당 메시지의 보낸 사람일 때
   // 나
   if (loginUserId === userId) {

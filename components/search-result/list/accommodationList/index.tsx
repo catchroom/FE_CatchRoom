@@ -32,16 +32,12 @@ const AccommodationList = () => {
   const region = regionFormat === '' ? 'all' : regionValue;
 
   const filter = filterRecord[dropdown];
-  console.log('필터: ', filter);
   const dateRange = useRecoilValue(rangeDate);
-  console.log('데이트 ', dateRange);
   const type = useRecoilValue(roomIndex);
-  console.log('타입: ', type);
   const adultCount = useRecoilValue(adultCountState);
 
   const childCount = useRecoilValue(childCountState);
   const pax = adultCount + childCount;
-  console.log('인원: ', pax);
   const checkInStart = dateRange?.from
     ? format(new Date(dateRange.from), 'yyyy-MM-dd')
     : format(new Date(), 'yyyy-MM-dd');
@@ -49,8 +45,6 @@ const AccommodationList = () => {
   const checkInEnd = dateRange?.to
     ? format(new Date(dateRange.to), 'yyyy-MM-dd')
     : format(tenYearsLater, 'yyyy-MM-dd');
-  console.log('체크스타트: ', checkInStart);
-  console.log('체크엔드: ', checkInEnd);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: [

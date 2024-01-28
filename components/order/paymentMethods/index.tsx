@@ -33,7 +33,6 @@ const PaymentMethods = () => {
   const handleEasyPaymentChange = (e: {
     target: { id: React.SetStateAction<string> };
   }) => {
-    console.log(e.target.id);
     setSelectedEasyPayment(e.target.id);
   };
 

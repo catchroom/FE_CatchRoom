@@ -19,8 +19,6 @@ const SellingPriceContainer = () => {
   const setIsCatchPrice = useSetRecoilState(isCatchPriceState);
   const setTotalPrice = useSetRecoilState(totalPriceState);
 
-  console.log(selectedPrice);
-
   const title =
     selectedPrice === 0
       ? '판매가를 선택해주세요'

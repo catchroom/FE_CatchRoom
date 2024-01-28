@@ -39,7 +39,6 @@ const SaleInfoContainer = ({ id }: Props) => {
   const isProduct = useRecoilValue(isProductState);
 
   const { data, isLoading } = useConditionalQuery(isProduct, +id!);
-  console.log(data);
 
   const setPercent = useSetRecoilState(percentState); //할인율
   const setPrice = useSetRecoilState(priceState); //판매가
@@ -67,7 +66,6 @@ const SaleInfoContainer = ({ id }: Props) => {
       }
       setMinute(endDate.getMinutes());
       if (data.isAutoCatch) {
-        console.log('데이터 받아올때 캐치특가 가격 출력, ', data.catchPrice);
         const catchDate = new Date(data?.catchPriceStartDate);
         setCatchEndDate(catchDate);
         setCatchPrice(data.catchPrice);
@@ -78,7 +76,6 @@ const SaleInfoContainer = ({ id }: Props) => {
       setEndDate(endDate);
       setIsNego(data?.isNego);
       setSellerContent(data?.introduction);
-      console.log('hi');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

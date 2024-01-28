@@ -10,7 +10,6 @@ const Logout = () => {
   const handleModalOpen = () => {
     logout()
       .then((response) => {
-        console.log(response);
         if (response.code === 2000) {
           nookies.destroy(null, 'accessToken');
           nookies.destroy(null, 'refreshToken');

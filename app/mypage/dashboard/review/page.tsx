@@ -12,7 +12,6 @@ const page = ({
   const id = parseInt(searchParams.id as string);
   const type = searchParams.type as '구매' | '판매';
   const reviewId = parseInt(searchParams.reviewId as string);
-  console.log(id, type, reviewId);
 
   if (isNaN(id) || (type !== '구매' && type !== '판매')) {
     return null;

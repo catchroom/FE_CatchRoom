@@ -7,7 +7,6 @@ import PurchasingItemsSkeleton from '../divider/skeleton';
 
 const PurchaseList = () => {
   const { data, isLoading } = useQueryGetPurchaseHistory();
-  console.log(data);
   if (isLoading) return <PurchasingItemsSkeleton />;
 
   return (

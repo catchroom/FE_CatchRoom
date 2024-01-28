@@ -6,7 +6,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body } = req;
   try {
     const docRef = await addDoc(collection(db, 'product'), body);
-    console.log(docRef.id);
     return res.status(200).json({ message: '판매 등록 성공', data: docRef.id });
   } catch (error) {
     return res.status(500).json({ message: '판매 등록 실패' });

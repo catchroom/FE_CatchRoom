@@ -12,7 +12,6 @@ const Page = ({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  console.log(searchParams.id);
   return (
     <div>
       <Header title="판매하기" showBackButton={true} isSale={true} />

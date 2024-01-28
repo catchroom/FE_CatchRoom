@@ -30,7 +30,6 @@ export const getCatchItemsListForScroll = async ({
   filter: string;
   region: string | number[];
 }) => {
-  console.log('hi', pageParam);
   const res = await fetch(
     `https://catchroom.xyz/v1/main/product/list?dataType=${dataType}&pageNumber=${pageParam}&filter=${filter}&region=${region}`,
     {

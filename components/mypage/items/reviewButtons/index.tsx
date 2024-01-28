@@ -23,7 +23,6 @@ const ReviewButtons = ({
   const router = useRouter();
 
   const handleClick = (id: number, type: '구매' | '판매') => {
-    console.log(id, type);
     router.push(`/mypage/dashboard/review?id=${id}&type=${type}`);
   };
 

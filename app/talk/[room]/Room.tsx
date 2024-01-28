@@ -37,7 +37,6 @@ const StompPage = ({ children }: { children: ReactNode }) => {
       () => {
         ws.subscribe(`/sub/chat/room/${ROOMID}`, (message) => {
           const recv = JSON.parse(message.body);
-          console.log(recv);
           setMessage((prev) => [...prev, recv]);
         });
 
