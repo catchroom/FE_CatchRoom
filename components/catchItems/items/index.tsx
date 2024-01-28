@@ -54,8 +54,6 @@ const InfiniteScrollContainer = () => {
     setTotalSize(data?.pages[0].size);
   }, [data?.pages, setTotalSize]);
 
-  console.log(data);
-
   const { pageHandler } = useProductInfoPage();
 
   return (
