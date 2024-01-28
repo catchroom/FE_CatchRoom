@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ROOM_CATEGORIES, SEARCH_DEFAULT } from '@/constants/search-detail';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
@@ -20,17 +20,6 @@ const RoomBottomSheet = ({
   const [roomBtnIdx, setRoomBtnIdx] = useRecoilState<number[]>(roomIndex);
   const [isRoomBtnSelected, setIsRoomBtnSelected] =
     useRecoilState<boolean[]>(roomBooleanIndex);
-
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      // fetch(roomBtnIdx) 등등 api에 사용 예정
-      console.log('디바운스된 숙소유형 :', roomBtnIdx);
-    }, 500);
-
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [roomBtnIdx]);
 
   const handleRoomSelectAll = () => {
     setIsRoomChecked(!isRoomChecked);

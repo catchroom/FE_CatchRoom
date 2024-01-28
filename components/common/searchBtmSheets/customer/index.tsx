@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   adultCountState,
   childCountState,
@@ -16,17 +16,6 @@ const CustomerBottomSheet = ({
 }) => {
   const [adultCount] = useRecoilState(adultCountState);
   const [childCount] = useRecoilState(childCountState);
-
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      // fetch(adultCount,childCount) 등등 api에 사용 예정
-      console.log('디바운스된 성인, 아동 수 :', adultCount, ', ', childCount);
-    }, 500);
-
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [adultCount, childCount]);
 
   return (
     <>

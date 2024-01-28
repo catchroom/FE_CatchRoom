@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import BottomSheets from '@/components/common/bottomSheets';
 import CheckBoxComponent from '@/components/common/checkBox';
 import { REGION_NAMES, SEARCH_DEFAULT } from '@/constants/search-detail';
@@ -27,17 +27,6 @@ const RegionBottomSheet = ({
   const [regionBtnIdx, setRegionBtnIdx] = useRecoilState<number[]>(regionIndex);
   const [regionBtnBlArr, setRegionBtnBlArr] =
     useRecoilState<boolean[]>(regionBooleanIndex);
-
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      // fetch(regionBtnIdx) 등등 api에 사용 예정
-      console.log('디바운스된 지역들 :', regionBtnIdx);
-    }, 500);
-
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [regionBtnIdx]);
 
   const handleRegionSelectAll = () => {
     setIsRegionChecked(!isRegionChecked);
