@@ -21,8 +21,8 @@ const Page = () => {
   if (!data) return <div>No data available</div>;
   const { accommodationName, roomName, normalCapacity, maxCapacity, image } =
     data.accommodation;
-  const { price } = data.sellPrice;
-  const { nickName } = data.seller;
+  const { sellPrice } = data.sellPrice;
+  const { buyerNickname } = data.buyer;
 
   const bookingDetails = {
     bookingHolder: {
@@ -42,7 +42,7 @@ const Page = () => {
     <>
       <div className="flex flex-col container mx-auto w-full px-5 pt-16   bg-bg">
         <div>
-          <CompleteMessage nickName={nickName} />
+          <CompleteMessage nickName={buyerNickname} />
         </div>
         <div className="flex flex-col container p-5 bg-white">
           <ProductDetails
@@ -55,7 +55,7 @@ const Page = () => {
           <ReservationInfo
             bookingHolder={bookingDetails.bookingHolder}
             guest={bookingDetails.guest}
-            totalPrice={price}
+            totalPrice={sellPrice}
             paymentMethod={data.paymentMethod}
           />
         </div>
