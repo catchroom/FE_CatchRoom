@@ -10,7 +10,7 @@ const CatchSpecialComponentWrapper = ({
   if (!selectedMarkerInfo) return null;
 
   return (
-    <div className="absolute bottom-[11.5rem] left-1/2 transform -translate-x-1/2 w-9/12 z-[5] p-3 px-3 bg-white">
+    <div className="absolute bottom-[11.5rem] left-1/2 transform -translate-x-1/2 w-[90%] z-[5] p-3 px-3 bg-white">
       <CatchSpecialComponent
         key={selectedMarkerInfo.productId}
         image={selectedMarkerInfo.image}

@@ -36,7 +36,7 @@ const ProductListControls = () => {
   }, [sortOption, setDropdownTitle]);
 
   return (
-    <div className="fixed z-20 flex items-center justify-between w-full max-w-[480px] p-5 mt-32 border-border-sub text-p1 font-semibold">
+    <div className="fixed z-10 flex items-center justify-between w-full max-w-[480px] p-5 mt-32 border-border-sub text-p1 font-semibold">
       <p className="text-t2 font-bold">총 {accommodationsCount}건</p>
       <div className="flex">
         <BottomSheetsWithoutCloseBtn

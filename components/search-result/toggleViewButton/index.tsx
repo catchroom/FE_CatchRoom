@@ -20,7 +20,7 @@ const ToggleViewButton = ({
 
   return (
     <button
-      className="flex items-center justify-center gap-2 py-2 px-4 rounded-full bg-gray-900 text-white font-semibold"
+      className="flex z-10 items-center justify-center gap-2 py-2 px-4 rounded-full bg-gray-900 text-white font-medium text-t3"
       onClick={onViewChange}
     >
       <IconComponent />

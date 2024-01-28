@@ -70,12 +70,11 @@ const GuestInfo = forwardRef(
 
     const defaultInputStyle = `w-full h-[3.25rem] rounded-md border  border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2`;
     const checkedInputStyle =
-      'w-full h-[3.25rem] rounded-md border border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2 bg-surface-gray';
+      'w-full h-[3.25rem] rounded-md  border-border-sub focus:outline-none focus:border-border-primary caret-pink-500 text-text-DEFAULT px-4 py-2 bg-surface-gray text-text-disabled';
 
     const baseInputStyle = isChecked ? checkedInputStyle : defaultInputStyle;
 
-    const inputWrapperStyle =
-      'relative flex items-center border border-border-sub rounded-md';
+    const inputWrapperStyle = 'relative flex items-center   rounded-md';
 
     return (
       <div>
