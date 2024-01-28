@@ -90,7 +90,7 @@ const AccommodationList = () => {
           <ListSkeletonUI />
         </div>
       )}
-      <div className="w-full flex flex-col gap-12 px-6">
+      <div className="w-full flex flex-col gap-12 ">
         <InfiniteScroll
           dataLength={data?.pages.length || 0}
           next={fetchNextPage}
