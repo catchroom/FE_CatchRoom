@@ -7,7 +7,11 @@ import { useParams, useRouter } from 'next/navigation';
 import { useRoomItem } from '@/api/room-info/query';
 import { useCookies } from 'react-cookie';
 import Modal from '@/components/common/modal';
-import { useChatRoomAvailable, useCreateChatRoom } from '@/api/chat/query';
+import {
+  useChatRoomAvailable,
+  useCheckRoomExist,
+  useCreateChatRoom,
+} from '@/api/chat/query';
 import { useToastAlert } from '@/hooks/useToastAlert';
 import SimpleButton from '@/components/common/sheetsButtons/simpleButton';
 import SimpleBorderButton from '@/components/common/sheetsButtons/simpleBorderButton';
@@ -18,6 +22,7 @@ const FooterComponent = () => {
   const [cookies] = useCookies();
   const mutation = useCreateChatRoom();
   const checkingMutation = useChatRoomAvailable();
+  const checkExistMutation = useCheckRoomExist();
   const [open, setOpen] = useState(false);
 
   // alert 발생
@@ -29,6 +34,9 @@ const FooterComponent = () => {
   );
   const { alertOpenHandler: viewNoRoom2 } =
     useToastAlert('채팅방 생성에 실패했습니다.');
+
+  const { alertOpenHandler: viewNoRoom3 } =
+    useToastAlert('채팅방이 존재하지 않습니다.');
 
   const { id } = useParams() as UseParamsType;
   const router = useRouter();
@@ -95,6 +103,21 @@ const FooterComponent = () => {
     }
   };
 
+  const handleSaleChattingClick = () => {
+    checkExistMutation.mutate(Number(id), {
+      onSuccess: (data) => {
+        if (data && data.length !== 0) {
+          return router.push(`/chat`);
+        } else {
+          return viewNoRoom3();
+        }
+      },
+      onError: () => {
+        viewNoRoom2();
+      },
+    });
+  };
+
   const buttonClass =
     'font-pretend h-full rounded-[4px] text-t1 font-semibold shadow-none';
 
@@ -117,7 +140,7 @@ const FooterComponent = () => {
           <Button
             placeholder="Button"
             type="button"
-            onClick={() => router.push('/chat')}
+            onClick={handleSaleChattingClick}
             className={`${buttonClass} w-full bg-main text-white`}
           >
             대화중인 채팅방

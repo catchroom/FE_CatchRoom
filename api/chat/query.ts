@@ -5,6 +5,7 @@ import {
   fetchChatInfo,
   fetchChatRoom,
   fetchPreviousChat,
+  getChatExist,
   infinitePreviousChat,
 } from './api';
 
@@ -75,6 +76,15 @@ export const useChatRoomAvailable = () => {
   const mutation = useMutation({
     mutationKey: ['checkChatRoomAvailable'],
     mutationFn: (roomId: string) => checkChatInfo(roomId),
+  });
+
+  return mutation;
+};
+
+export const useCheckRoomExist = () => {
+  const mutation = useMutation({
+    mutationKey: ['checkRoomExist'],
+    mutationFn: (userId: number) => getChatExist(userId),
   });
 
   return mutation;

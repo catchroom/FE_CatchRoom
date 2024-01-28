@@ -11,27 +11,29 @@ type TermOption = {
   detailLink: string;
 };
 
-const termsOptions: TermOption[] = [
-  {
-    id: 'serviceTerms',
-    text: '서비스 이용 및 취소/환불규정 동의 (필수)',
-    detailLink: '/mypage/dashboard/conditions/consent-refund',
-  },
-  {
-    id: 'personalInfo',
-    text: '개인정보 수집 및 이용 동의 (필수)',
-    detailLink: '/mypage/dashboard/conditions/consent-essential',
-  },
-  {
-    id: 'thirdParty',
-    text: '개인정보 제3자 제공 동의 (필수)',
-    detailLink: '/mypage/dashboard/conditions/consent-third',
-  },
-];
-
-const TermsAndConditions = () => {
+const TermsAndConditions = ({ productName }: { productName: string }) => {
   const [selectedTerms, setSelectedTerms] = useRecoilState(selectedTermsState);
   const [isAllSelected, setIsAllSelected] = useState(false);
+
+  const termsOptions: TermOption[] = [
+    {
+      id: 'serviceTerms',
+      text: '서비스 이용 및 취소/환불규정 동의 (필수)',
+      detailLink: '/mypage/dashboard/conditions/consent-refund',
+    },
+    {
+      id: 'personalInfo',
+      text: '개인정보 수집 및 이용 동의 (필수)',
+      detailLink: '/mypage/dashboard/conditions/consent-essential',
+    },
+    {
+      id: 'thirdParty',
+      text: '개인정보 제3자 제공 동의 (필수)',
+      detailLink: `/mypage/dashboard/conditions/consent-third?${
+        productName ? `productName=${productName}` : 'hello'
+      }`,
+    },
+  ];
 
   useEffect(() => {
     if (isAllSelected) {
