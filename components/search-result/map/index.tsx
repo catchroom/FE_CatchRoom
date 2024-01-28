@@ -139,6 +139,7 @@ const Map = ({ markers }: MapProps) => {
       bottom: 10px;
       left: 50%;
       width: 8.625rem;
+      auto;
       cursor: pointer; 
     `;
 

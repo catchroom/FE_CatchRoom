@@ -7,7 +7,7 @@ import CustomerBottomSheet from '@/components/common/searchBtmSheets/customer';
 
 const FilterBar = () => {
   return (
-    <div className="w-full max-w-[480px] fixed z-20 flex  gap-1 overflow-x-auto whitespace-nowrap px-5 pt-2 pb-4 mt-14 bg-surface-sub border-b border-divider-sub">
+    <div className="w-full max-w-[480px] fixed z-30 flex  gap-1 overflow-x-auto whitespace-nowrap px-5 pt-2 pb-4 mt-14 bg-surface-sub border-b border-divider-sub">
       <RegionBottomSheet buttonStyle="dropdown" />
       <CalendarBottomSheet buttonStyle="dropdown" />
       <RoomBottomSheet buttonStyle="dropdown" />

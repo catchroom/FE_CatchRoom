@@ -16,8 +16,6 @@ import NoResults from '@/components/search-result/noResults';
 import { format, addYears } from 'date-fns';
 
 const Page = () => {
-  // 검색 파라미터 설정
-
   const selectedRegion = useRecoilValue(regionIndex);
   const dateRange = useRecoilValue(rangeDate);
   const selectedType = useRecoilValue(roomIndex);
@@ -29,7 +27,7 @@ const Page = () => {
     region: selectedRegion.join(',') === '' ? 'all' : selectedRegion.join(','),
     checkInStart: dateRange?.from
       ? format(new Date(dateRange.from), 'yyyy-MM-dd')
-      : undefined,
+      : format(new Date(), 'yyyy-MM-dd'),
     checkInEnd: dateRange?.to
       ? format(new Date(dateRange.to), 'yyyy-MM-dd')
       : format(tenYearsLater, 'yyyy-MM-dd'),
