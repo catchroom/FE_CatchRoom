@@ -13,6 +13,7 @@ import { useQueryGetOrderProduct } from '@/api/order/query';
 import { useParams } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { negoPriceSelector } from '@/atoms/chat/chatContentAtom';
+import OrderSkeletonUI from '@/components/order/orderSkeletonUI';
 // const productId = 18;
 const Page = () => {
   const params = useParams<{ id: string }>();
@@ -23,7 +24,7 @@ const Page = () => {
 
   const guestInfoFormRef = useRef(null);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <OrderSkeletonUI />;
   if (error) return <div>Error loading data</div>;
   if (!data) return <div>No data available</div>;
   const { accommodationName, productName, checkInDate, checkOutDate } =

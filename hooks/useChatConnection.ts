@@ -119,7 +119,6 @@ export const useChatConnection = (roomId: string) => {
 
   // 가격 승인
   const denyPrice = (price: number) => {
-    alert('거절');
     if (!ws.current) return;
     ws.current.publish({
       headers: {

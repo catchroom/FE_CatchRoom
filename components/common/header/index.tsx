@@ -10,7 +10,6 @@ import { HeaderProps } from '@/types/common/header/types';
 import Modal from '../modal';
 import { useRecoilValue } from 'recoil';
 import { isHeaderSate } from '@/atoms/sale/headerAtom';
-import { usePathname } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { isProductState } from '@/atoms/sale/productAtom';
 import { mypageRoutingAtom } from '@/atoms/mypage/mypageRoutingAtom';
@@ -26,7 +25,6 @@ const Header = ({
   isSale = false,
 }: HeaderProps) => {
   const router = useRouter();
-  const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
   const ref = useSearchParams();
   const refString = ref?.get('ref');
@@ -51,14 +49,13 @@ const Header = ({
   };
 
   const handleBackBtn = () => {
-    if (pathname === '/mypage/dashboard/purchase') {
-      router.push('/mypage');
-    } else if (isSale) {
+    if (isSale) {
       setModalOpen(true);
     } else if (refString === 'info') {
       router.push('/');
     } else {
       router.back();
+      console.log('이동');
     }
   };
 
