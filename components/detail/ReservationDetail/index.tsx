@@ -10,7 +10,7 @@ const ReservationDetail = ({
   commission,
   totalPrice,
   paymentMethod,
-  nikName,
+  nickName,
 }: ReservationDetailProps) => {
   return (
     <>
@@ -68,7 +68,7 @@ const ReservationDetail = ({
       <section className="flex flex-col gap-4 px-5 py-4 mb-2">
         <div className="flex justify-between items-center">
           <h3 className="text-t2 text-text-sub">판매자</h3>
-          <p className="text-t2">{nikName}</p>
+          <p className="text-t2">{nickName}</p>
         </div>
       </section>
     </>
