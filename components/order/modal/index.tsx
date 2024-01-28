@@ -79,8 +79,14 @@ const PaymentModal = ({ isOpen, onClose, formRef }: ModalProps) => {
           userPhoneNumber: guestInfoData.phone,
         },
         paymentInfo: {
-          sellPrice: negoInfo ? negoInfo.sellPrice : data.payment.sellPrice,
-          price: negoInfo ? negoInfo.totalPrice : data.payment.price,
+          sellPrice:
+            negoInfo && negoInfo.sellPrice !== 0
+              ? negoInfo.sellPrice
+              : data.payment.sellPrice,
+          price:
+            negoInfo && negoInfo.totalPrice !== 0
+              ? negoInfo.totalPrice
+              : data.payment.price,
         },
         paymentMethod: paymentMethod,
       };
