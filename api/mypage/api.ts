@@ -1,28 +1,10 @@
 import { apiClient } from '../user/apiClient';
-// 노션의 api 명세서 번호 기준으로 표시
-//import nookies from 'nookies';
 
 //6. 로그아웃
 export const logout = async () => {
   const res = await apiClient.post('/v1/mypage/logout');
   return res.data;
 };
-
-// export const logout = async () => {
-//   console.log(accessToken);
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/mypage/logout`,
-//     {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     },
-//   );
-//   const data = await res.json();
-//   return data;
-// };
 
 // 7. 닉네임 변경
 export const editProfile = async (nickname: string) => {
@@ -154,7 +136,7 @@ export const editReview = async (
   return res.data;
 };
 
-//28. 리뷰에서 필요한 정보 조회 (숙소 이름, 이미지, 가격)
+//28. 리뷰에서 필요한 정보 조회
 export const getRoomInfo = async (id: number) => {
   const res = await apiClient.get(`/v1/product?id=${id}`);
   return res.data;

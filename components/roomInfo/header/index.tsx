@@ -27,63 +27,6 @@ const HeaderComponent = () => {
   const mutation = useMutationDeleteSaleProduct();
   const setIsProduct = useSetRecoilState(isProductState);
 
-  // ----------- 헤더부분에 스크롤에 따라 숙소이름 뜨게하려는 중...
-
-  // const [scroll, setScroll] = useState<boolean>(false);
-
-  // const [titleHidden, setTitleHidden] = useState(
-  //   typeof window !== 'undefined' ? false : true,
-  // );
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY >= 100) {
-  //       setTitleHidden(true);
-  //     } else {
-  //       setTitleHidden(false);
-  //     }
-  //   };
-
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, []);
-
-  // console.log(titleHidden);
-
-  // const titleRef = useRef(null);
-
-  // const handleScroll = useCallback((e) => {
-  //   console.log(e);
-  // }, []);
-
-  // useLayoutEffect(() => {
-  //   if (titleRef.current) {
-  //     titleRef.current.addEventListener('scroll', handleScroll);
-  //     return () =>
-  //       titleRef!.current.removeEventListener('scroll', handleScroll);
-  //   }
-  // }, [handleScroll]);
-  // const handleScroll = () => {
-  //   console.log(window.scrollY);
-  //   // 스크롤이 Top에서 50px 이상 내려오면 true값을 useState에 넣어줌
-  //   if (window.scrollY >= 50) {
-  //     setScroll(true);
-  //     console.log(scroll);
-  //   } else {
-  //     // 스크롤이 50px 미만일경우 false를 넣어줌
-  //     setScroll(false);
-  //     console.log(scroll);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll); //clean up
-  //   };
-  // }, []);
-  // ---------------------------------------------------------------
-
   const handleEditBtnClick = () => {
     setMoreBottomSheetOpen(false);
     setIsProduct(true);

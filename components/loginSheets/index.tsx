@@ -9,7 +9,8 @@ import Link from 'next/link';
 import CheckBoxComponent from '../common/checkBox';
 import { CheckboxId } from '@/types/login/types';
 
-const checkDivStyle = 'flex justify-between pl-3 p-2 mb-2';
+const checkDivStyle =
+  'flex justify-between pl-3 p-2 mb-2 text-t2 font-semibold';
 
 const LoginSheet = ({
   open,
@@ -126,8 +127,8 @@ const LoginSheet = ({
                   </button>
                 </div>
 
-                <div className="w-full h-full mt-3 flex flex-col text-black text-p1">
-                  <div className="flex border border-gray-500 rounded-md p-3 mb-3 mt-2">
+                <div className="w-full h-full mt-3 flex flex-col text-black text-t2">
+                  <div className="flex border border-border-sub rounded-md p-3 mb-3 mt-2 colors-surface-DEFAULT">
                     <div className="flex">
                       <CheckBoxComponent
                         id="allAgree"
@@ -153,6 +154,7 @@ const LoginSheet = ({
                       handleSelectState={(event) =>
                         handleAgreeChange(event, 'agree1')
                       }
+                      isLabelTextBold={true}
                     />
                   </div>
 
@@ -165,6 +167,7 @@ const LoginSheet = ({
                         handleSelectState={(event) =>
                           handleAgreeChange(event, 'agree2')
                         }
+                        isLabelTextBold={true}
                       />
                     </div>
                     <div
@@ -186,6 +189,7 @@ const LoginSheet = ({
                         handleSelectState={(event) =>
                           handleAgreeChange(event, 'agree3')
                         }
+                        isLabelTextBold={true}
                       />
                     </div>
                     <Link
@@ -204,6 +208,7 @@ const LoginSheet = ({
                       handleSelectState={(event) =>
                         handleAgreeChange(event, 'agree4')
                       }
+                      isLabelTextBold={true}
                     />
                   </div>
 
@@ -217,6 +222,7 @@ const LoginSheet = ({
                         handleSelectState={(event) =>
                           handleAgreeChange(event, 'agree5')
                         }
+                        isLabelTextBold={true}
                       />
                     </div>
                     <Link
@@ -235,6 +241,7 @@ const LoginSheet = ({
                       handleSelectState={(event) =>
                         handleAgreeChange(event, 'agree6')
                       }
+                      isLabelTextBold={true}
                     />
                   </div>
 

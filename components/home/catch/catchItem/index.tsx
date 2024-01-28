@@ -77,7 +77,7 @@ const CatchItem = ({
 
   return (
     <div className="flex flex-col relative w-full mt-5 rounded-lg border border-gray-200 cursor-pointer">
-      <div className="absolute flex top-[12px] left-4 bg-black gap-1 p-[10px] rounded-3xl items-center z-10 md:p-1.5 sm:p-1.5 md:text-t4 sm:text-t4">
+      <div className="absolute flex top-[12px] left-4 bg-black gap-1 lg:p-[10px] rounded-3xl items-center z-10 md:p-1.5 sm:p-1.5 md:text-t4 sm:text-t4">
         <White />
         <span className="text-white">{region}</span>
       </div>
@@ -106,7 +106,7 @@ const CatchItem = ({
         )}
       </div>
       <div
-        className="h-[184px] md:h-[138px] sm:h-[138px] relative"
+        className="lg:h-[184px] md:h-[138px] sm:h-[138px] relative"
         onClick={handleItemClick}
       >
         <Image
@@ -119,27 +119,27 @@ const CatchItem = ({
         />
       </div>
       <div
-        className="flex flex-col gap-1 p-5 bg-surface"
+        className="flex flex-col gap-1 p-5 bg-surface rounded-b-lg"
         onClick={handleItemClick}
       >
         <div className="flex justify-between">
           <div className="flex">
             <CalendarIcon />
-            <p className="text-p2 ml-1 text-black font-semibold md:text-t4 sm:text-t4">
+            <p className="lg:text-p2 ml-1 text-black font-semibold md:text-t4 sm:text-t4">
               {checkInString} - {checkOutString}
             </p>
           </div>
-          <p className="line-through text-p2 text-text-sub md:text-[11px] sm:text-[11px]">
+          <p className="line-through lg:text-p2 text-text-sub md:text-[11px] sm:text-[11px]">
             구매가 {originalPrice?.toLocaleString()}
           </p>
         </div>
         <div className="flex justify-between font-bold">
-          <div className="text-h5 md:text-t3 md:font-semibold sm:text-t3 sm:font-semibold">
+          <div className="lg:text-h5 md:text-t3 md:font-semibold sm:text-t3 sm:font-semibold">
             {accommodationName.length > 7
               ? `${accommodationName.substring(0, 7)}...`
               : accommodationName}
           </div>
-          <div className="text-t1 md:text-p2 sm:text-p2">
+          <div className="lg:text-t1 md:text-p2 sm:text-p2">
             <span className="text-main text-p1 mr-1">{discountRate}%</span>
             {sellPrice?.toLocaleString()}원
           </div>

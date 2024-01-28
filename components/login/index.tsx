@@ -13,7 +13,7 @@ import nookies from 'nookies';
 import { login } from '@/api/user/api';
 
 export const commonInputStyle =
-  'w-full h-[3.5rem] border-[1.5px] mb-3 flex flex-col items-start pl-3 rounded-md';
+  'w-full h-[3.5rem] border-[1.5px] mb-2 mt-2 flex flex-col items-start px-5 rounded-md';
 
 const LoginForm = () => {
   //약관 모달
@@ -84,14 +84,14 @@ const LoginForm = () => {
                 ? 'border-border-critical'
                 : clickedEmailInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedEmailInput(true)}
             onBlur={() => setTimeout(() => setClickedEmailInput(false), 200)}
           />
           {email && clickedEmailInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2"
               onClick={() => clearField('email')}
             >
               <DeleteIcon />
@@ -113,7 +113,7 @@ const LoginForm = () => {
                 ? 'border-border-critical'
                 : clickedPwInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedPwInput(true)}
             onBlur={() => setTimeout(() => setClickedPwInput(false), 200)}
@@ -121,7 +121,7 @@ const LoginForm = () => {
 
           {password && clickedPwInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2 text-border-critical"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2 text-border-critical"
               onClick={() => clearField('password')}
             >
               <DeleteIcon />
@@ -163,7 +163,7 @@ const LoginForm = () => {
             </span>
           </span>
 
-          <span className="relative">&nbsp;|</span>
+          <span className="relative text-text-disabled">&nbsp;|</span>
 
           <span className="relative">
             <div className="underline cursor-pointer" onClick={handleOpenModal}>

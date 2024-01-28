@@ -8,7 +8,6 @@ import ReviewSkeletonUI from '../ReviewSkeletonUI';
 
 const ReviewSwiper = () => {
   const { data, isLoading } = useQueryGetReviewList(1);
-  console.log(data);
 
   if (isLoading) return <ReviewSkeletonUI />;
   return (

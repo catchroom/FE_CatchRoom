@@ -1,8 +1,6 @@
 import nookies from 'nookies';
 import axios from 'axios';
 
-// 노션의 api 명세서 번호 기준으로 표시
-
 //1. 회원가입
 export const signUp = async (
   email: string,
@@ -63,30 +61,7 @@ export const emailCheck = async (email: string) => {
   return data;
 };
 
-// 6. 액세스 토큰 재발급 -> apiClient 사용할거면 필요 x, 일단 테스트용
-// export const getNewToken = async () => {
-//   const refreshToken = nookies.get(null)['refreshToken'];
-
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/user/accesstoken`,
-//     {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${refreshToken}`,
-//       },
-//     },
-//   );
-
-//   const data = await res.json();
-//   if (data.accessToken) {
-//     nookies.set(null, 'accessToken', data.accessToken, {
-//       path: '/',
-//     });
-//   }
-//   return data;
-// };
-
+// 6. 액세스 토큰 재발급
 export const getNewToken = async () => {
   const refreshToken = nookies.get(null)['refreshToken'];
 

@@ -59,28 +59,29 @@ const AccountContainer = ({ children }: { children: ReactNode }) => {
                 {data?.accountNumber} ({data?.bankName})
               </p>
             </div>
-
-            {/* 눌리면 바텀시트 열리게 */}
-            <BottomSheetsWithoutCloseBtn
-              buttonSelect="more"
-              outerControlAtom="more"
-              outerControl={false}
-            >
-              <div className="flex flex-col gap-7 w-full py-3 text-t1 font-bold">
-                {/* 누르면 계좌 선택 페이지로 이동? */}
-                <Link href="/mypage/dashboard/account">수정하기</Link>
-                <div
-                  className="cursor-pointer"
-                  onClick={() => {
-                    deleteAccount().then(() => {
-                      window.location.href = '/mypage';
-                    });
-                  }}
-                >
-                  삭제하기
+            <div className="cursor-pointer">
+              {/* 눌리면 바텀시트 열리게 */}
+              <BottomSheetsWithoutCloseBtn
+                buttonSelect="more"
+                outerControlAtom="more"
+                outerControl={false}
+              >
+                <div className="flex flex-col gap-7 w-full py-3 text-t1 font-bold">
+                  {/* 누르면 계좌 선택 페이지로 이동? */}
+                  <Link href="/mypage/dashboard/account">수정하기</Link>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => {
+                      deleteAccount().then(() => {
+                        window.location.href = '/mypage';
+                      });
+                    }}
+                  >
+                    삭제하기
+                  </div>
                 </div>
-              </div>
-            </BottomSheetsWithoutCloseBtn>
+              </BottomSheetsWithoutCloseBtn>
+            </div>
           </>
         )}
       </div>

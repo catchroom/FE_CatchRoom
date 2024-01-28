@@ -62,18 +62,15 @@ const SignUpInfo = () => {
     if (confirmedNickname === true) {
       signUp(email, password, data.nickname, data.phone, data.name)
         .then((response) => {
-          console.log(response);
-
           if (response.code === 1000) {
             login(email, password)
               .then((response) => {
-                console.log(response);
                 if (response.code === 1006) {
                   setEmail('');
                   setPassword('');
                   nookies.set(null, 'accessToken', response.data.accessToken, {
                     path: '/',
-                    maxAge: 60 * 30, //29분
+                    maxAge: 60 * 30,
                   });
                   nookies.set(
                     null,
@@ -81,10 +78,9 @@ const SignUpInfo = () => {
                     response.data.refreshToken,
                     {
                       path: '/',
-                      maxAge: 60 * 60 * 24 * 2, //2일
+                      maxAge: 60 * 60 * 24 * 2,
                     },
                   );
-
                   window.location.href = '/mypage';
                 }
               })
@@ -114,7 +110,6 @@ const SignUpInfo = () => {
       });
     } else {
       nicknameCheck(nickname).then((response) => {
-        console.log(response);
         if (response.code === 1010) {
           handleModalOpen();
           setConfirmedNickname(true);
@@ -139,14 +134,14 @@ const SignUpInfo = () => {
                 ? 'border-border-critical'
                 : clickedNameInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedNameInput(true)}
             onBlur={() => setTimeout(() => setClickedNameInput(false), 200)}
           />
           {name && clickedNameInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2"
               onClick={() => clearField('name')}
             >
               <DeleteIcon />
@@ -155,7 +150,9 @@ const SignUpInfo = () => {
         </div>
 
         {errors.name && (
-          <p className="text-border-critical mb-3">{errors.name.message}</p>
+          <p className="text-border-critical mb-2 mt-2 text-p2">
+            {errors.name.message}
+          </p>
         )}
 
         <div className="relative">
@@ -167,7 +164,7 @@ const SignUpInfo = () => {
                 ? 'border-border-critical'
                 : clickedPhoneInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedPhoneInput(true)}
             onBlur={() => setTimeout(() => setClickedPhoneInput(false), 200)}
@@ -175,7 +172,7 @@ const SignUpInfo = () => {
 
           {phone && clickedPhoneInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2"
               onClick={() => clearField('phone')}
             >
               <DeleteIcon />
@@ -184,7 +181,9 @@ const SignUpInfo = () => {
         </div>
 
         {errors.phone && (
-          <p className="text-border-critical mb-3">{errors.phone.message}</p>
+          <p className="text-border-critical mb-2 mt-2 text-p2">
+            {errors.phone.message}
+          </p>
         )}
 
         <div className="relative">
@@ -196,12 +195,12 @@ const SignUpInfo = () => {
                 ? 'border-border-critical'
                 : clickedNickInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedNickInput(true)}
             onBlur={() => setTimeout(() => setClickedNickInput(false), 200)}
           />
-          <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
+          <div className="absolute right-3 top-[50%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
             {nickname && clickedNickInput && (
               <div onClick={() => clearField('nickname')}>
                 <DeleteIcon />
@@ -209,7 +208,7 @@ const SignUpInfo = () => {
             )}
             {!confirmedNickname && (
               <div
-                className="cursor-pointer font-bold text-p3 underline"
+                className="cursor-pointer font-bold text-p2 underline"
                 onClick={() => checkNickname(nickname)}
               >
                 중복확인
@@ -233,9 +232,13 @@ const SignUpInfo = () => {
             2~8자, 한글/영문/숫자 혼합
           </div>
         ) : errors.nickname && errors.nickname.message ? (
-          <p className="text-border-critical mb-3">{errors.nickname.message}</p>
+          <p className="text-border-critical text-p2 mb-2 mt-2">
+            {errors.nickname.message}
+          </p>
         ) : !confirmedNickname ? (
-          <p className="text-border-critical mb-3">중복확인 필요합니다.</p>
+          <p className="text-border-critical text-p2 mb-2 mt-2">
+            중복확인 필요합니다.
+          </p>
         ) : (
           <div className="text-gray-600 text-p2">
             2~8자, 한글/영문/숫자 혼합

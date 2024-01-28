@@ -13,7 +13,6 @@ const changeStyle = (menu: string, value: string) =>
 const Menu = () => {
   const [menu, setMenu] = useRecoilState(menuAtom);
 
-  console.log(menu);
   return (
     <div className="w-full flex">
       {MENU_BUTTON.map((item) => {

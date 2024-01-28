@@ -11,7 +11,7 @@ import React from 'react';
 
 const page = async () => {
   return (
-    <div className="flex flex-col w-full h-full px-5 mt-5 items-center bg-primary md:px-4 sm:px-3">
+    <div className="flex flex-col w-full h-full lg:px-5 mt-5 items-center bg-primary md:px-4 sm:px-3">
       <Header />
       {/* 검색바 컴포넌트 */}
       <SearchBar />

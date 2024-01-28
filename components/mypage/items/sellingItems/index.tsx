@@ -36,7 +36,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
       case 'EXPIRED':
         return (
           <>
-            <p>{getSellState(dealState)}</p>
+            <p>게시 기한 만료</p>
             <ReEnrollButton dealState={dealState} fn={handleEditDate} />
           </>
         );
@@ -44,7 +44,7 @@ const MItem = ({ item }: { item: MypageSellingType }) => {
         return <p>판매일 : {getDotDate(item.endDate, true, true, true)}</p>;
       case 'UNSOLD':
       case 'UNABLESELL':
-        return <p>{getSellState(dealState)}</p>;
+        return <p>체크인 만료</p>;
       default:
         return <p>게시만료일 ~ {getDotDate(item.endDate, true, true, true)}</p>;
     }

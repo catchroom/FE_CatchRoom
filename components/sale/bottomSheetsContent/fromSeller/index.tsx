@@ -73,7 +73,6 @@ const FromSeller = () => {
   }, [isProduct]);
 
   useEffect(() => {
-    console.log(endDate);
     const combinedDateTime = new Date(
       endDate!.getFullYear(),
       endDate!.getMonth(),
@@ -81,7 +80,6 @@ const FromSeller = () => {
       time === '오전' ? (hour === 12 ? 0 : hour) : hour === 12 ? 12 : hour + 12,
       minute,
     );
-    console.log('fromseller', combinedDateTime);
 
     const timezoneOffset = combinedDateTime?.getTimezoneOffset() * 60000;
     const adjustedEndDate = new Date(
@@ -90,7 +88,6 @@ const FromSeller = () => {
     const isoString = adjustedEndDate
       ? adjustedEndDate?.toISOString()
       : '2024-01-26T18:22:33';
-    console.log(isoString);
     setTimeISOString(isoString);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -204,7 +201,6 @@ const FromSeller = () => {
 
   alertOpenHandler;
   const handleMutationSucess = (data: APIresponse) => {
-    console.log(data);
     setIsProduct(false);
     if (data.code === 4010) {
       setHeaderUnVisible(false);
@@ -221,7 +217,6 @@ const FromSeller = () => {
   };
 
   const handleMutationError = (error: Error) => {
-    console.log(error);
     if (axios.isAxiosError(error)) {
       console.log(error?.response?.data.data.message);
       setModalContent('사유 :  ' + error.response?.data.data.message);

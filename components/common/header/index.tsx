@@ -32,7 +32,6 @@ const Header = ({
   const refString = ref?.get('ref');
   const params = useSearchParams();
   const id = params?.get('id');
-  console.log(id);
 
   const mypageRouting = useRecoilValue(mypageRoutingAtom);
   const isProduct = useRecoilValue(isProductState);
@@ -44,7 +43,6 @@ const Header = ({
   } ${headerUnVisible ? 'z-0' : 'z-20'} `;
 
   const handleCloseBtn = () => {
-    console.log();
     if (closeButtonRedirectPath) {
       router.push(closeButtonRedirectPath);
     } else {
@@ -106,7 +104,7 @@ const Header = ({
         ) : (
           <div />
         )}
-        <h1 className="justify-self-center text-t1 whitespace-nowrap font-semibold">
+        <h1 className="justify-self-center text-t1 whitespace-nowrap font-semibold px-5">
           {title}
         </h1>
         <div className="justify-self-end mt-1">

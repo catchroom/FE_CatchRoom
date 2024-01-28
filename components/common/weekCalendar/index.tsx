@@ -28,7 +28,7 @@ const WeekCalendar = () => {
     const isSelected = date.getDate() === selectedDate.getDate();
 
     const buttonClasses = `
-      relative flex flex-col items-center font-semibold
+      relative flex flex-col items-center font-bold
       ${isToday ? 'justify-start' : ''}
       ${isSixDaysLater ? 'justify-end' : ''}
     `;
@@ -44,7 +44,7 @@ const WeekCalendar = () => {
         )}
         <p className="text-text-sub mt-[6px] mb-1">{dayNames[date.getDay()]}</p>
         <p
-          className={`rounded-full flex items-center justify-center w-[2rem] h-[2rem] font-extrabold 
+          className={`rounded-full flex items-center justify-center w-[2rem] h-[2rem] font-bold 
       ${isSelected ? 'bg-black text-white' : ''}`}
         >
           {date.getDate()}

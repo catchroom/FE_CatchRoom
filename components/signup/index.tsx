@@ -31,16 +31,15 @@ const SignUpAuth = () => {
     if (email === '') {
       setError('email', {
         type: 'email',
-        message: '올바르지 않은 이메일 형식입니다 이메일을 다시 확인해주세요.',
+        message: '올바르지 않은 이메일 형식입니다. 이메일을 다시 확인해주세요.',
       });
     } else if (errors.email?.message) {
       setError('email', {
         type: 'email',
-        message: '올바르지 않은 이메일 형식입니다 이메일을 다시 확인해주세요.',
+        message: '올바르지 않은 이메일 형식입니다. 이메일을 다시 확인해주세요.',
       });
     } else {
       emailCheck(email).then((response) => {
-        console.log(response);
         if (response.code === 1012) {
           handleModalOpen();
           setConfirmedEmail(true);
@@ -104,13 +103,13 @@ const SignUpAuth = () => {
                 ? 'border-border-critical'
                 : clickedEmailInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedEmailInput(true)}
             onBlur={() => setTimeout(() => setClickedEmailInput(false), 200)}
           />
 
-          <div className="absolute right-3 top-[40%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
+          <div className="absolute right-3 top-[50%] transform -translate-y-1/2 flex items-center justify-end space-x-2 min-w-[200px]">
             {email && clickedEmailInput && (
               <div onClick={() => clearField('email')}>
                 <DeleteIcon />
@@ -118,7 +117,7 @@ const SignUpAuth = () => {
             )}
             {!confirmedEmail && (
               <div
-                className="cursor-pointer font-bold text-p3 underline"
+                className="cursor-pointer font-bold text-p2 underline"
                 onClick={() => checkEmail(email)}
               >
                 중복확인
@@ -138,10 +137,14 @@ const SignUpAuth = () => {
         )}
 
         {errors.email && errors.email.message && (
-          <p className="text-border-critical mb-3">{errors.email.message}</p>
+          <p className="text-border-critical text-p2 mb-2 mt-2">
+            {errors.email.message}
+          </p>
         )}
         {!errors.email && email && !confirmedEmail && (
-          <p className="text-border-critical mb-3">중복확인 필요합니다.</p>
+          <p className="text-border-critical text-p2 mb-2 mt-2">
+            중복확인 필요합니다.
+          </p>
         )}
 
         <div className="relative">
@@ -154,7 +157,7 @@ const SignUpAuth = () => {
                 ? 'border-border-critical'
                 : clickedPwInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedPwInput(true)}
             onBlur={() => setTimeout(() => setClickedPwInput(false), 200)}
@@ -162,7 +165,7 @@ const SignUpAuth = () => {
 
           {password && clickedPwInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2"
               onClick={() => clearField('password')}
             >
               <DeleteIcon />
@@ -171,9 +174,11 @@ const SignUpAuth = () => {
         </div>
 
         {errors.password ? (
-          <p className="text-border-critical mb-3">{errors.password.message}</p>
+          <p className="text-border-critical text-p2 mb-2 mt-2">
+            {errors.password.message}
+          </p>
         ) : (
-          <div className="text-gray-600 text-p2 mt-3 mb-4">
+          <div className="text-gray-600 text-p2 mb-2 mt-2">
             영문+숫자+특수문자 8~20자리
           </div>
         )}
@@ -188,7 +193,7 @@ const SignUpAuth = () => {
                 ? 'border-border-critical'
                 : clickedPwCheckInput
                   ? 'border-border-primary'
-                  : 'border-gray-400'
+                  : 'border-border-sub'
             } outline-none`}
             onClick={() => setClickedPwCheckInput(true)}
             onBlur={() => setTimeout(() => setClickedPwCheckInput(false), 200)}
@@ -196,7 +201,7 @@ const SignUpAuth = () => {
 
           {passwordCheck && clickedPwCheckInput && (
             <div
-              className="absolute right-3 top-[40%] transform -translate-y-1/2"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2"
               onClick={() => clearField('passwordCheck')}
             >
               <DeleteIcon />
@@ -205,7 +210,9 @@ const SignUpAuth = () => {
         </div>
 
         {errors.passwordCheck && (
-          <p className="text-border-critical">{errors.passwordCheck.message}</p>
+          <p className="text-border-critical text-p2 mb-2 mt-2">
+            {errors.passwordCheck.message}
+          </p>
         )}
 
         <div className="w-full mt-5">

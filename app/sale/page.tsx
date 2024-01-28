@@ -12,11 +12,10 @@ const Page = ({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  console.log(searchParams.id);
   return (
     <div>
       <Header title="판매하기" showBackButton={true} isSale={true} />
-      <div className="p-5 mt-[52px]">
+      <div className="lg:p-5 md:p-4 sm:p-3 mt-[52px]">
         <SaleInfoContainer id={searchParams.id} />
         <Line />
         <SaleEndContainer />

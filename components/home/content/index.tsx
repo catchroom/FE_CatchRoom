@@ -5,7 +5,6 @@ import { useQueryGetSalesHistory } from '@/api/home/query';
 
 const Content = () => {
   const { data } = useQueryGetSalesHistory();
-  console.log(data);
 
   if (data?.code === 4000) return <SaleItems salesItem={data?.data} />;
 
