@@ -54,6 +54,8 @@ const InfiniteScrollContainer = () => {
     setTotalSize(data?.pages[0].size);
   }, [data?.pages, setTotalSize]);
 
+  console.log(data);
+
   const { pageHandler } = useProductInfoPage();
 
   return (
@@ -78,8 +80,8 @@ const InfiniteScrollContainer = () => {
           id="scrollableDiv"
           className="w-full max-h-[calc(100vh-128px)] overflow-auto flex flex-col mt-56 gap-[2rem] p-6 pt-2"
         >
-          {data ? (
-            data.pages.map((page, pageIndex) => (
+          {data?.pages[0].size !== 0 ? (
+            data?.pages.map((page, pageIndex) => (
               <div key={pageIndex} className="flex flex-col gap-[2rem]">
                 {page.list.map((data: DeadLineItem) => (
                   <CatchSpecialComponent
