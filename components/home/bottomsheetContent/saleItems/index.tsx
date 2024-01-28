@@ -39,7 +39,7 @@ const SaleItems = ({ salesItem }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-start w-full mt-12 gap-3"
+      className="flex flex-col items-start w-full mt-8 gap-3 max-h-[580px] overflow-y-scroll"
     >
       {salesItem &&
         salesItem.map((item) => {
@@ -71,7 +71,7 @@ const SaleItems = ({ salesItem }: Props) => {
       <button
         onClick={handleButtonClick}
         type="submit"
-        className={`w-full h-[44px] rounded mt-12 ${
+        className={`w-full h-[44px] min-h-[44px] rounded mt-8 ${
           selectedProduct
             ? 'bg-action-primary text-text-on'
             : 'bg-action-secondary-disabled text-text-disabled disabled'

@@ -169,7 +169,9 @@ const CatchContainer = () => {
     <div className="w-full flex flex-col relative">
       <div className="flex justify-between">
         <div className="flex gap-1 items-center">
-          <h2 className="text-h5 font-bold">캐치특가 자동 설정</h2>
+          <h2 className="lg:text-h5 font-semibold md:text-t1 sm:text-t1">
+            캐치특가 자동 설정
+          </h2>
           <div
             onClick={handleQuestionButtonClick}
             className="cursor-pointer"

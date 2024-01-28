@@ -101,7 +101,7 @@ const SaleInfoContainer = ({ id }: Props) => {
   return (
     <div className="flex flex-col w-full p-4 gap-5 bg-white border border-border-sub rounded">
       <div className="flex gap-5 w-full">
-        <div className="w-[100px] h-[100px] relative flex-shrink-0">
+        <div className="lg:w-[100px] lg:h-[100px] md:w-[80px] md:h-[80px] sm:w-[80px] sm:h-[80px] relative flex-shrink-0">
           <Image
             src={data?.accommdationUrl}
             alt="숙소 이미지"
@@ -113,8 +113,12 @@ const SaleInfoContainer = ({ id }: Props) => {
         </div>
 
         <div className="flex flex-col">
-          <p className="font-semibold text-h5">{data?.accommdationName}</p>
-          <p className="font-semibold text-t2 opacity-50">{data?.roomType}</p>
+          <p className="font-semibold text-h5 lg:whitespace-normal md:whitespace-nowrap md:overflow-hidden md:text-ellipsis md:w-[154px] sm:whitespace-nowrap sm:overflow-hidden sm:text-ellipsis sm:w-[154px]">
+            {data?.accommdationName}
+          </p>
+          <p className="font-semibold text-t2 opacity-50 lg:whitespace-normal md:whitespace-nowrap md:overflow-hidden md:text-ellipsis md:w-[154px] sm:whitespace-nowrap sm:overflow-hidden sm:text-ellipsis sm:w-[154px]">
+            {data?.roomType}
+          </p>
           <p className="text-p1 mt-4">
             <span className="opacity-50 mr-2">구매가</span>
             {data?.price.toLocaleString()}원

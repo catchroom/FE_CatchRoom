@@ -8,8 +8,8 @@ const SaleInfoSkeletonUI = () => {
         className="flex-col w-full space-y-8 animate-pulse  md:space-y-0 rtl:space-x-reverse md:items-center"
       >
         <div className="flex w-full gap-5">
-          <div className="w-[100px] h-[100px] relative rounded">
-            <div className="flex items-center justify-center w-[100px] h-[100px] bg-gray-300 rounded  dark:bg-gray-700">
+          <div className="lg:w-[100px] lg:h-[100px] md:w-[80px] md:h-[80px] sm:w-[80px] sm:h-[80px] relative rounded">
+            <div className="flex items-center justify-center lg:w-[100px] lg:h-[100px] md:w-[80px] md:h-[80px] sm:w-[80px] sm:h-[80px] bg-gray-300 rounded  dark:bg-gray-700">
               <svg
                 className="w-10 text-gray-200 dark:text-gray-600"
                 aria-hidden="true"
