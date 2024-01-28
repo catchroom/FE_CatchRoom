@@ -1,6 +1,7 @@
 'use client';
 import { useQueryGetOrderOrderComplete } from '@/api/order/query';
 import CompleteMessage from '@/components/complete/completeMessage';
+import CompleteSkeletonUI from '@/components/complete/completeSkeletonUI';
 import NavButton from '@/components/complete/navButton';
 import ProductDetails from '@/components/complete/productDetails';
 import ReservationInfo from '@/components/complete/reservationInfo';
@@ -16,14 +17,14 @@ const Page = () => {
   const router = useRouter();
   const { data, isLoading, error } = useQueryGetOrderOrderComplete(productId);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <CompleteSkeletonUI />;
   if (error) return <div>Error loading data</div>;
   if (!data) return <div>No data available</div>;
   const { accommodationName, roomName, normalCapacity, maxCapacity, image } =
     data.accommodation;
   const { sellPrice } = data.sellPrice;
   const { buyerNickname } = data.buyer;
-
+  const commission = data?.sellPrice.sellPrice * 0.05;
   const bookingDetails = {
     bookingHolder: {
       name: data?.buyer.buyerName,
@@ -55,7 +56,7 @@ const Page = () => {
           <ReservationInfo
             bookingHolder={bookingDetails.bookingHolder}
             guest={bookingDetails.guest}
-            totalPrice={sellPrice}
+            totalPrice={sellPrice + commission}
             paymentMethod={data.paymentMethod}
           />
         </div>
