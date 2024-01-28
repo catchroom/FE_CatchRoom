@@ -25,8 +25,6 @@ apiClient.interceptors.response.use(
   },
   async (outerError) => {
     const originalRequest = outerError.config;
-    // console.log('outerError.response', JSON.stringify(outerError.response));
-    // console.log(outerError.response.data.code); //5001
 
     if (
       (outerError.response.data.code === 5000 ||
@@ -35,8 +33,6 @@ apiClient.interceptors.response.use(
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
-
-      // console.log('재발급 전', accessToken);
 
       try {
         const res = await getNewToken();
@@ -53,11 +49,8 @@ apiClient.interceptors.response.use(
           maxAge: 60 * 30,
         });
 
-        // console.log('재시도 성공:', response.data);
-
         return response;
       } catch (innerError) {
-        // console.log('재시도 실패:', innerError);
         return Promise.reject(originalRequest);
       }
     }

@@ -9,7 +9,6 @@ import {
 } from './api';
 
 export const useGetChatRoom = (token: string, userId: number) => {
-  console.log(userId);
   const { data, isLoading, error } = useQuery({
     queryKey: ['chatRoom'],
     queryFn: () => fetchChatRoom(token, userId),

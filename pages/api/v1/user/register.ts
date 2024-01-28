@@ -10,8 +10,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       query(collection(db, 'user'), where('email', '==', body.email)),
     );
 
-    console.log(docSnap.docs.length);
-
     if (docSnap.docs.length > 0) {
       return res.status(400).json({
         code: '2000',

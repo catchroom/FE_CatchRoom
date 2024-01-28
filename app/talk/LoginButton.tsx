@@ -37,7 +37,6 @@ const fetchNewToken = async (token: string) => {
       },
     },
   );
-  console.log(data, 'data');
   return data.data;
 };
 
@@ -58,7 +57,6 @@ const fetchLogin = async () => {
   );
 
   const result = await data.data;
-  console.log(result, 'result');
   return result;
 };
 

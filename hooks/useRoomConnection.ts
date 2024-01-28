@@ -20,7 +20,6 @@ export const useRoomConnection = () => {
   const userId = cookies.userId;
 
   const { data, isLoading } = useGetChatRoom(accessToken, userId);
-  console.log(data, '데이터');
 
   // 초기 데이터 로딩
   useEffect(() => {
@@ -51,7 +50,6 @@ export const useRoomConnection = () => {
       () => {
         ws.current?.subscribe(`/sub/chat/roomlist/${userId}`, (message) => {
           const recv = JSON.parse(message.body);
-          console.log(recv, '받은거');
           setChatList(recv);
         });
       },

@@ -21,8 +21,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     };
 
-    console.log(state);
-
     const getRandomReviewStatus = () => {
       const randomValue = Math.random();
 

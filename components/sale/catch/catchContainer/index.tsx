@@ -52,7 +52,6 @@ const CatchContainer = () => {
   useEffect(() => {
     // 만약 등록된 상품이면 퍼센트 값을 계산하기 위함
     if (isProduct && isCatch) {
-      console.log(price, catchPrice);
       setSelectCatchPercent(100 - (catchPrice / price) * 100);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,7 +78,6 @@ const CatchContainer = () => {
       const endDate = new Date(selectedSaleEndDate);
       endDate.setDate(endDate.getDate() - 1);
       setSelected(endDate);
-      console.log(selectedSaleEndDate);
       if (selectedSaleEndDate.toDateString() === today.toDateString()) {
         // 그날짜가 체크인 날짜와 같다면 캐치특가 박스 disabled
         setDisable(true);
@@ -97,7 +95,6 @@ const CatchContainer = () => {
       const endDate = new Date(selectedSaleEndDate);
       endDate.setDate(endDate.getDate() - 1);
       setSelected(endDate);
-      console.log(selectedSaleEndDate);
       //만약 등록된 상품인데 판매 날짜가 체크인 날짜와 같으면 캐치특가 박스 disabled
       if (selectedSaleEndDate?.toDateString() === today.toDateString()) {
         setDisable(true);
@@ -123,8 +120,6 @@ const CatchContainer = () => {
 
   useEffect(() => {
     let catchPercent: number = 0;
-    console.log(isProduct, selectedPercent);
-    console.log('확인', isNeverChange);
     if (isNeverChange) return;
     if (selectedPercent === 90) {
       setIsCatch(false);

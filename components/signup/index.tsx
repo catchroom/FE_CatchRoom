@@ -40,7 +40,6 @@ const SignUpAuth = () => {
       });
     } else {
       emailCheck(email).then((response) => {
-        console.log(response);
         if (response.code === 1012) {
           handleModalOpen();
           setConfirmedEmail(true);
