@@ -61,8 +61,10 @@ const Page = () => {
 
   //체크인 범위
   useEffect(() => {
-    const startDate = dateRange?.from ?? new Date();
-    const endDate = dateRange?.to ?? new Date();
+    const startDate = dateRange?.from ? new Date(dateRange.from) : new Date();
+    const endDate = dateRange?.to
+      ? new Date(dateRange.to)
+      : addYears(new Date(), 10);
 
     setSearchParams((prev) => ({
       ...prev,
