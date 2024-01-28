@@ -11,7 +11,7 @@ describe('DeclineMessage', () => {
   };
 
   it('올바르게 렌더링되어야 합니다.', () => {
-    const { getByText, getByAltText } = render(
+    const { getByText } = render(
       <RecoilRoot>
         <DeclineMessage {...messageProps} />
       </RecoilRoot>,

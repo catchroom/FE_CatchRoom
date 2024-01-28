@@ -1,13 +1,23 @@
 import React from 'react';
 
-const page = () => {
+const page = ({
+  searchParams,
+}: {
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+}) => {
+  const productName = searchParams.productName as string;
+  console.log(productName);
+  console.log(searchParams);
+
   return (
     <div className="w-full p-5 flex flex-col gap-5 h-[calc(100vh-53px)] overflow-x-scroll">
       <div className="w-full overflow-x-scroll">
         <div className="border border-border-sub w-fit flex flex-col divide-y divide-gray-300">
           <ul className="grid grid-cols-3 divide-x divide-gray-300">
             <li className="p-5 col-span-1 bg-surface-gray">제공받는자</li>
-            <li className="p-5 col-span-2">%1 숙박 업소명 (변수값)</li>
+            <li className="p-5 col-span-2">%1 숙박 업소명 ({productName})</li>
           </ul>
           <ul className="grid grid-cols-3 divide-x divide-gray-300">
             <li className="p-5 col-span-1 bg-surface-gray">제공 목적</li>

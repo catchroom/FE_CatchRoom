@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import MessageItem from './index';
 import { MessagePropsNoPartial } from '@/types/chat/chatRoom/types';
 import { RecoilRoot } from 'recoil';

@@ -68,7 +68,7 @@ const Page = () => {
           }
         />
         <PaymentMethods />
-        <TermsAndConditions />
+        <TermsAndConditions productName={productName} />
         <PaymentButton
           formRef={guestInfoFormRef}
           amount={
