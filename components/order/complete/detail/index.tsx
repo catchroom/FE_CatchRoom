@@ -41,13 +41,21 @@ const OrderDetail = ({ id }: { id: number }) => {
         bookingHolder={bookingDetails.bookingHolder}
         guest={bookingDetails.guest}
         totalPrice={
-          negoPrice
+          negoPrice && negoPrice.totalPrice !== 0
             ? negoPrice.totalPrice
             : data?.sellPrice.sellPrice + commission
         }
         paymentMethod={data?.paymentMethod}
-        sellPrice={negoPrice ? negoPrice.sellPrice : data?.sellPrice.sellPrice}
-        commission={negoPrice ? negoPrice.commissionPrice : commission}
+        sellPrice={
+          negoPrice && negoPrice.sellPrice !== 0
+            ? negoPrice.sellPrice
+            : data?.sellPrice.sellPrice
+        }
+        commission={
+          negoPrice && negoPrice.commissionPrice !== 0
+            ? negoPrice.commissionPrice
+            : commission
+        }
         nikName={data?.seller.nickName}
       />
     </>

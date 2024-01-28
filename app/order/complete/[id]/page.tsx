@@ -60,7 +60,9 @@ const Page = () => {
             bookingHolder={bookingDetails.bookingHolder}
             guest={bookingDetails.guest}
             totalPrice={
-              negoPrice ? negoPrice.totalPrice : sellPrice + commission
+              negoPrice && negoPrice.totalPrice !== 0
+                ? negoPrice.totalPrice
+                : sellPrice + commission
             }
             paymentMethod={data.paymentMethod}
           />
