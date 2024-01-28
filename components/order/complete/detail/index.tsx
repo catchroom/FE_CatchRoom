@@ -4,12 +4,10 @@ import React from 'react';
 import ReservationSummary from '@/components/detail/ReservationSummary';
 import ReservationDetail from '@/components/detail/ReservationDetail';
 import { useQueryGetPurchaseDetail } from '@/api/mypage/query';
-import { useRecoilValue } from 'recoil';
-import { negoPriceSelector } from '@/atoms/chat/chatContentAtom';
 
 const OrderDetail = ({ id }: { id: number }) => {
-  const negoPrice = useRecoilValue(negoPriceSelector);
   const { data } = useQueryGetPurchaseDetail(id);
+
   console.log(data);
   const commission = data?.sellPrice.sellPrice * 0.05;
   const bookingDetails = {
@@ -35,20 +33,16 @@ const OrderDetail = ({ id }: { id: number }) => {
         transportation={data?.accommodation.transportation}
         checkIn={data?.accommodation.checkIn}
         checkOut={data?.accommodation.checkOut}
-        sellPrice={negoPrice ? negoPrice.sellPrice : data?.sellPrice.sellPrice}
+        sellPrice={data?.sellPrice.sellPrice}
       />
       <ReservationDetail
         bookingHolder={bookingDetails.bookingHolder}
         guest={bookingDetails.guest}
-        totalPrice={
-          negoPrice
-            ? negoPrice.totalPrice
-            : data?.sellPrice.sellPrice + commission
-        }
+        totalPrice={data?.sellPrice.sellPrice + commission}
         paymentMethod={data?.paymentMethod}
-        sellPrice={negoPrice ? negoPrice.sellPrice : data?.sellPrice.sellPrice}
-        commission={negoPrice ? negoPrice.commissionPrice : commission}
-        nikName={data?.seller.nickName}
+        sellPrice={data?.sellPrice.sellPrice}
+        commission={commission}
+        nickName={data?.seller.nickName}
       />
     </>
   );

@@ -11,5 +11,5 @@ export type ReservationDetailProps = {
   paymentMethod: string;
   sellPrice: number;
   commission: number;
-  nikName: string;
+  nickName: string;
 };
