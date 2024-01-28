@@ -41,6 +41,7 @@ const TermsAndConditions = ({ productName }: { productName: string }) => {
     } else {
       setSelectedTerms([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAllSelected, setSelectedTerms]);
 
   const handleSelectTerm = (id: string) => {
@@ -55,6 +56,7 @@ const TermsAndConditions = ({ productName }: { productName: string }) => {
     setIsAllSelected(
       termsOptions.every((option) => selectedTerms.includes(option.id)),
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTerms]);
 
   return (
