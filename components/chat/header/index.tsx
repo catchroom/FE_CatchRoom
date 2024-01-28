@@ -1,18 +1,19 @@
 'use client';
 
 import { chatRoomInfo } from '@/atoms/chat/chatContentAtom';
-import { dealModalAtom } from '@/atoms/chat/leaveButton';
+import { dealModalAtom, userOutAtom } from '@/atoms/chat/leaveButton';
 import LeftArrowIcon from '@/public/svgComponent/leftArrow';
 import XSymbolIcon from '@/public/svgComponent/xSymbol';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const ChatHeader = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [modalState, setModalState] = useRecoilState(dealModalAtom);
   const chatInfo = useRecoilValue(chatRoomInfo);
+  const userOut = useSetRecoilState(userOutAtom);
 
   const title =
     pathname === '/chat'
@@ -26,6 +27,7 @@ const ChatHeader = () => {
   };
 
   const handleBackPage = () => {
+    userOut(false);
     if (pathname === '/chat') return router.push('/home');
     router.push('/chat');
   };

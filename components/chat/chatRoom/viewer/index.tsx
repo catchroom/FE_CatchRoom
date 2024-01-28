@@ -8,6 +8,7 @@ import ChatMessageSender from '../sender';
 import { useInfiniteScroll } from '@/api/chat/query';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { MessageItemProps } from '@/types/chat/chatRoom/types';
+import { Spinner } from '@material-tailwind/react';
 
 const ChatMessageViewer = ({
   accept,
@@ -24,7 +25,23 @@ const ChatMessageViewer = ({
 }) => {
   const { data, fetchNextPage, hasNextPage } = useInfiniteScroll(roomId, token);
   const messages = useRecoilValue(chatContentAtom);
+  const [loaderVisible, setLoaderVisible] = React.useState(true);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // Show the loader initially
+    setLoaderVisible(true);
+
+    // Set a timeout to hide the loader after 3 seconds
+    const timeoutId = setTimeout(() => {
+      setLoaderVisible(false);
+    }, 30000);
+
+    // Clear the timeout when the component is unmounted or when a new page is loaded
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [data?.pages]);
 
   useEffect(() => {
     if (messageEndRef.current) {
@@ -39,7 +56,14 @@ const ChatMessageViewer = ({
       hasMore={hasNextPage}
       inverse={true}
       scrollableTarget="scrollableDiv"
-      loader={<div className="loader" key={0}></div>}
+      loader={
+        loaderVisible && (
+          <div className="fixed w-full max-w-[480px] flex flex-col items-center justify-center w z-[200000]">
+            <Spinner color="pink" className="mt-5" />
+            <p className="mt-1">로딩중</p>
+          </div>
+        )
+      }
       className="h-[calc(100vh-133px)] flex flex-col relative"
     >
       <div
