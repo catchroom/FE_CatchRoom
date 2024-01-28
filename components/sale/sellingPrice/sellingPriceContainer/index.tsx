@@ -43,7 +43,9 @@ const SellingPriceContainer = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <h2 className="text-h5 font-semibold">판매가 설정</h2>
+      <h2 className="lg:text-h5 font-semibold md:text-t1 sm:text-t1">
+        판매가 설정
+      </h2>
       <p className="text-p1 opacity-50 mt-1 mb-3">
         구매가의 10% 단위로 할인율을 선택할 수 있어요.
       </p>

@@ -18,15 +18,15 @@ const CheckInDateComponent = ({
   const checkInString = formatDateWithDay(CheckInDate);
   const checkOutString = formatDateWithDay(CheckOutDate);
   return (
-    <div className="relative flex flex-wrap w-full h-[5.625rem] mt-2 items-center justify-around bg-surface-gray rounded-[4px]">
-      <div className="text-center">
+    <div className="relative flex lg:flex-row lg:flex-wrap md:flex-col sm:flex-col md:items-start sm:items-start md:px-5 md:py-4 sm:px-5 sm:py-4 w-full lg:h-[5.625rem] md:h-[157px] sm:h-[157px] mt-2 lg:items-center lg:justify-around bg-surface-gray rounded-[4px]">
+      <div className="lg:text-center md:text-start sm:text-start">
         <div className="text-t3 font-medium text-gray-600">체크인</div>
         <div className="text-p1 font-semibold text-gray-800">
           {checkInString} {CHECKIN_TIME}
         </div>
       </div>
-      <div className="absolute h-[37px] w-[1px] bg-gray-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-      <div className="text-center">
+      <div className="absolute h-[37px] w-[1px] lg:bg-gray-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:block md:hidden sm:hidden" />
+      <div className="lg:text-center  md:text-start lg:mt-0 md:mt-[29px] sm:text-start sm:mt-[29px]">
         <div className="text-t3 font-medium text-gray-600">체크아웃</div>
         <div className="text-p1 font-semibold text-gray-800">
           {checkOutString} {CHECKOUT_TIME}

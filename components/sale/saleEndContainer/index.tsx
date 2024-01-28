@@ -60,7 +60,9 @@ const SaleEndContainer = () => {
             (minute < 10 ? '0' + minute.toString() : minute.toString()));
   return (
     <div className="w-full flex flex-col mt-5">
-      <h2 className="text-h5 font-semibold">판매 종료일 설정</h2>
+      <h2 className="lg:text-h5 font-semibold md:text-t1 sm:text-t1">
+        판매 종료일 설정
+      </h2>
       <p className="text-p1 opacity-50 mt-1 mb-3">
         판매 종료일 이후 판매글은 미노출 됩니다
       </p>
