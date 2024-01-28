@@ -16,6 +16,7 @@ import { format, addYears } from 'date-fns';
 import { catchItems } from '@/types/common/catchItems/types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { accommodationsCountState } from '@/atoms/search-result/countAtom';
+import ListSkeletonUI from '../listSkeletonUI';
 
 const AccommodationList = () => {
   const { pageHandler } = useProductInfoPage();
@@ -52,7 +53,7 @@ const AccommodationList = () => {
   console.log('체크스타트: ', checkInStart);
   console.log('체크엔드: ', checkInEnd);
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
     queryKey: [
       'searchResult',
       filter,
@@ -87,6 +88,14 @@ const AccommodationList = () => {
 
   return (
     <div className=" overflow-y-hidden">
+      {isLoading && (
+        <div
+          id="scrollableDiv"
+          className="w-full h-full overflow-auto mt-36 p-6 pt-2"
+        >
+          <ListSkeletonUI />
+        </div>
+      )}
       <div className="w-full flex flex-col gap-12 px-6">
         <InfiniteScroll
           dataLength={data?.pages.length || 0}
