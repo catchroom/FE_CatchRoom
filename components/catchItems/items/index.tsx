@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { weekCalendarDate } from '@/atoms/checkInImnt/weekCalendar';
-import { searchDropdownState } from '@/atoms/catchSale/dropdownAtom';
+import { dropdownState } from '@/atoms/catchSale/dropdownAtom';
 import { regionIndex } from '@/atoms/search-detail/searchStates';
 import { DeadLineItem } from '@/types/deadline-items/types';
 import CatchSpecialComponent from '@/components/common/catchComponent';
@@ -16,20 +16,23 @@ import { deadlineItemTotalSize } from '@/atoms/deadlineItems/totalSizeAtom';
 
 const InfiniteScrollContainer = () => {
   const currentDate = useRecoilValue(weekCalendarDate);
-  const filterFormat = useRecoilValue(searchDropdownState);
-  const regionFormat = useRecoilValue(regionIndex);
-  const setTotalSize = useSetRecoilState(deadlineItemTotalSize);
-
   const date = formatDate(currentDate);
 
-  const filter =
-    filterFormat === '할인율 높은순' ? 'HIGH_DISCOUNT' : 'LOW_PRICE';
-
+  const regionFormat = useRecoilValue(regionIndex);
   const regionIdx = regionFormat.join(',');
   const region = regionIdx === '' ? 'all' : regionIdx;
 
+  const setTotalSize = useSetRecoilState(deadlineItemTotalSize);
+
+  const dropdown = useRecoilValue(dropdownState);
+  const filterRecord: Record<string, string> = {
+    '할인율 높은순': 'HIGH_DISCOUNT',
+    '체크인 임박순': 'NEAR_CHECKIN',
+  };
+  const filter = filterRecord[dropdown];
+
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
-    queryKey: ['deadLineItems', currentDate, filterFormat, regionFormat],
+    queryKey: ['deadLineItems', date, filter, region],
     queryFn: ({ pageParam }) =>
       deadLinePageItems({
         date,
@@ -54,7 +57,7 @@ const InfiniteScrollContainer = () => {
   const { pageHandler } = useProductInfoPage();
 
   return (
-    <div className="overflow-y-hidden">
+    <div className="">
       {isLoading && (
         <div
           id="scrollableDiv"
@@ -73,11 +76,11 @@ const InfiniteScrollContainer = () => {
       >
         <div
           id="scrollableDiv"
-          className="w-full max-h-[calc(100vh-128px)] overflow-auto mt-56 p-6 pt-2"
+          className="w-full max-h-[calc(100vh-128px)] overflow-auto flex flex-col mt-56 gap-[2rem] p-6 pt-2"
         >
-          {data?.pages[0].size !== 0 ? (
-            data?.pages.map((page, pageIndex) => (
-              <div key={pageIndex} className="flex flex-col gap-[2rem] mb-8">
+          {data ? (
+            data.pages.map((page, pageIndex) => (
+              <div key={pageIndex} className="flex flex-col gap-[2rem]">
                 {page.list.map((data: DeadLineItem) => (
                   <CatchSpecialComponent
                     key={data.productId + data.accommodationName + pageIndex}
