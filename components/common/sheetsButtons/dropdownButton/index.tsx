@@ -17,7 +17,7 @@ const DropdownButton = ({
     <button
       onClick={fn}
       type="button"
-      className="flex items-center justify-between gap-2 h-[2.25rem] bg-white rounded-full border border-border-sub px-3 py-2 text-t3 font-semibold text-clip overflow-hidden"
+      className="flex items-center justify-between gap-2 h-[2.25rem] bg-white rounded-full border border-border-sub px-3 py-2 text-t3 font-semibold "
     >
       {useLocationIcon && <MapPinSmFillIcon />}
       {name}
