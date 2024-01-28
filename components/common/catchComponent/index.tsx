@@ -63,15 +63,15 @@ const CatchSpecialComponent = ({
   };
 
   const truncateString = (str: string) => {
-    if (str.length > 13) return str.substring(0, 10) + '...';
+    if (str.length > 12) return str.substring(0, 10) + '...';
     else return str;
   };
 
   return (
-    <div className="relative w-full h-36">
+    <div className="relative w-full">
       <div className="flex cursor-pointer" onClick={pageHandler}>
         {/* 숙소 이미지 및 캐치특가 */}
-        <div className="relative flex flex-shrink-0 w-[120px] max-w-[120px] overflow-hidden rounded-md mr-4">
+        <div className="relative flex flex-shrink-0 w-[80px] sm:w-[80px] acc:w-[100px] lg:w-[120px] max-w-[120px] overflow-hidden rounded-md mr-4">
           {catchType ? (
             <div className="absolute flex items-center z-[4] px-2 ml-2 mt-2 rounded-full bg-main text-p2 text-white font-medium">
               캐치 특가
@@ -79,7 +79,7 @@ const CatchSpecialComponent = ({
           ) : (
             ''
           )}
-          <div className="relative w-32 flex-shrink-0">
+          <div className="relative w-32 ">
             {image ? (
               <Image
                 src={image}
@@ -105,21 +105,21 @@ const CatchSpecialComponent = ({
 
         {/* 숙소정보 */}
         <div className="flex-grow flex-col">
-          <div className="mb-3 truncate">
-            <div className="flex items-center gap-1 text-t3 font-semibold">
+          <div className="truncate mb-1 md:mb-1 lg:mb-3 ">
+            <div className="flex items-center gap-1 font-semibold text-t4 sm:text-t4 md:text-t4 lg:text-t3  ">
               <CalendarIcon />
               {checkInString} - {checkOutString}
             </div>
-            <div className=" flex flex-col items-start mt-3 gap-3 ">
-              <div className="text-t1 font-bold leading-none ">
+            <div className=" flex flex-col items-start mt-1">
+              <div className="font-bold  text-p2 sm:text-p2 md:text-t2 lg:text-t1 ">
                 {truncateString(accommodationName)}
               </div>
-              <div className="text-t1 font-bold leading-none text-text-sub break-keep">
+              <div className="font-bold text-p2 text-text-sub sm:text-p2 md:text-t2 lg:text-t1">
                 {truncateString(roomName!)}
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start lg:items-end">
+          <div className="flex flex-col items-start sm:items-end acc:items-end">
             <div className="flex flex-wrap text-p2 text-gray-600">
               <p className="line-through">
                 구매가&nbsp;{originalPrice?.toLocaleString('us-EN')}원
@@ -127,7 +127,7 @@ const CatchSpecialComponent = ({
             </div>
             <div className="flex flex-wrap items-center">
               <p className="text-t1 text-main font-semibold">{discountRate}%</p>
-              <p className=" text-t1 font-bold ml-2 lg:text-h5">
+              <p className="text-t1 font-bold ml-2 ">
                 {sellPrice?.toLocaleString('us-EN')}원
               </p>
             </div>

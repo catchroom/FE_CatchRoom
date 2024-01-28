@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRecoilState } from 'recoil';
 import { SEARCH_DEFAULT } from '@/constants/search-detail';
 import BottomSheets from '@/components/common/bottomSheets';
@@ -20,26 +20,6 @@ const CalendarBottomSheet = ({
   const [isCalendarChecked, setIsCalendarChecked] =
     useRecoilState<boolean>(isAllDayCheckedState);
   const [range] = useRecoilState(rangeDate);
-
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      if (range && range.from && range.to)
-        // fetch(range.from) 등등 api에 사용 예정
-        console.log(
-          '디바운스된 날짜 :',
-          format(range.from, 'yyyy-MM-dd', {
-            locale: ko,
-          }),
-          format(range.to, 'yyyy-MM-dd', {
-            locale: ko,
-          }),
-        );
-    }, 500);
-
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [range]);
 
   const handleDateSelectAll = () => {
     setIsCalendarChecked(!isCalendarChecked);
