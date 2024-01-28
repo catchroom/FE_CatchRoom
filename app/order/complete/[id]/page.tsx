@@ -1,5 +1,6 @@
 'use client';
 import { useQueryGetOrderOrderComplete } from '@/api/order/query';
+import { negoPriceSelector } from '@/atoms/chat/chatContentAtom';
 import CompleteMessage from '@/components/complete/completeMessage';
 import CompleteSkeletonUI from '@/components/complete/completeSkeletonUI';
 import NavButton from '@/components/complete/navButton';
@@ -9,8 +10,10 @@ import { UseParamsType } from '@/types/room-info/types';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 
 const Page = () => {
+  const negoPrice = useRecoilValue(negoPriceSelector);
   const params = useParams<{ id: string }>();
   const { id } = useParams() as UseParamsType;
   const productId = params ? parseInt(params.id, 10) : 0;
@@ -56,11 +59,13 @@ const Page = () => {
           <ReservationInfo
             bookingHolder={bookingDetails.bookingHolder}
             guest={bookingDetails.guest}
-            totalPrice={sellPrice + commission}
+            totalPrice={
+              negoPrice ? negoPrice.totalPrice : sellPrice + commission
+            }
             paymentMethod={data.paymentMethod}
           />
         </div>
-        <div className="fixed flex gap-2 ml-[-1.25rem]  bottom-0 bg-white border-t border-border-sub p-5  h-17 w-full max-w-[480px] z-50">
+        <div className="fixed flex gap-2 left-1/2 -translate-x-1/2  bottom-0 bg-white border-t border-border-sub p-5  h-17 w-full max-w-[480px] z-50">
           <div className="w-full h-full">
             <Link href="/home">
               <NavButton

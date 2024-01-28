@@ -41,9 +41,10 @@ const PaymentButton = ({ amount, formRef }: PaymentButtonProps) => {
   };
   const formattedAmount = `${roundToTenWon(amount)?.toLocaleString('ko-KR')}원`;
 
+  //w-full max-w-[480px] fixed bottom-5 left-1/2 -translate-x-1/2
   return (
     <>
-      <div className="fixed bottom-0  bg-white border-t border-border-sub p-5 ml-[-1.25rem] h-17 w-full max-w-[480px] z-1 mx-auto">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-white border-t border-border-sub p-5  h-17 w-full max-w-[480px] z-1 mx-auto">
         <button
           onClick={handleSubmit}
           className="w-full h-[3.25rem] bg-action-primary text-white font-semibold py-3 rounded leading-7"
