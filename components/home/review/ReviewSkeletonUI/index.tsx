@@ -9,7 +9,7 @@ const ReviewSkeletonUI = () => {
           role="status"
           className="space-y-8 animate-pulse sm:w-72 md:w-80 md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 mt-3 rounded flex"
         >
-          <div className="flex items-center justify-center w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
+          <div className="flex items-center justify-center lg:w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
             <svg
               className="w-10 h-[184px] text-gray-200 dark:text-gray-600"
               aria-hidden="true"
@@ -34,9 +34,9 @@ const ReviewSkeletonUI = () => {
       <SwiperSlide>
         <div
           role="status"
-          className="space-y-8 animate-pulse sm:w-80 md:w-80 md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 mt-5 rounded flex"
+          className="space-y-8 animate-pulse sm:w-72 md:w-80 md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 mt-3 rounded flex"
         >
-          <div className="flex items-center justify-center w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
+          <div className="flex items-center justify-center lg:w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
             <svg
               className="w-10 h-[184px] text-gray-200 dark:text-gray-600"
               aria-hidden="true"
@@ -61,9 +61,9 @@ const ReviewSkeletonUI = () => {
       <SwiperSlide>
         <div
           role="status"
-          className="space-y-8 animate-pulse sm:w-80 md:w-80 md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 mt-5 rounded flex"
+          className="space-y-8 animate-pulse sm:w-72 md:w-80 md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 mt-3 rounded flex"
         >
-          <div className="flex items-center justify-center w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
+          <div className="flex items-center justify-center lg:w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
             <svg
               className="w-10 h-[184px] text-gray-200 dark:text-gray-600"
               aria-hidden="true"
@@ -88,9 +88,9 @@ const ReviewSkeletonUI = () => {
       <SwiperSlide>
         <div
           role="status"
-          className="space-y-8 animate-pulse sm:w-80 md:w-80 md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 mt-5 rounded flex"
+          className="space-y-8 animate-pulse sm:w-72 md:w-80 md:space-y-0 rtl:space-x-reverse md:items-center border border-gray-200 mt-3 rounded flex"
         >
-          <div className="flex items-center justify-center w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
+          <div className="flex items-center justify-center lg:w-full h-[140px] bg-gray-300 rounded  dark:bg-gray-700">
             <svg
               className="w-10 h-[184px] text-gray-200 dark:text-gray-600"
               aria-hidden="true"

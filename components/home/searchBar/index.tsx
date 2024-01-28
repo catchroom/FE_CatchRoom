@@ -29,7 +29,7 @@ const SearchBar = () => {
       : '지역, 여행 일정, 숙소 유형으로 검색';
   return (
     <div
-      className="flex justify-between w-full p-4 rounded-[4px] text-text-sub text-t2 font-normal bg-surface-secondary md:p-3 sm:p-3 sm:text-p4 items-center"
+      className="flex justify-between w-full lg:p-4 rounded-[4px] text-text-sub lg:text-t2 font-normal bg-surface-secondary md:p-3 sm:p-3 sm:text-p4 items-center"
       onClick={pageHandler}
     >
       <p>{title}</p>
