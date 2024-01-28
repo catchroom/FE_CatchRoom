@@ -8,7 +8,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const { body } = req;
       try {
         const docRef = await addDoc(collection(db, 'accommodation'), body);
-        console.log(docRef.id);
         return res
           .status(200)
           .json({ message: '숙소 등록 성공', data: docRef.id });
