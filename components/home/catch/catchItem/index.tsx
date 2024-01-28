@@ -119,7 +119,7 @@ const CatchItem = ({
         />
       </div>
       <div
-        className="flex flex-col gap-1 p-5 bg-surface"
+        className="flex flex-col gap-1 p-5 bg-surface rounded-b-lg"
         onClick={handleItemClick}
       >
         <div className="flex justify-between">

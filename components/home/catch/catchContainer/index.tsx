@@ -17,7 +17,7 @@ const CatchContainer = () => {
         </h2>
         <span
           onClick={handleViewAllBtnClick}
-          className="underline decoration-solid cursor-pointer text-text-sub lg:text-p2 md:text-[12px] sm:text-[12px] "
+          className="underline decoration-solid cursor-pointer text-text-sub lg:text-p2 md:text-[12px] sm:text-t3 "
         >
           전체보기
         </span>

@@ -74,7 +74,7 @@ const CheckInComponent = () => {
             {isBtnLoading ? '불러오는 중..' : '전체보기'}
           </Button>
         </div>
-        <div className="absolute inset-x-0 bottom-0 z-10 h-[130px] rounded-lg bg-gradient-to-t from-[#ffffffbd] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 z-10 sm:h-[160px] acc:h-[150px] lg:h-[130px] rounded-lg bg-gradient-to-t from-[#ffffffbd] to-transparent" />
       </div>
     </div>
   );
