@@ -7,7 +7,7 @@ import { useQueryGetPurchaseDetail } from '@/api/mypage/query';
 
 const OrderDetail = ({ id }: { id: number }) => {
   const { data } = useQueryGetPurchaseDetail(id);
-
+  console.log(data);
   const commission = data?.sellPrice.price * 0.05;
   const bookingDetails = {
     bookingHolder: {
@@ -32,7 +32,7 @@ const OrderDetail = ({ id }: { id: number }) => {
         transportation={data?.accommodation.transportation}
         checkIn={data?.accommodation.checkIn}
         checkOut={data?.accommodation.checkOut}
-        sellPrice={data?.sellPrice.sellPrice}
+        sellPrice={data?.sellPrice.price}
       />
       <ReservationDetail
         bookingHolder={bookingDetails.bookingHolder}
