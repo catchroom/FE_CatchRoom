@@ -35,7 +35,11 @@ const OrderDetail = ({ id }: { id: number }) => {
         transportation={data?.accommodation.transportation}
         checkIn={data?.accommodation.checkIn}
         checkOut={data?.accommodation.checkOut}
-        sellPrice={negoPrice ? negoPrice.sellPrice : data?.sellPrice.sellPrice}
+        sellPrice={
+          negoPrice && negoPrice.sellPrice !== 0
+            ? negoPrice.sellPrice
+            : data?.sellPrice.sellPrice
+        }
       />
       <ReservationDetail
         bookingHolder={bookingDetails.bookingHolder}
