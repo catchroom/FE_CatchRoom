@@ -1,14 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import HomeIcon from '@/public/svg/home-line.svg';
 import ChattingIcon from '@/public/svg/chatting.svg';
 import MyPageIcon from '@/public/svg/face-smile.svg';
+import nookies from 'nookies';
 
 const BottomNav = () => {
   const currentPath = usePathname();
+  const [mypageTitle, setMypageTitle] = useState('로그인');
+
+  const accessToken = nookies.get(null)['accessToken'];
+
+  useEffect(() => {
+    if (accessToken !== undefined) {
+      setMypageTitle('내정보');
+    } else setMypageTitle('로그인');
+  }, [accessToken]);
+
   return (
     <nav className="fixed bottom-0 bg-white border-t-2 border-gray-200 px-4 py-2 h-17 w-full max-w-[480px] z-20">
       <ul className="flex justify-between items-center h-full">
@@ -68,7 +79,7 @@ const BottomNav = () => {
               <MyPageIcon
                 stroke={currentPath === '/mypage' ? 'black' : 'currentColor'}
               />
-              <span className="text-p4 font-semibold">내정보</span>
+              <span className="text-p4 font-semibold">{mypageTitle}</span>
             </div>
           </Link>
         </li>
