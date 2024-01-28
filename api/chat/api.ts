@@ -101,3 +101,10 @@ export const checkChatInfo = async (roomId: string) => {
   const result = await res.data;
   return result;
 };
+
+export const getChatExist = async (userId: number) => {
+  const data = await apiChatClient.get(`/v1/chat/room/list?userId=${userId}`);
+
+  const result = await data.data;
+  return result;
+};

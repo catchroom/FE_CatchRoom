@@ -13,10 +13,12 @@ import {
   selectedEasyPaymentState,
 } from '@/atoms/order/paymentMethodAtom';
 import { useRouter } from 'next/navigation';
+import { negoPriceSelector } from '@/atoms/chat/chatContentAtom';
 
 const PaymentModal = ({ isOpen, onClose, formRef }: ModalProps) => {
   const router = useRouter();
 
+  const negoInfo = useRecoilValue(negoPriceSelector);
   const selectedPayment = useRecoilValue(selectedPaymentMethodState);
   const selectedEasyPayment = useRecoilValue(selectedEasyPaymentState);
   const params = useParams<{ id: string }>();
@@ -77,8 +79,8 @@ const PaymentModal = ({ isOpen, onClose, formRef }: ModalProps) => {
           userPhoneNumber: guestInfoData.phone,
         },
         paymentInfo: {
-          sellPrice: data.payment.sellPrice,
-          price: data.payment.price,
+          sellPrice: negoInfo ? negoInfo.sellPrice : data.payment.sellPrice,
+          price: negoInfo ? negoInfo.totalPrice : data.payment.price,
         },
         paymentMethod: paymentMethod,
       };

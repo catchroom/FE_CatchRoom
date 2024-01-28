@@ -9,6 +9,10 @@ const UserOut = ({ partnerNickName }: { partnerNickName: string }) => {
 
   useEffect(() => {
     setOutState(true);
+
+    return () => {
+      setOutState(false);
+    };
   }, [setOutState]);
   return (
     <div className="w-3/4 mx-auto mb-3">

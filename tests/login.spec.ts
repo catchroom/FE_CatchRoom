@@ -27,6 +27,7 @@ test.describe('로그인 로직 테스트', () => {
     // 로그인 버튼 클릭 - 올바른 계정정보 : 로그인 완료 및 Case에 따라 랜딩 (홈화면 or 마지막으로 본 상품 상세페이지)
     await page.getByText('로그인', { exact: true }).click();
 
+    await page.waitForLoadState();
     await expect(page.getByText('나의 활동', { exact: true })).toBeVisible();
   });
 });

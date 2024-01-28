@@ -11,7 +11,7 @@ import { useRecoilValue } from 'recoil';
 import { z } from 'zod';
 
 const ChatMessageSchema = z.object({
-  message: z.string(),
+  message: z.string().min(1),
 });
 
 type ChatMessage = z.infer<typeof ChatMessageSchema>;
@@ -24,7 +24,7 @@ const ChatMessageSender = ({
   const userOut = useRecoilValue(userOutAtom);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [hasValue, setHasValue] = useState<boolean>(false);
-  const { register, handleSubmit, reset } = useForm<ChatMessage>({
+  const { register, handleSubmit, reset, setValue } = useForm<ChatMessage>({
     resolver: zodResolver(ChatMessageSchema),
     mode: 'onChange',
   });
@@ -47,11 +47,22 @@ const ChatMessageSender = ({
       setHasValue(!!textareaRef.current?.value);
     };
 
+    const handleEnterKey = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        if (!textareaRef.current?.value) return;
+        setValue('message', textareaRef.current?.value);
+        event.preventDefault();
+        handleSubmit(onSubmit)();
+      }
+    };
+
     handleInitialValue();
     textareaRef.current?.addEventListener('input', handleInputChange);
+    textareaRef.current?.addEventListener('keydown', handleEnterKey);
 
     return () => {
       textareaRef.current?.removeEventListener('input', handleInputChange);
+      textareaRef.current?.removeEventListener('keydown', handleEnterKey);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -14,13 +14,14 @@ const InfiniteScrollWrapper = () => {
     queryFn: ({ pageParam }) => getReviewListForScroll({ dataType, pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.list.length === 0) {
+      if (lastPage.list?.length === 0) {
         return undefined;
       }
 
       return lastPageParam + 1;
     },
   });
+
   console.log(data);
   if (isLoading) return <ReviewSkeletonUI />;
   return (
@@ -29,7 +30,7 @@ const InfiniteScrollWrapper = () => {
       next={fetchNextPage}
       hasMore={hasNextPage}
       scrollableTarget="scrollableDiv"
-      loader={<div className="loader" key={0}></div>}
+      loader={<div></div>}
     >
       <div
         id="scrollableDiv"
