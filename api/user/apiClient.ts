@@ -46,7 +46,6 @@ apiClient.interceptors.response.use(
 
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
         const response = await apiClient.request(originalRequest);
-        //헤더에 담긴지 확인
 
         nookies.set(null, 'accessToken', accessToken, {
           path: '/',
