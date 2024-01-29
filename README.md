@@ -1,25 +1,25 @@
-## <img width="200px" alt="image" src="https://github.com/catchroom/BE_CatchRoom/assets/114489245/94228459-9aef-4069-975d-bee133b5c7c2">
+<img width="200px" alt="image" src="https://github.com/catchroom/BE_CatchRoom/assets/114489245/94228459-9aef-4069-975d-bee133b5c7c2">
 
-### 📝 주제
+## 📝 주제
 
 취소 수수료 발생 숙박매물을 고객간에 거래할 수 있는 중개거래 플랫폼
-<br/>
+<br/><br/>
 
-### 🌷 배포 사이트
+## 🌷 배포 사이트
 
 [![CatchRoom](https://img.shields.io/badge/CatchRoom-F0047F.svg?style=for-the-badge)](https://dev.dhlbrqe2v28e4.amplifyapp.com/home)
+<br/><br/>
 
-### 🎞️ 시연 영상
+## 🎞️ 시연 영상
 
 https://www.youtube.com/watch?v=TIb-DvcFkTQ
-<br/>
+<br/><br/>
 
-### 🚀 프로젝트 인원 및 기간
+## 🚀 프로젝트 인원 및 기간
 
 - **개발 인원**: FE 6명 & BE 4명
 - **프로젝트 기간**: 12월 11일(월) ~ 1월 29일(월)
-
-<br/>
+  <br/>
 
 ## ✨ 팀원
 
@@ -39,19 +39,23 @@ https://www.youtube.com/watch?v=TIb-DvcFkTQ
 
 ### 메인 페이지
 
-### 상품 상세 페이지
-
 ### 검색 결과 페이지
 
-### 마이 페이지
+### 상품 상세 페이지
 
 ### 채팅
 
-### 구매
+구매자와 판매자가 매물에 관해 대화할 수 있으며, 대화 중 가격을 네고하고 결제 할 수 있습니다. StompJS와 SockJS를 사용하여 크로스 브라우징을 지원하는 웹소켓 연결을 성공시키고, 실시간 채팅방 및 채팅 리스트를 구현하였습니다. 추가적으로 메세지를 불러올 때 무한스크롤을 적용하여 초기 페이지 렌더링 시간을 낮췄습니다.
 
-### 판매
+### 구매 페이지
+
+### 판매 페이지
 
 ### 결제 페이지
+
+### 마이 페이지
+
+로그인 한 유저의 프로필/계좌정보 수정/조회/삭제가 가능하고, 찜/판매/구매 목록 조회 및 상세 조회 가 가능합니다. 리뷰 작성/수정/삭제/조회 가능하고 출금 및 내역 조회도 가능합니다.
 
 <br/>
 
